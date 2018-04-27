@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>一介书生 | 关于git的总结</title>
+    <meta name="description" content="人间熙攘，好久不见">
+    <link rel="icon" href="http://img.dijiu.com/2016/0722/20160722041848319.jpg">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.dd211934.css" as="style"><link rel="preload" href="/blog/assets/js/app.fe71ef03.js" as="script"><link rel="preload" href="/blog/assets/js/7.96eca575.js" as="script"><link rel="prefetch" href="/blog/assets/js/3.a480aa32.js"><link rel="prefetch" href="/blog/assets/js/vendors~docsearch.12fcdaa5.js"><link rel="prefetch" href="/blog/assets/js/2.b531c1dc.js"><link rel="prefetch" href="/blog/assets/js/4.a4665a56.js"><link rel="prefetch" href="/blog/assets/js/5.43b3cfdc.js"><link rel="prefetch" href="/blog/assets/js/6.a5901974.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.dd211934.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/blog/" class="home-link router-link-active"><!----><span class="site-name">
+      一介书生
+    </span></a><div class="links"><form id="search-form" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form><nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Blog</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/blog/Blog/JavaScript/ES6的一些方法和技巧.html" class="nav-link">JavaScript</a></li><li class="dropdown-item"><!----><a href="/blog/Blog/CSSFile/" class="nav-link">CSS</a></li><li class="dropdown-item"><!----><a href="/blog/Blog/GIT/git的一些总结.html" class="nav-link router-link-exact-active router-link-active">Git</a></li><li class="dropdown-item"><!----><a href="/blog/Blog/Node/node版本管理.html" class="nav-link">Node</a></li></ul></div></div><a href="https://github.com/magicLaLa/blog" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">Blog</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/blog/Blog/JavaScript/ES6的一些方法和技巧.html" class="nav-link">JavaScript</a></li><li class="dropdown-item"><!----><a href="/blog/Blog/CSSFile/" class="nav-link">CSS</a></li><li class="dropdown-item"><!----><a href="/blog/Blog/GIT/git的一些总结.html" class="nav-link router-link-exact-active router-link-active">Git</a></li><li class="dropdown-item"><!----><a href="/blog/Blog/Node/node版本管理.html" class="nav-link">Node</a></li></ul></div></div><a href="https://github.com/magicLaLa/blog" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav><ul class="sidebar-links"><li><div class="sidebar-group first collapsable"><p class="sidebar-heading"><span>JavaScript</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading open"><span>Git</span><span class="arrow down"></span></p><ul class="sidebar-group-items"><li><a href="/blog/Blog/GIT/git的一些总结.html" class="active sidebar-link">关于git的总结</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/Blog/GIT/git的一些总结.html#git操作" class="sidebar-link">git操作</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/Blog/GIT/git的一些总结.html#合并某个分支上的文件到应一个分支、回退到某个版本和-远程服务器上面回退到某个版本" class="sidebar-link">合并某个分支上的文件到应一个分支、回退到某个版本和 远程服务器上面回退到某个版本</a></li><li class="sidebar-sub-header"><a href="/blog/Blog/GIT/git的一些总结.html#git设置、powershell-插件-posh-git-安装、可视化界面的项目版本控制软件，适用于git项目管理" class="sidebar-link">git设置、PowerShell 插件 posh-git 安装、可视化界面的项目版本控制软件，适用于git项目管理</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/Blog/GIT/git的一些总结.html#git的报错信息" class="sidebar-link">git的报错信息</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/Blog/GIT/git的一些总结.html#在-git-commit-或者-git-add-的时候报-git-fatal-unable-to-create-f-vue-learning-git-index-lock-file-exists-这个错误" class="sidebar-link">在 git commit 或者 git add 的时候报 Git: fatal: Unable to create 'f:/Vue-learning/.git/index.lock': File exists. 这个错误</a></li><li class="sidebar-sub-header"><a href="/blog/Blog/GIT/git的一些总结.html#git-merge-冲突，提示you-have-not-concluded-your-merge-merge-head-exists" class="sidebar-link">git merge 冲突，提示You have not concluded your merge (MERGE_HEAD exists)</a></li></ul></li></ul></li></ul></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>Node</span><span class="arrow right"></span></p><!----></div></li></ul></div><div class="page"><div class="content"><h1 id="关于git的总结"><a href="#关于git的总结" aria-hidden="true" class="header-anchor">#</a> 关于git的总结</h1><h2 id="git操作"><a href="#git操作" aria-hidden="true" class="header-anchor">#</a> git操作</h2><h3 id="合并某个分支上的文件到应一个分支、回退到某个版本和-远程服务器上面回退到某个版本"><a href="#合并某个分支上的文件到应一个分支、回退到某个版本和-远程服务器上面回退到某个版本" aria-hidden="true" class="header-anchor">#</a> 合并某个分支上的文件到应一个分支、回退到某个版本和 远程服务器上面回退到某个版本</h3><ol><li><p>git 合并某个分支上的文件到另一个分支上</p><pre><code> git checkout branch &lt;path&gt;
+</code></pre></li><li><p>git 本地回退到某个版本</p><pre><code> git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795
+</code></pre></li><li><p>git 远程服务器上面回退到某个版本</p><pre><code> 可以 先把本地回退到某个版本
+     例如：git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795
+ 然后再 强推到远程上面
+     git push -f
+</code></pre></li></ol><h3 id="git设置、powershell-插件-posh-git-安装、可视化界面的项目版本控制软件，适用于git项目管理"><a href="#git设置、powershell-插件-posh-git-安装、可视化界面的项目版本控制软件，适用于git项目管理" aria-hidden="true" class="header-anchor">#</a> git设置、PowerShell 插件 posh-git 安装、可视化界面的项目版本控制软件，适用于git项目管理</h3><ul><li><p>Git 设置</p><pre><code>  # 设置提交时的用户信息
+  git config --global user.name &quot;用户名&quot;
+  git config --global user.email &quot;邮箱&quot;
+
+  # 禁用git自动LF转CRLF
+  git config --global core.autocrlf false
+
+  # 生成密钥（默认文件名id_rsa）
+  # -t 密钥类型
+  # -C 注释
+  ssh-keygen -t rsa -C &quot;邮箱&quot;
+</code></pre></li><li><p>PowerShell 插件 posh-git 安装</p><pre><code>  VSCode 默认使用PowerShell，启动powershell，分别执行下面3个命令（提示都输入Yes）
+
+  # 1.设置权限
+  Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
+
+  # 2.使用PowerShellGet安装
+  PowerShellGet\Install-Module posh-git -Scope CurrentUser
+
+  # 3.全局导入posh-git
+  Add-PoshGitToProfile -AllHosts
+</code></pre></li><li><p>SourceTree拥有可视化界面的项目版本控制软件，适用于git项目管理</p><p>基本使用: <a href="https://www.cnblogs.com/tian-xie/p/6264104.html" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/tian-xie/p/6264104.html</a></p></li></ul><h2 id="git的报错信息"><a href="#git的报错信息" aria-hidden="true" class="header-anchor">#</a> git的报错信息</h2><h3 id="在-git-commit-或者-git-add-的时候报-git-fatal-unable-to-create-f-vue-learning-git-index-lock-file-exists-这个错误"><a href="#在-git-commit-或者-git-add-的时候报-git-fatal-unable-to-create-f-vue-learning-git-index-lock-file-exists-这个错误" aria-hidden="true" class="header-anchor">#</a> 在 git commit 或者 git add 的时候报 Git: fatal: Unable to create 'f:/Vue-learning/.git/index.lock': File exists. 这个错误</h3><ul><li>git 遇到这个错误时，需要把 当前项目下 .git -&gt; index.lock 这个文件删除即可</li></ul><p><img src="/1323758-20180206172305857-1172749425.png" alt="Alt text"></p><h3 id="git-merge-冲突，提示you-have-not-concluded-your-merge-merge-head-exists"><a href="#git-merge-冲突，提示you-have-not-concluded-your-merge-merge-head-exists" aria-hidden="true" class="header-anchor">#</a> git merge 冲突，提示You have not concluded your merge (MERGE_HEAD exists)</h3><pre><code>    You have not concluded your merge (MERGE_HEAD exists).
+    Please, commit your changes before you can merge.
+
+    可以先撤销合并(git的版本不同撤销命令也不同)
+
+    git merge --abort [Since git version 1.7.4]
+    git reset --merge [prior git versions]</code></pre></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
+        ← <a href="/blog/Blog/JavaScript/箭头函数this的指向.html" class="prev">
+          箭头函数this的指向
+        </a></span><span class="next"><a href="/blog/Blog/Node/node版本管理.html">
+          node版本管理
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/blog/assets/js/7.96eca575.js" defer></script><script src="/blog/assets/js/app.fe71ef03.js" defer></script>
+  </body>
+</html>
