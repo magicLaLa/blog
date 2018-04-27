@@ -1,7 +1,7 @@
 module.exports = {
   title: '一介书生',
   description: '人间熙攘，好久不见',
-  base:'blog/boom/',
+  base:'/blog/boom/',
   head: [
     ['link', { rel: 'icon', href: 'http://img.dijiu.com/2016/0722/20160722041848319.jpg' }]
   ],
