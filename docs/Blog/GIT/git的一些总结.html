@@ -7,7 +7,7 @@
     <meta name="description" content="人间熙攘，好久不见">
     <link rel="icon" href="http://img.dijiu.com/2016/0722/20160722041848319.jpg">
     
-    <link rel="preload" href="/assets/css/6.styles.34db101b.css" as="style"><link rel="preload" href="/assets/js/app.6deaf884.js" as="script"><link rel="preload" href="/assets/js/5.44fb9e9c.js" as="script"><link rel="prefetch" href="/assets/js/0.b58c243b.js"><link rel="prefetch" href="/assets/js/1.dcf690b2.js"><link rel="prefetch" href="/assets/js/2.860bbab5.js"><link rel="prefetch" href="/assets/js/3.a352b8cc.js"><link rel="prefetch" href="/assets/js/4.32a4e2ed.js">
+    <link rel="preload" href="/assets/css/6.styles.34db101b.css" as="style"><link rel="preload" href="/assets/js/app.1c39323a.js" as="script"><link rel="preload" href="/assets/js/5.f51ee258.js" as="script"><link rel="prefetch" href="/assets/js/0.b58c243b.js"><link rel="prefetch" href="/assets/js/1.dcf690b2.js"><link rel="prefetch" href="/assets/js/2.d4203ca0.js"><link rel="prefetch" href="/assets/js/3.a352b8cc.js"><link rel="prefetch" href="/assets/js/4.d46a2a87.js">
     <link rel="stylesheet" href="/assets/css/6.styles.34db101b.css">
   </head>
   <body>
@@ -50,13 +50,18 @@
     可以先撤销合并(git的版本不同撤销命令也不同)
 
     git merge --abort [Since git version 1.7.4]
-    git reset --merge [prior git versions]</code></pre></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
+    git reset --merge [prior git versions]
+</code></pre><h3 id="tag"><a href="#tag" aria-hidden="true" class="header-anchor">#</a> Tag</h3><ul><li><p><code>git tag</code>查看所有的标签</p></li><li><p><code>git tag -d tagName</code> 删除某个标签</p></li><li><p><code>git tag -a newName -m &quot;注释&quot;</code> 创建一个带注释的标签</p></li><li><p><code>git tag newName</code> 创建一个轻量级标签</p></li><li><p><code>git checkout tagName</code> 切换到某个标签</p></li><li><p>可以按照特定的表达式搜索某些标签</p><pre><code>  $ git tag -l v1.2.*
+    v1.2.1
+    v1.2.2
+    v1.2.3
+</code></pre></li><li><p><code>git push --tags</code> 默认情况下，<code>git push</code> 不会把 tag 上传到远程，为了共享这个 tag，可以在 git push 后面加 <code>--tags</code></p></li><li><p><code>git stash</code> 暂存区和工作区的状态都会被保存</p></li><li><p><code>git show tagName</code> 查看该标签的信息</p></li><li><p>注意 <em><code>tag</code>实际指向的是一次<code>commit</code>，<code>show tagName</code>展示出来的<code>diff</code>也是该次<code>commit</code>的<code>diff</code></em></p></li></ul></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
         ← <a href="/Blog/JavaScript/箭头函数this的指向.html" class="prev">
           箭头函数this的指向
         </a></span><span class="next"><a href="/Blog/Node/node版本管理.html">
           node版本管理
         </a> →
       </span></p></div></div></div></div>
-    <script src="/assets/js/5.44fb9e9c.js" defer></script><script src="/assets/js/app.6deaf884.js" defer></script>
+    <script src="/assets/js/5.f51ee258.js" defer></script><script src="/assets/js/app.1c39323a.js" defer></script>
   </body>
 </html>
