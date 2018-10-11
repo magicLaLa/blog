@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "5a2cd2442b80dde1508e356e908ba946"
+    "revision": "b24067b9e5cac9b5872ea28de66f4b71"
   },
   {
     "url": "assets/css/1.styles.babd7481.css",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "revision": "7c66a3fea978afe61d3244bd23a7734a"
   },
   {
-    "url": "assets/css/styles.65c204c6.css",
+    "url": "assets/css/styles.29194168.css",
     "revision": "f4c7fa5d4197afd1f7f2a464373c1a57"
   },
   {
@@ -72,8 +72,8 @@ self.__precacheManifest = [
     "revision": "ab7b44f4bc979d7aff9731168df4adb7"
   },
   {
-    "url": "assets/js/7.6c9bbf9b.js",
-    "revision": "fa9471a978b22164ef94053b71bfe367"
+    "url": "assets/js/7.44e0a993.js",
+    "revision": "36b1649ea10384eff3fcb6f56bc74ad3"
   },
   {
     "url": "assets/js/8.5be6a285.js",
@@ -84,40 +84,40 @@ self.__precacheManifest = [
     "revision": "f3c3efce629b01eaa29aa77fbdaca06f"
   },
   {
-    "url": "assets/js/app.65c204c6.js",
-    "revision": "a76a87034365c895428153cab043876f"
+    "url": "assets/js/app.29194168.js",
+    "revision": "3ef4dcc5d8aed87d6ad0e0a3163ced2e"
   },
   {
     "url": "Blog/GIT/git的一些总结.html",
-    "revision": "af7fd1008064bde8f0ddad81f9092cf1"
+    "revision": "c14eb129760966a69c49ddc01a82c195"
   },
   {
     "url": "Blog/index.html",
-    "revision": "ac028076ff42b5738b658324a5bb27ce"
+    "revision": "39a8fa7cc33e9b00f1af9de4cdbd1e72"
   },
   {
     "url": "Blog/JavaScript/ES6的一些方法和技巧.html",
-    "revision": "96bb7b17de715f4bca0697d788f7be91"
+    "revision": "270439259d12a78b7172256c08234dca"
   },
   {
     "url": "Blog/JavaScript/JS随笔.html",
-    "revision": "148d43ec0be89f966747c1ba5d272bfd"
+    "revision": "7d977d67a44195c47a56f95b9d14685e"
   },
   {
     "url": "Blog/JavaScript/箭头函数this的指向.html",
-    "revision": "57bf1a839393c9e7fb78f31b4eab5821"
+    "revision": "91d33f6d447ea9ae9e1f168b861cad97"
   },
   {
     "url": "Blog/MiniPrograms/MiniPrograms.html",
-    "revision": "1f8260cf91882552b8e9b9da22c2c364"
+    "revision": "cd9b093c5b5948906768acd726413d69"
   },
   {
     "url": "Blog/Node/node版本管理.html",
-    "revision": "812658234dca93fafdc4d3935a000663"
+    "revision": "bc390638e1bf0c8d32b057ac4e5ab527"
   },
   {
     "url": "Blog/VUE/vue.html",
-    "revision": "ae779b70113bc96a928d6c7c264bdccb"
+    "revision": "c636a42ad77fda5a51160b5fd7c0be7f"
   },
   {
     "url": "img/1323758-20180206101320904-162520733.png",
@@ -193,7 +193,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "cd2616b96b6c9b6373868ecdb0e861b9"
+    "revision": "46829b02bf70a997856cbc163651095d"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
