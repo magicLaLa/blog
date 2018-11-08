@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "60f254ebb0b7ff7f1606feb5da543945"
+    "revision": "56cd3213ef80d134b772b5e12af52f8d"
   },
   {
     "url": "assets/css/1.styles.babd7481.css",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "revision": "7c66a3fea978afe61d3244bd23a7734a"
   },
   {
-    "url": "assets/css/styles.e03847e9.css",
+    "url": "assets/css/styles.0805617d.css",
     "revision": "f4c7fa5d4197afd1f7f2a464373c1a57"
   },
   {
@@ -100,56 +100,56 @@ self.__precacheManifest = [
     "revision": "a4943c475fa1ed74882b4e1f4616fb72"
   },
   {
-    "url": "assets/js/app.e03847e9.js",
-    "revision": "c3867a2d15aa92ba790ec6c95ff19995"
+    "url": "assets/js/app.0805617d.js",
+    "revision": "2dab653e25ed624bb0ba88c2ab9947d2"
   },
   {
     "url": "Blog/GIT/git的一些总结.html",
-    "revision": "156f56ab0b3bf14e3ced36e53927eccd"
+    "revision": "f80ae747112130ed3a2c07e0f25fda62"
   },
   {
     "url": "Blog/index.html",
-    "revision": "a01227e803215d43f5fae272dcfc737d"
+    "revision": "d6d9fc5b4e0eecda3df3633daa70d9a6"
   },
   {
     "url": "Blog/JavaScript/ES6的一些方法和技巧.html",
-    "revision": "636c32ce8c1fcc5053c970210f24674f"
+    "revision": "43d4c894311c2a589583e98ec9ec5f79"
   },
   {
     "url": "Blog/JavaScript/JS随笔.html",
-    "revision": "d5bbec66ce80c1dd6aec217d0a6646eb"
+    "revision": "c53cd17522a8cbc12fcad14c4e8d4811"
   },
   {
     "url": "Blog/JavaScript/箭头函数this的指向.html",
-    "revision": "554240934de67ef561a3f9c5f0a3eefe"
+    "revision": "bfab747621b93a37325fcca79a7dd949"
   },
   {
     "url": "Blog/MiniPrograms/MiniPrograms.html",
-    "revision": "26b2d7947aa8e0a34fbd0aa1cf33c675"
+    "revision": "d9ab34aeedfde3181d4004f6104f818e"
   },
   {
     "url": "Blog/Node/node版本管理.html",
-    "revision": "5f86e24aece2a2375403ddd292123270"
+    "revision": "87d151523e64aa16dd6bb8fae200477c"
   },
   {
     "url": "Blog/Node/npm.html",
-    "revision": "2960181fe499a59c1de30689dca39ee0"
+    "revision": "7f46396dddc17aa9babf8948694cfe70"
   },
   {
     "url": "Blog/Other/fidder.html",
-    "revision": "8184b7bdbc2eba65feae79fe7690ab87"
+    "revision": "217e93548dbadd25efac9b05169c65f8"
   },
   {
     "url": "Blog/Other/gulp.html",
-    "revision": "8381d6e2d71decf04b7a2cfd0cc593d2"
+    "revision": "da382bb0252470f3e1626489f05f0535"
   },
   {
     "url": "Blog/Other/template.html",
-    "revision": "411bbbc568aba13b654a16366303c0af"
+    "revision": "2f3ab58e6b3126e407ec998094809636"
   },
   {
     "url": "Blog/VUE/vue.html",
-    "revision": "234b9a26744b8bfca87bf1370741cb3f"
+    "revision": "38b8abb7503f26ff6eb23d120d6b3656"
   },
   {
     "url": "img/1323758-20180206101320904-162520733.png",
@@ -205,7 +205,7 @@ self.__precacheManifest = [
   },
   {
     "url": "img/fuwuqi.png",
-    "revision": "095dd42d581b664ed6371c35922e19eb"
+    "revision": "38da593ca5406c71546fb59b6807586f"
   },
   {
     "url": "img/generateSprites.png",
@@ -248,8 +248,12 @@ self.__precacheManifest = [
     "revision": "b4b356d741b9b432c00f37fcd27f33e8"
   },
   {
+    "url": "img/捕获.png",
+    "revision": "f8019bf2a871af166998be50f4df7a60"
+  },
+  {
     "url": "index.html",
-    "revision": "d1d042d221b7bd7e079f3e07650c038d"
+    "revision": "7c32e1f2714e9e8e9e3fe249a274f549"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
