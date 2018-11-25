@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>console</title>
+</head>
+<body>
+  <div id="lg" class="s-p-top">
+    <img id="s_lg_img" class="s_lg_img_gold_show" src="//www.baidu.com/img/bd_logo1.png?where=super" width="270" height="129" usemap="#mp" /> 
+    <img id="s_lg_img_new" class="s_lg_img_gold_showre" src="//www.baidu.com/img/bd_logo1.png?qua=high&amp;where=super" width="270" height="129" usemap="#mp" /> 
+    <map name="mp" id="s_mp"><area style="cursor:pointer;outline:none;" shape="rect" coords="0,0,270,129" href="//www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&amp;tn=SE_Pclogo_6ysd4c7a&amp;sa=ire_dl_gh_logo&amp;rsv_dl=igh_logo_pc" target="_blank" title="点击一下，了解更多" onmousedown="return ns_c({'fm':'behs','tab':'bdlogo'})"></area></map> 
+  </div>
+</body>
+</html>
+<script>
+// 分类输出
+console.log('--------------- 分类输出 ----------------')
+console.log('文字信息');
+console.info('提示信息');
+console.warn('警告信息');
+console.error('错误信息');
+
+// 分组输出
+console.log('--------------- 分组输出 ----------------')
+console.group('第一个组');
+  console.log("1-1");
+  console.log("1-2");
+  console.log("1-3");
+console.groupEnd();
+console.group('第二个组');
+  console.log("2-1");
+  console.log("2-2");
+  console.log("2-3");
+console.groupEnd();
+
+
+// Console.group()还可以嵌套使用
+console.group('第一个组');
+  console.group("1-1");
+    console.group("1-1-1");
+      console.log('内容');
+    console.groupEnd();
+  console.groupEnd();
+  console.group("1-2");
+    console.log('内容');
+    console.log('内容');
+    console.log('内容');
+  console.groupEnd();
+console.groupEnd();
+
+console.groupCollapsed('第二个组');
+  console.group("2-1");
+  console.groupEnd();
+  console.group("2-2");
+  console.groupEnd();
+console.groupEnd();
+
+// 表格输出
+console.log('--------------- 表格输出 ----------------')
+var Obj = {
+    Obj1: {
+        a: "aaa",
+        b: "bbb",
+        c: "ccc"
+    },
+    Obj2: {
+        a: "aaa",
+        b: "bbb",
+        c: "ccc"
+    },
+    Obj3: {
+        a: "aaa",
+        b: "bbb",
+        c: "ccc"
+    },
+    Obj4: {
+        a: "aaa",
+        b: "bbb",
+        c: "ccc"
+    }
+}
+console.table(Obj);
+var Arr = [
+  ["aa", "bb", "cc"],
+  ["dd", "ee", "ff"],
+  ["gg", "hh", "ii"]
+]
+console.table(Arr);
+
+// 查看对象
+console.log('--------------- 查看对象 ----------------')
+var CodeDeer = {
+  name: '张三',
+  blog: 'www.google.com',
+}
+console.log("console.dir(CodeDeer)");
+console.dir(CodeDeer);
+console.log("console.log(CodeDeer)");
+console.log(CodeDeer);
+
+// 查看节点
+console.log('--------------- 查看节点 ----------------')
+var lg = document.getElementById('lg')
+console.dirxml(lg)
+console.log('********')
+console.log(lg)
+
+// 条件输出
+console.log('--------------- 条件输出 ----------------')
+console.assert(true, "你永远看不见我");
+console.assert((function() {
+    return true;
+})(), "你永远看不见我");
+console.assert(false, "你看得见我");
+console.assert((function() {
+    return false;
+})(), "你看得见我");
+
+// 计次输出
+console.log('--------------- 计次输出 ----------------')
+for (var i = 0; i < 3; i++) {
+  console.count("运行次数：");
+}
+
+// 追踪调用堆栈
+console.log('--------------- 追踪调用堆栈 ----------------')
+function add(a, b) {
+  console.trace("Add function");
+  return a + b;
+}
+function add3(a, b) {
+  return add2(a, b);
+}
+function add2(a, b) {
+  return add1(a, b);
+}
+function add1(a, b) {
+  return add(a, b);
+}
+var x = add3(1, 1);
+
+// 计时功能
+console.log('--------------- 计时功能 ----------------')
+console.time("Chrome中循环1000次的时间");
+for (var i = 0; i < 1000; i++) {}
+console.timeEnd("Chrome中循环1000次的时间");
+
+// 性能分析
+console.log('--------------- 性能分析 ----------------')
+// console.profile()
+// console.profileEnd()
+
+// Console.log()
+console.log('--------------- Console.log() ----------------')
+var ans = 12345;
+console.log("这是临时变量ans的值：", ans);
+
+// 格式化输出
+console.log('--------------- log 格式化输出 ----------------')
+var arr = ["张三", "李四"];
+console.log("欢迎%s和%s两位新同学", arr[0], arr[1]);
+console.log("圆周率整数部分：%d，带上小数是：%f", 3.1415, 3.1415);
+
+// 自定义样式
+console.log('--------------- log 自定义样式 ----------------')
+console.log("%c 啦啦啦", "color: #0084ff;font-size: 30px;")
+console.log("%c3D Text", " text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);font-size:5em");
+console.log('%cRainbow Text ', 'background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;');
+
+// debugger
+
+let nums1 = [4,9,5]
+let nums2 = [9,4,9,8,4]
+
+const solution2 = (arr1, arr2) => {
+  let result = []
+  for (let item of arr1) {
+    debugger
+    if (arr2.includes(item)) {
+      debugger
+      result.push(item)
+    }
+  }
+
+  return [...new Set(result)]
+}
+
+console.log('solution2', solution2(nums1, nums2))
+</script>
