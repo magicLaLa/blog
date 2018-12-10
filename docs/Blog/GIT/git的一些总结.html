@@ -9,7 +9,7 @@
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/img/logo.png">
     
-    <link rel="preload" href="/assets/css/0.styles.0e4fdce5.css" as="style"><link rel="preload" href="/assets/js/app.6759240b.js" as="script"><link rel="preload" href="/assets/js/3.5a0cafe9.js" as="script"><link rel="prefetch" href="/assets/js/10.d6230fe5.js"><link rel="prefetch" href="/assets/js/11.a8da0024.js"><link rel="prefetch" href="/assets/js/12.330e0f83.js"><link rel="prefetch" href="/assets/js/13.3e4e25c5.js"><link rel="prefetch" href="/assets/js/14.f5e46c9e.js"><link rel="prefetch" href="/assets/js/15.21be2681.js"><link rel="prefetch" href="/assets/js/16.5ec3ea9d.js"><link rel="prefetch" href="/assets/js/17.504682f1.js"><link rel="prefetch" href="/assets/js/18.6c486db0.js"><link rel="prefetch" href="/assets/js/19.a55b746b.js"><link rel="prefetch" href="/assets/js/2.979492e9.js"><link rel="prefetch" href="/assets/js/20.5493beb9.js"><link rel="prefetch" href="/assets/js/4.d05fc0ac.js"><link rel="prefetch" href="/assets/js/5.1533e6fe.js"><link rel="prefetch" href="/assets/js/6.b547afbb.js"><link rel="prefetch" href="/assets/js/7.b06df096.js"><link rel="prefetch" href="/assets/js/8.726bd949.js"><link rel="prefetch" href="/assets/js/9.3ee49416.js">
+    <link rel="preload" href="/assets/css/0.styles.0e4fdce5.css" as="style"><link rel="preload" href="/assets/js/app.c6f4e4c4.js" as="script"><link rel="preload" href="/assets/js/3.04921920.js" as="script"><link rel="prefetch" href="/assets/js/10.d6230fe5.js"><link rel="prefetch" href="/assets/js/11.a8da0024.js"><link rel="prefetch" href="/assets/js/12.330e0f83.js"><link rel="prefetch" href="/assets/js/13.3e4e25c5.js"><link rel="prefetch" href="/assets/js/14.f5e46c9e.js"><link rel="prefetch" href="/assets/js/15.21be2681.js"><link rel="prefetch" href="/assets/js/16.5ec3ea9d.js"><link rel="prefetch" href="/assets/js/17.504682f1.js"><link rel="prefetch" href="/assets/js/18.6c486db0.js"><link rel="prefetch" href="/assets/js/19.a55b746b.js"><link rel="prefetch" href="/assets/js/2.979492e9.js"><link rel="prefetch" href="/assets/js/20.5493beb9.js"><link rel="prefetch" href="/assets/js/4.d05fc0ac.js"><link rel="prefetch" href="/assets/js/5.1533e6fe.js"><link rel="prefetch" href="/assets/js/6.b547afbb.js"><link rel="prefetch" href="/assets/js/7.b06df096.js"><link rel="prefetch" href="/assets/js/8.726bd949.js"><link rel="prefetch" href="/assets/js/9.3ee49416.js">
     <link rel="stylesheet" href="/assets/css/0.styles.0e4fdce5.css">
   </head>
   <body>
@@ -29,8 +29,8 @@
     v1.2.1
     v1.2.2
     v1.2.3
-</code></pre></li> <li><p><code>git push --tags</code> 默认情况下，<code>git push</code> 不会把 tag 上传到远程，为了共享这个 tag，可以在 git push 后面加 <code>--tags</code></p></li> <li><p><code>git stash</code> 暂存区和工作区的状态都会被保存</p></li> <li><p><code>git show tagName</code> 查看该标签的信息</p></li> <li><p>注意 <em><code>tag</code>实际指向的是一次<code>commit</code>，<code>show tagName</code>展示出来的<code>diff</code>也是该次<code>commit</code>的<code>diff</code></em></p></li> <li><p>删除本地标签 <code>git tag -d 标签名</code></p></li> <li><p>删除远程标签 <code>git push origin :refs/tags/标签名</code></p></li></ul> <h3 id="git-推送本地分支到远程和拉去远程分支到本地"><a href="#git-推送本地分支到远程和拉去远程分支到本地" aria-hidden="true" class="header-anchor">#</a> git 推送本地分支到远程和拉去远程分支到本地</h3> <pre><code>    git push &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;远程分支名&gt;
-    git fetch origin &lt;远程分支名&gt;:&lt;远程分支名&gt;
+</code></pre></li> <li><p><code>git push --tags</code> 默认情况下，<code>git push</code> 不会把 tag 上传到远程，为了共享这个 tag，可以在 git push 后面加 <code>--tags</code></p></li> <li><p><code>git stash</code> 暂存区和工作区的状态都会被保存</p></li> <li><p><code>git show tagName</code> 查看该标签的信息</p></li> <li><p>注意 <em><code>tag</code>实际指向的是一次<code>commit</code>，<code>show tagName</code>展示出来的<code>diff</code>也是该次<code>commit</code>的<code>diff</code></em></p></li> <li><p>删除本地标签 <code>git tag -d 标签名</code></p></li> <li><p>删除远程标签 <code>git push origin :refs/tags/标签名</code></p></li></ul> <h3 id="git-推送本地分支到远程和拉去远程分支到本地"><a href="#git-推送本地分支到远程和拉去远程分支到本地" aria-hidden="true" class="header-anchor">#</a> git 推送本地分支到远程和拉去远程分支到本地</h3> <pre><code>    git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;
+    git fetch origin &lt;远程分支名&gt;:&lt;本地分支名&gt;
 </code></pre> <h3 id="git-回到远程仓库的状态"><a href="#git-回到远程仓库的状态" aria-hidden="true" class="header-anchor">#</a> git 回到远程仓库的状态</h3> <pre><code>    git fetch --all &amp;&amp; git reset --hard origin/master
 </code></pre> <h3 id="git-放弃工作区的修改"><a href="#git-放弃工作区的修改" aria-hidden="true" class="header-anchor">#</a> git 放弃工作区的修改</h3> <pre><code>    git checkout &lt;file-name&gt;
     放弃所有更改:
@@ -125,6 +125,6 @@ fatal: could not read Username for 'https://github.com': No error
 
 git reset --merge [prior git versions]
 </code></pre></div></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
-    <script src="/assets/js/3.5a0cafe9.js" defer></script><script src="/assets/js/app.6759240b.js" defer></script>
+    <script src="/assets/js/3.04921920.js" defer></script><script src="/assets/js/app.c6f4e4c4.js" defer></script>
   </body>
 </html>
