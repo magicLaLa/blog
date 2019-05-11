@@ -2,102 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Magic</title>
-    <link>http://192.168.31.10:8000/categories/</link>
+    <link>https://magiclala.github.io/categories/</link>
     <description>Recent content in Categories on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://192.168.31.10:8000/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://magiclala.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Webpack</title>
-      <link>http://192.168.31.10:8000/categories/webpack/</link>
+      <link>https://magiclala.github.io/categories/webpack/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/webpack/</guid>
+      <guid>https://magiclala.github.io/categories/webpack/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Docker</title>
-      <link>http://192.168.31.10:8000/categories/docker/</link>
+      <link>https://magiclala.github.io/categories/docker/</link>
       <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/docker/</guid>
+      <guid>https://magiclala.github.io/categories/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Node</title>
-      <link>http://192.168.31.10:8000/categories/node/</link>
+      <link>https://magiclala.github.io/categories/node/</link>
       <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/node/</guid>
+      <guid>https://magiclala.github.io/categories/node/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MiniPrograms</title>
-      <link>http://192.168.31.10:8000/categories/miniprograms/</link>
+      <link>https://magiclala.github.io/categories/miniprograms/</link>
       <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/miniprograms/</guid>
+      <guid>https://magiclala.github.io/categories/miniprograms/</guid>
       <description></description>
     </item>
     
     <item>
       <title>js</title>
-      <link>http://192.168.31.10:8000/categories/js/</link>
+      <link>https://magiclala.github.io/categories/js/</link>
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/js/</guid>
+      <guid>https://magiclala.github.io/categories/js/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Browser</title>
-      <link>http://192.168.31.10:8000/categories/browser/</link>
+      <link>https://magiclala.github.io/categories/browser/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/browser/</guid>
+      <guid>https://magiclala.github.io/categories/browser/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vue</title>
-      <link>http://192.168.31.10:8000/categories/vue/</link>
+      <link>https://magiclala.github.io/categories/vue/</link>
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/vue/</guid>
+      <guid>https://magiclala.github.io/categories/vue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>git</title>
-      <link>http://192.168.31.10:8000/categories/git/</link>
+      <link>https://magiclala.github.io/categories/git/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/git/</guid>
+      <guid>https://magiclala.github.io/categories/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>leetCode</title>
-      <link>http://192.168.31.10:8000/categories/leetcode/</link>
+      <link>https://magiclala.github.io/categories/leetcode/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/leetcode/</guid>
+      <guid>https://magiclala.github.io/categories/leetcode/</guid>
       <description></description>
     </item>
     
     <item>
       <title>other</title>
-      <link>http://192.168.31.10:8000/categories/other/</link>
+      <link>https://magiclala.github.io/categories/other/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/categories/other/</guid>
+      <guid>https://magiclala.github.io/categories/other/</guid>
       <description></description>
     </item>
     

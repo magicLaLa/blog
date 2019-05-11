@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>git on Magic</title>
-    <link>http://192.168.31.10:8000/categories/git/</link>
+    <link>https://magiclala.github.io/categories/git/</link>
     <description>Recent content in git on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://192.168.31.10:8000/categories/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://magiclala.github.io/categories/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>git commit emoji 使用指南</title>
-      <link>http://192.168.31.10:8000/2017/git-commit-emoji/</link>
+      <link>https://magiclala.github.io/2017/git-commit-emoji/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/2017/git-commit-emoji/</guid>
+      <guid>https://magiclala.github.io/2017/git-commit-emoji/</guid>
       <description>git commit emoji 使用指南 目录  commit 格式 emoji 指南 如何在命令行中显示 emoji 参考  git commit emoji write a good commit message   执行 git commit 时使用 emoji 为本次提交打上一个 &amp;ldquo;标签&amp;rdquo;, 使得此次 commit 的主要工作得以凸现，也能够使得其在整个提交历史中易于区分与查找。
 截取的 gitmoji 快照:
 commit 格式 git commit 时，提交信息遵循以下格式：
@@ -26,10 +26,10 @@ git commit -m &amp;quot;🎉 Initialize Repo&amp;quot;  emoji 指南    emoji em
     
     <item>
       <title>git 相关总结</title>
-      <link>http://192.168.31.10:8000/2017/git-summary/</link>
+      <link>https://magiclala.github.io/2017/git-summary/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://192.168.31.10:8000/2017/git-summary/</guid>
+      <guid>https://magiclala.github.io/2017/git-summary/</guid>
       <description>关于git的总结 git工作流 git相关  git 提交规范 git 简明指南 git 在线教程 git pro 中文教程
  Commitizen是一个撰写合格 Commit message 的工具。
   1.安装命令如下:
