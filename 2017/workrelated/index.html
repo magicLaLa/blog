@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="http://192.168.31.10:8000/2017/vue-watch/" />
+  <link rel="next" href="http://192.168.31.10:8000/2017/vueplugins/" />
+  <link rel="canonical" href="http://192.168.31.10:8000/2017/workrelated/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           vue 相关问题 | Magic
+       
+  </title>
+  <meta name="title" content="vue 相关问题 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vue 相关问题"/>
+<meta name="twitter:description" content="使用vuex状态管理后，在 input 中使用 v-model 来进行双向数据绑定，在修改 input 中值的时候会抛出一个错误  可以不使用 v-model 来进行双向数据绑定，使用 :value=&rsquo; &lsquo; 来，然后设置一个 监听器来推动 state 的更新( @input=&rsquo; &lsquo; )
+vue 模板
+ &lt;template&gt; &lt;div class=&quot;hello&quot;&gt; &lt;input type=&quot;text&quot; :value=&quot;text&quot; @input=&#39;update&#39;&gt; &lt;span&gt;{{ddd}}&lt;/span&gt; &lt;p ref=&quot;ppp&quot;&gt;啦啦啦&lt;/p&gt; &lt;input type=&quot;text&quot; v-focus&gt; &lt;/div&gt; &lt;/template&gt; &lt;script&gt; import {mapState} from &#39;vuex&#39; export default { name: &#39;HelloWorld&#39;, data () { return { ddd: &#39;&#39; } }, computed: { ...mapState([&#39;text&#39;]) }, methods: { update (e) { // 在这里来 更新 state 里的某一个值 this."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "vue 相关问题",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/192.168.31.10:8000\/2017\/workrelated\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "Vue",
+  "wordcount":  1008 ,
+  "url": "http:\/\/192.168.31.10:8000\/2017\/workrelated\/",
+  "datePublished": "2017-10-02T00:00:00\x2b00:00",
+  "dateModified": "2017-10-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/192.168.31.10:8000\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="http://192.168.31.10:8000">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="http://192.168.31.10:8000">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">vue 相关问题</h1>
+        <div class="post-meta">
+            Written by <a href="http://192.168.31.10:8000" rel="author">Magic</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2017-10-02 >2 October 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="http://192.168.31.10:8000/categories/vue/"> Vue </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                5 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h3 id="使用vuex状态管理后-在-input-中使用-v-model-来进行双向数据绑定-在修改-input-中值的时候会抛出一个错误">使用vuex状态管理后，在 input 中使用 v-model 来进行双向数据绑定，在修改 input 中值的时候会抛出一个错误</h3>
+
+<blockquote>
+<p>可以不使用 v-model 来进行双向数据绑定，使用 :value=&rsquo; &lsquo; 来，然后设置一个 监听器来推动 state 的更新( @input=&rsquo; &lsquo; )</p>
+
+<p>vue 模板</p>
+</blockquote>
+
+<pre><code class="language-vue">&lt;template&gt;
+  &lt;div class=&quot;hello&quot;&gt;
+    &lt;input type=&quot;text&quot; :value=&quot;text&quot; @input='update'&gt;
+    &lt;span&gt;{{ddd}}&lt;/span&gt;
+    &lt;p ref=&quot;ppp&quot;&gt;啦啦啦&lt;/p&gt;
+    &lt;input type=&quot;text&quot; v-focus&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import {mapState} from 'vuex'
+export default {
+  name: 'HelloWorld',
+  data () {
+    return {
+      ddd: ''
+    }
+  },
+  computed: {
+    ...mapState(['text'])
+  },
+  methods: {
+    update (e) {
+　　　// 在这里来 更新 state 里的某一个值
+      this.$store.dispatch('updataText', e.target.value)// 触发 actions 来 推动 mutations
+      this.$refs.ppp.innerText = '465'
+    }
+  },
+  watch: {
+    text: function () {
+      this.ddd = this.$store.state.text
+    }
+  },
+  directives: {
+    focus: {
+      // 自定义指令
+      inserted: function (el) {
+        el.focus()
+      }
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre>
+
+<blockquote>
+<p>actions.js 里内容</p>
+</blockquote>
+
+<pre><code class="language-javascript">const actions = {
+　updataText (context, val) {
+　　　context.commit('modify', val)
+　}
+}
+export default actions
+</code></pre>
+
+<blockquote>
+<p>state.js 里内容</p>
+</blockquote>
+
+<pre><code class="language-javascript">export default {
+　text: '46546'
+}
+</code></pre>
+
+<ul>
+<li><em>具体参考 <a href="https://vuex.vuejs.org/zh-cn/forms.html" rel="nofollow noreferrer" target="_blank">官方文档</a></em></li>
+</ul>
+
+<h3 id="在vue中父组件通过-props-给子组件传递数据-然后在-input-通过-v-model-绑定-怎么在-watch-中-进行监听-通过-props-来把传递的-数据-变成-子组件的-初始值">在vue中父组件通过 props 给子组件传递数据，然后在 input 通过 v-model 绑定，怎么在 watch 中 进行监听，通过 props 来把传递的 数据 变成 子组件的 初始值</h3>
+
+<blockquote>
+<p>父组件中的内容</p>
+</blockquote>
+
+<pre><code class="language-html">&lt;!-- 取货方式和收货人信息 --&gt;
+&lt;pick-box :checked=&quot;checkedSuccess&quot; :userData=&quot;userData&quot; :user2Data=&quot;user2Data&quot; :areaArr=&quot;infoAreaData&quot; :errTxt=&quot;pasTxt&quot; :isErrShow=&quot;isErrShow&quot; @changeErr=&quot;changeErrShow&quot; :disabled=&quot;!checkedSuccess&quot;&gt;&lt;/pick-box&gt;
+</code></pre>
+
+<pre><code class="language-javascript">export default {
+  // 可以在这个地方初始化值
+  let areaN = this.$store.state.numStatus.cityDic.cityName
+  if (areaN === '大兴安岭') {
+    emCityName1 = areaN + '地区'
+  } else {
+    emCityName1 = areaN + '市'
+  }
+
+  data () {
+    return {
+      userData: {
+        name: '',
+        idCard: ''
+      },
+      emCityName: emCityName
+    }
+  }
+}
+</code></pre>
+
+<blockquote>
+<p>子组件中的内容</p>
+</blockquote>
+
+<pre><code class="language-vue">&lt;template&gt;
+  &lt;div class=&quot;pickBox&quot;&gt;
+    &lt;div class=&quot;conInfoBox&quot; v-show=&quot;order.chiocePick === '1'&quot;&gt;
+      &lt;h3 class=&quot;numH3 c288fe line1&quot;&gt;收货人信息&lt;/h3&gt;
+      &lt;!-- 联系人姓名 --&gt;
+      &lt;div class=&quot;conInpBox&quot; @click=&quot;inputFocus&quot;&gt;&lt;span class=&quot;coin&quot;&gt;*&lt;/span&gt;&lt;input class=&quot;netInput&quot; type=&quot;text&quot; v-model=&quot;conPerName&quot; placeholder=&quot;联系人姓名: 请输入联系人姓名&quot; :disabled=&quot;!checked&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;errPro&quot;&gt;
+        &lt;div class=&quot;errItem&quot; v-show=&quot;isconErrShow.conErrName&quot;&gt;&lt;span class=&quot;errCoin f24&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;proTxt&quot;&gt;请输入正确的收货人姓名&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- 联系人电话 --&gt;
+      &lt;div class=&quot;conInpBox&quot; @click=&quot;inputFocus&quot;&gt;&lt;span class=&quot;coin&quot;&gt;*&lt;/span&gt;&lt;input class=&quot;netInput&quot; type=&quot;tel&quot; v-model=&quot;conPerTel&quot; placeholder=&quot;联系人电话: 请输入联系人电话&quot; :disabled=&quot;!checked&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;errPro&quot;&gt;
+        &lt;div class=&quot;errItem&quot; v-show=&quot;isconErrShow.conErrTel&quot;&gt;&lt;span class=&quot;errCoin f24&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;proTxt&quot;&gt;请输入正确的收货人电话&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- 所选区县 --&gt;
+      &lt;div class=&quot;conInpBox conArea&quot; :class=&quot;{'inputDisabled': !checked}&quot; @click=&quot;inputFocus&quot;&gt;
+        &lt;div class=&quot;conAreaBox&quot;&gt;&lt;span class=&quot;coin&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;areaTxt&quot; :class=&quot;{'inputDisabled': !checked}&quot;&gt;{{conPerArea}}&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;c288fe&quot; @click=&quot;openPickPop&quot; :class=&quot;{'inputDisabled': !checked}&quot;&gt;选择区县 〉&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;!-- 收货人信息详细地址 --&gt;
+      &lt;div class=&quot;conInpBox&quot; @click=&quot;inputFocus&quot;&gt;&lt;span class=&quot;coin&quot;&gt;*&lt;/span&gt;&lt;input class=&quot;netInput&quot; type=&quot;tel&quot; v-model=&quot;conPerAdd&quot; placeholder=&quot;详细地址: 请输入详细地址&quot; :disabled=&quot;!checked&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;errPro&quot;&gt;
+        &lt;div class=&quot;errItem&quot; v-show=&quot;isconErrShow.conErrAdd&quot;&gt;&lt;span class=&quot;errCoin f24&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;proTxt&quot;&gt;请输入正确的收货人地址&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data () {
+    let areaDefalut = this.$store.state.numStatus.cityDic.cityName
+    let emCityName2 = ''
+    if (areaDefalut === '大兴安岭') {
+      emCityName2 = areaDefalut + '地区'
+    } else {
+      emCityName2 = areaDefalut + '市'
+    }
+
+    return: {
+      isDisable: false,
+      loginNo: loginNo,
+      isLoading: false,
+      pickPersonArea: '',
+      conPerName: '',
+      conPerTel: '',
+      conPerAdd: '',
+      conPerArea: `所属地区: 黑龙江省 ${emCityName2}`,
+      conPerAreaCode: ''
+    }
+  },
+  props: {
+    userData: {
+      type: Object
+    },
+    user2Data: {
+      type: Object
+    },
+    areaArr: {
+      type: Array
+    },
+    isErrShow: {
+      type: Object
+    },
+    errTxt: {
+      type: String
+    },
+    checked: {
+      type: Boolean
+    }
+  },
+  watch: {
+    user2Data: {
+      handler: function (newVal, oldVal) {
+        console.log(newVal, oldVal)
+      },
+      deep: true  // 深度监听模式
+    },
+    // 收货人姓名检验
+    conPerName (newVal, oldVal) {
+      /* eslint-disable */
+      let conNameReg =  /^([a-zA-Z\u4e00-\u9fa5\·]{1,10})$/
+      if (newVal !== '') {
+        if (conNameReg.test(newVal)) {
+          this.isconErrShow.conErrName = false
+        } else {
+          this.isconErrShow.conErrName = true
+        }
+      } else {
+        this.isconErrShow.conErrName = true
+      }
+    },
+    // 收货人详细地址地址检验
+    conPerAdd (newVal, oldVal) {
+       let detaAdd = /[@\/\'\\\&quot;$%&amp;_!！+=\^\*\$\+\(\)\-\（\）]+/ig
+       if (newVal !== '') {
+         if (detaAdd.test(newVal) || newVal === '') {
+           this.isconErrShow.conErrAdd = true
+         } else {
+           this.isconErrShow.conErrAdd = false
+         }
+       } else {
+         this.isconErrShow.conErrAdd = true
+       }
+    },
+    // 收货人电话检验
+    conPerTel (newVal, oldVal) {
+      let conPTReg = /^\d{6,}$/
+      if (newVal !== '') {
+        if (conPTReg.test(newVal)) {
+          this.isconErrShow.conErrTel = false
+        } else {
+          this.isconErrShow.conErrTel = true
+        }
+      } else {
+        this.isconErrShow.conErrTel = true
+      }
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre>
+
+<ul>
+<li><strong>可以通过 在 data 里 初始化一个 简单值 ，然后 通过 watch 来 监听 通过 props 来传入值的变化 ，然后 再进行 赋值，然后 就可以 通过 在 watch 里面 来 监听 要 变化的 值 来 进行 处理。也可以 通过  computed 来 使 props 传递过来的数据 变成 子组件的 初始值，然后在 input 上面 通过 v-model 来进行双向数据绑定，可以 监听 input 的 change 事件 ， 来进行 对 输入过程中 进行操作。</strong></li>
+</ul>
+
+<h3 id="在vue-中-使用-mint-ui-的-picker-选择器-组件-在下滑或上滑和手机浏览器原生滑动事件有冲突-通常在-ios-上-会有这个现象-可以监听-touchmove-事件-来阻止默认事件-具体看代码">在vue 中 使用 mint-ui 的 Picker 选择器 组件，在下滑或上滑和手机浏览器原生滑动事件有冲突（通常在 IOS 上 会有这个现象），可以监听 touchmove 事件，来阻止默认事件，具体看代码</h3>
+
+<ul>
+<li><strong>参考 <a href="http://iscrolljs.com/" rel="nofollow noreferrer" target="_blank">http://iscrolljs.com/</a>  <a href="http://iscrolljs.com/" rel="nofollow noreferrer" target="_blank">这个网站</a></strong></li>
+</ul>
+
+<pre><code class="language-javascript">function isPassive () {
+  var supportsPassiveOption = false
+  try {
+    addEventListener('test', null, Object.defineProperty({}, 'passive', {
+      get: function () {
+        supportsPassiveOption = true
+      }
+    }))
+  } catch (e) {}
+  return supportsPassiveOption
+}
+
+function preventDefaultFunc (e) {
+  e.preventDefault()
+}
+
+export function preventTouchmove (onoff) {
+  if (onoff) {
+    document.body.addEventListener('touchmove', preventDefaultFunc, isPassive() ? {
+      capture: false,
+      passive: false
+    } : false)
+  } else {
+    console.log('wawawwaawa')
+    document.body.removeEventListener('touchmove', preventDefaultFunc, isPassive() ? {
+      capture: false,
+      passive: false
+    } : false)
+  }
+}
+</code></pre>
+
+<ul>
+<li>然后通过</li>
+</ul>
+
+<pre><code class="language-javascript">import { preventTouchmove } from 'utils/common'
+</code></pre>
+
+<ul>
+<li>来导入这个方法，然后使用，onoff 是开关，来传 布尔值</li>
+</ul>
+
+<pre><code class="language-js">preventTouchmove(true/false)
+</code></pre>
+
+<h3 id="在vue项目中展示效果为展开收起的动画组件">在vue项目中展示效果为展开收起的动画组件</h3>
+
+<ol>
+<li>expand.js （自己创建的js文件名）</li>
+</ol>
+
+<pre><code class="language-js">const elTransition = '0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out'
+const Transition = {
+  'before-enter' (el) {
+    el.style.transition = elTransition
+    if (!el.dataset) el.dataset = {}
+
+    el.dataset.oldPaddingTop = el.style.paddingTop
+    el.dataset.oldPaddingBottom = el.style.paddingBottom
+
+    el.style.height = 0
+    el.style.paddingTop = 0
+    el.style.paddingBottom = 0
+  },
+
+  'enter' (el) {
+    el.dataset.oldOverflow = el.style.overflow
+    if (el.scrollHeight !== 0) {
+      el.style.height = el.scrollHeight + 'px'
+      el.style.paddingTop = el.dataset.oldPaddingTop
+      el.style.paddingBottom = el.dataset.oldPaddingBottom
+    } else {
+      el.style.height = ''
+      el.style.paddingTop = el.dataset.oldPaddingTop
+      el.style.paddingBottom = el.dataset.oldPaddingBottom
+    }
+
+    el.style.overflow = 'hidden'
+  },
+
+  'after-enter' (el) {
+    el.style.transition = ''
+    el.style.height = ''
+    el.style.overflow = el.dataset.oldOverflow
+  },
+
+  'before-leave' (el) {
+    if (!el.dataset) el.dataset = {}
+    el.dataset.oldPaddingTop = el.style.paddingTop
+    el.dataset.oldPaddingBottom = el.style.paddingBottom
+    el.dataset.oldOverflow = el.style.overflow
+
+    el.style.height = el.scrollHeight + 'px'
+    el.style.overflow = 'hidden'
+  },
+
+  'leave' (el) {
+    if (el.scrollHeight !== 0) {
+      el.style.transition = elTransition
+      el.style.height = 0
+      el.style.paddingTop = 0
+      el.style.paddingBottom = 0
+    }
+  },
+
+  'after-leave' (el) {
+    el.style.transition = ''
+    el.style.height = ''
+    el.style.overflow = el.dataset.oldOverflow
+    el.style.paddingTop = el.dataset.oldPaddingTop
+    el.style.paddingBottom = el.dataset.oldPaddingBottom
+  }
+}
+
+export default {
+  name: 'collapseTransition',
+  functional: true,
+  render (h, { children }) {
+    const data = {
+      on: Transition
+    }
+    return h('transition', data, children)
+  }
+}
+</code></pre>
+
+<ol>
+<li>在组件中使用</li>
+</ol>
+
+<pre><code class="language-vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;collapse-transition&gt;
+      &lt;!-- 展示的内容 --&gt;
+    &lt;/collapse-transition&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import CollapseTransition from '../expand.js'
+export default {
+  data () {
+    return {
+      isActive: false
+    }
+  },
+  components: {
+    CollapseTransition
+  },
+  methods: {
+    moreAndMore () {
+      this.isActive = !this.isActive
+    },
+    collClick () {
+      this.isActive = false
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre>
+
+<ol>
+<li><strong>有卡顿或者获取高度有误，在enter的时候用setTimeout做了0.1s的延迟，就能准确的获取height了</strong></li>
+</ol>
+
+<h3 id="页面刷新vuex被清空">页面刷新vuex被清空</h3>
+
+<ul>
+<li>同一个页面(router未改变)，一旦刷新（刷新或深度刷新），存储的<code>vuex</code>就马上和你说拜拜，解决方法：</li>
+</ul>
+
+<p>localStorage：网上推荐最多的方法就是用<code>localStorage</code>。</p>
+
+<p>数据重新获取：在需要某些数据之前先判断一下数据是否存在，如果不存在重新获取。</p>
+
+<p><a href="https://github.com/robinvdvleuten/vuex-persistedstate" rel="nofollow noreferrer" target="_blank">vuex-persistedstate</a>：状态持久化。</p>
+
+<h3 id="nexttick适当使用">nextTick适当使用</h3>
+
+<p>将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。它跟全局方法 <code>Vue.nextTick</code> 一样，不同的是回调的 this 自动绑定到调用它的实例上。简而言之，等待DOM更新之后再进行操作。</p>
+
+<h3 id="elmentui里面的el-form-就地复用">elmentui里面的el-form &lsquo;就地复用&rsquo;</h3>
+
+<p>和<code>v-for</code>一样，更新已渲染过的元素时，它默认用‘就地复用’策略。如果数据项的顺序被改变，<code>Vue将不会移动DOM</code>元素来匹配数据项的顺序，而是简单服用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。</p>
+
+<h3 id="prop值的改变-不是立即">prop值的改变&ndash;不是立即</h3>
+
+<ul>
+<li><p>如果父组件中给子组件传递了一个<code>prop</code>的值，然后调用子组件的方法去获取该值，会发现值没有立即改变。</p>
+
+<p>解决方法：可以监听值的改变去调用相应子组件的方法，将子组件相关方法的调用放在<code>nextTick</code>里面</p></li>
+
+<li><p>不要直接修改<code>prop</code>传下来的值，可以在当前子组件内部声明一个简单值，然后赋值</p></li>
+</ul>
+
+<h3 id="组件之间的调用方式">组件之间的调用方式</h3>
+
+<ul>
+<li>父子组件<br />
+prop向下传递，事件向上传递<br />
+子组件添加ref属性，父组件可以获取到子组件的实例（不建议）<br />
+插槽slot 作用域插槽<br /></li>
+<li>非父子组件<br />
+使用状态管理<br />
+实例化一个公共vue实例<br /></li>
+</ul>
+
+<h3 id="路由变化页面数据不刷新问题">路由变化页面数据不刷新问题</h3>
+
+<ul>
+<li>出现这种情况是因为依赖路由的<code>params</code>参数获取写在<code>created</code>生命周期里面,因为相同路由二次甚至多次加载的关系 没有达到监听，退出页面再进入另一个文章页面并不会运行<code>created</code>组件生命周期,导致文章数据还是第一次进入的数据，解决方法：watch监听路由是否变化</li>
+</ul>
+
+<pre><code class="language-js"> watch: {
+   // 方法1
+   '$route'(to, from) { //监听路由是否变化
+     if (this.$route.params.articleId) { // 判断条件1  判断传递值的变化
+       //获取文章数据
+     }
+   }
+   //方法2
+   '$route'(to, from) {
+     if (to.path == &quot;/page&quot;) { /// 判断条件2  监听路由名 监听你从什么路由跳转过来的
+       this.message = this.$route.query.msg
+     }
+   }
+
+ }
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Magic </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>1008</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fworkrelated%2f&amp;text=vue%20%e7%9b%b8%e5%85%b3%e9%97%ae%e9%a2%98&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fworkrelated%2f&amp;appkey=&amp;title=vue%20%e7%9b%b8%e5%85%b3%e9%97%ae%e9%a2%98" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+            </p>
+                       
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="http://192.168.31.10:8000/tags/vue/">
+                    #Vue</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="http://192.168.31.10:8000">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://192.168.31.10:8000/2017/vue-watch/" class="prev" rel="prev" title="Vue watch选项"><i class="iconfont icon-dajiantou"></i>&nbsp;Vue watch选项</a>
+         
+        
+        <a href="http://192.168.31.10:8000/2017/vueplugins/" class="next" rel="next" title="Vue Plugins And Expansion">Vue Plugins And Expansion&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="http://192.168.31.10:8000">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

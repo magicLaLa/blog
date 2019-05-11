@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="http://192.168.31.10:8000/2017/vue/" />
+  <link rel="next" href="http://192.168.31.10:8000/2017/workrelated/" />
+  <link rel="canonical" href="http://192.168.31.10:8000/2017/vue-watch/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Vue watch选项 | Magic
+       
+  </title>
+  <meta name="title" content="Vue watch选项 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vue watch选项"/>
+<meta name="twitter:description" content="Vue watch选项  watch 的用法
+ watch 对象里的 value 是对应的回调函数
+  data () { return { a: 1 } }, watch: { a: function (newVal, oldVal) { console.log(newVal, oldVal) // 2 1 } }, created () { this.a = 2 }   value 也可以是方法名  data () { return { a: 1 } }, watch: { a: &#39;foo&#39; }, created () { this.a = 2 }, methods: { foo (newVal, oldVal) { console."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vue watch选项",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/192.168.31.10:8000\/2017\/vue-watch\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "Vue",
+  "wordcount":  404 ,
+  "url": "http:\/\/192.168.31.10:8000\/2017\/vue-watch\/",
+  "datePublished": "2017-09-02T00:00:00\x2b00:00",
+  "dateModified": "2017-09-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/192.168.31.10:8000\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="http://192.168.31.10:8000">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="http://192.168.31.10:8000">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Vue watch选项</h1>
+        <div class="post-meta">
+            Written by <a href="http://192.168.31.10:8000" rel="author">Magic</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2017-09-02 >2 September 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="http://192.168.31.10:8000/categories/vue/"> Vue </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                2 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="vue-watch选项">Vue watch选项</h2>
+
+<ul>
+<li><p>watch 的用法</p></li>
+
+<li><p>watch 对象里的 value 是对应的回调函数</p></li>
+</ul>
+
+<pre><code class="language-javascript">data () {
+  return {
+    a: 1
+  }
+},
+watch: {
+  a: function (newVal, oldVal) {
+    console.log(newVal, oldVal)
+    // 2 1
+  }
+},
+created () {
+  this.a = 2
+}
+</code></pre>
+
+<ul>
+<li>value 也可以是方法名</li>
+</ul>
+
+<pre><code class="language-javascript">data () {
+  return {
+    a: 1
+  }
+},
+watch: {
+  a: 'foo'
+},
+created () {
+  this.a = 2
+},
+methods: {
+  foo (newVal, oldVal) {
+    console.log(newVal, oldVal)
+    // 2 1
+  }
+}
+</code></pre>
+
+<ul>
+<li>深度监听 <em>对象内部属性或方法发生改变，须使用深度监听模式才能监听到该对象的改变</em></li>
+</ul>
+
+<pre><code class="language-javascript">data () {
+  return {
+    box: {
+      name: 'jordan'
+    }
+  }
+},
+watch: {
+  box: {
+    handler: function (newVal, oldVal) {
+      console.log(newVal.name, oldVal.name)
+      // kobe kobe
+    },
+    deep: true  // 深度监听模式
+  }
+},
+created () {
+  this.box.name = 'kobe'
+}
+</code></pre>
+
+<ul>
+<li>不使用深度监听时，可以直接监听 xxx.name</li>
+</ul>
+
+<pre><code class="language-javascript">data () {
+  return {
+    box: {
+      name: 'jordan'
+    }
+  }
+},
+watch: {
+  'box.name': {
+    handler: function (newVal, oldVal) {
+      console.log(newVal, oldVal)
+      // kobe jordan
+    }
+  }
+},
+created () {
+  this.box.name = 'lalala'
+}
+// 这时 box.name 又是一个简单值，所以输出 'lalala jordan'
+</code></pre>
+
+<ul>
+<li>数组的监听</li>
+</ul>
+
+<pre><code class="language-javascript">data () {
+  return {
+    box: [1, 1, 1]
+  }
+},
+watch: {
+  box: {
+    handler: function () {
+      console.log('watch works')
+    }
+  }
+},
+created () {
+  this.box[0] = 2
+  this.box.length = 4
+  this.box.push(1)  // watch works
+  this.box.splice(0, 1, 2)  // watch works
+}
+</code></pre>
+
+<blockquote>
+<p><em>created 里使用了4种方式对 box 进行操作，第一种和第二种方式 watch 是监听不到的，即便使用深度监听模式也无法监听的到。</em> <a href="https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" rel="nofollow noreferrer" target="_blank">可以参考</a></p>
+</blockquote>
+
+<ul>
+<li>使用 immediate</li>
+</ul>
+
+<pre><code class="language-javascript">data () {
+  return {
+    box: 1
+  }
+},
+watch: {
+  box: {
+    handler: function () {
+      console.log('watch works')
+    },
+    immediate: true
+  }
+}
+
+// watch works
+</code></pre>
+
+<blockquote>
+<p>增加 immediate: true 选项，handler 会在侦听开始之后被立即调用，即便 box 的值没有改变。如果对 this.box 的值加以修改，便会输出两次 &lsquo;watch works&rsquo;，一次是侦听开始的时候，一次是 box 的值被修改的时候</p>
+</blockquote>
+
+<ul>
+<li>watch 里的 value 可以是放在一个数组里面的多个 handler</li>
+</ul>
+
+<pre><code class="language-javascript">data () {
+  return {
+    box: 1
+  }
+},
+watch: {
+  box: [
+    function foo (newVal, oldVal) {
+      console.log(newVal, oldVal)
+      // 2 1
+    },
+    function bar (newVal, oldVal) {
+      console.log(newVal, oldVal)
+      // 2 1
+    }
+  ]
+},
+created () {
+  this.box = 2
+}
+</code></pre>
+
+<ul>
+<li>每一个 handler 都可以接收 new value 和 old value 两个参数，并且会按各自在数组中的顺序先后触发。当然下面的操作也能实现这样的场景：</li>
+</ul>
+
+<pre><code class="language-javascript">data () {
+  return {
+    box: 1
+  }
+},
+watch: {
+  box: function (newVal, oldVal) {
+    this.foo(newVal, oldVal)
+    this.bar(newVal, oldVal)
+  }
+},
+created () {
+  this.box = 2
+},
+methods: {
+  foo (newVal, oldVal) {
+    console.log(newVal, oldVal)
+  },
+  bar (newVal, oldVal) {
+    console.log(newVal, oldVal)
+  }
+}
+</code></pre>
+
+<blockquote>
+<p><strong>不应该使用箭头函数来定义 watcher 函数</strong></p>
+</blockquote>
+
+<pre><code class="language-javascript">data () {
+  return {
+    box: 1
+  }
+},
+watch: {
+  box: newVal =&gt; {
+    this.updateBox(newVal)
+  }
+},
+created () {
+  this.box = 2
+},
+methods: {
+  updateBox (newVal) {
+    this.box = newVal
+  }
+}
+</code></pre>
+
+<blockquote>
+<p><strong>上面的例子会报错，是因为箭头函数绑定了父级作用域的上下文，所以 this 将不会指向 Vue 实例，也就没有 this.updateBox 这个方法，可以参考 es6箭头函数this的指向</strong></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Magic </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>404</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fvue-watch%2f&amp;text=Vue%20watch%e9%80%89%e9%a1%b9&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fvue-watch%2f&amp;appkey=&amp;title=Vue%20watch%e9%80%89%e9%a1%b9" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+            </p>
+                       
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="http://192.168.31.10:8000/tags/vue/">
+                    #Vue</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="http://192.168.31.10:8000">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://192.168.31.10:8000/2017/vue/" class="prev" rel="prev" title="Vue配置相关"><i class="iconfont icon-dajiantou"></i>&nbsp;Vue配置相关</a>
+         
+        
+        <a href="http://192.168.31.10:8000/2017/workrelated/" class="next" rel="next" title="vue 相关问题">vue 相关问题&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="http://192.168.31.10:8000">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

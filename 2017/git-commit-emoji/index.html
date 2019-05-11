@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="http://192.168.31.10:8000/2017/git-summary/" />
+  <link rel="next" href="http://192.168.31.10:8000/2017/debugtools/" />
+  <link rel="canonical" href="http://192.168.31.10:8000/2017/git-commit-emoji/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           git commit emoji 使用指南 | Magic
+       
+  </title>
+  <meta name="title" content="git commit emoji 使用指南 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="git commit emoji 使用指南"/>
+<meta name="twitter:description" content="git commit emoji 使用指南 目录  commit 格式 emoji 指南 如何在命令行中显示 emoji 参考  git commit emoji write a good commit message   执行 git commit 时使用 emoji 为本次提交打上一个 &ldquo;标签&rdquo;, 使得此次 commit 的主要工作得以凸现，也能够使得其在整个提交历史中易于区分与查找。
+截取的 gitmoji 快照:
+commit 格式 git commit 时，提交信息遵循以下格式：
+:emoji1: :emoji2: 不超过 50 个字的摘要，首字母大写，使用祈使语气，句末不要加句号 提交信息主体 引用相关 issue 或 PR 编号 &lt;#110&gt;  初次提交示例：
+git commit -m &quot;🎉 Initialize Repo&quot;  emoji 指南    emoji emoji 代码 commit 说明     🎉 (庆祝) tada 初次提交   ✨ (火花) sparkles 引入新功能   🔖 (书签) bookmark 发行/版本标签   🐛 (bug) bug 修复 bug   🚑 (急救车) ambulance 重要补丁   🌐 (地球) globe_with_meridians 国际化与本地化   💄 (口红) lipstick 更新 UI 和样式文件   🚨 (警车灯) rotating_light 移除 linter 警告   🔧 (扳手) wrench 修改配置文件   ➕ (加号) heavy_plus_sign 增加一个依赖   ➖ (减号) heavy_minus_sign: 减少一个依赖   ⬆️ (上升箭头) arrow_up 升级依赖   ⬇️ (下降箭头) arrow_down 降级依赖   ⚡️ (闪电)"/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "git commit emoji 使用指南",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/192.168.31.10:8000\/2017\/git-commit-emoji\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "git",
+  "wordcount":  302 ,
+  "url": "http:\/\/192.168.31.10:8000\/2017\/git-commit-emoji\/",
+  "datePublished": "2017-06-02T00:00:00\x2b00:00",
+  "dateModified": "2017-06-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/192.168.31.10:8000\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="http://192.168.31.10:8000">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="http://192.168.31.10:8000">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">git commit emoji 使用指南</h1>
+        <div class="post-meta">
+            Written by <a href="http://192.168.31.10:8000" rel="author">Magic</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2017-06-02 >2 June 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="http://192.168.31.10:8000/categories/git/"> git </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                2 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="git-commit-emoji-使用指南">git commit emoji 使用指南</h1>
+
+<h4 id="目录">目录</h4>
+
+<!-- vim-markdown-toc GFM -->
+
+<ul>
+<li><a href="#commit-格式">commit 格式</a></li>
+<li><a href="#emoji-指南">emoji 指南</a></li>
+<li><a href="#如何在命令行中显示-emoji">如何在命令行中显示 emoji</a></li>
+<li><a href="#参考">参考</a>
+
+<ul>
+<li><a href="#git-commit-emoji">git commit emoji</a></li>
+<li><a href="#write-a-good-commit-message">write a good commit message</a></li>
+</ul></li>
+</ul>
+
+<!-- vim-markdown-toc -->
+
+<p>执行 <code>git commit</code> 时使用 emoji 为本次提交打上一个 &ldquo;标签&rdquo;, 使得此次 commit 的主要工作得以凸现，也能够使得其在整个提交历史中易于区分与查找。</p>
+
+<p>截取的 <a href="https://github.com/carloscuesta/gitmoji" rel="nofollow noreferrer" target="_blank">gitmoji</a> 快照:</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/snapshot.png" alt="gitmoji-snapshot" class="lazyload"><figcaption class="image-caption">gitmoji-snapshot</figcaption></figure></p>
+
+<h3 id="commit-格式">commit 格式</h3>
+
+<p><code>git commit</code> 时，提交信息遵循以下格式：</p>
+
+<pre><code class="language-sh">:emoji1: :emoji2: 不超过 50 个字的摘要，首字母大写，使用祈使语气，句末不要加句号
+
+提交信息主体
+
+引用相关 issue 或 PR 编号 &lt;#110&gt;
+</code></pre>
+
+<p>初次提交示例：</p>
+
+<pre><code class="language-sh">git commit -m &quot;🎉 Initialize Repo&quot;
+</code></pre>
+
+<h3 id="emoji-指南">emoji 指南</h3>
+
+<table>
+<thead>
+<tr>
+<th align="left">emoji</th>
+<th align="left">emoji 代码</th>
+<th align="left">commit 说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">🎉 (庆祝)</td>
+<td align="left"><code>tada</code></td>
+<td align="left">初次提交</td>
+</tr>
+
+<tr>
+<td align="left">✨ (火花)</td>
+<td align="left"><code>sparkles</code></td>
+<td align="left">引入新功能</td>
+</tr>
+
+<tr>
+<td align="left">🔖 (书签)</td>
+<td align="left"><code>bookmark</code></td>
+<td align="left">发行/版本标签</td>
+</tr>
+
+<tr>
+<td align="left">🐛 (bug)</td>
+<td align="left"><code>bug</code></td>
+<td align="left">修复 bug</td>
+</tr>
+
+<tr>
+<td align="left">🚑 (急救车)</td>
+<td align="left"><code>ambulance</code></td>
+<td align="left">重要补丁</td>
+</tr>
+
+<tr>
+<td align="left">🌐 (地球)</td>
+<td align="left"><code>globe_with_meridians</code></td>
+<td align="left">国际化与本地化</td>
+</tr>
+
+<tr>
+<td align="left">💄 (口红)</td>
+<td align="left"><code>lipstick</code></td>
+<td align="left">更新 UI 和样式文件</td>
+</tr>
+
+<tr>
+<td align="left">🚨 (警车灯)</td>
+<td align="left"><code>rotating_light</code></td>
+<td align="left">移除 linter 警告</td>
+</tr>
+
+<tr>
+<td align="left">🔧 (扳手)</td>
+<td align="left"><code>wrench</code></td>
+<td align="left">修改配置文件</td>
+</tr>
+
+<tr>
+<td align="left">➕ (加号)</td>
+<td align="left"><code>heavy_plus_sign</code></td>
+<td align="left">增加一个依赖</td>
+</tr>
+
+<tr>
+<td align="left">➖ (减号)</td>
+<td align="left"><code>heavy_minus_sign:</code></td>
+<td align="left">减少一个依赖</td>
+</tr>
+
+<tr>
+<td align="left">⬆️ (上升箭头)</td>
+<td align="left"><code>arrow_up</code></td>
+<td align="left">升级依赖</td>
+</tr>
+
+<tr>
+<td align="left">⬇️ (下降箭头)</td>
+<td align="left"><code>arrow_down</code></td>
+<td align="left">降级依赖</td>
+</tr>
+
+<tr>
+<td align="left">⚡️ (闪电)<br>🐎 (赛马)</td>
+<td align="left"><code>zap</code><br><code>racehorse</code></td>
+<td align="left">提升性能</td>
+</tr>
+
+<tr>
+<td align="left">📈 (上升趋势图)</td>
+<td align="left"><code>chart_with_upwards_trend</code></td>
+<td align="left">添加分析或跟踪代码</td>
+</tr>
+
+<tr>
+<td align="left">🚀 (火箭)</td>
+<td align="left"><code>rocket</code></td>
+<td align="left">部署功能</td>
+</tr>
+
+<tr>
+<td align="left">✅ (白色复选框)</td>
+<td align="left"><code>white_check_mark</code></td>
+<td align="left">增加测试</td>
+</tr>
+
+<tr>
+<td align="left">📝 (备忘录)</td>
+<td align="left"><code>memo</code></td>
+<td align="left">撰写文档</td>
+</tr>
+
+<tr>
+<td align="left">🔨 (锤子)</td>
+<td align="left"><code>hammer</code></td>
+<td align="left">重大重构</td>
+</tr>
+
+<tr>
+<td align="left">🎨 (调色板)</td>
+<td align="left"><code>art</code></td>
+<td align="left">改进代码结构/代码格式</td>
+</tr>
+
+<tr>
+<td align="left">🔥 (火焰)</td>
+<td align="left"><code>fire</code></td>
+<td align="left">移除代码或文件</td>
+</tr>
+
+<tr>
+<td align="left">✏️ (铅笔)</td>
+<td align="left"><code>pencil2</code></td>
+<td align="left">修复 typo</td>
+</tr>
+
+<tr>
+<td align="left">🚧 (施工)</td>
+<td align="left"><code>construction</code></td>
+<td align="left">工作进行中</td>
+</tr>
+
+<tr>
+<td align="left">👷 (工人)</td>
+<td align="left"><code>construction_worker</code></td>
+<td align="left">添加 CI 构建系统</td>
+</tr>
+
+<tr>
+<td align="left">💚 (绿心)</td>
+<td align="left"><code>green_heart</code></td>
+<td align="left">修复 CI 构建问题</td>
+</tr>
+
+<tr>
+<td align="left">🔒 (锁)</td>
+<td align="left"><code>lock</code></td>
+<td align="left">修复安全问题</td>
+</tr>
+
+<tr>
+<td align="left">🐳 (鲸鱼)</td>
+<td align="left"><code>whale</code></td>
+<td align="left">Docker 相关工作</td>
+</tr>
+
+<tr>
+<td align="left">🍎 (苹果)</td>
+<td align="left"><code>apple</code></td>
+<td align="left">修复 macOS 下的问题</td>
+</tr>
+
+<tr>
+<td align="left">🐧 (企鹅)</td>
+<td align="left"><code>penguin</code></td>
+<td align="left">修复 Linux 下的问题</td>
+</tr>
+
+<tr>
+<td align="left">🏁 (旗帜)</td>
+<td align="left"><code>checkered_flag</code></td>
+<td align="left">修复 Windows 下的问题</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><strong>需要用 <code>::</code>包裹住 emoji 代码</strong></li>
+</ul>
+
+<h3 id="如何在命令行中显示-emoji">如何在命令行中显示 emoji</h3>
+
+<p>默认情况下，在命令行中并不会显示出 emoji, 仅显示 emoji 代码。不过可以使用 <a href="https://github.com/mrowa44/emojify" rel="nofollow noreferrer" target="_blank">emojify</a> 使得在命令行也可显示 emoji, 它是一个 shell 脚本，安装与使用都很简单，在 <a href="https://github.com/mrowa44/emojify" rel="nofollow noreferrer" target="_blank">这里</a> 查看如何安装与使用。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/terminal_emojify.png" alt="emojify" class="lazyload"><figcaption class="image-caption">emojify</figcaption></figure></p>
+
+<h3 id="参考">参考</h3>
+
+<h4 id="git-commit-emoji">git commit emoji</h4>
+
+<ul>
+<li><a href="https://github.com/carloscuesta/gitmoji/" rel="nofollow noreferrer" target="_blank">gitmoji</a></li>
+<li><a href="http://www.webpagefx.com/tools/emoji-cheat-sheet/" rel="nofollow noreferrer" target="_blank">emoji-cheat-sheet</a></li>
+<li><a href="https://github.com/slashsBin/styleguide-git-commit-message" rel="nofollow noreferrer" target="_blank">styleguide-git-commit-message</a></li>
+<li><a href="https://github.com/atom/atom/blob/master/CONTRIBUTING.md#git-commit-messages" rel="nofollow noreferrer" target="_blank">atom git commit messages guide</a></li>
+<li><a href="https://gitmoji.carloscuesta.me/" rel="nofollow noreferrer" target="_blank">An emoji guide for your commit messages</a></li>
+<li><a href="https://www.h5jun.com/post/gitmoji.html" rel="nofollow noreferrer" target="_blank">程序员提交代码的 emoji 指南——原来表情文字不能乱用</a></li>
+</ul>
+
+<h4 id="write-a-good-commit-message">write a good commit message</h4>
+
+<ul>
+<li><a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html" rel="nofollow noreferrer" target="_blank">A Note About Git Commit Messages</a></li>
+<li><a href="https://news.ycombinator.com/item?id=13889155" rel="nofollow noreferrer" target="_blank">How to write a Git Commit Message (2014)</a></li>
+<li><a href="https://github.com/joelparkerhenderson/git_commit_message" rel="nofollow noreferrer" target="_blank">how to write a good git commit message</a></li>
+<li><a href="https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message" rel="nofollow noreferrer" target="_blank">5 Useful Tips For A Better Commit Message</a></li>
+<li><a href="http://udacity.github.io/git-styleguide/" rel="nofollow noreferrer" target="_blank">Udacity Git Commit Message Style Guide</a></li>
+<li><a href="https://stackoverflow.com/questions/16122234/how-to-commit-a-change-with-both-message-and-description-from-the-command-li" rel="nofollow noreferrer" target="_blank">How to commit a change with both “message” and “description” from the command line?</a></li>
+</ul>
+
+<h4 id="原文地址-liuchengxu-git-commit-emoji-cn-https-github-com-liuchengxu-git-commit-emoji-cn"><a href="https://github.com/liuchengxu/git-commit-emoji-cn" rel="nofollow noreferrer" target="_blank">原文地址 liuchengxu/git-commit-emoji-cn</a></h4>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Magic </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>302</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fgit-commit-emoji%2f&amp;text=git%20commit%20emoji%20%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fgit-commit-emoji%2f&amp;appkey=&amp;title=git%20commit%20emoji%20%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+            </p>
+                       
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="http://192.168.31.10:8000/tags/git/">
+                    #git</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="http://192.168.31.10:8000">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://192.168.31.10:8000/2017/git-summary/" class="prev" rel="prev" title="git 相关总结"><i class="iconfont icon-dajiantou"></i>&nbsp;git 相关总结</a>
+         
+        
+        <a href="http://192.168.31.10:8000/2017/debugtools/" class="next" rel="next" title="debugTools">debugTools&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="http://192.168.31.10:8000">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

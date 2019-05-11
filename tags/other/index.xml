@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>other on Magic</title>
+    <link>http://192.168.31.10:8000/tags/other/</link>
+    <description>Recent content in other on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://192.168.31.10:8000/tags/other/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>debugTools</title>
+      <link>http://192.168.31.10:8000/2017/debugtools/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2017/debugtools/</guid>
+      <description>抓包调试工具 Fidder的使用  下载地址  Fidder简介  抓包工具有很多，小到最常用的web调试工具firebug，达到通用的强大的抓包工具wireshark.为什么使用fiddler?原因如下： &amp;gt; a.Firebug虽然可以抓包，但是对于分析http请求的详细信息，不够强大。模拟http请求的功能也不够，且firebug常常是需要“无刷新修改”，如果刷新了页面，所有的修改都不会保存。 &amp;gt; b.Wireshark是通用的抓包工具，但是比较庞大，对于只需要抓取http请求的应用来说，似乎有些大材小用。 &amp;gt; c.Httpwatch也是比较常用的http抓包工具，但是只支持IE和firefox浏览器（其他浏览器可能会有相应的插件），对于想要调试chrome浏览器的http请求，似乎稍显无力，而Fiddler 是一个使用本地 127.0.0.1:8888 的 HTTP 代理，任何能够设置 HTTP 代理为 127.0.0.1:8888 的浏览器和应用程序都可以使用 Fiddler。
+ 对手机抓包  Tools &amp;gt; Options &amp;gt; https 勾选图中红线框出来的，之后会有弹窗提示安装证书。   Tools &amp;gt; Options &amp;gt; connections 勾选图中的   在手机上连接跟电脑在同一局域网下的网络，然后在无线网络中去设置代理，代理地址就是电脑ip地址和 端口号，之后在手机浏览器中输入 电脑ip地址和端口号 进行访问，会出下如下图，然后点击图中框出来的文字，下载并且安装证书。ios 比 安卓再多一个步骤，需要去 设置-&amp;gt;通用-&amp;gt;关于本机-&amp;gt;证书信任设置 去信任证书才可以进行抓包。  在电脑上对浏览器进行抓包  可以在浏览器设置里面设置代理，或者安装 Proxy SwitchyOmega 这个插件来管理代理，代理协议为 http，代理服务器为 127.0.0.1，端口号是在 fidder 上设置的端口号。  可以对fidder自定义规则(Rules -&amp;gt; Customize Rules)  下列设置中只能有一个OnBeforeResponse和OnBeforeResponse，下面只是为了方便演示代码位置才写了多个</description>
+    </item>
+    
+    <item>
+      <title>gulp 配置</title>
+      <link>http://192.168.31.10:8000/2017/gulp/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2017/gulp/</guid>
+      <description>项目中 gulp 的配置 项目目录结构 . ├── dist // 打包后的文件 ├── node_modules // 依赖模块 ├── src // 具体页面 | ├── namePage | ├── img // 图片 | └── xxx.png | ├── js // js文件 | └── xxx.js | ├── pages // 页面 | └── xxx.html | ├── sass // sass文件 | └── xxx.scss | └── sprite // 需要合成雪碧图的文件 | └── namePage | ├── img // 图片 | └── xxx.png | ├── js // js文件 | └── xxx.</description>
+    </item>
+    
+    <item>
+      <title>常用工具集合</title>
+      <link>http://192.168.31.10:8000/2017/tools/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2017/tools/</guid>
+      <description> Docsify  一个神奇的文档网站生成工具 GitHub  Clover  Clover 是 Windows Explorer 资源管理器的一个扩展，为其增加类似谷歌 Chrome 浏览器的多标签页功能。
+ Everything  Everything 是 Windows 全局文件、文件夹 搜索软件。
+ YoMail  YoMail 支持 Markdown 语法的邮箱客户端。
+ PxCook  PxCook UI自动标注，生成前端css代码等。
+ Imagine  Imagine 开源的 PNG/JPEG 压缩工具。
+ Eruda  Eruda 是一个专为手机网页前端设计的调试面板，类似 DevTools 的迷你版，其主要功能包括：捕获 console 日志、检查元素状态、捕获XHR请求、显示本地存储和 Cookie 信息等等。
+ vConsole  vConsole 是一个轻量、可拓展、针对手机网页的前端开发者调试面板。
+ Weinre  Weinre 基于node平台 的远程运行调试web页面工具。官网。
+ </description>
+    </item>
+    
+  </channel>
+</rss>

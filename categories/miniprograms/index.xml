@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MiniPrograms on Magic</title>
+    <link>http://192.168.31.10:8000/categories/miniprograms/</link>
+    <description>Recent content in MiniPrograms on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 21 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://192.168.31.10:8000/categories/miniprograms/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MiniPrograms</title>
+      <link>http://192.168.31.10:8000/2018/miniprograms/</link>
+      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/miniprograms/</guid>
+      <description>小程序相关 原生小程序 小程序支持分包加载  分包预下载  小程序转换为百度小程序  可以使用百度搬家工具进行转换 （不持支使用框架转换） ,wx2swanswan小程序搬家工具 (Node &amp;gt;= 8.0)  去掉小程序组件button默认样式  小程序中button组建有默认的点击效果，有border的话，需要去掉边框线的话需要这样写。  /* 去掉button默认边框线 */ button::after { border: 0; }  设置成禁用的话disable=&amp;quot;{{disable}}&amp;quot;,disable为 true 的话，点击按钮的时候还是有默认点击效果，如果需求需要去掉默认点击效果，就需要设置成行内样式来生效。
+&amp;lt;!-- 行内样式 --&amp;gt; &amp;lt;button class=&amp;quot;get-code&amp;quot; size=&amp;quot;mini&amp;quot; bindtap=&amp;quot;getCode&amp;quot; disabled=&amp;quot;{{disabled}}&amp;quot; style=&amp;quot;color: #00a4ff; background-color: #fff;&amp;quot;&amp;gt;{{getCodeBtn}}&amp;lt;/button&amp;gt;  小程序限制  小程序背景图片不支持相对路径的图片路径，需要设置为绝对路径。 小程序现在默认上传包大小为2M（以后有可能变化），可以把图片资源单独打包成一个项目工程，然后在小程序中去引用图片的绝对路径。 小程序不支持table组件和标签，如果需要的话可用wxss(css)来写表格，然是涉及到表格跨行跨列的话不太好处理，可以换一种展现格式。简单来说就是小程序不支持复杂的表格。 小程序现在支持跳转外部url，需要使用web-view组建来实现，需要在微信公众平台登录，然后在设置里面&amp;ndash;&amp;gt;开发设置来绑定业务域名，并且在业务域名的跟目下放微信检验文件，只有放过之后，在域名跟目下能访问到这个检验文件，在绑定业务域名的时候才能绑定成功。   小程序使用 wx.request(OBJECT) 来发起请求时，需要在微信公众平台设置&amp;ndash;&amp;gt;开发设置里面设置服务器域名配置。   小程序不能操作BOM/DOM。 在 {{}} 模板语法里不持支复杂计算，具体看小程序文档。 小程序文字不能上下居中，尤其是在一个些小的按钮里边。 小程序 canvas 在真机中不支持base64，画不到canvas里面。 小程序获取用户授权之后再能通过 wx.getUserInfo 来获取用户信息，可以通过 button 来发起用户授权。  &amp;lt;button class=&amp;quot;{{isLog ?</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="http://192.168.31.10:8000/2017/vueplugins/" />
+  <link rel="next" href="http://192.168.31.10:8000/2018/npm/" />
+  <link rel="canonical" href="http://192.168.31.10:8000/2018/js-essay/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           JS随笔 | Magic
+       
+  </title>
+  <meta name="title" content="JS随笔 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JS随笔"/>
+<meta name="twitter:description" content="JS随笔 点击按钮复制一个文本或者链接地址 &lt;div id=&quot;lalala&quot;&gt;www.baidu.com45646!!!!&lt;/div&gt; &lt;button onclick=&quot;but()&quot;&gt;点我&lt;/button&gt; &lt;script&gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; &#43; msg); } catch(err) { console.log(&#39;Oops, unable to copy&#39;); } // 移除选中的元素 window.getSelection().removeAllRanges(); return false } &lt;/script&gt;  (a == 1 &amp;&amp; a== 2 &amp;&amp; a == 3) 有可能是 true 吗？  第一种解法:  const a = { i: 0, toString: function() { return a."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "JS随笔",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/192.168.31.10:8000\/2018\/js-essay\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "js",
+  "wordcount":  987 ,
+  "url": "http:\/\/192.168.31.10:8000\/2018\/js-essay\/",
+  "datePublished": "2018-01-03T00:00:00\x2b00:00",
+  "dateModified": "2018-01-03T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/192.168.31.10:8000\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="http://192.168.31.10:8000">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="http://192.168.31.10:8000">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">JS随笔</h1>
+        <div class="post-meta">
+            Written by <a href="http://192.168.31.10:8000" rel="author">Magic</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2018-01-03 >3 January 2018</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="http://192.168.31.10:8000/categories/js/"> js </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                5 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="js随笔">JS随笔</h1>
+
+<h3 id="点击按钮复制一个文本或者链接地址">点击按钮复制一个文本或者链接地址</h3>
+
+<pre><code class="language-html">&lt;div id=&quot;lalala&quot;&gt;www.baidu.com45646!!!!&lt;/div&gt;
+&lt;button onclick=&quot;but()&quot;&gt;点我&lt;/button&gt;
+&lt;script&gt;
+function but () {
+  var copyDOM = document.getElementById('lalala');  
+  var range = document.createRange();
+  // 选中需要复制的节点
+  range.selectNode(copyDOM);
+  // 执行选中元素
+  window.getSelection().addRange(range);
+  // 执行 copy 操作
+  var successful = document.execCommand('copy');  
+  try {  
+    var msg = successful ? 'successful' : 'unsuccessful';  
+    console.log('copy is' + msg);  
+  } catch(err) {  
+    console.log('Oops, unable to copy');  
+  }
+  // 移除选中的元素
+  window.getSelection().removeAllRanges(); 
+  return false
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="a-1-a-2-a-3-有可能是-true-吗">(a == 1 &amp;&amp; a== 2 &amp;&amp; a == 3) 有可能是 true 吗？</h3>
+
+<ol>
+<li>第一种解法:</li>
+</ol>
+
+<pre><code class="language-js">const a = {
+　　i: 0,
+　　toString: function() {
+　　　　return a.i++
+　　}
+}
+
+if (a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3) {
+　　console.log('成功')
+}
+
+// 之所以成功，因为使用了松散相等的运算符，使用松散相等时，如果其中一个操作数与另一个类型不同，则 JS 引擎将尝试将一个操作转换为另一个类型。
+// 在左边对象、右边的数字的情况下，它会尝试将对象转换为一个数，首先通过调用 valueOf 如果是可调用的。否则，它会调用toString方法。
+</code></pre>
+
+<ol>
+<li>第二种解法:</li>
+</ol>
+
+<pre><code class="language-js">const a_ = 1;
+const a = 2;
+const _a = 3;
+if (a_ == 1 &amp;&amp; a == 2 &amp;&amp; _a == 3) {
+　　console.log('成功')
+}
+// 有三个不同的变量来声明，本质上没有做到题设（不推荐）
+</code></pre>
+
+<ol>
+<li>第三种解法:</li>
+</ol>
+
+<pre><code class="language-js">let val = 0;
+Object.defineProperty(window, 'a', {
+　　get: function() {
+　　　　return ++val
+　　}
+})
+
+
+if (a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3) {
+　　console.log('成功')
+}
+
+// 使用 get， 让 a 返回三个不同的值，在真正的代码逻辑中不推荐使用
+</code></pre>
+
+<h3 id="canvas-todataurl-在输出数据时-里面包含外部图片链接地址时抛出安全错误">canvas.toDataURL() 在输出数据时，里面包含外部图片链接地址时抛出安全错误</h3>
+
+<ul>
+<li>在canvs画图中里面包含外部图片链接地址时，在使用 toDataURL() 输出 base64位字符编码时会抛出安全错误，输出不了数据，因为引用了不同域名下的图片链接。</li>
+</ul>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/1323758-20180206101320904-162520733.png" alt="err" class="lazyload"><figcaption class="image-caption">err</figcaption></figure></p>
+
+<ul>
+<li><em>(vconsole.js 移动端里显示的错误)</em></li>
+<li>解决方法：需要把图片服务器设置（Access-Control-Allow-Origin: *），然后下面的代码才能正确执行。</li>
+</ul>
+
+<pre><code class="language-js">var image = new Image();
+image.setAttribute('crossOrigin', 'anonymous');
+image.src = '图片链接地址'
+image.onload = function() {
+　　.....
+}
+</code></pre>
+
+<h3 id="js判断一个对象是否为数组">js判断一个对象是否为数组</h3>
+
+<ul>
+<li>本来判断一个对象类型用typeof是最好的，不过对于Array类型是不适用的，<em>可以使用 instanceof 操作符</em></li>
+</ul>
+
+<pre><code class="language-js">var arrayStr=new Array(&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;)
+alert(arrayStr instanceof Array)
+</code></pre>
+
+<ul>
+<li>当然以上在一个简单的页面布局里面是没有问题的，如果是复杂页面情况，入获取的是frame内部的Array对象，可以用这个函数判断：</li>
+</ul>
+
+<pre><code class="language-js">function isArray(obj) {
+   return Object.prototype.toString.call(obj) === '[object Array]'
+}
+</code></pre>
+
+<h3 id="js正则-验证服务密码3位及-三位以上连续">js正则 验证服务密码3位及 三位以上连续</h3>
+
+<pre><code class="language-js">checkPas (str) { // 服务密码3位及 三位以上连续
+  let serArr = str.split('')
+  // console.log(str)
+  for (let i = 0; i &lt; serArr.length - 2; i++) {
+    let reg = new RegExp((serArr[i] + (Number(serArr[i]) - 1) + (Number(serArr[i]) - 2)) + '|' + (serA[i] + (Number(serArr[i]) + 1) + (Number(serArr[i]) + 2)), 'g')
+    if (reg.test(str)) {
+      return false
+    } else {
+      return true
+    }
+  }
+}
+</code></pre>
+
+<h3 id="js-获取日期时间戳-当前日期的前几天或者后几天">js 获取日期时间戳 =&gt; 当前日期的前几天或者后几天</h3>
+
+<pre><code class="language-js">/**
+* 获取日期时间戳
+* @param {Number} dayCount 当前日期的前几天或者后几天
+*/
+const getDateStr = function (dayCount) {
+  let dd = new Date()
+  dd.setDate(dd.getDate() + dayCount)
+  let time = dd.getTime()
+  return time + ''
+}
+</code></pre>
+
+<h3 id="使用-web-workers-来处理大量数据-简单的例子">使用 Web Workers 来处理大量数据(简单的例子)</h3>
+
+<pre><code class="language-js">// main.js
+let woker = new Worker('worker.js') // 创建一个新的worker,指定一个脚本的URI来执行worker线程
+// 通过postMessage() 方法和onmessage事件处理函数生效
+woker.onmessage = ({data: arr}) =&gt; {
+  // worker.js 处理完成之后返回回来的
+  console.log(arr)
+}
+woker.postMessage('start')
+</code></pre>
+
+<pre><code class="language-js">// worker.js
+onmessage = arr =&gt; {
+  console.log('开始')
+  var arr = []
+  for (let i = 0; i &lt; 1000000; i++) {
+    arr.push(Math.random())
+  }
+  let st = new Date()
+  arr.sort()
+  let et = new Date()
+  console.log('排序完成,耗时:' + (et - st))
+
+  postMessage(arr)
+}
+</code></pre>
+
+<h3 id="js来格式化手机号-如-的格式">js来格式化手机号 如：*** **** **** 的格式</h3>
+
+<pre><code class="language-js">// 我这个是在微信小程序中使用的，其他地方也可以使用 监听 input 输入
+handleNum: function (e) {
+  // console.log(e.detail.cursor)
+  let val = e.detail.value.replace(/[^\d]/g, '')
+  this.data.phoneNum = val
+  let arr = val.split('')
+  let str = ''
+  arr.forEach(function(val, ind) {
+    if (ind === 3 || ind === 7) {
+      str += ' '
+    } 
+    str += val
+  //   (3 === arr || 7 === arr) &amp;&amp; (str += ' ')
+  //   str += val
+  })
+  console.log(this.data.phoneNum)
+  return str
+}
+</code></pre>
+
+<h3 id="js来获取当前星期几和之前的星期">js来获取当前星期几和之前的星期</h3>
+
+<pre><code class="language-js">// js来获取当前星期几和之前的星期
+var setWeek = function (num) {
+    switch (num) {
+      case 0:
+        return '日'
+      case 1:
+        return '一'
+      case 2:
+        return '二'
+      case 3:
+        return '三'
+      case 4:
+        return '四'
+      case 5:
+        return '五'
+      case 6:
+        return '六'
+    }
+}
+var arr = []
+for (var i = 0; i &lt; 7; i++) {
+    a++
+    if (a &gt; 6) a = 0
+    var b = setWeek(a)
+    arr.push(b)
+}
+console.log(arr)
+ // [&quot;六&quot;, &quot;日&quot;, &quot;一&quot;, &quot;二&quot;, &quot;三&quot;, &quot;四&quot;, &quot;五&quot;]
+</code></pre>
+
+<h3 id="接口返回回来的数据是一个数组-里面有同年同月-需要把同年同月的合并到一个数组里面并且把相同年月的数据放到子数组中">接口返回回来的数据是一个数组，里面有同年同月，需要把同年同月的合并到一个数组里面并且把相同年月的数据放到子数组中</h3>
+
+<ul>
+<li>待处理的数据格式</li>
+</ul>
+
+<pre><code class="language-json">{
+  &quot;retCode&quot;: &quot;000000&quot;,
+  &quot;retDesc&quot;: &quot;success&quot;,
+  &quot;rspBody&quot;: {
+    &quot;list&quot;: [{
+        &quot;payType&quot;: &quot;06&quot;,
+        &quot;paymentDate&quot;: &quot;2018-06-02 22:41:17&quot;,
+        &quot;staffappprem&quot;: &quot;99.80&quot;,
+        &quot;paymentDateCode&quot;: &quot;99&quot;,
+        &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+        &quot;yearMonth&quot;: &quot;2018年6月&quot;,
+        &quot;date&quot;: &quot;06-02&quot;,
+        &quot;time&quot;: &quot;22:41:17&quot;,
+        &quot;price&quot;: &quot;99.80&quot;,
+        &quot;resource&quot;: &quot;第三方支付&quot;,
+        &quot;other&quot;: &quot;其他&quot;
+      }, {
+          &quot;payType&quot;: &quot;06&quot;,
+          &quot;paymentDate&quot;: &quot;2018-06-02 22:41:17&quot;,
+          &quot;staffappprem&quot;: &quot;0.20&quot;,
+          &quot;paymentDateCode&quot;: &quot;99&quot;,
+          &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+          &quot;yearMonth&quot;: &quot;2018年6月&quot;,
+          &quot;date&quot;: &quot;06-02&quot;,
+          &quot;time&quot;: &quot;22:41:17&quot;,
+          &quot;price&quot;: &quot;0.20&quot;,
+          &quot;resource&quot;: &quot;第三方支付&quot;,
+          &quot;other&quot;: &quot;其他&quot;
+      }, {
+          &quot;payType&quot;: &quot;06&quot;,
+          &quot;paymentDate&quot;: &quot;2018-04-02 17:46:00&quot;,
+          &quot;staffappprem&quot;: &quot;99.80&quot;,
+          &quot;paymentDateCode&quot;: &quot;99&quot;,
+          &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+          &quot;yearMonth&quot;: &quot;2018年4月&quot;,
+          &quot;date&quot;: &quot;04-02&quot;,
+          &quot;time&quot;: &quot;17:46:00&quot;,
+          &quot;price&quot;: &quot;99.80&quot;,
+          &quot;resource&quot;: &quot;第三方支付&quot;,
+          &quot;other&quot;: &quot;其他&quot;
+      }, {
+          &quot;payType&quot;: &quot;06&quot;,
+          &quot;paymentDate&quot;: &quot;2018-04-02 17:46:00&quot;,
+          &quot;staffappprem&quot;: &quot;0.20&quot;,
+          &quot;paymentDateCode&quot;: &quot;99&quot;,
+          &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+          &quot;yearMonth&quot;: &quot;2018年4月&quot;,
+          &quot;date&quot;: &quot;04-02&quot;,
+          &quot;time&quot;: &quot;17:46:00&quot;,
+          &quot;price&quot;: &quot;0.20&quot;,
+          &quot;resource&quot;: &quot;第三方支付&quot;,
+          &quot;other&quot;: &quot;其他&quot;
+      }, {
+          &quot;payType&quot;: &quot;06&quot;,
+          &quot;paymentDate&quot;: &quot;2018-03-02 07:55:41&quot;,
+          &quot;staffappprem&quot;: &quot;99.80&quot;,
+          &quot;paymentDateCode&quot;: &quot;99&quot;,
+          &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+          &quot;yearMonth&quot;: &quot;2018年3月&quot;,
+          &quot;date&quot;: &quot;03-02&quot;,
+          &quot;time&quot;: &quot;07:55:41&quot;,
+          &quot;price&quot;: &quot;99.80&quot;,
+          &quot;resource&quot;: &quot;第三方支付&quot;,
+          &quot;other&quot;: &quot;其他&quot;
+      }, {
+          &quot;payType&quot;: &quot;06&quot;,
+          &quot;paymentDate&quot;: &quot;2018-03-02 07:55:41&quot;,
+          &quot;staffappprem&quot;: &quot;0.20&quot;,
+          &quot;paymentDateCode&quot;: &quot;99&quot;,
+          &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+          &quot;yearMonth&quot;: &quot;2018年3月&quot;,
+          &quot;date&quot;: &quot;03-02&quot;,
+          &quot;time&quot;: &quot;07:55:41&quot;,
+          &quot;price&quot;: &quot;0.20&quot;,
+          &quot;resource&quot;: &quot;第三方支付&quot;,
+          &quot;other&quot;: &quot;其他&quot;
+      }]
+  }
+}
+</code></pre>
+
+<ul>
+<li>逻辑代码：</li>
+</ul>
+
+<pre><code class="language-js">var oCapHistoryinfo = data.rspBody.list
+var formatData = {
+    mainList: []
+};
+for (var i = 0; i &lt; oCapHistoryinfo.length; i++) {
+    var num = formatData.mainList.length;
+    var date = oCapHistoryinfo[i].yearMonth;
+    if (num &gt; 0 &amp;&amp; !!formatData.mainList[num - 1].date &amp;&amp; formatData.mainList[num - 1].date == date) {
+        formatData.mainList[num - 1].itemList.push(oCapHistoryinfo[i]);
+    } else {
+        var item = {
+            date: date,
+            itemList: []
+        };
+        item.itemList.push(oCapHistoryinfo[i]);
+        formatData.mainList.push(item);
+    }
+}
+console.log('arr', JSON.stringify(formatData))
+</code></pre>
+
+<ul>
+<li>处理后的数据格式：</li>
+</ul>
+
+<pre><code class="language-json">{
+    &quot;mainList&quot;: [{
+        &quot;date&quot;: &quot;2018年6月&quot;,
+        &quot;itemList&quot;: [{
+            &quot;payType&quot;: &quot;06&quot;,
+            &quot;paymentDate&quot;: &quot;2018-06-02 22:41:17&quot;,
+            &quot;staffappprem&quot;: &quot;99.80&quot;,
+            &quot;paymentDateCode&quot;: &quot;99&quot;,
+            &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+            &quot;yearMonth&quot;: &quot;2018年6月&quot;,
+            &quot;date&quot;: &quot;06-02&quot;,
+            &quot;time&quot;: &quot;22:41:17&quot;,
+            &quot;price&quot;: &quot;99.80&quot;,
+            &quot;resource&quot;: &quot;第三方支付&quot;,
+            &quot;other&quot;: &quot;其他&quot;
+        },
+        {
+            &quot;payType&quot;: &quot;06&quot;,
+            &quot;paymentDate&quot;: &quot;2018-06-02 22:41:17&quot;,
+            &quot;staffappprem&quot;: &quot;0.20&quot;,
+            &quot;paymentDateCode&quot;: &quot;99&quot;,
+            &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+            &quot;yearMonth&quot;: &quot;2018年6月&quot;,
+            &quot;date&quot;: &quot;06-02&quot;,
+            &quot;time&quot;: &quot;22:41:17&quot;,
+            &quot;price&quot;: &quot;0.20&quot;,
+            &quot;resource&quot;: &quot;第三方支付&quot;,
+            &quot;other&quot;: &quot;其他&quot;
+        }]
+    },
+    {
+        &quot;date&quot;: &quot;2018年4月&quot;,
+        &quot;itemList&quot;: [{
+            &quot;payType&quot;: &quot;06&quot;,
+            &quot;paymentDate&quot;: &quot;2018-04-02 17:46:00&quot;,
+            &quot;staffappprem&quot;: &quot;99.80&quot;,
+            &quot;paymentDateCode&quot;: &quot;99&quot;,
+            &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+            &quot;yearMonth&quot;: &quot;2018年4月&quot;,
+            &quot;date&quot;: &quot;04-02&quot;,
+            &quot;time&quot;: &quot;17:46:00&quot;,
+            &quot;price&quot;: &quot;99.80&quot;,
+            &quot;resource&quot;: &quot;第三方支付&quot;,
+            &quot;other&quot;: &quot;其他&quot;
+        },
+        {
+            &quot;payType&quot;: &quot;06&quot;,
+            &quot;paymentDate&quot;: &quot;2018-04-02 17:46:00&quot;,
+            &quot;staffappprem&quot;: &quot;0.20&quot;,
+            &quot;paymentDateCode&quot;: &quot;99&quot;,
+            &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+            &quot;yearMonth&quot;: &quot;2018年4月&quot;,
+            &quot;date&quot;: &quot;04-02&quot;,
+            &quot;time&quot;: &quot;17:46:00&quot;,
+            &quot;price&quot;: &quot;0.20&quot;,
+            &quot;resource&quot;: &quot;第三方支付&quot;,
+            &quot;other&quot;: &quot;其他&quot;
+        }]
+    },
+    {
+        &quot;date&quot;: &quot;2018年3月&quot;,
+        &quot;itemList&quot;: [{
+            &quot;payType&quot;: &quot;06&quot;,
+            &quot;paymentDate&quot;: &quot;2018-03-02 07:55:41&quot;,
+            &quot;staffappprem&quot;: &quot;99.80&quot;,
+            &quot;paymentDateCode&quot;: &quot;99&quot;,
+            &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+            &quot;yearMonth&quot;: &quot;2018年3月&quot;,
+            &quot;date&quot;: &quot;03-02&quot;,
+            &quot;time&quot;: &quot;07:55:41&quot;,
+            &quot;price&quot;: &quot;99.80&quot;,
+            &quot;resource&quot;: &quot;第三方支付&quot;,
+            &quot;other&quot;: &quot;其他&quot;
+        },
+        {
+            &quot;payType&quot;: &quot;06&quot;,
+            &quot;paymentDate&quot;: &quot;2018-03-02 07:55:41&quot;,
+            &quot;staffappprem&quot;: &quot;0.20&quot;,
+            &quot;paymentDateCode&quot;: &quot;99&quot;,
+            &quot;payTypeName&quot;: &quot;第三方支付&quot;,
+            &quot;yearMonth&quot;: &quot;2018年3月&quot;,
+            &quot;date&quot;: &quot;03-02&quot;,
+            &quot;time&quot;: &quot;07:55:41&quot;,
+            &quot;price&quot;: &quot;0.20&quot;,
+            &quot;resource&quot;: &quot;第三方支付&quot;,
+            &quot;other&quot;: &quot;其他&quot;
+        }]
+    }]
+}
+</code></pre>
+
+<h3 id="判断一个function-是不是-一个-function">判断一个function 是不是 一个 function</h3>
+
+<pre><code class="language-js">Object.prototype.toString.call(f) === '[object Function]'
+// 其他类型也可以这样进行判断
+</code></pre>
+
+<h3 id="js在字符串中获取指定位置之间的字符">js在字符串中获取指定位置之间的字符</h3>
+
+<pre><code class="language-js">var str = '8888888888&lt;style&gt;111111111&lt;/style&gt;88888888888888888888'.replace(/[&lt;s || &lt;\/s](.*?)e&gt;/g, '中')
+
+// 输出： 8888888888中111111111中88888888888888888888
+// 可以先替换成你需要的特殊字符，然后创建一个可以找到特殊字符第n个索引
+function find(str,cha,num){
+  var x=str.indexOf(cha);
+  for(var i=0;i&lt;num;i++){
+    x=str.indexOf(cha,x+1);
+  }
+  return x;
+}
+str.substring(str.indexOf('中') +1, find(str, '中', 1)) // &quot;111111111&quot;
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Magic </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>987</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=http%3a%2f%2f192.168.31.10%3a8000%2f2018%2fjs-essay%2f&amp;text=JS%e9%9a%8f%e7%ac%94&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=http%3a%2f%2f192.168.31.10%3a8000%2f2018%2fjs-essay%2f&amp;appkey=&amp;title=JS%e9%9a%8f%e7%ac%94" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+            </p>
+                       
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="http://192.168.31.10:8000/tags/js/">
+                    #js</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="http://192.168.31.10:8000">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://192.168.31.10:8000/2017/vueplugins/" class="prev" rel="prev" title="Vue Plugins And Expansion"><i class="iconfont icon-dajiantou"></i>&nbsp;Vue Plugins And Expansion</a>
+         
+        
+        <a href="http://192.168.31.10:8000/2018/npm/" class="next" rel="next" title="npm 镜像设置">npm 镜像设置&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="http://192.168.31.10:8000">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

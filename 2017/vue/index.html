@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="http://192.168.31.10:8000/2017/vue-blind-spot/" />
+  <link rel="next" href="http://192.168.31.10:8000/2017/vue-watch/" />
+  <link rel="canonical" href="http://192.168.31.10:8000/2017/vue/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Vue配置相关 | Magic
+       
+  </title>
+  <meta name="title" content="Vue配置相关 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vue配置相关"/>
+<meta name="twitter:description" content="Vue配置相关 代理配置 module.exports = { ........, dev: { // 开发环境配置 env: require(&#39;./dev.env&#39;), // 使用 config/dev.env.js 中定义的编译环境 port: 8686, // 运行测试页面的端口号 autoOpenBrowser: true, assetsSubDirectory: &#39;static&#39;, // 编译输出的二级目录 assetsPublicPath: &#39;/&#39;, // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名 // 需要 proxyTable 代理的接口（可跨域） proxyTable: { &#39;**&#39;: { target: &#39;https://xxxxxxx&#39;, changeOrigin: true, filter: function (pathname, req) { // 接口地址 /******-server/****/****** return pathname.match(&#39;^\/.&#43;-server.*&#39;) } } }, cssSourceMap: false } }  多入口配置 /* utils.js */ const path = require(&#39;path&#39;); // glob 是 webpack 安装时依赖的一个第三方模块，还模块允许你使用 * 等符号, // 例如 lib/*."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vue配置相关",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/192.168.31.10:8000\/2017\/vue\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "Vue",
+  "wordcount":  535 ,
+  "url": "http:\/\/192.168.31.10:8000\/2017\/vue\/",
+  "datePublished": "2017-09-02T00:00:00\x2b00:00",
+  "dateModified": "2017-09-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/192.168.31.10:8000\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="http://192.168.31.10:8000">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="http://192.168.31.10:8000">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Vue配置相关</h1>
+        <div class="post-meta">
+            Written by <a href="http://192.168.31.10:8000" rel="author">Magic</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2017-09-02 >2 September 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="http://192.168.31.10:8000/categories/vue/"> Vue </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                3 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="vue配置相关">Vue配置相关</h2>
+
+<h3 id="代理配置">代理配置</h3>
+
+<pre><code class="language-js">module.exports = {
+  ........,
+  dev: {      // 开发环境配置
+    env: require('./dev.env'),      // 使用 config/dev.env.js 中定义的编译环境
+    port: 8686,     // 运行测试页面的端口号
+    autoOpenBrowser: true,
+    assetsSubDirectory: 'static',     // 编译输出的二级目录
+    assetsPublicPath: '/',      // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
+    // 需要 proxyTable 代理的接口（可跨域）
+    proxyTable: {
+      '**': {
+        target: 'https://xxxxxxx',
+        changeOrigin: true,
+        filter: function (pathname, req) {
+          // 接口地址 /******-server/****/******
+          return pathname.match('^\/.+-server.*')
+        }
+      }
+    },
+    cssSourceMap: false
+  }
+}
+</code></pre>
+
+<h3 id="多入口配置">多入口配置</h3>
+
+<pre><code class="language-js">/* utils.js */
+const path = require('path');
+
+// glob 是 webpack 安装时依赖的一个第三方模块，还模块允许你使用 * 等符号,
+// 例如 lib/*.js 就是获取 lib 文件夹下的所有 js 后缀名的文件
+const glob = require('glob');
+
+// 取得相应的页面路径，因为之前的配置，所以是 src 文件夹下的 pages 文件夹
+const PAGE_PATH = path.resolve(__dirname, '../src/pages');
+
+/*
+* 多入口配置
+* 通过 glob 模块读取 pages 文件夹下的所有对应文件夹下的 js * 后缀文件，如果该文件存在
+* 那么就作为入口处理
+*/
+exports.getEntries = () =&gt; {
+  let entryFiles = glob.sync(PAGE_PATH + '/*/*.js') // 同步读取所有入口文件
+  let map = {}
+
+  // 遍历所有入口文件
+  entryFiles.forEach(filePath =&gt; {
+    // 获取文件名
+    let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
+
+    // 以键值对的形式存储
+    map[filename] = filePath
+  })
+
+  return map
+}
+</code></pre>
+
+<ul>
+<li>上方我们使用了 <code>glob</code> 这一第三方模块读取所有 pages 文件夹下的入口文件，其需要进行安装：<code>yarn add glob --dev</code></li>
+<li>可以将返回的入口文件对象其设置到 webpack 的 entry 属性上</li>
+</ul>
+
+<h3 id="多模板配置">多模板配置</h3>
+
+<ul>
+<li>模板文件的作用主要用于 webpack 中 <code>html-webpack-plugin</code> 插件的配置，其会根据模板文件生产一个编译后的 html 文件并自动加入携带 hash 的脚本和样式，基本配置如下：</li>
+</ul>
+
+<pre><code class="language-js">/* webpack 配置文件 */
+const HtmlWebpackPlugin = require('html-webpack-plugin') // 安装并引用插件
+
+module.exports = {
+    ...
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'My Page', // 生成 html 中的 title
+        filename: 'demo.html', // 生成 html 的文件名
+        template: 'xxx/xxx/demo.html', // 模板路径
+        chunks: ['manifest', 'vendor', 'demo'], // 所要包含的模块
+        inject: true, // 是否注入资源
+      })
+    ]
+    ...
+}
+</code></pre>
+
+<ul>
+<li>以上是单模板的配置，那么如果是多模板只要继续往 plugins 数组中添加 HtmlWebpackPlugin 即可，但是为了和多入口一样能够灵活的获取 pages 目录下所有模板文件并进行配置，可以在 utils.js 中添加多模板的读取解析方法：</li>
+</ul>
+
+<pre><code class="language-js">/* utils.js */
+
+// 多页面输出配置
+// 与上面的多页面入口配置相同，读取 page 文件夹下的对应的 html 后缀文件，然后放入数组中
+exports.htmlPlugin = configs =&gt; {
+    let entryHtml = glob.sync(PAGE_PATH + '/*/*.html')
+    let arr = []
+    entryHtml.forEach(filePath =&gt; {
+      let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
+      let conf = {
+        template: filePath, // 模板路径
+        filename: filename + '.html', // 生成 html 的文件名
+        chunks: ['manifest', 'vendor', filename],
+        inject: true,
+      }
+      // 如果有自定义配置可以进行 merge
+      if (configs) {
+        conf = merge(conf, configs)
+      }
+      // 针对生产环境配置
+      if (process.env.NODE_ENV === 'production') {
+        conf = merge(conf, {
+          minify: {
+            removeComments: true, // 删除 html 中的注释代码
+            collapseWhitespace: true, // 删除 html 中的空白符
+            // removeAttributeQuotes: true // 删除 html 元素中属性的引号
+          },
+          chunksSortMode: 'manual' // 按 manual 的顺序引入
+        })
+      }
+
+      arr.push(new HtmlWebpackPlugin(conf))
+    })
+    return arr
+}
+</code></pre>
+
+<blockquote>
+<p>注：<a href="https://github.com/kangax/html-minifier" rel="nofollow noreferrer" target="_blank">minify</a> 配置的作用：将 html-minifier 的选项作为对象来缩小输出</p>
+</blockquote>
+
+<h3 id="在-vue-cli3-使用-pages-配置">在 vue-cli3 使用 pages 配置</h3>
+
+<ul>
+<li>将多入口和多模板的方法就可以合并成一个函数来进行多页的处理，合并后的 setPages 方法如下：</li>
+</ul>
+
+<pre><code class="language-js">const path = require('path')
+
+// glob是webpack安装时依赖的一个第三方模块，还模块允许你使用 *等符号,
+// 例如lib/*.js就是获取lib文件夹下的所有js后缀名的文件
+const glob = require('glob')
+
+// 取得相应的页面路径，因为之前的配置，所以是src文件夹下的pages文件夹
+const PAGE_PATH = path.resolve(__dirname, '../src/pages/')
+
+// 用于做相应的merge处理
+const merge = require('webpack-merge')
+
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+let ENTRY = 'main.js'
+// pages 多入口配置
+exports.setPages = configs =&gt; {
+    let entryFiles = glob.sync(PAGE_PATH + '/**/' + ENTRY);
+    let map = {};
+
+    entryFiles.forEach(filePath =&gt; {
+        let tmp = filePath.substring(0, filePath.indexOf(ENTRY));
+        let fileName = filePath.substring(PAGE_PATH.length + 1, filePath.indexOf(ENTRY) - 1)
+
+        let conf = {
+          // page 的入口
+          entry: filePath,
+          // 模板来源
+          template: tmp + 'index.html',
+          // 在 dist/index.html 的输出
+          filename: fileName + '.html',
+          // 页面模板需要加对应的js脚本，如果不加这行则每个页面都会引入所有的js脚本
+          chunks: ['chunk-vendors', 'chunk-common', fileName]
+          // inject: true
+        };
+
+        console.log('conf', conf)
+
+        if (configs) {
+            conf = merge(conf, configs)
+        }
+
+        if (process.env.NODE_ENV === 'production') {
+            conf = merge(conf, {
+                minify: {
+                    removeComments: true, // 删除html中的注释代码
+                    collapseWhitespace: true, // 删除html中的空白符
+                },
+                chunksSortMode: 'manual'// 按manual的顺序引入
+            })
+        }
+
+        map[fileName] = conf;
+    })
+
+    return map
+}
+</code></pre>
+
+<ul>
+<li>上述代码我们 return 出的 map 对象就是 pages 所需要的配置项结构，我们只需在 vue.config.js 中引用即可：</li>
+</ul>
+
+<pre><code class="language-js">/* vue.config.js */
+const utils = require('./build/utils')
+
+module.exports = {
+  ...
+
+  pages: utils.setPages(),
+
+  ...
+}
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Magic </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>535</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fvue%2f&amp;text=Vue%e9%85%8d%e7%bd%ae%e7%9b%b8%e5%85%b3&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fvue%2f&amp;appkey=&amp;title=Vue%e9%85%8d%e7%bd%ae%e7%9b%b8%e5%85%b3" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+            </p>
+                       
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="http://192.168.31.10:8000/tags/vue/">
+                    #Vue</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="http://192.168.31.10:8000">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://192.168.31.10:8000/2017/vue-blind-spot/" class="prev" rel="prev" title="vue中盲点"><i class="iconfont icon-dajiantou"></i>&nbsp;vue中盲点</a>
+         
+        
+        <a href="http://192.168.31.10:8000/2017/vue-watch/" class="next" rel="next" title="Vue watch选项">Vue watch选项&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="http://192.168.31.10:8000">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

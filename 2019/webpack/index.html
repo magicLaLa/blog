@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="http://192.168.31.10:8000/2018/docker/" />
+  
+  <link rel="canonical" href="http://192.168.31.10:8000/2019/webpack/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Webpack 优化相关 | Magic
+       
+  </title>
+  <meta name="title" content="Webpack 优化相关 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Webpack 优化相关"/>
+<meta name="twitter:description" content="官网  Webpack 优化 构建过程提速策略 不要让 loader 做太多事情  以 babel-loader 为例：  babel-loader 无疑是强大的，但它也是慢的。
+最常见的优化方式是，用 include 或 exclude 来帮我们避免不必要的转译，比如 webpack 官方在介绍 babel-loader 时给出的示例：
+module: { rules: [ { test: /\.js$/, exclude: /(node_modules|bower_components)/, use: { loader: &#39;babel-loader&#39;, options: { presets: [&#39;@babel/preset-env&#39;] } } } ] }  除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：
+loader: &#39;babel-loader?cacheDirectory=true&#39;  抽离第三库  DllPlugin是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。  用 DllPlugin 处理文件，要分两步走：
+ 基于 dll 专属的配置文件，打包 dll 库 基于 webpack."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Webpack 优化相关",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/192.168.31.10:8000\/2019\/webpack\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "Webpack",
+  "wordcount":  453 ,
+  "url": "http:\/\/192.168.31.10:8000\/2019\/webpack\/",
+  "datePublished": "2019-01-01T00:00:00\x2b00:00",
+  "dateModified": "2019-01-01T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/192.168.31.10:8000\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="http://192.168.31.10:8000">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="http://192.168.31.10:8000">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Webpack 优化相关</h1>
+        <div class="post-meta">
+            Written by <a href="http://192.168.31.10:8000" rel="author">Magic</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2019-01-01 >1 January 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="http://192.168.31.10:8000/categories/webpack/"> Webpack </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                3 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<ul>
+<li><a href="https://webpack.js.org/" rel="nofollow noreferrer" target="_blank">官网</a></li>
+</ul>
+
+<h2 id="webpack-优化">Webpack 优化</h2>
+
+<h3 id="构建过程提速策略">构建过程提速策略</h3>
+
+<h4 id="不要让-loader-做太多事情">不要让 loader 做太多事情</h4>
+
+<ul>
+<li>以 babel-loader 为例：</li>
+</ul>
+
+<p>babel-loader 无疑是强大的，但它也是慢的。</p>
+
+<p>最常见的优化方式是，用 include 或 exclude 来帮我们避免不必要的转译，比如 webpack 官方在介绍 babel-loader 时给出的示例：</p>
+
+<pre><code class="language-js">module: {
+  rules: [
+    {
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+
+<p>除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：</p>
+
+<pre><code class="language-js">loader: 'babel-loader?cacheDirectory=true'
+</code></pre>
+
+<h4 id="抽离第三库">抽离第三库</h4>
+
+<ul>
+<li><code>DllPlugin</code>是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。</li>
+</ul>
+
+<p>用 DllPlugin 处理文件，要分两步走：</p>
+
+<ul>
+<li>基于 dll 专属的配置文件，打包 dll 库</li>
+<li>基于 webpack.config.js 文件，打包业务代码</li>
+</ul>
+
+<p>举例&ndash;配置文件如下：</p>
+
+<pre><code class="language-js">// webpack.dll.config.js
+const path = require(&quot;path&quot;)
+const webpack = require(&quot;webpack&quot;)
+
+module.exports = {
+  entry: {
+    // 依赖的库数组
+    vendor: [
+      'mint-ui',
+      'vue/dist/vue.common.js',
+      'whatwg-fetch',
+      'vuex',
+      'vue-router'
+    ]
+  },
+  output: {
+    path: path.join(__dirname, '../static/js'),
+    filename: '[name].dll.js',
+    library: '[name]_library'
+  },
+  plugins: [
+    new webpack.DllPlugin({
+      // DllPlugin的name属性需要和libary保持一致
+      path: path.join(__dirname, '..', '[name]-manifest.json'),
+      name: '[name]_library',
+      // context需要和webpack.config.js保持一致
+      context: __dirname
+    }),
+    // 压缩打包的文件
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ]
+};
+</code></pre>
+
+<p>在 <code>package.json--&gt;scripts</code>下添加</p>
+
+<pre><code class="language-json">{
+  &quot;build:dll&quot;: &quot;webpack --config build/webpack.dll.config.js&quot;
+}
+</code></pre>
+
+<p>命令，运行<code>npm run build:dll</code>会在<code>static/js</code>文件夹里会出现<code>vendor.dll.js</code>文件，在根目录下出现<code>vendor-manifest.json</code>文件。<br />
+<code>vendor.dll.js</code>是我们第三方库打包的结果，<code>vendor-manifest.json</code>则用于描述每个第三方库对应的具体路径。<br />
+随后在<code>webpack.base.conf.js || webpack.config.js</code>里针对 dll 稍作配置：</p>
+
+<pre><code class="language-js">const path = require('path');
+const webpack = require('webpack')
+module.exports = {
+  mode: 'production',
+  // 编译入口
+  entry: {
+    main: './src/index.js'
+  },
+  // 目标文件
+  output: {
+    path: path.join(__dirname, 'dist/'),
+    filename: '[name].js'
+  },
+  // dll相关配置
+  plugins: [
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      // manifest就是我们第一步中打包出来的json文件
+      manifest: require('../vendor-manifest.json')
+    }),
+    // 将 vendor.dll.js 插入HTML里 需要安装 html-webpack-include-assets-plugin
+    new HtmlWebpackIncludeAssetsPlugin({
+      assets: [utils.assetsPath('js/vendor.dll.js')],
+      files: ['index.html'],
+      append: false
+    })
+    // 多页面下 可以在每个 index.html 手动引入 vendor.dll.js
+  ]
+}
+</code></pre>
+
+<h4 id="happypack-将-loader-由单进程转为多进程">Happypack——将 loader 由单进程转为多进程</h4>
+
+<ul>
+<li><code>webpack</code> 是单线程的，就算此刻存在多个任务，你也只能排队一个接一个地等待处理。这是 webpack 的缺点，好在我们的 CPU 是多核的，<code>Happypack</code> 会充分释放 <code>CPU</code> 在多核并发方面的优势，帮我们把任务分解给多个子进程去并发执行，大大提升打包效率。</li>
+</ul>
+
+<pre><code class="language-js">/**
+ * 共享线程池
+ * 通常，在内部创建的每个HappyPack插件都会创建自己的线程，用于运行加载器。
+ * 但是，如果您使用多个HappyPack插件，那么最好自己创建一个线程池，然后配置插
+ * 件以共享该池，从而最大限度地减少其中线程的空闲时间
+ * 使用5个线程的自定义线程池
+ */
+const Happypack = require('happypack')
+const happyThreadPool = Happypack.ThreadPool({size: 5}) // HappyPack.ThreadPool({ size: os.cpus().length })
+
+module.exports = {
+  module: {
+    rules: [
+      ...
+      {
+        test: /\.js$/,
+        // 问号后面的查询参数指定了处理这类文件的HappyPack实例的名字
+        loader: 'happypack/loader?id=happyBabel',
+        ...
+      },
+    ],
+  },
+  plugins: [
+    ...
+    new HappyPack({
+      // 这个HappyPack的“名字”就叫做happyBabel，和楼上的查询参数遥相呼应
+      id: 'happyBabel',
+      // 指定进程池
+      threadPool: happyThreadPool,
+      loaders: ['babel-loader?cacheDirectory']
+    })
+  ],
+}
+</code></pre>
+
+<h3 id="构建结果体积压缩">构建结果体积压缩</h3>
+
+<h4 id="文件结构可视化-找出导致体积过大的原因">文件结构可视化，找出导致体积过大的原因</h4>
+
+<ul>
+<li><code>webpack-bundle-analyzer</code>配置方法和普通的 plugin 无异，它会以矩形树图的形式将包内各个模块的大小和依赖关系呈现出来，格局如官方所提供这张图所示：</li>
+</ul>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/webpack1.gif" alt="webpack1" class="lazyload"><figcaption class="image-caption">webpack1</figcaption></figure></p>
+
+<ul>
+<li>使用方式：</li>
+</ul>
+
+<pre><code class="language-js">const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+module.exports = {
+  plugins: [
+    new BundleAnalyzerPlugin()
+  ]
+}
+</code></pre>
+
+<h4 id="按需加载">按需加载</h4>
+
+<ul>
+<li><code>require.ensure</code> 是 Webpack 的特殊语法，用来设置 组件根路径 按需加载。</li>
+<li><a href="https://webpack.js.org/api/module-methods/#require-ensure" rel="nofollow noreferrer" target="_blank">官网</a></li>
+</ul>
+
+<p>以 <code>VUE</code> 项目举例：</p>
+
+<pre><code class="language-js">// vue Router
+import Vue from 'vue'
+import Router from 'vue-router'
+
+Vue.use(Router)
+
+export default new Router({
+  // require.ensure 是 Webpack 的特殊语法，用来设置 组件根路径 按需加载
+  routes: [
+    {
+      path: '/',
+      name: 'index',
+      redirect: '/home',
+      component (reslove) {
+        require.ensure(['../App.vue'], () =&gt; {
+          reslove(require('../App.vue'))// 完成调用
+        })
+      },
+      children: [{
+        path: '/order',
+        name: 'order',
+        component (reslove) {
+          require.ensure('../components/order/Order.vue', () =&gt; {
+            reslove(require('../components/order/Order.vue'))
+          })
+        }
+      },
+      {
+        path: '/home',
+        name: 'home',
+        component (reslove) {
+          require.ensure('../components/homepage/Home.vue', () =&gt; {
+            reslove(require('../components/homepage/Home.vue'))
+          })
+        }
+      },
+      {
+        path: '/drag',
+        name: 'drag',
+        component (reslove) {
+          require.ensure('../components/drag/drag.vue', () =&gt; {
+            reslove(require('../components/drag/drag.vue'))
+          })
+        }
+      }]
+    }
+  ]
+})
+
+</code></pre>
+
+<ul>
+<li><strong>注：</strong> <code>Vue Router</code> 官方文档还推荐使用动态 import 语法来进行代码分块，比如上述 require.ensure 代码可以修改为：</li>
+</ul>
+
+<pre><code class="language-js">// 引入 Order 组件
+const Order = () =&gt; import('../components/order/Order.vue');
+
+// 引入 Home 组件
+const Home = () =&gt; import('../components/homepage/Home.vue');
+</code></pre>
+
+<p>其余代码可以保持不变，仍然可以实现同样的功能。如果你想给拆分出的文件命名，可以尝试一下 webpack 提供的 <code>Magic Comments</code>（魔法注释）：</p>
+
+<pre><code class="language-js">const Home = () =&gt; import(/* webpackChunkName:'home'*/ './views/Home.vue');
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Magic </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>453</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=http%3a%2f%2f192.168.31.10%3a8000%2f2019%2fwebpack%2f&amp;text=Webpack%20%e4%bc%98%e5%8c%96%e7%9b%b8%e5%85%b3&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=http%3a%2f%2f192.168.31.10%3a8000%2f2019%2fwebpack%2f&amp;appkey=&amp;title=Webpack%20%e4%bc%98%e5%8c%96%e7%9b%b8%e5%85%b3" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+            </p>
+                       
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="http://192.168.31.10:8000/tags/webpack/">
+                    #Webpack</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="http://192.168.31.10:8000">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://192.168.31.10:8000/2018/docker/" class="prev" rel="prev" title="Docker 相关"><i class="iconfont icon-dajiantou"></i>&nbsp;Docker 相关</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="http://192.168.31.10:8000">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

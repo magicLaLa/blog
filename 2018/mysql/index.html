@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="http://192.168.31.10:8000/2018/miniprograms/" />
+  <link rel="next" href="http://192.168.31.10:8000/2018/hapi/" />
+  <link rel="canonical" href="http://192.168.31.10:8000/2018/mysql/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           MySQL 使用 | Magic
+       
+  </title>
+  <meta name="title" content="MySQL 使用 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL 使用"/>
+<meta name="twitter:description" content="MySQL 在 cmder 上连接远程服务器 ssh root@**.**.**.*** 远程服务器地址IP root@**.**.**.***&#39;s password: *********** // [root@vultr ~]#  安装 mysql 我是在vultr上安装的，系统是CentOS 7，可以在网上找相关教程安装。
+连接数据库 [root@vultr ~]# mysql -u root -p Enter password: **********  查看数据库 mysql&gt; show databases; &#43;--------------------&#43; | Database | &#43;--------------------&#43; | information_schema | | PRACTTEST | | mysql | | performance_schema | | sys | &#43;--------------------&#43; 5 rows in set (0.01 sec)  使用某个数据库 mysql&gt; use information_schema; Reading table information for completion of table and column names You can turn off this feature to get a quicker startup with -A Database changed  查看表 mysql&gt; show tables; &#43;----------------------&#43; | Tables_in_PRACTTEST | &#43;----------------------&#43; | DATA_PARICT | | _mysql_session_store | | pract_tbl | | transaction_tbl | | user | &#43;----------------------&#43; 5 rows in set (0."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MySQL 使用",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/192.168.31.10:8000\/2018\/mysql\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "Node",
+  "wordcount":  474 ,
+  "url": "http:\/\/192.168.31.10:8000\/2018\/mysql\/",
+  "datePublished": "2018-07-15T00:00:00\x2b00:00",
+  "dateModified": "2018-07-15T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/192.168.31.10:8000\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="http://192.168.31.10:8000">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="http://192.168.31.10:8000">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">MySQL 使用</h1>
+        <div class="post-meta">
+            Written by <a href="http://192.168.31.10:8000" rel="author">Magic</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2018-07-15 >15 July 2018</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="http://192.168.31.10:8000/categories/node/"> Node </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                3 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="mysql">MySQL</h1>
+
+<h3 id="在-cmder-上连接远程服务器">在 cmder 上连接远程服务器</h3>
+
+<pre><code class="language-bash">ssh root@**.**.**.*** 远程服务器地址IP
+root@**.**.**.***'s password: ***********
+
+// [root@vultr ~]#
+</code></pre>
+
+<h3 id="安装-mysql">安装 mysql</h3>
+
+<p>我是在<a href="https://www.vultr.com/" rel="nofollow noreferrer" target="_blank">vultr</a>上安装的，系统是<code>CentOS 7</code>，可以在网上找相关教程安装。</p>
+
+<h3 id="连接数据库">连接数据库</h3>
+
+<pre><code class="language-bash">[root@vultr ~]# mysql -u root -p
+Enter password: **********
+</code></pre>
+
+<h3 id="查看数据库">查看数据库</h3>
+
+<pre><code class="language-bash">mysql&gt; show databases;
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| PRACTTEST          |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+</code></pre>
+
+<h3 id="使用某个数据库">使用某个数据库</h3>
+
+<pre><code class="language-bash">mysql&gt; use information_schema;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+</code></pre>
+
+<h3 id="查看表">查看表</h3>
+
+<pre><code class="language-bash">mysql&gt; show tables;
+
++----------------------+
+| Tables_in_PRACTTEST  |
++----------------------+
+| DATA_PARICT          |
+| _mysql_session_store |
+| pract_tbl            |
+| transaction_tbl      |
+| user                 |
++----------------------+
+5 rows in set (0.00 sec)
+</code></pre>
+
+<h3 id="查看具体表的数据">查看具体表的数据</h3>
+
+<pre><code class="language-bash">mysql&gt; SELECT * from prpract_tbl;
++----------+------------------+--------------+-----------------+
+| pract_id | pract_title      | pract_author | submission_date |
++----------+------------------+--------------+-----------------+
+|        1 | 李拉拉           | MrSun        | 2018-07-24      |
+|        2 | 啦啦啦 MYsQL     | MrSun        | 2018-07-24      |
+|        3 | 啦啦啦 node      | MrSun        | 2018-07-24      |
+|        4 | 啦啦啦 小柴      | MrSun        | 2018-07-24      |
+|        6 | 萨科             | 胡比比       | 2018-07-24      |
+|        7 | 天鹅             | 胡比比       | 2018-07-24      |
+|        8 | 邬奎             | 贲作         | 2018-07-24      |
+|        9 | 秦巨改           | 史寺亦       | 2018-07-24      |
+|       10 | 龚扉持           | 缪瞑         | 2018-07-24      |
+|       11 | 俞然础           | 娄表诈       | 2018-07-24      |
++----------+------------------+--------------+-----------------+
+10 rows in set (0.00 sec)
+</code></pre>
+
+<h3 id="创建一个新的用户-和-用户授权">创建一个新的用户 和 用户授权</h3>
+
+<pre><code class="language-bash">mysql&gt; CREATE USER 'username'@'host' IDENTIFIED BY 'password';
+
+说明:username - 你将创建的用户名, host - 指定该用户在哪个主机上可以登陆,如果是本地用户可用localhost, 如果想让该用户可以从任意远程主机登陆,可以使用通配符%. password - 该用户的登陆密码,密码可以为空,如果为空则该用户可以不需要密码登陆服务器.
+
+例子: CREATE USER 'dog'@'localhost' IDENTIFIED BY '123456'
+CREATE USER 'pig'@'192.168.1.101_' IDENDIFIED BY '123456'
+CREATE USER 'pig'@'%' IDENTIFIED BY '123456'
+CREATE USER 'pig'@'%' IDENTIFIED BY ''
+CREATE USER 'pig'@'%'
+</code></pre>
+
+<pre><code class="language-bash">mysql&gt; GRANT privileges ON databasename.tablename TO 'username'@'host'
+
+说明: privileges - 用户的操作权限,如SELECT , INSERT , UPDATE 等(详细列表见该文最后面).如果要授予所的权限则使用ALL.;databasename - 数据库名,tablename-表名,如果要授予该用户对所有数据库和表的相应操作权限则可用*表示, 如*.*.
+
+例子: GRANT SELECT, INSERT ON test.user TO 'pig'@'%';
+GRANT ALL ON *.* TO 'pig'@'%';
+
+注意:用以上命令授权的用户不能给其它用户授权,如果想让该用户可以授权,用以下命令:
+GRANT privileges ON databasename.tablename TO 'username'@'host' WITH GRANT OPTION;
+</code></pre>
+
+<ul>
+<li>参考：</li>
+<li><a href="https://blog.csdn.net/justdb/article/details/7964319" rel="nofollow noreferrer" target="_blank">MySQL命令行创建用户与授权</a></li>
+<li><a href="https://blog.csdn.net/adu198888/article/details/54092857" rel="nofollow noreferrer" target="_blank">MySql 5.7中添加用户,新建数据库,用户授权,删除用户,修改密码</a></li>
+<li><a href="https://www.jb51.net/article/31850.htm" rel="nofollow noreferrer" target="_blank">MySQL创建用户与授权方法</a></li>
+</ul>
+
+<h3 id="node-链接数据库">Node 链接数据库</h3>
+
+<pre><code class="language-js">const mysql = require('mysql')
+const randomName = require('chinese-random-name')
+
+// 创建数据库会话
+let conection = mysql.createConnection({
+  host: '**.**.**.***',
+  user: '*****', // 临时用户
+  port: '3306',
+  password: '***********', // 临时用户密码
+  database: 'PRACTTEST'
+})
+
+conection.connect()
+
+let date = new Date().toLocaleDateString().split('/').join('-')
+
+// 查询当前数据表
+let sql = 'select * from pract_tbl'
+// 插入数据
+let addSql = `insert into pract_tbl(pract_title,pract_author,submission_date)
+              VALUES
+              (?,?,?)`
+let addSqlData = [randomName.generate(), randomName.generate(), date]
+// 更新数据
+let modSql = 'UPDATE pract_tbl SET pract_title = ? WHERE pract_id = ?'
+let modSqlParams = ['胡比比',6]
+
+conection.query(addSql, addSqlData, (err, res,fields) =&gt; {
+  if (err) throw err
+  console.log('--------------------------SELECT----------------------------');
+  console.log('INSERT ID', res);
+  console.log('------------------------------------------------------------\n\n');
+  upData()
+})
+
+function upData () {
+  conection.query(modSql, modSqlParams, (err, res) =&gt; {
+    if (err) throw err
+    console.log('--------------------------SELECT----------------------------');
+    console.log('UPDATE affectedRows',res.affectedRows);
+    console.log('------------------------------------------------------------\n\n');
+    serch()
+  })
+}
+
+function serch () {
+  conection.query(sql, (err, res, fields) =&gt; {
+    if (err) throw err
+    console.log('--------------------------SELECT----------------------------');
+    console.log(res);
+    console.log('------------------------------------------------------------\n\n');
+
+
+      // 结束会话
+      connection.release()
+  })
+}
+
+// conection.end()
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Magic </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>474</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=http%3a%2f%2f192.168.31.10%3a8000%2f2018%2fmysql%2f&amp;text=MySQL%20%e4%bd%bf%e7%94%a8&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=http%3a%2f%2f192.168.31.10%3a8000%2f2018%2fmysql%2f&amp;appkey=&amp;title=MySQL%20%e4%bd%bf%e7%94%a8" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+            </p>
+                       
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="http://192.168.31.10:8000/tags/node/">
+                    #Node</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="http://192.168.31.10:8000">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://192.168.31.10:8000/2018/miniprograms/" class="prev" rel="prev" title="MiniPrograms"><i class="iconfont icon-dajiantou"></i>&nbsp;MiniPrograms</a>
+         
+        
+        <a href="http://192.168.31.10:8000/2018/hapi/" class="next" rel="next" title="Hapi">Hapi&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="http://192.168.31.10:8000">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

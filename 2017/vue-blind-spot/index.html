@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="http://192.168.31.10:8000/2017/template/" />
+  <link rel="next" href="http://192.168.31.10:8000/2017/vue/" />
+  <link rel="canonical" href="http://192.168.31.10:8000/2017/vue-blind-spot/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           vue中盲点 | Magic
+       
+  </title>
+  <meta name="title" content="vue中盲点 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="vue中盲点"/>
+<meta name="twitter:description" content="vue中盲点 使用 performance 开启性能追踪  performance API 是 Vue 全局配置 API 中的一个，我们可以使用它来进行网页性能的追踪，我们可以在入口文件中添加：  if (process.env.NODE_ENV !== &#39;production&#39;) { Vue.config.performance = true; }  来开启这一功能，该 API（2.2.0 新增）功能只适用于开发模式和支持 performance.mark API 的浏览器上，开启后我们可以下载 Vue Performance Devtool 这一 chrome 插件来看查看各个组件的加载情况，如图：
+从中我们可以清晰的看到页面组件在每个阶段的耗时情况，而针对耗时比较久的组件，我们便可以对其进行相应优化。
+而其在 Vue 源码中主要使用了 window.performance 来获取网页性能数据，其中包含了 performance.mark 和 performance.measure。
+ performance.mark 主要用于创建标记 performance.measure 主要用于记录两个标记的时间间隔  例如：
+performance.mark(&#39;start&#39;); // 创建 start 标记 performance.mark(&#39;end&#39;); // 创建 end 标记 performance.measure(&#39;output&#39;, &#39;start&#39;, &#39;end&#39;); // 计算两者时间间隔 performance.getEntriesByName(&#39;output&#39;); // 获取标记，返回值是一个数组，包含了间隔时间数据  熟练的使用 performance 我们可以查看并分析网页的很多数据，为我们项目优化提供保障。"/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "vue中盲点",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/192.168.31.10:8000\/2017\/vue-blind-spot\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "Vue",
+  "wordcount":  192 ,
+  "url": "http:\/\/192.168.31.10:8000\/2017\/vue-blind-spot\/",
+  "datePublished": "2017-09-02T00:00:00\x2b00:00",
+  "dateModified": "2017-09-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/192.168.31.10:8000\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="http://192.168.31.10:8000">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="http://192.168.31.10:8000">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">vue中盲点</h1>
+        <div class="post-meta">
+            Written by <a href="http://192.168.31.10:8000" rel="author">Magic</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2017-09-02 >2 September 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="http://192.168.31.10:8000/categories/vue/"> Vue </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                1 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="vue中盲点">vue中盲点</h2>
+
+<h3 id="使用-performance-开启性能追踪">使用 performance 开启性能追踪</h3>
+
+<ul>
+<li>performance API 是 Vue 全局配置 API 中的一个，我们可以使用它来进行网页性能的追踪，我们可以在入口文件中添加：</li>
+</ul>
+
+<pre><code class="language-js">if (process.env.NODE_ENV !== 'production') {
+    Vue.config.performance = true;
+}
+</code></pre>
+
+<p>来开启这一功能，该 API（2.2.0 新增）功能只适用于开发模式和支持 performance.mark API 的浏览器上，开启后我们可以下载 Vue Performance Devtool 这一 chrome 插件来看查看各个组件的加载情况，如图：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/performance.png" alt="performance" class="lazyload"><figcaption class="image-caption">performance</figcaption></figure></p>
+
+<p>从中我们可以清晰的看到页面组件在每个阶段的耗时情况，而针对耗时比较久的组件，我们便可以对其进行相应优化。<br />
+而其在 Vue 源码中主要使用了 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Performance" rel="nofollow noreferrer" target="_blank">window.performance</a> 来获取网页性能数据，其中包含了 performance.mark 和 performance.measure。</p>
+
+<ul>
+<li>performance.mark 主要用于创建标记</li>
+<li>performance.measure 主要用于记录两个标记的时间间隔</li>
+</ul>
+
+<p>例如：</p>
+
+<pre><code class="language-js">performance.mark('start'); // 创建 start 标记
+performance.mark('end'); // 创建 end 标记
+
+performance.measure('output', 'start', 'end'); // 计算两者时间间隔
+
+performance.getEntriesByName('output'); // 获取标记，返回值是一个数组，包含了间隔时间数据
+</code></pre>
+
+<p>熟练的使用 performance 我们可以查看并分析网页的很多数据，为我们项目优化提供保障。</p>
+
+<h3 id="对低开销的静态组件使用-v-once">对低开销的静态组件使用 v-once</h3>
+
+<p>Vue 提供了 v-once 指令用于只渲染元素和组件一次，一般可以用于存在大量静态数据组件的更新性能优化，注意是大量静态数据，因为少数情况下我们的页面渲染会因为一些静态数据而变慢。如果需要对一个组件使用 v-once，可以直接在组件上绑定：</p>
+
+<pre><code class="language-vue">&lt;box-content v-once :data=&quot;msg&quot;&gt;&lt;/box-content&gt;
+</code></pre>
+
+<p>这时候因为组件绑定了 v-once，所以无论 msg 的值如何变化，组件内渲染的永远是其第一次获取到的初始值。因此我们在使用 v-once 的时候需要考虑该组件今后的更新情况，避免不必要的问题产生。</p>
+
+<h3 id="使用-isserver-判断当前实例是否运行于服务器">使用 $isServer 判断当前实例是否运行于服务器</h3>
+
+<p>当我们的 Vue 项目中存在服务端渲染（SSR）的时候，有些项目文件可能会同时在客户端和服务端加载，这时候代码中的一些客户端浏览器才支持的属性或变量在服务端便会加载出错，比如 window、 document 等，这时候我们需要进行环境的判断来区分客户端和服务端，如果你不知道 <code>$isServer</code>，那么你可能会使用 <code>try ... catch</code> 或者 <code>process.env.VUE_ENV</code> 来判断：</p>
+
+<pre><code class="language-js">try {
+    document.title = 'test';
+} catch(e) {}
+
+// process.env.VUE_ENV 需要在 webpack 中进行配置
+if (process.env.VUE_ENV === 'client') {
+    document.title = 'test';
+}
+</code></pre>
+
+<p>而使用 $isServer 则无需进行配置，在组件中直接使用该 API 即可：</p>
+
+<pre><code class="language-js">if (this.$isServer) {
+    document.title = 'test';
+}
+</code></pre>
+
+<p>其源码中使用了 Object.defineProperty 来进行数据监测：</p>
+
+<pre><code class="language-js">Object.defineProperty(Vue.prototype, '$isServer', {
+    get: isServerRendering
+});
+
+var _isServer;
+var isServerRendering = function () {
+    if (_isServer === undefined) {
+        if (!inBrowser &amp;&amp; !inWeex &amp;&amp; typeof global !== 'undefined') {
+            _isServer = global['process'].env.VUE_ENV === 'server';
+        } else {
+            _isServer = false;
+        }
+    }
+    return _isServer
+};
+</code></pre>
+
+<p>当我们访问 $isServer 属性时，其会调用 <code>isServerRendering</code>方法，该方法会首先判断当前环境，如果在浏览器或者 Weex 下则返回 false，否则继续判断当前全局环境下的 <code>process.env.VUE_ENV</code> 是否为 server 来返回最终结果。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Magic </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>192</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fvue-blind-spot%2f&amp;text=vue%e4%b8%ad%e7%9b%b2%e7%82%b9&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=http%3a%2f%2f192.168.31.10%3a8000%2f2017%2fvue-blind-spot%2f&amp;appkey=&amp;title=vue%e4%b8%ad%e7%9b%b2%e7%82%b9" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+            </p>
+                       
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="http://192.168.31.10:8000/tags/vue/">
+                    #Vue</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="http://192.168.31.10:8000">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://192.168.31.10:8000/2017/template/" class="prev" rel="prev" title="JS 模板"><i class="iconfont icon-dajiantou"></i>&nbsp;JS 模板</a>
+         
+        
+        <a href="http://192.168.31.10:8000/2017/vue/" class="next" rel="next" title="Vue配置相关">Vue配置相关&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="http://192.168.31.10:8000">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

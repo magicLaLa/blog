@@ -1,0 +1,4544 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Magic on Magic</title>
+    <link>http://192.168.31.10:8000/</link>
+    <description>Recent content in Magic on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://192.168.31.10:8000/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Webpack 优化相关</title>
+      <link>http://192.168.31.10:8000/2019/webpack/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2019/webpack/</guid>
+      <description>
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://webpack.js.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;webpack-优化&#34;&gt;Webpack 优化&lt;/h2&gt;
+
+&lt;h3 id=&#34;构建过程提速策略&#34;&gt;构建过程提速策略&lt;/h3&gt;
+
+&lt;h4 id=&#34;不要让-loader-做太多事情&#34;&gt;不要让 loader 做太多事情&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;以 babel-loader 为例：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;babel-loader 无疑是强大的，但它也是慢的。&lt;/p&gt;
+
+&lt;p&gt;最常见的优化方式是，用 include 或 exclude 来帮我们避免不必要的转译，比如 webpack 官方在介绍 babel-loader 时给出的示例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;module: {
+  rules: [
+    {
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: &#39;babel-loader&#39;,
+        options: {
+          presets: [&#39;@babel/preset-env&#39;]
+        }
+      }
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;loader: &#39;babel-loader?cacheDirectory=true&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;抽离第三库&#34;&gt;抽离第三库&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;DllPlugin&lt;/code&gt;是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;用 DllPlugin 处理文件，要分两步走：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;基于 dll 专属的配置文件，打包 dll 库&lt;/li&gt;
+&lt;li&gt;基于 webpack.config.js 文件，打包业务代码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;举例&amp;ndash;配置文件如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// webpack.dll.config.js
+const path = require(&amp;quot;path&amp;quot;)
+const webpack = require(&amp;quot;webpack&amp;quot;)
+
+module.exports = {
+  entry: {
+    // 依赖的库数组
+    vendor: [
+      &#39;mint-ui&#39;,
+      &#39;vue/dist/vue.common.js&#39;,
+      &#39;whatwg-fetch&#39;,
+      &#39;vuex&#39;,
+      &#39;vue-router&#39;
+    ]
+  },
+  output: {
+    path: path.join(__dirname, &#39;../static/js&#39;),
+    filename: &#39;[name].dll.js&#39;,
+    library: &#39;[name]_library&#39;
+  },
+  plugins: [
+    new webpack.DllPlugin({
+      // DllPlugin的name属性需要和libary保持一致
+      path: path.join(__dirname, &#39;..&#39;, &#39;[name]-manifest.json&#39;),
+      name: &#39;[name]_library&#39;,
+      // context需要和webpack.config.js保持一致
+      context: __dirname
+    }),
+    // 压缩打包的文件
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ]
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在 &lt;code&gt;package.json--&amp;gt;scripts&lt;/code&gt;下添加&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;build:dll&amp;quot;: &amp;quot;webpack --config build/webpack.dll.config.js&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;命令，运行&lt;code&gt;npm run build:dll&lt;/code&gt;会在&lt;code&gt;static/js&lt;/code&gt;文件夹里会出现&lt;code&gt;vendor.dll.js&lt;/code&gt;文件，在根目录下出现&lt;code&gt;vendor-manifest.json&lt;/code&gt;文件。&lt;br /&gt;
+&lt;code&gt;vendor.dll.js&lt;/code&gt;是我们第三方库打包的结果，&lt;code&gt;vendor-manifest.json&lt;/code&gt;则用于描述每个第三方库对应的具体路径。&lt;br /&gt;
+随后在&lt;code&gt;webpack.base.conf.js || webpack.config.js&lt;/code&gt;里针对 dll 稍作配置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const path = require(&#39;path&#39;);
+const webpack = require(&#39;webpack&#39;)
+module.exports = {
+  mode: &#39;production&#39;,
+  // 编译入口
+  entry: {
+    main: &#39;./src/index.js&#39;
+  },
+  // 目标文件
+  output: {
+    path: path.join(__dirname, &#39;dist/&#39;),
+    filename: &#39;[name].js&#39;
+  },
+  // dll相关配置
+  plugins: [
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      // manifest就是我们第一步中打包出来的json文件
+      manifest: require(&#39;../vendor-manifest.json&#39;)
+    }),
+    // 将 vendor.dll.js 插入HTML里 需要安装 html-webpack-include-assets-plugin
+    new HtmlWebpackIncludeAssetsPlugin({
+      assets: [utils.assetsPath(&#39;js/vendor.dll.js&#39;)],
+      files: [&#39;index.html&#39;],
+      append: false
+    })
+    // 多页面下 可以在每个 index.html 手动引入 vendor.dll.js
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;happypack-将-loader-由单进程转为多进程&#34;&gt;Happypack——将 loader 由单进程转为多进程&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;webpack&lt;/code&gt; 是单线程的，就算此刻存在多个任务，你也只能排队一个接一个地等待处理。这是 webpack 的缺点，好在我们的 CPU 是多核的，&lt;code&gt;Happypack&lt;/code&gt; 会充分释放 &lt;code&gt;CPU&lt;/code&gt; 在多核并发方面的优势，帮我们把任务分解给多个子进程去并发执行，大大提升打包效率。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * 共享线程池
+ * 通常，在内部创建的每个HappyPack插件都会创建自己的线程，用于运行加载器。
+ * 但是，如果您使用多个HappyPack插件，那么最好自己创建一个线程池，然后配置插
+ * 件以共享该池，从而最大限度地减少其中线程的空闲时间
+ * 使用5个线程的自定义线程池
+ */
+const Happypack = require(&#39;happypack&#39;)
+const happyThreadPool = Happypack.ThreadPool({size: 5}) // HappyPack.ThreadPool({ size: os.cpus().length })
+
+module.exports = {
+  module: {
+    rules: [
+      ...
+      {
+        test: /\.js$/,
+        // 问号后面的查询参数指定了处理这类文件的HappyPack实例的名字
+        loader: &#39;happypack/loader?id=happyBabel&#39;,
+        ...
+      },
+    ],
+  },
+  plugins: [
+    ...
+    new HappyPack({
+      // 这个HappyPack的“名字”就叫做happyBabel，和楼上的查询参数遥相呼应
+      id: &#39;happyBabel&#39;,
+      // 指定进程池
+      threadPool: happyThreadPool,
+      loaders: [&#39;babel-loader?cacheDirectory&#39;]
+    })
+  ],
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;构建结果体积压缩&#34;&gt;构建结果体积压缩&lt;/h3&gt;
+
+&lt;h4 id=&#34;文件结构可视化-找出导致体积过大的原因&#34;&gt;文件结构可视化，找出导致体积过大的原因&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;webpack-bundle-analyzer&lt;/code&gt;配置方法和普通的 plugin 无异，它会以矩形树图的形式将包内各个模块的大小和依赖关系呈现出来，格局如官方所提供这张图所示：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/webpack1.gif&#34; alt=&#34;webpack1&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用方式：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const BundleAnalyzerPlugin = require(&#39;webpack-bundle-analyzer&#39;).BundleAnalyzerPlugin
+
+module.exports = {
+  plugins: [
+    new BundleAnalyzerPlugin()
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;按需加载&#34;&gt;按需加载&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;require.ensure&lt;/code&gt; 是 Webpack 的特殊语法，用来设置 组件根路径 按需加载。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://webpack.js.org/api/module-methods/#require-ensure&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以 &lt;code&gt;VUE&lt;/code&gt; 项目举例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// vue Router
+import Vue from &#39;vue&#39;
+import Router from &#39;vue-router&#39;
+
+Vue.use(Router)
+
+export default new Router({
+  // require.ensure 是 Webpack 的特殊语法，用来设置 组件根路径 按需加载
+  routes: [
+    {
+      path: &#39;/&#39;,
+      name: &#39;index&#39;,
+      redirect: &#39;/home&#39;,
+      component (reslove) {
+        require.ensure([&#39;../App.vue&#39;], () =&amp;gt; {
+          reslove(require(&#39;../App.vue&#39;))// 完成调用
+        })
+      },
+      children: [{
+        path: &#39;/order&#39;,
+        name: &#39;order&#39;,
+        component (reslove) {
+          require.ensure(&#39;../components/order/Order.vue&#39;, () =&amp;gt; {
+            reslove(require(&#39;../components/order/Order.vue&#39;))
+          })
+        }
+      },
+      {
+        path: &#39;/home&#39;,
+        name: &#39;home&#39;,
+        component (reslove) {
+          require.ensure(&#39;../components/homepage/Home.vue&#39;, () =&amp;gt; {
+            reslove(require(&#39;../components/homepage/Home.vue&#39;))
+          })
+        }
+      },
+      {
+        path: &#39;/drag&#39;,
+        name: &#39;drag&#39;,
+        component (reslove) {
+          require.ensure(&#39;../components/drag/drag.vue&#39;, () =&amp;gt; {
+            reslove(require(&#39;../components/drag/drag.vue&#39;))
+          })
+        }
+      }]
+    }
+  ]
+})
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;注：&lt;/strong&gt; &lt;code&gt;Vue Router&lt;/code&gt; 官方文档还推荐使用动态 import 语法来进行代码分块，比如上述 require.ensure 代码可以修改为：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 引入 Order 组件
+const Order = () =&amp;gt; import(&#39;../components/order/Order.vue&#39;);
+
+// 引入 Home 组件
+const Home = () =&amp;gt; import(&#39;../components/homepage/Home.vue&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其余代码可以保持不变，仍然可以实现同样的功能。如果你想给拆分出的文件命名，可以尝试一下 webpack 提供的 &lt;code&gt;Magic Comments&lt;/code&gt;（魔法注释）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const Home = () =&amp;gt; import(/* webpackChunkName:&#39;home&#39;*/ &#39;./views/Home.vue&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker 相关</title>
+      <link>http://192.168.31.10:8000/2018/docker/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/docker/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-相关&#34;&gt;Docker 相关&lt;/h1&gt;
+
+&lt;h2 id=&#34;搭建-gitlab&#34;&gt;搭建 gitLab&lt;/h2&gt;
+
+&lt;h3 id=&#34;搜索镜像&#34;&gt;搜索镜像&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker search gitlab-ce
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;查看镜像&#34;&gt;查看镜像&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker images
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hapi</title>
+      <link>http://192.168.31.10:8000/2018/hapi/</link>
+      <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/hapi/</guid>
+      <description>
+
+&lt;h1 id=&#34;hapi&#34;&gt;Hapi&lt;/h1&gt;
+
+&lt;h2 id=&#34;hapi-相关使用总结&#34;&gt;Hapi 相关使用总结&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Hapi.js 是一个用来构建基于 Node.js 的应用和服务的富框架，使得开发者把重点放在便携可重用的应用逻辑而不是构建架构。内建输入验证、缓存、认证和其他 Web 应用开发常用的功能。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;hapi-框架模块接口文档&#34;&gt;Hapi 框架模块接口文档&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://hapijs.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hapijs.com/api&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Hapi-api&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;supervisor-nodemon-pm2&#34;&gt;Supervisor / nodemon / PM2&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;有不少 Node.js 小工具能帮助我们监视代码的改动然后自动重启 Node.js 服务，好用的工具有 &lt;code&gt;Supervisor / nodemon / PM2&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 系统全局安装 supervisor
+$ npm i -g supervisor
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;目录结构&#34;&gt;目录结构&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── config                       # 项目配置目录
+|   ├── index.js                 # 配置项目中的配置信息
+├── models                       # 数据库 model
+├── node_modules                 # node.js 的依赖目录
+├── plugins                      # 插件目录
+├── routes                       # 路由目录
+│   ├── hello-world.js           # 测试接口 hello-world
+├── utils                        # 工具类相关目录
+├── app.js                       # 项目入口文件
+├── package.json                 # JS 项目工程依赖库
+├── README.md                    # 项目工程如何被使用的说明手册
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;环境配置&#34;&gt;环境配置&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;例子：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# .env.example
+
+# 服务的启动名字和端口，但也可以缺省不填值，默认值的填写只是一定程度减少起始数据配置工作
+HOST = 127.0.0.1
+PORT = 3000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;读取-env-中的配置值&#34;&gt;读取 .env 中的配置值&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Node.js 可以通过 env2 的插件，来读取 .env 配置文件，加载后的环境配置参数，可以通过例如 process.env.PORT 来读取端口信息。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i env2 -D
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;使用-swagger-插件配置接口文档&#34;&gt;使用 Swagger 插件配置接口文档&lt;/h3&gt;
+
+&lt;h4 id=&#34;安装基础依赖与基础插件配置&#34;&gt;安装基础依赖与基础插件配置&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 安装适配 hapi v16 的 swagger 插件
+npm i hapi-swagger@7
+npm i inert@4
+npm i vision@4
+npm i package
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── plugins                       # hapi 插件配置
+|   ├── hapi-swagger.js           # swagger 插件
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过 &lt;strong&gt;自己的服务地址+/documentation&lt;/strong&gt; 来查看 Swagger 文档。&lt;em&gt;&lt;a href=&#34;http://192.168.31.10:8181/documentation&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://192.168.31.10:8181/documentation&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;使用-joi-校验数据结构&#34;&gt;使用 Joi 校验数据结构&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 安装适配 hapi v16 的 joi 插件
+npm i joi@13
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;mysql修改默认编码&#34;&gt;MySQL修改默认编码&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;show variables like &#39;%char%&#39;;&lt;/code&gt; 查看默认编码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; show variables like &#39;%char%&#39;;
++--------------------------+---------------------------------------------------------+
+| Variable_name            | Value                                                   |
++--------------------------+---------------------------------------------------------+
+| character_set_client     | gbk                                                     |
+| character_set_connection | gbk                                                     |
+| character_set_database   | utf8                                                    |
+| character_set_filesystem | binary                                                  |
+| character_set_results    | gbk                                                     |
+| character_set_server     | utf8                                                    |
+| character_set_system     | utf8                                                    |
+| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 5.7\share\charsets\ |
++--------------------------+---------------------------------------------------------+
+8 rows in set, 1 warning (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;修改mysql编码，（version：5.7.24）Window10下 &lt;code&gt;my.ini&lt;/code&gt;文件路径在 &lt;code&gt;C:\ProgramData\MySQL\MySQL Server 5.7\&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在my.ini添加如下：&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[mysqld]
+character-set-server=utf8
+[client]
+default-character-set=utf8
+[mysql]
+default-character-set=utf8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;mysql-与-sequelize&#34;&gt;MySQL 与 Sequelize&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;数据库为 MySQL 5.6。&lt;a href=&#34;https://sequelize.readthedocs.io/en/v3/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Sequelize&lt;/a&gt; 则是 Node.js 生态中一款知名的基于 promise 数据库 ORM 插件，提供了大量常用数据库增删改查的函数式 API，以帮助我们在实际开发中，大量减少书写冗长的基础数据库查询语句。&lt;/li&gt;
+&lt;li&gt;Sequelize 支持的数据库有：&lt;code&gt;PostgreSQL，MySQL，MariaDB，SQLite 和 MSSQL。&lt;/code&gt;在使用不同的数据库时候，需要我们开发者额外安装不同的对应数据库连接驱动，d当前使用的 MySQL，则依赖于插件 MySQL2 。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# MySQL 连接
+[root@vultr ~]# mysql -u root -p
+Enter password: *******
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.22 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.
+
+# 查看数据库编码格式
+mysql&amp;gt; show variables like &#39;%char%&#39;;
++--------------------------+---------------------------------------------------------+
+| Variable_name            | Value                                                   |
++--------------------------+---------------------------------------------------------+
+| character_set_client     | utf8                                                    |
+| character_set_connection | utf8                                                    |
+| character_set_database   | latin1                                                  |
+| character_set_filesystem | binary                                                  |
+| character_set_results    | utf8                                                    |
+| character_set_server     | latin1                                                  |
+| character_set_system     | utf8                                                    |
+| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 5.7\share\charsets\ |
++--------------------------+---------------------------------------------------------+
+8 rows in set, 1 warning (0.00 sec)
+
+# 创建用户
+# 说明：
+# username：你将创建的用户名
+# host：指定该用户在哪个主机上可以登陆，如果是本地用户可用localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符%
+# password：该用户的登陆密码，密码可以为空，如果为空则该用户可以不需要密码登陆服务器
+mysql&amp;gt; CREATE USER &#39;username&#39;@&#39;host&#39; IDENTIFIED BY &#39;password&#39;;
+
+# 授权
+# 说明:
+# privileges：用户的操作权限，如SELECT，INSERT，UPDATE等，如果要授予所的权限则使用ALL
+# databasename：数据库名
+# tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用*表示，如*.*
+# 例子：
+# GRANT SELECT, INSERT ON test.user TO &#39;pig&#39;@&#39;%&#39;;
+# GRANT ALL ON *.* TO &#39;pig&#39;@&#39;%&#39;;
+mysql&amp;gt; GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39;;
+# 注意:用以上命令授权的用户不能给其它用户授权，如果想让该用户可以授权，用以下命令:
+mysql&amp;gt; GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39; WITH GRANT OPTION;
+
+# 设置与更改用户密码
+mysql&amp;gt; SET PASSWORD FOR &#39;username&#39;@&#39;host&#39; = PASSWORD(&#39;newpassword&#39;);
+# 如果是当前登陆用户用:
+mysql&amp;gt; SET PASSWORD = PASSWORD(&amp;quot;newpassword&amp;quot;);
+
+# 撤销用户权限
+# 说明：说明:privilege, databasename, tablename：同授权部分
+# 注意：
+# 假如你在给用户&#39;pig&#39;@&#39;%&#39;授权的时候是这样的（或类似的）：GRANT SELECT ON test.user TO &#39;pig&#39;@&#39;%&#39;，则在使用REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;命令并不能撤销该用户对test数据库中user表的SELECT 操作。相反，如果授权使用的是GRANT SELECT ON *.* TO &#39;pig&#39;@&#39;%&#39;;则REVOKE SELECT ON test.user FROM &#39;pig&#39;@&#39;%&#39;;命令也不能撤销该用户对test数据库中user表的Select权限。
+# 具体信息可以用命令SHOW GRANTS FOR &#39;pig&#39;@&#39;%&#39;; 查看
+mysql&amp;gt; REVOKE privilege ON databasename.tablename FROM &#39;username&#39;@&#39;host&#39;;
+
+# 删除用户
+mysql&amp;gt; DROP USER &#39;username&#39;@&#39;host&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;sequelize-cli&#34;&gt;Sequelize-cli&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sequelize 插件的主要应用场景是实际应用开发过程中的代码逻辑层。与其相伴的还有一套 cli 工具，Sequelize-cli，提供了一系列好用的终端指令，来帮助我们完成一些常用的琐碎任务。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;安装依赖&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i sequelize-cli -D
+npm i sequelize
+npm i mysql2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;sequelize init (通过 sequelize-cli 初始化 sequelize，我们将得到一个好用的初始化结构：)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# windows下
+node_modules\.bin\sequelize init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── config                       # 项目配置目录
+|   ├── config.[json|js]              # 数据库连接的配置
+├── models                       # 数据库 model
+|   ├── index.js                 # 数据库连接的样板代码
+├── migrations                   # 数据迁移的目录
+├── seeders                      # 数据填充的目录
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;sequelize db:create&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;执行下面的命令，可以默认使用 development 下的配置，来创建项目数据库。增加例如 &amp;ndash;env production，则使用 config/config.js 中的 production 项配置，来完成数据库的创建。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;node_modules\.bin\sequelize db:create
+
+# 通过 --env 参数，指定为生产环境创建项目数据库
+# node_modules\.bin\sequelize db:create --env production
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;migrate-数据迁移&#34;&gt;migrate 数据迁移&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;sequelize migration:create &lt;em&gt;使用 sequelize migration:create 来创建一个迁移文件 create-shops-table。&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;node_modules\.bin\sequelize migration:create --name create-shops-table
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;sequelize db:migrate &lt;em&gt;帮助将 migrations 目录下的迁移行为定义，按时间戳的顺序，逐个地执行迁移描述，最终完成数据库表结构的自动化创建。并且，在数据库中会默认创建一个名为 SequelizeMeta 的表，用于记录在当前数据库上所运行的迁移历史版本。&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;node_modules\.bin\sequelize db:migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; show tables;
++---------------------+
+| Tables_in_practtest |
++---------------------+
+| goods               |
+| sequelizemeta       |
+| shops               |
++---------------------+
+3 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;sequelize db:migrate:undo &lt;em&gt;sequelize db:migrate:undo 则可以帮助我们按照 down 方法中所定义的规则，回退一个数据库表结构迁移的状态。&lt;code&gt;node_modules\.bin\sequelize db:migrate:undo&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;向表中追加字段 &lt;em&gt;创建一个名叫 add-columns-to-shops-table 的迁移迁移文件：&lt;code&gt;node_modules\.bin\sequelize migration:create --name add-columns-to-shops-table&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;module.exports = {
+  up: (queryInterface, Sequelize) =&amp;gt; Promise.all([
+    queryInterface.addColumn(&#39;shops&#39;, &#39;address&#39;, { type: Sequelize.STRING }),
+  ]),
+
+  down: queryInterface =&amp;gt; Promise.all([
+    queryInterface.removeColumn(&#39;shops&#39;, &#39;address&#39;),
+  ]),
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 之前的表结构
+mysql&amp;gt; desc shops;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(255) | NO   |     | NULL    |                |
+| thumb_url  | varchar(255) | YES  |     | NULL    |                |
+| created_at | datetime     | YES  |     | NULL    |                |
+| updated_at | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 再次运行完 node_modules\.bin\sequelize db:migrate 后的表结构
+mysql&amp;gt; desc shops;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(255) | NO   |     | NULL    |                |
+| thumb_url  | varchar(255) | YES  |     | NULL    |                |
+| created_at | datetime     | YES  |     | NULL    |                |
+| updated_at | datetime     | YES  |     | NULL    |                |
+| address    | varchar(255) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;seeders-种子数据填充&#34;&gt;seeders 种子数据填充&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;sequelize seed:create &lt;em&gt;&lt;code&gt;node_modules\.bin\sequelize seed:create --name init-shops&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;sequelize db:seed:all &lt;em&gt;与 db:migrate 相似，执行 sequelize db:seed:all ，将向数据库填充 seeders 目录中所有 up 方法所定义的数据。&lt;code&gt;node_modules\.bin\sequelize db:seed:all&lt;/code&gt;&lt;/em&gt;&lt;strong&gt;注意: seeders 的执行，不会将状态存储在 SequelizeMeta 表中。&lt;/strong&gt;(当然，我们也可以通过 &lt;code&gt;--seed&lt;/code&gt; 来制定特定的 &lt;code&gt;seed&lt;/code&gt; 配置来做填充：
+&lt;code&gt;node_modules\.bin\sequelize db:seed --seed 20190103082032-init-goods.js&lt;/code&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 添加后的数据表
+mysql&amp;gt; select * from shops;
++----+-------+-----------+---------------------+---------------------+---------+
+| id | name  | thumb_url | created_at          | updated_at          | address |
++----+-------+-----------+---------------------+---------------------+---------+
+|  1 | 店铺1 | 1.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  2 | 店铺2 | 2.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  3 | 店铺3 | 3.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  4 | 店铺4 | 4.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  5 | 店铺5 | 5.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
++----+-------+-----------+---------------------+---------------------+---------+
+5 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;sequelize db:seed:undo &lt;em&gt;Seeders 所填充的数据，也与迁移的 db:migrate:undo 相仿，只是不会进入 SequelizeMeta 记录。两个可用的命令如下，很简单，不再赘述：&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
+# 撤销所有的种子
+node_modules\.bin\sequelize db:seed:undo:all
+# 数据表
+mysql&amp;gt; select * from shops;
++----+-------+-----------+---------------------+---------------------+---------+
+| id | name  | thumb_url | created_at          | updated_at          | address |
++----+-------+-----------+---------------------+---------------------+---------+
+|  5 | 店铺5 | 5.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
++----+-------+-----------+---------------------+---------------------+---------+
+1 row in set (0.00 sec)
+
+# 撤销指定的种子
+node_modules\.bin\sequelize db:seed:undo --seed XXXXXXXXXXXXXX-demo-user.js
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;sequelize-连接-mysql-数据库&#34;&gt;Sequelize 连接 MySQL 数据库&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sequelize 连接数据库的核心代码主要就是通过 new Sequelize（database, username, password, options） 来实现，其中 options 中的配置选项，除了最基础的 host 与 port、数据库类型外，还可以设置连接池的连接参数 pool，数据模型命名规范 underscored 等等。具体可以查阅官方手册 &lt;a href=&#34;http://docs.sequelizejs.com/manual/installation/usage.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;基础使用&lt;/a&gt;。&lt;strong&gt;希望遵循 MySQL 数据库表字段的下划线命名规范，所以，需要全局开启一个 &lt;code&gt;underscore: true&lt;/code&gt; 的定义，来使系统中默认的 createdAt 与 updatedAt 能以下划线的方式，与表结构保持一致。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;定义数据库业务相关的-model&#34;&gt;定义数据库业务相关的 model&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;结合业务所需，可以在存放 models 目录下继续创建一系列的 model 来与数据库表结构做对应：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── models                       # 数据库 model
+│   ├── index.js                 # model 入口与连接
+│   ├── goods.js                 # 商品表
+│   ├── shops.js                 # 店铺表
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;实现接口&#34;&gt;实现接口&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;很多时候，我们并不希望 findAll 来将数据表中的所有数据全都暴露出来，比如在查询用户列表时，用户的密码的值，便是特别敏感的数据。 我们可以在 findAll 中加入一个 &lt;code&gt;attributes&lt;/code&gt; 的约束，可以是一个要查询的属性（字段）列表，或者是一个 key 为 &lt;code&gt;include&lt;/code&gt; 或 &lt;code&gt;exclude&lt;/code&gt; 对象的键，比如对于用户表，&lt;code&gt;findAll({ attributes: { exclude: [&#39;password&#39;] } })&lt;/code&gt;，就可以排除密码字段的查询露出。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const Joi = require(&#39;joi&#39;)
+const models = require(&#39;../models&#39;)
+
+const GROUP_NAME = &#39;shops&#39;
+
+module.exports = [
+  {
+    method: &#39;GET&#39;,
+    path: `/${GROUP_NAME}`,
+    handler: async (request, reply) =&amp;gt; {
+      // 查找数据
+      const result = await models.shops.findAll({
+        // 只返回 id 和 name
+        attributes: [&#39;id&#39;, &#39;name&#39;]
+      })
+      reply(result)
+    },
+    config: {
+      tags: [&#39;api&#39;, GROUP_NAME],
+      description: &#39;获取店铺列表&#39;,
+      // 适用于 GET 接口的 query（URL 路径参数）
+      validate: {
+        query: {
+          limit: Joi.number().integer().min(1).default(10).description(&#39;每页条数&#39;),
+          // error(new Error(&#39;页码数不能为0！&#39;))  显示的错误信息为中文（message）
+          page: Joi.number().integer().min(1).default(1).description(&#39;页码数&#39;).error(new Error(&#39;页码数不能为0！&#39;))
+        }
+      }
+    }
+  },
+  ...
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;列表分页 &lt;code&gt;options&lt;/code&gt; 的具体配置参数细节说明，参见 &lt;a href=&#34;https://github.com/fknop/hapi-pagination/tree/v1.6.5&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;hapi-pagination&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 安装适配 hapi v16 的 hapi-pagination
+$ npm i hapi-pagination@1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;基于-jwt-的身份验证&#34;&gt;基于 JWT 的身份验证&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JWT 全称 JSON Web Token，是为了方便在各系统之间安全地传送 JSON 对象格式的信息，而采用的一个开发标准，基于 RFC 7519 定义。服务器在接收到 JWT 之后，可以验证它的合法性，用户登录与否的身份验证便是 JWT 的使用场景之一。&lt;/li&gt;
+&lt;li&gt;JWT 具有「紧凑」与「自包含」的两大特点: 紧凑（compact）、自包含（self-contained）&lt;/li&gt;
+&lt;li&gt;JWT 的构成&amp;mdash;JSON Web Token 由 header、payload、signature 三部分组成，使用点号 . 分隔，下面是一段典型的 JWT 串:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# header
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+# payload
+eyJ1c2VySWQiOjEsImV4cCI6MTUzNTMyMjc0NSwiaWF0IjoxNTM0NzE3OTQ1fQ.
+# signature
+6tOdn2R82bxJbXjAnwU5g4g9EKqGNe-qo4qCo6UZnQ
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;header &amp;ndash; JWT 第一部分 header 指定了该 JWT 使用的签名算法：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{ &amp;quot;alg&amp;quot;: &amp;quot;HS256&amp;quot;, &amp;quot;typ&amp;quot;:&amp;quot;JWT&amp;quot; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;payload &amp;ndash; JWT 的第二部分 &lt;code&gt;payload&lt;/code&gt; 包含了该 JWT 的签发内容信息。以如上述 JWT 串为例，被解码之后，可以得到如下信息，包涵有用户 &lt;code&gt;ID&lt;/code&gt;，&lt;code&gt;JWT&lt;/code&gt; 过期时间 &lt;code&gt;exp&lt;/code&gt;，&lt;code&gt;JWT&lt;/code&gt; 签发时间 &lt;code&gt;iat&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;userId&amp;quot;: 1,
+  &amp;quot;exp&amp;quot;: 1535322745,
+  &amp;quot;iat&amp;quot;: 1534717945
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中 JWT 的规范有一套预设的标准注册声明，非必要项，在业务场景需要的时候加入：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;iss(issuer)&lt;/code&gt;：JWT 的签发者&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sub(subject)&lt;/code&gt;：JWT 所面向的用户&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;aud(audience)&lt;/code&gt;：接收 JWT 的一方&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;exp(expiresIn)&lt;/code&gt;：JWT 的过期时间，这个时间必须大于签发时间&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nbf(notBefore)&lt;/code&gt;：定义在什么时间之前，该 JWT 都是不可用的&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;iat(issuedAt)&lt;/code&gt;：JWT 的签发时间&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;jti(jwtid)&lt;/code&gt;：JWT 的唯一身份标识，主要用来作为一次性 token，从而避免重放攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其他的信息数据，可以在 payload 中额外追加，避免与预设保留字冲突就好。&lt;br /&gt;
+&lt;em&gt;注意&lt;/em&gt; ：对于已签发的 JWT, 尽管信息是可以受到下文 signature 的签名防篡改保护，但 payload 部分的内容，依旧任何人都可以 decode 解码阅读。故而不要在 payload 中存放诸如密码密秘类的安全敏感数据。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;signature &amp;ndash; JWT 的第三部分 signature 用来验证签发数据的合法性，是否存在第三方篡改伪造行为。由 header + payload + 签发 secret 组合而成。有心的读者可以发现，其中的参数条件 header 和 payload 皆为 base64 的编码内容，base64 是一种可双向的编码算法，所以不具备数据安全性。唯有 secret 的参数条件，在 JWT 最终的生成串中并不公开，所以在服务端保管好 secret 的签发字符串的私密性尤为重要，随意地将其提交进 git 的代码版本库，是一种极度不严谨行为。 以 HS256 算法为例，signature 的签发算法如下：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;HMACSHA256(base64UrlEncode(header) + &amp;quot;.&amp;quot; + base64UrlEncode(payload), secret)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Secret&lt;/code&gt; 的秘钥签发，可以通过一些在线的 AES 加密工具来生成一串长度 32 或 64 的随机字符串。比如： &lt;a href=&#34;http://tool.oschina.net/encrypt/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;tool.oschina.net/encrypt/&lt;/a&gt; 。太长的字符串会一定程度上影响 jwt 验证的计算效率，所以找寻一个平衡点为宜。&lt;/p&gt;
+
+&lt;h4 id=&#34;基于-jwt-的身份验证的好处&#34;&gt;基于 JWT 的身份验证的好处&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;跨语言性&lt;/strong&gt;：payload 数据结构基于 JSON，可以被任何主流语言支持。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;免疫 CSRF&lt;/strong&gt;：对 Cookie 的不依赖性，决定了天然免疫 CSRF 攻击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可跨域性&lt;/strong&gt;：同样是对 Cookie 的不依赖性，决定了更好的跨域支持与独立服务化属性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多端适配&lt;/strong&gt;：iOS， Android，微信小程序等非网页客户端，Cookie 是不被支持的，JWT 的认证机制则会简单很多。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;去耦可扩展性&lt;/strong&gt;：JWT 可以在任何拥有正确 secret 私钥的 API 服务环境被身份验证和使用，便于微服务拆分。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;基于-jwt-身份验证的注意项&#34;&gt;基于 JWT 身份验证的注意项&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不要在 JWT 的 payload 中签入敏感信息&lt;/li&gt;
+&lt;li&gt;保护好 secret 秘钥&lt;/li&gt;
+&lt;li&gt;使用 HTTPS 传输 JWT&lt;/li&gt;
+&lt;li&gt;设置较短的 JWT 失效时间，并结合一个失效较长的 JWT RefreshToken 组合为宜。因为 JWT 无法轻易失效已签发的合法 JWT&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;使用-jsonwebtoken-签发-jwt&#34;&gt;使用 jsonwebtoken 签发 JWT&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;jsonwebtoken 是 Node.js 生态里用于签发与校验 JWT 的流行插件。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i jsonwebtoken
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;jwt-sign-签发&#34;&gt;jwt.sign 签发&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JWT 的签发语法是 &lt;code&gt;jwt.sign(payload, secretOrPrivateKey, [options, callback])&lt;/code&gt;。默认的签发算法基于 &lt;code&gt;HS256 (HMAC SHA256)&lt;/code&gt;，可以在 options 参数的 &lt;code&gt;algorithm&lt;/code&gt; 另行修改。JWT 签发规范中的一些标准保留字段比如 &lt;code&gt;exp&lt;/code&gt;，&lt;code&gt;nbf&lt;/code&gt;，&lt;code&gt;aud&lt;/code&gt;，&lt;code&gt;sub&lt;/code&gt;，&lt;code&gt;iss&lt;/code&gt; 等都没有默认值，可以一并在 &lt;code&gt;payload&lt;/code&gt;参数中按需声明使用，亦可以在第三个参数 options 中，通过 &lt;code&gt;expiresIn&lt;/code&gt;，&lt;code&gt;notBefore&lt;/code&gt;，&lt;code&gt;audience&lt;/code&gt;，&lt;code&gt;subject&lt;/code&gt;，&lt;code&gt;issuer&lt;/code&gt; 来分别赋值，但是不允许在两处同时声明。&lt;/li&gt;
+&lt;li&gt;可以通过 &lt;a href=&#34;https://jwt.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JWT&lt;/a&gt; 来 decode JWT 中的 payload 信息。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&#34;hapi-auth-jwt2-接口用户验证&#34;&gt;hapi-auth-jwt2 接口用户验证&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;安装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i hapi-auth-jwt2@7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hapi-auth-jwt2 配置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── plugins                       # hapi 插件配置
+│ ├── hapi-auth-jwt2.js           # jwt 配置插件
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;sequelize-支持两种使用事务的方法&#34;&gt;Sequelize 支持两种使用事务的方法&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;托管事务&lt;/li&gt;
+&lt;li&gt;非托管事务&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;在一个事务中，可能会包含开始（start）、提交（commit）、回滚（rollback）等操作，Sequelize 通过 &lt;a href=&#34;http://docs.sequelizejs.com/manual/tutorial/transactions.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Transaction&lt;/a&gt;类来实现事务相关功能。以满足一些对操作过程的完整性比较高的使用场景。&lt;/em&gt;
+&lt;em&gt;托管事务基于 Promise 结果链进行自动提交或回滚。非托管事务则交由用户自行控制提交或回滚。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;微信接收的数据与返回的格式都是以-text-xml-的格式-而非-application-json-需要引入-xml2js-的插件帮助在-javascript-的-ojbect-与-xml-的-object-数据关系之间快速转换&#34;&gt;微信接收的数据与返回的格式都是以 text/xml 的格式，而非 application/json ，需要引入 xml2js 的插件帮助在 JavaScript 的 Ojbect 与 XML 的 Object 数据关系之间快速转换&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i xml2js
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;系统监控与记录-使用-good-插件&#34;&gt;系统监控与记录 —— 使用 Good 插件&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Good 是一个 hapi 插件，用于监视和报告来自主机的各种 hapi 服务器事件以及 ops 信息。它侦听 hapi 服务器实例发出的事件，并将标准化事件推送到流集合中。Good 插件目前有这四个扩展功能： good-squeeze、good-console、good-file、good-http。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i good@7
+npm i good-squeeze@5
+npm i good-console@7
+npm i good-file@6
+npm i good-http@6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;good-squeeze：good-squeeze 是一个小转换流的集合。它提供了两个类，Squeeze 和 SafeJson, Squeeze 流基于良好的事件选项来过滤事件。SafeJson 流用于把对象转成 JSON 字符串，并且可以防止对象中循环引用引起的错误。&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;good-console：good-console 能够将服务 good 服务事件转化为格式化字符串的转换流插件，最终通过 stdout 在控制台打印输出。
+&amp;gt; GoodConsole([config])
+&amp;gt; good-console 本身提供 3 个参数来简单配置控制台的打印信息：
+&amp;gt; * format：使用 MomentJS 格式化时间， 默认值 YYMMDD/HHmmss.SSS
+&amp;gt; * utc：boolean 输出时间是否为布尔值， 默认值 true
+&amp;gt; * color：boolean 是否彩色输出，默认值 true&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;good-file：基于 good-console 的控制台输出日志，当遇到控制台断开或是重启的时候，历史日志将无法找回，此时，在本地生成一份写文件的日志记录，会更好地便于日后的追溯。good-file 插件很好地解决了这样的需求痛点。
+&amp;gt; GoodFile (path, options)
+&amp;gt; * path：必填项，用来定义日志的写入目录
+&amp;gt; * options：选填项，文件流的选项。 默认值为&lt;code&gt;{ encoding: &#39;utf8&#39;, flags: &#39;a&#39;, mode: 0o666 }&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;good-http：除此之外，在实际应用场景中，我们会遇到一些高危异常的错误情况，这类日志我们更希望能在错误发生的第一时间，就通过自动报警的方式，来通知开发人员及时介入响应。这里可以使用 good-http 插件，它可以构造一个 post 的请求接口，将定义的重要日志信息以 JSON 的数据结构方式，推送到目标端点。
+&amp;gt; GoodHttp (endpoint, config)
+&amp;gt; * endpoint：日志发送的目标地址
+&amp;gt; * config：Object 类型的配置项目&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;组合使用日志插件：在实际项目使用中，可以进行组合性配置，在 reporters 字段中使用不同的 key 来区分即可&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;reporters: {
+  typeConsole: [
+    // good-console 的一系列配置
+  ],
+  typeFile: [
+    // good-file 的一系列配置
+  ],
+  typeHttpA: [
+    // good-http 针对 A 平台的一系列配置
+  ],
+  typeHttpB: [
+    // good-http 针对 B 平台的一系列配置
+  ],
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;使用-good-http-结合-sentry-自动收集错误日志&#34;&gt;使用 good-http 结合 Sentry 自动收集错误日志&lt;/h3&gt;
+
+&lt;h4 id=&#34;sentry-简介&#34;&gt;Sentry 简介&lt;/h4&gt;
+
+&lt;p&gt;Sentry 中文翻译过来是哨兵的意思，从字面中可以知道 「站岗、放哨、巡逻、稽查的士兵」，不错，Sentry 是程序的「哨兵」 。它可以监控我们在生产环境中项目的运行状态，一旦某段代码运行报错，或者异常，会第一时间把报错的 路由，异常文件，请求方式 等一些非常详细的信息以消息或者邮件给我们，让我们第一时间知道：程序出错了，然后我们可以从 Sentry 给我们的详细的错误信息中瞬间找到我们需要处理的代码，并及时修正。&lt;/p&gt;
+
+&lt;h4 id=&#34;sentry-服务搭建流程&#34;&gt;Sentry 服务搭建流程&lt;/h4&gt;
+
+&lt;p&gt;利用 hapi 的 API 服务能力再搭建一个简易的内网 API 服务，该服务使用 Sentry 的 raven 插件进行错误日志的收集与汇报，日志的信息源来自应用服务的 good-http 插件&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;申请 Sentry 的 API key&lt;/li&gt;
+&lt;li&gt;配置 Sentry 的错误收集与报告插件 raven&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i raven
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const Raven = require(&#39;raven&#39;)
+Raven.config(&#39;https://your-sentry-api-key@sentry.io/182062&#39;).install()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;提供错误日志接收服务&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{
+  method: &#39;POST&#39;,
+  path: &#39;/reportErrorLog&#39;,
+  handler: async (request, reply) =&amp;gt; {
+    //直接将请求参数上报到 Sentry
+    Raven.captureException(request.payload)
+    reply()
+  },
+  config: {
+    tags: [&#39;api&#39;, &#39;report&#39;],
+    auth: false,
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;配置应用服务中 good-http 的错误日志推送到上述含有 Sentry raven 的 API 微服务&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;server.register({
+  plugin: require(&#39;good&#39;),
+  {
+    ops: {
+      interval: 1000
+    },
+    reporters: {
+      typeHttp: [
+        {
+          module: &#39;good-squeeze&#39;,
+          name: &#39;Squeeze&#39;,
+          args: [{ error: &#39;*&#39; }]
+        },
+        {
+          module: &#39;good-http&#39;,
+          args: [&#39;http://your-sentry-server/reportErrorLog&#39;, {}]
+        }
+      ]
+    }
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MySQL 使用</title>
+      <link>http://192.168.31.10:8000/2018/mysql/</link>
+      <pubDate>Sun, 15 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/mysql/</guid>
+      <description>
+
+&lt;h1 id=&#34;mysql&#34;&gt;MySQL&lt;/h1&gt;
+
+&lt;h3 id=&#34;在-cmder-上连接远程服务器&#34;&gt;在 cmder 上连接远程服务器&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ssh root@**.**.**.*** 远程服务器地址IP
+root@**.**.**.***&#39;s password: ***********
+
+// [root@vultr ~]#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;安装-mysql&#34;&gt;安装 mysql&lt;/h3&gt;
+
+&lt;p&gt;我是在&lt;a href=&#34;https://www.vultr.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;vultr&lt;/a&gt;上安装的，系统是&lt;code&gt;CentOS 7&lt;/code&gt;，可以在网上找相关教程安装。&lt;/p&gt;
+
+&lt;h3 id=&#34;连接数据库&#34;&gt;连接数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[root@vultr ~]# mysql -u root -p
+Enter password: **********
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;查看数据库&#34;&gt;查看数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; show databases;
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| PRACTTEST          |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;使用某个数据库&#34;&gt;使用某个数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; use information_schema;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;查看表&#34;&gt;查看表&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; show tables;
+
++----------------------+
+| Tables_in_PRACTTEST  |
++----------------------+
+| DATA_PARICT          |
+| _mysql_session_store |
+| pract_tbl            |
+| transaction_tbl      |
+| user                 |
++----------------------+
+5 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;查看具体表的数据&#34;&gt;查看具体表的数据&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; SELECT * from prpract_tbl;
++----------+------------------+--------------+-----------------+
+| pract_id | pract_title      | pract_author | submission_date |
++----------+------------------+--------------+-----------------+
+|        1 | 李拉拉           | MrSun        | 2018-07-24      |
+|        2 | 啦啦啦 MYsQL     | MrSun        | 2018-07-24      |
+|        3 | 啦啦啦 node      | MrSun        | 2018-07-24      |
+|        4 | 啦啦啦 小柴      | MrSun        | 2018-07-24      |
+|        6 | 萨科             | 胡比比       | 2018-07-24      |
+|        7 | 天鹅             | 胡比比       | 2018-07-24      |
+|        8 | 邬奎             | 贲作         | 2018-07-24      |
+|        9 | 秦巨改           | 史寺亦       | 2018-07-24      |
+|       10 | 龚扉持           | 缪瞑         | 2018-07-24      |
+|       11 | 俞然础           | 娄表诈       | 2018-07-24      |
++----------+------------------+--------------+-----------------+
+10 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;创建一个新的用户-和-用户授权&#34;&gt;创建一个新的用户 和 用户授权&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; CREATE USER &#39;username&#39;@&#39;host&#39; IDENTIFIED BY &#39;password&#39;;
+
+说明:username - 你将创建的用户名, host - 指定该用户在哪个主机上可以登陆,如果是本地用户可用localhost, 如果想让该用户可以从任意远程主机登陆,可以使用通配符%. password - 该用户的登陆密码,密码可以为空,如果为空则该用户可以不需要密码登陆服务器.
+
+例子: CREATE USER &#39;dog&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;
+CREATE USER &#39;pig&#39;@&#39;192.168.1.101_&#39; IDENDIFIED BY &#39;123456&#39;
+CREATE USER &#39;pig&#39;@&#39;%&#39; IDENTIFIED BY &#39;123456&#39;
+CREATE USER &#39;pig&#39;@&#39;%&#39; IDENTIFIED BY &#39;&#39;
+CREATE USER &#39;pig&#39;@&#39;%&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39;
+
+说明: privileges - 用户的操作权限,如SELECT , INSERT , UPDATE 等(详细列表见该文最后面).如果要授予所的权限则使用ALL.;databasename - 数据库名,tablename-表名,如果要授予该用户对所有数据库和表的相应操作权限则可用*表示, 如*.*.
+
+例子: GRANT SELECT, INSERT ON test.user TO &#39;pig&#39;@&#39;%&#39;;
+GRANT ALL ON *.* TO &#39;pig&#39;@&#39;%&#39;;
+
+注意:用以上命令授权的用户不能给其它用户授权,如果想让该用户可以授权,用以下命令:
+GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39; WITH GRANT OPTION;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;参考：&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/justdb/article/details/7964319&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;MySQL命令行创建用户与授权&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/adu198888/article/details/54092857&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;MySql 5.7中添加用户,新建数据库,用户授权,删除用户,修改密码&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jb51.net/article/31850.htm&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;MySQL创建用户与授权方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;node-链接数据库&#34;&gt;Node 链接数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const mysql = require(&#39;mysql&#39;)
+const randomName = require(&#39;chinese-random-name&#39;)
+
+// 创建数据库会话
+let conection = mysql.createConnection({
+  host: &#39;**.**.**.***&#39;,
+  user: &#39;*****&#39;, // 临时用户
+  port: &#39;3306&#39;,
+  password: &#39;***********&#39;, // 临时用户密码
+  database: &#39;PRACTTEST&#39;
+})
+
+conection.connect()
+
+let date = new Date().toLocaleDateString().split(&#39;/&#39;).join(&#39;-&#39;)
+
+// 查询当前数据表
+let sql = &#39;select * from pract_tbl&#39;
+// 插入数据
+let addSql = `insert into pract_tbl(pract_title,pract_author,submission_date)
+              VALUES
+              (?,?,?)`
+let addSqlData = [randomName.generate(), randomName.generate(), date]
+// 更新数据
+let modSql = &#39;UPDATE pract_tbl SET pract_title = ? WHERE pract_id = ?&#39;
+let modSqlParams = [&#39;胡比比&#39;,6]
+
+conection.query(addSql, addSqlData, (err, res,fields) =&amp;gt; {
+  if (err) throw err
+  console.log(&#39;--------------------------SELECT----------------------------&#39;);
+  console.log(&#39;INSERT ID&#39;, res);
+  console.log(&#39;------------------------------------------------------------\n\n&#39;);
+  upData()
+})
+
+function upData () {
+  conection.query(modSql, modSqlParams, (err, res) =&amp;gt; {
+    if (err) throw err
+    console.log(&#39;--------------------------SELECT----------------------------&#39;);
+    console.log(&#39;UPDATE affectedRows&#39;,res.affectedRows);
+    console.log(&#39;------------------------------------------------------------\n\n&#39;);
+    serch()
+  })
+}
+
+function serch () {
+  conection.query(sql, (err, res, fields) =&amp;gt; {
+    if (err) throw err
+    console.log(&#39;--------------------------SELECT----------------------------&#39;);
+    console.log(res);
+    console.log(&#39;------------------------------------------------------------\n\n&#39;);
+
+
+      // 结束会话
+      connection.release()
+  })
+}
+
+// conection.end()
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MiniPrograms</title>
+      <link>http://192.168.31.10:8000/2018/miniprograms/</link>
+      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/miniprograms/</guid>
+      <description>
+
+&lt;h1 id=&#34;小程序相关&#34;&gt;小程序相关&lt;/h1&gt;
+
+&lt;h2 id=&#34;原生小程序&#34;&gt;原生小程序&lt;/h2&gt;
+
+&lt;h3 id=&#34;小程序支持分包加载&#34;&gt;小程序支持分包加载&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/preload.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;分包预下载&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;小程序转换为百度小程序&#34;&gt;小程序转换为百度小程序&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;可以使用百度搬家工具进行转换 &lt;strong&gt;（不持支使用框架转换）&lt;/strong&gt; ,&lt;code&gt;wx2swan&lt;/code&gt;&lt;a href=&#34;https://github.com/yican008/wx2swan&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;swan小程序搬家工具&lt;/a&gt; &lt;strong&gt;(Node &amp;gt;= 8.0)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;去掉小程序组件button默认样式&#34;&gt;去掉小程序组件button默认样式&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;小程序中&lt;code&gt;button&lt;/code&gt;组建有默认的点击效果，有&lt;code&gt;border&lt;/code&gt;的话，需要去掉边框线的话需要这样写。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;/* 去掉button默认边框线 */
+button::after {
+  border: 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设置成禁用的话&lt;code&gt;disable=&amp;quot;{{disable}}&amp;quot;&lt;/code&gt;,&lt;code&gt;disable&lt;/code&gt;为 &lt;code&gt;true&lt;/code&gt; 的话，点击按钮的时候还是有默认点击效果，如果需求需要去掉默认点击效果，就需要设置成行内样式来生效。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- 行内样式 --&amp;gt;
+ &amp;lt;button class=&amp;quot;get-code&amp;quot; size=&amp;quot;mini&amp;quot;  bindtap=&amp;quot;getCode&amp;quot; disabled=&amp;quot;{{disabled}}&amp;quot; style=&amp;quot;color: #00a4ff; background-color: #fff;&amp;quot;&amp;gt;{{getCodeBtn}}&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;小程序限制&#34;&gt;小程序限制&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;小程序背景图片不支持相对路径的图片路径，需要设置为绝对路径。&lt;/li&gt;
+&lt;li&gt;小程序现在默认上传包大小为&lt;code&gt;2M&lt;/code&gt;（以后有可能变化），可以把图片资源单独打包成一个项目工程，然后在小程序中去引用图片的绝对路径。&lt;/li&gt;
+&lt;li&gt;小程序不支持&lt;code&gt;table&lt;/code&gt;组件和标签，如果需要的话可用&lt;code&gt;wxss(css)&lt;/code&gt;来写表格，然是涉及到表格跨行跨列的话不太好处理，可以换一种展现格式。简单来说就是小程序不支持复杂的表格。&lt;/li&gt;
+&lt;li&gt;小程序现在支持跳转外部&lt;code&gt;url&lt;/code&gt;，需要使用&lt;code&gt;web-view&lt;/code&gt;组建来实现，需要在微信公众平台登录，然后在设置里面&amp;ndash;&amp;gt;开发设置来绑定业务域名，并且在业务域名的跟目下放微信检验文件，只有放过之后，在域名跟目下能访问到这个检验文件，在绑定业务域名的时候才能绑定成功。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/捕获.PNG&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;小程序使用 &lt;code&gt;wx.request(OBJECT)&lt;/code&gt; 来发起请求时，需要在微信公众平台设置&amp;ndash;&amp;gt;开发设置里面设置服务器域名配置。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/fuwuqi.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;小程序不能操作BOM/DOM。&lt;/li&gt;
+&lt;li&gt;在 &lt;code&gt;{{}}&lt;/code&gt; 模板语法里不持支复杂计算，具体看小程序文档。&lt;/li&gt;
+&lt;li&gt;小程序文字不能上下居中，尤其是在一个些小的按钮里边。&lt;/li&gt;
+&lt;li&gt;小程序 canvas 在真机中不支持base64，画不到canvas里面。&lt;/li&gt;
+&lt;li&gt;小程序获取用户授权之后再能通过 wx.getUserInfo 来获取用户信息，可以通过 button 来发起用户授权。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;button class=&amp;quot;{{isLog ? &#39;&#39; : &#39;button2&#39;}}&amp;quot; open-type=&amp;quot;getUserInfo&amp;quot; size=&amp;quot;default&amp;quot; hover-class=&amp;quot;other-button-hover&amp;quot; bindgetuserinfo=&amp;quot;login&amp;quot; disabled=&amp;quot;{{loginDisabled}}&amp;quot;&amp;gt;用户授权&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;获取系统剪贴板的内容&#34;&gt;获取系统剪贴板的内容&lt;/h3&gt;
+
+&lt;p&gt;通过 &lt;code&gt;wx.getClipboardData&lt;/code&gt; 获取系统剪贴板的内容成功后会有一个默认的 &lt;code&gt;toast&lt;/code&gt;提示，内容为*内容已复制*，可以通过在 &lt;code&gt;success&lt;/code&gt;回调中重写&lt;code&gt;toast&lt;/code&gt;来修改这个默认提示内容。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;wx.setClipboardData({
+  data: &#39;www.baidu.com&#39;,
+  success(res) {
+    wx.getClipboardData({
+      success(res) {
+        wx.showToast({
+          title: &#39;去浏览器中打开&#39;,
+          icon: &#39;none&#39;,
+          duration: 5000
+        })
+      }
+    })
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;小程序的web-view组件&#34;&gt;小程序的web-view组件&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在小程序里需要跳转H5页面，需要增加web-view组件，通过 web-view 的 src 属性去跳转，可以在 web-view 页面里的 js 文件里动态的获取赋值。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;这个web-view 的 src 链接地址需要在微信公众平台后台 的业务域配置，并且要先在 根域名中放入微信检验文件，可以放多个不同的检验文件。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;在 web-view 组件中分享可以通过 options.webViewUrl 来获取 url 来连接。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// 分享获取
+/**
+ * 在分享出去需要携带的 url 上带有多参数的时候需要通过 encodeURIComponent 去编码，否则小程序在分享出去再次获取url 时候会只保留 第一个参数。
+*/
+onShareAppMessage (options) {
+  console.log(options.webViewUrl)
+  let path = &#39;/pages/web-view/web-view?url=&#39; + encodeURIComponent(options.webViewUrl)
+  return {
+    title: &#39;&#39;,
+    path: path
+  }
+},
+onLoad (options) {
+  console.log(&#39;options.url&#39;, options.url)
+  let path = decodeURIComponent(options.url)
+  console.log(&#39;path&#39;, path)
+  this.setData({
+    path: path
+  })
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;在小程序中的方法&#34;&gt;在小程序中的方法&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;小程序需要在页面内点击按钮分享的时候，使用button 组件来发起分享事件(onShareAppMessage)。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;button class=&amp;quot;flexCol&amp;quot; open-type=&amp;quot;share&amp;quot;&amp;gt;
+  &amp;lt;div class=&amp;quot;shareIcon weixinIcon&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+  &amp;lt;span class=&amp;quot;shareText&amp;quot;&amp;gt;分享给好友&amp;lt;/span&amp;gt;
+&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;小程序分享需要定义分享函数。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;onShareAppMessage (ops) {
+  console.log(&#39;分享&#39;, ops)
+  return {
+    title: &#39;xxxxx&#39;,
+    imageUrl: &#39;https://www.xxxxx.xx.png&#39;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;小程序需要通过 wx.login API 去换取 jsCode，通过jsCode 后台来获取openId(微信用户的唯一标识)。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;小程序中canvas 或者 通过 wx.createAnimation（动画）需要的是 px 或 number，这个时候就需要通过 wx.getSystemInfoSync 来获取系统信息，来动态的去计算所需的值。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let systemInfo = wx.getSystemInfoSync()
+// 用 系统的宽度 除 设计稿的 宽度  就是 2.48344 现在这个值
+let x = systemInfo.windowWidth / 2.48344
+let z = systemInfo.windowWidth / 3.75
+this.animation1.translate3d(-x, 0, z).step()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在小程序跳转到另一个页面，需要再次返回回来的时候，并且在当前页面需要获取从另一给页面获取相应的数据等，可以在最外定义 pageObj， 在当前页面初次 onLoad 时候 把 this 赋值给 pageObj，在另一个页面完成方法并且通过 wx.navigateBack 返回时，在 success 方法里 可以调用 app.pageObj.onLoad() 掉用前一个页面的方法。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const app = getApp();
+// index.js
+onLoad (options) {
+  app.pageObj = this
+}
+// login.js
+wx.navigateBack({
+  delta: 1,
+  success: function () {
+    app.pageObj.onLoad();
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;小程序富文本解析-wxparse&#34;&gt;小程序富文本解析 wxParse&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;.wxml 文件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;import src=&amp;quot;../../utils/wxParse/wxParse.wxml&amp;quot;/&amp;gt;
+
+&amp;lt;view class=&amp;quot;pbd-ct wxParse {{index == curDesc ? &#39;show&#39; : &#39;hidden&#39;}}&amp;quot; wx:for=&amp;quot;{{getGoodsDetailD.detailList}}&amp;quot; wx:key=&amp;quot;detailDesc&amp;quot;&amp;gt;
+   &amp;lt;block wx:if=&amp;quot;{{index==0}}&amp;quot;&amp;gt;
+    &amp;lt;template is=&amp;quot;wxParse&amp;quot; data=&amp;quot;{{wxParseData:article1.nodes}}&amp;quot;/&amp;gt;
+   &amp;lt;/block&amp;gt;
+    &amp;lt;block wx:elif=&amp;quot;{{index==1}}&amp;quot;&amp;gt;
+    &amp;lt;template is=&amp;quot;wxParse&amp;quot; data=&amp;quot;{{wxParseData:article2.nodes}}&amp;quot;/&amp;gt;
+   &amp;lt;/block&amp;gt;
+    &amp;lt;block wx:elif=&amp;quot;{{index==2}}&amp;quot;&amp;gt;
+    &amp;lt;template is=&amp;quot;wxParse&amp;quot; data=&amp;quot;{{wxParseData:article3.nodes}}&amp;quot;/&amp;gt;
+   &amp;lt;/block&amp;gt;
+   &amp;lt;block wx:else&amp;gt;
+    &amp;lt;template is=&amp;quot;wxParse&amp;quot; data=&amp;quot;{{wxParseData:article4.nodes}}&amp;quot;/&amp;gt;
+   &amp;lt;/block&amp;gt;
+&amp;lt;/view&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;对应 js 文件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var WxParse = require(&#39;../../utils/wxParse/wxParse.js&#39;) //引入富文本插件js部分
+
+Page({
+  onLoad () {
+    // 获取描述信息
+    getGoodsDetail () {
+      wx.request({
+        ...,
+        success: function (data) {
+          // 富文本插件一次只能编译一条数据，详情detailDesc有四条，故需要绑定4个的数据名
+          WxParse.wxParse(&#39;article1&#39;, &#39;html&#39;, res.data.rspBody.detailList[0].detailDesc.replace(/&amp;lt;o:p&amp;gt;/g, &amp;quot;&amp;quot;).replace(/&amp;lt;\/o:p&amp;gt;/g, &amp;quot;&amp;quot;).replace(/x0dx0a/g, &amp;quot;&amp;quot;).replace(/x0a/g, &amp;quot;&amp;quot;).replace(/【/g, &amp;quot;&amp;quot;), that, 0);
+          WxParse.wxParse(&#39;article2&#39;, &#39;html&#39;, res.data.rspBody.detailList[1].detailDesc.replace(/&amp;lt;o:p&amp;gt;/g, &amp;quot;&amp;quot;).replace(/&amp;lt;\/o:p&amp;gt;/g, &amp;quot;&amp;quot;).replace(/x0dx0a/g, &amp;quot;&amp;quot;).replace(/x0a/g, &amp;quot;&amp;quot;).replace(/【/g, &amp;quot;&amp;quot;).replace(/&amp;lt;u1:p&amp;gt;/g, &amp;quot;&amp;quot;), that, 0);
+          WxParse.wxParse(&#39;article3&#39;, &#39;html&#39;, res.data.rspBody.detailList[2].detailDesc.replace(/&amp;lt;o:p&amp;gt;/g, &amp;quot;&amp;quot;).replace(/&amp;lt;\/o:p&amp;gt;/g, &amp;quot;&amp;quot;).replace(/x0dx0a/g, &amp;quot;&amp;quot;).replace(/x0a/g, &amp;quot;&amp;quot;).replace(/【/g, &amp;quot;&amp;quot;).replace(/&amp;lt;u1:p&amp;gt;/g, &amp;quot;&amp;quot;), that, 0);
+          WxParse.wxParse(&#39;article4&#39;, &#39;html&#39;, res.data.rspBody.detailList[3].detailDesc.replace(/&amp;lt;o:p&amp;gt;/g, &amp;quot;&amp;quot;).replace(/&amp;lt;\/o:p&amp;gt;/g, &amp;quot;&amp;quot;).replace(/x0dx0a/g, &amp;quot;&amp;quot;).replace(/x0a/g, &amp;quot;&amp;quot;).replace(/【/g, &amp;quot;&amp;quot;).replace(/&amp;lt;u1:p&amp;gt;/g, &amp;quot;&amp;quot;), that, 0);
+        }
+      })
+    }
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;对应的 .wxss 样式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;/*引入富文本插件wxss部分*/
+@import &amp;quot;../../utils/wxParse/wxParse.wxss&amp;quot;;
+
+/*富文本插件样式修改*/
+.wxParse-img{
+    width:100% !important;
+}
+/*富文本插件编译后，需设置wxParse-pre类才能对富文本原始标签pre样式起作用*/
+.pbd-ct .wxParse-pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/*富文本插件编译后，需设置wxParse-table类才能对富文本原始标签table样式起作用*/
+.pbd-ct  .wxParse-table {
+     width: 100% !important;
+     border-collapse: collapse;
+     border-spacing: 0;
+}
+.pbd-ct  .wxParse-tr {
+    border-right:0;
+    border-bottom:0;
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.wxParse-th,.wxParse-td {
+      border-left:0;
+    vertical-align: inherit;
+}
+.wxParse-td {
+    display: table-cell;
+}
+.wxParse-td:first-child{
+    margin-left:20pt;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;具体文档可以看富文本解析 &lt;a href=&#34;https://github.com/icindy/wxParse&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;适用于 Mpvue 的微信小程序富文本解析自定义组件 &lt;a href=&#34;https://github.com/F-loat/mpvue-wxParse&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;小程序指定页面二维码&#34;&gt;小程序指定页面二维码&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;可以看小程序文档获取二维码api文档。&lt;/li&gt;
+&lt;li&gt;或者 &lt;em&gt;使用 Vue CLI 3 来写的&lt;/em&gt; &lt;a href=&#34;https://github.com/magicLaLa/GetWxCode&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;获取微信小程序指定页面二维码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;mpvue小程序开发框架-美团&#34;&gt;MPVUE小程序开发框架（美团）&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://mpvue.com/mpvue/quickstart/#4-2018723&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;MPVUE支持分包&lt;/a&gt;，找不到问题可以到&lt;a href=&#34;https://github.com/Meituan-Dianping/mpvue/issues&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Issues&lt;/a&gt;中寻找。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;获取微信小程序实例，可以通过&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;this.$root.$mp || this.$mp // 来获取
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;小程序中弹窗出来，不让页面进行滚动，可以在 遮罩 和 弹窗上增加 &lt;code&gt;catchtouchmove&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;!-- 遮罩 --&amp;gt;
+&amp;lt;div v-if=&amp;quot;isShowModel&amp;quot; class=&amp;quot;model&amp;quot; catchtouchmove=&amp;quot;true&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;有时候需要和 小程序的生命周期混用。&lt;/li&gt;
+&lt;li&gt;不支持在组件上绑定事件，例如：&lt;code&gt;@click&lt;/code&gt;。如果要子组件中出发父组件事件，使用&lt;code&gt;vuex&lt;/code&gt;来统一管理。&lt;/li&gt;
+&lt;li&gt;不支持使用&lt;code&gt;mapState mapGetters mapActions mapMutations&lt;/code&gt; 辅助函数。可以在每个&lt;code&gt;.vue&lt;/code&gt;模板中单独引用&lt;code&gt;import store from &#39;./store/stroe.js&#39;&lt;/code&gt;。然后通过使用 &lt;code&gt;store.commit(...)/store.dispatch(...)&lt;/code&gt;来触发事件。&lt;/li&gt;
+&lt;li&gt;可以在&lt;code&gt;main.js&lt;/code&gt;里面设置&lt;code&gt;vue.prototype.store = store&lt;/code&gt;，就可以使用辅助函数了。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// src =&amp;gt; store =&amp;gt; index.js
+import Vue from &#39;vue&#39;
+import Vuex from &#39;vuex&#39;
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    isAn: 1, // 轮播切换
+    isShowModel: false, // 是否展示遮罩
+    isShareBox: false, // 是否展示分享弹窗
+    systemInfo: &#39;&#39;, // 系统信息
+    pageObj: &#39;&#39;, // 页面实例
+    popupFunObj: { // 弹窗两个方法
+      comfirm: &#39;&#39;,
+      cancel: &#39;&#39;
+    },
+    isLogin: false, // 是否登录
+    localName: &#39;&#39; // 登录地点
+  },
+  mutations: {
+    change: (state) =&amp;gt; {
+      console.log(&#39;mutations change&#39;)
+      const obj = state
+      obj.isAn++
+    },
+    decrement: (state) =&amp;gt; {
+      const obj = state
+      obj.count -= 1
+    }
+  }
+})
+
+export default store
+
+// src =&amp;gt; main.js
+import Vue from &#39;vue&#39;
+import App from &#39;./App&#39;
+import store from &#39;@/store/index&#39;
+
+Vue.config.productionTip = false
+App.mpType = &#39;app&#39;
+
+Vue.prototype.$store = store
+
+const app = new Vue(App)
+app.$mount()
+
+// src =&amp;gt; index =&amp;gt; index.vue
+import { mapState } from &#39;vuex&#39;
+
+export default {
+  computed: {
+    ...mapState([&#39;isShowModel&#39;, &#39;isShareBox&#39;])
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;因为小程序不支持在模板语法里&lt;code&gt;{{}}&lt;/code&gt; 复杂的计算，所以在 mpvue 中也不能进行复杂的计算。&lt;/li&gt;
+&lt;li&gt;在原生小程序中访问下程序实例是通过&lt;code&gt;getApp()&lt;/code&gt;来获取定义在&lt;code&gt;app.js中的函数和自定义的属性&lt;/code&gt;，在&lt;code&gt;mpVue&lt;/code&gt;中在&lt;code&gt;created/mounted/onLoad...&lt;/code&gt;中调用&lt;code&gt;getApp()&lt;/code&gt;获取不到在&lt;code&gt;app.js&lt;/code&gt;中自定义的一些属性，在&lt;code&gt;mpVue&lt;/code&gt;中推荐使用&lt;code&gt;VUEX&lt;/code&gt;来集中管理公共的自定义的一些属性和方法。&lt;/li&gt;
+&lt;li&gt;最新版的 app.json 是单独放到 src 下面，不是在 main.js 里面去写自动生成页面路径添加到 pages 里面，每一个 page 也是单独把 main.json 放到单独的页面文件下。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/APPjson.png&#34; alt=&#34;Alt text&#34; /&gt;
+&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/pagejson.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;可以写背景图片，把背景图片放到 &lt;code&gt;src =&amp;gt; assets =&amp;gt; images&lt;/code&gt; 下。然后在 scss 中 通过 &lt;code&gt;background: url(~@/assets/images/top.png) no-repeat;&lt;/code&gt;来使用，然后需要在 &lt;code&gt;build =&amp;gt; webpack.base.conf.js&lt;/code&gt; 修改 module。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/imgimg.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;也可以使用精灵图（雪碧图）来写， 具体代码如下:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;webpack.base.conf.js&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// 自动雪碧图
+const spritesmith = require(&#39;webpack-spritesmith&#39;)
+
+// 雪碧图位置
+const SPRITES = path.resolve(__dirname, &#39;../src/sprites/&#39;)
+const SPRITES_SUB = path.resolve(__dirname, &#39;../src/sprites/*&#39;)
+
+// 雪碧图方法
+function generateSprites() {
+  return glob.sync(SPRITES_SUB).map(filenames =&amp;gt; {
+    let pathName = filenames.substring(SPRITES.length + 1)
+
+    return new spritesmith({
+      src: {
+        cwd: path.resolve(SPRITES, pathName),
+        glob: &#39;*.png&#39;
+      },
+      target: {
+        image: path.resolve(__dirname, &#39;../src/sprite-generate/sprite-&#39; + pathName + &#39;.png&#39;),
+        css: [
+          [
+            path.resolve(__dirname, &#39;../src/sprite-generate/_sprite-&#39; + pathName + &#39;.scss&#39;),
+            {
+              format: &#39;handlebars_based_template&#39;
+            }
+          ]
+        ]
+      },
+      apiOptions: {
+        cssImageRef: &#39;~sprite-&#39; + pathName + &#39;.png&#39;
+      },
+      customTemplates: {
+        handlebars_based_template: path.resolve(__dirname, &#39;../scss.template.handlebars&#39;)
+      },
+      spritesmithOptions: {
+        padding: 6
+      }
+    })
+
+  })
+}
+
+module.exports = {
+  ...,
+  resolve: {
+    extensions: [&#39;.js&#39;, &#39;.vue&#39;, &#39;.json&#39;],
+    modules: [
+      resolve(&#39;src&#39;),
+      resolve(&#39;node_modules&#39;),
+      resolve(&#39;src/sprite-generate&#39;)
+    ],
+    alias: {
+      &#39;vue&#39;: &#39;mpvue&#39;,
+      &#39;@&#39;: resolve(&#39;src&#39;)
+    },
+    symlinks: false,
+    aliasFields: [&#39;mpvue&#39;, &#39;weapp&#39;, &#39;browser&#39;],
+    mainFields: [&#39;browser&#39;, &#39;module&#39;, &#39;main&#39;]
+  },
+  plugins: [
+    ............,
+    ...generateSprites()
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;需要在 &lt;code&gt;src =&amp;gt; sprite-generate | sprites&lt;/code&gt; 新建这两个文件夹。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/generateSprites.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;动画切换效果&#34;&gt;动画切换效果&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;动画效果如下：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/ic.gif&#34; alt=&#34;图片&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;模板.vue&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vue&#34;&gt;&amp;lt;template&amp;gt;
+  &amp;lt;div class=&amp;quot;head&amp;quot;&amp;gt;
+    &amp;lt;!-- 卡片切换 --&amp;gt;
+    &amp;lt;div class=&amp;quot;cardBox&amp;quot;&amp;gt;
+      &amp;lt;!-- 左按钮 --&amp;gt;
+      &amp;lt;div class=&amp;quot;iconBtn leftBtn&amp;quot; data-isAct=&amp;quot;btn&amp;quot; @click=&amp;quot;change&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;!-- 右按钮 --&amp;gt;
+      &amp;lt;div class=&amp;quot;iconBtn rightBtn&amp;quot; data-isAct=&amp;quot;btn&amp;quot; @click=&amp;quot;change&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;!-- 图片 --&amp;gt;
+      &amp;lt;div class=&amp;quot;picBox&amp;quot;&amp;gt;
+        &amp;lt;div @click=&amp;quot;change&amp;quot; :animation=&amp;quot;isAn%2 !== 0 ? animationData : animationData2&amp;quot; :data-isAct=&amp;quot;isAn%2 !== 0 ? &#39;isActive&#39; : &#39;btn&#39;&amp;quot; class=&amp;quot;picIcon bigMac&amp;quot; :class=&amp;quot;isAn%2 !== 0 ? &#39;isActive&#39; : &#39;&#39;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+        &amp;lt;div @click=&amp;quot;change&amp;quot; :animation=&amp;quot;isAn%2 === 0 ? animationData : animationData2&amp;quot; :data-isAct=&amp;quot;isAn%2 === 0 ? &#39;isActive&#39; : &#39;btn&#39;&amp;quot; class=&amp;quot;picIcon youngIcon&amp;quot; :class=&amp;quot;isAn%2 === 0 ? &#39;isActive&#39; : &#39;&#39;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+import { mapState, mapMutations } from &#39;vuex&#39;
+
+export default {
+  data () {
+    return {
+      animation1: &#39;&#39;,
+      animation2: &#39;&#39;,
+      animationData: {},
+      animationData2: {}
+    }
+  },
+  computed: {
+    ...mapState([&#39;isAn&#39;, &#39;systemInfo&#39;])
+  },
+  methods: {
+    ...mapMutations([&#39;change&#39;])
+  },
+  mounted () {
+    console.log(&#39;systemInfo&#39;, this.systemInfo)
+    let x = this.systemInfo.windowWidth / 2.48344
+    let z = this.systemInfo.windowWidth / 3.75
+    let options = {
+      duration: 1000,
+      timingFunction: &#39;ease&#39;
+    }
+    this.animation1 = wx.createAnimation(options)
+    this.animation2 = wx.createAnimation(options)
+    this.animation1.translate3d(-x, 0, z).step()
+    this.animation2.translate3d(0, 0, 0).step()
+    this.animationData = this.animation1.export()
+    this.animationData2 = this.animation2.export()
+  }
+}
+&amp;lt;/script&amp;gt;
+
+&amp;lt;style lang=&amp;quot;scss&amp;quot; scoped&amp;gt;
+.cardBox {
+  width: 100%;
+  height: 224px;
+  padding: 0 32px;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  .iconBtn {
+    width: 30px;
+    height: 60px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+  }
+
+  .leftBtn {
+    background: url(~@/assets/images/leftBtn.png) no-repeat;
+    background-size: 100% 100%;
+    left: 32px;
+  }
+  .rightBtn {
+    background: url(~@/assets/images/rightBtn.png) no-repeat;
+    background-size: 100% 100%;
+    right: 32px;
+  }
+
+  .picBox {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+    perspective: 1000px;
+
+    .picIcon {
+      width: 281px;
+      height: 132px;
+      position: absolute;
+      top: 50%;
+      margin-top: -67px;
+      right: 20px;
+    }
+
+    .bigMac {
+      background: url(~@/assets/images/bigMac.png) no-repeat;
+      background-size: 100% 100%;
+      z-index: 10;
+    }
+    .youngIcon {
+      background: url(~@/assets/images/youngIcon.png) no-repeat;
+      background-size: 100% 100%;
+      z-index: 5;
+    }
+
+    .isActive {
+      box-shadow: 0px 0px 21px 5px
+        rgba(228, 229, 245, 0.8);
+      border-radius: 16px;
+      z-index: 15;
+    }
+  }
+}
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// store =&amp;gt; index.js
+// https://vuex.vuejs.org/zh-cn/intro.html
+// make sure to call Vue.use(Vuex) if using a module system
+import Vue from &#39;vue&#39;
+import Vuex from &#39;vuex&#39;
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    isAn: 1, // 轮播切换
+    isShowModel: false, // 是否展示遮罩
+    systemInfo: &#39;&#39; // 系统信息
+  },
+  mutations: {
+    change: (state, e) =&amp;gt; {
+      const obj = state
+      if (!!e.mp.currentTarget.dataset.isact &amp;amp;&amp;amp; e.mp.currentTarget.dataset.isact !== &#39;isActive&#39;) {
+        obj.isAn++
+        if (obj.isAn % 2 !== 0) {
+          obj.webViewUrl = &#39;https://www.google.com&#39;
+        } if (obj.isAn % 2 === 0) {
+          obj.webViewUrl = &#39;https://www.baidu.com&#39;
+        }
+      }
+    }
+  }
+})
+
+export default store
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MPVUE&lt;/strong&gt; 现在也支持 &lt;a href=&#34;http://smartprogram.baidu.com/mappconsole/main/login&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;百度小程序&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;okam小程序开发框架-百度&#34;&gt;OKAM小程序开发框架（百度）&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ecomfe.github.io/okam/#/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;奥卡姆，一个面向小程序开发的开发框架，提供类_Vue_的开发体验&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;小程序支持&#34;&gt;小程序支持&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;√ &lt;a href=&#34;https://smartprogram.baidu.com/docs/introduction/enter_application/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;百度小程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;√ &lt;a href=&#34;https://developers.weixin.qq.com/miniprogram/dev/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;微信小程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;√ &lt;a href=&#34;https://docs.alipay.com/mini/developer/getting-started&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;支付宝小程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;√ &lt;a href=&#34;https://developer.toutiao.com/docs/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;头条小程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;√ &lt;a href=&#34;https://www.quickapp.cn/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;快应用&lt;/a&gt; &lt;code&gt;初步支持，待完善&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;megalo小程序开发框架-网易&#34;&gt;Megalo小程序开发框架（网易）&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Megalo 是基于 Vue（Vue@2.5.16） 的小程序开发框架，让开发者可以用 Vue 的开发方式开发小程序应用。Megalo 是为了跨 H5 和小程序两端的应用提供一个高效的解决方案，只需要少量改动即可完成 H5 和小程序之间的代码迁移。&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Megalo 目前支持微信小程序，支付宝小程序，百度智能小程序。&lt;a href=&#34;https://megalojs.org/#/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;taro小程序开发框架-京东&#34;&gt;Taro小程序开发框架（京东）&lt;/h2&gt;
+
+&lt;p&gt;Taro 是一套遵循 React 语法规范的 多端开发 解决方案。现如今市面上端的形态多种多样，Web、React-Native、微信小程序等各种端大行其道，当业务要求同时在不同的端都要求有所表现的时候，针对不同的端去编写多套代码的成本显然非常高，这时候只编写一套代码就能够适配到多端的能力就显得极为需要。&lt;/p&gt;
+
+&lt;p&gt;使用 Taro，我们可以只书写一套代码，再通过 Taro 的编译工具，将源代码分别编译出可以在不同端（微信小程序、H5、RN 等）运行的代码。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://nervjs.github.io/taro/docs/README.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;mpx-滴滴&#34;&gt;MPX (滴滴)&lt;/h2&gt;
+
+&lt;p&gt;Mpx是一款致力于提高小程序开发体验的增强型小程序框架。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://didi.github.io/mpx/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>箭头函数this的指向</title>
+      <link>http://192.168.31.10:8000/2018/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E6%8C%87%E5%90%91/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E6%8C%87%E5%90%91/</guid>
+      <description>
+
+&lt;h1 id=&#34;箭头函数this的指向&#34;&gt;箭头函数this的指向&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;介绍&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;箭头函数this的定义：箭头函数中的this是在定义函数的时候绑定，而不是在执行函数的时候绑定。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;一、 何为定义时绑定（看下面的例子）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let x = 11;
+let obj = {
+  x: 22,
+  say: function () {
+    console.log(this.x)
+  }
+}
+obj.say() // 22
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一般的定义函数跟我们的理解是一样的，运行的时候决定this的指向，我们可以知道当运行obj.say()时候，this指向的是obj这个对象。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let x = 11;
+let obj = {
+  x: 22,
+  say: () =&amp;gt; {
+    console.log(this.x)
+  }
+}
+obj.say() // 11
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个this指向的是外部的 &lt;code&gt;x = 11&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;所谓的定义时候绑定， *就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值*，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而obj的父执行上下文就是window，因此这里的this.x实际上表示的是window.x，因此输出的是11。(this只有在函数被调用，或者通过构造函数new Object()的形式才会有this)。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;类似的还有：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// 不使用箭头函数
+let a = 11;
+function test () {
+  this.a = 22;
+  let b = function () {
+    console.log(this.a)
+  }
+  b()
+}
+new test() //  console.log(this.a) 11
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// 使用箭头函数
+let a = 11;
+function test () {
+  this.a = 22;
+  let b = () =&amp;gt; {
+    console.log(this.a)
+  }
+  b()
+}
+new test() //  console.log(this.a) 22
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;箭头函数中的&lt;code&gt;this&lt;/code&gt;*就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值*。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;二、注意&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;箭头函数作为函数的一种形式,对于this的处理和普通函数有所区别,其没有自己的this上下文,也就是说通过bind/call/apply函数方法设置this值时无效的，会被忽略。&lt;/li&gt;
+&lt;li&gt;因为箭头函数没有自己的this上下文，那么当它作为对象的方法函数运行时，this并不指向这个对象。&lt;/li&gt;
+&lt;li&gt;箭头函数中的this是指向外部作用域中的this。&lt;/li&gt;
+&lt;li&gt;你可以认为箭头函数的this和调用者无关，只和其定义时所在的上下文相关。&lt;/li&gt;
+&lt;li&gt;箭头函数没有&lt;code&gt;this&lt;/code&gt;，所以也就不能用作构造函数。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+&lt;li&gt;箭头函数转换成ES5&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// ES6
+function foo () {
+  setTimeout(() =&amp;gt; {
+    console.log(&#39;id&#39;, this.id)
+  }, 100)
+}
+
+// ES5
+function () {
+  var _this = this;
+  setTimeout(function () {
+    console.log(&#39;id&#39;, _this.id)
+  }, 100)
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ES6的一些方法和技巧</title>
+      <link>http://192.168.31.10:8000/2018/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7/</guid>
+      <description>
+
+&lt;h1 id=&#34;es6的一些方法和技巧&#34;&gt;ES6的一些方法和技巧&lt;/h1&gt;
+
+&lt;h2 id=&#34;声明变量&#34;&gt;声明变量&lt;/h2&gt;
+
+&lt;h3 id=&#34;用let不用var&#34;&gt;用let不用var&lt;/h3&gt;
+
+&lt;p&gt;ES6之前我们用var声明一个变量，但是它有很多弊病：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;因为没有块级作用域，很容易声明全局变量&lt;/li&gt;
+&lt;li&gt;变量提升&lt;/li&gt;
+&lt;li&gt;可以重复声明 还记得这道面试题吗？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var a = [];
+for (var i = 0; i &amp;lt; 10; i++) {
+  a[i] = function () {
+    console.log(i);
+  };
+}
+a[6](); // 10
+a[7](); // 10
+a[8](); // 10
+a[9](); // 10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以要使用 let，可以避免 使用 var 来声明所带来的一些问题。&lt;/p&gt;
+
+&lt;h3 id=&#34;const-和-let&#34;&gt;const 和 let&lt;/h3&gt;
+
+&lt;p&gt;const 和 let 的区别就是 使用 const 来声明的变量，称为 &lt;em&gt;常量&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;更好的代码语义化，哪个可以修改，哪个不可以修改等等&lt;/li&gt;
+&lt;li&gt;函数声明应该使用 const 来声明&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;字符串&#34;&gt;字符串&lt;/h2&gt;
+
+&lt;p&gt;不要使用 &amp;ldquo;双引号&amp;rdquo;，一律使用 &amp;lsquo;单引号&amp;rsquo; 或者 `模板字符串`&lt;/p&gt;
+
+&lt;p&gt;模板字符串可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// low
+const a = &amp;quot;123&amp;quot;;
+let b = &amp;quot;a&amp;quot; + b + &amp;quot;c&amp;quot;;
+
+// good
+const str = &#39;456&#39;
+let arrStr = `123${ 变量/JavaScript 表达式 }456`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之前判断字符串是否在另一个字符串中存在，用的是 &lt;code&gt;indexOf&lt;/code&gt; 来判断，在 ES6 中提供了三个新的方法:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;includes()：返回布尔值，表示是否找到了参数字符串。&lt;/li&gt;
+&lt;li&gt;startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。&lt;/li&gt;
+&lt;li&gt;endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let s = &#39;Hello world!&#39;;
+
+s.startsWith(&#39;Hello&#39;) // true
+s.endsWith(&#39;!&#39;) // true
+s.includes(&#39;o&#39;) // true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这三个方法都支持第二个参数，表示开始搜索的位置。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let s = &#39;Hello world!&#39;;
+
+s.startsWith(&#39;world&#39;, 6) // true
+s.endsWith(&#39;Hello&#39;, 5) // true
+s.includes(&#39;Hello&#39;, 6) // fals
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;repeat()方法返回一个新字符串，表示将原字符串重复n次。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;&#39;-&#39;.repeat(10) // &#39;----------&#39;
+// 可以在 console.log() 里面来使用，区分上下
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;结构赋值&#34;&gt;结构赋值&lt;/h2&gt;
+
+&lt;h3 id=&#34;变量赋值&#34;&gt;变量赋值&lt;/h3&gt;
+
+&lt;p&gt;在用到数组成员对变量赋值时，尽量使用解构赋值。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const arr = [1, 2, 3, 4];
+
+// low
+const first = arr[0];
+const second = arr[1];
+
+// good
+const [first, second] = arr;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;函数参数为对象时&#34;&gt;函数参数为对象时&lt;/h3&gt;
+
+&lt;p&gt;函数的参数如果是对象的成员，优先使用解构赋值。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// low
+function getFullName(user) {
+  const firstName = user.firstName;
+  const lastName = user.lastName;
+}
+
+// good
+function getFullName({ firstName, lastName }) {
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果函数返回多个值，优先使用对象的解构赋值，而不是数组的解构赋值。这样便于以后添加返回值，以及更改返回值的顺序。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// low
+function processInput(input) {
+  return [left, right, top, bottom];
+}
+
+// good
+function processInput(input) {
+  return { left, right, top, bottom };
+}
+
+const { left, right } = processInput(input);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;对象object&#34;&gt;对象Object&lt;/h2&gt;
+
+&lt;h3 id=&#34;对象属性名是动态时-可以使用-属性表达式&#34;&gt;对象属性名是动态时，可以使用 属性表达式&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// low
+const obj = {
+  id: 5,
+  name: &#39;San Francisco&#39;,
+};
+obj[getKey(&#39;enabled&#39;)] = true;
+
+// good
+const obj = {
+  id: 5,
+  name: &#39;San Francisco&#39;,
+
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;再简洁一点&#34;&gt;再简洁一点&lt;/h3&gt;
+
+&lt;p&gt;在定义对象时，能简洁表达尽量简洁表达：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let name = &#39;John&#39;;
+
+// low
+let obj = {
+  name: name,
+  age: 18,
+  sleep: function () {
+    console.log(`sleep`)
+  }
+}
+
+// good
+let obj = {
+  name,
+  age: 18,
+  sleep: function () {
+    console.log(`sleep`)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;简单的键值对优先map&#34;&gt;简单的键值对优先Map&lt;/h3&gt;
+
+&lt;p&gt;如果只是简单的key: value结构，建议优先使用Map，因为Map提供方便的遍历机制。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let map = new Map(obj);
+// 遍历key值
+for (let key of map.keys()) {
+  console.log(key);
+}
+// 遍历value值
+for (let value of map.values()) {
+  console.log(value);
+}
+// 遍历key和value值
+for (let item of map.entries()) {
+  console.log(item[0], item[1]);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;数组&#34;&gt;数组&lt;/h2&gt;
+
+&lt;h3 id=&#34;扩展运算符&#34;&gt;&amp;hellip; 扩展运算符&lt;/h3&gt;
+
+&lt;p&gt;使用扩展运算符（&amp;hellip;）拷贝数组：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// 还在用for i 你就太low了
+const len = items.length;
+const itemsCopy = [];
+let i;
+
+for (i = 0; i &amp;lt; len; i++) {
+  itemsCopy[i] = items[i];
+}
+
+// cool !
+const itemsCopy = [...items];
+
+// 可以结合 Set构造函数 来对数组进行去重
+let a = [...new Set([1,1,2,5,8,3,2,1])]
+// [1, 2, 5, 8, 3]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;类数组&#34;&gt;类数组&lt;/h3&gt;
+
+&lt;p&gt;可以用 &lt;code&gt;Array.from&lt;/code&gt; 将类似数组的对象转为数组：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const arr = Array.from(arguments);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;set-和-map&#34;&gt;Set 和 Map&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Set 类似于数组，但数组可以允许元素重复，Set 不允许元素重复&lt;/li&gt;
+&lt;li&gt;Map 类似于对象，但普通对象的 key 必须是字符串或者数字，而 Map 的 key 可以是任何数据类型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;注：Set 和 Map 都是 ES6 中新增的数据结构，是对当前 JS 数组和对象这两种重要数据结构的扩展&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;set&#34;&gt;Set&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Set 实例不允许元素有重复，可以通过以下示例证明。可以通过一个数组初始化一个 Set 实例，或者通过add添加元素，元素不能重复，重复的会被忽略。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 例1
+const set = new Set([1, 2, 3, 4, 4]);
+console.log(set) // Set(4) {1, 2, 3, 4}
+
+// 例2
+const set = new Set();
+[2, 3, 5, 4, 5, 8, 8].forEach(item =&amp;gt; set.add(item));
+for (let item of set) {
+  console.log(item);
+}
+// 2 3 5 4 8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Set 实例的属性和方法有：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;size&lt;/code&gt;：获取元素数量。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;add(value)&lt;/code&gt;：添加元素，返回 Set 实例本身。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete(value)&lt;/code&gt;：删除元素，返回一个布尔值，表示删除是否成功。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;has(value)&lt;/code&gt;：返回一个布尔值，表示该值是否是 Set 实例的元素。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;clear()&lt;/code&gt;：清除所有元素，没有返回值。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const s = new Set();
+s.add(1).add(2).add(2); // 添加元素
+
+s.size // 2
+
+s.has(1) // true
+s.has(2) // true
+s.has(3) // false
+
+s.delete(2);
+s.has(2) // false
+
+s.clear();
+console.log(s);  // Set(0) {}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Set 实例的遍历，可使用如下方法&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;keys()&lt;/code&gt;：返回键名的遍历器。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;values()&lt;/code&gt;：返回键值的遍历器。不过由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以&lt;code&gt;keys()&lt;/code&gt;和&lt;code&gt;values()&lt;/code&gt;返回结果一致。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;entries()&lt;/code&gt;：返回键值对的遍历器。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;forEach()&lt;/code&gt;：使用回调函数遍历每个成员。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let set = new Set([&#39;aaa&#39;, &#39;bbb&#39;, &#39;ccc&#39;]);
+
+for (let item of set.keys()) {
+  console.log(item);
+}
+// aaa
+// bbb
+// ccc
+
+for (let item of set.values()) {
+  console.log(item);
+}
+// aaa
+// bbb
+// ccc
+
+for (let item of set.entries()) {
+  console.log(item);
+}
+// [&amp;quot;aaa&amp;quot;, &amp;quot;aaa&amp;quot;]
+// [&amp;quot;bbb&amp;quot;, &amp;quot;bbb&amp;quot;]
+// [&amp;quot;ccc&amp;quot;, &amp;quot;ccc&amp;quot;]
+
+set.forEach((value, key) =&amp;gt; console.log(key + &#39; : &#39; + value))
+// aaa : aaa
+// bbb : bbb
+// ccc : ccc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;map&#34;&gt;Map&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Map 的用法和普通对象基本一致，先看一下它能用非字符串或者数字作为 key 的特性。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const map = new Map();
+const obj = {p: &#39;Hello World&#39;};
+
+map.set(obj, &#39;OK&#39;)
+map.get(obj) // &amp;quot;OK&amp;quot;
+
+map.has(obj) // true
+map.delete(obj) // true
+map.has(obj) // false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Map 实例的属性和方法如下：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;size&lt;/code&gt;：获取成员的数量&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;set&lt;/code&gt;：设置成员 key 和 value&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;get&lt;/code&gt;：获取成员属性值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;has&lt;/code&gt;：判断成员是否存在&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delete&lt;/code&gt;：删除成员&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;clear&lt;/code&gt;：清空所有&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const map = new Map();
+map.set(&#39;aaa&#39;, 100);
+map.set(&#39;bbb&#39;, 200);
+
+map.size // 2
+
+map.get(&#39;aaa&#39;) // 100
+
+map.has(&#39;aaa&#39;) // true
+
+map.delete(&#39;aaa&#39;)
+map.has(&#39;aaa&#39;) // false
+
+map.clear()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Map 实例的遍历方法有：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;keys()&lt;/code&gt;：返回键名的遍历器。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;values()&lt;/code&gt;：返回键值的遍历器。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;entries()&lt;/code&gt;：返回所有成员的遍历器。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;forEach()&lt;/code&gt;：遍历 Map 的所有成员。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const map = new Map();
+map.set(&#39;aaa&#39;, 100);
+map.set(&#39;bbb&#39;, 200);
+
+for (let key of map.keys()) {
+  console.log(key);
+}
+// &amp;quot;aaa&amp;quot;
+// &amp;quot;bbb&amp;quot;
+
+for (let value of map.values()) {
+  console.log(value);
+}
+// 100
+// 200
+
+for (let item of map.entries()) {
+  console.log(item[0], item[1]);
+}
+// aaa 100
+// bbb 200
+
+// 或者
+for (let [key, value] of map.entries()) {
+  console.log(key, value);
+}
+// aaa 100
+// bbb 200
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;函数&#34;&gt;函数&lt;/h2&gt;
+
+&lt;h3 id=&#34;参数设置默认值&#34;&gt;参数设置默认值&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// low
+function add (x, y) {
+  x = x || 0;
+  y = y || 0;
+}
+
+// good
+function add (x, y = &#39;1&#39;) {
+  return x + y
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;rest参数-变量名&#34;&gt;rest参数 (&amp;hellip;变量名)&lt;/h3&gt;
+
+&lt;p&gt;ES6 引入 rest 参数（形式为&amp;hellip;变量名），用于获取函数的多余参数，这样就不需要使用arguments对象了。rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// low
+function sortNum() {
+  let args = Array.prototype.slice.call(arguments);
+  return args.sort()
+}
+
+// good
+function sortNum(...args) {
+  return args.sort()
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;箭头函数&#34;&gt;箭头函数 =&amp;gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;立即执行函数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;(() =&amp;gt; {
+  ...
+  console.log(&#39;***&#39;)
+})()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;可以使代码变得简洁优雅&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// low
+[1, 2, 3].map(function (x) {
+  return x * x;
+});
+
+// cool !
+[1, 2, 3].map(x =&amp;gt; x * x);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;箭头函数只有一行语句，且不需要返回值，可以采用下面的写法，就不用写大括号了&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;let fn = () =&amp;gt; void doesNotReturn();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;箭头函数可以与变量解构结合使用&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const full = ({ first, last }) =&amp;gt; first + &#39; &#39; + last;
+
+// 等同于
+function full(person) {
+  return person.first + &#39; &#39; + person.last;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;async-await&#34;&gt;async、await&lt;/h2&gt;
+
+&lt;p&gt;async 函数返回的是一个 Promise 对象，可以在后面&lt;code&gt;.then((res)) =&amp;gt; {})&lt;/code&gt;来添加回调函数，内部遇到&lt;code&gt;await&lt;/code&gt;会等待返回结果，&lt;code&gt;await&lt;/code&gt;后面是一个 &lt;code&gt;Promise&lt;/code&gt; 对象，如果不是，会被转成一个立即resolve的 Promise 对象。&lt;/p&gt;
+
+&lt;p&gt;async 函数内部报错时，可以被&lt;code&gt;.catch()&lt;/code&gt;捕获。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;async function add(reqBody) {
+  let data = await fetch({
+    url: &#39;...&#39;,
+    data: {
+      reqBody: reqBody
+    }
+  })
+  return data
+}
+
+add({a, b}).then(res =&amp;gt; {
+  console.log(res)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;简洁直观的class语法&#34;&gt;简洁直观的class语法&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// low
+function Query(arr1, arr2) {
+  this._arr = [...arr1, ...arr2] // 合并数组
+}
+Query.prototype.push = function (item) {
+  this._arr = this._arr.splice(this._arr.length, 0, item)
+}
+
+// good
+class Query {
+  constructor (arr1, arr2) {
+    this._arr = [...arr1, ...arr2]
+  }
+
+  push (item) {
+    this._arr = this._arr.splice(this._arr.length, 0, item)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;es6模块化&#34;&gt;ES6模块化&lt;/h2&gt;
+
+&lt;h3 id=&#34;引入模块-和-输出模块&#34;&gt;引入模块 和 输出模块&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// 第一种
+export const func1 = function () {...}
+gggport { func1 } from &#39;moduleA&#39;
+
+// 第二种
+export default function func2 () {...}
+import func1 from &#39;moduleA&#39;
+
+// 第三种
+export const func1 = function () {...}
+export const func2 = function () {...}
+export const func3 = function () {...}
+import { func1, func2, func3 } from &#39;moduleA&#39;
+// 或者
+import * as types from &#39;moduleA&#39;
+// types.BUILD_CITYTREE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;输出单个值，使用export default&lt;/li&gt;
+&lt;li&gt;输出多个值，使用export&lt;/li&gt;
+&lt;li&gt;export default与普通的export不要同时使用&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>EventLoop</title>
+      <link>http://192.168.31.10:8000/2018/eventloop/</link>
+      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/eventloop/</guid>
+      <description>
+
+&lt;h1 id=&#34;event-loop&#34;&gt;Event Loop&lt;/h1&gt;
+
+&lt;h2 id=&#34;事件循环机制&#34;&gt;事件循环机制&lt;/h2&gt;
+
+&lt;h3 id=&#34;线程与进程&#34;&gt;线程与进程&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;进程：CPU资源分配的最小单位&lt;/li&gt;
+&lt;li&gt;线程：CPU调度的最小单位&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;浏览器打开即为打开一个进程（任务管理器查看），浏览器就是多进程、多线程的，浏览器打开后占用CPU的资源，可将这些资源分别分配给不同的tab页面进行并发处理，互不影响；如：一个浏览器打开多个窗口，多个窗口同时运行网页（浏览器中任务管理查看）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/chrome.png&#34; alt=&#34;浏览器进程&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;浏览器进程&#34;&gt;浏览器进程&lt;/h3&gt;
+
+&lt;p&gt;作为主进程，主要负责页面管理以及其他进程的创建及销毁，常驻的线程有：(工厂-&amp;gt; 部门)&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;手机工厂(浏览器)[进程]&lt;/center&gt;
+&lt;center&gt;↓&lt;/center&gt;
+&lt;center&gt;造手机部 &amp;mdash;&amp;ndash; 造手机壳部 &amp;mdash;&amp;ndash; 造膜部等(tab页面)[进程]&lt;/center&gt;
+&lt;center&gt;↓&lt;/center&gt;
+&lt;center&gt;各个岗位(html、css、js、事件触发等)[线程]&lt;/center&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;GUI渲染线程
+
+&lt;ol&gt;
+&lt;li&gt;主要负责页面的渲染，解析HTML、CSS，构建DOM树，布局和绘制等。&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;当界面需要重绘或者由于某种操作引发回流时，将执行该线程。&lt;/li&gt;
+&lt;li&gt;该线程与JS引擎线程互斥，当执行JS引擎线程时，GUI渲染会被挂起，当任务队列空闲时，JS引擎才会去执行 GUI 渲染。&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;JS引擎线程&lt;br /&gt;
+
+&lt;ol&gt;
+&lt;li&gt;该线程当然是主要负责处理 JavaScript脚本，执行代码；&lt;/li&gt;
+&lt;li&gt;也是主要负责执行准备好待执行的事件，即定时器计数结束，或者异步请求成功并返回正确时，将依次进入任务队列，等待JS引擎线程的执行；&lt;/li&gt;
+&lt;li&gt;当然，该线程与 GUI渲染线程互斥，当 JS引擎线程执行 JavaScript脚本时间过长，将导致页面渲染的阻塞。&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;事件触发线程
+
+&lt;ol&gt;
+&lt;li&gt;主要负责将准备好的事件交给Js引擎线程执行&lt;/li&gt;
+&lt;li&gt;比如setTimeout定时器计数结束，ajax等异步请求成功并出发回调函数，或者用户出发点击事件，该线程将会整装待发的事件依次加入到任务队列的队尾，等待Js引擎线程的执行&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;定时器触发线程
+
+&lt;ol&gt;
+&lt;li&gt;顾名思义，负责执行异步定时器一类的函数的线程，如： setTimeout，setInterval。&lt;/li&gt;
+&lt;li&gt;主线程依次执行代码时，遇到定时器，会将定时器交给该线程处理，当计数完毕后，事件触发线程会将计数完毕后的事件加入到任务队列的尾部，等待JS引擎线程执行。&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;HTTP请求线程
+
+&lt;ol&gt;
+&lt;li&gt;顾名思义，负责执行异步请求一类的函数的线程，如： Promise，axios，ajax等。&lt;/li&gt;
+&lt;li&gt;主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列的尾部，等待JS引擎线程执行。&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;多个线程之间配合工作，各司其职。&lt;/p&gt;
+
+&lt;h3 id=&#34;render-进程&#34;&gt;Render 进程&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;浏览器渲染进程（浏览器内核），主要负责页面的渲染、JS执行以及事件的循环。
+(render给与，表达  总经办 -&amp;gt; 分管各个部门的副经理)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;同步和异步任务&#34;&gt;同步和异步任务&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;同步任务&lt;/strong&gt; 即可以立即执行的任务，例如 console.log() 打印一条日志、声明一个变量或者执行一次加法操作等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;异步任务&lt;/strong&gt; 相反不会立即执行的事件任务。异步任务包括宏任务(&lt;code&gt;setTimeout&lt;/code&gt;、&lt;code&gt;setInterval&lt;/code&gt;)和微任务(&lt;code&gt;Promise&lt;/code&gt;、&lt;code&gt;async&lt;/code&gt;和&lt;code&gt;await&lt;/code&gt;)等。&lt;/li&gt;
+&lt;li&gt;常见的异步操作：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;ajax&lt;/li&gt;
+&lt;li&gt;DOM的事件操作&lt;/li&gt;
+&lt;li&gt;setTimeout&lt;/li&gt;
+&lt;li&gt;Promise 的then方法&lt;/li&gt;
+&lt;li&gt;Node的读取文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;同步任务和异步任务的执行流程：
+&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/eventLoop1.png&#34; alt=&#34;浏览器进程&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;栈&lt;/strong&gt; 就像是一个容器，任务都是在栈中执行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主线程&lt;/strong&gt; 就像是操作员，负责执行栈中的任务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;任务队列&lt;/strong&gt; 就像是等待被加工的物品。&lt;/li&gt;
+&lt;li&gt;异步任务完成注册后会将回调函数加入任务队列等待主线程执行。&lt;/li&gt;
+&lt;li&gt;执行栈中的同步任务执行完毕后，会查看并读取任务队列中的事件函数，于是任务队列的函数结束等待状态，进入执行栈，开始执行。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;宏任务和微任务&#34;&gt;宏任务和微任务&lt;/h3&gt;
+
+&lt;p&gt;异步任务分为宏任务和微任务，宏任务队列可以有多个，微任务队列只有一个。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;宏任务： script(全局任务)， setTimeout， setInterval， setImmediate， I/O， UI rendering&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;微任务： process.nextTick， Promise.then()， Object.observe， MutationObserver&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;在微任务中 process.nextTick 优先级高于Promise&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;当一个异步任务入栈时，主线程判断该任务为异步任务，并把该任务交给异步处理模块处理，当异步处理模块处理完达到触发条件时，根据任务的类型，将回调函数压入任务队列。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如果是宏任务，则新增一个宏任务队列，任务队列中的宏任务可以有多个来源。&lt;/li&gt;
+&lt;li&gt;如果是微任务，则直接压入微任务队列。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;所以上图的任务队列可以继续细化一下：
+&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/eventLoop2.png&#34; alt=&#34;任务队列&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;event-loop-1&#34;&gt;Event Loop&lt;/h3&gt;
+
+&lt;p&gt;回顾单线程异步机制：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;js全局任务开始，任务一次进入执行栈，被主线程执行，执行完毕后出栈&lt;/li&gt;
+&lt;li&gt;遇到异步任务，交给异步处理模块处理，如:&lt;code&gt;setTimeout&lt;/code&gt;，&lt;code&gt;ajax&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;当异步任务达到可执行状态时，事件触发线程将回调函数加入任务队列，等执行栈为空时，在依次进入执行栈中被执行&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;那么问题就来了，我们有宏任务和微任务，先执行谁呢？&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;异步任务开始执行从全局任务开始执行（异步里边的var url = &amp;ldquo; &amp;hellip;.），这些都属于宏任务，执行时js引擎会检查执行栈是否空闲，如果不空闲继续检查，当同步任务执行完毕，执行栈空闲下来,js引擎又会检查任务队列是否为空，如果不为空，会先提取任务队列中的微任务进行执行，如果为空，则继续检查；&lt;/li&gt;
+&lt;li&gt;微任务队列执行完毕之后，引擎检查到主线程又空闲下来了，再去任务队列提取排在最前的宏任务；&lt;/li&gt;
+&lt;li&gt;执行宏任务的过程中 ，遇到了微任务，在将这个微任务加入任务队列中；&lt;/li&gt;
+&lt;li&gt;待执行栈空闲时，再次去提取上边加入的微任务进行执行，该微任务执行结束后，又去检测任务队列中的任务，如果为空，提取最前边的任务，放入执行栈执行，如果为空了，就继续检查任务队列，以此类推。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;（另）：可放大宏任务（var xxx= &amp;hellip;），将全局js任务和宏任务放一起理解，第一步宏任务先执行，遇到&lt;code&gt;setTimeout&lt;/code&gt;同样放入事件队列，执行结束后，引擎检查微任务，将微任务放入执行栈执行，执行结束后，在第二轮 检查事件队列的是否含有宏任务，如有，放入执行栈执行，依次循环。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>js 调试相关</title>
+      <link>http://192.168.31.10:8000/2018/debugs/</link>
+      <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/debugs/</guid>
+      <description>
+
+&lt;h1 id=&#34;js调试命令&#34;&gt;Js调试命令&lt;/h1&gt;
+
+&lt;h2 id=&#34;console&#34;&gt;Console&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Console&lt;/strong&gt; 对象提供对浏览器控制台的接入。不同浏览器上它的工作方式是不一样的。&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Console&lt;/strong&gt; 对象可以在任何全局对象中访问，如 Window，&lt;a href=&#34;https://developer.mozilla.org/zh-CN/docs/Web/API/WorkerGlobalScope&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;WorkerGlobalScope&lt;/a&gt; 以及通过属性工作台提供的特殊定义。&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;它被浏览器定义为 Window.Console，也可被简单的 Console 调用。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最常用的方法就是 &lt;code&gt;console.log()&lt;/code&gt; 就是在控制台输出内容。&lt;strong&gt;console&lt;/strong&gt; 对象还有除了 &lt;code&gt;log&lt;/code&gt; 之外的其他方法。&lt;br /&gt;
+注意：因为 &lt;strong&gt;Console 对象提供对浏览器控制台的接入&lt;/strong&gt; ，所以在不同浏览器中的支持以及表现方法可能不太一样，但是调试内容只有开发者会看，所以保证在开发环境用这些方法就可以。&lt;/p&gt;
+
+&lt;h4 id=&#34;分类输出&#34;&gt;分类输出&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不同类别信息的输出。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;console.log(&#39;文字信息&#39;);
+console.info(&#39;提示信息&#39;);
+console.warn(&#39;警告信息&#39;);
+console.error(&#39;错误信息&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console1.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;分组输出&#34;&gt;分组输出&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;Console.group()&lt;/code&gt;和 &lt;code&gt;Console.groupEnd()&lt;/code&gt;包裹分组内容。&lt;/li&gt;
+&lt;li&gt;还可以使用 &lt;code&gt;Console.groupCollapsed()&lt;/code&gt;来代替 &lt;code&gt;Console.group()&lt;/code&gt;生成折叠的分组。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;console.group(&#39;第一个组&#39;);
+  console.log(&amp;quot;1-1&amp;quot;);
+  console.log(&amp;quot;1-2&amp;quot;);
+  console.log(&amp;quot;1-3&amp;quot;);
+console.groupEnd();
+console.group(&#39;第二个组&#39;);
+  console.log(&amp;quot;2-1&amp;quot;);
+  console.log(&amp;quot;2-2&amp;quot;);
+  console.log(&amp;quot;2-3&amp;quot;);
+console.groupEnd();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console2.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Console.group()&lt;/code&gt;还可以嵌套使用。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;console.group(&#39;第一个组&#39;);
+  console.group(&amp;quot;1-1&amp;quot;);
+    console.group(&amp;quot;1-1-1&amp;quot;);
+      console.log(&#39;内容&#39;);
+    console.groupEnd();
+  console.groupEnd();
+  console.group(&amp;quot;1-2&amp;quot;);
+    console.log(&#39;内容&#39;);
+    console.log(&#39;内容&#39;);
+    console.log(&#39;内容&#39;);
+  console.groupEnd();
+console.groupEnd();
+
+console.groupCollapsed(&#39;第二个组&#39;);
+  console.group(&amp;quot;2-1&amp;quot;);
+  console.groupEnd();
+  console.group(&amp;quot;2-2&amp;quot;);
+  console.groupEnd();
+console.groupEnd();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console3.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;表格输出&#34;&gt;表格输出&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;console.table()&lt;/code&gt;可以将传入的对象，或数组以表格形式输出。适合排列整齐的元素。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var Obj = {
+    Obj1: {
+        a: &amp;quot;aaa&amp;quot;,
+        b: &amp;quot;bbb&amp;quot;,
+        c: &amp;quot;ccc&amp;quot;
+    },
+    Obj2: {
+        a: &amp;quot;aaa&amp;quot;,
+        b: &amp;quot;bbb&amp;quot;,
+        c: &amp;quot;ccc&amp;quot;
+    },
+    Obj3: {
+        a: &amp;quot;aaa&amp;quot;,
+        b: &amp;quot;bbb&amp;quot;,
+        c: &amp;quot;ccc&amp;quot;
+    },
+    Obj4: {
+        a: &amp;quot;aaa&amp;quot;,
+        b: &amp;quot;bbb&amp;quot;,
+        c: &amp;quot;ccc&amp;quot;
+    }
+}
+console.table(Obj);
+var Arr = [
+  [&amp;quot;aa&amp;quot;, &amp;quot;bb&amp;quot;, &amp;quot;cc&amp;quot;],
+  [&amp;quot;dd&amp;quot;, &amp;quot;ee&amp;quot;, &amp;quot;ff&amp;quot;],
+  [&amp;quot;gg&amp;quot;, &amp;quot;hh&amp;quot;, &amp;quot;ii&amp;quot;]
+]
+console.table(Arr);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console4.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;查看对象&#34;&gt;查看对象&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;Console.dir()&lt;/code&gt;显示一个对象的所有属性和方法。&lt;/li&gt;
+&lt;li&gt;在Chrome中 &lt;code&gt;Console.dir()&lt;/code&gt;和 &lt;code&gt;Console.log()&lt;/code&gt;效果相同。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var CodeDeer = {
+  name: &#39;张三&#39;,
+  blog: &#39;www.google.com&#39;,
+}
+console.log(&amp;quot;console.dir(CodeDeer)&amp;quot;);
+console.dir(CodeDeer);
+console.log(&amp;quot;console.log(CodeDeer)&amp;quot;);
+console.log(CodeDeer);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console5.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;查看节点&#34;&gt;查看节点&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;Console.dirxml()&lt;/code&gt; &lt;a href=&#34;https://developer.mozilla.org/zh-CN/docs/Web/API/Console/dirxml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;显示一个明确的XML/HTML元素的包括所有后代元素的交互树。 如果无法作为一个element被显示，那么会以JavaScript对象的形式作为替代。 它的输出是一个继承的扩展的节点列表，可以让你看到子节点的内容&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;在Chrome中 &lt;code&gt;Console.dirxml()&lt;/code&gt;和 &lt;code&gt;Console.log()&lt;/code&gt;效果相同。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * html 元素
+ * &amp;lt;div id=&amp;quot;lg&amp;quot; class=&amp;quot;s-p-top&amp;quot;&amp;gt;
+    &amp;lt;img id=&amp;quot;s_lg_img&amp;quot; class=&amp;quot;s_lg_img_gold_show&amp;quot; src=&amp;quot;//www.baidu.com/img/bd_logo1.png?where=super&amp;quot; width=&amp;quot;270&amp;quot; height=&amp;quot;129&amp;quot; usemap=&amp;quot;#mp&amp;quot; /&amp;gt; 
+    &amp;lt;img id=&amp;quot;s_lg_img_new&amp;quot; class=&amp;quot;s_lg_img_gold_showre&amp;quot; src=&amp;quot;//www.baidu.com/img/bd_logo1.png?qua=high&amp;amp;amp;where=super&amp;quot; width=&amp;quot;270&amp;quot; height=&amp;quot;129&amp;quot; usemap=&amp;quot;#mp&amp;quot; /&amp;gt; 
+    &amp;lt;map name=&amp;quot;mp&amp;quot; id=&amp;quot;s_mp&amp;quot;&amp;gt;&amp;lt;area style=&amp;quot;cursor:pointer;outline:none;&amp;quot; shape=&amp;quot;rect&amp;quot; coords=&amp;quot;0,0,270,129&amp;quot; href=&amp;quot;//www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&amp;amp;amp;tn=SE_Pclogo_6ysd4c7a&amp;amp;amp;sa=ire_dl_gh_logo&amp;amp;amp;rsv_dl=igh_logo_pc&amp;quot; target=&amp;quot;_blank&amp;quot; title=&amp;quot;点击一下，了解更多&amp;quot; onmousedown=&amp;quot;return ns_c({&#39;fm&#39;:&#39;behs&#39;,&#39;tab&#39;:&#39;bdlogo&#39;})&amp;quot;&amp;gt;&amp;lt;/area&amp;gt;&amp;lt;/map&amp;gt; 
+  &amp;lt;/div&amp;gt;
+*/
+var lg = document.getElementById(&#39;lg&#39;)
+console.dirxml(lg)
+console.log(&#39;********&#39;)
+console.log(lg)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console6.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;条件输出&#34;&gt;条件输出&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;利用 &lt;code&gt;console.assert()&lt;/code&gt;,可以进行条件输出。&lt;/li&gt;
+&lt;li&gt;当第一个参数或返回值为真时，不输出内容。&lt;/li&gt;
+&lt;li&gt;当第一个参数或返回值为假时，输出后面的内容并抛出异常。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;console.assert(true, &amp;quot;你永远看不见我&amp;quot;);
+console.assert((function() {
+    return true;
+})(), &amp;quot;你永远看不见我&amp;quot;);
+console.assert(false, &amp;quot;你看得见我&amp;quot;);
+console.assert((function() {
+    return false;
+})(), &amp;quot;你看得见我&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console7.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;计次输出&#34;&gt;计次输出&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;Console.count()&lt;/code&gt;输出内容和被调用的次数。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;for (var i = 0; i &amp;lt; 3; i++) {
+  console.count(&amp;quot;运行次数：&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console8.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;追踪调用堆栈&#34;&gt;追踪调用堆栈&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;Console.trace()&lt;/code&gt;来追踪函数被调用的过程，在复杂项目时调用过程非常多，用这个命令来帮你缕清。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function add(a, b) {
+  console.trace(&amp;quot;Add function&amp;quot;);
+  return a + b;
+}
+function add3(a, b) {
+  return add2(a, b);
+}
+function add2(a, b) {
+  return add1(a, b);
+}
+function add1(a, b) {
+  return add(a, b);
+}
+var x = add3(1, 1);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console9.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;堆栈调用如何工作&#34;&gt;堆栈调用如何工作&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;每当函数被调用，它都会被推到堆栈的顶部。函数执行完毕，便会从堆栈顶部移除。就是 &lt;strong&gt;最后一个入栈的将会第一个从堆栈中移除&lt;/strong&gt; 这也就是我们所熟悉的LIFO(后进，先出)特性。&lt;/li&gt;
+&lt;li&gt;注：&lt;a href=&#34;https://juejin.im/post/5a05b4576fb9a04519690d42&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JavaScript 如何工作：对引擎、运行时、调用堆栈的概述&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;计时功能&#34;&gt;计时功能&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;Console.time()&lt;/code&gt;和 &lt;code&gt;Console.timeEnd()&lt;/code&gt;包裹需要计时的代码片段，输出运行这段代码的事件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Console.time()&lt;/code&gt;中的参数作为计时器的标识，具有唯一性。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Console.timeEnd()&lt;/code&gt;中的参数来结束此标识的计时器，并以毫秒为单位返回运行时间。&lt;/li&gt;
+&lt;li&gt;最多同时运行10000个计时器。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;console.time(&amp;quot;Chrome中循环1000次的时间&amp;quot;);
+for (var i = 0; i &amp;lt; 1000; i++) {}
+console.timeEnd(&amp;quot;Chrome中循环1000次的时间&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console10.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;性能分析&#34;&gt;性能分析&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;Console.profile()&lt;/code&gt;进行性能分析，要停止记录，请调用&lt;code&gt;Console.profileEnd()&lt;/code&gt;。查看代码各部分运行消耗的时间，在Chrome自带的调试工具中并没有找到在哪里查看这两个方法生成的分析报告。应该需要其他的调试工具。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.oschina.net/translate/performance-optimisation-with-timeline-profiles&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;使用Chrome DevTools的Timeline和Profiles提高Web应用程序的性能&lt;/a&gt;。Chrome 最新版本的查看网页性能名称为 &lt;code&gt;Performance(性能)&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;console-log&#34;&gt;Console.log()&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;最后再来介绍一下强大的 &lt;code&gt;Console.log()&lt;/code&gt;，这个方法有很多的用法（其他输出方法的用法，如&lt;code&gt;error()&lt;/code&gt;等，可以参照&lt;code&gt;log()&lt;/code&gt;使用）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+&lt;li&gt;提示输出 可以再输出的对象、变量前加上提示信息，增加辨识度。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var ans = 12345;
+console.log(&amp;quot;这是临时变量ans的值：&amp;quot;, ans);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console11.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;格式化输出&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;占位符&lt;/th&gt;
+&lt;th&gt;含义&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;%s&lt;/td&gt;
+&lt;td&gt;字符串输出&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;%d or %i&lt;/td&gt;
+&lt;td&gt;整数输出&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;%f&lt;/td&gt;
+&lt;td&gt;浮点数输出&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;%o&lt;/td&gt;
+&lt;td&gt;打印javascript对象，可以是整数、字符串以及JSON数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var arr = [&amp;quot;张三&amp;quot;, &amp;quot;李四&amp;quot;];
+console.log(&amp;quot;欢迎%s和%s两位新同学&amp;quot;, arr[0], arr[1]);
+console.log(&amp;quot;圆周率整数部分：%d，带上小数是：%f&amp;quot;, 3.1415, 3.1415);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console12.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;自定义样式&amp;ndash;使用&lt;code&gt;%c&lt;/code&gt;为打印内容定义样式,再输出信息前加上&lt;code&gt;%c&lt;/code&gt;，后面写上标准的css样式，就可以为输出的信息添加样式了。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;console.log(&amp;quot;%c 啦啦啦&amp;quot;, &amp;quot;color: #0084ff;font-size: 30px;&amp;quot;)
+console.log(&amp;quot;%c3D Text&amp;quot;, &amp;quot; text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);font-size:5em&amp;quot;);
+console.log(&#39;%cRainbow Text &#39;, &#39;background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/console13.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;debugger&#34;&gt;debugger&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;调试js代码时 可以在需要调试的地方打断点，然后在浏览器中打开在运行到这一段的代码时会在打断点的地方停止，在 &lt;code&gt;Chrome&lt;/code&gt; 中可以按 &lt;code&gt;F10&lt;/code&gt; 继续下一步，然后在 &lt;strong&gt;开发者工具&amp;ndash;&amp;gt;Sources&lt;/strong&gt; 中可以看到具体内容，也可以用 鼠标 放到某个 变量上 看具体值。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let nums1 = [4,9,5]
+let nums2 = [9,4,9,8,4]
+
+const solution2 = (arr1, arr2) =&amp;gt; {
+  let result = []
+  for (let item of arr1) {
+    debugger
+    if (arr2.includes(item)) {
+      debugger
+      result.push(item)
+    }
+  }
+
+  return [...new Set(result)]
+}
+
+console.log(&#39;solution2&#39;, solution2(nums1, nums2))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/debugger1.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;在-vscode-中打断点&#34;&gt;在 vscode 中打断点&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在vscode 中 选择调试模式，然后 开启调式 或者 在一个文件上 直接 &lt;code&gt;F5&lt;/code&gt;，可以直接开启调式模式，首先会弹出弹窗，选择 &lt;code&gt;环境&lt;/code&gt;（vscode 中有插件，&lt;code&gt;Debugger for Chrome || Node Debug || React Native Tools&lt;/code&gt;，安装完成后），会在选择环境中弹出环境配置。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/debugger3.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在一个js文件里面我选择的是 node 环境，然后在代码中打上断点（图中红色圆圈，使用鼠标右键），之后运行会出现如图所示。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/debugger2.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;Debugger for Chrome&lt;/code&gt; 插件调试代码。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;开启本地服务运行项目，在这里我用的是 &lt;code&gt;anywhere&lt;/code&gt;，也可以用其他的，如 &lt;a href=&#34;http://www.browsersync.cn/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Browsersync&lt;/a&gt;。&lt;br /&gt;
+启动vscode， debug模式选择 Chrome。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/debug4.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后有两种模式（launch | attach）如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/debug5.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;第一种模式使用&lt;br /&gt;
+先开启本地服务。我使用的端口默认为8080，上面配置里就对应是&lt;a href=&#34;http://localhost:8080。&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://localhost:8080。&lt;/a&gt;&lt;br /&gt;
+得先把chrome关闭，并且确保所有chrome进程都被杀死了，然后可以按&lt;code&gt;F5&lt;/code&gt; 直接打开调试模式，才能正常使用调试，否则就会总报错就会（window下好像不用，会开启一个新的chrome窗口），就可以在vscode进行调试了。（例子：在html里面引入xxx.js）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/debug6.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;第二种模式使用&lt;br /&gt;
+同上先启动本地服务。关闭所有chrome进程（window下好像不用）。&lt;a href=&#34;https://github.com/Microsoft/vscode-chrome-debug&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;需要先在终端中使用和配置项port一致的端口号将chrome启动&lt;/a&gt;。选择 &lt;code&gt;attach to Chrome&lt;/code&gt;，然后启动调试，在打开的浏览器中输入服务器url或者文件路径都可以进行调试。并且你关闭调试也不会关闭chrome浏览器。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/debug7.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>npm 镜像设置</title>
+      <link>http://192.168.31.10:8000/2018/npm/</link>
+      <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/npm/</guid>
+      <description>
+
+&lt;h3 id=&#34;npm-镜像设置&#34;&gt;npm 镜像设置&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm config set registry https://registry.npm.taobao.org
+npm config set SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>JS随笔</title>
+      <link>http://192.168.31.10:8000/2018/js-essay/</link>
+      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2018/js-essay/</guid>
+      <description>
+
+&lt;h1 id=&#34;js随笔&#34;&gt;JS随笔&lt;/h1&gt;
+
+&lt;h3 id=&#34;点击按钮复制一个文本或者链接地址&#34;&gt;点击按钮复制一个文本或者链接地址&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div id=&amp;quot;lalala&amp;quot;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt;
+&amp;lt;button onclick=&amp;quot;but()&amp;quot;&amp;gt;点我&amp;lt;/button&amp;gt;
+&amp;lt;script&amp;gt;
+function but () {
+  var copyDOM = document.getElementById(&#39;lalala&#39;);  
+  var range = document.createRange();
+  // 选中需要复制的节点
+  range.selectNode(copyDOM);
+  // 执行选中元素
+  window.getSelection().addRange(range);
+  // 执行 copy 操作
+  var successful = document.execCommand(&#39;copy&#39;);  
+  try {  
+    var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;;  
+    console.log(&#39;copy is&#39; + msg);  
+  } catch(err) {  
+    console.log(&#39;Oops, unable to copy&#39;);  
+  }
+  // 移除选中的元素
+  window.getSelection().removeAllRanges(); 
+  return false
+}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;a-1-a-2-a-3-有可能是-true-吗&#34;&gt;(a == 1 &amp;amp;&amp;amp; a== 2 &amp;amp;&amp;amp; a == 3) 有可能是 true 吗？&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;第一种解法:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const a = {
+　　i: 0,
+　　toString: function() {
+　　　　return a.i++
+　　}
+}
+
+if (a == 1 &amp;amp;&amp;amp; a == 2 &amp;amp;&amp;amp; a == 3) {
+　　console.log(&#39;成功&#39;)
+}
+
+// 之所以成功，因为使用了松散相等的运算符，使用松散相等时，如果其中一个操作数与另一个类型不同，则 JS 引擎将尝试将一个操作转换为另一个类型。
+// 在左边对象、右边的数字的情况下，它会尝试将对象转换为一个数，首先通过调用 valueOf 如果是可调用的。否则，它会调用toString方法。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;第二种解法:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const a_ = 1;
+const a = 2;
+const _a = 3;
+if (a_ == 1 &amp;amp;&amp;amp; a == 2 &amp;amp;&amp;amp; _a == 3) {
+　　console.log(&#39;成功&#39;)
+}
+// 有三个不同的变量来声明，本质上没有做到题设（不推荐）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;第三种解法:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let val = 0;
+Object.defineProperty(window, &#39;a&#39;, {
+　　get: function() {
+　　　　return ++val
+　　}
+})
+
+
+if (a == 1 &amp;amp;&amp;amp; a == 2 &amp;amp;&amp;amp; a == 3) {
+　　console.log(&#39;成功&#39;)
+}
+
+// 使用 get， 让 a 返回三个不同的值，在真正的代码逻辑中不推荐使用
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;canvas-todataurl-在输出数据时-里面包含外部图片链接地址时抛出安全错误&#34;&gt;canvas.toDataURL() 在输出数据时，里面包含外部图片链接地址时抛出安全错误&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在canvs画图中里面包含外部图片链接地址时，在使用 toDataURL() 输出 base64位字符编码时会抛出安全错误，输出不了数据，因为引用了不同域名下的图片链接。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://192.168.31.10:8000/images/totalimgs/1323758-20180206101320904-162520733.png&#34; alt=&#34;err&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;(vconsole.js 移动端里显示的错误)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;解决方法：需要把图片服务器设置（Access-Control-Allow-Origin: *），然后下面的代码才能正确执行。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var image = new Image();
+image.setAttribute(&#39;crossOrigin&#39;, &#39;anonymous&#39;);
+image.src = &#39;图片链接地址&#39;
+image.onload = function() {
+　　.....
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;js判断一个对象是否为数组&#34;&gt;js判断一个对象是否为数组&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;本来判断一个对象类型用typeof是最好的，不过对于Array类型是不适用的，&lt;em&gt;可以使用 instanceof 操作符&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var arrayStr=new Array(&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;,&amp;quot;4&amp;quot;,&amp;quot;5&amp;quot;)
+alert(arrayStr instanceof Array)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;当然以上在一个简单的页面布局里面是没有问题的，如果是复杂页面情况，入获取的是frame内部的Array对象，可以用这个函数判断：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function isArray(obj) {
+   return Object.prototype.toString.call(obj) === &#39;[object Array]&#39;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;js正则-验证服务密码3位及-三位以上连续&#34;&gt;js正则 验证服务密码3位及 三位以上连续&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;checkPas (str) { // 服务密码3位及 三位以上连续
+  let serArr = str.split(&#39;&#39;)
+  // console.log(str)
+  for (let i = 0; i &amp;lt; serArr.length - 2; i++) {
+    let reg = new RegExp((serArr[i] + (Number(serArr[i]) - 1) + (Number(serArr[i]) - 2)) + &#39;|&#39; + (serA[i] + (Number(serArr[i]) + 1) + (Number(serArr[i]) + 2)), &#39;g&#39;)
+    if (reg.test(str)) {
+      return false
+    } else {
+      return true
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;js-获取日期时间戳-当前日期的前几天或者后几天&#34;&gt;js 获取日期时间戳 =&amp;gt; 当前日期的前几天或者后几天&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+* 获取日期时间戳
+* @param {Number} dayCount 当前日期的前几天或者后几天
+*/
+const getDateStr = function (dayCount) {
+  let dd = new Date()
+  dd.setDate(dd.getDate() + dayCount)
+  let time = dd.getTime()
+  return time + &#39;&#39;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;使用-web-workers-来处理大量数据-简单的例子&#34;&gt;使用 Web Workers 来处理大量数据(简单的例子)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// main.js
+let woker = new Worker(&#39;worker.js&#39;) // 创建一个新的worker,指定一个脚本的URI来执行worker线程
+// 通过postMessage() 方法和onmessage事件处理函数生效
+woker.onmessage = ({data: arr}) =&amp;gt; {
+  // worker.js 处理完成之后返回回来的
+  console.log(arr)
+}
+woker.postMessage(&#39;start&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// worker.js
+onmessage = arr =&amp;gt; {
+  console.log(&#39;开始&#39;)
+  var arr = []
+  for (let i = 0; i &amp;lt; 1000000; i++) {
+    arr.push(Math.random())
+  }
+  let st = new Date()
+  arr.sort()
+  let et = new Date()
+  console.log(&#39;排序完成,耗时:&#39; + (et - st))
+
+  postMessage(arr)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;js来格式化手机号-如-的格式&#34;&gt;js来格式化手机号 如：*** **** **** 的格式&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 我这个是在微信小程序中使用的，其他地方也可以使用 监听 input 输入
+handleNum: function (e) {
+  // console.log(e.detail.cursor)
+  let val = e.detail.value.replace(/[^\d]/g, &#39;&#39;)
+  this.data.phoneNum = val
+  let arr = val.split(&#39;&#39;)
+  let str = &#39;&#39;
+  arr.forEach(function(val, ind) {
+    if (ind === 3 || ind === 7) {
+      str += &#39; &#39;
+    } 
+    str += val
+  //   (3 === arr || 7 === arr) &amp;amp;&amp;amp; (str += &#39; &#39;)
+  //   str += val
+  })
+  console.log(this.data.phoneNum)
+  return str
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;js来获取当前星期几和之前的星期&#34;&gt;js来获取当前星期几和之前的星期&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// js来获取当前星期几和之前的星期
+var setWeek = function (num) {
+    switch (num) {
+      case 0:
+        return &#39;日&#39;
+      case 1:
+        return &#39;一&#39;
+      case 2:
+        return &#39;二&#39;
+      case 3:
+        return &#39;三&#39;
+      case 4:
+        return &#39;四&#39;
+      case 5:
+        return &#39;五&#39;
+      case 6:
+        return &#39;六&#39;
+    }
+}
+var arr = []
+for (var i = 0; i &amp;lt; 7; i++) {
+    a++
+    if (a &amp;gt; 6) a = 0
+    var b = setWeek(a)
+    arr.push(b)
+}
+console.log(arr)
+ // [&amp;quot;六&amp;quot;, &amp;quot;日&amp;quot;, &amp;quot;一&amp;quot;, &amp;quot;二&amp;quot;, &amp;quot;三&amp;quot;, &amp;quot;四&amp;quot;, &amp;quot;五&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;接口返回回来的数据是一个数组-里面有同年同月-需要把同年同月的合并到一个数组里面并且把相同年月的数据放到子数组中&#34;&gt;接口返回回来的数据是一个数组，里面有同年同月，需要把同年同月的合并到一个数组里面并且把相同年月的数据放到子数组中&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;待处理的数据格式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;retCode&amp;quot;: &amp;quot;000000&amp;quot;,
+  &amp;quot;retDesc&amp;quot;: &amp;quot;success&amp;quot;,
+  &amp;quot;rspBody&amp;quot;: {
+    &amp;quot;list&amp;quot;: [{
+        &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+        &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-06-02 22:41:17&amp;quot;,
+        &amp;quot;staffappprem&amp;quot;: &amp;quot;99.80&amp;quot;,
+        &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+        &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+        &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年6月&amp;quot;,
+        &amp;quot;date&amp;quot;: &amp;quot;06-02&amp;quot;,
+        &amp;quot;time&amp;quot;: &amp;quot;22:41:17&amp;quot;,
+        &amp;quot;price&amp;quot;: &amp;quot;99.80&amp;quot;,
+        &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+        &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+      }, {
+          &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+          &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-06-02 22:41:17&amp;quot;,
+          &amp;quot;staffappprem&amp;quot;: &amp;quot;0.20&amp;quot;,
+          &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+          &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年6月&amp;quot;,
+          &amp;quot;date&amp;quot;: &amp;quot;06-02&amp;quot;,
+          &amp;quot;time&amp;quot;: &amp;quot;22:41:17&amp;quot;,
+          &amp;quot;price&amp;quot;: &amp;quot;0.20&amp;quot;,
+          &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+      }, {
+          &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+          &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-04-02 17:46:00&amp;quot;,
+          &amp;quot;staffappprem&amp;quot;: &amp;quot;99.80&amp;quot;,
+          &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+          &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年4月&amp;quot;,
+          &amp;quot;date&amp;quot;: &amp;quot;04-02&amp;quot;,
+          &amp;quot;time&amp;quot;: &amp;quot;17:46:00&amp;quot;,
+          &amp;quot;price&amp;quot;: &amp;quot;99.80&amp;quot;,
+          &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+      }, {
+          &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+          &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-04-02 17:46:00&amp;quot;,
+          &amp;quot;staffappprem&amp;quot;: &amp;quot;0.20&amp;quot;,
+          &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+          &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年4月&amp;quot;,
+          &amp;quot;date&amp;quot;: &amp;quot;04-02&amp;quot;,
+          &amp;quot;time&amp;quot;: &amp;quot;17:46:00&amp;quot;,
+          &amp;quot;price&amp;quot;: &amp;quot;0.20&amp;quot;,
+          &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+      }, {
+          &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+          &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-03-02 07:55:41&amp;quot;,
+          &amp;quot;staffappprem&amp;quot;: &amp;quot;99.80&amp;quot;,
+          &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+          &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年3月&amp;quot;,
+          &amp;quot;date&amp;quot;: &amp;quot;03-02&amp;quot;,
+          &amp;quot;time&amp;quot;: &amp;quot;07:55:41&amp;quot;,
+          &amp;quot;price&amp;quot;: &amp;quot;99.80&amp;quot;,
+          &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+      }, {
+          &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+          &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-03-02 07:55:41&amp;quot;,
+          &amp;quot;staffappprem&amp;quot;: &amp;quot;0.20&amp;quot;,
+          &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+          &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年3月&amp;quot;,
+          &amp;quot;date&amp;quot;: &amp;quot;03-02&amp;quot;,
+          &amp;quot;time&amp;quot;: &amp;quot;07:55:41&amp;quot;,
+          &amp;quot;price&amp;quot;: &amp;quot;0.20&amp;quot;,
+          &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+          &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+      }]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;逻辑代码：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var oCapHistoryinfo = data.rspBody.list
+var formatData = {
+    mainList: []
+};
+for (var i = 0; i &amp;lt; oCapHistoryinfo.length; i++) {
+    var num = formatData.mainList.length;
+    var date = oCapHistoryinfo[i].yearMonth;
+    if (num &amp;gt; 0 &amp;amp;&amp;amp; !!formatData.mainList[num - 1].date &amp;amp;&amp;amp; formatData.mainList[num - 1].date == date) {
+        formatData.mainList[num - 1].itemList.push(oCapHistoryinfo[i]);
+    } else {
+        var item = {
+            date: date,
+            itemList: []
+        };
+        item.itemList.push(oCapHistoryinfo[i]);
+        formatData.mainList.push(item);
+    }
+}
+console.log(&#39;arr&#39;, JSON.stringify(formatData))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;处理后的数据格式：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+    &amp;quot;mainList&amp;quot;: [{
+        &amp;quot;date&amp;quot;: &amp;quot;2018年6月&amp;quot;,
+        &amp;quot;itemList&amp;quot;: [{
+            &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+            &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-06-02 22:41:17&amp;quot;,
+            &amp;quot;staffappprem&amp;quot;: &amp;quot;99.80&amp;quot;,
+            &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+            &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年6月&amp;quot;,
+            &amp;quot;date&amp;quot;: &amp;quot;06-02&amp;quot;,
+            &amp;quot;time&amp;quot;: &amp;quot;22:41:17&amp;quot;,
+            &amp;quot;price&amp;quot;: &amp;quot;99.80&amp;quot;,
+            &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+        },
+        {
+            &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+            &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-06-02 22:41:17&amp;quot;,
+            &amp;quot;staffappprem&amp;quot;: &amp;quot;0.20&amp;quot;,
+            &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+            &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年6月&amp;quot;,
+            &amp;quot;date&amp;quot;: &amp;quot;06-02&amp;quot;,
+            &amp;quot;time&amp;quot;: &amp;quot;22:41:17&amp;quot;,
+            &amp;quot;price&amp;quot;: &amp;quot;0.20&amp;quot;,
+            &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+        }]
+    },
+    {
+        &amp;quot;date&amp;quot;: &amp;quot;2018年4月&amp;quot;,
+        &amp;quot;itemList&amp;quot;: [{
+            &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+            &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-04-02 17:46:00&amp;quot;,
+            &amp;quot;staffappprem&amp;quot;: &amp;quot;99.80&amp;quot;,
+            &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+            &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年4月&amp;quot;,
+            &amp;quot;date&amp;quot;: &amp;quot;04-02&amp;quot;,
+            &amp;quot;time&amp;quot;: &amp;quot;17:46:00&amp;quot;,
+            &amp;quot;price&amp;quot;: &amp;quot;99.80&amp;quot;,
+            &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+        },
+        {
+            &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+            &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-04-02 17:46:00&amp;quot;,
+            &amp;quot;staffappprem&amp;quot;: &amp;quot;0.20&amp;quot;,
+            &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+            &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年4月&amp;quot;,
+            &amp;quot;date&amp;quot;: &amp;quot;04-02&amp;quot;,
+            &amp;quot;time&amp;quot;: &amp;quot;17:46:00&amp;quot;,
+            &amp;quot;price&amp;quot;: &amp;quot;0.20&amp;quot;,
+            &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+        }]
+    },
+    {
+        &amp;quot;date&amp;quot;: &amp;quot;2018年3月&amp;quot;,
+        &amp;quot;itemList&amp;quot;: [{
+            &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+            &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-03-02 07:55:41&amp;quot;,
+            &amp;quot;staffappprem&amp;quot;: &amp;quot;99.80&amp;quot;,
+            &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+            &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年3月&amp;quot;,
+            &amp;quot;date&amp;quot;: &amp;quot;03-02&amp;quot;,
+            &amp;quot;time&amp;quot;: &amp;quot;07:55:41&amp;quot;,
+            &amp;quot;price&amp;quot;: &amp;quot;99.80&amp;quot;,
+            &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+        },
+        {
+            &amp;quot;payType&amp;quot;: &amp;quot;06&amp;quot;,
+            &amp;quot;paymentDate&amp;quot;: &amp;quot;2018-03-02 07:55:41&amp;quot;,
+            &amp;quot;staffappprem&amp;quot;: &amp;quot;0.20&amp;quot;,
+            &amp;quot;paymentDateCode&amp;quot;: &amp;quot;99&amp;quot;,
+            &amp;quot;payTypeName&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;yearMonth&amp;quot;: &amp;quot;2018年3月&amp;quot;,
+            &amp;quot;date&amp;quot;: &amp;quot;03-02&amp;quot;,
+            &amp;quot;time&amp;quot;: &amp;quot;07:55:41&amp;quot;,
+            &amp;quot;price&amp;quot;: &amp;quot;0.20&amp;quot;,
+            &amp;quot;resource&amp;quot;: &amp;quot;第三方支付&amp;quot;,
+            &amp;quot;other&amp;quot;: &amp;quot;其他&amp;quot;
+        }]
+    }]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;判断一个function-是不是-一个-function&#34;&gt;判断一个function 是不是 一个 function&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;Object.prototype.toString.call(f) === &#39;[object Function]&#39;
+// 其他类型也可以这样进行判断
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;js在字符串中获取指定位置之间的字符&#34;&gt;js在字符串中获取指定位置之间的字符&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var str = &#39;8888888888&amp;lt;style&amp;gt;111111111&amp;lt;/style&amp;gt;88888888888888888888&#39;.replace(/[&amp;lt;s || &amp;lt;\/s](.*?)e&amp;gt;/g, &#39;中&#39;)
+
+// 输出： 8888888888中111111111中88888888888888888888
+// 可以先替换成你需要的特殊字符，然后创建一个可以找到特殊字符第n个索引
+function find(str,cha,num){
+  var x=str.indexOf(cha);
+  for(var i=0;i&amp;lt;num;i++){
+    x=str.indexOf(cha,x+1);
+  }
+  return x;
+}
+str.substring(str.indexOf(&#39;中&#39;) +1, find(str, &#39;中&#39;, 1)) // &amp;quot;111111111&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Vue Plugins And Expansion</title>
+      <link>http://192.168.31.10:8000/2017/vueplugins/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2017/vueplugins/</guid>
+      <description>
+
+&lt;h1 id=&#34;vue-plugins-and-expansion-后台模板&#34;&gt;Vue Plugins And Expansion(后台模板)&lt;/h1&gt;
+
+&lt;h2 id=&#34;条形码-vue-barcode&#34;&gt;条形码 vue-barcode&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;地址：&lt;a href=&#34;https://fengyuanchen.github.io/vue-barcode/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;vue-barcode&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;GitHub: &lt;a href=&#34;https://github.com/fengyuanchen/vue-barcode&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/fengyuanchen/vue-barcode&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;全局使用方式：&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// main.js
+import VueBarcode from &#39;@chenfengyuan/vue-barcode&#39;;
+Vue.component(&#39;barcode&#39;, VueBarcode);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;barcode :value=qualityInfo.tyOrderCode :options=&amp;quot;{ displayValue: false }&amp;quot; id=&amp;quot;canves&amp;quot;&amp;gt;&amp;lt;/barcode&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;vue图表-v-charts&#34;&gt;vue图表-V-charts&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://v-charts.js.org/#/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;V-charts 文档&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;vue后台管理模板&#34;&gt;vue后台管理模板&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://panjiachen.github.io/vue-element-admin-site/zh/guide/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;vue-element-admin&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>vue 相关问题</title>
+      <link>http://192.168.31.10:8000/2017/workrelated/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2017/workrelated/</guid>
+      <description>
+
+&lt;h3 id=&#34;使用vuex状态管理后-在-input-中使用-v-model-来进行双向数据绑定-在修改-input-中值的时候会抛出一个错误&#34;&gt;使用vuex状态管理后，在 input 中使用 v-model 来进行双向数据绑定，在修改 input 中值的时候会抛出一个错误&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;可以不使用 v-model 来进行双向数据绑定，使用 :value=&amp;rsquo; &amp;lsquo; 来，然后设置一个 监听器来推动 state 的更新( @input=&amp;rsquo; &amp;lsquo; )&lt;/p&gt;
+
+&lt;p&gt;vue 模板&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vue&#34;&gt;&amp;lt;template&amp;gt;
+  &amp;lt;div class=&amp;quot;hello&amp;quot;&amp;gt;
+    &amp;lt;input type=&amp;quot;text&amp;quot; :value=&amp;quot;text&amp;quot; @input=&#39;update&#39;&amp;gt;
+    &amp;lt;span&amp;gt;{{ddd}}&amp;lt;/span&amp;gt;
+    &amp;lt;p ref=&amp;quot;ppp&amp;quot;&amp;gt;啦啦啦&amp;lt;/p&amp;gt;
+    &amp;lt;input type=&amp;quot;text&amp;quot; v-focus&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+import {mapState} from &#39;vuex&#39;
+export default {
+  name: &#39;HelloWorld&#39;,
+  data () {
+    return {
+      ddd: &#39;&#39;
+    }
+  },
+  computed: {
+    ...mapState([&#39;text&#39;])
+  },
+  methods: {
+    update (e) {
+　　　// 在这里来 更新 state 里的某一个值
+      this.$store.dispatch(&#39;updataText&#39;, e.target.value)// 触发 actions 来 推动 mutations
+      this.$refs.ppp.innerText = &#39;465&#39;
+    }
+  },
+  watch: {
+    text: function () {
+      this.ddd = this.$store.state.text
+    }
+  },
+  directives: {
+    focus: {
+      // 自定义指令
+      inserted: function (el) {
+        el.focus()
+      }
+    }
+  }
+}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;actions.js 里内容&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const actions = {
+　updataText (context, val) {
+　　　context.commit(&#39;modify&#39;, val)
+　}
+}
+export default actions
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;state.js 里内容&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;export default {
+　text: &#39;46546&#39;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;具体参考 &lt;a href=&#34;https://vuex.vuejs.org/zh-cn/forms.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官方文档&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;在vue中父组件通过-props-给子组件传递数据-然后在-input-通过-v-model-绑定-怎么在-watch-中-进行监听-通过-props-来把传递的-数据-变成-子组件的-初始值&#34;&gt;在vue中父组件通过 props 给子组件传递数据，然后在 input 通过 v-model 绑定，怎么在 watch 中 进行监听，通过 props 来把传递的 数据 变成 子组件的 初始值&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;父组件中的内容&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- 取货方式和收货人信息 --&amp;gt;
+&amp;lt;pick-box :checked=&amp;quot;checkedSuccess&amp;quot; :userData=&amp;quot;userData&amp;quot; :user2Data=&amp;quot;user2Data&amp;quot; :areaArr=&amp;quot;infoAreaData&amp;quot; :errTxt=&amp;quot;pasTxt&amp;quot; :isErrShow=&amp;quot;isErrShow&amp;quot; @changeErr=&amp;quot;changeErrShow&amp;quot; :disabled=&amp;quot;!checkedSuccess&amp;quot;&amp;gt;&amp;lt;/pick-box&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;export default {
+  // 可以在这个地方初始化值
+  let areaN = this.$store.state.numStatus.cityDic.cityName
+  if (areaN === &#39;大兴安岭&#39;) {
+    emCityName1 = areaN + &#39;地区&#39;
+  } else {
+    emCityName1 = areaN + &#39;市&#39;
+  }
+
+  data () {
+    return {
+      userData: {
+        name: &#39;&#39;,
+        idCard: &#39;&#39;
+      },
+      emCityName: emCityName
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;子组件中的内容&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vue&#34;&gt;&amp;lt;template&amp;gt;
+  &amp;lt;div class=&amp;quot;pickBox&amp;quot;&amp;gt;
+    &amp;lt;div class=&amp;quot;conInfoBox&amp;quot; v-show=&amp;quot;order.chiocePick === &#39;1&#39;&amp;quot;&amp;gt;
+      &amp;lt;h3 class=&amp;quot;numH3 c288fe line1&amp;quot;&amp;gt;收货人信息&amp;lt;/h3&amp;gt;
+      &amp;lt;!-- 联系人姓名 --&amp;gt;
+      &amp;lt;div class=&amp;quot;conInpBox&amp;quot; @click=&amp;quot;inputFocus&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;coin&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;input class=&amp;quot;netInput&amp;quot; type=&amp;quot;text&amp;quot; v-model=&amp;quot;conPerName&amp;quot; placeholder=&amp;quot;联系人姓名: 请输入联系人姓名&amp;quot; :disabled=&amp;quot;!checked&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;div class=&amp;quot;errPro&amp;quot;&amp;gt;
+        &amp;lt;div class=&amp;quot;errItem&amp;quot; v-show=&amp;quot;isconErrShow.conErrName&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;errCoin f24&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;proTxt&amp;quot;&amp;gt;请输入正确的收货人姓名&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;/div&amp;gt;
+      &amp;lt;!-- 联系人电话 --&amp;gt;
+      &amp;lt;div class=&amp;quot;conInpBox&amp;quot; @click=&amp;quot;inputFocus&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;coin&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;input class=&amp;quot;netInput&amp;quot; type=&amp;quot;tel&amp;quot; v-model=&amp;quot;conPerTel&amp;quot; placeholder=&amp;quot;联系人电话: 请输入联系人电话&amp;quot; :disabled=&amp;quot;!checked&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;div class=&amp;quot;errPro&amp;quot;&amp;gt;
+        &amp;lt;div class=&amp;quot;errItem&amp;quot; v-show=&amp;quot;isconErrShow.conErrTel&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;errCoin f24&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;proTxt&amp;quot;&amp;gt;请输入正确的收货人电话&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;/div&amp;gt;
+      &amp;lt;!-- 所选区县 --&amp;gt;
+      &amp;lt;div class=&amp;quot;conInpBox conArea&amp;quot; :class=&amp;quot;{&#39;inputDisabled&#39;: !checked}&amp;quot; @click=&amp;quot;inputFocus&amp;quot;&amp;gt;
+        &amp;lt;div class=&amp;quot;conAreaBox&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;coin&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;areaTxt&amp;quot; :class=&amp;quot;{&#39;inputDisabled&#39;: !checked}&amp;quot;&amp;gt;{{conPerArea}}&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
+        &amp;lt;div class=&amp;quot;c288fe&amp;quot; @click=&amp;quot;openPickPop&amp;quot; :class=&amp;quot;{&#39;inputDisabled&#39;: !checked}&amp;quot;&amp;gt;选择区县 〉&amp;lt;/div&amp;gt;
+      &amp;lt;/div&amp;gt;
+      &amp;lt;!-- 收货人信息详细地址 --&amp;gt;
+      &amp;lt;div class=&amp;quot;conInpBox&amp;quot; @click=&amp;quot;inputFocus&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;coin&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;input class=&amp;quot;netInput&amp;quot; type=&amp;quot;tel&amp;quot; v-model=&amp;quot;conPerAdd&amp;quot; placeholder=&amp;quot;详细地址: 请输入详细地址&amp;quot; :disabled=&amp;quot;!checked&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;div class=&amp;quot;errPro&amp;quot;&amp;gt;
+        &amp;lt;div class=&amp;quot;errItem&amp;quot; v-show=&amp;quot;isconErrShow.conErrAdd&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;errCoin f24&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;proTxt&amp;quot;&amp;gt;请输入正确的收货人地址&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+export default {
+  data () {
+    let areaDefalut = this.$store.state.numStatus.cityDic.cityName
+    let emCityName2 = &#39;&#39;
+    if (areaDefalut === &#39;大兴安岭&#39;) {
+      emCityName2 = areaDefalut + &#39;地区&#39;
+    } else {
+      emCityName2 = areaDefalut + &#39;市&#39;
+    }
+
+    return: {
+      isDisable: false,
+      loginNo: loginNo,
+      isLoading: false,
+      pickPersonArea: &#39;&#39;,
+      conPerName: &#39;&#39;,
+      conPerTel: &#39;&#39;,
+      conPerAdd: &#39;&#39;,
+      conPerArea: `所属地区: 黑龙江省 ${emCityName2}`,
+      conPerAreaCode: &#39;&#39;
+    }
+  },
+  props: {
+    userData: {
+      type: Object
+    },
+    user2Data: {
+      type: Object
+    },
+    areaArr: {
+      type: Array
+    },
+    isErrShow: {
+      type: Object
+    },
+    errTxt: {
+      type: String
+    },
+    checked: {
+      type: Boolean
+    }
+  },
+  watch: {
+    user2Data: {
+      handler: function (newVal, oldVal) {
+        console.log(newVal, oldVal)
+      },
+      deep: true  // 深度监听模式
+    },
+    // 收货人姓名检验
+    conPerName (newVal, oldVal) {
+      /* eslint-disable */
+      let conNameReg =  /^([a-zA-Z\u4e00-\u9fa5\·]{1,10})$/
+      if (newVal !== &#39;&#39;) {
+        if (conNameReg.test(newVal)) {
+          this.isconErrShow.conErrName = false
+        } else {
+          this.isconErrShow.conErrName = true
+        }
+      } else {
+        this.isconErrShow.conErrName = true
+      }
+    },
+    // 收货人详细地址地址检验
+    conPerAdd (newVal, oldVal) {
+       let detaAdd = /[@\/\&#39;\\\&amp;quot;$%&amp;amp;_!！+=\^\*\$\+\(\)\-\（\）]+/ig
+       if (newVal !== &#39;&#39;) {
+         if (detaAdd.test(newVal) || newVal === &#39;&#39;) {
+           this.isconErrShow.conErrAdd = true
+         } else {
+           this.isconErrShow.conErrAdd = false
+         }
+       } else {
+         this.isconErrShow.conErrAdd = true
+       }
+    },
+    // 收货人电话检验
+    conPerTel (newVal, oldVal) {
+      let conPTReg = /^\d{6,}$/
+      if (newVal !== &#39;&#39;) {
+        if (conPTReg.test(newVal)) {
+          this.isconErrShow.conErrTel = false
+        } else {
+          this.isconErrShow.conErrTel = true
+        }
+      } else {
+        this.isconErrShow.conErrTel = true
+      }
+    }
+  }
+}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;可以通过 在 data 里 初始化一个 简单值 ，然后 通过 watch 来 监听 通过 props 来传入值的变化 ，然后 再进行 赋值，然后 就可以 通过 在 watch 里面 来 监听 要 变化的 值 来 进行 处理。也可以 通过  computed 来 使 props 传递过来的数据 变成 子组件的 初始值，然后在 input 上面 通过 v-model 来进行双向数据绑定，可以 监听 input 的 change 事件 ， 来进行 对 输入过程中 进行操作。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;在vue-中-使用-mint-ui-的-picker-选择器-组件-在下滑或上滑和手机浏览器原生滑动事件有冲突-通常在-ios-上-会有这个现象-可以监听-touchmove-事件-来阻止默认事件-具体看代码&#34;&gt;在vue 中 使用 mint-ui 的 Picker 选择器 组件，在下滑或上滑和手机浏览器原生滑动事件有冲突（通常在 IOS 上 会有这个现象），可以监听 touchmove 事件，来阻止默认事件，具体看代码&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;参考 &lt;a href=&#34;http://iscrolljs.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://iscrolljs.com/&lt;/a&gt;  &lt;a href=&#34;http://iscrolljs.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;这个网站&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function isPassive () {
+  var supportsPassiveOption = false
+  try {
+    addEventListener(&#39;test&#39;, null, Object.defineProperty({}, &#39;passive&#39;, {
+      get: function () {
+        supportsPassiveOption = true
+      }
+    }))
+  } catch (e) {}
+  return supportsPassiveOption
+}
+
+function preventDefaultFunc (e) {
+  e.preventDefault()
+}
+
+export function preventTouchmove (onoff) {
+  if (onoff) {
+    document.body.addEventListener(&#39;touchmove&#39;, preventDefaultFunc, isPassive() ? {
+      capture: false,
+      passive: false
+    } : false)
+  } else {
+    console.log(&#39;wawawwaawa&#39;)
+    document.body.removeEventListener(&#39;touchmove&#39;, preventDefaultFunc, isPassive() ? {
+      capture: false,
+      passive: false
+    } : false)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;然后通过&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { preventTouchmove } from &#39;utils/common&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;来导入这个方法，然后使用，onoff 是开关，来传 布尔值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;preventTouchmove(true/false)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;在vue项目中展示效果为展开收起的动画组件&#34;&gt;在vue项目中展示效果为展开收起的动画组件&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;expand.js （自己创建的js文件名）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const elTransition = &#39;0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out&#39;
+const Transition = {
+  &#39;before-enter&#39; (el) {
+    el.style.transition = elTransition
+    if (!el.dataset) el.dataset = {}
+
+    el.dataset.oldPaddingTop = el.style.paddingTop
+    el.dataset.oldPaddingBottom = el.style.paddingBottom
+
+    el.style.height = 0
+    el.style.paddingTop = 0
+    el.style.paddingBottom = 0
+  },
+
+  &#39;enter&#39; (el) {
+    el.dataset.oldOverflow = el.style.overflow
+    if (el.scrollHeight !== 0) {
+      el.style.height = el.scrollHeight + &#39;px&#39;
+      el.style.paddingTop = el.dataset.oldPaddingTop
+      el.style.paddingBottom = el.dataset.oldPaddingBottom
+    } else {
+      el.style.height = &#39;&#39;
+      el.style.paddingTop = el.dataset.oldPaddingTop
+      el.style.paddingBottom = el.dataset.oldPaddingBottom
+    }
+
+    el.style.overflow = &#39;hidden&#39;
+  },
+
+  &#39;after-enter&#39; (el) {
+    el.style.transition = &#39;&#39;
+    el.style.height = &#39;&#39;
+    el.style.overflow = el.dataset.oldOverflow
+  },
+
+  &#39;before-leave&#39; (el) {
+    if (!el.dataset) el.dataset = {}
+    el.dataset.oldPaddingTop = el.style.paddingTop
+    el.dataset.oldPaddingBottom = el.style.paddingBottom
+    el.dataset.oldOverflow = el.style.overflow
+
+    el.style.height = el.scrollHeight + &#39;px&#39;
+    el.style.overflow = &#39;hidden&#39;
+  },
+
+  &#39;leave&#39; (el) {
+    if (el.scrollHeight !== 0) {
+      el.style.transition = elTransition
+      el.style.height = 0
+      el.style.paddingTop = 0
+      el.style.paddingBottom = 0
+    }
+  },
+
+  &#39;after-leave&#39; (el) {
+    el.style.transition = &#39;&#39;
+    el.style.height = &#39;&#39;
+    el.style.overflow = el.dataset.oldOverflow
+    el.style.paddingTop = el.dataset.oldPaddingTop
+    el.style.paddingBottom = el.dataset.oldPaddingBottom
+  }
+}
+
+export default {
+  name: &#39;collapseTransition&#39;,
+  functional: true,
+  render (h, { children }) {
+    const data = {
+      on: Transition
+    }
+    return h(&#39;transition&#39;, data, children)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在组件中使用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vue&#34;&gt;&amp;lt;template&amp;gt;
+  &amp;lt;div&amp;gt;
+    &amp;lt;collapse-transition&amp;gt;
+      &amp;lt;!-- 展示的内容 --&amp;gt;
+    &amp;lt;/collapse-transition&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+import CollapseTransition from &#39;../expand.js&#39;
+export default {
+  data () {
+    return {
+      isActive: false
+    }
+  },
+  components: {
+    CollapseTransition
+  },
+  methods: {
+    moreAndMore () {
+      this.isActive = !this.isActive
+    },
+    collClick () {
+      this.isActive = false
+    }
+  }
+}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;有卡顿或者获取高度有误，在enter的时候用setTimeout做了0.1s的延迟，就能准确的获取height了&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;页面刷新vuex被清空&#34;&gt;页面刷新vuex被清空&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;同一个页面(router未改变)，一旦刷新（刷新或深度刷新），存储的&lt;code&gt;vuex&lt;/code&gt;就马上和你说拜拜，解决方法：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;localStorage：网上推荐最多的方法就是用&lt;code&gt;localStorage&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;数据重新获取：在需要某些数据之前先判断一下数据是否存在，如果不存在重新获取。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/robinvdvleuten/vuex-persistedstate&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;vuex-persistedstate&lt;/a&gt;：状态持久化。&lt;/p&gt;
+
+&lt;h3 id=&#34;nexttick适当使用&#34;&gt;nextTick适当使用&lt;/h3&gt;
+
+&lt;p&gt;将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。它跟全局方法 &lt;code&gt;Vue.nextTick&lt;/code&gt; 一样，不同的是回调的 this 自动绑定到调用它的实例上。简而言之，等待DOM更新之后再进行操作。&lt;/p&gt;
+
+&lt;h3 id=&#34;elmentui里面的el-form-就地复用&#34;&gt;elmentui里面的el-form &amp;lsquo;就地复用&amp;rsquo;&lt;/h3&gt;
+
+&lt;p&gt;和&lt;code&gt;v-for&lt;/code&gt;一样，更新已渲染过的元素时，它默认用‘就地复用’策略。如果数据项的顺序被改变，&lt;code&gt;Vue将不会移动DOM&lt;/code&gt;元素来匹配数据项的顺序，而是简单服用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。&lt;/p&gt;
+
+&lt;h3 id=&#34;prop值的改变-不是立即&#34;&gt;prop值的改变&amp;ndash;不是立即&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;如果父组件中给子组件传递了一个&lt;code&gt;prop&lt;/code&gt;的值，然后调用子组件的方法去获取该值，会发现值没有立即改变。&lt;/p&gt;
+
+&lt;p&gt;解决方法：可以监听值的改变去调用相应子组件的方法，将子组件相关方法的调用放在&lt;code&gt;nextTick&lt;/code&gt;里面&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;不要直接修改&lt;code&gt;prop&lt;/code&gt;传下来的值，可以在当前子组件内部声明一个简单值，然后赋值&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;组件之间的调用方式&#34;&gt;组件之间的调用方式&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;父子组件&lt;br /&gt;
+prop向下传递，事件向上传递&lt;br /&gt;
+子组件添加ref属性，父组件可以获取到子组件的实例（不建议）&lt;br /&gt;
+插槽slot 作用域插槽&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;非父子组件&lt;br /&gt;
+使用状态管理&lt;br /&gt;
+实例化一个公共vue实例&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;路由变化页面数据不刷新问题&#34;&gt;路由变化页面数据不刷新问题&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;出现这种情况是因为依赖路由的&lt;code&gt;params&lt;/code&gt;参数获取写在&lt;code&gt;created&lt;/code&gt;生命周期里面,因为相同路由二次甚至多次加载的关系 没有达到监听，退出页面再进入另一个文章页面并不会运行&lt;code&gt;created&lt;/code&gt;组件生命周期,导致文章数据还是第一次进入的数据，解决方法：watch监听路由是否变化&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt; watch: {
+   // 方法1
+   &#39;$route&#39;(to, from) { //监听路由是否变化
+     if (this.$route.params.articleId) { // 判断条件1  判断传递值的变化
+       //获取文章数据
+     }
+   }
+   //方法2
+   &#39;$route&#39;(to, from) {
+     if (to.path == &amp;quot;/page&amp;quot;) { /// 判断条件2  监听路由名 监听你从什么路由跳转过来的
+       this.message = this.$route.query.msg
+     }
+   }
+
+ }
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Vue watch选项</title>
+      <link>http://192.168.31.10:8000/2017/vue-watch/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2017/vue-watch/</guid>
+      <description>
+
+&lt;h2 id=&#34;vue-watch选项&#34;&gt;Vue watch选项&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;watch 的用法&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;watch 对象里的 value 是对应的回调函数&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
+  return {
+    a: 1
+  }
+},
+watch: {
+  a: function (newVal, oldVal) {
+    console.log(newVal, oldVal)
+    // 2 1
+  }
+},
+created () {
+  this.a = 2
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;value 也可以是方法名&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
+  return {
+    a: 1
+  }
+},
+watch: {
+  a: &#39;foo&#39;
+},
+created () {
+  this.a = 2
+},
+methods: {
+  foo (newVal, oldVal) {
+    console.log(newVal, oldVal)
+    // 2 1
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;深度监听 &lt;em&gt;对象内部属性或方法发生改变，须使用深度监听模式才能监听到该对象的改变&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
+  return {
+    box: {
+      name: &#39;jordan&#39;
+    }
+  }
+},
+watch: {
+  box: {
+    handler: function (newVal, oldVal) {
+      console.log(newVal.name, oldVal.name)
+      // kobe kobe
+    },
+    deep: true  // 深度监听模式
+  }
+},
+created () {
+  this.box.name = &#39;kobe&#39;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不使用深度监听时，可以直接监听 xxx.name&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
+  return {
+    box: {
+      name: &#39;jordan&#39;
+    }
+  }
+},
+watch: {
+  &#39;box.name&#39;: {
+    handler: function (newVal, oldVal) {
+      console.log(newVal, oldVal)
+      // kobe jordan
+    }
+  }
+},
+created () {
+  this.box.name = &#39;lalala&#39;
+}
+// 这时 box.name 又是一个简单值，所以输出 &#39;lalala jordan&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;数组的监听&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
+  return {
+    box: [1, 1, 1]
+  }
+},
+watch: {
+  box: {
+    handler: function () {
+      console.log(&#39;watch works&#39;)
+    }
+  }
+},
+created () {
+  this.box[0] = 2
+  this.box.length = 4
+  this.box.push(1)  // watch works
+  this.box.splice(0, 1, 2)  // watch works
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;created 里使用了4种方式对 box 进行操作，第一种和第二种方式 watch 是监听不到的，即便使用深度监听模式也无法监听的到。&lt;/em&gt; &lt;a href=&#34;https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;可以参考&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 immediate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
+  return {
+    box: 1
+  }
+},
+watch: {
+  box: {
+    handler: function () {
+      console.log(&#39;watch works&#39;)
+    },
+    immediate: true
+  }
+}
+
+// watch works
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;增加 immediate: true 选项，handler 会在侦听开始之后被立即调用，即便 box 的值没有改变。如果对 this.box 的值加以修改，便会输出两次 &amp;lsquo;watch works&amp;rsquo;，一次是侦听开始的时候，一次是 box 的值被修改的时候&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;watch 里的 value 可以是放在一个数组里面的多个 handler&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
+  return {
+    box: 1
+  }
+},
+watch: {
+  box: [
+    function foo (newVal, oldVal) {
+      console.log(newVal, oldVal)
+      // 2 1
+    },
+    function bar (newVal, oldVal) {
+      console.log(newVal, oldVal)
+      // 2 1
+    }
+  ]
+},
+created () {
+  this.box = 2
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;每一个 handler 都可以接收 new value 和 old value 两个参数，并且会按各自在数组中的顺序先后触发。当然下面的操作也能实现这样的场景：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
+  return {
+    box: 1
+  }
+},
+watch: {
+  box: function (newVal, oldVal) {
+    this.foo(newVal, oldVal)
+    this.bar(newVal, oldVal)
+  }
+},
+created () {
+  this.box = 2
+},
+methods: {
+  foo (newVal, oldVal) {
+    console.log(newVal, oldVal)
+  },
+  bar (newVal, oldVal) {
+    console.log(newVal, oldVal)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;不应该使用箭头函数来定义 watcher 函数&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
+  return {
+    box: 1
+  }
+},
+watch: {
+  box: newVal =&amp;gt; {
+    this.updateBox(newVal)
+  }
+},
+created () {
+  this.box = 2
+},
+methods: {
+  updateBox (newVal) {
+    this.box = newVal
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;上面的例子会报错，是因为箭头函数绑定了父级作用域的上下文，所以 this 将不会指向 Vue 实例，也就没有 this.updateBox 这个方法，可以参考 es6箭头函数this的指向&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Vue配置相关</title>
+      <link>http://192.168.31.10:8000/2017/vue/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2017/vue/</guid>
+      <description>
+
+&lt;h2 id=&#34;vue配置相关&#34;&gt;Vue配置相关&lt;/h2&gt;
+
+&lt;h3 id=&#34;代理配置&#34;&gt;代理配置&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;module.exports = {
+  ........,
+  dev: {      // 开发环境配置
+    env: require(&#39;./dev.env&#39;),      // 使用 config/dev.env.js 中定义的编译环境
+    port: 8686,     // 运行测试页面的端口号
+    autoOpenBrowser: true,
+    assetsSubDirectory: &#39;static&#39;,     // 编译输出的二级目录
+    assetsPublicPath: &#39;/&#39;,      // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
+    // 需要 proxyTable 代理的接口（可跨域）
+    proxyTable: {
+      &#39;**&#39;: {
+        target: &#39;https://xxxxxxx&#39;,
+        changeOrigin: true,
+        filter: function (pathname, req) {
+          // 接口地址 /******-server/****/******
+          return pathname.match(&#39;^\/.+-server.*&#39;)
+        }
+      }
+    },
+    cssSourceMap: false
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;多入口配置&#34;&gt;多入口配置&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/* utils.js */
+const path = require(&#39;path&#39;);
+
+// glob 是 webpack 安装时依赖的一个第三方模块，还模块允许你使用 * 等符号,
+// 例如 lib/*.js 就是获取 lib 文件夹下的所有 js 后缀名的文件
+const glob = require(&#39;glob&#39;);
+
+// 取得相应的页面路径，因为之前的配置，所以是 src 文件夹下的 pages 文件夹
+const PAGE_PATH = path.resolve(__dirname, &#39;../src/pages&#39;);
+
+/*
+* 多入口配置
+* 通过 glob 模块读取 pages 文件夹下的所有对应文件夹下的 js * 后缀文件，如果该文件存在
+* 那么就作为入口处理
+*/
+exports.getEntries = () =&amp;gt; {
+  let entryFiles = glob.sync(PAGE_PATH + &#39;/*/*.js&#39;) // 同步读取所有入口文件
+  let map = {}
+
+  // 遍历所有入口文件
+  entryFiles.forEach(filePath =&amp;gt; {
+    // 获取文件名
+    let filename = filePath.substring(filePath.lastIndexOf(&#39;\/&#39;) + 1, filePath.lastIndexOf(&#39;.&#39;))
+
+    // 以键值对的形式存储
+    map[filename] = filePath
+  })
+
+  return map
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;上方我们使用了 &lt;code&gt;glob&lt;/code&gt; 这一第三方模块读取所有 pages 文件夹下的入口文件，其需要进行安装：&lt;code&gt;yarn add glob --dev&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;可以将返回的入口文件对象其设置到 webpack 的 entry 属性上&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;多模板配置&#34;&gt;多模板配置&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;模板文件的作用主要用于 webpack 中 &lt;code&gt;html-webpack-plugin&lt;/code&gt; 插件的配置，其会根据模板文件生产一个编译后的 html 文件并自动加入携带 hash 的脚本和样式，基本配置如下：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/* webpack 配置文件 */
+const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;) // 安装并引用插件
+
+module.exports = {
+    ...
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: &#39;My Page&#39;, // 生成 html 中的 title
+        filename: &#39;demo.html&#39;, // 生成 html 的文件名
+        template: &#39;xxx/xxx/demo.html&#39;, // 模板路径
+        chunks: [&#39;manifest&#39;, &#39;vendor&#39;, &#39;demo&#39;], // 所要包含的模块
+        inject: true, // 是否注入资源
+      })
+    ]
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;以上是单模板的配置，那么如果是多模板只要继续往 plugins 数组中添加 HtmlWebpackPlugin 即可，但是为了和多入口一样能够灵活的获取 pages 目录下所有模板文件并进行配置，可以在 utils.js 中添加多模板的读取解析方法：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/* utils.js */
+
+// 多页面输出配置
+// 与上面的多页面入口配置相同，读取 page 文件夹下的对应的 html 后缀文件，然后放入数组中
+exports.htmlPlugin = configs =&amp;gt; {
+    let entryHtml = glob.sync(PAGE_PATH + &#39;/*/*.html&#39;)
+    let arr = []
+    entryHtml.forEach(filePath =&amp;gt; {
+      let filename = filePath.substring(filePath.lastIndexOf(&#39;\/&#39;) + 1, filePath.lastIndexOf(&#39;.&#39;))
+      let conf = {
+        template: filePath, // 模板路径
+        filename: filename + &#39;.html&#39;, // 生成 html 的文件名
+        chunks: [&#39;manifest&#39;, &#39;vendor&#39;, filename],
+        inject: true,
+      }
+      // 如果有自定义配置可以进行 merge
+      if (configs) {
+        conf = merge(conf, configs)
+      }
+      // 针对生产环境配置
+      if (process.env.NODE_ENV === &#39;production&#39;) {
+        conf = merge(conf, {
+          minify: {
+            removeComments: true, // 删除 html 中的注释代码
+            collapseWhitespace: true, // 删除 html 中的空白符
+            // removeAttributeQuotes: true // 删除 html 元素中属性的引号
+          },
+          chunksSortMode: &#39;manual&#39; // 按 manual 的顺序引入
+        })
+      }
+
+      arr.push(new HtmlWebpackPlugin(conf))
+    })
+    return arr
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;注：&lt;a href=&#34;https://github.com/kangax/html-minifier&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;minify&lt;/a&gt; 配置的作用：将 html-minifier 的选项作为对象来缩小输出&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;在-vue-cli3-使用-pages-配置&#34;&gt;在 vue-cli3 使用 pages 配置&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;将多入口和多模板的方法就可以合并成一个函数来进行多页的处理，合并后的 setPages 方法如下：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const path = require(&#39;path&#39;)
+
+// glob是webpack安装时依赖的一个第三方模块，还模块允许你使用 *等符号,
+// 例如lib/*.js就是获取lib文件夹下的所有js后缀名的文件
+const glob = require(&#39;glob&#39;)
+
+// 取得相应的页面路径，因为之前的配置，所以是src文件夹下的pages文件夹
+const PAGE_PATH = path.resolve(__dirname, &#39;../src/pages/&#39;)
+
+// 用于做相应的merge处理
+const merge = require(&#39;webpack-merge&#39;)
+
+const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
+
+let ENTRY = &#39;main.js&#39;
+// pages 多入口配置
+exports.setPages = configs =&amp;gt; {
+    let entryFiles = glob.sync(PAGE_PATH + &#39;/**/&#39; + ENTRY);
+    let map = {};
+
+    entryFiles.forEach(filePath =&amp;gt; {
+        let tmp = filePath.substring(0, filePath.indexOf(ENTRY));
+        let fileName = filePath.substring(PAGE_PATH.length + 1, filePath.indexOf(ENTRY) - 1)
+
+        let conf = {
+          // page 的入口
+          entry: filePath,
+          // 模板来源
+          template: tmp + &#39;index.html&#39;,
+          // 在 dist/index.html 的输出
+          filename: fileName + &#39;.html&#39;,
+          // 页面模板需要加对应的js脚本，如果不加这行则每个页面都会引入所有的js脚本
+          chunks: [&#39;chunk-vendors&#39;, &#39;chunk-common&#39;, fileName]
+          // inject: true
+        };
+
+        console.log(&#39;conf&#39;, conf)
+
+        if (configs) {
+            conf = merge(conf, configs)
+        }
+
+        if (process.env.NODE_ENV === &#39;production&#39;) {
+            conf = merge(conf, {
+                minify: {
+                    removeComments: true, // 删除html中的注释代码
+                    collapseWhitespace: true, // 删除html中的空白符
+                },
+                chunksSortMode: &#39;manual&#39;// 按manual的顺序引入
+            })
+        }
+
+        map[fileName] = conf;
+    })
+
+    return map
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;上述代码我们 return 出的 map 对象就是 pages 所需要的配置项结构，我们只需在 vue.config.js 中引用即可：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/* vue.config.js */
+const utils = require(&#39;./build/utils&#39;)
+
+module.exports = {
+  ...
+
+  pages: utils.setPages(),
+
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

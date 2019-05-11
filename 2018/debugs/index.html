@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="http://192.168.31.10:8000/2018/npm/" />
+  <link rel="next" href="http://192.168.31.10:8000/2018/eventloop/" />
+  <link rel="canonical" href="http://192.168.31.10:8000/2018/debugs/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           js 调试相关 | Magic
+       
+  </title>
+  <meta name="title" content="js 调试相关 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="js 调试相关"/>
+<meta name="twitter:description" content="Js调试命令 Console  Console 对象提供对浏览器控制台的接入。不同浏览器上它的工作方式是不一样的。
+ Console 对象可以在任何全局对象中访问，如 Window，WorkerGlobalScope 以及通过属性工作台提供的特殊定义。
+ 它被浏览器定义为 Window.Console，也可被简单的 Console 调用。  最常用的方法就是 console.log() 就是在控制台输出内容。console 对象还有除了 log 之外的其他方法。
+注意：因为 Console 对象提供对浏览器控制台的接入 ，所以在不同浏览器中的支持以及表现方法可能不太一样，但是调试内容只有开发者会看，所以保证在开发环境用这些方法就可以。
+分类输出  不同类别信息的输出。  console.log(&#39;文字信息&#39;); console.info(&#39;提示信息&#39;); console.warn(&#39;警告信息&#39;); console.error(&#39;错误信息&#39;);  分组输出  使用 Console.group()和 Console.groupEnd()包裹分组内容。 还可以使用 Console.groupCollapsed()来代替 Console.group()生成折叠的分组。  console.group(&#39;第一个组&#39;); console.log(&quot;1-1&quot;); console.log(&quot;1-2&quot;); console.log(&quot;1-3&quot;); console.groupEnd(); console.group(&#39;第二个组&#39;); console.log(&quot;2-1&quot;); console.log(&quot;2-2&quot;); console.log(&quot;2-3&quot;); console.groupEnd();  Console.group()还可以嵌套使用。
+console.group(&#39;第一个组&#39;); console.group(&quot;1-1&quot;); console.group(&quot;1-1-1&quot;); console.log(&#39;内容&#39;); console.groupEnd(); console.groupEnd(); console.group(&quot;1-2&quot;); console.log(&#39;内容&#39;); console.log(&#39;内容&#39;); console.log(&#39;内容&#39;); console.groupEnd(); console.groupEnd(); console.groupCollapsed(&#39;第二个组&#39;); console."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "js 调试相关",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http:\/\/192.168.31.10:8000\/2018\/debugs\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "js",
+  "wordcount":  516 ,
+  "url": "http:\/\/192.168.31.10:8000\/2018\/debugs\/",
+  "datePublished": "2018-03-02T00:00:00\x2b00:00",
+  "dateModified": "2018-03-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http:\/\/192.168.31.10:8000\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="http://192.168.31.10:8000">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="http://192.168.31.10:8000">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">js 调试相关</h1>
+        <div class="post-meta">
+            Written by <a href="http://192.168.31.10:8000" rel="author">Magic</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2018-03-02 >2 March 2018</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="http://192.168.31.10:8000/categories/js/"> js </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                3 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="js调试命令">Js调试命令</h1>
+
+<h2 id="console">Console</h2>
+
+<ul>
+<li><strong>Console</strong> 对象提供对浏览器控制台的接入。不同浏览器上它的工作方式是不一样的。<br /></li>
+<li><strong>Console</strong> 对象可以在任何全局对象中访问，如 Window，<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WorkerGlobalScope" rel="nofollow noreferrer" target="_blank">WorkerGlobalScope</a> 以及通过属性工作台提供的特殊定义。<br /></li>
+<li>它被浏览器定义为 Window.Console，也可被简单的 Console 调用。</li>
+</ul>
+
+<p>最常用的方法就是 <code>console.log()</code> 就是在控制台输出内容。<strong>console</strong> 对象还有除了 <code>log</code> 之外的其他方法。<br />
+注意：因为 <strong>Console 对象提供对浏览器控制台的接入</strong> ，所以在不同浏览器中的支持以及表现方法可能不太一样，但是调试内容只有开发者会看，所以保证在开发环境用这些方法就可以。</p>
+
+<h4 id="分类输出">分类输出</h4>
+
+<ul>
+<li>不同类别信息的输出。</li>
+</ul>
+
+<pre><code class="language-js">console.log('文字信息');
+console.info('提示信息');
+console.warn('警告信息');
+console.error('错误信息');
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console1.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h4 id="分组输出">分组输出</h4>
+
+<ul>
+<li>使用 <code>Console.group()</code>和 <code>Console.groupEnd()</code>包裹分组内容。</li>
+<li>还可以使用 <code>Console.groupCollapsed()</code>来代替 <code>Console.group()</code>生成折叠的分组。</li>
+</ul>
+
+<pre><code class="language-js">console.group('第一个组');
+  console.log(&quot;1-1&quot;);
+  console.log(&quot;1-2&quot;);
+  console.log(&quot;1-3&quot;);
+console.groupEnd();
+console.group('第二个组');
+  console.log(&quot;2-1&quot;);
+  console.log(&quot;2-2&quot;);
+  console.log(&quot;2-3&quot;);
+console.groupEnd();
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console2.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<p><code>Console.group()</code>还可以嵌套使用。</p>
+
+<pre><code class="language-js">console.group('第一个组');
+  console.group(&quot;1-1&quot;);
+    console.group(&quot;1-1-1&quot;);
+      console.log('内容');
+    console.groupEnd();
+  console.groupEnd();
+  console.group(&quot;1-2&quot;);
+    console.log('内容');
+    console.log('内容');
+    console.log('内容');
+  console.groupEnd();
+console.groupEnd();
+
+console.groupCollapsed('第二个组');
+  console.group(&quot;2-1&quot;);
+  console.groupEnd();
+  console.group(&quot;2-2&quot;);
+  console.groupEnd();
+console.groupEnd();
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console3.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h4 id="表格输出">表格输出</h4>
+
+<ul>
+<li>使用 <code>console.table()</code>可以将传入的对象，或数组以表格形式输出。适合排列整齐的元素。</li>
+</ul>
+
+<pre><code class="language-js">var Obj = {
+    Obj1: {
+        a: &quot;aaa&quot;,
+        b: &quot;bbb&quot;,
+        c: &quot;ccc&quot;
+    },
+    Obj2: {
+        a: &quot;aaa&quot;,
+        b: &quot;bbb&quot;,
+        c: &quot;ccc&quot;
+    },
+    Obj3: {
+        a: &quot;aaa&quot;,
+        b: &quot;bbb&quot;,
+        c: &quot;ccc&quot;
+    },
+    Obj4: {
+        a: &quot;aaa&quot;,
+        b: &quot;bbb&quot;,
+        c: &quot;ccc&quot;
+    }
+}
+console.table(Obj);
+var Arr = [
+  [&quot;aa&quot;, &quot;bb&quot;, &quot;cc&quot;],
+  [&quot;dd&quot;, &quot;ee&quot;, &quot;ff&quot;],
+  [&quot;gg&quot;, &quot;hh&quot;, &quot;ii&quot;]
+]
+console.table(Arr);
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console4.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h4 id="查看对象">查看对象</h4>
+
+<ul>
+<li>使用 <code>Console.dir()</code>显示一个对象的所有属性和方法。</li>
+<li>在Chrome中 <code>Console.dir()</code>和 <code>Console.log()</code>效果相同。</li>
+</ul>
+
+<pre><code class="language-js">var CodeDeer = {
+  name: '张三',
+  blog: 'www.google.com',
+}
+console.log(&quot;console.dir(CodeDeer)&quot;);
+console.dir(CodeDeer);
+console.log(&quot;console.log(CodeDeer)&quot;);
+console.log(CodeDeer);
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console5.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h4 id="查看节点">查看节点</h4>
+
+<ul>
+<li>使用 <code>Console.dirxml()</code> <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Console/dirxml" rel="nofollow noreferrer" target="_blank">显示一个明确的XML/HTML元素的包括所有后代元素的交互树。 如果无法作为一个element被显示，那么会以JavaScript对象的形式作为替代。 它的输出是一个继承的扩展的节点列表，可以让你看到子节点的内容</a>。</li>
+<li>在Chrome中 <code>Console.dirxml()</code>和 <code>Console.log()</code>效果相同。</li>
+</ul>
+
+<pre><code class="language-js">/**
+ * html 元素
+ * &lt;div id=&quot;lg&quot; class=&quot;s-p-top&quot;&gt;
+    &lt;img id=&quot;s_lg_img&quot; class=&quot;s_lg_img_gold_show&quot; src=&quot;//www.baidu.com/img/bd_logo1.png?where=super&quot; width=&quot;270&quot; height=&quot;129&quot; usemap=&quot;#mp&quot; /&gt; 
+    &lt;img id=&quot;s_lg_img_new&quot; class=&quot;s_lg_img_gold_showre&quot; src=&quot;//www.baidu.com/img/bd_logo1.png?qua=high&amp;amp;where=super&quot; width=&quot;270&quot; height=&quot;129&quot; usemap=&quot;#mp&quot; /&gt; 
+    &lt;map name=&quot;mp&quot; id=&quot;s_mp&quot;&gt;&lt;area style=&quot;cursor:pointer;outline:none;&quot; shape=&quot;rect&quot; coords=&quot;0,0,270,129&quot; href=&quot;//www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&amp;amp;tn=SE_Pclogo_6ysd4c7a&amp;amp;sa=ire_dl_gh_logo&amp;amp;rsv_dl=igh_logo_pc&quot; target=&quot;_blank&quot; title=&quot;点击一下，了解更多&quot; onmousedown=&quot;return ns_c({'fm':'behs','tab':'bdlogo'})&quot;&gt;&lt;/area&gt;&lt;/map&gt; 
+  &lt;/div&gt;
+*/
+var lg = document.getElementById('lg')
+console.dirxml(lg)
+console.log('********')
+console.log(lg)
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console6.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h4 id="条件输出">条件输出</h4>
+
+<ul>
+<li>利用 <code>console.assert()</code>,可以进行条件输出。</li>
+<li>当第一个参数或返回值为真时，不输出内容。</li>
+<li>当第一个参数或返回值为假时，输出后面的内容并抛出异常。</li>
+</ul>
+
+<pre><code class="language-js">console.assert(true, &quot;你永远看不见我&quot;);
+console.assert((function() {
+    return true;
+})(), &quot;你永远看不见我&quot;);
+console.assert(false, &quot;你看得见我&quot;);
+console.assert((function() {
+    return false;
+})(), &quot;你看得见我&quot;);
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console7.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h4 id="计次输出">计次输出</h4>
+
+<ul>
+<li>使用 <code>Console.count()</code>输出内容和被调用的次数。</li>
+</ul>
+
+<pre><code class="language-js">for (var i = 0; i &lt; 3; i++) {
+  console.count(&quot;运行次数：&quot;);
+}
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console8.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h4 id="追踪调用堆栈">追踪调用堆栈</h4>
+
+<ul>
+<li>使用 <code>Console.trace()</code>来追踪函数被调用的过程，在复杂项目时调用过程非常多，用这个命令来帮你缕清。</li>
+</ul>
+
+<pre><code class="language-js">function add(a, b) {
+  console.trace(&quot;Add function&quot;);
+  return a + b;
+}
+function add3(a, b) {
+  return add2(a, b);
+}
+function add2(a, b) {
+  return add1(a, b);
+}
+function add1(a, b) {
+  return add(a, b);
+}
+var x = add3(1, 1);
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console9.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h5 id="堆栈调用如何工作">堆栈调用如何工作</h5>
+
+<ul>
+<li>每当函数被调用，它都会被推到堆栈的顶部。函数执行完毕，便会从堆栈顶部移除。就是 <strong>最后一个入栈的将会第一个从堆栈中移除</strong> 这也就是我们所熟悉的LIFO(后进，先出)特性。</li>
+<li>注：<a href="https://juejin.im/post/5a05b4576fb9a04519690d42" rel="nofollow noreferrer" target="_blank">JavaScript 如何工作：对引擎、运行时、调用堆栈的概述</a></li>
+</ul>
+
+<h4 id="计时功能">计时功能</h4>
+
+<ul>
+<li>使用 <code>Console.time()</code>和 <code>Console.timeEnd()</code>包裹需要计时的代码片段，输出运行这段代码的事件。</li>
+<li><code>Console.time()</code>中的参数作为计时器的标识，具有唯一性。</li>
+<li><code>Console.timeEnd()</code>中的参数来结束此标识的计时器，并以毫秒为单位返回运行时间。</li>
+<li>最多同时运行10000个计时器。</li>
+</ul>
+
+<pre><code class="language-js">console.time(&quot;Chrome中循环1000次的时间&quot;);
+for (var i = 0; i &lt; 1000; i++) {}
+console.timeEnd(&quot;Chrome中循环1000次的时间&quot;);
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console10.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h4 id="性能分析">性能分析</h4>
+
+<ul>
+<li>使用 <code>Console.profile()</code>进行性能分析，要停止记录，请调用<code>Console.profileEnd()</code>。查看代码各部分运行消耗的时间，在Chrome自带的调试工具中并没有找到在哪里查看这两个方法生成的分析报告。应该需要其他的调试工具。</li>
+<li><a href="https://www.oschina.net/translate/performance-optimisation-with-timeline-profiles" rel="nofollow noreferrer" target="_blank">使用Chrome DevTools的Timeline和Profiles提高Web应用程序的性能</a>。Chrome 最新版本的查看网页性能名称为 <code>Performance(性能)</code>。</li>
+</ul>
+
+<h4 id="console-log">Console.log()</h4>
+
+<ul>
+<li>最后再来介绍一下强大的 <code>Console.log()</code>，这个方法有很多的用法（其他输出方法的用法，如<code>error()</code>等，可以参照<code>log()</code>使用）。</li>
+</ul>
+
+<ol>
+<li>提示输出 可以再输出的对象、变量前加上提示信息，增加辨识度。</li>
+</ol>
+
+<pre><code class="language-js">var ans = 12345;
+console.log(&quot;这是临时变量ans的值：&quot;, ans);
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console11.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<ol>
+<li>格式化输出</li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>含义</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>%s</td>
+<td>字符串输出</td>
+</tr>
+
+<tr>
+<td>%d or %i</td>
+<td>整数输出</td>
+</tr>
+
+<tr>
+<td>%f</td>
+<td>浮点数输出</td>
+</tr>
+
+<tr>
+<td>%o</td>
+<td>打印javascript对象，可以是整数、字符串以及JSON数据</td>
+</tr>
+</tbody>
+</table>
+
+<pre><code class="language-js">var arr = [&quot;张三&quot;, &quot;李四&quot;];
+console.log(&quot;欢迎%s和%s两位新同学&quot;, arr[0], arr[1]);
+console.log(&quot;圆周率整数部分：%d，带上小数是：%f&quot;, 3.1415, 3.1415);
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console12.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<ol>
+<li>自定义样式&ndash;使用<code>%c</code>为打印内容定义样式,再输出信息前加上<code>%c</code>，后面写上标准的css样式，就可以为输出的信息添加样式了。</li>
+</ol>
+
+<pre><code class="language-js">console.log(&quot;%c 啦啦啦&quot;, &quot;color: #0084ff;font-size: 30px;&quot;)
+console.log(&quot;%c3D Text&quot;, &quot; text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);font-size:5em&quot;);
+console.log('%cRainbow Text ', 'background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;');
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/console13.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h2 id="debugger">debugger</h2>
+
+<ul>
+<li>调试js代码时 可以在需要调试的地方打断点，然后在浏览器中打开在运行到这一段的代码时会在打断点的地方停止，在 <code>Chrome</code> 中可以按 <code>F10</code> 继续下一步，然后在 <strong>开发者工具&ndash;&gt;Sources</strong> 中可以看到具体内容，也可以用 鼠标 放到某个 变量上 看具体值。</li>
+</ul>
+
+<pre><code class="language-js">let nums1 = [4,9,5]
+let nums2 = [9,4,9,8,4]
+
+const solution2 = (arr1, arr2) =&gt; {
+  let result = []
+  for (let item of arr1) {
+    debugger
+    if (arr2.includes(item)) {
+      debugger
+      result.push(item)
+    }
+  }
+
+  return [...new Set(result)]
+}
+
+console.log('solution2', solution2(nums1, nums2))
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/debugger1.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<h3 id="在-vscode-中打断点">在 vscode 中打断点</h3>
+
+<ul>
+<li>在vscode 中 选择调试模式，然后 开启调式 或者 在一个文件上 直接 <code>F5</code>，可以直接开启调式模式，首先会弹出弹窗，选择 <code>环境</code>（vscode 中有插件，<code>Debugger for Chrome || Node Debug || React Native Tools</code>，安装完成后），会在选择环境中弹出环境配置。</li>
+</ul>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/debugger3.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<ul>
+<li>在一个js文件里面我选择的是 node 环境，然后在代码中打上断点（图中红色圆圈，使用鼠标右键），之后运行会出现如图所示。</li>
+</ul>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/debugger2.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<ul>
+<li>使用 <code>Debugger for Chrome</code> 插件调试代码。</li>
+</ul>
+
+<p>开启本地服务运行项目，在这里我用的是 <code>anywhere</code>，也可以用其他的，如 <a href="http://www.browsersync.cn/" rel="nofollow noreferrer" target="_blank">Browsersync</a>。<br />
+启动vscode， debug模式选择 Chrome。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/debug4.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<p>然后有两种模式（launch | attach）如下图：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/debug5.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<p>第一种模式使用<br />
+先开启本地服务。我使用的端口默认为8080，上面配置里就对应是<a href="http://localhost:8080。" rel="nofollow noreferrer" target="_blank">http://localhost:8080。</a><br />
+得先把chrome关闭，并且确保所有chrome进程都被杀死了，然后可以按<code>F5</code> 直接打开调试模式，才能正常使用调试，否则就会总报错就会（window下好像不用，会开启一个新的chrome窗口），就可以在vscode进行调试了。（例子：在html里面引入xxx.js）</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/debug6.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+<p>第二种模式使用<br />
+同上先启动本地服务。关闭所有chrome进程（window下好像不用）。<a href="https://github.com/Microsoft/vscode-chrome-debug" rel="nofollow noreferrer" target="_blank">需要先在终端中使用和配置项port一致的端口号将chrome启动</a>。选择 <code>attach to Chrome</code>，然后启动调试，在打开的浏览器中输入服务器url或者文件路径都可以进行调试。并且你关闭调试也不会关闭chrome浏览器。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/debug7.png" alt="CONSOLE1" class="lazyload"><figcaption class="image-caption">CONSOLE1</figcaption></figure></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Magic </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>516</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=http%3a%2f%2f192.168.31.10%3a8000%2f2018%2fdebugs%2f&amp;text=js%20%e8%b0%83%e8%af%95%e7%9b%b8%e5%85%b3&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=http%3a%2f%2f192.168.31.10%3a8000%2f2018%2fdebugs%2f&amp;appkey=&amp;title=js%20%e8%b0%83%e8%af%95%e7%9b%b8%e5%85%b3" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+            </p>
+                       
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="http://192.168.31.10:8000/tags/js/">
+                    #js</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="http://192.168.31.10:8000">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="http://192.168.31.10:8000/2018/npm/" class="prev" rel="prev" title="npm 镜像设置"><i class="iconfont icon-dajiantou"></i>&nbsp;npm 镜像设置</a>
+         
+        
+        <a href="http://192.168.31.10:8000/2018/eventloop/" class="next" rel="next" title="EventLoop">EventLoop&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="http://192.168.31.10:8000">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

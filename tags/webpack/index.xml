@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webpack on Magic</title>
+    <link>http://192.168.31.10:8000/tags/webpack/</link>
+    <description>Recent content in Webpack on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://192.168.31.10:8000/tags/webpack/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Webpack 优化相关</title>
+      <link>http://192.168.31.10:8000/2019/webpack/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2019/webpack/</guid>
+      <description>官网  Webpack 优化 构建过程提速策略 不要让 loader 做太多事情  以 babel-loader 为例：  babel-loader 无疑是强大的，但它也是慢的。
+最常见的优化方式是，用 include 或 exclude 来帮我们避免不必要的转译，比如 webpack 官方在介绍 babel-loader 时给出的示例：
+module: { rules: [ { test: /\.js$/, exclude: /(node_modules|bower_components)/, use: { loader: &#39;babel-loader&#39;, options: { presets: [&#39;@babel/preset-env&#39;] } } } ] }  除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：
+loader: &#39;babel-loader?cacheDirectory=true&#39;  抽离第三库  DllPlugin是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。  用 DllPlugin 处理文件，要分两步走：
+ 基于 dll 专属的配置文件，打包 dll 库 基于 webpack.</description>
+    </item>
+    
+  </channel>
+</rss>

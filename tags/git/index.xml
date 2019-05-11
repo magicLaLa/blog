@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Magic</title>
+    <link>http://192.168.31.10:8000/tags/git/</link>
+    <description>Recent content in git on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://192.168.31.10:8000/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>git commit emoji 使用指南</title>
+      <link>http://192.168.31.10:8000/2017/git-commit-emoji/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2017/git-commit-emoji/</guid>
+      <description>git commit emoji 使用指南 目录  commit 格式 emoji 指南 如何在命令行中显示 emoji 参考  git commit emoji write a good commit message   执行 git commit 时使用 emoji 为本次提交打上一个 &amp;ldquo;标签&amp;rdquo;, 使得此次 commit 的主要工作得以凸现，也能够使得其在整个提交历史中易于区分与查找。
+截取的 gitmoji 快照:
+commit 格式 git commit 时，提交信息遵循以下格式：
+:emoji1: :emoji2: 不超过 50 个字的摘要，首字母大写，使用祈使语气，句末不要加句号 提交信息主体 引用相关 issue 或 PR 编号 &amp;lt;#110&amp;gt;  初次提交示例：
+git commit -m &amp;quot;🎉 Initialize Repo&amp;quot;  emoji 指南    emoji emoji 代码 commit 说明     🎉 (庆祝) tada 初次提交   ✨ (火花) sparkles 引入新功能   🔖 (书签) bookmark 发行/版本标签   🐛 (bug) bug 修复 bug   🚑 (急救车) ambulance 重要补丁   🌐 (地球) globe_with_meridians 国际化与本地化   💄 (口红) lipstick 更新 UI 和样式文件   🚨 (警车灯) rotating_light 移除 linter 警告   🔧 (扳手) wrench 修改配置文件   ➕ (加号) heavy_plus_sign 增加一个依赖   ➖ (减号) heavy_minus_sign: 减少一个依赖   ⬆️ (上升箭头) arrow_up 升级依赖   ⬇️ (下降箭头) arrow_down 降级依赖   ⚡️ (闪电)</description>
+    </item>
+    
+    <item>
+      <title>git 相关总结</title>
+      <link>http://192.168.31.10:8000/2017/git-summary/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/2017/git-summary/</guid>
+      <description>关于git的总结 git工作流 git相关  git 提交规范 git 简明指南 git 在线教程 git pro 中文教程
+ Commitizen是一个撰写合格 Commit message 的工具。
+  1.安装命令如下:
+npm install -g commitizen  2.然后，在项目目录里，运行下面的命令，使其支持 Angular 的 Commit message 格式
+commitizen init cz-conventional-changelog --save --save-exact  3.以后，凡是用到git commit命令，一律改为使用git cz。这时，就会出现选项，用来生成符合格式的 Commit message
+ 更多关于Commit message 和 Change log 编写指南可以到Commit message 和 Change log 编写指南查看&amp;hellip;  git操作 合并某个分支上的文件到应一个分支、回退到某个版本和 远程服务器上面回退到某个版本  git 合并某个分支上的文件到另一个分支上git checkout branch &amp;lt;path&amp;gt; git 本地回退到某个版本
+git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795   git 远程服务器上面回退到某个版本</description>
+    </item>
+    
+  </channel>
+</rss>

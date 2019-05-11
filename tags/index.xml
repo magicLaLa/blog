@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Magic</title>
+    <link>http://192.168.31.10:8000/tags/</link>
+    <description>Recent content in Tags on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://192.168.31.10:8000/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Webpack</title>
+      <link>http://192.168.31.10:8000/tags/webpack/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/webpack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>http://192.168.31.10:8000/tags/docker/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Node</title>
+      <link>http://192.168.31.10:8000/tags/node/</link>
+      <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/node/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MiniPrograms</title>
+      <link>http://192.168.31.10:8000/tags/miniprograms/</link>
+      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/miniprograms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>js</title>
+      <link>http://192.168.31.10:8000/tags/js/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Browser</title>
+      <link>http://192.168.31.10:8000/tags/browser/</link>
+      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/browser/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vue</title>
+      <link>http://192.168.31.10:8000/tags/vue/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/vue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>http://192.168.31.10:8000/tags/git/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>leetCode</title>
+      <link>http://192.168.31.10:8000/tags/leetcode/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/leetcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>other</title>
+      <link>http://192.168.31.10:8000/tags/other/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.31.10:8000/tags/other/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
