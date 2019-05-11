@@ -2,102 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Magic</title>
-    <link>https://magiclala.github.io/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://magiclala.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Webpack</title>
-      <link>https://magiclala.github.io/categories/webpack/</link>
+      <link>/categories/webpack/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/webpack/</guid>
+      <guid>/categories/webpack/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Docker</title>
-      <link>https://magiclala.github.io/categories/docker/</link>
+      <link>/categories/docker/</link>
       <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/docker/</guid>
+      <guid>/categories/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Node</title>
-      <link>https://magiclala.github.io/categories/node/</link>
+      <link>/categories/node/</link>
       <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/node/</guid>
+      <guid>/categories/node/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MiniPrograms</title>
-      <link>https://magiclala.github.io/categories/miniprograms/</link>
+      <link>/categories/miniprograms/</link>
       <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/miniprograms/</guid>
+      <guid>/categories/miniprograms/</guid>
       <description></description>
     </item>
     
     <item>
       <title>js</title>
-      <link>https://magiclala.github.io/categories/js/</link>
+      <link>/categories/js/</link>
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/js/</guid>
+      <guid>/categories/js/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Browser</title>
-      <link>https://magiclala.github.io/categories/browser/</link>
+      <link>/categories/browser/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/browser/</guid>
+      <guid>/categories/browser/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vue</title>
-      <link>https://magiclala.github.io/categories/vue/</link>
+      <link>/categories/vue/</link>
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/vue/</guid>
+      <guid>/categories/vue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>git</title>
-      <link>https://magiclala.github.io/categories/git/</link>
+      <link>/categories/git/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/git/</guid>
+      <guid>/categories/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>leetCode</title>
-      <link>https://magiclala.github.io/categories/leetcode/</link>
+      <link>/categories/leetcode/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/leetcode/</guid>
+      <guid>/categories/leetcode/</guid>
       <description></description>
     </item>
     
     <item>
       <title>other</title>
-      <link>https://magiclala.github.io/categories/other/</link>
+      <link>/categories/other/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/categories/other/</guid>
+      <guid>/categories/other/</guid>
       <description></description>
     </item>
     

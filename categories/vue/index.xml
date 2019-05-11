@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vue on Magic</title>
-    <link>https://magiclala.github.io/categories/vue/</link>
+    <link>/categories/vue/</link>
     <description>Recent content in Vue on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 02 Oct 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://magiclala.github.io/categories/vue/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/vue/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Vue Plugins And Expansion</title>
-      <link>https://magiclala.github.io/2017/vueplugins/</link>
+      <link>/2017/vueplugins/</link>
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2017/vueplugins/</guid>
+      <guid>/2017/vueplugins/</guid>
       <description> Vue Plugins And Expansion(后台模板) 条形码 vue-barcode  地址：vue-barcode GitHub: https://github.com/fengyuanchen/vue-barcode
  全局使用方式：
   // main.js import VueBarcode from &#39;@chenfengyuan/vue-barcode&#39;; Vue.component(&#39;barcode&#39;, VueBarcode);  &amp;lt;barcode :value=qualityInfo.tyOrderCode :options=&amp;quot;{ displayValue: false }&amp;quot; id=&amp;quot;canves&amp;quot;&amp;gt;&amp;lt;/barcode&amp;gt;  vue图表-V-charts  V-charts 文档  vue后台管理模板  vue-element-admin  </description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>vue 相关问题</title>
-      <link>https://magiclala.github.io/2017/workrelated/</link>
+      <link>/2017/workrelated/</link>
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2017/workrelated/</guid>
+      <guid>/2017/workrelated/</guid>
       <description>使用vuex状态管理后，在 input 中使用 v-model 来进行双向数据绑定，在修改 input 中值的时候会抛出一个错误  可以不使用 v-model 来进行双向数据绑定，使用 :value=&amp;rsquo; &amp;lsquo; 来，然后设置一个 监听器来推动 state 的更新( @input=&amp;rsquo; &amp;lsquo; )
 vue 模板
  &amp;lt;template&amp;gt; &amp;lt;div class=&amp;quot;hello&amp;quot;&amp;gt; &amp;lt;input type=&amp;quot;text&amp;quot; :value=&amp;quot;text&amp;quot; @input=&#39;update&#39;&amp;gt; &amp;lt;span&amp;gt;{{ddd}}&amp;lt;/span&amp;gt; &amp;lt;p ref=&amp;quot;ppp&amp;quot;&amp;gt;啦啦啦&amp;lt;/p&amp;gt; &amp;lt;input type=&amp;quot;text&amp;quot; v-focus&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; import {mapState} from &#39;vuex&#39; export default { name: &#39;HelloWorld&#39;, data () { return { ddd: &#39;&#39; } }, computed: { ...mapState([&#39;text&#39;]) }, methods: { update (e) { // 在这里来 更新 state 里的某一个值 this.</description>
@@ -35,10 +35,10 @@ vue 模板
     
     <item>
       <title>Vue watch选项</title>
-      <link>https://magiclala.github.io/2017/vue-watch/</link>
+      <link>/2017/vue-watch/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2017/vue-watch/</guid>
+      <guid>/2017/vue-watch/</guid>
       <description>Vue watch选项  watch 的用法
  watch 对象里的 value 是对应的回调函数
   data () { return { a: 1 } }, watch: { a: function (newVal, oldVal) { console.log(newVal, oldVal) // 2 1 } }, created () { this.a = 2 }   value 也可以是方法名  data () { return { a: 1 } }, watch: { a: &#39;foo&#39; }, created () { this.a = 2 }, methods: { foo (newVal, oldVal) { console.</description>
@@ -46,19 +46,19 @@ vue 模板
     
     <item>
       <title>Vue配置相关</title>
-      <link>https://magiclala.github.io/2017/vue/</link>
+      <link>/2017/vue/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2017/vue/</guid>
+      <guid>/2017/vue/</guid>
       <description>Vue配置相关 代理配置 module.exports = { ........, dev: { // 开发环境配置 env: require(&#39;./dev.env&#39;), // 使用 config/dev.env.js 中定义的编译环境 port: 8686, // 运行测试页面的端口号 autoOpenBrowser: true, assetsSubDirectory: &#39;static&#39;, // 编译输出的二级目录 assetsPublicPath: &#39;/&#39;, // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名 // 需要 proxyTable 代理的接口（可跨域） proxyTable: { &#39;**&#39;: { target: &#39;https://xxxxxxx&#39;, changeOrigin: true, filter: function (pathname, req) { // 接口地址 /******-server/****/****** return pathname.match(&#39;^\/.+-server.*&#39;) } } }, cssSourceMap: false } }  多入口配置 /* utils.js */ const path = require(&#39;path&#39;); // glob 是 webpack 安装时依赖的一个第三方模块，还模块允许你使用 * 等符号, // 例如 lib/*.</description>
     </item>
     
     <item>
       <title>vue中盲点</title>
-      <link>https://magiclala.github.io/2017/vue-blind-spot/</link>
+      <link>/2017/vue-blind-spot/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2017/vue-blind-spot/</guid>
+      <guid>/2017/vue-blind-spot/</guid>
       <description>vue中盲点 使用 performance 开启性能追踪  performance API 是 Vue 全局配置 API 中的一个，我们可以使用它来进行网页性能的追踪，我们可以在入口文件中添加：  if (process.env.NODE_ENV !== &#39;production&#39;) { Vue.config.performance = true; }  来开启这一功能，该 API（2.2.0 新增）功能只适用于开发模式和支持 performance.mark API 的浏览器上，开启后我们可以下载 Vue Performance Devtool 这一 chrome 插件来看查看各个组件的加载情况，如图：
 从中我们可以清晰的看到页面组件在每个阶段的耗时情况，而针对耗时比较久的组件，我们便可以对其进行相应优化。
 而其在 Vue 源码中主要使用了 window.performance 来获取网页性能数据，其中包含了 performance.mark 和 performance.measure。

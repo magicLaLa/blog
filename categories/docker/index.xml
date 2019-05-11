@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on Magic</title>
-    <link>https://magiclala.github.io/categories/docker/</link>
+    <link>/categories/docker/</link>
     <description>Recent content in Docker on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 02 Sep 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://magiclala.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker 相关</title>
-      <link>https://magiclala.github.io/2018/docker/</link>
+      <link>/2018/docker/</link>
       <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/docker/</guid>
+      <guid>/2018/docker/</guid>
       <description> Docker 相关 搭建 gitLab 搜索镜像 docker search gitlab-ce  查看镜像 docker images  </description>
     </item>
     

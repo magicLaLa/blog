@@ -1,19 +1,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Magic on Magic</title>
-    <link>https://magiclala.github.io/</link>
+    <link>/</link>
     <description>Recent content in Magic on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://magiclala.github.io/" rel="self" type="application/rss+xml" />
+    <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Webpack 优化相关</title>
-      <link>https://magiclala.github.io/2019/webpack/</link>
+      <link>/2019/webpack/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2019/webpack/</guid>
+      <guid>/2019/webpack/</guid>
       <description>
 
 &lt;ul&gt;
@@ -199,7 +199,7 @@ module.exports = {
 &lt;li&gt;&lt;code&gt;webpack-bundle-analyzer&lt;/code&gt;配置方法和普通的 plugin 无异，它会以矩形树图的形式将包内各个模块的大小和依赖关系呈现出来，格局如官方所提供这张图所示：&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/webpack1.gif&#34; alt=&#34;webpack1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/webpack1.gif&#34; alt=&#34;webpack1&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;使用方式：&lt;/li&gt;
@@ -294,10 +294,10 @@ const Home = () =&amp;gt; import(&#39;../components/homepage/Home.vue&#39;);
     
     <item>
       <title>Docker 相关</title>
-      <link>https://magiclala.github.io/2018/docker/</link>
+      <link>/2018/docker/</link>
       <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/docker/</guid>
+      <guid>/2018/docker/</guid>
       <description>
 
 &lt;h1 id=&#34;docker-相关&#34;&gt;Docker 相关&lt;/h1&gt;
@@ -318,10 +318,10 @@ const Home = () =&amp;gt; import(&#39;../components/homepage/Home.vue&#39;);
     
     <item>
       <title>Hapi</title>
-      <link>https://magiclala.github.io/2018/hapi/</link>
+      <link>/2018/hapi/</link>
       <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/hapi/</guid>
+      <guid>/2018/hapi/</guid>
       <description>
 
 &lt;h1 id=&#34;hapi&#34;&gt;Hapi&lt;/h1&gt;
@@ -997,10 +997,10 @@ Raven.config(&#39;https://your-sentry-api-key@sentry.io/182062&#39;).install()
     
     <item>
       <title>MySQL 使用</title>
-      <link>https://magiclala.github.io/2018/mysql/</link>
+      <link>/2018/mysql/</link>
       <pubDate>Sun, 15 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/mysql/</guid>
+      <guid>/2018/mysql/</guid>
       <description>
 
 &lt;h1 id=&#34;mysql&#34;&gt;MySQL&lt;/h1&gt;
@@ -1182,10 +1182,10 @@ function serch () {
     
     <item>
       <title>MiniPrograms</title>
-      <link>https://magiclala.github.io/2018/miniprograms/</link>
+      <link>/2018/miniprograms/</link>
       <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/miniprograms/</guid>
+      <guid>/2018/miniprograms/</guid>
       <description>
 
 &lt;h1 id=&#34;小程序相关&#34;&gt;小程序相关&lt;/h1&gt;
@@ -1231,13 +1231,13 @@ button::after {
 &lt;li&gt;小程序现在支持跳转外部&lt;code&gt;url&lt;/code&gt;，需要使用&lt;code&gt;web-view&lt;/code&gt;组建来实现，需要在微信公众平台登录，然后在设置里面&amp;ndash;&amp;gt;开发设置来绑定业务域名，并且在业务域名的跟目下放微信检验文件，只有放过之后，在域名跟目下能访问到这个检验文件，在绑定业务域名的时候才能绑定成功。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/捕获.PNG&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/捕获.PNG&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;小程序使用 &lt;code&gt;wx.request(OBJECT)&lt;/code&gt; 来发起请求时，需要在微信公众平台设置&amp;ndash;&amp;gt;开发设置里面设置服务器域名配置。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/fuwuqi.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/fuwuqi.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;小程序不能操作BOM/DOM。&lt;/li&gt;
@@ -1551,14 +1551,14 @@ export default {
 &lt;li&gt;最新版的 app.json 是单独放到 src 下面，不是在 main.js 里面去写自动生成页面路径添加到 pages 里面，每一个 page 也是单独把 main.json 放到单独的页面文件下。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/APPjson.png&#34; alt=&#34;Alt text&#34; /&gt;
-&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/pagejson.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/APPjson.png&#34; alt=&#34;Alt text&#34; /&gt;
+&lt;img src=&#34;/images/totalimgs/pagejson.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;可以写背景图片，把背景图片放到 &lt;code&gt;src =&amp;gt; assets =&amp;gt; images&lt;/code&gt; 下。然后在 scss 中 通过 &lt;code&gt;background: url(~@/assets/images/top.png) no-repeat;&lt;/code&gt;来使用，然后需要在 &lt;code&gt;build =&amp;gt; webpack.base.conf.js&lt;/code&gt; 修改 module。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/imgimg.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/imgimg.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;也可以使用精灵图（雪碧图）来写， 具体代码如下:&lt;/li&gt;
@@ -1634,7 +1634,7 @@ module.exports = {
 
 &lt;p&gt;需要在 &lt;code&gt;src =&amp;gt; sprite-generate | sprites&lt;/code&gt; 新建这两个文件夹。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/generateSprites.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/generateSprites.png&#34; alt=&#34;Alt text&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;动画切换效果&#34;&gt;动画切换效果&lt;/h3&gt;
 
@@ -1642,7 +1642,7 @@ module.exports = {
 &lt;li&gt;动画效果如下：&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/ic.gif&#34; alt=&#34;图片&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/ic.gif&#34; alt=&#34;图片&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;模板.vue&lt;/li&gt;
@@ -1850,10 +1850,10 @@ export default store
     
     <item>
       <title>箭头函数this的指向</title>
-      <link>https://magiclala.github.io/2018/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E6%8C%87%E5%90%91/</link>
+      <link>/2018/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E6%8C%87%E5%90%91/</link>
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E6%8C%87%E5%90%91/</guid>
+      <guid>/2018/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E6%8C%87%E5%90%91/</guid>
       <description>
 
 &lt;h1 id=&#34;箭头函数this的指向&#34;&gt;箭头函数this的指向&lt;/h1&gt;
@@ -1960,10 +1960,10 @@ function () {
     
     <item>
       <title>ES6的一些方法和技巧</title>
-      <link>https://magiclala.github.io/2018/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7/</link>
+      <link>/2018/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7/</guid>
+      <guid>/2018/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7/</guid>
       <description>
 
 &lt;h1 id=&#34;es6的一些方法和技巧&#34;&gt;ES6的一些方法和技巧&lt;/h1&gt;
@@ -2516,10 +2516,10 @@ import * as types from &#39;moduleA&#39;
     
     <item>
       <title>EventLoop</title>
-      <link>https://magiclala.github.io/2018/eventloop/</link>
+      <link>/2018/eventloop/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/eventloop/</guid>
+      <guid>/2018/eventloop/</guid>
       <description>
 
 &lt;h1 id=&#34;event-loop&#34;&gt;Event Loop&lt;/h1&gt;
@@ -2537,7 +2537,7 @@ import * as types from &#39;moduleA&#39;
 
 &lt;p&gt;浏览器打开即为打开一个进程（任务管理器查看），浏览器就是多进程、多线程的，浏览器打开后占用CPU的资源，可将这些资源分别分配给不同的tab页面进行并发处理，互不影响；如：一个浏览器打开多个窗口，多个窗口同时运行网页（浏览器中任务管理查看）&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/chrome.png&#34; alt=&#34;浏览器进程&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/chrome.png&#34; alt=&#34;浏览器进程&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;浏览器进程&#34;&gt;浏览器进程&lt;/h3&gt;
 
@@ -2614,7 +2614,7 @@ import * as types from &#39;moduleA&#39;
 &lt;/blockquote&gt;
 
 &lt;p&gt;同步任务和异步任务的执行流程：
-&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/eventLoop1.png&#34; alt=&#34;浏览器进程&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/images/totalimgs/eventLoop1.png&#34; alt=&#34;浏览器进程&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;栈&lt;/strong&gt; 就像是一个容器，任务都是在栈中执行。&lt;/li&gt;
@@ -2643,7 +2643,7 @@ import * as types from &#39;moduleA&#39;
 &lt;/ul&gt;
 
 &lt;p&gt;所以上图的任务队列可以继续细化一下：
-&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/eventLoop2.png&#34; alt=&#34;任务队列&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/images/totalimgs/eventLoop2.png&#34; alt=&#34;任务队列&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;event-loop-1&#34;&gt;Event Loop&lt;/h3&gt;
 
@@ -2670,10 +2670,10 @@ import * as types from &#39;moduleA&#39;
     
     <item>
       <title>js 调试相关</title>
-      <link>https://magiclala.github.io/2018/debugs/</link>
+      <link>/2018/debugs/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/debugs/</guid>
+      <guid>/2018/debugs/</guid>
       <description>
 
 &lt;h1 id=&#34;js调试命令&#34;&gt;Js调试命令&lt;/h1&gt;
@@ -2701,7 +2701,7 @@ console.warn(&#39;警告信息&#39;);
 console.error(&#39;错误信息&#39;);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console1.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console1.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;分组输出&#34;&gt;分组输出&lt;/h4&gt;
 
@@ -2722,7 +2722,7 @@ console.group(&#39;第二个组&#39;);
 console.groupEnd();
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console2.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console2.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;Console.group()&lt;/code&gt;还可以嵌套使用。&lt;/p&gt;
 
@@ -2747,7 +2747,7 @@ console.groupCollapsed(&#39;第二个组&#39;);
 console.groupEnd();
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console3.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console3.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;表格输出&#34;&gt;表格输出&lt;/h4&gt;
 
@@ -2786,7 +2786,7 @@ var Arr = [
 console.table(Arr);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console4.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console4.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;查看对象&#34;&gt;查看对象&lt;/h4&gt;
 
@@ -2805,7 +2805,7 @@ console.log(&amp;quot;console.log(CodeDeer)&amp;quot;);
 console.log(CodeDeer);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console5.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console5.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;查看节点&#34;&gt;查看节点&lt;/h4&gt;
 
@@ -2828,7 +2828,7 @@ console.log(&#39;********&#39;)
 console.log(lg)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console6.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console6.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;条件输出&#34;&gt;条件输出&lt;/h4&gt;
 
@@ -2848,7 +2848,7 @@ console.assert((function() {
 })(), &amp;quot;你看得见我&amp;quot;);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console7.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console7.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;计次输出&#34;&gt;计次输出&lt;/h4&gt;
 
@@ -2861,7 +2861,7 @@ console.assert((function() {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console8.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console8.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;追踪调用堆栈&#34;&gt;追踪调用堆栈&lt;/h4&gt;
 
@@ -2885,7 +2885,7 @@ function add1(a, b) {
 var x = add3(1, 1);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console9.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console9.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h5 id=&#34;堆栈调用如何工作&#34;&gt;堆栈调用如何工作&lt;/h5&gt;
 
@@ -2908,7 +2908,7 @@ for (var i = 0; i &amp;lt; 1000; i++) {}
 console.timeEnd(&amp;quot;Chrome中循环1000次的时间&amp;quot;);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console10.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console10.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;性能分析&#34;&gt;性能分析&lt;/h4&gt;
 
@@ -2931,7 +2931,7 @@ console.timeEnd(&amp;quot;Chrome中循环1000次的时间&amp;quot;);
 console.log(&amp;quot;这是临时变量ans的值：&amp;quot;, ans);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console11.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console11.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;格式化输出&lt;/li&gt;
@@ -2973,7 +2973,7 @@ console.log(&amp;quot;欢迎%s和%s两位新同学&amp;quot;, arr[0], arr[1]);
 console.log(&amp;quot;圆周率整数部分：%d，带上小数是：%f&amp;quot;, 3.1415, 3.1415);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console12.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console12.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;自定义样式&amp;ndash;使用&lt;code&gt;%c&lt;/code&gt;为打印内容定义样式,再输出信息前加上&lt;code&gt;%c&lt;/code&gt;，后面写上标准的css样式，就可以为输出的信息添加样式了。&lt;/li&gt;
@@ -2984,7 +2984,7 @@ console.log(&amp;quot;%c3D Text&amp;quot;, &amp;quot; text-shadow: 0 1px 0 #ccc,
 console.log(&#39;%cRainbow Text &#39;, &#39;background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;&#39;);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/console13.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/console13.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;debugger&#34;&gt;debugger&lt;/h2&gt;
 
@@ -3011,7 +3011,7 @@ const solution2 = (arr1, arr2) =&amp;gt; {
 console.log(&#39;solution2&#39;, solution2(nums1, nums2))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/debugger1.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/debugger1.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;在-vscode-中打断点&#34;&gt;在 vscode 中打断点&lt;/h3&gt;
 
@@ -3019,13 +3019,13 @@ console.log(&#39;solution2&#39;, solution2(nums1, nums2))
 &lt;li&gt;在vscode 中 选择调试模式，然后 开启调式 或者 在一个文件上 直接 &lt;code&gt;F5&lt;/code&gt;，可以直接开启调式模式，首先会弹出弹窗，选择 &lt;code&gt;环境&lt;/code&gt;（vscode 中有插件，&lt;code&gt;Debugger for Chrome || Node Debug || React Native Tools&lt;/code&gt;，安装完成后），会在选择环境中弹出环境配置。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/debugger3.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/debugger3.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;在一个js文件里面我选择的是 node 环境，然后在代码中打上断点（图中红色圆圈，使用鼠标右键），之后运行会出现如图所示。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/debugger2.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/debugger2.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;使用 &lt;code&gt;Debugger for Chrome&lt;/code&gt; 插件调试代码。&lt;/li&gt;
@@ -3034,31 +3034,31 @@ console.log(&#39;solution2&#39;, solution2(nums1, nums2))
 &lt;p&gt;开启本地服务运行项目，在这里我用的是 &lt;code&gt;anywhere&lt;/code&gt;，也可以用其他的，如 &lt;a href=&#34;http://www.browsersync.cn/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Browsersync&lt;/a&gt;。&lt;br /&gt;
 启动vscode， debug模式选择 Chrome。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/debug4.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/debug4.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;然后有两种模式（launch | attach）如下图：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/debug5.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/debug5.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;第一种模式使用&lt;br /&gt;
 先开启本地服务。我使用的端口默认为8080，上面配置里就对应是&lt;a href=&#34;http://localhost:8080。&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://localhost:8080。&lt;/a&gt;&lt;br /&gt;
 得先把chrome关闭，并且确保所有chrome进程都被杀死了，然后可以按&lt;code&gt;F5&lt;/code&gt; 直接打开调试模式，才能正常使用调试，否则就会总报错就会（window下好像不用，会开启一个新的chrome窗口），就可以在vscode进行调试了。（例子：在html里面引入xxx.js）&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/debug6.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/debug6.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;第二种模式使用&lt;br /&gt;
 同上先启动本地服务。关闭所有chrome进程（window下好像不用）。&lt;a href=&#34;https://github.com/Microsoft/vscode-chrome-debug&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;需要先在终端中使用和配置项port一致的端口号将chrome启动&lt;/a&gt;。选择 &lt;code&gt;attach to Chrome&lt;/code&gt;，然后启动调试，在打开的浏览器中输入服务器url或者文件路径都可以进行调试。并且你关闭调试也不会关闭chrome浏览器。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/debug7.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/debug7.png&#34; alt=&#34;CONSOLE1&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>npm 镜像设置</title>
-      <link>https://magiclala.github.io/2018/npm/</link>
+      <link>/2018/npm/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/npm/</guid>
+      <guid>/2018/npm/</guid>
       <description>
 
 &lt;h3 id=&#34;npm-镜像设置&#34;&gt;npm 镜像设置&lt;/h3&gt;
@@ -3071,10 +3071,10 @@ npm config set SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/
     
     <item>
       <title>JS随笔</title>
-      <link>https://magiclala.github.io/2018/js-essay/</link>
+      <link>/2018/js-essay/</link>
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/js-essay/</guid>
+      <guid>/2018/js-essay/</guid>
       <description>
 
 &lt;h1 id=&#34;js随笔&#34;&gt;JS随笔&lt;/h1&gt;
@@ -3165,7 +3165,7 @@ if (a == 1 &amp;amp;&amp;amp; a == 2 &amp;amp;&amp;amp; a == 3) {
 &lt;li&gt;在canvs画图中里面包含外部图片链接地址时，在使用 toDataURL() 输出 base64位字符编码时会抛出安全错误，输出不了数据，因为引用了不同域名下的图片链接。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://magiclala.github.io/images/totalimgs/1323758-20180206101320904-162520733.png&#34; alt=&#34;err&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/1323758-20180206101320904-162520733.png&#34; alt=&#34;err&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;(vconsole.js 移动端里显示的错误)&lt;/em&gt;&lt;/li&gt;
@@ -3544,10 +3544,10 @@ str.substring(str.indexOf(&#39;中&#39;) +1, find(str, &#39;中&#39;, 1)) // &am
     
     <item>
       <title>Vue Plugins And Expansion</title>
-      <link>https://magiclala.github.io/2017/vueplugins/</link>
+      <link>/2017/vueplugins/</link>
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2017/vueplugins/</guid>
+      <guid>/2017/vueplugins/</guid>
       <description>
 
 &lt;h1 id=&#34;vue-plugins-and-expansion-后台模板&#34;&gt;Vue Plugins And Expansion(后台模板)&lt;/h1&gt;
@@ -3586,10 +3586,10 @@ Vue.component(&#39;barcode&#39;, VueBarcode);
     
     <item>
       <title>vue 相关问题</title>
-      <link>https://magiclala.github.io/2017/workrelated/</link>
+      <link>/2017/workrelated/</link>
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2017/workrelated/</guid>
+      <guid>/2017/workrelated/</guid>
       <description>
 
 &lt;h3 id=&#34;使用vuex状态管理后-在-input-中使用-v-model-来进行双向数据绑定-在修改-input-中值的时候会抛出一个错误&#34;&gt;使用vuex状态管理后，在 input 中使用 v-model 来进行双向数据绑定，在修改 input 中值的时候会抛出一个错误&lt;/h3&gt;
@@ -4073,10 +4073,10 @@ prop向下传递，事件向上传递&lt;br /&gt;
     
     <item>
       <title>Vue watch选项</title>
-      <link>https://magiclala.github.io/2017/vue-watch/</link>
+      <link>/2017/vue-watch/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2017/vue-watch/</guid>
+      <guid>/2017/vue-watch/</guid>
       <description>
 
 &lt;h2 id=&#34;vue-watch选项&#34;&gt;Vue watch选项&lt;/h2&gt;
@@ -4315,10 +4315,10 @@ methods: {
     
     <item>
       <title>Vue配置相关</title>
-      <link>https://magiclala.github.io/2017/vue/</link>
+      <link>/2017/vue/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2017/vue/</guid>
+      <guid>/2017/vue/</guid>
       <description>
 
 &lt;h2 id=&#34;vue配置相关&#34;&gt;Vue配置相关&lt;/h2&gt;

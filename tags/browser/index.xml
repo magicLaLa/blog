@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Browser on Magic</title>
-    <link>https://magiclala.github.io/tags/browser/</link>
+    <link>/tags/browser/</link>
     <description>Recent content in Browser on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://magiclala.github.io/tags/browser/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/browser/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>EventLoop</title>
-      <link>https://magiclala.github.io/2018/eventloop/</link>
+      <link>/2018/eventloop/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/2018/eventloop/</guid>
+      <guid>/2018/eventloop/</guid>
       <description>Event Loop 事件循环机制 线程与进程   进程：CPU资源分配的最小单位 线程：CPU调度的最小单位   浏览器打开即为打开一个进程（任务管理器查看），浏览器就是多进程、多线程的，浏览器打开后占用CPU的资源，可将这些资源分别分配给不同的tab页面进行并发处理，互不影响；如：一个浏览器打开多个窗口，多个窗口同时运行网页（浏览器中任务管理查看）
 浏览器进程 作为主进程，主要负责页面管理以及其他进程的创建及销毁，常驻的线程有：(工厂-&amp;gt; 部门)
 手机工厂(浏览器)[进程] ↓ 造手机部 &amp;mdash;&amp;ndash; 造手机壳部 &amp;mdash;&amp;ndash; 造膜部等(tab页面)[进程] ↓ 各个岗位(html、css、js、事件触发等)[线程]

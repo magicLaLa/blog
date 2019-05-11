@@ -2,102 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Magic</title>
-    <link>https://magiclala.github.io/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://magiclala.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Webpack</title>
-      <link>https://magiclala.github.io/tags/webpack/</link>
+      <link>/tags/webpack/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/webpack/</guid>
+      <guid>/tags/webpack/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Docker</title>
-      <link>https://magiclala.github.io/tags/docker/</link>
+      <link>/tags/docker/</link>
       <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/docker/</guid>
+      <guid>/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Node</title>
-      <link>https://magiclala.github.io/tags/node/</link>
+      <link>/tags/node/</link>
       <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/node/</guid>
+      <guid>/tags/node/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MiniPrograms</title>
-      <link>https://magiclala.github.io/tags/miniprograms/</link>
+      <link>/tags/miniprograms/</link>
       <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/miniprograms/</guid>
+      <guid>/tags/miniprograms/</guid>
       <description></description>
     </item>
     
     <item>
       <title>js</title>
-      <link>https://magiclala.github.io/tags/js/</link>
+      <link>/tags/js/</link>
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/js/</guid>
+      <guid>/tags/js/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Browser</title>
-      <link>https://magiclala.github.io/tags/browser/</link>
+      <link>/tags/browser/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/browser/</guid>
+      <guid>/tags/browser/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vue</title>
-      <link>https://magiclala.github.io/tags/vue/</link>
+      <link>/tags/vue/</link>
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/vue/</guid>
+      <guid>/tags/vue/</guid>
       <description></description>
     </item>
     
     <item>
       <title>git</title>
-      <link>https://magiclala.github.io/tags/git/</link>
+      <link>/tags/git/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/git/</guid>
+      <guid>/tags/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>leetCode</title>
-      <link>https://magiclala.github.io/tags/leetcode/</link>
+      <link>/tags/leetcode/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/leetcode/</guid>
+      <guid>/tags/leetcode/</guid>
       <description></description>
     </item>
     
     <item>
       <title>other</title>
-      <link>https://magiclala.github.io/tags/other/</link>
+      <link>/tags/other/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://magiclala.github.io/tags/other/</guid>
+      <guid>/tags/other/</guid>
       <description></description>
     </item>
     
