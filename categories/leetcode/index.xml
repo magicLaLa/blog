@@ -17,7 +17,7 @@
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/leetcode-easy/</guid>
-      <description>Easy Two Sum 两数之和(1)  给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。 例子：   Given nums = [2, 7, 11, 15], target = 9, Because nums[0] + nums[1] = 2 + 7 = 9, return [0, 1].   解:  /** * @param {number[]} nums * @param {number} target * @return {number[]} */ var twoSum = function(nums, target) { // 第一种 let map = new Map() for (let i = 0; i &amp;lt; nums.</description>
+      <description>Two Sum 两数之和(1)  给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。 例子：   Given nums = [2, 7, 11, 15], target = 9, Because nums[0] + nums[1] = 2 + 7 = 9, return [0, 1].   解:  /** * @param {number[]} nums * @param {number} target * @return {number[]} */ var twoSum = function(nums, target) { // 第一种 let map = new Map() for (let i = 0; i &amp;lt; nums.length; i++) { if (map.</description>
     </item>
     
     <item>

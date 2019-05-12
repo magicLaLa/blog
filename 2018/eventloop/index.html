@@ -137,40 +137,43 @@ Render 进程  浏览器渲染进程（浏览器内核），主要负责页面�
     <header class="post-header">
         <h1 class="post-title">EventLoop</h1>
         <div class="post-meta">
-            Written by <a href="/" rel="author">Magic</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2018-03-03 >3 March 2018</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                        <a href="/categories/js/"> js </a>
-                        <a href="/categories/browser/"> Browser </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                1 min
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2018-03-03>3 March 2018</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/js/"> js </a>
+                <a href="/categories/browser/"> Browser </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            1 min
         </div>
     </header>
     <div class="post-content">
         
 
         
-            
+        
         
 
         
         
-     
-          
-          
-          
 
-          
-          
-          
+        
+        
+        
 
-          
+        
+        
+        
+
+        
 
 <h1 id="event-loop">Event Loop</h1>
 
@@ -187,7 +190,7 @@ Render 进程  浏览器渲染进程（浏览器内核），主要负责页面�
 
 <p>浏览器打开即为打开一个进程（任务管理器查看），浏览器就是多进程、多线程的，浏览器打开后占用CPU的资源，可将这些资源分别分配给不同的tab页面进行并发处理，互不影响；如：一个浏览器打开多个窗口，多个窗口同时运行网页（浏览器中任务管理查看）</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/chrome.png" alt="浏览器进程" class="lazyload"><figcaption class="image-caption">浏览器进程</figcaption></figure></p>
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/chrome.png" alt="浏览器进程" class="lazyload"><figcaption class="image-caption">浏览器进程</figcaption></figure></p>
 
 <h3 id="浏览器进程">浏览器进程</h3>
 
@@ -264,7 +267,7 @@ Render 进程  浏览器渲染进程（浏览器内核），主要负责页面�
 </blockquote>
 
 <p>同步任务和异步任务的执行流程：
-<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/eventLoop1.png" alt="浏览器进程" class="lazyload"><figcaption class="image-caption">浏览器进程</figcaption></figure></p>
+<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/eventLoop1.png" alt="浏览器进程" class="lazyload"><figcaption class="image-caption">浏览器进程</figcaption></figure></p>
 
 <ul>
 <li><strong>栈</strong> 就像是一个容器，任务都是在栈中执行。</li>
@@ -293,7 +296,7 @@ Render 进程  浏览器渲染进程（浏览器内核），主要负责页面�
 </ul>
 
 <p>所以上图的任务队列可以继续细化一下：
-<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/eventLoop2.png" alt="任务队列" class="lazyload"><figcaption class="image-caption">任务队列</figcaption></figure></p>
+<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/eventLoop2.png" alt="任务队列" class="lazyload"><figcaption class="image-caption">任务队列</figcaption></figure></p>
 
 <h3 id="event-loop-1">Event Loop</h3>
 
@@ -319,22 +322,22 @@ Render 进程  浏览器渲染进程（浏览器内核），主要负责页面�
     </div>
 
     <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>Magic </span>
-                </p>
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>117</span>
+        </p>
+
+        <p class="copyright-item">
             
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>117</span>
-            </p>
-            
-            <p class="copyright-item">
-                
-                <span>Share:</span>
-                <span>
+            <span>Share:</span>
+            <span>
 
       
         <a href="//twitter.com/share?url=%2f2018%2feventloop%2f&amp;text=EventLoop&amp;via=" target="_blank" title="Share on Twitter">
@@ -343,6 +346,10 @@ Render 进程  浏览器渲染进程（浏览器内核），主要负责页面�
         
       
       
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2018%2feventloop%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
       
       
       
@@ -366,21 +373,21 @@ Render 进程  浏览器渲染进程（浏览器内核），主要负责页面�
           </a>
           
 </span>
-            </p>
-                       
+        </p>
+        
 
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
     </div>
 
-  
+
     <div class="post-tags">
         
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
             
             <span class="tag"><a href="/tags/js/">
                     #js</a></span>
@@ -388,26 +395,28 @@ Render 进程  浏览器渲染进程（浏览器内核），主要负责页面�
             <span class="tag"><a href="/tags/browser/">
                     #Browser</a></span>
             
-            </section>
+        </section>
         
         <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="/">Home</a></span>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
         </section>
     </div>
 
     <div class="post-nav">
         
-        <a href="/2018/debugs/" class="prev" rel="prev" title="js 调试相关"><i class="iconfont icon-dajiantou"></i>&nbsp;js 调试相关</a>
-         
+        <a href="/2018/debugs/" class="prev" rel="prev" title="js 调试相关"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;js 调试相关</a>
         
-        <a href="/2018/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7/" class="next" rel="next" title="ES6的一些方法和技巧">ES6的一些方法和技巧&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+        <a href="/2018/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7/" class="next" rel="next"
+            title="ES6的一些方法和技巧">ES6的一些方法和技巧&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 
     <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
+        
+        <div id="disqus_thread"></div>
     <script type="text/javascript">
     (function() {
       
@@ -424,7 +433,7 @@ Render 进程  浏览器渲染进程（浏览器内核），主要负责页面�
   
 
 
-          
+        
     </div>
 </article>
           </div>

@@ -131,39 +131,42 @@
     <header class="post-header">
         <h1 class="post-title">MiniPrograms</h1>
         <div class="post-meta">
-            Written by <a href="/" rel="author">Magic</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2018-05-21 >21 May 2018</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                        <a href="/categories/miniprograms/"> MiniPrograms </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                6 min
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2018-05-21>21 May 2018</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/miniprograms/"> MiniPrograms </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            6 min
         </div>
     </header>
     <div class="post-content">
         
 
         
-            
+        
         
 
         
         
-     
-          
-          
-          
 
-          
-          
-          
+        
+        
+        
 
-          
+        
+        
+        
+
+        
 
 <h1 id="小程序相关">小程序相关</h1>
 
@@ -208,13 +211,13 @@ button::after {
 <li>小程序现在支持跳转外部<code>url</code>，需要使用<code>web-view</code>组建来实现，需要在微信公众平台登录，然后在设置里面&ndash;&gt;开发设置来绑定业务域名，并且在业务域名的跟目下放微信检验文件，只有放过之后，在域名跟目下能访问到这个检验文件，在绑定业务域名的时候才能绑定成功。</li>
 </ul>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/捕获.PNG" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/捕获.PNG" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
 
 <ul>
 <li>小程序使用 <code>wx.request(OBJECT)</code> 来发起请求时，需要在微信公众平台设置&ndash;&gt;开发设置里面设置服务器域名配置。</li>
 </ul>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/fuwuqi.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/fuwuqi.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
 
 <ul>
 <li>小程序不能操作BOM/DOM。</li>
@@ -528,14 +531,14 @@ export default {
 <li>最新版的 app.json 是单独放到 src 下面，不是在 main.js 里面去写自动生成页面路径添加到 pages 里面，每一个 page 也是单独把 main.json 放到单独的页面文件下。</li>
 </ul>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/APPjson.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure>
-<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/pagejson.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/APPjson.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure>
+<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/pagejson.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
 
 <ul>
 <li>可以写背景图片，把背景图片放到 <code>src =&gt; assets =&gt; images</code> 下。然后在 scss 中 通过 <code>background: url(~@/assets/images/top.png) no-repeat;</code>来使用，然后需要在 <code>build =&gt; webpack.base.conf.js</code> 修改 module。</li>
 </ul>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/imgimg.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/imgimg.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
 
 <ul>
 <li>也可以使用精灵图（雪碧图）来写， 具体代码如下:</li>
@@ -611,7 +614,7 @@ module.exports = {
 
 <p>需要在 <code>src =&gt; sprite-generate | sprites</code> 新建这两个文件夹。</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/generateSprites.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/generateSprites.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
 
 <h3 id="动画切换效果">动画切换效果</h3>
 
@@ -619,7 +622,7 @@ module.exports = {
 <li>动画效果如下：</li>
 </ul>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/totalimgs/ic.gif" alt="图片" class="lazyload"><figcaption class="image-caption">图片</figcaption></figure></p>
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/ic.gif" alt="图片" class="lazyload"><figcaption class="image-caption">图片</figcaption></figure></p>
 
 <ul>
 <li>模板.vue</li>
@@ -826,22 +829,22 @@ export default store
     </div>
 
     <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>Magic </span>
-                </p>
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>1253</span>
+        </p>
+
+        <p class="copyright-item">
             
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>1253</span>
-            </p>
-            
-            <p class="copyright-item">
-                
-                <span>Share:</span>
-                <span>
+            <span>Share:</span>
+            <span>
 
       
         <a href="//twitter.com/share?url=%2f2018%2fminiprograms%2f&amp;text=MiniPrograms&amp;via=" target="_blank" title="Share on Twitter">
@@ -850,6 +853,10 @@ export default store
         
       
       
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2018%2fminiprograms%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
       
       
       
@@ -873,45 +880,47 @@ export default store
           </a>
           
 </span>
-            </p>
-                       
+        </p>
+        
 
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
     </div>
 
-  
+
     <div class="post-tags">
         
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
             
             <span class="tag"><a href="/tags/miniprograms/">
                     #MiniPrograms</a></span>
             
-            </section>
+        </section>
         
         <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="/">Home</a></span>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
         </section>
     </div>
 
     <div class="post-nav">
         
-        <a href="/2018/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E6%8C%87%E5%90%91/" class="prev" rel="prev" title="箭头函数this的指向"><i class="iconfont icon-dajiantou"></i>&nbsp;箭头函数this的指向</a>
-         
+        <a href="/2018/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E6%8C%87%E5%90%91/" class="prev" rel="prev" title="箭头函数this的指向"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;箭头函数this的指向</a>
         
-        <a href="/2018/mysql/" class="next" rel="next" title="MySQL 使用">MySQL 使用&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+        <a href="/2018/mysql/" class="next" rel="next"
+            title="MySQL 使用">MySQL 使用&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 
     <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
+        
+        <div id="disqus_thread"></div>
     <script type="text/javascript">
     (function() {
       
@@ -928,7 +937,7 @@ export default store
   
 
 
-          
+        
     </div>
 </article>
           </div>

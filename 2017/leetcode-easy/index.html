@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="leetCode Easy"/>
-<meta name="twitter:description" content="Easy Two Sum 两数之和(1)  给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。 例子：   Given nums = [2, 7, 11, 15], target = 9, Because nums[0] &#43; nums[1] = 2 &#43; 7 = 9, return [0, 1].   解:  /** * @param {number[]} nums * @param {number} target * @return {number[]} */ var twoSum = function(nums, target) { // 第一种 let map = new Map() for (let i = 0; i &lt; nums."/>
+<meta name="twitter:description" content="Two Sum 两数之和(1)  给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。 例子：   Given nums = [2, 7, 11, 15], target = 9, Because nums[0] &#43; nums[1] = 2 &#43; 7 = 9, return [0, 1].   解:  /** * @param {number[]} nums * @param {number} target * @return {number[]} */ var twoSum = function(nums, target) { // 第一种 let map = new Map() for (let i = 0; i &lt; nums.length; i&#43;&#43;) { if (map."/>
 
   <script type="application/ld+json">
 {
@@ -50,7 +50,7 @@
   
   "genre": "posts",
   "keywords": "leetCode",
-  "wordcount":  369 ,
+  "wordcount":  623 ,
   "url": "\/2017\/leetcode-easy\/",
   "datePublished": "2017-06-02T00:00:00\x2b00:00",
   "dateModified": "2017-06-02T00:00:00\x2b00:00",
@@ -131,18 +131,21 @@
     <header class="post-header">
         <h1 class="post-title">leetCode Easy</h1>
         <div class="post-meta">
-            Written by <a href="/" rel="author">Magic</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2017-06-02 >2 June 2017</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
-                <span class="post-category">
-                        <a href="/categories/leetcode/"> leetCode </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                2 min
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2017-06-02>2 June 2017</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/leetcode/"> leetCode </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            3 min
         </div>
     </header>
     <div class="post-content">
@@ -152,20 +155,18 @@
 
         
         
-     
-          
-          
-          
 
-          
-          
-          
+        
+        
+        
 
-          
+        
+        
+        
 
-<h2 id="easy">Easy</h2>
+        
 
-<h4 id="two-sum-两数之和-1">Two Sum 两数之和(1)</h4>
+<h3 id="two-sum-两数之和-1">Two Sum 两数之和(1)</h3>
 
 <ul>
 <li>给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。</li>
@@ -210,7 +211,7 @@ var twoSum = function(nums, target) {
 };
 </code></pre>
 
-<h4 id="反转整数-reverse-integer-7">反转整数 Reverse Integer(7)</h4>
+<h3 id="反转整数-reverse-integer-7">反转整数 Reverse Integer(7)</h3>
 
 <ul>
 <li><p>给定32位有符号整数，整数的反向数字</p></li>
@@ -273,7 +274,7 @@ var reverse = function(x) {
 };
 </code></pre>
 
-<h4 id="回文数-palindrome-number-9">回文数 Palindrome Number(9)</h4>
+<h3 id="回文数-palindrome-number-9">回文数 Palindrome Number(9)</h3>
 
 <ul>
 <li><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p></li>
@@ -317,25 +318,110 @@ var isPalindrome = function(x) {
 };
 </code></pre>
 
+<h3 id="罗马数字转整数-roman-to-integer-13">罗马数字转整数 Roman to Integer(13)</h3>
+
+<ul>
+<li><p>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。</p>
+
+<pre><code>字符          数值
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+</code></pre></li>
+
+<li><p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p></li>
+
+<li><p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p>
+
+<ul>
+<li>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。</li>
+<li>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。</li>
+<li>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</li>
+</ul></li>
+
+<li><p>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p></li>
+
+<li><p>例子：</p></li>
+</ul>
+
+<pre><code class="language-sh">示例 1:
+    输入: &quot;III&quot;
+    输出: 3
+示例 2:
+    输入: &quot;IV&quot;
+    输出: 4
+示例 3:
+    输入: &quot;IX&quot;
+    输出: 9
+示例 4:
+    输入: &quot;LVIII&quot;
+    输出: 58
+    解释: L = 50, V= 5, III = 3
+示例 5:
+    输入: &quot;MCMXCIV&quot;
+    输出: 1994
+    解释: M = 1000, CM = 900, XC = 90, IV = 4
+</code></pre>
+
+<ul>
+<li>解：</li>
+</ul>
+
+<pre><code class="language-js">/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    var len = s.length;
+    var hash = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    };
+    // charAt() 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1。
+    var lastChar = hash[s.charAt(0)];
+    var r = 0;
+    
+    for (var i = 0; i&lt; len; i++) {
+        var currentChar = hash[s.charAt(i)];
+        if (lastChar &lt; currentChar) {
+            r  = r - (lastChar * 2) + currentChar;
+        } else {
+            r += currentChar;
+        }
+        lastChar = currentChar;
+    }
+    return r;
+};
+</code></pre>
+
     </div>
 
     <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>Magic </span>
-                </p>
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>623</span>
+        </p>
+
+        <p class="copyright-item">
             
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>369</span>
-            </p>
-            
-            <p class="copyright-item">
-                
-                <span>Share:</span>
-                <span>
+            <span>Share:</span>
+            <span>
 
       
         <a href="//twitter.com/share?url=%2f2017%2fleetcode-easy%2f&amp;text=leetCode%20Easy&amp;via=" target="_blank" title="Share on Twitter">
@@ -344,6 +430,10 @@ var isPalindrome = function(x) {
         
       
       
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2017%2fleetcode-easy%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
       
       
       
@@ -367,45 +457,47 @@ var isPalindrome = function(x) {
           </a>
           
 </span>
-            </p>
-                       
+        </p>
+        
 
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
     </div>
 
-  
+
     <div class="post-tags">
         
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
             
             <span class="tag"><a href="/tags/leetcode/">
                     #leetCode</a></span>
             
-            </section>
+        </section>
         
         <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="/">Home</a></span>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
         </section>
     </div>
 
     <div class="post-nav">
         
-        <a href="/2017/leetcode-medium/" class="prev" rel="prev" title="leetCode Medium"><i class="iconfont icon-dajiantou"></i>&nbsp;leetCode Medium</a>
-         
+        <a href="/2017/leetcode-medium/" class="prev" rel="prev" title="leetCode Medium"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;leetCode Medium</a>
         
-        <a href="/2017/gulp/" class="next" rel="next" title="gulp 配置">gulp 配置&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+        <a href="/2017/gulp/" class="next" rel="next"
+            title="gulp 配置">gulp 配置&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 
     <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
+        
+        <div id="disqus_thread"></div>
     <script type="text/javascript">
     (function() {
       
@@ -422,7 +514,7 @@ var isPalindrome = function(x) {
   
 
 
-          
+        
     </div>
 </article>
           </div>
