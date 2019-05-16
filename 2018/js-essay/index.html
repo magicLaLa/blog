@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="JS随笔"/>
-<meta name="twitter:description" content="JS随笔 点击按钮复制一个文本或者链接地址 &lt;div id=&quot;lalala&quot;&gt;www.baidu.com45646!!!!&lt;/div&gt; &lt;button onclick=&quot;but()&quot;&gt;点我&lt;/button&gt; &lt;script&gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; &#43; msg); } catch(err) { console.log(&#39;Oops, unable to copy&#39;); } // 移除选中的元素 window.getSelection().removeAllRanges(); return false } &lt;/script&gt;  (a == 1 &amp;&amp; a== 2 &amp;&amp; a == 3) 有可能是 true 吗？  第一种解法:  const a = { i: 0, toString: function() { return a."/>
+<meta name="twitter:description" content="JS随笔 等待多好毫秒后执行后面代码 export const sleep = async (ms: number) =&gt; { return new Promise((resolve) =&gt; setTimeout(resolve, ms || 0)); };  点击按钮复制一个文本或者链接地址 &lt;div id=&quot;lalala&quot;&gt;www.baidu.com45646!!!!&lt;/div&gt; &lt;button onclick=&quot;but()&quot;&gt;点我&lt;/button&gt; &lt;script&gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; &#43; msg); } catch(err) { console."/>
 
   <script type="application/ld+json">
 {
@@ -49,8 +49,8 @@
   },
   
   "genre": "posts",
-  "keywords": "js",
-  "wordcount":  987 ,
+  "keywords": "essay, js",
+  "wordcount":  1006 ,
   "url": "\/2018\/js-essay\/",
   "datePublished": "2018-01-03T00:00:00\x2b00:00",
   "dateModified": "2018-01-03T00:00:00\x2b00:00",
@@ -141,7 +141,7 @@
             in
             <i class="iconfont icon-folder"></i>
             <span class="post-category">
-                <a href="/categories/js/"> js </a>
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E9%9A%8F%E7%AC%94/"> 技术相关随笔 </a>
                 
             </span>
             <i class="iconfont icon-timer"></i>
@@ -169,6 +169,13 @@
         
 
 <h1 id="js随笔">JS随笔</h1>
+
+<h3 id="等待多好毫秒后执行后面代码">等待多好毫秒后执行后面代码</h3>
+
+<pre><code class="language-ts">export const sleep = async (ms: number) =&gt; {
+  return new Promise((resolve) =&gt; setTimeout(resolve, ms || 0));
+};
+</code></pre>
 
 <h3 id="点击按钮复制一个文本或者链接地址">点击按钮复制一个文本或者链接地址</h3>
 
@@ -643,7 +650,7 @@ str.substring(str.indexOf('中') +1, find(str, '中', 1)) // &quot;111111111&quo
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>987</span>
+            <span>1006</span>
         </p>
 
         <p class="copyright-item">
@@ -700,6 +707,9 @@ str.substring(str.indexOf('中') +1, find(str, '中', 1)) // &quot;111111111&quo
         
         <section>
             <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/essay/">
+                    #essay</a></span>
             
             <span class="tag"><a href="/tags/js/">
                     #js</a></span>

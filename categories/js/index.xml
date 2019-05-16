@@ -67,15 +67,6 @@ console.group(&#39;第一个组&#39;); console.group(&amp;quot;1-1&amp;quot;); c
     </item>
     
     <item>
-      <title>JS随笔</title>
-      <link>/2018/js-essay/</link>
-      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/js-essay/</guid>
-      <description>JS随笔 点击按钮复制一个文本或者链接地址 &amp;lt;div id=&amp;quot;lalala&amp;quot;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt; &amp;lt;button onclick=&amp;quot;but()&amp;quot;&amp;gt;点我&amp;lt;/button&amp;gt; &amp;lt;script&amp;gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; + msg); } catch(err) { console.log(&#39;Oops, unable to copy&#39;); } // 移除选中的元素 window.getSelection().removeAllRanges(); return false } &amp;lt;/script&amp;gt;  (a == 1 &amp;amp;&amp;amp; a== 2 &amp;amp;&amp;amp; a == 3) 有可能是 true 吗？  第一种解法:  const a = { i: 0, toString: function() { return a.</description>
-    </item>
-    
-    <item>
       <title>JS 模板</title>
       <link>/2017/template/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>

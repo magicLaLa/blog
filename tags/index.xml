@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>essay</title>
+      <link>/tags/essay/</link>
+      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/essay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>js</title>
+      <link>/tags/js/</link>
+      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/js/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Webpack</title>
@@ -48,15 +66,6 @@
     </item>
     
     <item>
-      <title>js</title>
-      <link>/tags/js/</link>
-      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Browser</title>
       <link>/tags/browser/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
@@ -71,6 +80,15 @@
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/vue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTTP</title>
+      <link>/tags/http/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/http/</guid>
       <description></description>
     </item>
     

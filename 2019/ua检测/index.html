@@ -10,9 +10,9 @@
   
   
   
-  <link rel="prev" href="/2017/debugtools/" />
-  <link rel="next" href="/2017/httpstatus/" />
-  <link rel="canonical" href="/2017/template/" />
+  <link rel="prev" href="/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/" />
+  <link rel="next" href="/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/" />
+  <link rel="canonical" href="/2019/ua%E6%A3%80%E6%B5%8B/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,10 +24,10 @@
   <title>
        
        
-           JS 模板 | Magic
+           ua检测 | Magic
        
   </title>
-  <meta name="title" content="JS 模板 | Magic">
+  <meta name="title" content="ua检测 | Magic">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -35,25 +35,25 @@
 
 
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JS 模板"/>
-<meta name="twitter:description" content=" JS 模板 Juicer  GitHub  Soda  官方文档 GitHub  "/>
+<meta name="twitter:title" content="ua检测"/>
+<meta name="twitter:description" content="代码如下： const userAgent = window.navigator.userAgent.toLowerCase(); export const uaJudge = { get isAndroid() { return /android|adr/gi.test(userAgent); }, get isVivo() { return /vivo/gi.test(userAgent); }, get isIos() { return /iphone|ipod|ipad/gi.test(userAgent); }, /** 微信（包含小程序） */ get isWeChat() { return /micromessenger/gi.test(userAgent); }, /** 微信小程序 */ get isWeChatMini() { if (this.isWeChat) { return new Promise((resolve, reject) =&gt; { wx.miniProgram.getEnv((res: any) =&gt; { resolve(res.miniprogram); }); setTimeout(resolve, 1000); }); } else { return Promise.resolve(false); } }, /** 支付宝 */ get isAlipay() { return /alipay/gi."/>
 
   <script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "JS 模板",
+  "headline": "ua检测",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "\/2017\/template\/"
+    "@id": "\/2019\/ua%E6%A3%80%E6%B5%8B\/"
   },
   
   "genre": "posts",
-  "keywords": "js",
-  "wordcount":  7 ,
-  "url": "\/2017\/template\/",
-  "datePublished": "2017-06-02T00:00:00\x2b00:00",
-  "dateModified": "2017-06-02T00:00:00\x2b00:00",
+  "keywords": "essay, js",
+  "wordcount":  219 ,
+  "url": "\/2019\/ua%E6%A3%80%E6%B5%8B\/",
+  "datePublished": "2019-01-16T00:00:00\x2b00:00",
+  "dateModified": "2019-01-16T00:00:00\x2b00:00",
   
   "publisher": {
     "@type": "Organization",
@@ -129,23 +129,23 @@
       		
 <article class="post-warp">
     <header class="post-header">
-        <h1 class="post-title">JS 模板</h1>
+        <h1 class="post-title">ua检测</h1>
         <div class="post-meta">
             Written by <a href="/"
                 rel="author">Magic</a>
             with ♥
             <span class="post-time">
                 on <time
-                    datetime=2017-06-02>2 June 2017</time>
+                    datetime=2019-01-16>16 January 2019</time>
             </span>
             in
             <i class="iconfont icon-folder"></i>
             <span class="post-category">
-                <a href="/categories/js/"> js </a>
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E9%9A%8F%E7%AC%94/"> 技术相关随笔 </a>
                 
             </span>
             <i class="iconfont icon-timer"></i>
-            1 min
+            2 min
         </div>
     </header>
     <div class="post-content">
@@ -166,20 +166,100 @@
 
         
 
-<h1 id="js-模板">JS 模板</h1>
+<h4 id="代码如下">代码如下：</h4>
 
-<h3 id="juicer">Juicer</h3>
-
-<ul>
-<li><a href="https://github.com/PaulGuo/Juicer" rel="nofollow noreferrer" target="_blank">GitHub</a></li>
-</ul>
-
-<h3 id="soda">Soda</h3>
-
-<ul>
-<li><a href="https://github.com/AlloyTeam/sodajs/blob/master/readme_zh.md" rel="nofollow noreferrer" target="_blank">官方文档</a></li>
-<li><a href="https://github.com/AlloyTeam/sodajs" rel="nofollow noreferrer" target="_blank">GitHub</a></li>
-</ul>
+<pre><code class="language-ts">const userAgent = window.navigator.userAgent.toLowerCase();
+export const uaJudge = {
+  get isAndroid() {
+    return /android|adr/gi.test(userAgent);
+  },
+  get isVivo() {
+    return /vivo/gi.test(userAgent);
+  },
+  get isIos() {
+    return /iphone|ipod|ipad/gi.test(userAgent);
+  },
+  /** 微信（包含小程序） */
+  get isWeChat() {
+    return /micromessenger/gi.test(userAgent);
+  },
+  /** 微信小程序 */
+  get isWeChatMini() {
+    if (this.isWeChat) {
+      return new Promise((resolve, reject) =&gt; {
+        wx.miniProgram.getEnv((res: any) =&gt; {
+          resolve(res.miniprogram);
+        });
+        setTimeout(resolve, 1000);
+      });
+    } else {
+      return Promise.resolve(false);
+    }
+  },
+  /** 支付宝 */
+  get isAlipay() {
+    return /alipay/gi.test(userAgent);
+  },
+  /** 百度 */
+  get isBaidu() {
+    return /baiduboxapp/gi.test(userAgent);
+  },
+  /** 百度网盘 */
+  get isWangPan() {
+    return /bdnetdisk/gi.test(userAgent);
+  },
+  /** 新浪微博 */
+  get isWeiBo() {
+    return /weibo/gi.test(userAgent);
+  },
+  /** 钉钉 */
+  get isDingDing() {
+    return /dingtalk/gi.test(userAgent);
+  },
+  /** qq，qq浏览器 */
+  get isQQ() {
+    return /QQ/gi.test(window.navigator.userAgent);
+  },
+  /** uc浏览器 */
+  get isUC() {
+    return /ucbrowser/gi.test(userAgent);
+  },
+  /** 网易云音乐 */
+  get isWYMusic() {
+    return /neteasemusic/gi.test(userAgent);
+  },
+  /** 美图系（包含潮自拍，美图贴贴等） */
+  get isMTSeries() {
+    return /com.meitu/gi.test(userAgent);
+  },
+  /** 潮自拍 */
+  get isChaoZiPai() {
+    return /com.meitu.wheecam/gi.test(userAgent);
+  },
+  /** 潮自拍3.6.4及以上版本支持新协议 */
+  get isNewChaoZiPai() {
+    const result = /com.meitu.wheecam\/([\d.]*)/.exec(userAgent);
+    const version = result &amp;&amp; result[1];
+    if (version) {
+      return parseInt(version.replace(/\./g, '').substring(0, 3), 10) &gt;= 364;
+    } else {
+      return false;
+    }
+  },
+  /** 无他相机 */
+  get isWuTa() {
+    return /wuta_browser/gi.test(userAgent);
+  },
+  /** 她face++ */
+  get isTaFace() {
+    return /taface/gi.test(userAgent);
+  },
+  /** 小恩爱 */
+  get isXiaoenai() {
+    return /mzdw/gi.test(userAgent);
+  },
+};
+</code></pre>
 
     </div>
 
@@ -193,7 +273,7 @@
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>7</span>
+            <span>219</span>
         </p>
 
         <p class="copyright-item">
@@ -202,13 +282,13 @@
             <span>
 
       
-        <a href="//twitter.com/share?url=%2f2017%2ftemplate%2f&amp;text=JS%20%e6%a8%a1%e6%9d%bf&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=%2f2019%2fua%25E6%25A3%2580%25E6%25B5%258B%2f&amp;text=ua%e6%a3%80%e6%b5%8b&amp;via=" target="_blank" title="Share on Twitter">
           <i class="iconfont icon-twitter"></i>
         </a>
         
       
       
-        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2017%2ftemplate%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2fua%25E6%25A3%2580%25E6%25B5%258B%2f" target="_blank" title="Share on Facebook">
           <i class="iconfont icon-facebook"></i>
         </a>
         
@@ -230,7 +310,7 @@
           
 
           
-        <a href="//service.weibo.com/share/share.php?url=%2f2017%2ftemplate%2f&amp;appkey=&amp;title=JS%20%e6%a8%a1%e6%9d%bf" target="_blank" title="Share on Douban ">
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2fua%25E6%25A3%2580%25E6%25B5%258B%2f&amp;appkey=&amp;title=ua%e6%a3%80%e6%b5%8b" target="_blank" title="Share on Douban ">
             <i class="iconfont icon-weibo"></i>
           </a>
           
@@ -251,6 +331,9 @@
         <section>
             <i class="iconfont icon-icon-tag"></i>Tag:
             
+            <span class="tag"><a href="/tags/essay/">
+                    #essay</a></span>
+            
             <span class="tag"><a href="/tags/js/">
                     #js</a></span>
             
@@ -264,12 +347,12 @@
 
     <div class="post-nav">
         
-        <a href="/2017/debugtools/" class="prev" rel="prev" title="debugTools"><i
-                class="iconfont icon-dajiantou"></i>&nbsp;debugTools</a>
+        <a href="/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/" class="prev" rel="prev" title="获取元素content宽高"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;获取元素content宽高</a>
         
         
-        <a href="/2017/httpstatus/" class="next" rel="next"
-            title="HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)">HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        <a href="/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/" class="next" rel="next"
+            title="弹出遮照阻止底部页面滚动">弹出遮照阻止底部页面滚动&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 

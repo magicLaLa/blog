@@ -10,9 +10,9 @@
   
   
   
-  <link rel="prev" href="/2017/debugtools/" />
-  <link rel="next" href="/2017/httpstatus/" />
-  <link rel="canonical" href="/2017/template/" />
+  <link rel="prev" href="/2017/template/" />
+  <link rel="next" href="/2017/vue-blind-spot/" />
+  <link rel="canonical" href="/2017/httpstatus/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,10 +24,10 @@
   <title>
        
        
-           JS 模板 | Magic
+           HTTP Status code（状态码）和 Status text（状态文本）(简单随笔) | Magic
        
   </title>
-  <meta name="title" content="JS 模板 | Magic">
+  <meta name="title" content="HTTP Status code（状态码）和 Status text（状态文本）(简单随笔) | Magic">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -35,23 +35,26 @@
 
 
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JS 模板"/>
-<meta name="twitter:description" content=" JS 模板 Juicer  GitHub  Soda  官方文档 GitHub  "/>
+<meta name="twitter:title" content="HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)"/>
+<meta name="twitter:description" content="常见的状态码  1xx：临时回应，表示客户端请继续。 2xx：请求成功：  200：请求成功。  3xx: 表示请求的目标有变化，希望客户端进一步处理：  301&amp;302：永久性与临时性跳转。 304：客户端缓存没有更新。  4xx：客户端请求错误：  403：无权限。 404：表示请求的页面不存在。 418：It’s a teapot. 这是一个彩蛋，来自 ietf 的一个愚人节玩笑。（超文本咖啡壶控制协议）  5xx：服务端请求错误：  500：服务端错误。 503：服务端暂时性错误，可以一会再试。   对我们前端来说，1xx 系列的状态码是非常陌生的，原因是 1xx 的状态被浏览器 http 库直接处理掉了，不会让上层应用知晓。
+2xx 系列的状态最熟悉的就是 200，这通常是网页请求成功的标志，也是大家最喜欢的状态码。
+3xx 系列比较复杂，301 和 302 两个状态表示当前资源已经被转移，只不过一个是永久性转移，一个是临时性转移。实际上 301 更接近于一种报错，提示客户端下次别来了。
+304 又是一个每个前端必知必会的状态，产生这个状态的前提是：客户端本地已经有缓存的版本，并且在 Request 中告诉了服务端，当服务端通过时间或者 tag，发现没有更新的时候，就会返回一个不含 body 的 304 状态。"/>
 
   <script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "JS 模板",
+  "headline": "HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "\/2017\/template\/"
+    "@id": "\/2017\/httpstatus\/"
   },
   
   "genre": "posts",
-  "keywords": "js",
-  "wordcount":  7 ,
-  "url": "\/2017\/template\/",
+  "keywords": "HTTP, essay",
+  "wordcount":  45 ,
+  "url": "\/2017\/httpstatus\/",
   "datePublished": "2017-06-02T00:00:00\x2b00:00",
   "dateModified": "2017-06-02T00:00:00\x2b00:00",
   
@@ -129,7 +132,7 @@
       		
 <article class="post-warp">
     <header class="post-header">
-        <h1 class="post-title">JS 模板</h1>
+        <h1 class="post-title">HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)</h1>
         <div class="post-meta">
             Written by <a href="/"
                 rel="author">Magic</a>
@@ -141,7 +144,7 @@
             in
             <i class="iconfont icon-folder"></i>
             <span class="post-category">
-                <a href="/categories/js/"> js </a>
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E9%9A%8F%E7%AC%94/"> 技术相关随笔 </a>
                 
             </span>
             <i class="iconfont icon-timer"></i>
@@ -166,20 +169,43 @@
 
         
 
-<h1 id="js-模板">JS 模板</h1>
-
-<h3 id="juicer">Juicer</h3>
+<h3 id="常见的状态码">常见的状态码</h3>
 
 <ul>
-<li><a href="https://github.com/PaulGuo/Juicer" rel="nofollow noreferrer" target="_blank">GitHub</a></li>
-</ul>
-
-<h3 id="soda">Soda</h3>
+<li>1xx：临时回应，表示客户端请继续。</li>
+<li>2xx：请求成功：
 
 <ul>
-<li><a href="https://github.com/AlloyTeam/sodajs/blob/master/readme_zh.md" rel="nofollow noreferrer" target="_blank">官方文档</a></li>
-<li><a href="https://github.com/AlloyTeam/sodajs" rel="nofollow noreferrer" target="_blank">GitHub</a></li>
+<li>200：请求成功。</li>
+</ul></li>
+<li>3xx: 表示请求的目标有变化，希望客户端进一步处理：
+
+<ul>
+<li>301&amp;302：永久性与临时性跳转。</li>
+<li>304：客户端缓存没有更新。</li>
+</ul></li>
+<li>4xx：客户端请求错误：
+
+<ul>
+<li>403：无权限。</li>
+<li>404：表示请求的页面不存在。</li>
+<li>418：It’s a teapot. 这是一个彩蛋，来自 ietf 的一个愚人节玩笑。（<a href="https://tools.ietf.org/html/rfc2324" rel="nofollow noreferrer" target="_blank">超文本咖啡壶控制协议</a>）</li>
+</ul></li>
+<li>5xx：服务端请求错误：
+
+<ul>
+<li>500：服务端错误。</li>
+<li>503：服务端暂时性错误，可以一会再试。</li>
+</ul></li>
 </ul>
+
+<p>对我们前端来说，1xx 系列的状态码是非常陌生的，原因是 1xx 的状态被浏览器 http 库直接处理掉了，不会让上层应用知晓。</p>
+
+<p>2xx 系列的状态最熟悉的就是 200，这通常是网页请求成功的标志，也是大家最喜欢的状态码。</p>
+
+<p>3xx 系列比较复杂，301 和 302 两个状态表示当前资源已经被转移，只不过一个是永久性转移，一个是临时性转移。实际上 301 更接近于一种报错，提示客户端下次别来了。</p>
+
+<p>304 又是一个每个前端必知必会的状态，产生这个状态的前提是：客户端本地已经有缓存的版本，并且在 Request 中告诉了服务端，当服务端通过时间或者 tag，发现没有更新的时候，就会返回一个不含 body 的 304 状态。</p>
 
     </div>
 
@@ -193,7 +219,7 @@
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>7</span>
+            <span>45</span>
         </p>
 
         <p class="copyright-item">
@@ -202,13 +228,13 @@
             <span>
 
       
-        <a href="//twitter.com/share?url=%2f2017%2ftemplate%2f&amp;text=JS%20%e6%a8%a1%e6%9d%bf&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=%2f2017%2fhttpstatus%2f&amp;text=HTTP%20Status%20code%ef%bc%88%e7%8a%b6%e6%80%81%e7%a0%81%ef%bc%89%e5%92%8c%20Status%20text%ef%bc%88%e7%8a%b6%e6%80%81%e6%96%87%e6%9c%ac%ef%bc%89%28%e7%ae%80%e5%8d%95%e9%9a%8f%e7%ac%94%29&amp;via=" target="_blank" title="Share on Twitter">
           <i class="iconfont icon-twitter"></i>
         </a>
         
       
       
-        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2017%2ftemplate%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2017%2fhttpstatus%2f" target="_blank" title="Share on Facebook">
           <i class="iconfont icon-facebook"></i>
         </a>
         
@@ -230,7 +256,7 @@
           
 
           
-        <a href="//service.weibo.com/share/share.php?url=%2f2017%2ftemplate%2f&amp;appkey=&amp;title=JS%20%e6%a8%a1%e6%9d%bf" target="_blank" title="Share on Douban ">
+        <a href="//service.weibo.com/share/share.php?url=%2f2017%2fhttpstatus%2f&amp;appkey=&amp;title=HTTP%20Status%20code%ef%bc%88%e7%8a%b6%e6%80%81%e7%a0%81%ef%bc%89%e5%92%8c%20Status%20text%ef%bc%88%e7%8a%b6%e6%80%81%e6%96%87%e6%9c%ac%ef%bc%89%28%e7%ae%80%e5%8d%95%e9%9a%8f%e7%ac%94%29" target="_blank" title="Share on Douban ">
             <i class="iconfont icon-weibo"></i>
           </a>
           
@@ -251,8 +277,11 @@
         <section>
             <i class="iconfont icon-icon-tag"></i>Tag:
             
-            <span class="tag"><a href="/tags/js/">
-                    #js</a></span>
+            <span class="tag"><a href="/tags/http/">
+                    #HTTP</a></span>
+            
+            <span class="tag"><a href="/tags/essay/">
+                    #essay</a></span>
             
         </section>
         
@@ -264,12 +293,12 @@
 
     <div class="post-nav">
         
-        <a href="/2017/debugtools/" class="prev" rel="prev" title="debugTools"><i
-                class="iconfont icon-dajiantou"></i>&nbsp;debugTools</a>
+        <a href="/2017/template/" class="prev" rel="prev" title="JS 模板"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;JS 模板</a>
         
         
-        <a href="/2017/httpstatus/" class="next" rel="next"
-            title="HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)">HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        <a href="/2017/vue-blind-spot/" class="next" rel="next"
+            title="vue中盲点">vue中盲点&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 

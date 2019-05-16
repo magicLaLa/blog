@@ -6,10 +6,37 @@
     <description>Recent content in Posts on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>弹出遮照阻止底部页面滚动</title>
+      <link>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</link>
+      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</guid>
+      <description> 代码如下： const bodyEl = document.body; let top = 0; /** * 阻止页面滚动 * @param {boolean} isFixed */ export function stopBodyScroll(isFixed: boolean) { if (isFixed) { top = window.scrollY; bodyEl.style.position = &#39;fixed&#39;; bodyEl.style.top = -top + &#39;px&#39;; } else { bodyEl.style.position = &#39;&#39;; bodyEl.style.top = &#39;&#39;; window.scrollTo(0, top); // 回到原先的top } }  </description>
+    </item>
+    
+    <item>
+      <title>ua检测</title>
+      <link>/2019/ua%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/ua%E6%A3%80%E6%B5%8B/</guid>
+      <description>代码如下： const userAgent = window.navigator.userAgent.toLowerCase(); export const uaJudge = { get isAndroid() { return /android|adr/gi.test(userAgent); }, get isVivo() { return /vivo/gi.test(userAgent); }, get isIos() { return /iphone|ipod|ipad/gi.test(userAgent); }, /** 微信（包含小程序） */ get isWeChat() { return /micromessenger/gi.test(userAgent); }, /** 微信小程序 */ get isWeChatMini() { if (this.isWeChat) { return new Promise((resolve, reject) =&amp;gt; { wx.miniProgram.getEnv((res: any) =&amp;gt; { resolve(res.miniprogram); }); setTimeout(resolve, 1000); }); } else { return Promise.resolve(false); } }, /** 支付宝 */ get isAlipay() { return /alipay/gi.</description>
+    </item>
+    
+    <item>
+      <title>获取元素content宽高</title>
+      <link>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</guid>
+      <description>代码如下： /** * 获取元素content宽高 * @param el */ export function getContentSize(el: HTMLElement) { const width = el.offsetWidth; const height = el.offsetHeight; const style = window.getComputedStyle(el); // border const blw = parseFloat(style.borderLeftWidth || &#39;0&#39;); const brw = parseFloat(style.borderRightWidth || &#39;0&#39;); const btw = parseFloat(style.borderTopWidth || &#39;0&#39;); const bbw = parseFloat(style.borderBottomWidth || &#39;0&#39;); // padding const plw = parseFloat(style.paddingLeft || &#39;0&#39;); const prw = parseFloat(style.paddingRight || &#39;0&#39;); const ptw = parseFloat(style.paddingTop || &#39;0&#39;); const pbw = parseFloat(style.</description>
+    </item>
     
     <item>
       <title>Webpack 优化相关</title>
@@ -132,7 +159,7 @@ console.group(&#39;第一个组&#39;); console.group(&amp;quot;1-1&amp;quot;); c
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/js-essay/</guid>
-      <description>JS随笔 点击按钮复制一个文本或者链接地址 &amp;lt;div id=&amp;quot;lalala&amp;quot;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt; &amp;lt;button onclick=&amp;quot;but()&amp;quot;&amp;gt;点我&amp;lt;/button&amp;gt; &amp;lt;script&amp;gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; + msg); } catch(err) { console.log(&#39;Oops, unable to copy&#39;); } // 移除选中的元素 window.getSelection().removeAllRanges(); return false } &amp;lt;/script&amp;gt;  (a == 1 &amp;amp;&amp;amp; a== 2 &amp;amp;&amp;amp; a == 3) 有可能是 true 吗？  第一种解法:  const a = { i: 0, toString: function() { return a.</description>
+      <description>JS随笔 等待多好毫秒后执行后面代码 export const sleep = async (ms: number) =&amp;gt; { return new Promise((resolve) =&amp;gt; setTimeout(resolve, ms || 0)); };  点击按钮复制一个文本或者链接地址 &amp;lt;div id=&amp;quot;lalala&amp;quot;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt; &amp;lt;button onclick=&amp;quot;but()&amp;quot;&amp;gt;点我&amp;lt;/button&amp;gt; &amp;lt;script&amp;gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; + msg); } catch(err) { console.</description>
     </item>
     
     <item>
@@ -188,6 +215,18 @@ vue 模板
 而其在 Vue 源码中主要使用了 window.performance 来获取网页性能数据，其中包含了 performance.mark 和 performance.measure。
  performance.mark 主要用于创建标记 performance.measure 主要用于记录两个标记的时间间隔  例如：
 performance.mark(&#39;start&#39;); // 创建 start 标记 performance.mark(&#39;end&#39;); // 创建 end 标记 performance.measure(&#39;output&#39;, &#39;start&#39;, &#39;end&#39;); // 计算两者时间间隔 performance.getEntriesByName(&#39;output&#39;); // 获取标记，返回值是一个数组，包含了间隔时间数据  熟练的使用 performance 我们可以查看并分析网页的很多数据，为我们项目优化提供保障。</description>
+    </item>
+    
+    <item>
+      <title>HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)</title>
+      <link>/2017/httpstatus/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/httpstatus/</guid>
+      <description>常见的状态码  1xx：临时回应，表示客户端请继续。 2xx：请求成功：  200：请求成功。  3xx: 表示请求的目标有变化，希望客户端进一步处理：  301&amp;amp;302：永久性与临时性跳转。 304：客户端缓存没有更新。  4xx：客户端请求错误：  403：无权限。 404：表示请求的页面不存在。 418：It’s a teapot. 这是一个彩蛋，来自 ietf 的一个愚人节玩笑。（超文本咖啡壶控制协议）  5xx：服务端请求错误：  500：服务端错误。 503：服务端暂时性错误，可以一会再试。   对我们前端来说，1xx 系列的状态码是非常陌生的，原因是 1xx 的状态被浏览器 http 库直接处理掉了，不会让上层应用知晓。
+2xx 系列的状态最熟悉的就是 200，这通常是网页请求成功的标志，也是大家最喜欢的状态码。
+3xx 系列比较复杂，301 和 302 两个状态表示当前资源已经被转移，只不过一个是永久性转移，一个是临时性转移。实际上 301 更接近于一种报错，提示客户端下次别来了。
+304 又是一个每个前端必知必会的状态，产生这个状态的前提是：客户端本地已经有缓存的版本，并且在 Request 中告诉了服务端，当服务端通过时间或者 tag，发现没有更新的时候，就会返回一个不含 body 的 304 状态。</description>
     </item>
     
     <item>
@@ -247,7 +286,7 @@ git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795   git 远程服务器�
     </item>
     
     <item>
-      <title>leetCode Easy</title>
+      <title>leetCode Easy One</title>
       <link>/2017/leetcode-easy/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       

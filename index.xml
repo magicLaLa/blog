@@ -5,8 +5,183 @@
     <description>Recent content in Magic on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 May 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>弹出遮照阻止底部页面滚动</title>
+      <link>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</link>
+      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</guid>
+      <description>
+
+&lt;h4 id=&#34;代码如下&#34;&gt;代码如下：&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const bodyEl = document.body;
+let top = 0;
+/**
+ * 阻止页面滚动
+ * @param {boolean} isFixed
+ */
+export function stopBodyScroll(isFixed: boolean) {
+  if (isFixed) {
+    top = window.scrollY;
+
+    bodyEl.style.position = &#39;fixed&#39;;
+    bodyEl.style.top = -top + &#39;px&#39;;
+  } else {
+    bodyEl.style.position = &#39;&#39;;
+    bodyEl.style.top = &#39;&#39;;
+
+    window.scrollTo(0, top); // 回到原先的top
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ua检测</title>
+      <link>/2019/ua%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/ua%E6%A3%80%E6%B5%8B/</guid>
+      <description>
+
+&lt;h4 id=&#34;代码如下&#34;&gt;代码如下：&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;const userAgent = window.navigator.userAgent.toLowerCase();
+export const uaJudge = {
+  get isAndroid() {
+    return /android|adr/gi.test(userAgent);
+  },
+  get isVivo() {
+    return /vivo/gi.test(userAgent);
+  },
+  get isIos() {
+    return /iphone|ipod|ipad/gi.test(userAgent);
+  },
+  /** 微信（包含小程序） */
+  get isWeChat() {
+    return /micromessenger/gi.test(userAgent);
+  },
+  /** 微信小程序 */
+  get isWeChatMini() {
+    if (this.isWeChat) {
+      return new Promise((resolve, reject) =&amp;gt; {
+        wx.miniProgram.getEnv((res: any) =&amp;gt; {
+          resolve(res.miniprogram);
+        });
+        setTimeout(resolve, 1000);
+      });
+    } else {
+      return Promise.resolve(false);
+    }
+  },
+  /** 支付宝 */
+  get isAlipay() {
+    return /alipay/gi.test(userAgent);
+  },
+  /** 百度 */
+  get isBaidu() {
+    return /baiduboxapp/gi.test(userAgent);
+  },
+  /** 百度网盘 */
+  get isWangPan() {
+    return /bdnetdisk/gi.test(userAgent);
+  },
+  /** 新浪微博 */
+  get isWeiBo() {
+    return /weibo/gi.test(userAgent);
+  },
+  /** 钉钉 */
+  get isDingDing() {
+    return /dingtalk/gi.test(userAgent);
+  },
+  /** qq，qq浏览器 */
+  get isQQ() {
+    return /QQ/gi.test(window.navigator.userAgent);
+  },
+  /** uc浏览器 */
+  get isUC() {
+    return /ucbrowser/gi.test(userAgent);
+  },
+  /** 网易云音乐 */
+  get isWYMusic() {
+    return /neteasemusic/gi.test(userAgent);
+  },
+  /** 美图系（包含潮自拍，美图贴贴等） */
+  get isMTSeries() {
+    return /com.meitu/gi.test(userAgent);
+  },
+  /** 潮自拍 */
+  get isChaoZiPai() {
+    return /com.meitu.wheecam/gi.test(userAgent);
+  },
+  /** 潮自拍3.6.4及以上版本支持新协议 */
+  get isNewChaoZiPai() {
+    const result = /com.meitu.wheecam\/([\d.]*)/.exec(userAgent);
+    const version = result &amp;amp;&amp;amp; result[1];
+    if (version) {
+      return parseInt(version.replace(/\./g, &#39;&#39;).substring(0, 3), 10) &amp;gt;= 364;
+    } else {
+      return false;
+    }
+  },
+  /** 无他相机 */
+  get isWuTa() {
+    return /wuta_browser/gi.test(userAgent);
+  },
+  /** 她face++ */
+  get isTaFace() {
+    return /taface/gi.test(userAgent);
+  },
+  /** 小恩爱 */
+  get isXiaoenai() {
+    return /mzdw/gi.test(userAgent);
+  },
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>获取元素content宽高</title>
+      <link>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</guid>
+      <description>
+
+&lt;h4 id=&#34;代码如下&#34;&gt;代码如下：&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * 获取元素content宽高
+ * @param el
+ */
+export function getContentSize(el: HTMLElement) {
+  const width = el.offsetWidth;
+  const height = el.offsetHeight;
+  const style = window.getComputedStyle(el);
+  // border
+  const blw = parseFloat(style.borderLeftWidth || &#39;0&#39;);
+  const brw = parseFloat(style.borderRightWidth || &#39;0&#39;);
+  const btw = parseFloat(style.borderTopWidth || &#39;0&#39;);
+  const bbw = parseFloat(style.borderBottomWidth || &#39;0&#39;);
+  // padding
+  const plw = parseFloat(style.paddingLeft || &#39;0&#39;);
+  const prw = parseFloat(style.paddingRight || &#39;0&#39;);
+  const ptw = parseFloat(style.paddingTop || &#39;0&#39;);
+  const pbw = parseFloat(style.paddingBottom || &#39;0&#39;);
+  return {
+    width: width - blw - brw - plw - prw,
+    height: height - btw - bbw - ptw - pbw,
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Webpack 优化相关</title>
@@ -3079,6 +3254,13 @@ npm config set SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/
 
 &lt;h1 id=&#34;js随笔&#34;&gt;JS随笔&lt;/h1&gt;
 
+&lt;h3 id=&#34;等待多好毫秒后执行后面代码&#34;&gt;等待多好毫秒后执行后面代码&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;export const sleep = async (ms: number) =&amp;gt; {
+  return new Promise((resolve) =&amp;gt; setTimeout(resolve, ms || 0));
+};
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h3 id=&#34;点击按钮复制一个文本或者链接地址&#34;&gt;点击按钮复制一个文本或者链接地址&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div id=&amp;quot;lalala&amp;quot;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt;
@@ -3581,962 +3763,6 @@ Vue.component(&#39;barcode&#39;, VueBarcode);
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://panjiachen.github.io/vue-element-admin-site/zh/guide/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;vue-element-admin&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>vue 相关问题</title>
-      <link>/2017/workrelated/</link>
-      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/workrelated/</guid>
-      <description>
-
-&lt;h3 id=&#34;使用vuex状态管理后-在-input-中使用-v-model-来进行双向数据绑定-在修改-input-中值的时候会抛出一个错误&#34;&gt;使用vuex状态管理后，在 input 中使用 v-model 来进行双向数据绑定，在修改 input 中值的时候会抛出一个错误&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;可以不使用 v-model 来进行双向数据绑定，使用 :value=&amp;rsquo; &amp;lsquo; 来，然后设置一个 监听器来推动 state 的更新( @input=&amp;rsquo; &amp;lsquo; )&lt;/p&gt;
-
-&lt;p&gt;vue 模板&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vue&#34;&gt;&amp;lt;template&amp;gt;
-  &amp;lt;div class=&amp;quot;hello&amp;quot;&amp;gt;
-    &amp;lt;input type=&amp;quot;text&amp;quot; :value=&amp;quot;text&amp;quot; @input=&#39;update&#39;&amp;gt;
-    &amp;lt;span&amp;gt;{{ddd}}&amp;lt;/span&amp;gt;
-    &amp;lt;p ref=&amp;quot;ppp&amp;quot;&amp;gt;啦啦啦&amp;lt;/p&amp;gt;
-    &amp;lt;input type=&amp;quot;text&amp;quot; v-focus&amp;gt;
-  &amp;lt;/div&amp;gt;
-&amp;lt;/template&amp;gt;
-
-&amp;lt;script&amp;gt;
-import {mapState} from &#39;vuex&#39;
-export default {
-  name: &#39;HelloWorld&#39;,
-  data () {
-    return {
-      ddd: &#39;&#39;
-    }
-  },
-  computed: {
-    ...mapState([&#39;text&#39;])
-  },
-  methods: {
-    update (e) {
-　　　// 在这里来 更新 state 里的某一个值
-      this.$store.dispatch(&#39;updataText&#39;, e.target.value)// 触发 actions 来 推动 mutations
-      this.$refs.ppp.innerText = &#39;465&#39;
-    }
-  },
-  watch: {
-    text: function () {
-      this.ddd = this.$store.state.text
-    }
-  },
-  directives: {
-    focus: {
-      // 自定义指令
-      inserted: function (el) {
-        el.focus()
-      }
-    }
-  }
-}
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;actions.js 里内容&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;const actions = {
-　updataText (context, val) {
-　　　context.commit(&#39;modify&#39;, val)
-　}
-}
-export default actions
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;state.js 里内容&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;export default {
-　text: &#39;46546&#39;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;具体参考 &lt;a href=&#34;https://vuex.vuejs.org/zh-cn/forms.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官方文档&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;在vue中父组件通过-props-给子组件传递数据-然后在-input-通过-v-model-绑定-怎么在-watch-中-进行监听-通过-props-来把传递的-数据-变成-子组件的-初始值&#34;&gt;在vue中父组件通过 props 给子组件传递数据，然后在 input 通过 v-model 绑定，怎么在 watch 中 进行监听，通过 props 来把传递的 数据 变成 子组件的 初始值&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;父组件中的内容&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- 取货方式和收货人信息 --&amp;gt;
-&amp;lt;pick-box :checked=&amp;quot;checkedSuccess&amp;quot; :userData=&amp;quot;userData&amp;quot; :user2Data=&amp;quot;user2Data&amp;quot; :areaArr=&amp;quot;infoAreaData&amp;quot; :errTxt=&amp;quot;pasTxt&amp;quot; :isErrShow=&amp;quot;isErrShow&amp;quot; @changeErr=&amp;quot;changeErrShow&amp;quot; :disabled=&amp;quot;!checkedSuccess&amp;quot;&amp;gt;&amp;lt;/pick-box&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;export default {
-  // 可以在这个地方初始化值
-  let areaN = this.$store.state.numStatus.cityDic.cityName
-  if (areaN === &#39;大兴安岭&#39;) {
-    emCityName1 = areaN + &#39;地区&#39;
-  } else {
-    emCityName1 = areaN + &#39;市&#39;
-  }
-
-  data () {
-    return {
-      userData: {
-        name: &#39;&#39;,
-        idCard: &#39;&#39;
-      },
-      emCityName: emCityName
-    }
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;子组件中的内容&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vue&#34;&gt;&amp;lt;template&amp;gt;
-  &amp;lt;div class=&amp;quot;pickBox&amp;quot;&amp;gt;
-    &amp;lt;div class=&amp;quot;conInfoBox&amp;quot; v-show=&amp;quot;order.chiocePick === &#39;1&#39;&amp;quot;&amp;gt;
-      &amp;lt;h3 class=&amp;quot;numH3 c288fe line1&amp;quot;&amp;gt;收货人信息&amp;lt;/h3&amp;gt;
-      &amp;lt;!-- 联系人姓名 --&amp;gt;
-      &amp;lt;div class=&amp;quot;conInpBox&amp;quot; @click=&amp;quot;inputFocus&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;coin&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;input class=&amp;quot;netInput&amp;quot; type=&amp;quot;text&amp;quot; v-model=&amp;quot;conPerName&amp;quot; placeholder=&amp;quot;联系人姓名: 请输入联系人姓名&amp;quot; :disabled=&amp;quot;!checked&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-      &amp;lt;div class=&amp;quot;errPro&amp;quot;&amp;gt;
-        &amp;lt;div class=&amp;quot;errItem&amp;quot; v-show=&amp;quot;isconErrShow.conErrName&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;errCoin f24&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;proTxt&amp;quot;&amp;gt;请输入正确的收货人姓名&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
-      &amp;lt;/div&amp;gt;
-      &amp;lt;!-- 联系人电话 --&amp;gt;
-      &amp;lt;div class=&amp;quot;conInpBox&amp;quot; @click=&amp;quot;inputFocus&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;coin&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;input class=&amp;quot;netInput&amp;quot; type=&amp;quot;tel&amp;quot; v-model=&amp;quot;conPerTel&amp;quot; placeholder=&amp;quot;联系人电话: 请输入联系人电话&amp;quot; :disabled=&amp;quot;!checked&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-      &amp;lt;div class=&amp;quot;errPro&amp;quot;&amp;gt;
-        &amp;lt;div class=&amp;quot;errItem&amp;quot; v-show=&amp;quot;isconErrShow.conErrTel&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;errCoin f24&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;proTxt&amp;quot;&amp;gt;请输入正确的收货人电话&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
-      &amp;lt;/div&amp;gt;
-      &amp;lt;!-- 所选区县 --&amp;gt;
-      &amp;lt;div class=&amp;quot;conInpBox conArea&amp;quot; :class=&amp;quot;{&#39;inputDisabled&#39;: !checked}&amp;quot; @click=&amp;quot;inputFocus&amp;quot;&amp;gt;
-        &amp;lt;div class=&amp;quot;conAreaBox&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;coin&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;areaTxt&amp;quot; :class=&amp;quot;{&#39;inputDisabled&#39;: !checked}&amp;quot;&amp;gt;{{conPerArea}}&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
-        &amp;lt;div class=&amp;quot;c288fe&amp;quot; @click=&amp;quot;openPickPop&amp;quot; :class=&amp;quot;{&#39;inputDisabled&#39;: !checked}&amp;quot;&amp;gt;选择区县 〉&amp;lt;/div&amp;gt;
-      &amp;lt;/div&amp;gt;
-      &amp;lt;!-- 收货人信息详细地址 --&amp;gt;
-      &amp;lt;div class=&amp;quot;conInpBox&amp;quot; @click=&amp;quot;inputFocus&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;coin&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;input class=&amp;quot;netInput&amp;quot; type=&amp;quot;tel&amp;quot; v-model=&amp;quot;conPerAdd&amp;quot; placeholder=&amp;quot;详细地址: 请输入详细地址&amp;quot; :disabled=&amp;quot;!checked&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-      &amp;lt;div class=&amp;quot;errPro&amp;quot;&amp;gt;
-        &amp;lt;div class=&amp;quot;errItem&amp;quot; v-show=&amp;quot;isconErrShow.conErrAdd&amp;quot;&amp;gt;&amp;lt;span class=&amp;quot;errCoin f24&amp;quot;&amp;gt;*&amp;lt;/span&amp;gt;&amp;lt;span class=&amp;quot;proTxt&amp;quot;&amp;gt;请输入正确的收货人地址&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
-      &amp;lt;/div&amp;gt;
-    &amp;lt;/div&amp;gt;
-  &amp;lt;/div&amp;gt;
-&amp;lt;/template&amp;gt;
-
-&amp;lt;script&amp;gt;
-export default {
-  data () {
-    let areaDefalut = this.$store.state.numStatus.cityDic.cityName
-    let emCityName2 = &#39;&#39;
-    if (areaDefalut === &#39;大兴安岭&#39;) {
-      emCityName2 = areaDefalut + &#39;地区&#39;
-    } else {
-      emCityName2 = areaDefalut + &#39;市&#39;
-    }
-
-    return: {
-      isDisable: false,
-      loginNo: loginNo,
-      isLoading: false,
-      pickPersonArea: &#39;&#39;,
-      conPerName: &#39;&#39;,
-      conPerTel: &#39;&#39;,
-      conPerAdd: &#39;&#39;,
-      conPerArea: `所属地区: 黑龙江省 ${emCityName2}`,
-      conPerAreaCode: &#39;&#39;
-    }
-  },
-  props: {
-    userData: {
-      type: Object
-    },
-    user2Data: {
-      type: Object
-    },
-    areaArr: {
-      type: Array
-    },
-    isErrShow: {
-      type: Object
-    },
-    errTxt: {
-      type: String
-    },
-    checked: {
-      type: Boolean
-    }
-  },
-  watch: {
-    user2Data: {
-      handler: function (newVal, oldVal) {
-        console.log(newVal, oldVal)
-      },
-      deep: true  // 深度监听模式
-    },
-    // 收货人姓名检验
-    conPerName (newVal, oldVal) {
-      /* eslint-disable */
-      let conNameReg =  /^([a-zA-Z\u4e00-\u9fa5\·]{1,10})$/
-      if (newVal !== &#39;&#39;) {
-        if (conNameReg.test(newVal)) {
-          this.isconErrShow.conErrName = false
-        } else {
-          this.isconErrShow.conErrName = true
-        }
-      } else {
-        this.isconErrShow.conErrName = true
-      }
-    },
-    // 收货人详细地址地址检验
-    conPerAdd (newVal, oldVal) {
-       let detaAdd = /[@\/\&#39;\\\&amp;quot;$%&amp;amp;_!！+=\^\*\$\+\(\)\-\（\）]+/ig
-       if (newVal !== &#39;&#39;) {
-         if (detaAdd.test(newVal) || newVal === &#39;&#39;) {
-           this.isconErrShow.conErrAdd = true
-         } else {
-           this.isconErrShow.conErrAdd = false
-         }
-       } else {
-         this.isconErrShow.conErrAdd = true
-       }
-    },
-    // 收货人电话检验
-    conPerTel (newVal, oldVal) {
-      let conPTReg = /^\d{6,}$/
-      if (newVal !== &#39;&#39;) {
-        if (conPTReg.test(newVal)) {
-          this.isconErrShow.conErrTel = false
-        } else {
-          this.isconErrShow.conErrTel = true
-        }
-      } else {
-        this.isconErrShow.conErrTel = true
-      }
-    }
-  }
-}
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;可以通过 在 data 里 初始化一个 简单值 ，然后 通过 watch 来 监听 通过 props 来传入值的变化 ，然后 再进行 赋值，然后 就可以 通过 在 watch 里面 来 监听 要 变化的 值 来 进行 处理。也可以 通过  computed 来 使 props 传递过来的数据 变成 子组件的 初始值，然后在 input 上面 通过 v-model 来进行双向数据绑定，可以 监听 input 的 change 事件 ， 来进行 对 输入过程中 进行操作。&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;在vue-中-使用-mint-ui-的-picker-选择器-组件-在下滑或上滑和手机浏览器原生滑动事件有冲突-通常在-ios-上-会有这个现象-可以监听-touchmove-事件-来阻止默认事件-具体看代码&#34;&gt;在vue 中 使用 mint-ui 的 Picker 选择器 组件，在下滑或上滑和手机浏览器原生滑动事件有冲突（通常在 IOS 上 会有这个现象），可以监听 touchmove 事件，来阻止默认事件，具体看代码&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;参考 &lt;a href=&#34;http://iscrolljs.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://iscrolljs.com/&lt;/a&gt;  &lt;a href=&#34;http://iscrolljs.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;这个网站&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function isPassive () {
-  var supportsPassiveOption = false
-  try {
-    addEventListener(&#39;test&#39;, null, Object.defineProperty({}, &#39;passive&#39;, {
-      get: function () {
-        supportsPassiveOption = true
-      }
-    }))
-  } catch (e) {}
-  return supportsPassiveOption
-}
-
-function preventDefaultFunc (e) {
-  e.preventDefault()
-}
-
-export function preventTouchmove (onoff) {
-  if (onoff) {
-    document.body.addEventListener(&#39;touchmove&#39;, preventDefaultFunc, isPassive() ? {
-      capture: false,
-      passive: false
-    } : false)
-  } else {
-    console.log(&#39;wawawwaawa&#39;)
-    document.body.removeEventListener(&#39;touchmove&#39;, preventDefaultFunc, isPassive() ? {
-      capture: false,
-      passive: false
-    } : false)
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;然后通过&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import { preventTouchmove } from &#39;utils/common&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;来导入这个方法，然后使用，onoff 是开关，来传 布尔值&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;preventTouchmove(true/false)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;在vue项目中展示效果为展开收起的动画组件&#34;&gt;在vue项目中展示效果为展开收起的动画组件&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;expand.js （自己创建的js文件名）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const elTransition = &#39;0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out&#39;
-const Transition = {
-  &#39;before-enter&#39; (el) {
-    el.style.transition = elTransition
-    if (!el.dataset) el.dataset = {}
-
-    el.dataset.oldPaddingTop = el.style.paddingTop
-    el.dataset.oldPaddingBottom = el.style.paddingBottom
-
-    el.style.height = 0
-    el.style.paddingTop = 0
-    el.style.paddingBottom = 0
-  },
-
-  &#39;enter&#39; (el) {
-    el.dataset.oldOverflow = el.style.overflow
-    if (el.scrollHeight !== 0) {
-      el.style.height = el.scrollHeight + &#39;px&#39;
-      el.style.paddingTop = el.dataset.oldPaddingTop
-      el.style.paddingBottom = el.dataset.oldPaddingBottom
-    } else {
-      el.style.height = &#39;&#39;
-      el.style.paddingTop = el.dataset.oldPaddingTop
-      el.style.paddingBottom = el.dataset.oldPaddingBottom
-    }
-
-    el.style.overflow = &#39;hidden&#39;
-  },
-
-  &#39;after-enter&#39; (el) {
-    el.style.transition = &#39;&#39;
-    el.style.height = &#39;&#39;
-    el.style.overflow = el.dataset.oldOverflow
-  },
-
-  &#39;before-leave&#39; (el) {
-    if (!el.dataset) el.dataset = {}
-    el.dataset.oldPaddingTop = el.style.paddingTop
-    el.dataset.oldPaddingBottom = el.style.paddingBottom
-    el.dataset.oldOverflow = el.style.overflow
-
-    el.style.height = el.scrollHeight + &#39;px&#39;
-    el.style.overflow = &#39;hidden&#39;
-  },
-
-  &#39;leave&#39; (el) {
-    if (el.scrollHeight !== 0) {
-      el.style.transition = elTransition
-      el.style.height = 0
-      el.style.paddingTop = 0
-      el.style.paddingBottom = 0
-    }
-  },
-
-  &#39;after-leave&#39; (el) {
-    el.style.transition = &#39;&#39;
-    el.style.height = &#39;&#39;
-    el.style.overflow = el.dataset.oldOverflow
-    el.style.paddingTop = el.dataset.oldPaddingTop
-    el.style.paddingBottom = el.dataset.oldPaddingBottom
-  }
-}
-
-export default {
-  name: &#39;collapseTransition&#39;,
-  functional: true,
-  render (h, { children }) {
-    const data = {
-      on: Transition
-    }
-    return h(&#39;transition&#39;, data, children)
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;在组件中使用&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vue&#34;&gt;&amp;lt;template&amp;gt;
-  &amp;lt;div&amp;gt;
-    &amp;lt;collapse-transition&amp;gt;
-      &amp;lt;!-- 展示的内容 --&amp;gt;
-    &amp;lt;/collapse-transition&amp;gt;
-  &amp;lt;/div&amp;gt;
-&amp;lt;/template&amp;gt;
-
-&amp;lt;script&amp;gt;
-import CollapseTransition from &#39;../expand.js&#39;
-export default {
-  data () {
-    return {
-      isActive: false
-    }
-  },
-  components: {
-    CollapseTransition
-  },
-  methods: {
-    moreAndMore () {
-      this.isActive = !this.isActive
-    },
-    collClick () {
-      this.isActive = false
-    }
-  }
-}
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;有卡顿或者获取高度有误，在enter的时候用setTimeout做了0.1s的延迟，就能准确的获取height了&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;页面刷新vuex被清空&#34;&gt;页面刷新vuex被清空&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;同一个页面(router未改变)，一旦刷新（刷新或深度刷新），存储的&lt;code&gt;vuex&lt;/code&gt;就马上和你说拜拜，解决方法：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;localStorage：网上推荐最多的方法就是用&lt;code&gt;localStorage&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;数据重新获取：在需要某些数据之前先判断一下数据是否存在，如果不存在重新获取。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/robinvdvleuten/vuex-persistedstate&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;vuex-persistedstate&lt;/a&gt;：状态持久化。&lt;/p&gt;
-
-&lt;h3 id=&#34;nexttick适当使用&#34;&gt;nextTick适当使用&lt;/h3&gt;
-
-&lt;p&gt;将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。它跟全局方法 &lt;code&gt;Vue.nextTick&lt;/code&gt; 一样，不同的是回调的 this 自动绑定到调用它的实例上。简而言之，等待DOM更新之后再进行操作。&lt;/p&gt;
-
-&lt;h3 id=&#34;elmentui里面的el-form-就地复用&#34;&gt;elmentui里面的el-form &amp;lsquo;就地复用&amp;rsquo;&lt;/h3&gt;
-
-&lt;p&gt;和&lt;code&gt;v-for&lt;/code&gt;一样，更新已渲染过的元素时，它默认用‘就地复用’策略。如果数据项的顺序被改变，&lt;code&gt;Vue将不会移动DOM&lt;/code&gt;元素来匹配数据项的顺序，而是简单服用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。&lt;/p&gt;
-
-&lt;h3 id=&#34;prop值的改变-不是立即&#34;&gt;prop值的改变&amp;ndash;不是立即&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;如果父组件中给子组件传递了一个&lt;code&gt;prop&lt;/code&gt;的值，然后调用子组件的方法去获取该值，会发现值没有立即改变。&lt;/p&gt;
-
-&lt;p&gt;解决方法：可以监听值的改变去调用相应子组件的方法，将子组件相关方法的调用放在&lt;code&gt;nextTick&lt;/code&gt;里面&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;不要直接修改&lt;code&gt;prop&lt;/code&gt;传下来的值，可以在当前子组件内部声明一个简单值，然后赋值&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;组件之间的调用方式&#34;&gt;组件之间的调用方式&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;父子组件&lt;br /&gt;
-prop向下传递，事件向上传递&lt;br /&gt;
-子组件添加ref属性，父组件可以获取到子组件的实例（不建议）&lt;br /&gt;
-插槽slot 作用域插槽&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;非父子组件&lt;br /&gt;
-使用状态管理&lt;br /&gt;
-实例化一个公共vue实例&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;路由变化页面数据不刷新问题&#34;&gt;路由变化页面数据不刷新问题&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;出现这种情况是因为依赖路由的&lt;code&gt;params&lt;/code&gt;参数获取写在&lt;code&gt;created&lt;/code&gt;生命周期里面,因为相同路由二次甚至多次加载的关系 没有达到监听，退出页面再进入另一个文章页面并不会运行&lt;code&gt;created&lt;/code&gt;组件生命周期,导致文章数据还是第一次进入的数据，解决方法：watch监听路由是否变化&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt; watch: {
-   // 方法1
-   &#39;$route&#39;(to, from) { //监听路由是否变化
-     if (this.$route.params.articleId) { // 判断条件1  判断传递值的变化
-       //获取文章数据
-     }
-   }
-   //方法2
-   &#39;$route&#39;(to, from) {
-     if (to.path == &amp;quot;/page&amp;quot;) { /// 判断条件2  监听路由名 监听你从什么路由跳转过来的
-       this.message = this.$route.query.msg
-     }
-   }
-
- }
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Vue watch选项</title>
-      <link>/2017/vue-watch/</link>
-      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/vue-watch/</guid>
-      <description>
-
-&lt;h2 id=&#34;vue-watch选项&#34;&gt;Vue watch选项&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;watch 的用法&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;watch 对象里的 value 是对应的回调函数&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
-  return {
-    a: 1
-  }
-},
-watch: {
-  a: function (newVal, oldVal) {
-    console.log(newVal, oldVal)
-    // 2 1
-  }
-},
-created () {
-  this.a = 2
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;value 也可以是方法名&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
-  return {
-    a: 1
-  }
-},
-watch: {
-  a: &#39;foo&#39;
-},
-created () {
-  this.a = 2
-},
-methods: {
-  foo (newVal, oldVal) {
-    console.log(newVal, oldVal)
-    // 2 1
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;深度监听 &lt;em&gt;对象内部属性或方法发生改变，须使用深度监听模式才能监听到该对象的改变&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
-  return {
-    box: {
-      name: &#39;jordan&#39;
-    }
-  }
-},
-watch: {
-  box: {
-    handler: function (newVal, oldVal) {
-      console.log(newVal.name, oldVal.name)
-      // kobe kobe
-    },
-    deep: true  // 深度监听模式
-  }
-},
-created () {
-  this.box.name = &#39;kobe&#39;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;不使用深度监听时，可以直接监听 xxx.name&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
-  return {
-    box: {
-      name: &#39;jordan&#39;
-    }
-  }
-},
-watch: {
-  &#39;box.name&#39;: {
-    handler: function (newVal, oldVal) {
-      console.log(newVal, oldVal)
-      // kobe jordan
-    }
-  }
-},
-created () {
-  this.box.name = &#39;lalala&#39;
-}
-// 这时 box.name 又是一个简单值，所以输出 &#39;lalala jordan&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;数组的监听&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
-  return {
-    box: [1, 1, 1]
-  }
-},
-watch: {
-  box: {
-    handler: function () {
-      console.log(&#39;watch works&#39;)
-    }
-  }
-},
-created () {
-  this.box[0] = 2
-  this.box.length = 4
-  this.box.push(1)  // watch works
-  this.box.splice(0, 1, 2)  // watch works
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;created 里使用了4种方式对 box 进行操作，第一种和第二种方式 watch 是监听不到的，即便使用深度监听模式也无法监听的到。&lt;/em&gt; &lt;a href=&#34;https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;可以参考&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;使用 immediate&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
-  return {
-    box: 1
-  }
-},
-watch: {
-  box: {
-    handler: function () {
-      console.log(&#39;watch works&#39;)
-    },
-    immediate: true
-  }
-}
-
-// watch works
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;增加 immediate: true 选项，handler 会在侦听开始之后被立即调用，即便 box 的值没有改变。如果对 this.box 的值加以修改，便会输出两次 &amp;lsquo;watch works&amp;rsquo;，一次是侦听开始的时候，一次是 box 的值被修改的时候&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;watch 里的 value 可以是放在一个数组里面的多个 handler&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
-  return {
-    box: 1
-  }
-},
-watch: {
-  box: [
-    function foo (newVal, oldVal) {
-      console.log(newVal, oldVal)
-      // 2 1
-    },
-    function bar (newVal, oldVal) {
-      console.log(newVal, oldVal)
-      // 2 1
-    }
-  ]
-},
-created () {
-  this.box = 2
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;每一个 handler 都可以接收 new value 和 old value 两个参数，并且会按各自在数组中的顺序先后触发。当然下面的操作也能实现这样的场景：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
-  return {
-    box: 1
-  }
-},
-watch: {
-  box: function (newVal, oldVal) {
-    this.foo(newVal, oldVal)
-    this.bar(newVal, oldVal)
-  }
-},
-created () {
-  this.box = 2
-},
-methods: {
-  foo (newVal, oldVal) {
-    console.log(newVal, oldVal)
-  },
-  bar (newVal, oldVal) {
-    console.log(newVal, oldVal)
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;不应该使用箭头函数来定义 watcher 函数&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;data () {
-  return {
-    box: 1
-  }
-},
-watch: {
-  box: newVal =&amp;gt; {
-    this.updateBox(newVal)
-  }
-},
-created () {
-  this.box = 2
-},
-methods: {
-  updateBox (newVal) {
-    this.box = newVal
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;上面的例子会报错，是因为箭头函数绑定了父级作用域的上下文，所以 this 将不会指向 Vue 实例，也就没有 this.updateBox 这个方法，可以参考 es6箭头函数this的指向&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Vue配置相关</title>
-      <link>/2017/vue/</link>
-      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/vue/</guid>
-      <description>
-
-&lt;h2 id=&#34;vue配置相关&#34;&gt;Vue配置相关&lt;/h2&gt;
-
-&lt;h3 id=&#34;代理配置&#34;&gt;代理配置&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;module.exports = {
-  ........,
-  dev: {      // 开发环境配置
-    env: require(&#39;./dev.env&#39;),      // 使用 config/dev.env.js 中定义的编译环境
-    port: 8686,     // 运行测试页面的端口号
-    autoOpenBrowser: true,
-    assetsSubDirectory: &#39;static&#39;,     // 编译输出的二级目录
-    assetsPublicPath: &#39;/&#39;,      // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
-    // 需要 proxyTable 代理的接口（可跨域）
-    proxyTable: {
-      &#39;**&#39;: {
-        target: &#39;https://xxxxxxx&#39;,
-        changeOrigin: true,
-        filter: function (pathname, req) {
-          // 接口地址 /******-server/****/******
-          return pathname.match(&#39;^\/.+-server.*&#39;)
-        }
-      }
-    },
-    cssSourceMap: false
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;多入口配置&#34;&gt;多入口配置&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/* utils.js */
-const path = require(&#39;path&#39;);
-
-// glob 是 webpack 安装时依赖的一个第三方模块，还模块允许你使用 * 等符号,
-// 例如 lib/*.js 就是获取 lib 文件夹下的所有 js 后缀名的文件
-const glob = require(&#39;glob&#39;);
-
-// 取得相应的页面路径，因为之前的配置，所以是 src 文件夹下的 pages 文件夹
-const PAGE_PATH = path.resolve(__dirname, &#39;../src/pages&#39;);
-
-/*
-* 多入口配置
-* 通过 glob 模块读取 pages 文件夹下的所有对应文件夹下的 js * 后缀文件，如果该文件存在
-* 那么就作为入口处理
-*/
-exports.getEntries = () =&amp;gt; {
-  let entryFiles = glob.sync(PAGE_PATH + &#39;/*/*.js&#39;) // 同步读取所有入口文件
-  let map = {}
-
-  // 遍历所有入口文件
-  entryFiles.forEach(filePath =&amp;gt; {
-    // 获取文件名
-    let filename = filePath.substring(filePath.lastIndexOf(&#39;\/&#39;) + 1, filePath.lastIndexOf(&#39;.&#39;))
-
-    // 以键值对的形式存储
-    map[filename] = filePath
-  })
-
-  return map
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;上方我们使用了 &lt;code&gt;glob&lt;/code&gt; 这一第三方模块读取所有 pages 文件夹下的入口文件，其需要进行安装：&lt;code&gt;yarn add glob --dev&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;可以将返回的入口文件对象其设置到 webpack 的 entry 属性上&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;多模板配置&#34;&gt;多模板配置&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;模板文件的作用主要用于 webpack 中 &lt;code&gt;html-webpack-plugin&lt;/code&gt; 插件的配置，其会根据模板文件生产一个编译后的 html 文件并自动加入携带 hash 的脚本和样式，基本配置如下：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/* webpack 配置文件 */
-const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;) // 安装并引用插件
-
-module.exports = {
-    ...
-    plugins: [
-      new HtmlWebpackPlugin({
-        title: &#39;My Page&#39;, // 生成 html 中的 title
-        filename: &#39;demo.html&#39;, // 生成 html 的文件名
-        template: &#39;xxx/xxx/demo.html&#39;, // 模板路径
-        chunks: [&#39;manifest&#39;, &#39;vendor&#39;, &#39;demo&#39;], // 所要包含的模块
-        inject: true, // 是否注入资源
-      })
-    ]
-    ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;以上是单模板的配置，那么如果是多模板只要继续往 plugins 数组中添加 HtmlWebpackPlugin 即可，但是为了和多入口一样能够灵活的获取 pages 目录下所有模板文件并进行配置，可以在 utils.js 中添加多模板的读取解析方法：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/* utils.js */
-
-// 多页面输出配置
-// 与上面的多页面入口配置相同，读取 page 文件夹下的对应的 html 后缀文件，然后放入数组中
-exports.htmlPlugin = configs =&amp;gt; {
-    let entryHtml = glob.sync(PAGE_PATH + &#39;/*/*.html&#39;)
-    let arr = []
-    entryHtml.forEach(filePath =&amp;gt; {
-      let filename = filePath.substring(filePath.lastIndexOf(&#39;\/&#39;) + 1, filePath.lastIndexOf(&#39;.&#39;))
-      let conf = {
-        template: filePath, // 模板路径
-        filename: filename + &#39;.html&#39;, // 生成 html 的文件名
-        chunks: [&#39;manifest&#39;, &#39;vendor&#39;, filename],
-        inject: true,
-      }
-      // 如果有自定义配置可以进行 merge
-      if (configs) {
-        conf = merge(conf, configs)
-      }
-      // 针对生产环境配置
-      if (process.env.NODE_ENV === &#39;production&#39;) {
-        conf = merge(conf, {
-          minify: {
-            removeComments: true, // 删除 html 中的注释代码
-            collapseWhitespace: true, // 删除 html 中的空白符
-            // removeAttributeQuotes: true // 删除 html 元素中属性的引号
-          },
-          chunksSortMode: &#39;manual&#39; // 按 manual 的顺序引入
-        })
-      }
-
-      arr.push(new HtmlWebpackPlugin(conf))
-    })
-    return arr
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;注：&lt;a href=&#34;https://github.com/kangax/html-minifier&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;minify&lt;/a&gt; 配置的作用：将 html-minifier 的选项作为对象来缩小输出&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;在-vue-cli3-使用-pages-配置&#34;&gt;在 vue-cli3 使用 pages 配置&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;将多入口和多模板的方法就可以合并成一个函数来进行多页的处理，合并后的 setPages 方法如下：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const path = require(&#39;path&#39;)
-
-// glob是webpack安装时依赖的一个第三方模块，还模块允许你使用 *等符号,
-// 例如lib/*.js就是获取lib文件夹下的所有js后缀名的文件
-const glob = require(&#39;glob&#39;)
-
-// 取得相应的页面路径，因为之前的配置，所以是src文件夹下的pages文件夹
-const PAGE_PATH = path.resolve(__dirname, &#39;../src/pages/&#39;)
-
-// 用于做相应的merge处理
-const merge = require(&#39;webpack-merge&#39;)
-
-const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)
-
-let ENTRY = &#39;main.js&#39;
-// pages 多入口配置
-exports.setPages = configs =&amp;gt; {
-    let entryFiles = glob.sync(PAGE_PATH + &#39;/**/&#39; + ENTRY);
-    let map = {};
-
-    entryFiles.forEach(filePath =&amp;gt; {
-        let tmp = filePath.substring(0, filePath.indexOf(ENTRY));
-        let fileName = filePath.substring(PAGE_PATH.length + 1, filePath.indexOf(ENTRY) - 1)
-
-        let conf = {
-          // page 的入口
-          entry: filePath,
-          // 模板来源
-          template: tmp + &#39;index.html&#39;,
-          // 在 dist/index.html 的输出
-          filename: fileName + &#39;.html&#39;,
-          // 页面模板需要加对应的js脚本，如果不加这行则每个页面都会引入所有的js脚本
-          chunks: [&#39;chunk-vendors&#39;, &#39;chunk-common&#39;, fileName]
-          // inject: true
-        };
-
-        console.log(&#39;conf&#39;, conf)
-
-        if (configs) {
-            conf = merge(conf, configs)
-        }
-
-        if (process.env.NODE_ENV === &#39;production&#39;) {
-            conf = merge(conf, {
-                minify: {
-                    removeComments: true, // 删除html中的注释代码
-                    collapseWhitespace: true, // 删除html中的空白符
-                },
-                chunksSortMode: &#39;manual&#39;// 按manual的顺序引入
-            })
-        }
-
-        map[fileName] = conf;
-    })
-
-    return map
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;上述代码我们 return 出的 map 对象就是 pages 所需要的配置项结构，我们只需在 vue.config.js 中引用即可：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/* vue.config.js */
-const utils = require(&#39;./build/utils&#39;)
-
-module.exports = {
-  ...
-
-  pages: utils.setPages(),
-
-  ...
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

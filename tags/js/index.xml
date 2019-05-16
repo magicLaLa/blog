@@ -6,10 +6,37 @@
     <description>Recent content in js on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 04 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/js/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>弹出遮照阻止底部页面滚动</title>
+      <link>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</link>
+      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</guid>
+      <description> 代码如下： const bodyEl = document.body; let top = 0; /** * 阻止页面滚动 * @param {boolean} isFixed */ export function stopBodyScroll(isFixed: boolean) { if (isFixed) { top = window.scrollY; bodyEl.style.position = &#39;fixed&#39;; bodyEl.style.top = -top + &#39;px&#39;; } else { bodyEl.style.position = &#39;&#39;; bodyEl.style.top = &#39;&#39;; window.scrollTo(0, top); // 回到原先的top } }  </description>
+    </item>
+    
+    <item>
+      <title>ua检测</title>
+      <link>/2019/ua%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/ua%E6%A3%80%E6%B5%8B/</guid>
+      <description>代码如下： const userAgent = window.navigator.userAgent.toLowerCase(); export const uaJudge = { get isAndroid() { return /android|adr/gi.test(userAgent); }, get isVivo() { return /vivo/gi.test(userAgent); }, get isIos() { return /iphone|ipod|ipad/gi.test(userAgent); }, /** 微信（包含小程序） */ get isWeChat() { return /micromessenger/gi.test(userAgent); }, /** 微信小程序 */ get isWeChatMini() { if (this.isWeChat) { return new Promise((resolve, reject) =&amp;gt; { wx.miniProgram.getEnv((res: any) =&amp;gt; { resolve(res.miniprogram); }); setTimeout(resolve, 1000); }); } else { return Promise.resolve(false); } }, /** 支付宝 */ get isAlipay() { return /alipay/gi.</description>
+    </item>
+    
+    <item>
+      <title>获取元素content宽高</title>
+      <link>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</guid>
+      <description>代码如下： /** * 获取元素content宽高 * @param el */ export function getContentSize(el: HTMLElement) { const width = el.offsetWidth; const height = el.offsetHeight; const style = window.getComputedStyle(el); // border const blw = parseFloat(style.borderLeftWidth || &#39;0&#39;); const brw = parseFloat(style.borderRightWidth || &#39;0&#39;); const btw = parseFloat(style.borderTopWidth || &#39;0&#39;); const bbw = parseFloat(style.borderBottomWidth || &#39;0&#39;); // padding const plw = parseFloat(style.paddingLeft || &#39;0&#39;); const prw = parseFloat(style.paddingRight || &#39;0&#39;); const ptw = parseFloat(style.paddingTop || &#39;0&#39;); const pbw = parseFloat(style.</description>
+    </item>
     
     <item>
       <title>箭头函数this的指向</title>
@@ -72,7 +99,7 @@ console.group(&#39;第一个组&#39;); console.group(&amp;quot;1-1&amp;quot;); c
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/js-essay/</guid>
-      <description>JS随笔 点击按钮复制一个文本或者链接地址 &amp;lt;div id=&amp;quot;lalala&amp;quot;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt; &amp;lt;button onclick=&amp;quot;but()&amp;quot;&amp;gt;点我&amp;lt;/button&amp;gt; &amp;lt;script&amp;gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; + msg); } catch(err) { console.log(&#39;Oops, unable to copy&#39;); } // 移除选中的元素 window.getSelection().removeAllRanges(); return false } &amp;lt;/script&amp;gt;  (a == 1 &amp;amp;&amp;amp; a== 2 &amp;amp;&amp;amp; a == 3) 有可能是 true 吗？  第一种解法:  const a = { i: 0, toString: function() { return a.</description>
+      <description>JS随笔 等待多好毫秒后执行后面代码 export const sleep = async (ms: number) =&amp;gt; { return new Promise((resolve) =&amp;gt; setTimeout(resolve, ms || 0)); };  点击按钮复制一个文本或者链接地址 &amp;lt;div id=&amp;quot;lalala&amp;quot;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt; &amp;lt;button onclick=&amp;quot;but()&amp;quot;&amp;gt;点我&amp;lt;/button&amp;gt; &amp;lt;script&amp;gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; + msg); } catch(err) { console.</description>
     </item>
     
     <item>
