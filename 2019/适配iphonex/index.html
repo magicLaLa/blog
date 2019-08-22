@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/" />
+  <link rel="next" href="/2019/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" />
+  <link rel="canonical" href="/2019/%E9%80%82%E9%85%8Diphonex/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           css3 适配iphoneX 安全区域 | Magic
+       
+  </title>
+  <meta name="title" content="css3 适配iphoneX 安全区域 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="css3 适配iphoneX 安全区域"/>
+<meta name="twitter:description" content="iphoneX 适配 第一步：设置网页在可视窗口的布局方式  ios11 引入 meta 标签的 viewpoint 扩展属性 viewpoint-fit，在 iOS 11 中 viewpoint-fit 也官方添加到 CSS Round Display 规范中了。 viewport-fit 有三个属性值：  Auto：默认值。这个值不影响初始布局视窗，整个 Web 页面是可视的。 Contain：最初的布局视窗和视觉布局视窗被设置为最大的矩形。 Cover：初始布局视窗和视觉布局视窗被设置为设备物理屏幕的限定矩形。   所以我们可以通过 viewpoint-fit=cover 来解决问题，使页面内容跳出安全区域的框框。
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0,user-scalable=0,viewport-fit=cover&quot;&gt;  第二步：页面主体内容限定在安全区域内  IOS11 提供了两个个新的 css 变量 env(safe-area-inset-※) 和 constant(safe-area-inset-※) safe-area-inset-※ 提供了四个方向的值：
+ safe-area-inset-top：在 Viewport 顶部的安全区域内设置量； safe-area-inset-bottom：在 Viewport 底部的安全区域内设置量； safe-area-inset-left：在 Viewport 左边的安全区域内设置量； safe-area-inset-right：在 Viewport 右边的安全区域内设置量；  constant() 和 env() 这个变量已经开始着手标准化，目前也可以被用在 margin、padding、top、bottom、left、right 等 css 属性中，同时在不支持的环境中将不会生效。而且，同样在 iOS 11 中，iPhone X 机型以下得到的值均为 0，iPhone X 得到其对应的设置量。"/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "css3 适配iphoneX 安全区域",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2019\/%E9%80%82%E9%85%8Diphonex\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "CSS",
+  "wordcount":  130 ,
+  "url": "\/2019\/%E9%80%82%E9%85%8Diphonex\/",
+  "datePublished": "2019-06-18T00:00:00\x2b00:00",
+  "dateModified": "2019-06-18T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="/">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="/">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">css3 适配iphoneX 安全区域</h1>
+        <div class="post-meta">
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2019-06-18>18 June 2019</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/css%E7%9B%B8%E5%85%B3/"> CSS相关 </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            1 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+<h2 id="iphonex-适配">iphoneX 适配</h2>
+
+<h3 id="第一步-设置网页在可视窗口的布局方式">第一步：设置网页在可视窗口的布局方式</h3>
+
+<ul>
+<li>ios11 引入 meta 标签的 viewpoint 扩展属性 <code>viewpoint-fit</code>，在 iOS 11 中 viewpoint-fit 也官方添加到 CSS Round Display 规范中了。</li>
+<li><code>viewport-fit</code> 有三个属性值：
+
+<ul>
+<li>Auto：默认值。这个值不影响初始布局视窗，整个 Web 页面是可视的。</li>
+<li>Contain：最初的布局视窗和视觉布局视窗被设置为最大的矩形。</li>
+<li>Cover：初始布局视窗和视觉布局视窗被设置为设备物理屏幕的限定矩形。</li>
+</ul></li>
+</ul>
+
+<p>所以我们可以通过 viewpoint-fit=cover 来解决问题，使页面内容跳出安全区域的框框。</p>
+
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0,user-scalable=0,viewport-fit=cover&quot;&gt;
+</code></pre>
+
+<h3 id="第二步-页面主体内容限定在安全区域内">第二步：页面主体内容限定在安全区域内</h3>
+
+<ul>
+<li>IOS11 提供了两个个新的 css 变量 <code>env(safe-area-inset-※)</code> 和 <code>constant(safe-area-inset-※)</code></li>
+
+<li><p><code>safe-area-inset-※</code> 提供了四个方向的值：</p>
+
+<ul>
+<li><code>safe-area-inset-top</code>：在 Viewport 顶部的安全区域内设置量；</li>
+<li><code>safe-area-inset-bottom</code>：在 Viewport 底部的安全区域内设置量；</li>
+<li><code>safe-area-inset-left</code>：在 Viewport 左边的安全区域内设置量；</li>
+<li><code>safe-area-inset-right</code>：在 Viewport 右边的安全区域内设置量；</li>
+</ul></li>
+
+<li><p><code>constant()</code> 和 <code>env()</code> 这个变量已经开始着手标准化，目前也可以被用在 <code>margin、padding、top、bottom、left、right</code> 等 css 属性中，<strong>同时在不支持的环境中将不会生效</strong>。而且，同样在 iOS 11 中，iPhone X 机型以下得到的值均为 0，iPhone X 得到其对应的设置量。</p></li>
+</ul>
+
+<h3 id="第三步-设置底部的样式">第三步：设置底部的样式</h3>
+
+<ul>
+<li><code>safe-area-inset-bottom</code> 这个变量，因为它对应的就是小黑条的高度（横竖屏时值不一样）。</li>
+</ul>
+
+<pre><code class="language-css">body {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+</code></pre>
+
+<h3 id="扩展-fixed-元素适配">扩展：fixed 元素适配</h3>
+
+<ul>
+<li>类型一：fixed 完全吸底元素（bottom = 0）</li>
+</ul>
+
+<pre><code class="language-css">.fixed-bottom-box {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+</code></pre>
+
+<ul>
+<li>类型二：fixed 非完全吸底元素（bottom ≠ 0），比如 “返回顶部”、“侧边广告” 等</li>
+</ul>
+
+<pre><code class="language-css">div {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+</code></pre>
+
+<h3 id="扩展-只希望-iphonex-才需要新增适配样式-可以配合-supports-来隔离兼容样式">扩展：只希望 iPhoneX 才需要新增适配样式，可以配合 @supports 来隔离兼容样式</h3>
+
+<ul>
+<li><code>@supports</code> 来判断浏览器是否支持某个CSS属性，并且根据是否支持来定义样式。</li>
+<li><code>@supports</code> 中的“条件规则”可以声明一条或者几个由不同的逻辑运算符相结合的声明（比如说，非（not），或（or），与（and）等），而且还可以使用括号来确定其操作的优先级关系。</li>
+</ul>
+
+<pre><code class="language-css">@supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
+    div {
+        margin-bottom: constant(safe-area-inset-bottom);
+        margin-bottom: env(safe-area-inset-bottom);
+    }
+}
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>130</span>
+        </p>
+
+        <p class="copyright-item">
+            
+            <span>Share:</span>
+            <span>
+
+      
+        <a href="//twitter.com/share?url=%2f2019%2f%25E9%2580%2582%25E9%2585%258Diphonex%2f&amp;text=css3%20%e9%80%82%e9%85%8diphoneX%20%e5%ae%89%e5%85%a8%e5%8c%ba%e5%9f%9f&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2f%25E9%2580%2582%25E9%2585%258Diphonex%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2f%25E9%2580%2582%25E9%2585%258Diphonex%2f&amp;appkey=&amp;title=css3%20%e9%80%82%e9%85%8diphoneX%20%e5%ae%89%e5%85%a8%e5%8c%ba%e5%9f%9f" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+        </p>
+        
+
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/css/">
+                    #CSS</a></span>
+            
+        </section>
+        
+        <section>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/" class="prev" rel="prev" title="数组降纬"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;数组降纬</a>
+        
+        
+        <a href="/2019/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" class="next" rel="next"
+            title="阿里云服务器相关">阿里云服务器相关&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+        
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

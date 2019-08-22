@@ -6,10 +6,20 @@
     <description>Recent content in Node on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 02 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/node/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>pm2</title>
+      <link>/2019/pm2/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/pm2/</guid>
+      <description>PM2 的安装提示处理 在本地安装 PM2 之后，可能会看到下面的这个提示，可以按照提示操作一下：
+Since PM2’s deployment command runs on a non-interactive SSH connection, we need to resolve this by commenting out a few lines from the semaphoreci user’s ~/.bashrc file. We’re already logged in as this user on our droplet, so we simply need to open up this file and comment this out: Comment the following lines: #If not running interactively, don&#39;t do anything #case $- in # *i*) ;; # * return;; #esac and this in /etc/bash.</description>
+    </item>
     
     <item>
       <title>Hapi</title>

@@ -56,7 +56,7 @@ git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795   git 远程服务器�
   
   "genre": "posts",
   "keywords": "git",
-  "wordcount":  984 ,
+  "wordcount":  1027 ,
   "url": "\/2017\/git-summary\/",
   "datePublished": "2017-06-02T00:00:00\x2b00:00",
   "dateModified": "2017-06-02T00:00:00\x2b00:00",
@@ -470,6 +470,26 @@ fatal: could not read Username for 'https://github.com': No error
 git reset --merge [prior git versions]
 </code></pre>
 
+<h3 id="撤销上一次-commit-将改动保留在暂存区">撤销上一次 commit，将改动保留在暂存区</h3>
+
+<ul>
+<li>只想为之前的commit增加更多的改动，或者改变之前的提交信息</li>
+</ul>
+
+<pre><code class="language-sh"># 和git rest HEAD~ 有些类似，但是会将你的改动保留在暂存区内
+get reset --soft HEAD~
+</code></pre>
+
+<h3 id="通过-ssh-add-管理-ssh密钥-重启电脑后需要再次输入密钥密码">通过 ssh-add 管理 ssh密钥，重启电脑后需要再次输入密钥密码</h3>
+
+<ul>
+<li>ssh-add 这个命令不是用来永久性的记住你所使用的私钥的。实际上，它的作用只是把你指定的私钥添加到 ssh-agent 所管理的一个 session 当中。而 ssh-agent 是一个用于存储私钥的临时性的 session 服务，也就是说当你重启之后，ssh-agent 服务也就重置了。</li>
+<li>Mac 系统内置了一个 Keychain 的服务及其管理程序，可以方便的帮你管理各种秘钥，其中包括 ssh 秘钥。ssh-add 默认将制定的秘钥添加在当前运行的 ssh-agent 服务中，但是你可以改变这个默认行为让它添加到 keychain 服务中，让 Mac 来帮你记住、管理并保障这些秘钥的安全性，命令如下：</li>
+</ul>
+
+<pre><code class="language-sh">ssh-add -K [path/to/your/ssh-key]
+</code></pre>
+
     </div>
 
     <div class="post-copyright">
@@ -482,7 +502,7 @@ git reset --merge [prior git versions]
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>984</span>
+            <span>1027</span>
         </p>
 
         <p class="copyright-item">

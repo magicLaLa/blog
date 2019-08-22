@@ -36,9 +36,8 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="vue 相关问题"/>
-<meta name="twitter:description" content="使用vuex状态管理后，在 input 中使用 v-model 来进行双向数据绑定，在修改 input 中值的时候会抛出一个错误  可以不使用 v-model 来进行双向数据绑定，使用 :value=&rsquo; &lsquo; 来，然后设置一个 监听器来推动 state 的更新( @input=&rsquo; &lsquo; )
-vue 模板
- &lt;template&gt; &lt;div class=&quot;hello&quot;&gt; &lt;input type=&quot;text&quot; :value=&quot;text&quot; @input=&#39;update&#39;&gt; &lt;span&gt;{{ddd}}&lt;/span&gt; &lt;p ref=&quot;ppp&quot;&gt;啦啦啦&lt;/p&gt; &lt;input type=&quot;text&quot; v-focus&gt; &lt;/div&gt; &lt;/template&gt; &lt;script&gt; import {mapState} from &#39;vuex&#39; export default { name: &#39;HelloWorld&#39;, data () { return { ddd: &#39;&#39; } }, computed: { ...mapState([&#39;text&#39;]) }, methods: { update (e) { // 在这里来 更新 state 里的某一个值 this."/>
+<meta name="twitter:description" content="使用 keep-alive 来包裹路由后，某个页面需要动态的去除缓存 可以使用动态的:include=&quot;calcInclude&quot; 来对需要的缓存的页面进行修改，calcInclude需要使用计算属性。整个include使用数组来储存*string[]*，数据可放到全局 store 中，通过 commit去修改，在需要的地方去更改。
+&lt;keep-alive :include=&quot;calcInclude&quot;&gt; &lt;router-view /&gt; &lt;/keep-alive&gt;  get calcInclude() { return this.$store.state.includes; } const store = { state: { includes: [&#39;...&#39;}, }, } const mutations = { changeIncludes(state: State, obj: any) { const name = obj.name; const channel = obj.channel; const ind = state.includes.indexOf(name); if (ind &gt; -1 &amp;&amp; channel === &#39;remove&#39;) { state.includes.splice(ind, 1); } else if (channel === &#39;add&#39;) { state."/>
 
   <script type="application/ld+json">
 {
@@ -52,7 +51,7 @@ vue 模板
   
   "genre": "posts",
   "keywords": "Vue",
-  "wordcount":  1008 ,
+  "wordcount":  1086 ,
   "url": "\/2017\/workrelated\/",
   "datePublished": "2017-10-02T00:00:00\x2b00:00",
   "dateModified": "2017-10-02T00:00:00\x2b00:00",
@@ -147,7 +146,7 @@ vue 模板
                 
             </span>
             <i class="iconfont icon-timer"></i>
-            5 min
+            6 min
         </div>
     </header>
     <div class="post-content">
@@ -167,6 +166,42 @@ vue 模板
         
 
         
+
+<h3 id="使用-keep-alive-来包裹路由后-某个页面需要动态的去除缓存">使用 keep-alive 来包裹路由后，某个页面需要动态的去除缓存</h3>
+
+<p>可以使用动态的<code>:include=&quot;calcInclude&quot;</code> 来对需要的缓存的页面进行修改，<code>calcInclude</code>需要使用计算属性。整个<code>include</code>使用数组来储存*string[]*，数据可放到全局 <code>store</code> 中，通过 <code>commit</code>去修改，在需要的地方去更改。</p>
+
+<pre><code class="language-html">&lt;keep-alive :include=&quot;calcInclude&quot;&gt;
+  &lt;router-view /&gt;
+&lt;/keep-alive&gt;
+</code></pre>
+
+<pre><code class="language-ts">get calcInclude() {
+  return this.$store.state.includes;
+}
+const store = {
+  state: {
+    includes: ['...'},
+  },
+}
+const mutations = {
+  changeIncludes(state: State, obj: any) {
+      const name = obj.name;
+      const channel = obj.channel;
+      const ind = state.includes.indexOf(name);
+      if (ind &gt; -1 &amp;&amp; channel === 'remove') {
+        state.includes.splice(ind, 1);
+      } else if (channel === 'add') {
+        state.includes.push(name);
+        state.includes = [...new Set(state.includes)];
+      }
+    },
+}
+</code></pre>
+
+<ul>
+<li>更多关于这个 <a href="https://github.com/vuejs/vue/issues/6509" rel="nofollow noreferrer" target="_blank">issues</a></li>
+</ul>
 
 <h3 id="使用vuex状态管理后-在-input-中使用-v-model-来进行双向数据绑定-在修改-input-中值的时候会抛出一个错误">使用vuex状态管理后，在 input 中使用 v-model 来进行双向数据绑定，在修改 input 中值的时候会抛出一个错误</h3>
 
@@ -657,7 +692,7 @@ prop向下传递，事件向上传递<br />
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>1008</span>
+            <span>1086</span>
         </p>
 
         <p class="copyright-item">

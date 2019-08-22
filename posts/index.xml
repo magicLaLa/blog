@@ -6,10 +6,82 @@
     <description>Recent content in Posts on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>pm2</title>
+      <link>/2019/pm2/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/pm2/</guid>
+      <description>PM2 的安装提示处理 在本地安装 PM2 之后，可能会看到下面的这个提示，可以按照提示操作一下：
+Since PM2’s deployment command runs on a non-interactive SSH connection, we need to resolve this by commenting out a few lines from the semaphoreci user’s ~/.bashrc file. We’re already logged in as this user on our droplet, so we simply need to open up this file and comment this out: Comment the following lines: #If not running interactively, don&#39;t do anything #case $- in # *i*) ;; # * return;; #esac and this in /etc/bash.</description>
+    </item>
+    
+    <item>
+      <title>安装与配置MongoDB数据库</title>
+      <link>/2019/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEmongodb%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEmongodb%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>服务器系统为 Ubuntu 14.04
+ mongodump 逻辑备份工具。 mongorestore 逻辑恢复工具。 mongoexport 数据导出工具。 mongoimport 数据导入工具。  可以使用 Navicat for MongoDB 来管理数据库
+安装 MongoDB 并开启等命令  MongoDB社区安装   加入公钥 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 使用后面这个命令：sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 为 MongoDB 创建一个列表文件，可以选择使用 Aliyun 的镜像文件 echo &amp;quot;deb [ arch=amd64 ] http://mirrors.aliyun.com/MongoDB/apt/ubuntu trusty/MongoDB-org/4.0 multiverse&amp;quot; | sudo tee /etc/apt/sources.list.d/MongoDB-org-4.0.list echo &#39;deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen&#39; | sudo tee /etc/apt/sources.list.d/mongodb.list 重新加载更新本地的包库 sudo apt-get update 安装 MongoDB 稳定版 sudo apt-get install -y MongoDB-org   在安装的时候有可能会遇到这个问题：定位不到本地的 MongoDB-org 的安装包，可能是因为我们使用的是阿里云的服务器，所以默认的是阿里云的源。可以先把阿里云的源屏蔽掉试一下:</description>
+    </item>
+    
+    <item>
+      <title>搭建 Node.js 与阿里云 Alinode 环境</title>
+      <link>/2019/%E6%90%AD%E5%BB%BAnode.js%E4%B8%8E%E9%98%BF%E9%87%8C%E4%BA%91alinode%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E6%90%AD%E5%BB%BAnode.js%E4%B8%8E%E9%98%BF%E9%87%8C%E4%BA%91alinode%E7%8E%AF%E5%A2%83/</guid>
+      <description>搭建 Node.js 环境 系统更新，安装基础包 sudo apt-get update sudo apt-get install vim openssl build-essential libssl-dev wget curl git  安装 node.js  使用 nvm 这个工具，方便升级和管理 node.js 版本 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash 安装 node.js  nvm install v10.14.2 nvm use v10.14.2 nvm alias default v10.14.2 node -v v10.14.2  安装 阿里云的 alinode  或者可以直接安装阿里云的 alinode，这也是我推荐给大家的 Node，因为它对 Node 做了必要的定制，可以无缝接入到 alinode 的监控中心，对于 多机器多应用运维 非常有用。大家可以参考 alinode 安装文档  安装一些常用的全局工具包  可以配置一个简单的 registry 参数来指定使用国内的 taobao 镜像来下载： npm --registry=https://registry.</description>
+    </item>
+    
+    <item>
+      <title>配置Nginx反向代理Node.js端口</title>
+      <link>/2019/%E9%85%8D%E7%BD%AEnginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86node.js%E7%AB%AF%E5%8F%A3/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E9%85%8D%E7%BD%AEnginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86node.js%E7%AB%AF%E5%8F%A3/</guid>
+      <description>安装 sudo apt-get install nginx sudo vi /etc/nginx/sites-available/default   安装完毕后，检查下 Nginx 的版本：nginx -v。这个版本号通常可以在 Web 端的 header 里看到。安全起见，可以通过配置隐藏掉，如下打开 nginx.conf 文件：sudo vi /etc/nginx/nginx.conf，把nginx.conf 文件中的server_tokens on 改成 server_tokens off。  配置 Nginx 反向代理 Node.js 端口  我们的网站静态服务是跑在 4321 端口上的，直接通过 80 端口无法启动，原因是我们 rn_manager 下的 Node 并不具备 root 的运行权限，不能监听 0 ~ 1024 之间的端口，当然也包括 80 端口。通过 sudo 来强制启动 Node 服务也不是不可以，但是，这多少会带来一些额外的成本和风险：一是我们需要额外配置，二是需要放大 Node 程序的权限。
+  用 ip 访问，使用 nginx，用 root 级的权限来启动对 80 端口的监听，同时把来自 80 端口的流量分配给 Node 服务的另外一个端口，实现这种服务的代理。   如果服务器只需放一个网站程序，那么解析网站到服务器网址，网站程序监听 80 端口即可。如果服务器有多个应用（你有多个网站），借助 Nginx 不仅可以实现端口代理，还可以实现负载均衡，由它来判断是来自哪个域名或 IP 的访问，从而根据配置的规则，将这个请求原封不动地转发给特定的端口或特定的某几台机器。在我们的这个案例中，就是把 80 端口的 IP 请求都转发到 Node.</description>
+    </item>
+    
+    <item>
+      <title>阿里云服务器相关</title>
+      <link>/2019/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/</guid>
+      <description>根据 慕课网 专栏 ‘一条龙的 Node·Vue·React 服务器部署’ 笔记。
+购买  到阿里云官网购买一个服务器 配置相关信息 记录登录名 root 和 登录密码  使用 登录  通过 ssh 登录 例如：ssh root@116.62.201.97 后面会要求输入密码 可以通过 sudo lsb_release -a 来查看服务器版本 登录成功后可以首先运行 sudo apt-get update，作用是先把服务器上所有的包和源都 check 和更新一遍，让服务器处在一个崭新的状态 可以把一些常用的开发者套件先安装上 sudo apt-get install -y software-properties-common  添加一个用户  增加一个用户 adduser rn_manager，完成后记录住密码，赋予账号更高权限:可以在 visudo 权限配置文件配置一下:sudo visudo，加入 rn_manager ALL=(ALL:ALL) ALL 这行，然后可以重启 ssh 服务：service ssh restart  配置无密码登录 那么，首先来本地电脑上配置这把钥匙，而且要生成两把钥匙，分别是 私钥 和 公钥
+ 提示：如果你之前用过 GitHub 或者 GitLab 之类基于 Git 的仓库管理系统，那么你本地应该是配置过这个公钥和私钥的，这里要切记，不用再重复配置一遍了！不用重新配置一遍了！ 可能你会覆盖掉你本地用的钥匙，这样的话，你可能就连不上你之前有权限的 Git 仓库了，我会演示这一步。</description>
+    </item>
+    
+    <item>
+      <title>css3 适配iphoneX 安全区域</title>
+      <link>/2019/%E9%80%82%E9%85%8Diphonex/</link>
+      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E9%80%82%E9%85%8Diphonex/</guid>
+      <description>iphoneX 适配 第一步：设置网页在可视窗口的布局方式  ios11 引入 meta 标签的 viewpoint 扩展属性 viewpoint-fit，在 iOS 11 中 viewpoint-fit 也官方添加到 CSS Round Display 规范中了。 viewport-fit 有三个属性值：  Auto：默认值。这个值不影响初始布局视窗，整个 Web 页面是可视的。 Contain：最初的布局视窗和视觉布局视窗被设置为最大的矩形。 Cover：初始布局视窗和视觉布局视窗被设置为设备物理屏幕的限定矩形。   所以我们可以通过 viewpoint-fit=cover 来解决问题，使页面内容跳出安全区域的框框。
+&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width,initial-scale=1.0,user-scalable=0,viewport-fit=cover&amp;quot;&amp;gt;  第二步：页面主体内容限定在安全区域内  IOS11 提供了两个个新的 css 变量 env(safe-area-inset-※) 和 constant(safe-area-inset-※) safe-area-inset-※ 提供了四个方向的值：
+ safe-area-inset-top：在 Viewport 顶部的安全区域内设置量； safe-area-inset-bottom：在 Viewport 底部的安全区域内设置量； safe-area-inset-left：在 Viewport 左边的安全区域内设置量； safe-area-inset-right：在 Viewport 右边的安全区域内设置量；  constant() 和 env() 这个变量已经开始着手标准化，目前也可以被用在 margin、padding、top、bottom、left、right 等 css 属性中，同时在不支持的环境中将不会生效。而且，同样在 iOS 11 中，iPhone X 机型以下得到的值均为 0，iPhone X 得到其对应的设置量。</description>
+    </item>
+    
+    <item>
+      <title>数组降纬</title>
+      <link>/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/</link>
+      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/</guid>
+      <description> 第一种：将数组字符串话  利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。
+ let arr = [[222, 333, 444], [55, 66, 77], 11, ] arr += &#39;&#39;; arr = arr.split(&#39;,&#39;); arr = arr.map(item =&amp;gt; Number(item)); console.log(arr); // [222, 333, 444, 55, 66, 77, 11]  第二种：自定义函数 const reduceDimension = (arr) =&amp;gt; { let ret = []; let toArr = function(arr){ arr.forEach(function(item){ Array.isArray(item) ? toArr(item) : ret.push(item); }); } toArr(arr); return ret; } let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];  </description>
+    </item>
     
     <item>
       <title>弹出遮照阻止底部页面滚动</title>
@@ -39,6 +111,15 @@
     </item>
     
     <item>
+      <title>通过http链接加载script</title>
+      <link>/2019/%E9%80%9A%E8%BF%87http%E9%93%BE%E6%8E%A5%E5%8A%A0%E8%BD%BDscript/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E9%80%9A%E8%BF%87http%E9%93%BE%E6%8E%A5%E5%8A%A0%E8%BD%BDscript/</guid>
+      <description>function loadScript(src: string, async: boolean = true) { return new Promise((resolve, reject) =&amp;gt; { const script = document.createElement(&#39;script&#39;); async &amp;amp;&amp;amp; (script.async = true); script.onload = resolve; script.onerror = reject; script.src = src; document.body.appendChild(script); }); } // 注意：使用appendChild，不要使用append，ios9不支持append。  </description>
+    </item>
+    
+    <item>
       <title>Webpack 优化相关</title>
       <link>/2019/webpack/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
@@ -49,6 +130,15 @@
 module: { rules: [ { test: /\.js$/, exclude: /(node_modules|bower_components)/, use: { loader: &#39;babel-loader&#39;, options: { presets: [&#39;@babel/preset-env&#39;] } } } ] }  除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：
 loader: &#39;babel-loader?cacheDirectory=true&#39;  抽离第三库  DllPlugin是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。  用 DllPlugin 处理文件，要分两步走：
  基于 dll 专属的配置文件，打包 dll 库 基于 webpack.</description>
+    </item>
+    
+    <item>
+      <title>localStorage 统一管理设置-增加时间</title>
+      <link>/2018/local-stroge/</link>
+      <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/local-stroge/</guid>
+      <description>设置本地存储  function setStorage(key: string, value: any) { try { localStorage.setItem(key, JSON.stringify({ data: value, time: Date.now(), })); } catch { console.log(&#39;localStorage.setItem error&#39;); console.log(key, value); } }   获取本地存储  // 注意：stringify 会过滤掉undefined的值 function getStorage(key: string) { const result = localStorage.getItem(key); if (result) { try { const objRes = JSON.parse(result); return objRes; } catch (e) { console.log(&#39;JSON.parse error:&#39;, result); return result; } } else { return result; } }   删除本地存储  function removeStorage(key: string) { localStorage.</description>
     </item>
     
     <item>
@@ -121,13 +211,16 @@ const 和 let const 和 let 的区别就是 使用 const 来声明的变量，�
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/eventloop/</guid>
-      <description>Event Loop 事件循环机制 线程与进程   进程：CPU资源分配的最小单位 线程：CPU调度的最小单位   浏览器打开即为打开一个进程（任务管理器查看），浏览器就是多进程、多线程的，浏览器打开后占用CPU的资源，可将这些资源分别分配给不同的tab页面进行并发处理，互不影响；如：一个浏览器打开多个窗口，多个窗口同时运行网页（浏览器中任务管理查看）
-浏览器进程 作为主进程，主要负责页面管理以及其他进程的创建及销毁，常驻的线程有：(工厂-&amp;gt; 部门)
+      <description>Event Loop 参考资料：
+JavaScript 运行机制详解：再谈Event Loop@阮一峰
+8张图帮你一步步看清 async/await 和 promise 的执行顺序
+进程与线程的一个简单解释
+事件循环机制 线程与进程   进程：CPU资源分配的最小单位 线程：CPU调度的最小单位   浏览器打开即为打开一个进程（任务管理器查看），浏览器就是多进程、多线程的，浏览器打开后占用CPU的资源，可将这些资源分别分配给不同的tab页面进行并发处理，互不影响；如：一个浏览器打开多个窗口，多个窗口同时运行网页（浏览器中任务管理查看）
+浏览器 浏览器进程 作为主进程，主要负责页面管理以及其他进程的创建及销毁，常驻的线程有：(工厂-&amp;gt; 部门)
 手机工厂(浏览器)[进程] ↓ 造手机部 &amp;mdash;&amp;ndash; 造手机壳部 &amp;mdash;&amp;ndash; 造膜部等(tab页面)[进程] ↓ 各个岗位(html、css、js、事件触发等)[线程]
   GUI渲染线程  主要负责页面的渲染，解析HTML、CSS，构建DOM树，布局和绘制等。
- 当界面需要重绘或者由于某种操作引发回流时，将执行该线程。 该线程与JS引擎线程互斥，当执行JS引擎线程时，GUI渲染会被挂起，当任务队列空闲时，JS引擎才会去执行 GUI 渲染。  JS引擎线程
- 该线程当然是主要负责处理 JavaScript脚本，执行代码； 也是主要负责执行准备好待执行的事件，即定时器计数结束，或者异步请求成功并返回正确时，将依次进入任务队列，等待JS引擎线程的执行； 当然，该线程与 GUI渲染线程互斥，当 JS引擎线程执行 JavaScript脚本时间过长，将导致页面渲染的阻塞。  事件触发线程  主要负责将准备好的事件交给Js引擎线程执行 比如setTimeout定时器计数结束，ajax等异步请求成功并出发回调函数，或者用户出发点击事件，该线程将会整装待发的事件依次加入到任务队列的队尾，等待Js引擎线程的执行  定时器触发线程  顾名思义，负责执行异步定时器一类的函数的线程，如： setTimeout，setInterval。 主线程依次执行代码时，遇到定时器，会将定时器交给该线程处理，当计数完毕后，事件触发线程会将计数完毕后的事件加入到任务队列的尾部，等待JS引擎线程执行。  HTTP请求线程  顾名思义，负责执行异步请求一类的函数的线程，如： Promise，axios，ajax等。 主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列的尾部，等待JS引擎线程执行。    多个线程之间配合工作，各司其职。
-Render 进程  浏览器渲染进程（浏览器内核），主要负责页面的渲染、JS执行以及事件的循环。 (render给与，表达 总经办 -&amp;gt; 分管各个部门的副经理)</description>
+ 当界面需要重绘或者由于某种操作引发回流时，将执行该线程。（回流必将引起重绘，重绘不一定会引起回流） 该线程与JS引擎线程互斥，当执行JS引擎线程时，GUI渲染会被挂起，当任务队列空闲时，JS引擎才会去执行 GUI 渲染。  JS引擎线程
+ 该线程当然是主要负责处理 JavaScript脚本，执行代码； 也是主要负责执行准备好待执行的事件，即定时器计数结束，或者异步请求成功并返回正确时，将依次进入任务队列，等待JS引擎线程的执行； 当然，该线程与 GUI渲染线程互斥，当 JS引擎线程执行 JavaScript脚本时间过长，将导致页面渲染的阻塞。  事件触发线程  主要负责将准备好的事件交给Js引擎线程执行 比如setTimeout定时器计数结束，ajax等异步请求成功并出发回调函数，或者用户出发点击事件，该线程将会整装待发的事件依次加入到任务队列的队尾，等待Js引擎线程的执行  定时器触发线程  顾名思义，负责执行异步定时器一类的函数的线程，如： setTimeout，setInterval。 主线程依次执行代码时，遇到定时器，会将定时器交给该线程处理，当计数完毕后，事件触发线程会将计数完毕后的事件加入到任务队列的尾部，等待JS引擎线程执行。  HTTP请求线程  顾名思义，负责执行异步请求一类的函数的线程，如： Promise，axios，ajax等。 主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列的尾部，等待JS引擎线程执行。    多个线程之间配合工作，各司其职。</description>
     </item>
     
     <item>
@@ -170,7 +263,7 @@ console.group(&#39;第一个组&#39;); console.group(&amp;quot;1-1&amp;quot;); c
       <guid>/2017/vueplugins/</guid>
       <description> Vue Plugins And Expansion(后台模板) 条形码 vue-barcode  地址：vue-barcode GitHub: https://github.com/fengyuanchen/vue-barcode
  全局使用方式：
-  // main.js import VueBarcode from &#39;@chenfengyuan/vue-barcode&#39;; Vue.component(&#39;barcode&#39;, VueBarcode);  &amp;lt;barcode :value=qualityInfo.tyOrderCode :options=&amp;quot;{ displayValue: false }&amp;quot; id=&amp;quot;canves&amp;quot;&amp;gt;&amp;lt;/barcode&amp;gt;  vue图表-V-charts  V-charts 文档  vue后台管理模板  vue-element-admin  </description>
+  // main.js import VueBarcode from &#39;@chenfengyuan/vue-barcode&#39;; Vue.component(&#39;barcode&#39;, VueBarcode);  &amp;lt;barcode :value=qualityInfo.tyOrderCode :options=&amp;quot;{ displayValue: false }&amp;quot; id=&amp;quot;canves&amp;quot;&amp;gt;&amp;lt;/barcode&amp;gt;  vue图表-V-charts  V-charts 文档  vue后台管理模板  vue-element-admin  vant UI组件库  vant 使用 van-popup 来封装一个组件时，需要使用 :value=&amp;quot;value&amp;quot; 来绑定，避免使用 v-model 来绑定v-model，代码如下：  &amp;lt;!-- 可以查看 vue 文档 对 v-model 的解释 --&amp;gt; &amp;lt;van-popup :value=&amp;quot;isShowCash&amp;quot; @click-overlay=&amp;quot;closeCashPopup&amp;quot;&amp;gt; &amp;lt;!-- .... to do --&amp;gt; &amp;lt;/van-popup&amp;gt;  </description>
     </item>
     
     <item>
@@ -179,9 +272,8 @@ console.group(&#39;第一个组&#39;); console.group(&amp;quot;1-1&amp;quot;); c
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/workrelated/</guid>
-      <description>使用vuex状态管理后，在 input 中使用 v-model 来进行双向数据绑定，在修改 input 中值的时候会抛出一个错误  可以不使用 v-model 来进行双向数据绑定，使用 :value=&amp;rsquo; &amp;lsquo; 来，然后设置一个 监听器来推动 state 的更新( @input=&amp;rsquo; &amp;lsquo; )
-vue 模板
- &amp;lt;template&amp;gt; &amp;lt;div class=&amp;quot;hello&amp;quot;&amp;gt; &amp;lt;input type=&amp;quot;text&amp;quot; :value=&amp;quot;text&amp;quot; @input=&#39;update&#39;&amp;gt; &amp;lt;span&amp;gt;{{ddd}}&amp;lt;/span&amp;gt; &amp;lt;p ref=&amp;quot;ppp&amp;quot;&amp;gt;啦啦啦&amp;lt;/p&amp;gt; &amp;lt;input type=&amp;quot;text&amp;quot; v-focus&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; import {mapState} from &#39;vuex&#39; export default { name: &#39;HelloWorld&#39;, data () { return { ddd: &#39;&#39; } }, computed: { ...mapState([&#39;text&#39;]) }, methods: { update (e) { // 在这里来 更新 state 里的某一个值 this.</description>
+      <description>使用 keep-alive 来包裹路由后，某个页面需要动态的去除缓存 可以使用动态的:include=&amp;quot;calcInclude&amp;quot; 来对需要的缓存的页面进行修改，calcInclude需要使用计算属性。整个include使用数组来储存*string[]*，数据可放到全局 store 中，通过 commit去修改，在需要的地方去更改。
+&amp;lt;keep-alive :include=&amp;quot;calcInclude&amp;quot;&amp;gt; &amp;lt;router-view /&amp;gt; &amp;lt;/keep-alive&amp;gt;  get calcInclude() { return this.$store.state.includes; } const store = { state: { includes: [&#39;...&#39;}, }, } const mutations = { changeIncludes(state: State, obj: any) { const name = obj.name; const channel = obj.channel; const ind = state.includes.indexOf(name); if (ind &amp;gt; -1 &amp;amp;&amp;amp; channel === &#39;remove&#39;) { state.includes.splice(ind, 1); } else if (channel === &#39;add&#39;) { state.</description>
     </item>
     
     <item>
@@ -303,6 +395,15 @@ git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795   git 远程服务器�
       <description>Add Two Numbers 两数相加(2)  给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
  例子:
   Input: (2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4) Output: 7 -&amp;gt; 0 -&amp;gt; 8 Explanation: 342 + 465 = 807   解:  // 单链表的定义 function ListNode(val) { this.val = val; this.next = null; } // 第一种 /** * @param {ListNode} l1 * @param {ListNode} l2 * @return {ListNode} */ var addTwoNumbers = function(l1, l2) { if (l1===null) return l2; if (l2===null) return l1; //new a ListNode here, with head.</description>
+    </item>
+    
+    <item>
+      <title>text-decoration 文本修饰</title>
+      <link>/2017/%E6%96%87%E6%9C%AC%E4%BF%AE%E9%A5%B0/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/%E6%96%87%E6%9C%AC%E4%BF%AE%E9%A5%B0/</guid>
+      <description> 项目使用是用来 做下划线等，例如减免邮费等。如果在父元素上设置值为line-through，然后字元素有多个，font-size相同的情况下样式正确，font-size不同的情况下，会找自身元素的中间位置添加下划线。 text-decoration 属性规定添加到文本的修饰。 修饰的颜色由 &amp;ldquo;color&amp;rdquo; 属性设置。  h1 {text-decoration:overline} h2 {text-decoration:line-through} h3 {text-decoration:underline} h4 {text-decoration:blink}   可能的值  none	#默认。定义标准的文本。 underline	#定义文本下的一条线。 overline	#定义文本上的一条线。 line-through	#定义穿过文本下的一条线。 blink	#定义闪烁的文本。 inherit	#规定应该从父元素继承 text-decoration 属性的值。  </description>
     </item>
     
     <item>

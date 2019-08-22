@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="/2019/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" />
+  <link rel="next" href="/2019/%E6%90%AD%E5%BB%BAnode.js%E4%B8%8E%E9%98%BF%E9%87%8C%E4%BA%91alinode%E7%8E%AF%E5%A2%83/" />
+  <link rel="canonical" href="/2019/%E9%85%8D%E7%BD%AEnginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86node.js%E7%AB%AF%E5%8F%A3/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           配置Nginx反向代理Node.js端口 | Magic
+       
+  </title>
+  <meta name="title" content="配置Nginx反向代理Node.js端口 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="配置Nginx反向代理Node.js端口"/>
+<meta name="twitter:description" content="安装 sudo apt-get install nginx sudo vi /etc/nginx/sites-available/default   安装完毕后，检查下 Nginx 的版本：nginx -v。这个版本号通常可以在 Web 端的 header 里看到。安全起见，可以通过配置隐藏掉，如下打开 nginx.conf 文件：sudo vi /etc/nginx/nginx.conf，把nginx.conf 文件中的server_tokens on 改成 server_tokens off。  配置 Nginx 反向代理 Node.js 端口  我们的网站静态服务是跑在 4321 端口上的，直接通过 80 端口无法启动，原因是我们 rn_manager 下的 Node 并不具备 root 的运行权限，不能监听 0 ~ 1024 之间的端口，当然也包括 80 端口。通过 sudo 来强制启动 Node 服务也不是不可以，但是，这多少会带来一些额外的成本和风险：一是我们需要额外配置，二是需要放大 Node 程序的权限。
+  用 ip 访问，使用 nginx，用 root 级的权限来启动对 80 端口的监听，同时把来自 80 端口的流量分配给 Node 服务的另外一个端口，实现这种服务的代理。   如果服务器只需放一个网站程序，那么解析网站到服务器网址，网站程序监听 80 端口即可。如果服务器有多个应用（你有多个网站），借助 Nginx 不仅可以实现端口代理，还可以实现负载均衡，由它来判断是来自哪个域名或 IP 的访问，从而根据配置的规则，将这个请求原封不动地转发给特定的端口或特定的某几台机器。在我们的这个案例中，就是把 80 端口的 IP 请求都转发到 Node."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "配置Nginx反向代理Node.js端口",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2019\/%E9%85%8D%E7%BD%AEnginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86node.js%E7%AB%AF%E5%8F%A3\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "nginx",
+  "wordcount":  197 ,
+  "url": "\/2019\/%E9%85%8D%E7%BD%AEnginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86node.js%E7%AB%AF%E5%8F%A3\/",
+  "datePublished": "2019-07-02T00:00:00\x2b00:00",
+  "dateModified": "2019-07-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="/">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="/">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">配置Nginx反向代理Node.js端口</h1>
+        <div class="post-meta">
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2019-07-02>2 July 2019</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/serves/"> serves </a>
+                <a href="/categories/node/"> node </a>
+                <a href="/categories/nginx/"> nginx </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            1 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+        
+        
+
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+<h3 id="安装">安装</h3>
+
+<pre><code class="language-sh">sudo apt-get install nginx
+sudo vi /etc/nginx/sites-available/default
+</code></pre>
+
+<ul>
+<li>安装完毕后，检查下 Nginx 的版本：<code>nginx -v</code>。这个版本号通常可以在 Web 端的 header 里看到。安全起见，可以通过配置隐藏掉，如下打开 nginx.conf 文件：<code>sudo vi /etc/nginx/nginx.conf</code>，把<code>nginx.conf</code> 文件中的<code>server_tokens on</code> 改成 <code>server_tokens off</code>。</li>
+</ul>
+
+<h3 id="配置-nginx-反向代理-node-js-端口">配置 Nginx 反向代理 Node.js 端口</h3>
+
+<blockquote>
+<p>我们的网站静态服务是跑在 4321 端口上的，直接通过 80 端口无法启动，原因是我们 rn_manager 下的 Node 并不具备 root 的运行权限，不能监听 0 ~ 1024 之间的端口，当然也包括 80 端口。通过 sudo 来强制启动 Node 服务也不是不可以，但是，这多少会带来一些额外的成本和风险：一是我们需要额外配置，二是需要放大 Node 程序的权限。</p>
+</blockquote>
+
+<ul>
+<li>用 ip 访问，使用 nginx，用 root 级的权限来启动对 80 端口的监听，同时把来自 80 端口的流量分配给 Node 服务的另外一个端口，实现这种服务的代理。</li>
+</ul>
+
+<blockquote>
+<p>如果服务器只需放一个网站程序，那么解析网站到服务器网址，网站程序监听 80 端口即可。如果服务器有多个应用（你有多个网站），借助 Nginx 不仅可以实现端口代理，还可以实现负载均衡，由它来判断是来自哪个域名或 IP 的访问，从而根据配置的规则，将这个请求原封不动地转发给特定的端口或特定的某几台机器。在我们的这个案例中，就是把 80 端口的 IP 请求都转发到 Node.js 的 8081 端口。</p>
+</blockquote>
+
+<ul>
+<li>第一步要在 /etc/nginx/conf.d 文件夹下面新增一个配置文件：<code>sudo vi  /etc/nginx/conf.d/imooc-com-4321.conf</code>(看一下配置文件，就可以知道哪个域名对应到哪个端口)，详细配置如下：</li>
+</ul>
+
+<pre><code class="language-conf"># 通过 upstream 我们可以设定一个简单的负载均衡策略，以应对将来可能的升级
+# 首先定义一个 server 集群 gougou，里面可以加多个 server，每个 server 对应的值可以用域名，也可以直接用 IP，但我们通常不会用 IP 来访问，而是通过域名:
+
+upstream imooc {
+    server 127.0.0.1:4321;
+}
+
+server {
+    listen 80;
+    server_name test1.luck-year.top;
+
+    # Gzip Compression
+    gzip on;
+    gzip_comp_level 6;
+    gzip_vary on;
+    gzip_min_length  1000;
+    gzip_proxied any;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+    gzip_buffers 16 8k;
+    
+    location / {
+        # remote_addr 代表客户端的 IP
+        proxy_set_header X-Real-IP $remote_addr;
+        # proxy_add_x_forwarded_for 获取真实的 IP
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # http_host 表示请求的 host 头
+        proxy_set_header Host $http_host;
+        proxy_set_header X-NginX-Proxy true;
+      
+        # proxy_pass 指令实现代理。把域名代理到集群名上面
+        proxy_pass http://imooc;
+        proxy_redirect off;
+    }
+}
+</code></pre>
+
+<ul>
+<li>保存后，通过 <code>sudo nginx -t</code>  来验证配置是否正确，有没有语法错误，然后我们把 Nginx 的服务重启一下: <code>sudo service nginx restart</code></li>
+</ul>
+
+<p>访问：<code>http://test1.luck-year.top/</code></p>
+
+<p><strong>注意</strong>：<code>server_name test1.luck-year.top</code> 这个对应的耳机域名需要在 域名解析里添加记录，需要先对域名进行备案。</p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/域名解析.png" alt="域名解析png" class="lazyload"><figcaption class="image-caption">域名解析png</figcaption></figure></p>
+
+<h4 id="扩展">扩展</h4>
+
+<ul>
+<li><code>ps -ef | grep nginx</code> 查看nginx安装目录和nginx配置文件目录</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>197</span>
+        </p>
+
+        <p class="copyright-item">
+            
+            <span>Share:</span>
+            <span>
+
+      
+        <a href="//twitter.com/share?url=%2f2019%2f%25E9%2585%258D%25E7%25BD%25AEnginx%25E5%258F%258D%25E5%2590%2591%25E4%25BB%25A3%25E7%2590%2586node.js%25E7%25AB%25AF%25E5%258F%25A3%2f&amp;text=%e9%85%8d%e7%bd%aeNginx%e5%8f%8d%e5%90%91%e4%bb%a3%e7%90%86Node.js%e7%ab%af%e5%8f%a3&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2f%25E9%2585%258D%25E7%25BD%25AEnginx%25E5%258F%258D%25E5%2590%2591%25E4%25BB%25A3%25E7%2590%2586node.js%25E7%25AB%25AF%25E5%258F%25A3%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2f%25E9%2585%258D%25E7%25BD%25AEnginx%25E5%258F%258D%25E5%2590%2591%25E4%25BB%25A3%25E7%2590%2586node.js%25E7%25AB%25AF%25E5%258F%25A3%2f&amp;appkey=&amp;title=%e9%85%8d%e7%bd%aeNginx%e5%8f%8d%e5%90%91%e4%bb%a3%e7%90%86Node.js%e7%ab%af%e5%8f%a3" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+        </p>
+        
+
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/nginx/">
+                    #nginx</a></span>
+            
+        </section>
+        
+        <section>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/" class="prev" rel="prev" title="阿里云服务器相关"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;阿里云服务器相关</a>
+        
+        
+        <a href="/2019/%E6%90%AD%E5%BB%BAnode.js%E4%B8%8E%E9%98%BF%E9%87%8C%E4%BA%91alinode%E7%8E%AF%E5%A2%83/" class="next" rel="next"
+            title="搭建 Node.js 与阿里云 Alinode 环境">搭建 Node.js 与阿里云 Alinode 环境&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+        
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

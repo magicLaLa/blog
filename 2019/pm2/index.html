@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="/2019/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEmongodb%E6%95%B0%E6%8D%AE%E5%BA%93/" />
+  
+  <link rel="canonical" href="/2019/pm2/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           pm2 | Magic
+       
+  </title>
+  <meta name="title" content="pm2 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="pm2"/>
+<meta name="twitter:description" content="PM2 的安装提示处理 在本地安装 PM2 之后，可能会看到下面的这个提示，可以按照提示操作一下：
+Since PM2’s deployment command runs on a non-interactive SSH connection, we need to resolve this by commenting out a few lines from the semaphoreci user’s ~/.bashrc file. We’re already logged in as this user on our droplet, so we simply need to open up this file and comment this out: Comment the following lines: #If not running interactively, don&#39;t do anything #case $- in # *i*) ;; # * return;; #esac and this in /etc/bash."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "pm2",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2019\/pm2\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "node",
+  "wordcount":  585 ,
+  "url": "\/2019\/pm2\/",
+  "datePublished": "2019-07-02T00:00:00\x2b00:00",
+  "dateModified": "2019-07-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="/">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="/">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">pm2</h1>
+        <div class="post-meta">
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2019-07-02>2 July 2019</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/node-serve/"> node serve </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            3 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+<h3 id="pm2-的安装提示处理">PM2 的安装提示处理</h3>
+
+<p>在本地安装 PM2 之后，可能会看到下面的这个提示，可以按照提示操作一下：</p>
+
+<pre><code class="language-sh">Since PM2’s deployment command runs on a non-interactive SSH connection, we need to resolve this by commenting out a few lines from the semaphoreci user’s ~/.bashrc file. We’re already logged in as this user on our droplet, so we simply need to open up this file and comment this out:
+
+
+Comment the following lines:
+
+#If not running interactively, don't do anything
+#case $- in
+#    *i*) ;;
+#      * return;;
+#esac
+
+and this in /etc/bash.bashrc
+
+# If not running interactively, don't do anything
+[ -z &quot;$PS1&quot; ] &amp;&amp; return
+</code></pre>
+
+<h3 id="尝试-pm2-启动服务">尝试 PM2 启动服务</h3>
+
+<p>如果一个网站的服务，必须通过命令行 node server.js 来启动，启动后，退出命令行服务就终止，这显然不符合我们的预期。而即便是服务能持续运行，一旦遇到异常情况服务即终止，也是不理想的，这时候就需要有一种能够守护进程的工具或者服务，来把已经挂起的服务再次重启，这就是服务常驻的基本需求了。对于 Node.js 来说，有很多工具可以帮我们做到这一点，PM2 就是其中一个，之前我们写了这样一个静态站点代码 - app.js：</p>
+
+<pre><code class="language-js">const http = require('http')
+
+const homePage = `
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;meta charset=&quot;utf-8&quot;&gt;
+      &lt;title&gt;Node.js 部署上线示例&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;h1&gt;慕课网 Node.js 部署发布&lt;/h1&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+`
+
+http.createServer((req, res) =&gt; {
+  res.statusCode = 200
+  res.setHeader('Content-Type', 'text/html')
+  res.end(homePage)
+}).listen(4321, () =&gt; {
+  console.log('Server running at 4321')
+})
+</code></pre>
+
+<p>我们想要把一个静态站点开起来，需要满足 2 个条件:</p>
+
+<ul>
+<li>第一，这个站点可以持续稳定地提供服务；</li>
+<li>第二，这个站点可以从外网直接访问到，比如通过域名访问到。</li>
+</ul>
+
+<p>现在，我们的端口是跑在 4321 的，这显然不满足第二个条件，我们需要从外网通过 80 端口来访问。</p>
+
+<ul>
+<li>我们先解决第一个问题：让服务可以持续稳定地运行。（第二个问题留到下一个节来解决。）通过 node app.js 启动服务文件，服务就跑起来了。</li>
+<li><code>node app</code></li>
+
+<li><p>我们通过浏览器来访问，就可以看到 Node.js 服务返回的页面内容了，但是一旦退出命令行，这个会话状态就会中断，随之 Node.js 服务也会终止。显然这不是我们想要的状态，我们希望服务不仅可以在后台运行，而且在出现异常的时候还可以自动重启。这时我们就可以用到 PM2 这个 Node.js 部署和进程管理工具，不作过多解释，直接来用。</p></li>
+
+<li><p>不加任何参数的话，PM2 会自动初始化一些基础参数，来把服务跑起来。</p></li>
+</ul>
+
+<p><code>pm2 start app.js</code></p>
+
+<h3 id="补充-pm2-常用命令">补充：PM2 常用命令</h3>
+
+<ul>
+<li>通过 PM2 跑服务器的时候，是可以进行集群配置的，也就是指定在几个核上运行几个进程：</li>
+</ul>
+
+<pre><code class="language-sh">pm2 start app.js -i 2
+</code></pre>
+
+<p>-i 后面跟的 2 表示启动 2 个 server 实例，如果输入 0 的话，则按照当前服务器实际的 CPU 核数来启动多个 server，启动后，我们通过 pm2 ls 来看看已经启动的实例：</p>
+
+<pre><code class="language-sh">~ pm2 ls
+┌────┬──┬────┬───────┬──────┬───┬──────┬───────┐
+│Name│id│mode│status │↺     │cpu│memory│       │
+├────┼──┼────┼───────┼──────┼───┼──────┼───────┤
+│app │0 │N/A │cluster│online│0  │19%   │28.4 MB│
+│app │1 │N/A │cluster│online│0  │0%    │20.3 MB│
+└────┴──┴────┴───────┴──────┴───┴──────┴───────┘
+</code></pre>
+
+<h4 id="pm2-实时扩容集群">PM2 实时扩容集群</h4>
+
+<p>如果发现线上的服务响应比较吃力，而 CPU 核数没有吃满的话，我们可以实时扩容集群，通过 scale 命令来实现，比如：<code>pm2 scale app +1</code>，这里的 +1 就是扩容一个服务实例，其实就是增加一个 cluster 的 worker 子进程，扩容后的应用效果如下图：</p>
+
+<pre><code class="language-sh">[PM2] Scaling up application
+┌─────┬──┬────┬───────┬──────┬───┬──────┬───────┐
+│ Name│id│mode│status │↺     │cpu│memory│       │
+├─────┼──┼────┼───────┼──────┼───┼──────┼───────┤
+│ app │0 │N/A │cluster│online│0  │0%    │33.6 MB│
+│ app │1 │N/A │cluster│online│0  │0%    │34.2 MB│
+│ app │2 │N/A │cluster│online│0  │0%    │19.9 MB│
+└─────┴──┴────┴───────┴──────┴───┴──────┴───────┘
+</code></pre>
+
+<h4 id="pm2-终止某个进程">PM2 终止某个进程</h4>
+
+<p>有时候如果某个进程明显卡住了，或者线上负载不大，可以杀掉部分进程，通过：</p>
+
+<pre><code class="language-sh">e12-cluster git:(master) ✗ pm2 stop 1
+[PM2] Applying action stopProcessId on app [1](ids: 1)
+[PM2] [app](1) ✓
+┌────┬──┬────┬───────┬───────┬───┬──────┬───────┐
+│Name│id│mode│status │↺      │cpu│memory│       │
+├────┼──┼────┼───────┼───────┼───┼──────┼───────┤
+│app │0 │N/A │cluster│online │0  │0%    │33.6 MB│
+│app │1 │N/A │cluster│stopped│0  │0%    │0 B    │
+│app │2 │N/A │cluster│online │0  │0%    │33.6 MB│
+└────┴──┴────┴───────┴───────┴───┴──────┴───────┘
+</code></pre>
+
+<p>可以看到进程 ID 为 1 的 worker 已经是 stopped 状态。</p>
+
+<h4 id="pm2-平滑重启进程">PM2 平滑重启进程</h4>
+
+<p>有时候，如果想要某个比较吃内存的进程可以重启，或者想要所有的 worker 都重启，但是又不希望影响进程正常处理用户的请求，可以使用 PM2 的 gracefulReload 命令：</p>
+
+<pre><code class="language-sh">➜ pm2 reload app
+Use --update-env to update environment variables
+[PM2] Applying action reloadProcessId on app [app](ids: 0,1,2)
+[PM2] [app](1) ✓
+[PM2] [app](0) ✓
+[PM2] [app](2) ✓
+➜ pm2 ls
+┌────┬──┬────┬───────┬──────┬───┬──────┬───────┐
+│Name│id│mode│status │↺     │cpu│memory│       │ 
+├────┼──┼────┼───────┼──────┼───┼──────┼───────┤
+│app │0 │N/A │cluster│online│1  │6.8%  │37.4 MB│
+│app │1 │N/A │cluster│online│0  │6.8%  │37.4 MB│
+│app │2 │N/A │cluster│online│1  │6.4%  │37.5 MB│
+└────┴──┴────┴───────┴──────┴───┴──────┴───────┘
+</code></pre>
+
+<p>这样所有的子进程又原地满血复活了，当然也存在这种情况，即某些进程上的未处理连接或任务的确很重，比如有一些大而重的文件 IO 或者数据库 IO 在等待，会导致 reload 失败。这时候可以指定一个超时时间，命令会退化到 restart 模式，强制杀死进程再重启；或者我们可以在代码中再友好一些，当它收到 PM2 要重启的时候，在程序里把一些任务清空然后让服务重启：</p>
+
+<pre><code class="language-sh">// PM2 会发出 SIGINT 事件，我们监听事件
+process.on('SIGINT', function() {
+  // 处理一些任务然后信号交还给 PM2 来重启服务
+  db.stop(function(err) {
+    process.exit(err ? 1 : 0)
+  })
+})
+</code></pre>
+
+<ul>
+<li><a href="https://pm2.io/doc/en/runtime/overview/" rel="nofollow noreferrer" target="_blank">PM2 的文档</a></li>
+<li><a href="https://github.com/Unitech/pm2" rel="nofollow noreferrer" target="_blank">PM2 的仓库</a></li>
+</ul>
+
+<h3 id="配置-pm2-一健部署项目目录">配置 pm2 一健部署项目目录</h3>
+
+<ol>
+<li>可以先在本地仓库加一份 PM2 的部署文件 <code>ecosystem.yaml</code>:</li>
+</ol>
+
+<pre><code class="language-yaml">apps:
+  - script: index.js
+    name: NodeDeployStatic
+    env:
+      COMMON_VARIABLE: true
+    env_production:
+      NODE_ENV: production
+deploy:
+  production:
+    user: rn_manager
+    host:
+      - 116.62.201.97
+    port: '39999'
+    ref: origin/master
+    repo: git@git.dev.tencent.com:s_auto/muke.git
+    # 服务器上项目部署的目录，会在/www/node-deploy-static下初始化一个production文件夹
+    # 配置文件会自动从git上面拉取静态网站代码到此路径
+    path: /www/node-deploy-static/production
+    
+    ssh_options: StrictHostKeyChecking=no
+    pre-deploy: git fetch --all
+    post-deploy: 'npm i &amp;&amp; pm2 startOrRestart ecosystem.yaml --env production'
+    env:
+      NODE_ENV: production
+</code></pre>
+
+<ol>
+<li>运行：<code>pm2 deploy ./ecosystem.yaml production setup</code>，*注：有可能会报：Permission denied（权限不足），可以到服务器上使用 <code>sudo chmod 777 /www/</code> 这个命令对用户的权限为可读、可写、可执行（远程）*，输出内容如下：</li>
+</ol>
+
+<pre><code class="language-sh">--&gt; Deploying to production environment
+--&gt; on host 116.62.201.97
+  ○ hook pre-setup
+  ○ running setup
+  ○ cloning git@git.dev.tencent.com:s_auto/muke.git
+  ○ full fetch
+Cloning into '/www/node-deploy-static/production/source'...
+  ○ hook post-setup
+  ○ setup complete
+--&gt; Success
+</code></pre>
+
+<p>注：当前的服务所运行的文件夹，source 是 clone 下来的源码，shared 里面是日志文件和 pid 之类，其中 current 是 source 的软连接，两者是一样的代码，然后通过 <code>sudo chown -R $USER:$USER /www</code> 可以让权限被当前用户访问，或者更暴力一点：<code>sudo chmod 755 /www/node-deploy-vue</code>。等到服务器的文件夹都安置后，就可以从本地利用 PM2 往服务器进行部署了。</p>
+
+<h3 id="从本地发布上线和更服务器的部署项目">从本地发布上线和更服务器的部署项目</h3>
+
+<ol>
+<li>本地目录下输入命令：<code>pm2 deploy ecosystem.yaml production</code> 更新和运行，<em>注：使用nvm安装的node和pm2 会报 <code>bash: pm2: command not found / post-deploy hook failed / Deploy failed</code>，网上搜出来说是没有进行加 软链接&ndash;待定</em></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>585</span>
+        </p>
+
+        <p class="copyright-item">
+            
+            <span>Share:</span>
+            <span>
+
+      
+        <a href="//twitter.com/share?url=%2f2019%2fpm2%2f&amp;text=pm2&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2fpm2%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2fpm2%2f&amp;appkey=&amp;title=pm2" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+        </p>
+        
+
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/node/">
+                    #node</a></span>
+            
+        </section>
+        
+        <section>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEmongodb%E6%95%B0%E6%8D%AE%E5%BA%93/" class="prev" rel="prev" title="安装与配置MongoDB数据库"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;安装与配置MongoDB数据库</a>
+        
+        
+    </div>
+
+    <div class="post-comment">
+        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+        
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>
