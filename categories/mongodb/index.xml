@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MongoDB on Magic</title>
+    <link>/categories/mongodb/</link>
+    <description>Recent content in MongoDB on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 02 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/mongodb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>安装与配置MongoDB数据库</title>
+      <link>/2019/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEmongodb%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEmongodb%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>服务器系统为 Ubuntu 14.04
+ mongodump 逻辑备份工具。 mongorestore 逻辑恢复工具。 mongoexport 数据导出工具。 mongoimport 数据导入工具。  可以使用 Navicat for MongoDB 来管理数据库
+安装 MongoDB 并开启等命令  MongoDB社区安装   加入公钥 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 使用后面这个命令：sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 为 MongoDB 创建一个列表文件，可以选择使用 Aliyun 的镜像文件 echo &amp;quot;deb [ arch=amd64 ] http://mirrors.aliyun.com/MongoDB/apt/ubuntu trusty/MongoDB-org/4.0 multiverse&amp;quot; | sudo tee /etc/apt/sources.list.d/MongoDB-org-4.0.list echo &#39;deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen&#39; | sudo tee /etc/apt/sources.list.d/mongodb.list 重新加载更新本地的包库 sudo apt-get update 安装 MongoDB 稳定版 sudo apt-get install -y MongoDB-org   在安装的时候有可能会遇到这个问题：定位不到本地的 MongoDB-org 的安装包，可能是因为我们使用的是阿里云的服务器，所以默认的是阿里云的源。可以先把阿里云的源屏蔽掉试一下:</description>
+    </item>
+    
+  </channel>
+</rss>

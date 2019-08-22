@@ -6,15 +6,69 @@
     <description>Recent content in Categories on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>MongoDB</title>
+      <link>/categories/mongodb/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/mongodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>/categories/nginx/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node</title>
+      <link>/categories/node/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/node/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node serve</title>
+      <link>/categories/node-serve/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/node-serve/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>serves</title>
+      <link>/categories/serves/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/serves/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CSS相关</title>
+      <link>/categories/css%E7%9B%B8%E5%85%B3/</link>
+      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/css%E7%9B%B8%E5%85%B3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>技术相关随笔</title>
       <link>/categories/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E9%9A%8F%E7%AC%94/</link>
-      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/categories/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E9%9A%8F%E7%AC%94/</guid>
       <description></description>
@@ -30,6 +84,15 @@
     </item>
     
     <item>
+      <title>js</title>
+      <link>/categories/js/</link>
+      <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Docker</title>
       <link>/categories/docker/</link>
       <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
@@ -39,29 +102,11 @@
     </item>
     
     <item>
-      <title>Node</title>
-      <link>/categories/node/</link>
-      <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/node/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>MiniPrograms</title>
       <link>/categories/miniprograms/</link>
       <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/miniprograms/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>js</title>
-      <link>/categories/js/</link>
-      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/js/</guid>
       <description></description>
     </item>
     
