@@ -6,10 +6,43 @@
     <description>Recent content in 技术相关随笔 on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 18 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E9%9A%8F%E7%AC%94/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TS重新定义模块</title>
+      <link>/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/</guid>
+      <description>重新定义模块：
+declare var am: any; // 支付宝 declare interface Window { ap: any; // 支付宝注入 } declare module &#39;dva/dynamic&#39; { const dynamic: (config: any) =&amp;gt; React.ComponentType; export default dynamic; }  </description>
+    </item>
+    
+    <item>
+      <title>你真的了解webview么？</title>
+      <link>/2019/webview/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/webview/</guid>
+      <description>文章转载自微信公众号 大转转FE
+适用场景 像一些 App 的内嵌页面，提供各种各样的交互操作，其实webview的应用场景远远不止这些，其实在一些PC的软件里，和我们交互的也是我们的html页面，只是穿着webview的衣服，衣服太美而我们没有发现他们的真谛。
+另外，还有一些网络机顶盒里的交互，也是webview在和我们打交道，比如一些早期的IPTV里的EPG都是运行在webview里的，它们基于webkit内核，尽管我们使用的交互方式是遥控器。
+与App native的交互 目前使用频率最多的，还是客户端内嵌的webview，都是webview打开m页去承接的。目前javascript和客户端（后面统称native）交互的常见方式有两种，一种是通过JSBridge的方式，另一种是通过schema的方式。
+JSBridge 体现的形式其实就是，当我们在native内打开m页，native会在全局的window下，为我们注入一个Bridge。这个Bridge里面，会包含我们与native交互的各种方法、比如判断第三方App是否安装、获取网络信息等等功能。
+/** * 作用域下的JSBridge， * 和实例化后的getNetInfomation， * 均根据实际约定情况而定， * 这里只是用来举例说明 */ const bridge = window.JSBridge; console.log(bridge.getNetInfomation());   IOS端: 在IOS中，主要使用WebViewJavascriptBridge来注册，可以参考Github WebViewJavascriptBridge  self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView]; [self.bridge registerHandler:@&amp;quot;ObjC Echo&amp;quot; handler:^(id data, WVJBResponseCallback responseCallback) { // to do... }];   Android: 在Android中，需要通过addJavascriptInterface来注册  class JSBridge { @JavascriptInterface //注意这里的注解。出于安全的考虑，4.2 之后强制要求，不然无法从 Javascript 中发起调用 public void getNetInfomation(){ // to do }; } webView.</description>
+    </item>
+    
+    <item>
+      <title>typeof Vue/React</title>
+      <link>/2019/typeof-vue-react/</link>
+      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/typeof-vue-react/</guid>
+      <description> typeof Vue -&amp;gt; function typeof React -&amp;gt; object  </description>
+    </item>
     
     <item>
       <title>数组降纬</title>
@@ -17,8 +50,8 @@
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/</guid>
-      <description> 第一种：将数组字符串话  利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。
- let arr = [[222, 333, 444], [55, 66, 77], 11, ] arr += &#39;&#39;; arr = arr.split(&#39;,&#39;); arr = arr.map(item =&amp;gt; Number(item)); console.log(arr); // [222, 333, 444, 55, 66, 77, 11]  第二种：自定义函数 const reduceDimension = (arr) =&amp;gt; { let ret = []; let toArr = function(arr){ arr.forEach(function(item){ Array.isArray(item) ? toArr(item) : ret.push(item); }); } toArr(arr); return ret; } let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];  </description>
+      <description>第一种：将数组字符串话  利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。
+ let arr = [[222, 333, 444], [55, 66, 77], 11, ] arr += &#39;&#39;; arr = arr.split(&#39;,&#39;); arr = arr.map(item =&amp;gt; Number(item)); console.log(arr); // [222, 333, 444, 55, 66, 77, 11]  第二种：自定义函数 const reduceDimension = (arr) =&amp;gt; { let ret = []; let toArr = function(arr){ arr.forEach(function(item){ Array.isArray(item) ? toArr(item) : ret.push(item); }); } toArr(arr); return ret; } let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];  第三种 ES6数组的扩展 Array.</description>
     </item>
     
     <item>
@@ -85,6 +118,15 @@
 2xx 系列的状态最熟悉的就是 200，这通常是网页请求成功的标志，也是大家最喜欢的状态码。
 3xx 系列比较复杂，301 和 302 两个状态表示当前资源已经被转移，只不过一个是永久性转移，一个是临时性转移。实际上 301 更接近于一种报错，提示客户端下次别来了。
 304 又是一个每个前端必知必会的状态，产生这个状态的前提是：客户端本地已经有缓存的版本，并且在 Request 中告诉了服务端，当服务端通过时间或者 tag，发现没有更新的时候，就会返回一个不含 body 的 304 状态。</description>
+    </item>
+    
+    <item>
+      <title>.eslintrc.js配置详解</title>
+      <link>/1/eslintrc%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/1/eslintrc%E9%85%8D%E7%BD%AE/</guid>
+      <description>{ &amp;quot;extends&amp;quot;: [ &amp;quot;alloy&amp;quot;, &amp;quot;alloy/react&amp;quot;, &amp;quot;alloy/typescript&amp;quot;, ], &amp;quot;env&amp;quot;: { &amp;quot;browser&amp;quot;: true, &amp;quot;node&amp;quot;: true, &amp;quot;commonjs&amp;quot;: true }, &amp;quot;globals&amp;quot;: { // 这里填入你的项目需要的全局变量 // false 表示这个全局变量不允许被重新赋值，比如： // // myGlobal: false }, &amp;quot;ecmaFeatures&amp;quot;: { // lambda表达式 &amp;quot;arrowFunctions&amp;quot;: true, // 解构赋值 &amp;quot;destructuring&amp;quot;: true, // class &amp;quot;classes&amp;quot;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &amp;quot;defaultParams&amp;quot;: true, // 块级作用域，允许使用let const &amp;quot;blockBindings&amp;quot;: true, // 允许使用模块，模块内默认严格模式 &amp;quot;modules&amp;quot;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &amp;quot;objectLiteralComputedProperties&amp;quot;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &amp;quot;Hello!</description>
     </item>
     
   </channel>

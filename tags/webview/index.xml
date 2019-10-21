@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>webview on Magic</title>
+    <link>/tags/webview/</link>
+    <description>Recent content in webview on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 27 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/webview/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>你真的了解webview么？</title>
+      <link>/2019/webview/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/webview/</guid>
+      <description>文章转载自微信公众号 大转转FE
+适用场景 像一些 App 的内嵌页面，提供各种各样的交互操作，其实webview的应用场景远远不止这些，其实在一些PC的软件里，和我们交互的也是我们的html页面，只是穿着webview的衣服，衣服太美而我们没有发现他们的真谛。
+另外，还有一些网络机顶盒里的交互，也是webview在和我们打交道，比如一些早期的IPTV里的EPG都是运行在webview里的，它们基于webkit内核，尽管我们使用的交互方式是遥控器。
+与App native的交互 目前使用频率最多的，还是客户端内嵌的webview，都是webview打开m页去承接的。目前javascript和客户端（后面统称native）交互的常见方式有两种，一种是通过JSBridge的方式，另一种是通过schema的方式。
+JSBridge 体现的形式其实就是，当我们在native内打开m页，native会在全局的window下，为我们注入一个Bridge。这个Bridge里面，会包含我们与native交互的各种方法、比如判断第三方App是否安装、获取网络信息等等功能。
+/** * 作用域下的JSBridge， * 和实例化后的getNetInfomation， * 均根据实际约定情况而定， * 这里只是用来举例说明 */ const bridge = window.JSBridge; console.log(bridge.getNetInfomation());   IOS端: 在IOS中，主要使用WebViewJavascriptBridge来注册，可以参考Github WebViewJavascriptBridge  self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView]; [self.bridge registerHandler:@&amp;quot;ObjC Echo&amp;quot; handler:^(id data, WVJBResponseCallback responseCallback) { // to do... }];   Android: 在Android中，需要通过addJavascriptInterface来注册  class JSBridge { @JavascriptInterface //注意这里的注解。出于安全的考虑，4.2 之后强制要求，不然无法从 Javascript 中发起调用 public void getNetInfomation(){ // to do }; } webView.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" />
+  <link rel="next" href="/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" />
+  <link rel="canonical" href="/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           链表-leetCode-删除排序链表中的重复元素 | Magic
+       
+  </title>
+  <meta name="title" content="链表-leetCode-删除排序链表中的重复元素 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="链表-leetCode-删除排序链表中的重复元素"/>
+<meta name="twitter:description" content="链表"/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "链表-leetCode-删除排序链表中的重复元素",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2019\/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "leetCode, 链表-easy",
+  "wordcount":  91 ,
+  "url": "\/2019\/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0\/",
+  "datePublished": "2019-08-31T00:00:00\x2b00:00",
+  "dateModified": "2019-08-31T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": "链表"
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="/">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="/">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">链表-leetCode-删除排序链表中的重复元素</h1>
+        <div class="post-meta">
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2019-08-31>31 August 2019</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/%E9%93%BE%E8%A1%A8/"> 链表 </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            1 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+<h3 id="删除排序链表中的重复元素">删除排序链表中的重复元素</h3>
+
+<h4 id="描述">描述</h4>
+
+<p>给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。</p>
+
+<pre><code class="language-bash">示例 1:
+  输入: 1-&gt;1-&gt;2
+  输出: 1-&gt;2
+示例 2:
+  输入: 1-&gt;1-&gt;2-&gt;3-&gt;3
+  输出: 1-&gt;2-&gt;3
+</code></pre>
+
+<h4 id="分析">分析</h4>
+
+<p>一、直接法</p>
+
+<ul>
+<li><p>仅测试你操作列表的结点指针的能力。由于输入的列表已排序，因此我们可以通过将结点的值与它之后的结点进行比较来确定它是否为重复结点。如果它是重复的，我们更改当前结点的 next 指针，以便它跳过下一个结点并直接指向下一个结点之后的结点。</p></li>
+
+<li><p>思路</p>
+
+<ul>
+<li>指定 cur 指针指向头部 head</li>
+<li>当 cur 和 cur.next 的存在为循环结束条件，当二者有一个不存在时说明链表没有去重复的必要了</li>
+<li>当 cur.val 和 cur.next.val 相等时说明需要去重，则将 cur 的下一个指针指向下一个的下一个，这样就能达到去重复的效果</li>
+<li>如果不相等则 cur 移动到下一个位置继续循环</li>
+<li>时间复杂度：O(n)O(n)</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-js">/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {
+  let current = head;
+  while (current !== null &amp;&amp; current.next !== null) {
+    if (current.val === current.next.val) {
+      current.next = current.next.next;
+    } else {
+      current = current.next
+    }
+  }
+  return head; // current和head指向的是同一个地址，current用来操作列表，去除重复的。最后返回列表的最开始的地址，即头部head
+};
+</code></pre>
+
+<p>循环不变式: <em>循环不变式是在循环的每次迭代之前和之后为真的条件</em></p>
+
+    </div>
+
+    <div class="post-copyright">
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>91</span>
+        </p>
+
+        <p class="copyright-item">
+            
+            <span>Share:</span>
+            <span>
+
+      
+        <a href="//twitter.com/share?url=%2f2019%2f%25E5%2588%25A0%25E9%2599%25A4%25E6%258E%2592%25E5%25BA%258F%25E9%2593%25BE%25E8%25A1%25A8%25E4%25B8%25AD%25E7%259A%2584%25E9%2587%258D%25E5%25A4%258D%25E5%2585%2583%25E7%25B4%25A0%2f&amp;text=%e9%93%be%e8%a1%a8-leetCode-%e5%88%a0%e9%99%a4%e6%8e%92%e5%ba%8f%e9%93%be%e8%a1%a8%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e5%85%83%e7%b4%a0&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2f%25E5%2588%25A0%25E9%2599%25A4%25E6%258E%2592%25E5%25BA%258F%25E9%2593%25BE%25E8%25A1%25A8%25E4%25B8%25AD%25E7%259A%2584%25E9%2587%258D%25E5%25A4%258D%25E5%2585%2583%25E7%25B4%25A0%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2f%25E5%2588%25A0%25E9%2599%25A4%25E6%258E%2592%25E5%25BA%258F%25E9%2593%25BE%25E8%25A1%25A8%25E4%25B8%25AD%25E7%259A%2584%25E9%2587%258D%25E5%25A4%258D%25E5%2585%2583%25E7%25B4%25A0%2f&amp;appkey=&amp;title=%e9%93%be%e8%a1%a8-leetCode-%e5%88%a0%e9%99%a4%e6%8e%92%e5%ba%8f%e9%93%be%e8%a1%a8%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e5%85%83%e7%b4%a0" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+        </p>
+        
+
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/leetcode/">
+                    #leetCode</a></span>
+            
+            <span class="tag"><a href="/tags/%E9%93%BE%E8%A1%A8-easy/">
+                    #链表-easy</a></span>
+            
+        </section>
+        
+        <section>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="prev" rel="prev" title="链表-leetCode-合并两个有序链表"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;链表-leetCode-合并两个有序链表</a>
+        
+        
+        <a href="/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" class="next" rel="next"
+            title="链表-leetCode-两数相加">链表-leetCode-两数相加&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+        
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

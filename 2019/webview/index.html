@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="/2019/pm2/" />
+  <link rel="next" href="/2019/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/" />
+  <link rel="canonical" href="/2019/webview/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           你真的了解webview么？ | Magic
+       
+  </title>
+  <meta name="title" content="你真的了解webview么？ | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="你真的了解webview么？"/>
+<meta name="twitter:description" content="文章转载自微信公众号 大转转FE
+适用场景 像一些 App 的内嵌页面，提供各种各样的交互操作，其实webview的应用场景远远不止这些，其实在一些PC的软件里，和我们交互的也是我们的html页面，只是穿着webview的衣服，衣服太美而我们没有发现他们的真谛。
+另外，还有一些网络机顶盒里的交互，也是webview在和我们打交道，比如一些早期的IPTV里的EPG都是运行在webview里的，它们基于webkit内核，尽管我们使用的交互方式是遥控器。
+与App native的交互 目前使用频率最多的，还是客户端内嵌的webview，都是webview打开m页去承接的。目前javascript和客户端（后面统称native）交互的常见方式有两种，一种是通过JSBridge的方式，另一种是通过schema的方式。
+JSBridge 体现的形式其实就是，当我们在native内打开m页，native会在全局的window下，为我们注入一个Bridge。这个Bridge里面，会包含我们与native交互的各种方法、比如判断第三方App是否安装、获取网络信息等等功能。
+/** * 作用域下的JSBridge， * 和实例化后的getNetInfomation， * 均根据实际约定情况而定， * 这里只是用来举例说明 */ const bridge = window.JSBridge; console.log(bridge.getNetInfomation());   IOS端: 在IOS中，主要使用WebViewJavascriptBridge来注册，可以参考Github WebViewJavascriptBridge  self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView]; [self.bridge registerHandler:@&quot;ObjC Echo&quot; handler:^(id data, WVJBResponseCallback responseCallback) { // to do... }];   Android: 在Android中，需要通过addJavascriptInterface来注册  class JSBridge { @JavascriptInterface //注意这里的注解。出于安全的考虑，4.2 之后强制要求，不然无法从 Javascript 中发起调用 public void getNetInfomation(){ // to do }; } webView."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "你真的了解webview么？",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2019\/webview\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "essay, webview",
+  "wordcount":  274 ,
+  "url": "\/2019\/webview\/",
+  "datePublished": "2019-08-27T00:00:00\x2b00:00",
+  "dateModified": "2019-08-27T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="/">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="/">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">你真的了解webview么？</h1>
+        <div class="post-meta">
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2019-08-27>27 August 2019</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E9%9A%8F%E7%AC%94/"> 技术相关随笔 </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            2 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+        
+        
+
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+<p><em>文章转载自微信公众号 <strong>大转转FE</strong></em></p>
+
+<h2 id="适用场景">适用场景</h2>
+
+<p>像一些 App 的内嵌页面，提供各种各样的交互操作，其实webview的应用场景远远不止这些，其实在一些PC的软件里，和我们交互的也是我们的html页面，只是穿着webview的衣服，衣服太美而我们没有发现他们的真谛。</p>
+
+<p>另外，还有一些网络机顶盒里的交互，也是webview在和我们打交道，比如一些早期的IPTV里的EPG都是运行在webview里的，它们基于webkit内核，尽管我们使用的交互方式是遥控器。</p>
+
+<hr />
+
+<h2 id="与app-native的交互">与App native的交互</h2>
+
+<p>目前使用频率最多的，还是客户端内嵌的webview，都是webview打开m页去承接的。目前javascript和客户端（后面统称native）交互的常见方式有两种，一种是通过JSBridge的方式，另一种是通过schema的方式。</p>
+
+<h3 id="jsbridge">JSBridge</h3>
+
+<p>体现的形式其实就是，当我们在native内打开m页，native会在全局的window下，为我们注入一个Bridge。这个Bridge里面，会包含我们与native交互的各种方法、比如判断第三方App是否安装、获取网络信息等等功能。</p>
+
+<pre><code class="language-js">/**
+ * 作用域下的JSBridge，
+ * 和实例化后的getNetInfomation，
+ * 均根据实际约定情况而定，
+ * 这里只是用来举例说明
+ */
+const bridge = window.JSBridge;
+console.log(bridge.getNetInfomation());
+</code></pre>
+
+<ul>
+<li>IOS端: 在IOS中，主要使用<code>WebViewJavascriptBridge</code>来注册，可以参考<em>Github WebViewJavascriptBridge</em></li>
+</ul>
+
+<pre><code class="language-swift">self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
+
+[self.bridge registerHandler:@&quot;ObjC Echo&quot; handler:^(id data, WVJBResponseCallback responseCallback) {
+	// to do...
+}];
+</code></pre>
+
+<ul>
+<li>Android: 在Android中，需要通过addJavascriptInterface来注册</li>
+</ul>
+
+<pre><code class="language-java">class JSBridge {
+    @JavascriptInterface //注意这里的注解。出于安全的考虑，4.2 之后强制要求，不然无法从 Javascript 中发起调用
+    public void getNetInfomation(){
+      // to do
+    };
+}
+webView.addJavascriptInterface(new JSBridge();, &quot;JSBridge&quot;);
+</code></pre>
+
+<h3 id="schema-url">Schema url</h3>
+
+<p>如果说Bridge的方式是只能在native内部交互，那么<code>schame url</code>的不紧可以在native内交互，也是可以跨app来交互的。<code>schema</code>也是目前我们转转使用的主要方式，它类似一个伪协议的链接（也可以叫做统跳协议），比如：<strong>schema://path?param=abc</strong></p>
+
+<p>在webview里，当m页发起schema请求时，native端会去进行捕获。</p>
+
+<ul>
+<li>IOS端: 以UIWebView为例，在IOS中，UIWebView内发起网络请求时，可以通过delegate在native层来拦截，然后将捕获的schema进行触发对应的功能或业务逻辑（利用shouldStartLoadWithRequest）</li>
+</ul>
+
+<pre><code class="language-swift">- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
+  // 获取scheme url后自行进行处理
+  NSURL *url = [request URL];
+  NSString *requestString = [[request URL] absoluteString];
+  return YES;
+}
+</code></pre>
+
+<ul>
+<li>Android端: 在Android中，可以使用shouldoverrideurlloading来捕获schema url</li>
+</ul>
+
+<pre><code class="language-java">public boolean shouldOverrideUrlLoading(WebView view, String url){
+  //读取到url后自行进行分析处理
+
+  //这里注意：如果返回false，则WebView处理链接url，如果返回true，代表WebView根据程序来执行url  
+  return true;
+}
+</code></pre>
+
+<hr />
+
+<h2 id="如何通过schema的方式可以进行跨端交互">如何通过schema的方式可以进行跨端交互？</h2>
+
+<p>其实对于JavaScript，在webview里基本是一样的，也是发起一个schema的请求，只不过在native侧会有些许变化。</p>
+
+<p>首先，给大家普及一个小知识，就是在natvie中（包括IOS和Android），会通过schema找到相匹配的App。其中IOS不可以重复，就像appId一样；安卓可以重复，遇到重复情况时，会弹窗让用户选择其中之一。</p>
+
+<p>那么，有了这个知识点做铺垫，就可以理解，当我们在其他app中，像这个schema发起请求时，系统底层（IOS &amp; Android）会通过schema去找到所匹配的app，然后将此App拉起。拉起app后，对应处理如下：</p>
+
+<ul>
+<li>IOS端: 在IOS端内，会将schema作为参数传入一个提前定义好的回调函数内，然后执行该回调函数。此回调函数，可以通过得到的schema去进行解析，然后定向到app内的固定的某个页面。</li>
+</ul>
+
+<pre><code class="language-swift">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
+  // 参数 url 即为获取的 schema
+      
+  // to do
+}
+</code></pre>
+
+<ul>
+<li>Android端: 在Android端内，会稍微麻烦一些，在外部的m页，会发起一个schema的伪协议链接，系统会去根据这个schema去检索，需要被拉起的App需要有一个配置文件，大致如下：</li>
+</ul>
+
+<pre><code class="language-xml">&lt;activity
+  android:name=&quot;.activity.StartActivity&quot;
+  android:exported=&quot;true&quot;
+&gt;
+&lt;intent-filter&gt;
+    &lt;action android:name=&quot;android.intent.action.VIEW&quot;/&gt;
+    &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;   
+    &lt;category android:name=&quot;android.intent.category.BROWSABLE&quot;/&gt;        
+    &lt;data android:scheme=&quot;zhuanzhuan&quot;/&gt; 
+  &lt;/intent-filter&gt;
+&lt;/activityandroid:name=&quot;.activity.StartActivity&quot;android:exported=&quot;true&quot;&gt;
+</code></pre>
+
+<p>以上面的代码为例，在上面配置中scheme为zhuanzhuan，只要是 &ldquo;zhuanzhuan://&rdquo; 开头的schema的链接都会调起配置该schema的Activity(类似上面代码的 StartActivity)，此Activity会对这个 schema url 做处理，例如：</p>
+
+<pre><code class="language-java">public class StartActivity extends TempBaseActivity {
+
+  Intent intent;
+    
+  @Override
+  protected void onCreate(BundlesavedInstanceState) {       
+    super.onCreate(savedInstanceState);
+    intent = getIntent();      
+    Uri uri = intent.getData();
+  }
+}
+</code></pre>
+
+<p>例如上面的代码，可以在此Activity中，通过 intent 中的 getData 方法，获取到传入的schema的相关信息，如下图：</p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="https://ftp.bmp.ovh/imgs/2019/08/27374e51955cc775.jpg" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
+
+<p>可以在第三方app内，可以调起app的原理。当然现在市场上一些app，为了怕有流量流失，会对schema进行限制，只有plist白名单里的schema才能对应拉起，否则会被直接过滤掉。比如我们的wx爸爸，开通白名单后，才可以使用更多的jsApiList，通过schema的拉起就是其中之一，在此不做赘述…… :）</p>
+
+<hr />
+
+<h2 id="webview的进化">webview的进化</h2>
+
+<p>对于webview，要说进化、或者蜕变，让我第一想到的就是IOS的WKWebView了，每一个事物存在都有它的必然，让我们一起看看这个super版的webview。</p>
+
+<h3 id="wkwebview的出现">WKWebView的出现</h3>
+
+<p>目前混合开发已然成为了主流，为了提高体验，WKWebView在IOS8发布时，也随之一起诞生。在这之前IOS端一直使用的是UIWebView。</p>
+
+<p>从性能方面来说，WKWebView会比UIWebView高很多，可以算是一次飞跃。它采用了跨进程的方案，用 Nitro JS 解析器，高达 60fps 的刷新率。同时，提供了很好的H5页面支持，类比UIWebView还多提供了一个加载进度的属性。目前一些一线互联网app在IOS已经切换到了WKWebView，所以感觉我们无法拒绝。</p>
+
+<p>整个WKWebView的初始化也很简单：</p>
+
+<pre><code class="language-swift">WKWebView *webView = [[WKWebView alloc] init];
+NSURL *url = [NSURL URLWithString:@&quot;https://m.zhuanzhuan.com&quot;];
+[webView loadRequest:[NSURLRequest requestWithURL:url]];
+</code></pre>
+
+<h3 id="wkwebview-与-uiwebview的对比">WKWebView 与 UIWebView的对比</h3>
+
+<p>上面有提到性能的提升，为什么 app 接入 WKWebView 之后，相对比 UIWebView 内存占用小那么多，主要是因为网页的载入和渲染这些耗内存和性能的过程都是由 WKWebView 进程去实现的（WKWebView是独立于app的进程）。如下图：</p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="https://ftp.bmp.ovh/imgs/2019/08/b6c28e21432a222c.jpeg" alt="WKWebView" class="lazyload"><figcaption class="image-caption">WKWebView</figcaption></figure></p>
+
+<p>这样，互相进程独立相当于把整个App的进程对内存的占用量减少，App进程会更为稳定。况且，即使页面进程崩溃，体现出来的就是页面白屏或载入失败，不会影响到整个App进程的崩溃。</p>
+
+<p>除了上面说的性能以外，WKWebView会比UIWebView多了一个询问过程。在服务器完成响应之后，会询问获取内容是否载入到容器内，在控制上会比UIWebView更细粒度一点，也可以在一些通信上更好的和m页进行交互。大概流程如下图：</p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="https://ftp.bmp.ovh/imgs/2019/08/f019036d9012a991.jpeg" alt="stream" class="lazyload"><figcaption class="image-caption">stream</figcaption></figure></p>
+
+<p>WKWebView 的代理协议为 WKNavigationDelegate，对比 UIWebDelegate 首先跳转询问，就是载入 URL之前的一次调用，询问开发者是否下载并载入当前 URL，UIWebView 只有一次询问，就是请求之前的询问，而 WKWebView 在 URL 下载完毕之后还会发一次询问，让开发者根据服务器返回的 Web 内容再次做一次确定。</p>
+
+<hr />
+
+<h2 id="任重而道远">任重而道远</h2>
+
+<p>前面说到WKWebView这么赞，其实开发中也有一些痛点。不同于UIWebView，WKWebView很多交互都是异步的，所以在很大程度上，在和m页通信的时候，提高了开发成本。</p>
+
+<h3 id="cookie">cookie</h3>
+
+<p>首先就是cookie问题，这个目前我认为也是WKWebView在业界的一个坑。之前出现过一个问题，就是在IOS登陆完成后，马上进入m页，会有登录态的cookie获取不到的问题。这个问题在UIWebView中是不存在的。</p>
+
+<p>经过调研发现，主要问题是UIWebView对cookie是通过NSHTTPCookieStorage来统一处理的，服务端响应时写入，然后在下次请求时，在请求头里会带上相应的cookie，来做到m页和native共享cookie的值。</p>
+
+<p>但是在WKWebView中，则不然。它虽然也会对NSHTTPCookieStorage来写入cookie，但却不是实时存储的。而且从实际的测试中发现，不同的IOS版本，延迟的时间还不一样，无意对m页的开发者是一种挑战。同样，发起请求时，也不是实时读取，无法做到和native同步，导致页面逻辑出错。</p>
+
+<p>针对这个问题，目前我们转转的解决方法是需要客户端手动干预一下cookie的存储。将服务响应的cookie，持久化到本地，在下次webview启动时，读取本地的cookie值，手动再去通过native往webview写入。大致流程如下图：</p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="https://ftp.bmp.ovh/imgs/2019/08/f06684b50c93ab95.jpeg" alt="stream" class="lazyload"><figcaption class="image-caption">stream</figcaption></figure></p>
+
+<p>当然这也不是很完美的解决方案，因为偶尔还有spa的页面路由切换的时候丢失cookie的问题。</p>
+
+<h3 id="缓存">缓存</h3>
+
+<p>除了cookie以外，WKWebView的缓存问题，最近我们也在关注。由于WKWebView内部默认使用一套缓存机制，开发者可以操作的权限会有限制，特别是IOS8版本，也许是当时刚诞生WKWebView的缘故，还很不完善，根本没法操作（当然相信IOS8很快会退出历史舞台）。对于一些m页的静态资源，偶尔会出现缓存不更新的情况，着实让人头疼。</p>
+
+<p>但在IOS 9 之后，系统提供了缓存管理的接口 WKWebsiteDataStore。</p>
+
+<pre><code class="language-swift">// RemoveCache
+NSSet *websiteTypes= [NSSet setWithArray:@[WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache]];
+NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteTypes modifiedSince:date completionHandler:^{}];
+</code></pre>
+
+<p>至于IOS8，就只能通过删除文件来解决了，一般WKWebView的缓存数据会存储在这个目录里：<code>~/Library/Caches/BundleID/WebKit/</code>，可通过删除该目录来实现清理缓存。</p>
+
+<hr />
+
+<p>还有webview的通病，就是我们每次首次打开m页时，都要有webview初始化的过程，那么如何减少初始化webview的时间，也是我们可以提高页面打开速度的一个重要环节</p>
+
+    </div>
+
+    <div class="post-copyright">
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>274</span>
+        </p>
+
+        <p class="copyright-item">
+            
+            <span>Share:</span>
+            <span>
+
+      
+        <a href="//twitter.com/share?url=%2f2019%2fwebview%2f&amp;text=%e4%bd%a0%e7%9c%9f%e7%9a%84%e4%ba%86%e8%a7%a3webview%e4%b9%88%ef%bc%9f&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2fwebview%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2fwebview%2f&amp;appkey=&amp;title=%e4%bd%a0%e7%9c%9f%e7%9a%84%e4%ba%86%e8%a7%a3webview%e4%b9%88%ef%bc%9f" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+        </p>
+        
+
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/essay/">
+                    #essay</a></span>
+            
+            <span class="tag"><a href="/tags/webview/">
+                    #webview</a></span>
+            
+        </section>
+        
+        <section>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/pm2/" class="prev" rel="prev" title="pm2"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;pm2</a>
+        
+        
+        <a href="/2019/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/" class="next" rel="next"
+            title="链表-leetCode-移除链表元素">链表-leetCode-移除链表元素&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+        
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

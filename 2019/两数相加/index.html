@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/" />
+  <link rel="next" href="/2019/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/" />
+  <link rel="canonical" href="/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           链表-leetCode-两数相加 | Magic
+       
+  </title>
+  <meta name="title" content="链表-leetCode-两数相加 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="链表-leetCode-两数相加"/>
+<meta name="twitter:description" content="链表"/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "链表-leetCode-两数相加",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2019\/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "leetCode, 链表-easy",
+  "wordcount":  190 ,
+  "url": "\/2019\/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0\/",
+  "datePublished": "2019-08-31T00:00:00\x2b00:00",
+  "dateModified": "2019-08-31T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": "链表"
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="/">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="/">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">链表-leetCode-两数相加</h1>
+        <div class="post-meta">
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2019-08-31>31 August 2019</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/%E9%93%BE%E8%A1%A8/"> 链表 </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            1 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+<h3 id="两数相加">两数相加</h3>
+
+<h4 id="描述">描述</h4>
+
+<p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
+
+<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
+
+<pre><code class="language-bash">输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
+输出：7 -&gt; 0 -&gt; 8
+原因：342 + 465 = 807
+</code></pre>
+
+<h4 id="分析">分析</h4>
+
+<ul>
+<li>单链表的数据结构：<code>val</code>属性存储当前的值，<code>next</code>属性存储下一个节点的引用。</li>
+</ul>
+
+<p>从链表表头开始，然后进行每一位进行相加，每位的数字在 0~9 之间，相加有可能会出现 <em>溢出</em> 。
+例如：5+7=12，这种情况下，将个位设置为当前值（也就是2），并将进位 carry=1 带入下一次迭代。进位必定是 0 | 1，因为两个数字相加（考虑到进位）最大和为 9+9+1=19。</p>
+
+<blockquote>
+<p>对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。<strong>使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。</strong></p>
+</blockquote>
+
+<ul>
+<li>先初始化一个哑结点</li>
+<li>初始化 sum 为 0</li>
+<li>进位 carry 初始化为 0</li>
+<li>遍历列表 l1 和 l2 直至到达它们的尾端，并对 sum 进行累加，将 l1 和 l2 赋值为下一个节点</li>
+<li>更新进位的值，carry = ~~(sum / 10carry=sum/10)</li>
+<li>创建一个数值为 (sum % 10) 的新结点，并将其设置为当前结点的下一个结点，然后将当前结点前进到下一个结点</li>
+<li>sum 赋值为 进位 carry，带入下一次循环</li>
+<li>将 carry 从初始化</li>
+<li>返回哑结点的下一个结点</li>
+</ul>
+
+<h4 id="代码">代码</h4>
+
+<pre><code class="language-js">/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+  let res = new ListNode(0)
+      dummy = res,
+      sum = 0, carry = 0;
+  while(l1 || l2 || sum &gt; 0) {
+      if(l1) {
+          sum += l1.val;
+          l1 = l1.next;
+      }
+      if(l2) {
+          sum += l2.val;
+          l2 = l2.next;
+      }
+      carry = ~~(sum / 10);
+      dummy.next = new ListNode(sum % 10)
+      dummy = dummy.next;
+      sum = carry;
+      carry = 0;
+  }
+  return res.next;
+};
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>190</span>
+        </p>
+
+        <p class="copyright-item">
+            
+            <span>Share:</span>
+            <span>
+
+      
+        <a href="//twitter.com/share?url=%2f2019%2f%25E4%25B8%25A4%25E6%2595%25B0%25E7%259B%25B8%25E5%258A%25A0%2f&amp;text=%e9%93%be%e8%a1%a8-leetCode-%e4%b8%a4%e6%95%b0%e7%9b%b8%e5%8a%a0&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2f%25E4%25B8%25A4%25E6%2595%25B0%25E7%259B%25B8%25E5%258A%25A0%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2f%25E4%25B8%25A4%25E6%2595%25B0%25E7%259B%25B8%25E5%258A%25A0%2f&amp;appkey=&amp;title=%e9%93%be%e8%a1%a8-leetCode-%e4%b8%a4%e6%95%b0%e7%9b%b8%e5%8a%a0" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+        </p>
+        
+
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/leetcode/">
+                    #leetCode</a></span>
+            
+            <span class="tag"><a href="/tags/%E9%93%BE%E8%A1%A8-easy/">
+                    #链表-easy</a></span>
+            
+        </section>
+        
+        <section>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/" class="prev" rel="prev" title="链表-leetCode-删除排序链表中的重复元素"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;链表-leetCode-删除排序链表中的重复元素</a>
+        
+        
+        <a href="/2019/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/" class="next" rel="next"
+            title="链表-leetCode-设计链表">链表-leetCode-设计链表&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+        
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

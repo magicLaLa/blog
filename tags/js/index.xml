@@ -17,8 +17,8 @@
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/</guid>
-      <description> 第一种：将数组字符串话  利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。
- let arr = [[222, 333, 444], [55, 66, 77], 11, ] arr += &#39;&#39;; arr = arr.split(&#39;,&#39;); arr = arr.map(item =&amp;gt; Number(item)); console.log(arr); // [222, 333, 444, 55, 66, 77, 11]  第二种：自定义函数 const reduceDimension = (arr) =&amp;gt; { let ret = []; let toArr = function(arr){ arr.forEach(function(item){ Array.isArray(item) ? toArr(item) : ret.push(item); }); } toArr(arr); return ret; } let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];  </description>
+      <description>第一种：将数组字符串话  利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。
+ let arr = [[222, 333, 444], [55, 66, 77], 11, ] arr += &#39;&#39;; arr = arr.split(&#39;,&#39;); arr = arr.map(item =&amp;gt; Number(item)); console.log(arr); // [222, 333, 444, 55, 66, 77, 11]  第二种：自定义函数 const reduceDimension = (arr) =&amp;gt; { let ret = []; let toArr = function(arr){ arr.forEach(function(item){ Array.isArray(item) ? toArr(item) : ret.push(item); }); } toArr(arr); return ret; } let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];  第三种 ES6数组的扩展 Array.</description>
     </item>
     
     <item>

@@ -6,10 +6,73 @@
     <description>Recent content in Tags on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 02 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TypeScript</title>
+      <link>/tags/typescript/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/typescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>essay</title>
+      <link>/tags/essay/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/essay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>easy</title>
+      <link>/tags/easy/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/easy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>leetCode</title>
+      <link>/tags/leetcode/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/leetcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>链表</title>
+      <link>/tags/%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E9%93%BE%E8%A1%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>链表-easy</title>
+      <link>/tags/%E9%93%BE%E8%A1%A8-easy/</link>
+      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E9%93%BE%E8%A1%A8-easy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webview</title>
+      <link>/tags/webview/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/webview/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>MongoDB</title>
@@ -57,20 +120,20 @@
     </item>
     
     <item>
-      <title>essay</title>
-      <link>/tags/essay/</link>
-      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/essay/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>js</title>
       <link>/tags/js/</link>
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>杂项</title>
+      <link>/tags/%E6%9D%82%E9%A1%B9/</link>
+      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E6%9D%82%E9%A1%B9/</guid>
       <description></description>
     </item>
     
@@ -147,20 +210,20 @@
     </item>
     
     <item>
-      <title>leetCode</title>
-      <link>/tags/leetcode/</link>
-      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/leetcode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>other</title>
       <link>/tags/other/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/other/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>eslintrc</title>
+      <link>/tags/eslintrc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/eslintrc/</guid>
       <description></description>
     </item>
     

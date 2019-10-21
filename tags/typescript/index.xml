@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeScript on Magic</title>
+    <link>/tags/typescript/</link>
+    <description>Recent content in TypeScript on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 17 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TS重新定义模块</title>
+      <link>/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/</guid>
+      <description>重新定义模块：
+declare var am: any; // 支付宝 declare interface Window { ap: any; // 支付宝注入 } declare module &#39;dva/dynamic&#39; { const dynamic: (config: any) =&amp;gt; React.ComponentType; export default dynamic; }  </description>
+    </item>
+    
+  </channel>
+</rss>

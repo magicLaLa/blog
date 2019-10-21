@@ -5,8 +5,1076 @@
     <description>Recent content in Magic on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 02 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Oct 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>TS重新定义模块</title>
+      <link>/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/</guid>
+      <description>&lt;p&gt;重新定义模块：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;declare var am: any; // 支付宝
+
+declare interface Window {
+  ap: any; // 支付宝注入
+}
+
+declare module &#39;dva/dynamic&#39; {
+  const dynamic: (config: any) =&amp;gt; React.ComponentType;
+  export default dynamic;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-反转链表</title>
+      <link>/2019/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;h2 id=&#34;反转链表&#34;&gt;反转链表&lt;/h2&gt;
+
+&lt;h3 id=&#34;描述&#34;&gt;描述&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;反转一个单链表。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;示例:
+  输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL
+  输出: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;分析&#34;&gt;分析&lt;/h3&gt;
+
+&lt;p&gt;一、迭代
+  - 第一个节点无前置节点 所以需要声明初始化一个前置节点prev
+  - 开始迭代，结束提交为 当前节点不为null
+  - 先把当前节点后置节点变为当前节点的前置节点
+  - 然后把前置pre变为当前节点 因为下一次所需
+  - 再把当前节点设为后置节点&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;在遍历列表时，将当前节点的 next 指针改为指向前一个元素。由于节点没有引用其上一个节点，因此必须事先存储其前一个元素。在更改引用之前，还需要另一个指针来存储下一个节点。不要忘记在最后返回新的头引用！&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  let cur = head;
+  let pre = null;
+  while(cur) {
+    let temp = cur.next; //  保存当前节点的后置节点 之后循环到下一个节点需要
+    cur.next = pre;
+    pre = cur;
+    cur = temp;
+  }
+  return pre;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;二、递归&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;递归版本稍微复杂一些，其关键在于反向工作。假设列表的其余部分已经被反转，现在我该如何反转它前面的部分？&lt;/li&gt;
+&lt;li&gt;假设列表为：&lt;code&gt;n1 ​→ ... → nk−1 ​→ nk ​→ nk+1 ​→...→ nm ​→∅&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;若从节点 &lt;code&gt;nk+1&lt;/code&gt;到 &lt;code&gt;nm&lt;/code&gt;已经被反转，而我们正处于 &lt;code&gt;nk&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n 1 ​ →...→n k−1 ​ →n k ​ →n k+1 ​ ←...←n m&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;我们希望 &lt;code&gt;nk+1&lt;/code&gt; 的下一个节点指向 &lt;code&gt;nk&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;所以:&lt;code&gt;nk.next.next = nk&lt;/code&gt; &lt;em&gt;要小心的是 &lt;code&gt;n1&lt;/code&gt; 的下一个必须指向 Ø 。如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  if (!head || !head.next) return head;
+  let p = reverseList(head.next);
+  head.next.next = head;
+  head.next = null;
+  return p;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-设计链表</title>
+      <link>/2019/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;h3 id=&#34;设计链表&#34;&gt;设计链表&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针/引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。&lt;/p&gt;
+
+&lt;p&gt;在链表类中实现这些功能：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。&lt;/li&gt;
+&lt;li&gt;addAtHead(val)：在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。&lt;/li&gt;
+&lt;li&gt;addAtTail(val)：将值为 val 的节点追加到链表的最后一个元素。&lt;/li&gt;
+&lt;li&gt;addAtIndex(index,val)：在链表中的第 index 个节点之前添加值为 val  的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点。&lt;/li&gt;
+&lt;li&gt;deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 假设链表为 5 -&amp;gt; 3 &amp;gt; 1
+{
+  val: 5,
+  next: {
+    val: 3,
+    next: {
+      val: 1,
+      next: null
+    }
+  }
+}
+// 双链表的结构就会多一个prev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;一-数组-不推荐&#34;&gt;一、数组（不推荐）&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class MyLinkedList {
+  constructor() {
+    this.list = [];
+  }
+  get(index) {
+    if (index &amp;lt; 0 || index &amp;gt;= this.list.length) return -1;
+    return this.list[index];
+  }
+  addAtHead(val) {
+    this.list.unshift(val);
+  }
+  addAtTail(val) {
+    this.arr.push(val)
+  }
+  addAtIndex(index, val) {
+    if (index &amp;lt; 0) { this.arr.push(val); return }
+    if (index &amp;gt; this.arr.length) { return }
+    this.arr.splice(index, 0, val)
+  }
+  deleteAtIndex(index) {
+    if (index &amp;gt;= 0 &amp;amp;&amp;amp; index &amp;lt; this.arr.length) this.arr.splice(index, 1)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;二-对象设计单链表&#34;&gt;二、对象设计单链表&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class MyLinkedList {
+  constructor() {
+    this.data = {};
+  }
+  get(index) {
+    if (index &amp;lt; 0) return -1;
+    let current = this.data;
+    for (let i = 0; i &amp;lt; index; i++) {
+      if (!current.next) return -1;
+      current = current.next;
+    }
+    return current.val === undefined || current.val === null ? -1 : current.val;
+  }
+  addAtHead(val) {
+    if (this.data.val === undefined || this.data.val === null) {
+      this.data = {
+        val: val,
+        next: this.data,
+      };
+    } else {
+      this.data = {
+        val: val,
+        next: null,
+      };
+    }
+  }
+  addAtTail(val) {
+    let curr = this.data;
+    while(curr.next) {
+      curr = curr/next;
+    }
+    curr.next = {
+      val: val,
+      next: null,
+    };
+  }
+  addAtIndex(index, val) {
+    if (index &amp;lt; 0) return this.addAtHead(val);
+    let curr = this.data;
+    for (let i = 0; i &amp;lt; index - 1; i++) {
+      if (!curr || !curr.next) return null;
+      curr = curr.next;
+    }
+    if (!curr.val &amp;amp;&amp;amp; curr.val !== 0) return null;
+    curr.next = {
+      val: val,
+      next: curr.next,
+    };
+  }
+  deleteAtIndex(index) {
+    if (index &amp;lt; 0) return null;
+    if (index === 0) return this.data = this.data.next;
+    let curr = this.data;
+    for (let i = 0; i &amp;lt; index - 1; i++) {
+      if (!curr.next || !curr.next.next) return null
+      curr = curr.next;
+    }
+    if (!curr.next) return null;
+    if (!curr.next.next) return curr.next = null;
+    curr.next = curr.next.next;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;二-对象设计双链表&#34;&gt;二、对象设计双链表&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class MyLinkedList {
+  constructor () {
+    this.data = null;
+  }
+  get(index) {
+    if (index &amp;lt; 0) return -1;
+    let curr = this.data;
+    while (index &amp;gt; 0 &amp;amp;&amp;amp; curr) {
+      curr = curr.next;
+      index--;
+    }
+    return curr ? curr.val : -1;
+  }
+  addAtHead(val) {
+    this.data = {
+      val, next: this.data, prev: null
+    }
+    if (this.data.next) this.data.next.prev = this.data;
+  }
+  addAtTail(val) {
+    if (this.data) {
+      let curr = this.data;
+      while (curr.next) {
+        curr = curr.next;
+      }
+      curr.next = { val, next: null, prev: curr}
+    } else {
+      this.data = { val, next: null, prev: null }
+    }
+  }
+  addAtIndex(index, val) {
+    if (index &amp;lt;= 0) return this.addAtHead(val);
+    let curr = this.data;
+    for (let i = 0; i &amp;lt; index - 1; i++) {
+      if (!curr || !curr.next) return null;
+      curr = curr.next;
+    }
+    if (!curr) return null;
+    let temp = curr.next;
+    curr.next = {
+      val, prev: curr, next: curr.next
+    }
+    if (temp) temp.prev = curr.next
+  }
+  deleteAtIndex(index) {
+    if (index &amp;lt; 0) return null;
+    let curr = this.data;
+    while (index &amp;gt; 0) {
+      if (!curr) return null;
+      curr = curr.next;
+      index--;
+    }
+    if (!curr) return null;
+    if (!curr.prev &amp;amp;&amp;amp; !curr.next) {
+      this.data = null;
+    } else if (!curr.prev) {
+      curr.next.prev = curr.prev;
+      this.data = curr.next;
+    } else if (!curr.next) {
+      curr.prev.next = null;
+    } else {
+      curr.prev.next = curr.next;
+      curr.next.prev = curr.prev;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-两数相加</title>
+      <link>/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</guid>
+      <description>
+
+&lt;h3 id=&#34;两数相加&#34;&gt;两数相加&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。&lt;/p&gt;
+
+&lt;p&gt;如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;输入：(2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4)
+输出：7 -&amp;gt; 0 -&amp;gt; 8
+原因：342 + 465 = 807
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;单链表的数据结构：&lt;code&gt;val&lt;/code&gt;属性存储当前的值，&lt;code&gt;next&lt;/code&gt;属性存储下一个节点的引用。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;从链表表头开始，然后进行每一位进行相加，每位的数字在 0~9 之间，相加有可能会出现 &lt;em&gt;溢出&lt;/em&gt; 。
+例如：5+7=12，这种情况下，将个位设置为当前值（也就是2），并将进位 carry=1 带入下一次迭代。进位必定是 0 | 1，因为两个数字相加（考虑到进位）最大和为 9+9+1=19。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。&lt;strong&gt;使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;先初始化一个哑结点&lt;/li&gt;
+&lt;li&gt;初始化 sum 为 0&lt;/li&gt;
+&lt;li&gt;进位 carry 初始化为 0&lt;/li&gt;
+&lt;li&gt;遍历列表 l1 和 l2 直至到达它们的尾端，并对 sum 进行累加，将 l1 和 l2 赋值为下一个节点&lt;/li&gt;
+&lt;li&gt;更新进位的值，carry = ~~(sum / 10carry=sum/10)&lt;/li&gt;
+&lt;li&gt;创建一个数值为 (sum % 10) 的新结点，并将其设置为当前结点的下一个结点，然后将当前结点前进到下一个结点&lt;/li&gt;
+&lt;li&gt;sum 赋值为 进位 carry，带入下一次循环&lt;/li&gt;
+&lt;li&gt;将 carry 从初始化&lt;/li&gt;
+&lt;li&gt;返回哑结点的下一个结点&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;代码&#34;&gt;代码&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+  let res = new ListNode(0)
+      dummy = res,
+      sum = 0, carry = 0;
+  while(l1 || l2 || sum &amp;gt; 0) {
+      if(l1) {
+          sum += l1.val;
+          l1 = l1.next;
+      }
+      if(l2) {
+          sum += l2.val;
+          l2 = l2.next;
+      }
+      carry = ~~(sum / 10);
+      dummy.next = new ListNode(sum % 10)
+      dummy = dummy.next;
+      sum = carry;
+      carry = 0;
+  }
+  return res.next;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-删除排序链表中的重复元素</title>
+      <link>/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</guid>
+      <description>
+
+&lt;h3 id=&#34;删除排序链表中的重复元素&#34;&gt;删除排序链表中的重复元素&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;示例 1:
+  输入: 1-&amp;gt;1-&amp;gt;2
+  输出: 1-&amp;gt;2
+示例 2:
+  输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3
+  输出: 1-&amp;gt;2-&amp;gt;3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;p&gt;一、直接法&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;仅测试你操作列表的结点指针的能力。由于输入的列表已排序，因此我们可以通过将结点的值与它之后的结点进行比较来确定它是否为重复结点。如果它是重复的，我们更改当前结点的 next 指针，以便它跳过下一个结点并直接指向下一个结点之后的结点。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;思路&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;指定 cur 指针指向头部 head&lt;/li&gt;
+&lt;li&gt;当 cur 和 cur.next 的存在为循环结束条件，当二者有一个不存在时说明链表没有去重复的必要了&lt;/li&gt;
+&lt;li&gt;当 cur.val 和 cur.next.val 相等时说明需要去重，则将 cur 的下一个指针指向下一个的下一个，这样就能达到去重复的效果&lt;/li&gt;
+&lt;li&gt;如果不相等则 cur 移动到下一个位置继续循环&lt;/li&gt;
+&lt;li&gt;时间复杂度：O(n)O(n)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {
+  let current = head;
+  while (current !== null &amp;amp;&amp;amp; current.next !== null) {
+    if (current.val === current.next.val) {
+      current.next = current.next.next;
+    } else {
+      current = current.next
+    }
+  }
+  return head; // current和head指向的是同一个地址，current用来操作列表，去除重复的。最后返回列表的最开始的地址，即头部head
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;循环不变式: &lt;em&gt;循环不变式是在循环的每次迭代之前和之后为真的条件&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-合并两个有序链表</title>
+      <link>/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;由于单链表是线性的，使用递归方式将导致栈的使用也是线性的，当链表长度达到一定程度时，递归会导致爆栈，因此，现实中并不推荐使用递归方式来操作链表。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;合并两个有序链表&#34;&gt;合并两个有序链表&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4
+输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;p&gt;一、 递归&lt;/p&gt;
+
+&lt;p&gt;可以使用 递归，两个链表头部较小的一个与剩下元素的 merge 操作结果合并。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;特殊的，如果 l1 或者 l2 一开始就是 null ，那么没有任何操作需要合并，所以我们只需要返回非空链表。否则，我们要判断 l1 和 l2 哪一个的头元素更小，然后递归地决定下一个添加到结果里的值。如果两个链表都是空的，那么过程终止，所以递归过程最终一定会终止。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;思路&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;这道题可以使用递归实现，新链表也不需要构造新节点，我们下面列举递归三个要素&lt;/li&gt;
+&lt;li&gt;终止条件：两条链表分别名为 l1 和 l2，当 l1 为空或 l2 为空时结束&lt;/li&gt;
+&lt;li&gt;返回值：每一层调用都返回排序好的链表头&lt;/li&gt;
+&lt;li&gt;本级递归内容：如果 l1 的 val 值更小，则将 l1.next 与排序好的链表头相接，l2 同理&lt;/li&gt;
+&lt;li&gt;O(m+n)O(m+n)，mm 为 l1的长度，nn 为 l2 的长度&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+  if(l1 === null){
+      return l2;
+  }
+  if(l2 === null){
+      return l1;
+  }
+  if(l1.val &amp;lt; l2.val){
+      l1.next = mergeTwoLists(l1.next, l2);
+      return l1;
+  }else{
+      l2.next = mergeTwoLists(l1, l2.next);
+      return l2;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;二、迭代&lt;/p&gt;
+
+&lt;p&gt;可以用迭代的方法来实现上述算法。我们假设 l1 元素严格比 l2元素少，我们可以将 l2 中的元素逐一插入 l1 中正确的位置。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;思路:
+
+&lt;ul&gt;
+&lt;li&gt;首先，我们设定一个哨兵节点 &lt;code&gt;preheat&lt;/code&gt; ，这可以在最后让我们比较容易地返回合并后的链表。我们维护一个 prev 指针，我们需要做的是调整它的 next 指针。然后，我们重复以下过程，直到 l1 或者 l2 指向了 null ：如果 l1 当前位置的值小于等于 l2 ，我们就把 l1 的值接在 prev 节点的后面同时将 l1 指针往后移一个。否则，我们对 l2 做同样的操作。不管我们将哪一个元素接在了后面，我们都把 prev 向后移一个元素。&lt;/li&gt;
+&lt;li&gt;在循环终止的时候， l1 和 l2 至多有一个是非空的。由于输入的两个链表都是有序的，所以不管哪个链表是非空的，它包含的所有元素都比前面已经合并链表中的所有元素都要大。这意味着我们只需要简单地将非空链表接在合并链表的后面，并返回合并链表。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+  // 在返回节点之前保持对节点的不变引用
+  const preheat = new ListNode(-1);
+  let prev = preheat;
+
+  while (l1 &amp;amp;&amp;amp; l2) {
+    if (l1.val &amp;lt; l2.val) {
+      prev.next = l1;
+      l1 = l1.next;
+    } else {
+      prev.next = l2;
+      l2 = l2.next;
+    }
+    prev = prev.next;
+  }
+  // 此时l1和l2中恰好有一个是非空的，将非空链表接在合并链表的后面
+  prev.next = l1 ? l1 : l2;
+  return preheat.next;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-回文链表</title>
+      <link>/2019/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;h2 id=&#34;回文链表&#34;&gt;回文链表&lt;/h2&gt;
+
+&lt;h3 id=&#34;描述&#34;&gt;描述&lt;/h3&gt;
+
+&lt;p&gt;判断一个链表是否为回文链表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;示例 1:
+  输入: 1-&amp;gt;2
+  输出: false
+
+示例 2:
+  输入: 1-&amp;gt;2-&amp;gt;2-&amp;gt;1
+  输出: true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;分析&#34;&gt;分析&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;用2个指针，一个low，一个fast，fast是low的2倍，所以可以达到2分链表的效果&lt;/li&gt;
+&lt;li&gt;在移动指针时同时对前半部分链表进行反转，最后直接比较被分开的2个链表&lt;/li&gt;
+&lt;li&gt;因为不能改变当前slow的next，不然就无法跳到下一个元素，所以这里用pre和prepre实现指针的反转&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function(head) {
+  if (!head || !head.next) return true;
+  let slow = head;
+  let fast = head.next;
+  let pre = null;
+  let prepre = null;
+  while (fast &amp;amp;&amp;amp; fast.next) {
+    // 反转前半段链表
+    pre = slow;
+    slow = slow.next;
+    fast = fast.next.next;
+    // 先移动指针再来反转
+    pre.next = prepre;
+    prepre = pre;
+  }
+  let p2 = slow.next;
+  slow.next = pre;
+  let p1 = !fast ? slow.next : slow;
+  while(p1) {
+    if (p1.val !== p2.val) return false;
+    p1 = p1.next;
+    p2 = p2.next;
+  }
+  return true;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-环形链表</title>
+      <link>/2019/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;h3 id=&#34;环形链表&#34;&gt;环形链表&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;给定一个链表，判断链表中是否有环。&lt;/p&gt;
+
+&lt;p&gt;为了表示给定链表中的环，我们使用整数 &lt;code&gt;pos&lt;/code&gt; 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 &lt;code&gt;pos&lt;/code&gt; 是 -1，则在该链表中没有环。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;示例 1：
+
+输入：head = [3,2,0,-4], pos = 1
+输出：true
+解释：链表中有一个环，其尾部连接到第二个节点。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png&#34; alt=&#34;pic&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;示例 2：
+
+输入：head = [1,2], pos = 0
+输出：true
+解释：链表中有一个环，其尾部连接到第一个节点。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png&#34; alt=&#34;pic&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;示例 3：
+
+输入：head = [1], pos = -1
+输出：false
+解释：链表中没有环。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png&#34; alt=&#34;pic&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一、由上到下给每一层遍历到的结点做上标记，如果在下一个结点中出现了这个标记，则表示存在环形结构。如果不想篡改原始数据，可以先用 &lt;code&gt;temp&lt;/code&gt; 保存。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+  while (head) {
+    if (head.val === &#39;k.top&#39;) return true;
+    head.val = &#39;k.top&#39;;
+    head = head.next;
+  }
+  return false;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;二、利用 &lt;code&gt;JSON.stringify()&lt;/code&gt; 不能字符串化含有循环引用的结构。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+  try {
+    JSON.stringify(head);
+    return false;
+  } catch (e) {
+    return true;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;三、*(双指针法）*设置一快一慢两个指针，快指针一次走两步到 .next.next，慢指针一次走一步到 .next，如果链表不存在环形结构，那么快指针和慢指针不会相遇。如果存在环形结构，快指针总会和慢指针相遇。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+  if (head === null || head.next === null) return false;
+  let slow = head;
+  let fast = head.next;
+  while (slow !== fast) {
+    if (fast === null || fast.next === null) return false;
+    slow = slow.next;
+    fast = fast.next;
+  }
+  return true;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-相交链表</title>
+      <link>/2019/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;h3 id=&#34;相交链表&#34;&gt;相交链表&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;编写一个程序，找到两个单链表相交的起始节点。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/27/uMQiZ9.png&#34; alt=&#34;pic&#34; /&gt;
+&lt;img src=&#34;https://s2.ax1x.com/2019/09/27/uMQFaR.png&#34; alt=&#34;pic&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;注意：
+- 如果两个链表没有交点，返回 null.
+- 在返回结果后，两个链表仍须保持原有的结构。
+- 可假定整个链表结构中没有循环。
+- 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。&lt;/p&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;p&gt;根据题目意思&lt;/p&gt;
+
+&lt;p&gt;如果两个链表相交，那么相交点之后的长度是相同的&lt;/p&gt;
+
+&lt;p&gt;我们需要做的事情是，让两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。
+为此，我们必须消除两个链表的长度差&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历&lt;/li&gt;
+&lt;li&gt;如果 pA 到了末尾，则 pA = headB 继续遍历&lt;/li&gt;
+&lt;li&gt;如果 pB 到了末尾，则 pB = headA 继续遍历&lt;/li&gt;
+&lt;li&gt;比较长的链表指针指向较短链表head时，长度差就消除了&lt;/li&gt;
+&lt;li&gt;如此，只需要将最短链表遍历两次即可找到位置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/xtjd.png&#34; alt=&#34;pic&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var getIntersectionNode = function(headA, headB) {
+  if (headA === null || headB === null) return null;
+  let pA = headA;
+  let pB = headB;
+  while(pA !== pB) {
+    pA = (pA === null) ? headB : pA.next;
+    pB = (pB === null) ? headA : pB.next;
+  }
+  return pA;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-移除链表元素</title>
+      <link>/2019/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/</guid>
+      <description>
+
+&lt;h3 id=&#34;移除链表元素&#34;&gt;移除链表元素&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;删除链表中等于给定值 val 的所有节点。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;示例:
+输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6
+输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/**
+ * @param {ListNode} head
+ * @param {number} val
+ * @return {ListNode}
+ */
+var removeElements = function(head, val) {
+  let tem = head;
+  let pre = null;
+  while (tem) {
+    if (tem.val === val) {
+      if (pre) {
+        pre.next = tem.next;
+      } else {
+        head = tem.next;
+      }
+    } else {
+      pre = tem;
+    }
+    tem = tem.next;
+  }
+  return head;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var removeElements = function(head, val) {
+  if (!head) return null;
+  if (head.val === val) return removeElements(head.next, val);
+  head.next = removeElements(head.next, val);
+  return head;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>你真的了解webview么？</title>
+      <link>/2019/webview/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/webview/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;文章转载自微信公众号 &lt;strong&gt;大转转FE&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;适用场景&#34;&gt;适用场景&lt;/h2&gt;
+
+&lt;p&gt;像一些 App 的内嵌页面，提供各种各样的交互操作，其实webview的应用场景远远不止这些，其实在一些PC的软件里，和我们交互的也是我们的html页面，只是穿着webview的衣服，衣服太美而我们没有发现他们的真谛。&lt;/p&gt;
+
+&lt;p&gt;另外，还有一些网络机顶盒里的交互，也是webview在和我们打交道，比如一些早期的IPTV里的EPG都是运行在webview里的，它们基于webkit内核，尽管我们使用的交互方式是遥控器。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;与app-native的交互&#34;&gt;与App native的交互&lt;/h2&gt;
+
+&lt;p&gt;目前使用频率最多的，还是客户端内嵌的webview，都是webview打开m页去承接的。目前javascript和客户端（后面统称native）交互的常见方式有两种，一种是通过JSBridge的方式，另一种是通过schema的方式。&lt;/p&gt;
+
+&lt;h3 id=&#34;jsbridge&#34;&gt;JSBridge&lt;/h3&gt;
+
+&lt;p&gt;体现的形式其实就是，当我们在native内打开m页，native会在全局的window下，为我们注入一个Bridge。这个Bridge里面，会包含我们与native交互的各种方法、比如判断第三方App是否安装、获取网络信息等等功能。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * 作用域下的JSBridge，
+ * 和实例化后的getNetInfomation，
+ * 均根据实际约定情况而定，
+ * 这里只是用来举例说明
+ */
+const bridge = window.JSBridge;
+console.log(bridge.getNetInfomation());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IOS端: 在IOS中，主要使用&lt;code&gt;WebViewJavascriptBridge&lt;/code&gt;来注册，可以参考&lt;em&gt;Github WebViewJavascriptBridge&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
+
+[self.bridge registerHandler:@&amp;quot;ObjC Echo&amp;quot; handler:^(id data, WVJBResponseCallback responseCallback) {
+	// to do...
+}];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android: 在Android中，需要通过addJavascriptInterface来注册&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class JSBridge {
+    @JavascriptInterface //注意这里的注解。出于安全的考虑，4.2 之后强制要求，不然无法从 Javascript 中发起调用
+    public void getNetInfomation(){
+      // to do
+    };
+}
+webView.addJavascriptInterface(new JSBridge();, &amp;quot;JSBridge&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;schema-url&#34;&gt;Schema url&lt;/h3&gt;
+
+&lt;p&gt;如果说Bridge的方式是只能在native内部交互，那么&lt;code&gt;schame url&lt;/code&gt;的不紧可以在native内交互，也是可以跨app来交互的。&lt;code&gt;schema&lt;/code&gt;也是目前我们转转使用的主要方式，它类似一个伪协议的链接（也可以叫做统跳协议），比如：&lt;strong&gt;schema://path?param=abc&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在webview里，当m页发起schema请求时，native端会去进行捕获。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IOS端: 以UIWebView为例，在IOS中，UIWebView内发起网络请求时，可以通过delegate在native层来拦截，然后将捕获的schema进行触发对应的功能或业务逻辑（利用shouldStartLoadWithRequest）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
+  // 获取scheme url后自行进行处理
+  NSURL *url = [request URL];
+  NSString *requestString = [[request URL] absoluteString];
+  return YES;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android端: 在Android中，可以使用shouldoverrideurlloading来捕获schema url&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public boolean shouldOverrideUrlLoading(WebView view, String url){
+  //读取到url后自行进行分析处理
+
+  //这里注意：如果返回false，则WebView处理链接url，如果返回true，代表WebView根据程序来执行url  
+  return true;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;如何通过schema的方式可以进行跨端交互&#34;&gt;如何通过schema的方式可以进行跨端交互？&lt;/h2&gt;
+
+&lt;p&gt;其实对于JavaScript，在webview里基本是一样的，也是发起一个schema的请求，只不过在native侧会有些许变化。&lt;/p&gt;
+
+&lt;p&gt;首先，给大家普及一个小知识，就是在natvie中（包括IOS和Android），会通过schema找到相匹配的App。其中IOS不可以重复，就像appId一样；安卓可以重复，遇到重复情况时，会弹窗让用户选择其中之一。&lt;/p&gt;
+
+&lt;p&gt;那么，有了这个知识点做铺垫，就可以理解，当我们在其他app中，像这个schema发起请求时，系统底层（IOS &amp;amp; Android）会通过schema去找到所匹配的app，然后将此App拉起。拉起app后，对应处理如下：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IOS端: 在IOS端内，会将schema作为参数传入一个提前定义好的回调函数内，然后执行该回调函数。此回调函数，可以通过得到的schema去进行解析，然后定向到app内的固定的某个页面。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
+  // 参数 url 即为获取的 schema
+      
+  // to do
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android端: 在Android端内，会稍微麻烦一些，在外部的m页，会发起一个schema的伪协议链接，系统会去根据这个schema去检索，需要被拉起的App需要有一个配置文件，大致如下：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;activity
+  android:name=&amp;quot;.activity.StartActivity&amp;quot;
+  android:exported=&amp;quot;true&amp;quot;
+&amp;gt;
+&amp;lt;intent-filter&amp;gt;
+    &amp;lt;action android:name=&amp;quot;android.intent.action.VIEW&amp;quot;/&amp;gt;
+    &amp;lt;category android:name=&amp;quot;android.intent.category.DEFAULT&amp;quot;/&amp;gt;   
+    &amp;lt;category android:name=&amp;quot;android.intent.category.BROWSABLE&amp;quot;/&amp;gt;        
+    &amp;lt;data android:scheme=&amp;quot;zhuanzhuan&amp;quot;/&amp;gt; 
+  &amp;lt;/intent-filter&amp;gt;
+&amp;lt;/activityandroid:name=&amp;quot;.activity.StartActivity&amp;quot;android:exported=&amp;quot;true&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上面的代码为例，在上面配置中scheme为zhuanzhuan，只要是 &amp;ldquo;zhuanzhuan://&amp;rdquo; 开头的schema的链接都会调起配置该schema的Activity(类似上面代码的 StartActivity)，此Activity会对这个 schema url 做处理，例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class StartActivity extends TempBaseActivity {
+
+  Intent intent;
+    
+  @Override
+  protected void onCreate(BundlesavedInstanceState) {       
+    super.onCreate(savedInstanceState);
+    intent = getIntent();      
+    Uri uri = intent.getData();
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如上面的代码，可以在此Activity中，通过 intent 中的 getData 方法，获取到传入的schema的相关信息，如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2019/08/27374e51955cc775.jpg&#34; alt=&#34;pic&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以在第三方app内，可以调起app的原理。当然现在市场上一些app，为了怕有流量流失，会对schema进行限制，只有plist白名单里的schema才能对应拉起，否则会被直接过滤掉。比如我们的wx爸爸，开通白名单后，才可以使用更多的jsApiList，通过schema的拉起就是其中之一，在此不做赘述…… :）&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;webview的进化&#34;&gt;webview的进化&lt;/h2&gt;
+
+&lt;p&gt;对于webview，要说进化、或者蜕变，让我第一想到的就是IOS的WKWebView了，每一个事物存在都有它的必然，让我们一起看看这个super版的webview。&lt;/p&gt;
+
+&lt;h3 id=&#34;wkwebview的出现&#34;&gt;WKWebView的出现&lt;/h3&gt;
+
+&lt;p&gt;目前混合开发已然成为了主流，为了提高体验，WKWebView在IOS8发布时，也随之一起诞生。在这之前IOS端一直使用的是UIWebView。&lt;/p&gt;
+
+&lt;p&gt;从性能方面来说，WKWebView会比UIWebView高很多，可以算是一次飞跃。它采用了跨进程的方案，用 Nitro JS 解析器，高达 60fps 的刷新率。同时，提供了很好的H5页面支持，类比UIWebView还多提供了一个加载进度的属性。目前一些一线互联网app在IOS已经切换到了WKWebView，所以感觉我们无法拒绝。&lt;/p&gt;
+
+&lt;p&gt;整个WKWebView的初始化也很简单：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;WKWebView *webView = [[WKWebView alloc] init];
+NSURL *url = [NSURL URLWithString:@&amp;quot;https://m.zhuanzhuan.com&amp;quot;];
+[webView loadRequest:[NSURLRequest requestWithURL:url]];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;wkwebview-与-uiwebview的对比&#34;&gt;WKWebView 与 UIWebView的对比&lt;/h3&gt;
+
+&lt;p&gt;上面有提到性能的提升，为什么 app 接入 WKWebView 之后，相对比 UIWebView 内存占用小那么多，主要是因为网页的载入和渲染这些耗内存和性能的过程都是由 WKWebView 进程去实现的（WKWebView是独立于app的进程）。如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2019/08/b6c28e21432a222c.jpeg&#34; alt=&#34;WKWebView&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这样，互相进程独立相当于把整个App的进程对内存的占用量减少，App进程会更为稳定。况且，即使页面进程崩溃，体现出来的就是页面白屏或载入失败，不会影响到整个App进程的崩溃。&lt;/p&gt;
+
+&lt;p&gt;除了上面说的性能以外，WKWebView会比UIWebView多了一个询问过程。在服务器完成响应之后，会询问获取内容是否载入到容器内，在控制上会比UIWebView更细粒度一点，也可以在一些通信上更好的和m页进行交互。大概流程如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2019/08/f019036d9012a991.jpeg&#34; alt=&#34;stream&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;WKWebView 的代理协议为 WKNavigationDelegate，对比 UIWebDelegate 首先跳转询问，就是载入 URL之前的一次调用，询问开发者是否下载并载入当前 URL，UIWebView 只有一次询问，就是请求之前的询问，而 WKWebView 在 URL 下载完毕之后还会发一次询问，让开发者根据服务器返回的 Web 内容再次做一次确定。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;任重而道远&#34;&gt;任重而道远&lt;/h2&gt;
+
+&lt;p&gt;前面说到WKWebView这么赞，其实开发中也有一些痛点。不同于UIWebView，WKWebView很多交互都是异步的，所以在很大程度上，在和m页通信的时候，提高了开发成本。&lt;/p&gt;
+
+&lt;h3 id=&#34;cookie&#34;&gt;cookie&lt;/h3&gt;
+
+&lt;p&gt;首先就是cookie问题，这个目前我认为也是WKWebView在业界的一个坑。之前出现过一个问题，就是在IOS登陆完成后，马上进入m页，会有登录态的cookie获取不到的问题。这个问题在UIWebView中是不存在的。&lt;/p&gt;
+
+&lt;p&gt;经过调研发现，主要问题是UIWebView对cookie是通过NSHTTPCookieStorage来统一处理的，服务端响应时写入，然后在下次请求时，在请求头里会带上相应的cookie，来做到m页和native共享cookie的值。&lt;/p&gt;
+
+&lt;p&gt;但是在WKWebView中，则不然。它虽然也会对NSHTTPCookieStorage来写入cookie，但却不是实时存储的。而且从实际的测试中发现，不同的IOS版本，延迟的时间还不一样，无意对m页的开发者是一种挑战。同样，发起请求时，也不是实时读取，无法做到和native同步，导致页面逻辑出错。&lt;/p&gt;
+
+&lt;p&gt;针对这个问题，目前我们转转的解决方法是需要客户端手动干预一下cookie的存储。将服务响应的cookie，持久化到本地，在下次webview启动时，读取本地的cookie值，手动再去通过native往webview写入。大致流程如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2019/08/f06684b50c93ab95.jpeg&#34; alt=&#34;stream&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当然这也不是很完美的解决方案，因为偶尔还有spa的页面路由切换的时候丢失cookie的问题。&lt;/p&gt;
+
+&lt;h3 id=&#34;缓存&#34;&gt;缓存&lt;/h3&gt;
+
+&lt;p&gt;除了cookie以外，WKWebView的缓存问题，最近我们也在关注。由于WKWebView内部默认使用一套缓存机制，开发者可以操作的权限会有限制，特别是IOS8版本，也许是当时刚诞生WKWebView的缘故，还很不完善，根本没法操作（当然相信IOS8很快会退出历史舞台）。对于一些m页的静态资源，偶尔会出现缓存不更新的情况，着实让人头疼。&lt;/p&gt;
+
+&lt;p&gt;但在IOS 9 之后，系统提供了缓存管理的接口 WKWebsiteDataStore。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;// RemoveCache
+NSSet *websiteTypes= [NSSet setWithArray:@[WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache]];
+NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteTypes modifiedSince:date completionHandler:^{}];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;至于IOS8，就只能通过删除文件来解决了，一般WKWebView的缓存数据会存储在这个目录里：&lt;code&gt;~/Library/Caches/BundleID/WebKit/&lt;/code&gt;，可通过删除该目录来实现清理缓存。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;还有webview的通病，就是我们每次首次打开m页时，都要有webview初始化的过程，那么如何减少初始化webview的时间，也是我们可以提高页面打开速度的一个重要环节&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>pm2</title>
@@ -706,1691 +1774,6 @@ server {
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;ps -ef | grep nginx&lt;/code&gt; 查看nginx安装目录和nginx配置文件目录&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>阿里云服务器相关</title>
-      <link>/2019/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/</link>
-      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/</guid>
-      <description>
-
-&lt;p&gt;根据 慕课网 专栏 ‘一条龙的 Node·Vue·React 服务器部署’ 笔记。&lt;/p&gt;
-
-&lt;h3 id=&#34;购买&#34;&gt;购买&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;到阿里云官网购买一个&lt;a href=&#34;https://www.aliyun.com/product/ecs?spm=5176.12825654.eofdhaal5.2.54212c4a2B4irr&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;服务器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;配置相关信息&lt;/li&gt;
-&lt;li&gt;记录登录名 root 和 登录密码&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;使用&#34;&gt;使用&lt;/h3&gt;
-
-&lt;h4 id=&#34;登录&#34;&gt;登录&lt;/h4&gt;
-
-&lt;ol&gt;
-&lt;li&gt;通过 ssh 登录 例如：&lt;code&gt;ssh root@116.62.201.97&lt;/code&gt; 后面会要求输入密码&lt;/li&gt;
-&lt;li&gt;可以通过 &lt;code&gt;sudo lsb_release -a&lt;/code&gt; 来查看服务器版本&lt;/li&gt;
-&lt;li&gt;登录成功后可以首先运行 &lt;code&gt;sudo apt-get update&lt;/code&gt;，作用是先把服务器上所有的包和源都 check 和更新一遍，让服务器处在一个崭新的状态&lt;/li&gt;
-&lt;li&gt;可以把一些常用的开发者套件先安装上 &lt;code&gt;sudo apt-get install -y software-properties-common&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&#34;添加一个用户&#34;&gt;添加一个用户&lt;/h4&gt;
-
-&lt;ol&gt;
-&lt;li&gt;增加一个用户 &lt;code&gt;adduser rn_manager&lt;/code&gt;，完成后记录住密码，&lt;strong&gt;赋予账号更高权限&lt;/strong&gt;:可以在 &lt;strong&gt;visudo 权限配置文件&lt;/strong&gt;配置一下:&lt;code&gt;sudo visudo&lt;/code&gt;，加入 &lt;code&gt;rn_manager ALL=(ALL:ALL) ALL&lt;/code&gt; 这行，然后可以重启 ssh 服务：&lt;code&gt;service ssh restart&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&#34;配置无密码登录&#34;&gt;配置无密码登录&lt;/h4&gt;
-
-&lt;p&gt;那么，首先来本地电脑上配置这把钥匙，而且要生成两把钥匙，分别是 &lt;strong&gt;私钥&lt;/strong&gt; 和 &lt;strong&gt;公钥&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;提示：如果你之前用过 GitHub 或者 GitLab 之类基于 Git 的仓库管理系统，那么你本地应该是配置过这个公钥和私钥的，这里要切记，&lt;strong&gt;不用再重复配置一遍了！不用重新配置一遍了！&lt;/strong&gt; 可能你会覆盖掉你本地用的钥匙，这样的话，你可能就连不上你之前有权限的 Git 仓库了，我会演示这一步。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;配置&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 通过 mkdir 创建这个目录
-mkdir .ssh
-# 通过 cd 进入到该目录下
-cd .ssh
-
-ssh-keygen -t rsa -b 4096 -C &amp;quot;你的邮箱（可以随便填写）&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;一路回车到底，对于新手这里就先不要设置密码了，不然就搞得太复杂了。执行完这一步命令之后，可以看到 .ssh 的目录下面生成了两个文件 id_rsa（私钥）和 id_rsa.pub（公钥），然后开起来 ssh 代理：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;eval &amp;quot;$(ssh-agent -s)&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后，把 ssh key 加入到 ssh 代理中&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ssh-add ~/.ssh/id_rsa
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;理论上走完这一步，你本地已经有了配置好的钥匙文件，强调一下，这里要切换到本地操作，不是服务器上，在本地的根目录的 ssh 文件夹下。&lt;br /&gt;
-通过 cat 命令打印这个公钥文件内容：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cat .ssh/id_rsa.pub
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后选中整段内容，复制一下，再来到服务器上。
-&amp;gt; 注意：这时候我们可能打开了至少 3 个终端窗口，一个是 root 账号的，一个是 rn_manager 新账号的（这两个都是服务器上的），还有一个是在本地，也就是当前这个终端窗口。我们进入到 rn_manager 用户登录的终端中，输入 ls 命令，显然是什么都没有的。&lt;/p&gt;
-
-&lt;p&gt;然后，这一步很重要哈！这一步是为了，以后我们可以从 GitHub 或者 GitLab 之类的仓库获得仓库的权限，因此我们要把刚才生成私钥的过程重复一遍，这一步不做是不影响我们配置无密码登录的，再把刚才的流程走一遍，一模一样的步骤：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ssh-keygen -t rsa -b 4096 -C &amp;quot;scott@imooc.com&amp;quot;
-eval &amp;quot;$(ssh-agent -s)&amp;quot;
-ssh-add ~/.ssh/id_rsa
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后，通过简单的 vim 命令，我们需要创建一个授权文件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;vi .ssh/authorized_keys
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;会打开一个编辑页面，不要做任何输入，切记，不要做任何输入，同时要保证当前的输入法切换到英文输入状态，然后按下键盘上的 &lt;code&gt;i&lt;/code&gt;  键后，command+v 把刚才复制的公钥拷贝进来，再按一下键盘上的 ESC 退出键确保回到编辑状态，然后同时按下 shift 和 &lt;strong&gt;冒号键&lt;/strong&gt;，最后输入 &lt;code&gt;wq!&lt;/code&gt; 回车，这个文件就自动创建了。这是简单的 vim 快捷键，大家还是要多少了解一点点的，才能方便在服务器上增改文件。&lt;br /&gt;
-然后，我们之前不是复制过本地的公钥文件吗，这时候还在系统的剪贴板里面呢，我们这时候要注意，切换到 rn_manager 这个账号下面的终端里，不是切换到 root 账号的终端里面，我们在新的账号终端环境操作。再次通过&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;vi .ssh/authorized_keys
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者按一下键盘上的上选择键，来调出历史中缓存的刚才所使用的一条命令来打开授权文件，然后记住输入法是英文状态下，按一下键盘上的 i 键，切记，是 uijk 的 i 键，然后 command+v 粘贴进去（如果是 Windows 系统，是 ctrl+v 粘贴）。&lt;br /&gt;
-之后，按一下 ESC 退出键，再同时按下 shift+; 键，输入 &lt;code&gt;wq!&lt;/code&gt;  回车即可。这个操作很容易由于不熟悉 Linux 下的 vim 编辑而出错，要多体会几遍，再动手做。&lt;/p&gt;
-
-&lt;p&gt;如果没有生效，可以对该文件进行一个 600 可读授权，再重启下 ssh 服务：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;chmod 600 ~/.ssh/authorized_keys
-sudo service ssh restart
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在重启这个 ssh 服务的时候，应该会提示你要输入密码，这时候要输入刚才创建 rn_manager 账户的密码，千万注意，这里输入的密码不是 root 账号的密码，而是新账号的密码。&lt;/p&gt;
-
-&lt;p&gt;最后，我们先不要关闭这个终端窗口，再另外开一个 &lt;code&gt;Iterm&lt;/code&gt; 窗口，通过 &lt;code&gt;ssh rn_manager@116.62.201.97&lt;/code&gt; 就可以直接登录了，不需要输入密码&lt;/p&gt;
-
-&lt;h4 id=&#34;修改服务起端口号&#34;&gt;修改服务起端口号&lt;/h4&gt;
-
-&lt;p&gt;可以在 root 或者 rn_manager 用户下操作：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo vim /etc/ssh/sshd_config
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 不允许空密码
-PermitEmptyPasswords no
-# 关闭密码验证登录，前提是你已经使用了 ssh 密钥验证方式登录
-PasswordAuthentication no
-# 如果你在服务器上手动添加了用户并将用户分配到 root 用户组，可以考虑禁止root用户登录
-PermitRootLogin no
-
-# 允许 pubkey 登录
-PubkeyAuthentication yes
-
-# Expect .ssh/authorized_keys2 to be disregarded by default in future.
-AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2
-
-# 登录的端口号
-Port 39999
-UseDNS no
-AllowUsers rn_manager
-# 只允许 ip4
-AddressFamily inet
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;补充：单独聊一聊端口，这个很容易被人忽视，一般来说，0 ~ 65536 端口号都是可用范围内的数，但是 0 ~ 1024 最好不要使用，通常会被系统程序占用，必须以 root 身份才能启动，那么在 1024 以上到 65536 之间我们都可以选择性的使用。可以设置得稍微大一些，这样做不仅是禁用掉了 22 默认端口的登录途径，也缩小了被扫描和猜测到的概率，在安全层面我们是增加了一点点的安全防护，多多益善吧。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;完成后可以重启 ssh 服务: &lt;code&gt;sudo service ssh restart&lt;/code&gt;，之后就可以使用 &lt;code&gt;ssh -p 39999 rn_manager@116.62.201.97&lt;/code&gt; 来进行登录。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;阿里云需要去 管理-&amp;gt;本实例安全组-&amp;gt;安全组列表-&amp;gt;配置规则-&amp;gt;添加安全组规则。否则会连接不上服务器，报超时&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&#34;安全防护-配置-iptables-和-fail2ban-增强安全防护&#34;&gt;安全防护：配置 IPTables 和 Fail2Ban 增强安全防护&lt;/h4&gt;
-
-&lt;h5 id=&#34;iptables&#34;&gt;iptables&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;iptables 是一个允许灵活配置的安全策略防火墙框架，简言之就是防火墙。对于一堵墙，我们的操作原则就是设置一些出入的大门，有些大门关闭，有些大门设置一些出入规则，尽量筛选掉一些恶意或者可疑的访问，留出安全的通道对外或者对内提供访问服务。&lt;/li&gt;
-&lt;li&gt;可以先把 Ubuntu 升级更新一下：&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade&lt;/code&gt;，如果遇到:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;E: Could not get lock /var/lib/dpkg/lock - open (11 Resource temporarily unavailable)
-E: Unable to lock the administration directory (/var/lib/dpkg/) is another process using it? 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这种错误，可以采用：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ps aux | grep apt
-
-root      1531  0.0  0.0  53340  3732 ?        S    16:24   0:00 sudo apt-get upgrade
-root      1532  0.0  1.8 106184 75992 ?        S    16:24   0:07 apt-get upgrade
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;找到 apt-get 开头的，&lt;code&gt;sudo kill -9 1531 &amp;amp;&amp;amp; sudo kill -9 1532&lt;/code&gt;，然后重新执行，如果还失败，可以再多执行个 &lt;code&gt;sudo rm /var/lib/dpkg/lock &amp;amp;&amp;amp; sudo rm /var/cache/apt/archives/lock&lt;/code&gt;，然后再重新执行：&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;然后我们把 iptables 的所有过滤规则都清空掉，输入：&lt;code&gt;iptables -F&lt;/code&gt;，在命令行，是可以一条一条的添加规则的，但是整个过程不太好用文字形式来演示，我们就通过文件方式来配置吧，输入如下命令：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;*filter
-
-# Accepts all established inbound connections
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-# Allows all outbound traffic
-# You could modify this to only allow certain traffic
--A OUTPUT -j ACCEPT
-
-# Allows HTTP and HTTPS connections from anywhere (the normal ports for websites)
- -A INPUT -p tcp --dport 443 -j ACCEPT
- -A INPUT -p tcp --dport 80 -j ACCEPT
-# Allows SSH connections for script kiddies
-# THE -dport NUMBER IS THE SAME ONE YOU SET UP IN THE SSHD_CONFIG FILE
- -A INPUT -p tcp -m state --state NEW --dport 39999 -j ACCEPT
-
-# Now you should read up on iptables rules and consider whether ssh access
-# for everyone is really desired. Most likely you will only allow access from certain IPs.
-
-# allow ping
- -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
- 
-# Mongodb open prot
--A INPUT -s 127.0.0.1 -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
--A OUTPUT -d 127.0.0.1 -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
-
-# log iptables denied calls (access via &#39;dmesg&#39; command)
--A INPUT -m limit --limit 5/min -j LOG --log-prefix &amp;quot;iptables denied: &amp;quot; --log-level 7
-
-# Drop incoming connections if IP make more than 150 connection attempts to port 80 within 60 seconds
--A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --set
--A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --update --seconds 60  --hitcount 150 -j DROP
-
-COMMIT
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这几条需要特别注意：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 443 通常是 ssl 的端口，如果 VPS 是作为一台 web 应用的服务器并且启用 https，你需要这个
- -A INPUT -p tcp --dport 443 -j ACCEPT
- # 80 端口就不多说了
- -A INPUT -p tcp --dport 80 -j ACCEPT
- # 这是 ssh 默认的 22 端口，开放给自己登录使用
- -A INPUT -p tcp -m state --state NEW --dport 39999 -j ACCEPT
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注意这里的 22 端口，你可以修改为其他的端口，并且关闭 22 端口。更有一种解决方案是：将生产机器 ssh 端口完全关闭，用一台同一子网下的跳板机来登录目标生产机器，其他的配置的话，你需要根据你的业务来具体配置相对应的安全策略。(需要把中文转译或者写为英文，否则下个操作会报错)&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;告诉 iptables 你的配置在哪：&lt;code&gt;sudo iptables-restore &amp;lt; /etc/iptables.up.rules&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;最后创建 shell 脚本来开机自启动：&lt;code&gt;sudo vi /etc/network/if-up.d/iptables&lt;/code&gt;，写入:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 防火墙的开启与禁用命令很简单，如下：
-
-sudo ufw start
-sudo ufw status
-sudo ufw disable
-
-# 然后把文件路径写入进去
-
-#!/bin/sh
-iptables-restore /etc/iptables.up.rules
-
-# 给予可以执行的权限
-
-chmod +x /etc/network/if-up.d/iptables
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这样我们就把 iptables 配置好了。&lt;/p&gt;
-
-&lt;h5 id=&#34;fail2ban&#34;&gt;Fail2Ban&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Fail2Ban 可以看做是防御性的动作库，通过监控系统的日志文件，根据检测到的任何可疑的行为，自动触发不同的防御动作，如将产生可疑行为的目标，执行 IP 锁定等。Fail2Ban 的安装很简单：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install fail2ban
-sudo apt-get install nginx sendmail iptables-persistent
-
-/etc/iptables/rules.v4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;拷贝一份新的配置文件出来，我们重新编辑这个配置文件：&lt;code&gt;awk &#39;{ printf &amp;quot;# &amp;quot;; print; }&#39; /etc/fail2ban/jail.conf | sudo tee /etc/fail2ban/jail.local&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;打开配置文件 &lt;code&gt;sudo vi /etc/fail2ban/jail.conf&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[DEFAULT]
-ignoreip = 127.0.0.1/8
-bantime  = 3600
-maxretry = 3
-destemail = youemail@domain.com
-action = %(action_mw)s
-
-[ssh]
-enabled  = true
-port     = ssh
-filter   = sshd
-logpath  = /var/log/auth.log
-maxretry = 3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;阿里云安全组&#34;&gt;阿里云安全组&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;阿里云的服务器，默认就提供了安全组这样的高级防火墙，供我们使用，它可以控制从外网能访问到服务器的哪些端口，从内网能访问到服务器的哪些端口，流量的进和出，对哪些 IP 段的服务器授权，非常强大。&lt;/li&gt;
-&lt;li&gt;根据实际使用情况，通常我们会选择开启下面这些端口：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;协议	端口
-SSH	    22
-telnet	23
-HTTP	80
-HTTPS	443
-MS SQL	1443
-Oracle	1521
-MySQL	3306
-RDP	    3389
-PostgreSQL	5432
-Redis	6379
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;注&#34;&gt;注：&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;vi 中文乱码：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 修改方法很简单,因为明确是vi编码的问题,就修改一下它的保存编码即可.. 
-# 编辑/etc/vim/vimrc文件,在最后添上 
-set encoding=utf-8 
-set fileencoding=utf-8 
-set fileencodings=utf-8,gb18030,utf-16,big5
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;服务器上可以安装 git ，然后通过设置 ssh 来拉取项目&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>css3 适配iphoneX 安全区域</title>
-      <link>/2019/%E9%80%82%E9%85%8Diphonex/</link>
-      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E9%80%82%E9%85%8Diphonex/</guid>
-      <description>
-
-&lt;h2 id=&#34;iphonex-适配&#34;&gt;iphoneX 适配&lt;/h2&gt;
-
-&lt;h3 id=&#34;第一步-设置网页在可视窗口的布局方式&#34;&gt;第一步：设置网页在可视窗口的布局方式&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ios11 引入 meta 标签的 viewpoint 扩展属性 &lt;code&gt;viewpoint-fit&lt;/code&gt;，在 iOS 11 中 viewpoint-fit 也官方添加到 CSS Round Display 规范中了。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;viewport-fit&lt;/code&gt; 有三个属性值：
-
-&lt;ul&gt;
-&lt;li&gt;Auto：默认值。这个值不影响初始布局视窗，整个 Web 页面是可视的。&lt;/li&gt;
-&lt;li&gt;Contain：最初的布局视窗和视觉布局视窗被设置为最大的矩形。&lt;/li&gt;
-&lt;li&gt;Cover：初始布局视窗和视觉布局视窗被设置为设备物理屏幕的限定矩形。&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;所以我们可以通过 viewpoint-fit=cover 来解决问题，使页面内容跳出安全区域的框框。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width,initial-scale=1.0,user-scalable=0,viewport-fit=cover&amp;quot;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;第二步-页面主体内容限定在安全区域内&#34;&gt;第二步：页面主体内容限定在安全区域内&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;IOS11 提供了两个个新的 css 变量 &lt;code&gt;env(safe-area-inset-※)&lt;/code&gt; 和 &lt;code&gt;constant(safe-area-inset-※)&lt;/code&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;safe-area-inset-※&lt;/code&gt; 提供了四个方向的值：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;safe-area-inset-top&lt;/code&gt;：在 Viewport 顶部的安全区域内设置量；&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;safe-area-inset-bottom&lt;/code&gt;：在 Viewport 底部的安全区域内设置量；&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;safe-area-inset-left&lt;/code&gt;：在 Viewport 左边的安全区域内设置量；&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;safe-area-inset-right&lt;/code&gt;：在 Viewport 右边的安全区域内设置量；&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;constant()&lt;/code&gt; 和 &lt;code&gt;env()&lt;/code&gt; 这个变量已经开始着手标准化，目前也可以被用在 &lt;code&gt;margin、padding、top、bottom、left、right&lt;/code&gt; 等 css 属性中，&lt;strong&gt;同时在不支持的环境中将不会生效&lt;/strong&gt;。而且，同样在 iOS 11 中，iPhone X 机型以下得到的值均为 0，iPhone X 得到其对应的设置量。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;第三步-设置底部的样式&#34;&gt;第三步：设置底部的样式&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;safe-area-inset-bottom&lt;/code&gt; 这个变量，因为它对应的就是小黑条的高度（横竖屏时值不一样）。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;body {
-    padding-bottom: constant(safe-area-inset-bottom);
-    padding-bottom: env(safe-area-inset-bottom);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;扩展-fixed-元素适配&#34;&gt;扩展：fixed 元素适配&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;类型一：fixed 完全吸底元素（bottom = 0）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.fixed-bottom-box {
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;类型二：fixed 非完全吸底元素（bottom ≠ 0），比如 “返回顶部”、“侧边广告” 等&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;div {
-  margin-bottom: constant(safe-area-inset-bottom);
-  margin-bottom: env(safe-area-inset-bottom);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;扩展-只希望-iphonex-才需要新增适配样式-可以配合-supports-来隔离兼容样式&#34;&gt;扩展：只希望 iPhoneX 才需要新增适配样式，可以配合 @supports 来隔离兼容样式&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;@supports&lt;/code&gt; 来判断浏览器是否支持某个CSS属性，并且根据是否支持来定义样式。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;@supports&lt;/code&gt; 中的“条件规则”可以声明一条或者几个由不同的逻辑运算符相结合的声明（比如说，非（not），或（or），与（and）等），而且还可以使用括号来确定其操作的优先级关系。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;@supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
-    div {
-        margin-bottom: constant(safe-area-inset-bottom);
-        margin-bottom: env(safe-area-inset-bottom);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>数组降纬</title>
-      <link>/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/</link>
-      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/</guid>
-      <description>
-
-&lt;h3 id=&#34;第一种-将数组字符串话&#34;&gt;第一种：将数组字符串话&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;let arr = [[222, 333, 444], [55, 66, 77], 11, ]
-arr += &#39;&#39;;
-arr = arr.split(&#39;,&#39;);
-arr = arr.map(item =&amp;gt; Number(item));
-
-console.log(arr); // [222, 333, 444, 55, 66, 77, 11]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;第二种-自定义函数&#34;&gt;第二种：自定义函数&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const reduceDimension = (arr) =&amp;gt; {
-	let ret = [];
-
-	let toArr = function(arr){
-		arr.forEach(function(item){
-			Array.isArray(item) ? toArr(item) : ret.push(item);
-		});
-	}
-	toArr(arr);
-
-	return ret;
-}
-let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>弹出遮照阻止底部页面滚动</title>
-      <link>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</link>
-      <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</guid>
-      <description>
-
-&lt;h4 id=&#34;代码如下&#34;&gt;代码如下：&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const bodyEl = document.body;
-let top = 0;
-/**
- * 阻止页面滚动
- * @param {boolean} isFixed
- */
-export function stopBodyScroll(isFixed: boolean) {
-  if (isFixed) {
-    top = window.scrollY;
-
-    bodyEl.style.position = &#39;fixed&#39;;
-    bodyEl.style.top = -top + &#39;px&#39;;
-  } else {
-    bodyEl.style.position = &#39;&#39;;
-    bodyEl.style.top = &#39;&#39;;
-
-    window.scrollTo(0, top); // 回到原先的top
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ua检测</title>
-      <link>/2019/ua%E6%A3%80%E6%B5%8B/</link>
-      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/ua%E6%A3%80%E6%B5%8B/</guid>
-      <description>
-
-&lt;h4 id=&#34;代码如下&#34;&gt;代码如下：&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;const userAgent = window.navigator.userAgent.toLowerCase();
-export const uaJudge = {
-  get isAndroid() {
-    return /android|adr/gi.test(userAgent);
-  },
-  get isVivo() {
-    return /vivo/gi.test(userAgent);
-  },
-  get isIos() {
-    return /iphone|ipod|ipad/gi.test(userAgent);
-  },
-  /** 微信（包含小程序） */
-  get isWeChat() {
-    return /micromessenger/gi.test(userAgent);
-  },
-  /** 微信小程序 */
-  get isWeChatMini() {
-    if (this.isWeChat) {
-      return new Promise((resolve, reject) =&amp;gt; {
-        wx.miniProgram.getEnv((res: any) =&amp;gt; {
-          resolve(res.miniprogram);
-        });
-        setTimeout(resolve, 1000);
-      });
-    } else {
-      return Promise.resolve(false);
-    }
-  },
-  /** 支付宝 */
-  get isAlipay() {
-    return /alipay/gi.test(userAgent);
-  },
-  /** 百度 */
-  get isBaidu() {
-    return /baiduboxapp/gi.test(userAgent);
-  },
-  /** 百度网盘 */
-  get isWangPan() {
-    return /bdnetdisk/gi.test(userAgent);
-  },
-  /** 新浪微博 */
-  get isWeiBo() {
-    return /weibo/gi.test(userAgent);
-  },
-  /** 钉钉 */
-  get isDingDing() {
-    return /dingtalk/gi.test(userAgent);
-  },
-  /** qq，qq浏览器 */
-  get isQQ() {
-    return /QQ/gi.test(window.navigator.userAgent);
-  },
-  /** uc浏览器 */
-  get isUC() {
-    return /ucbrowser/gi.test(userAgent);
-  },
-  /** 网易云音乐 */
-  get isWYMusic() {
-    return /neteasemusic/gi.test(userAgent);
-  },
-  /** 美图系（包含潮自拍，美图贴贴等） */
-  get isMTSeries() {
-    return /com.meitu/gi.test(userAgent);
-  },
-  /** 潮自拍 */
-  get isChaoZiPai() {
-    return /com.meitu.wheecam/gi.test(userAgent);
-  },
-  /** 潮自拍3.6.4及以上版本支持新协议 */
-  get isNewChaoZiPai() {
-    const result = /com.meitu.wheecam\/([\d.]*)/.exec(userAgent);
-    const version = result &amp;amp;&amp;amp; result[1];
-    if (version) {
-      return parseInt(version.replace(/\./g, &#39;&#39;).substring(0, 3), 10) &amp;gt;= 364;
-    } else {
-      return false;
-    }
-  },
-  /** 无他相机 */
-  get isWuTa() {
-    return /wuta_browser/gi.test(userAgent);
-  },
-  /** 她face++ */
-  get isTaFace() {
-    return /taface/gi.test(userAgent);
-  },
-  /** 小恩爱 */
-  get isXiaoenai() {
-    return /mzdw/gi.test(userAgent);
-  },
-};
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>获取元素content宽高</title>
-      <link>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</link>
-      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</guid>
-      <description>
-
-&lt;h4 id=&#34;代码如下&#34;&gt;代码如下：&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
- * 获取元素content宽高
- * @param el
- */
-export function getContentSize(el: HTMLElement) {
-  const width = el.offsetWidth;
-  const height = el.offsetHeight;
-  const style = window.getComputedStyle(el);
-  // border
-  const blw = parseFloat(style.borderLeftWidth || &#39;0&#39;);
-  const brw = parseFloat(style.borderRightWidth || &#39;0&#39;);
-  const btw = parseFloat(style.borderTopWidth || &#39;0&#39;);
-  const bbw = parseFloat(style.borderBottomWidth || &#39;0&#39;);
-  // padding
-  const plw = parseFloat(style.paddingLeft || &#39;0&#39;);
-  const prw = parseFloat(style.paddingRight || &#39;0&#39;);
-  const ptw = parseFloat(style.paddingTop || &#39;0&#39;);
-  const pbw = parseFloat(style.paddingBottom || &#39;0&#39;);
-  return {
-    width: width - blw - brw - plw - prw,
-    height: height - btw - bbw - ptw - pbw,
-  };
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>通过http链接加载script</title>
-      <link>/2019/%E9%80%9A%E8%BF%87http%E9%93%BE%E6%8E%A5%E5%8A%A0%E8%BD%BDscript/</link>
-      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E9%80%9A%E8%BF%87http%E9%93%BE%E6%8E%A5%E5%8A%A0%E8%BD%BDscript/</guid>
-      <description>&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function loadScript(src: string, async: boolean = true) {
-  return new Promise((resolve, reject) =&amp;gt; {
-    const script = document.createElement(&#39;script&#39;);
-    async &amp;amp;&amp;amp; (script.async = true);
-    script.onload = resolve;
-    script.onerror = reject;
-    script.src = src;
-    document.body.appendChild(script);
-  });
-}
-// 注意：使用appendChild，不要使用append，ios9不支持append。
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Webpack 优化相关</title>
-      <link>/2019/webpack/</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/webpack/</guid>
-      <description>
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://webpack.js.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;webpack-优化&#34;&gt;Webpack 优化&lt;/h2&gt;
-
-&lt;h3 id=&#34;构建过程提速策略&#34;&gt;构建过程提速策略&lt;/h3&gt;
-
-&lt;h4 id=&#34;不要让-loader-做太多事情&#34;&gt;不要让 loader 做太多事情&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;以 babel-loader 为例：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;babel-loader 无疑是强大的，但它也是慢的。&lt;/p&gt;
-
-&lt;p&gt;最常见的优化方式是，用 include 或 exclude 来帮我们避免不必要的转译，比如 webpack 官方在介绍 babel-loader 时给出的示例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;module: {
-  rules: [
-    {
-      test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
-      use: {
-        loader: &#39;babel-loader&#39;,
-        options: {
-          presets: [&#39;@babel/preset-env&#39;]
-        }
-      }
-    }
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;loader: &#39;babel-loader?cacheDirectory=true&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;抽离第三库&#34;&gt;抽离第三库&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;DllPlugin&lt;/code&gt;是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;用 DllPlugin 处理文件，要分两步走：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;基于 dll 专属的配置文件，打包 dll 库&lt;/li&gt;
-&lt;li&gt;基于 webpack.config.js 文件，打包业务代码&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;举例&amp;ndash;配置文件如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// webpack.dll.config.js
-const path = require(&amp;quot;path&amp;quot;)
-const webpack = require(&amp;quot;webpack&amp;quot;)
-
-module.exports = {
-  entry: {
-    // 依赖的库数组
-    vendor: [
-      &#39;mint-ui&#39;,
-      &#39;vue/dist/vue.common.js&#39;,
-      &#39;whatwg-fetch&#39;,
-      &#39;vuex&#39;,
-      &#39;vue-router&#39;
-    ]
-  },
-  output: {
-    path: path.join(__dirname, &#39;../static/js&#39;),
-    filename: &#39;[name].dll.js&#39;,
-    library: &#39;[name]_library&#39;
-  },
-  plugins: [
-    new webpack.DllPlugin({
-      // DllPlugin的name属性需要和libary保持一致
-      path: path.join(__dirname, &#39;..&#39;, &#39;[name]-manifest.json&#39;),
-      name: &#39;[name]_library&#39;,
-      // context需要和webpack.config.js保持一致
-      context: __dirname
-    }),
-    // 压缩打包的文件
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在 &lt;code&gt;package.json--&amp;gt;scripts&lt;/code&gt;下添加&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;build:dll&amp;quot;: &amp;quot;webpack --config build/webpack.dll.config.js&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;命令，运行&lt;code&gt;npm run build:dll&lt;/code&gt;会在&lt;code&gt;static/js&lt;/code&gt;文件夹里会出现&lt;code&gt;vendor.dll.js&lt;/code&gt;文件，在根目录下出现&lt;code&gt;vendor-manifest.json&lt;/code&gt;文件。&lt;br /&gt;
-&lt;code&gt;vendor.dll.js&lt;/code&gt;是我们第三方库打包的结果，&lt;code&gt;vendor-manifest.json&lt;/code&gt;则用于描述每个第三方库对应的具体路径。&lt;br /&gt;
-随后在&lt;code&gt;webpack.base.conf.js || webpack.config.js&lt;/code&gt;里针对 dll 稍作配置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const path = require(&#39;path&#39;);
-const webpack = require(&#39;webpack&#39;)
-module.exports = {
-  mode: &#39;production&#39;,
-  // 编译入口
-  entry: {
-    main: &#39;./src/index.js&#39;
-  },
-  // 目标文件
-  output: {
-    path: path.join(__dirname, &#39;dist/&#39;),
-    filename: &#39;[name].js&#39;
-  },
-  // dll相关配置
-  plugins: [
-    new webpack.DllReferencePlugin({
-      context: __dirname,
-      // manifest就是我们第一步中打包出来的json文件
-      manifest: require(&#39;../vendor-manifest.json&#39;)
-    }),
-    // 将 vendor.dll.js 插入HTML里 需要安装 html-webpack-include-assets-plugin
-    new HtmlWebpackIncludeAssetsPlugin({
-      assets: [utils.assetsPath(&#39;js/vendor.dll.js&#39;)],
-      files: [&#39;index.html&#39;],
-      append: false
-    })
-    // 多页面下 可以在每个 index.html 手动引入 vendor.dll.js
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;happypack-将-loader-由单进程转为多进程&#34;&gt;Happypack——将 loader 由单进程转为多进程&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;webpack&lt;/code&gt; 是单线程的，就算此刻存在多个任务，你也只能排队一个接一个地等待处理。这是 webpack 的缺点，好在我们的 CPU 是多核的，&lt;code&gt;Happypack&lt;/code&gt; 会充分释放 &lt;code&gt;CPU&lt;/code&gt; 在多核并发方面的优势，帮我们把任务分解给多个子进程去并发执行，大大提升打包效率。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
- * 共享线程池
- * 通常，在内部创建的每个HappyPack插件都会创建自己的线程，用于运行加载器。
- * 但是，如果您使用多个HappyPack插件，那么最好自己创建一个线程池，然后配置插
- * 件以共享该池，从而最大限度地减少其中线程的空闲时间
- * 使用5个线程的自定义线程池
- */
-const Happypack = require(&#39;happypack&#39;)
-const happyThreadPool = Happypack.ThreadPool({size: 5}) // HappyPack.ThreadPool({ size: os.cpus().length })
-
-module.exports = {
-  module: {
-    rules: [
-      ...
-      {
-        test: /\.js$/,
-        // 问号后面的查询参数指定了处理这类文件的HappyPack实例的名字
-        loader: &#39;happypack/loader?id=happyBabel&#39;,
-        ...
-      },
-    ],
-  },
-  plugins: [
-    ...
-    new HappyPack({
-      // 这个HappyPack的“名字”就叫做happyBabel，和楼上的查询参数遥相呼应
-      id: &#39;happyBabel&#39;,
-      // 指定进程池
-      threadPool: happyThreadPool,
-      loaders: [&#39;babel-loader?cacheDirectory&#39;]
-    })
-  ],
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;构建结果体积压缩&#34;&gt;构建结果体积压缩&lt;/h3&gt;
-
-&lt;h4 id=&#34;文件结构可视化-找出导致体积过大的原因&#34;&gt;文件结构可视化，找出导致体积过大的原因&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;webpack-bundle-analyzer&lt;/code&gt;配置方法和普通的 plugin 无异，它会以矩形树图的形式将包内各个模块的大小和依赖关系呈现出来，格局如官方所提供这张图所示：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;/images/totalimgs/webpack1.gif&#34; alt=&#34;webpack1&#34; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;使用方式：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const BundleAnalyzerPlugin = require(&#39;webpack-bundle-analyzer&#39;).BundleAnalyzerPlugin
-
-module.exports = {
-  plugins: [
-    new BundleAnalyzerPlugin()
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;按需加载&#34;&gt;按需加载&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;require.ensure&lt;/code&gt; 是 Webpack 的特殊语法，用来设置 组件根路径 按需加载。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://webpack.js.org/api/module-methods/#require-ensure&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;以 &lt;code&gt;VUE&lt;/code&gt; 项目举例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// vue Router
-import Vue from &#39;vue&#39;
-import Router from &#39;vue-router&#39;
-
-Vue.use(Router)
-
-export default new Router({
-  // require.ensure 是 Webpack 的特殊语法，用来设置 组件根路径 按需加载
-  routes: [
-    {
-      path: &#39;/&#39;,
-      name: &#39;index&#39;,
-      redirect: &#39;/home&#39;,
-      component (reslove) {
-        require.ensure([&#39;../App.vue&#39;], () =&amp;gt; {
-          reslove(require(&#39;../App.vue&#39;))// 完成调用
-        })
-      },
-      children: [{
-        path: &#39;/order&#39;,
-        name: &#39;order&#39;,
-        component (reslove) {
-          require.ensure(&#39;../components/order/Order.vue&#39;, () =&amp;gt; {
-            reslove(require(&#39;../components/order/Order.vue&#39;))
-          })
-        }
-      },
-      {
-        path: &#39;/home&#39;,
-        name: &#39;home&#39;,
-        component (reslove) {
-          require.ensure(&#39;../components/homepage/Home.vue&#39;, () =&amp;gt; {
-            reslove(require(&#39;../components/homepage/Home.vue&#39;))
-          })
-        }
-      },
-      {
-        path: &#39;/drag&#39;,
-        name: &#39;drag&#39;,
-        component (reslove) {
-          require.ensure(&#39;../components/drag/drag.vue&#39;, () =&amp;gt; {
-            reslove(require(&#39;../components/drag/drag.vue&#39;))
-          })
-        }
-      }]
-    }
-  ]
-})
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;注：&lt;/strong&gt; &lt;code&gt;Vue Router&lt;/code&gt; 官方文档还推荐使用动态 import 语法来进行代码分块，比如上述 require.ensure 代码可以修改为：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 引入 Order 组件
-const Order = () =&amp;gt; import(&#39;../components/order/Order.vue&#39;);
-
-// 引入 Home 组件
-const Home = () =&amp;gt; import(&#39;../components/homepage/Home.vue&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;其余代码可以保持不变，仍然可以实现同样的功能。如果你想给拆分出的文件命名，可以尝试一下 webpack 提供的 &lt;code&gt;Magic Comments&lt;/code&gt;（魔法注释）：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const Home = () =&amp;gt; import(/* webpackChunkName:&#39;home&#39;*/ &#39;./views/Home.vue&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>localStorage 统一管理设置-增加时间</title>
-      <link>/2018/local-stroge/</link>
-      <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/local-stroge/</guid>
-      <description>&lt;ul&gt;
-&lt;li&gt;设置本地存储&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function setStorage(key: string, value: any) {
-  try {
-    localStorage.setItem(key,  JSON.stringify({
-      data: value,
-      time: Date.now(),
-    }));
-  } catch {
-    console.log(&#39;localStorage.setItem error&#39;);
-    console.log(key, value);
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;获取本地存储&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 注意：stringify 会过滤掉undefined的值
-function getStorage(key: string) {
-  const result = localStorage.getItem(key);
-  if (result) {
-    try {
-      const objRes = JSON.parse(result);
-      return objRes;
-    } catch (e) {
-      console.log(&#39;JSON.parse error:&#39;, result);
-      return result;
-    }
-  } else {
-    return result;
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;删除本地存储&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function removeStorage(key: string) {
-  localStorage.removeItem(key);
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Docker 相关</title>
-      <link>/2018/docker/</link>
-      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/docker/</guid>
-      <description>
-
-&lt;h1 id=&#34;docker-相关&#34;&gt;Docker 相关&lt;/h1&gt;
-
-&lt;h2 id=&#34;搭建-gitlab&#34;&gt;搭建 gitLab&lt;/h2&gt;
-
-&lt;h3 id=&#34;搜索镜像&#34;&gt;搜索镜像&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker search gitlab-ce
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;查看镜像&#34;&gt;查看镜像&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker images
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hapi</title>
-      <link>/2018/hapi/</link>
-      <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/hapi/</guid>
-      <description>
-
-&lt;h1 id=&#34;hapi&#34;&gt;Hapi&lt;/h1&gt;
-
-&lt;h2 id=&#34;hapi-相关使用总结&#34;&gt;Hapi 相关使用总结&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Hapi.js 是一个用来构建基于 Node.js 的应用和服务的富框架，使得开发者把重点放在便携可重用的应用逻辑而不是构建架构。内建输入验证、缓存、认证和其他 Web 应用开发常用的功能。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;hapi-框架模块接口文档&#34;&gt;Hapi 框架模块接口文档&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://hapijs.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://hapijs.com/api&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Hapi-api&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;supervisor-nodemon-pm2&#34;&gt;Supervisor / nodemon / PM2&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;有不少 Node.js 小工具能帮助我们监视代码的改动然后自动重启 Node.js 服务，好用的工具有 &lt;code&gt;Supervisor / nodemon / PM2&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 系统全局安装 supervisor
-$ npm i -g supervisor
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;目录结构&#34;&gt;目录结构&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── config                       # 项目配置目录
-|   ├── index.js                 # 配置项目中的配置信息
-├── models                       # 数据库 model
-├── node_modules                 # node.js 的依赖目录
-├── plugins                      # 插件目录
-├── routes                       # 路由目录
-│   ├── hello-world.js           # 测试接口 hello-world
-├── utils                        # 工具类相关目录
-├── app.js                       # 项目入口文件
-├── package.json                 # JS 项目工程依赖库
-├── README.md                    # 项目工程如何被使用的说明手册
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;环境配置&#34;&gt;环境配置&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;例子：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# .env.example
-
-# 服务的启动名字和端口，但也可以缺省不填值，默认值的填写只是一定程度减少起始数据配置工作
-HOST = 127.0.0.1
-PORT = 3000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;读取-env-中的配置值&#34;&gt;读取 .env 中的配置值&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Node.js 可以通过 env2 的插件，来读取 .env 配置文件，加载后的环境配置参数，可以通过例如 process.env.PORT 来读取端口信息。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i env2 -D
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;使用-swagger-插件配置接口文档&#34;&gt;使用 Swagger 插件配置接口文档&lt;/h3&gt;
-
-&lt;h4 id=&#34;安装基础依赖与基础插件配置&#34;&gt;安装基础依赖与基础插件配置&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 安装适配 hapi v16 的 swagger 插件
-npm i hapi-swagger@7
-npm i inert@4
-npm i vision@4
-npm i package
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── plugins                       # hapi 插件配置
-|   ├── hapi-swagger.js           # swagger 插件
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;通过 &lt;strong&gt;自己的服务地址+/documentation&lt;/strong&gt; 来查看 Swagger 文档。&lt;em&gt;&lt;a href=&#34;http://192.168.31.10:8181/documentation&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://192.168.31.10:8181/documentation&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;使用-joi-校验数据结构&#34;&gt;使用 Joi 校验数据结构&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 安装适配 hapi v16 的 joi 插件
-npm i joi@13
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;mysql修改默认编码&#34;&gt;MySQL修改默认编码&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;show variables like &#39;%char%&#39;;&lt;/code&gt; 查看默认编码&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; show variables like &#39;%char%&#39;;
-+--------------------------+---------------------------------------------------------+
-| Variable_name            | Value                                                   |
-+--------------------------+---------------------------------------------------------+
-| character_set_client     | gbk                                                     |
-| character_set_connection | gbk                                                     |
-| character_set_database   | utf8                                                    |
-| character_set_filesystem | binary                                                  |
-| character_set_results    | gbk                                                     |
-| character_set_server     | utf8                                                    |
-| character_set_system     | utf8                                                    |
-| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 5.7\share\charsets\ |
-+--------------------------+---------------------------------------------------------+
-8 rows in set, 1 warning (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;修改mysql编码，（version：5.7.24）Window10下 &lt;code&gt;my.ini&lt;/code&gt;文件路径在 &lt;code&gt;C:\ProgramData\MySQL\MySQL Server 5.7\&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;在my.ini添加如下：&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[mysqld]
-character-set-server=utf8
-[client]
-default-character-set=utf8
-[mysql]
-default-character-set=utf8
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;mysql-与-sequelize&#34;&gt;MySQL 与 Sequelize&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;数据库为 MySQL 5.6。&lt;a href=&#34;https://sequelize.readthedocs.io/en/v3/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Sequelize&lt;/a&gt; 则是 Node.js 生态中一款知名的基于 promise 数据库 ORM 插件，提供了大量常用数据库增删改查的函数式 API，以帮助我们在实际开发中，大量减少书写冗长的基础数据库查询语句。&lt;/li&gt;
-&lt;li&gt;Sequelize 支持的数据库有：&lt;code&gt;PostgreSQL，MySQL，MariaDB，SQLite 和 MSSQL。&lt;/code&gt;在使用不同的数据库时候，需要我们开发者额外安装不同的对应数据库连接驱动，d当前使用的 MySQL，则依赖于插件 MySQL2 。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# MySQL 连接
-[root@vultr ~]# mysql -u root -p
-Enter password: *******
-
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 3
-Server version: 5.7.22 MySQL Community Server (GPL)
-
-Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.
-
-# 查看数据库编码格式
-mysql&amp;gt; show variables like &#39;%char%&#39;;
-+--------------------------+---------------------------------------------------------+
-| Variable_name            | Value                                                   |
-+--------------------------+---------------------------------------------------------+
-| character_set_client     | utf8                                                    |
-| character_set_connection | utf8                                                    |
-| character_set_database   | latin1                                                  |
-| character_set_filesystem | binary                                                  |
-| character_set_results    | utf8                                                    |
-| character_set_server     | latin1                                                  |
-| character_set_system     | utf8                                                    |
-| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 5.7\share\charsets\ |
-+--------------------------+---------------------------------------------------------+
-8 rows in set, 1 warning (0.00 sec)
-
-# 创建用户
-# 说明：
-# username：你将创建的用户名
-# host：指定该用户在哪个主机上可以登陆，如果是本地用户可用localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符%
-# password：该用户的登陆密码，密码可以为空，如果为空则该用户可以不需要密码登陆服务器
-mysql&amp;gt; CREATE USER &#39;username&#39;@&#39;host&#39; IDENTIFIED BY &#39;password&#39;;
-
-# 授权
-# 说明:
-# privileges：用户的操作权限，如SELECT，INSERT，UPDATE等，如果要授予所的权限则使用ALL
-# databasename：数据库名
-# tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用*表示，如*.*
-# 例子：
-# GRANT SELECT, INSERT ON test.user TO &#39;pig&#39;@&#39;%&#39;;
-# GRANT ALL ON *.* TO &#39;pig&#39;@&#39;%&#39;;
-mysql&amp;gt; GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39;;
-# 注意:用以上命令授权的用户不能给其它用户授权，如果想让该用户可以授权，用以下命令:
-mysql&amp;gt; GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39; WITH GRANT OPTION;
-
-# 设置与更改用户密码
-mysql&amp;gt; SET PASSWORD FOR &#39;username&#39;@&#39;host&#39; = PASSWORD(&#39;newpassword&#39;);
-# 如果是当前登陆用户用:
-mysql&amp;gt; SET PASSWORD = PASSWORD(&amp;quot;newpassword&amp;quot;);
-
-# 撤销用户权限
-# 说明：说明:privilege, databasename, tablename：同授权部分
-# 注意：
-# 假如你在给用户&#39;pig&#39;@&#39;%&#39;授权的时候是这样的（或类似的）：GRANT SELECT ON test.user TO &#39;pig&#39;@&#39;%&#39;，则在使用REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;命令并不能撤销该用户对test数据库中user表的SELECT 操作。相反，如果授权使用的是GRANT SELECT ON *.* TO &#39;pig&#39;@&#39;%&#39;;则REVOKE SELECT ON test.user FROM &#39;pig&#39;@&#39;%&#39;;命令也不能撤销该用户对test数据库中user表的Select权限。
-# 具体信息可以用命令SHOW GRANTS FOR &#39;pig&#39;@&#39;%&#39;; 查看
-mysql&amp;gt; REVOKE privilege ON databasename.tablename FROM &#39;username&#39;@&#39;host&#39;;
-
-# 删除用户
-mysql&amp;gt; DROP USER &#39;username&#39;@&#39;host&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;sequelize-cli&#34;&gt;Sequelize-cli&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Sequelize 插件的主要应用场景是实际应用开发过程中的代码逻辑层。与其相伴的还有一套 cli 工具，Sequelize-cli，提供了一系列好用的终端指令，来帮助我们完成一些常用的琐碎任务。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;安装依赖&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i sequelize-cli -D
-npm i sequelize
-npm i mysql2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;sequelize init (通过 sequelize-cli 初始化 sequelize，我们将得到一个好用的初始化结构：)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# windows下
-node_modules\.bin\sequelize init
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── config                       # 项目配置目录
-|   ├── config.[json|js]              # 数据库连接的配置
-├── models                       # 数据库 model
-|   ├── index.js                 # 数据库连接的样板代码
-├── migrations                   # 数据迁移的目录
-├── seeders                      # 数据填充的目录
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;sequelize db:create&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;执行下面的命令，可以默认使用 development 下的配置，来创建项目数据库。增加例如 &amp;ndash;env production，则使用 config/config.js 中的 production 项配置，来完成数据库的创建。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;node_modules\.bin\sequelize db:create
-
-# 通过 --env 参数，指定为生产环境创建项目数据库
-# node_modules\.bin\sequelize db:create --env production
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;migrate-数据迁移&#34;&gt;migrate 数据迁移&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;sequelize migration:create &lt;em&gt;使用 sequelize migration:create 来创建一个迁移文件 create-shops-table。&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;node_modules\.bin\sequelize migration:create --name create-shops-table
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;sequelize db:migrate &lt;em&gt;帮助将 migrations 目录下的迁移行为定义，按时间戳的顺序，逐个地执行迁移描述，最终完成数据库表结构的自动化创建。并且，在数据库中会默认创建一个名为 SequelizeMeta 的表，用于记录在当前数据库上所运行的迁移历史版本。&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;node_modules\.bin\sequelize db:migrate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; show tables;
-+---------------------+
-| Tables_in_practtest |
-+---------------------+
-| goods               |
-| sequelizemeta       |
-| shops               |
-+---------------------+
-3 rows in set (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;sequelize db:migrate:undo &lt;em&gt;sequelize db:migrate:undo 则可以帮助我们按照 down 方法中所定义的规则，回退一个数据库表结构迁移的状态。&lt;code&gt;node_modules\.bin\sequelize db:migrate:undo&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;向表中追加字段 &lt;em&gt;创建一个名叫 add-columns-to-shops-table 的迁移迁移文件：&lt;code&gt;node_modules\.bin\sequelize migration:create --name add-columns-to-shops-table&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;module.exports = {
-  up: (queryInterface, Sequelize) =&amp;gt; Promise.all([
-    queryInterface.addColumn(&#39;shops&#39;, &#39;address&#39;, { type: Sequelize.STRING }),
-  ]),
-
-  down: queryInterface =&amp;gt; Promise.all([
-    queryInterface.removeColumn(&#39;shops&#39;, &#39;address&#39;),
-  ]),
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 之前的表结构
-mysql&amp;gt; desc shops;
-+------------+--------------+------+-----+---------+----------------+
-| Field      | Type         | Null | Key | Default | Extra          |
-+------------+--------------+------+-----+---------+----------------+
-| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
-| name       | varchar(255) | NO   |     | NULL    |                |
-| thumb_url  | varchar(255) | YES  |     | NULL    |                |
-| created_at | datetime     | YES  |     | NULL    |                |
-| updated_at | datetime     | YES  |     | NULL    |                |
-+------------+--------------+------+-----+---------+----------------+
-5 rows in set (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 再次运行完 node_modules\.bin\sequelize db:migrate 后的表结构
-mysql&amp;gt; desc shops;
-+------------+--------------+------+-----+---------+----------------+
-| Field      | Type         | Null | Key | Default | Extra          |
-+------------+--------------+------+-----+---------+----------------+
-| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
-| name       | varchar(255) | NO   |     | NULL    |                |
-| thumb_url  | varchar(255) | YES  |     | NULL    |                |
-| created_at | datetime     | YES  |     | NULL    |                |
-| updated_at | datetime     | YES  |     | NULL    |                |
-| address    | varchar(255) | YES  |     | NULL    |                |
-+------------+--------------+------+-----+---------+----------------+
-6 rows in set (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;seeders-种子数据填充&#34;&gt;seeders 种子数据填充&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;sequelize seed:create &lt;em&gt;&lt;code&gt;node_modules\.bin\sequelize seed:create --name init-shops&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;sequelize db:seed:all &lt;em&gt;与 db:migrate 相似，执行 sequelize db:seed:all ，将向数据库填充 seeders 目录中所有 up 方法所定义的数据。&lt;code&gt;node_modules\.bin\sequelize db:seed:all&lt;/code&gt;&lt;/em&gt;&lt;strong&gt;注意: seeders 的执行，不会将状态存储在 SequelizeMeta 表中。&lt;/strong&gt;(当然，我们也可以通过 &lt;code&gt;--seed&lt;/code&gt; 来制定特定的 &lt;code&gt;seed&lt;/code&gt; 配置来做填充：
-&lt;code&gt;node_modules\.bin\sequelize db:seed --seed 20190103082032-init-goods.js&lt;/code&gt;)&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 添加后的数据表
-mysql&amp;gt; select * from shops;
-+----+-------+-----------+---------------------+---------------------+---------+
-| id | name  | thumb_url | created_at          | updated_at          | address |
-+----+-------+-----------+---------------------+---------------------+---------+
-|  1 | 店铺1 | 1.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-|  2 | 店铺2 | 2.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-|  3 | 店铺3 | 3.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-|  4 | 店铺4 | 4.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-|  5 | 店铺5 | 5.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-+----+-------+-----------+---------------------+---------------------+---------+
-5 rows in set (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;sequelize db:seed:undo &lt;em&gt;Seeders 所填充的数据，也与迁移的 db:migrate:undo 相仿，只是不会进入 SequelizeMeta 记录。两个可用的命令如下，很简单，不再赘述：&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;
-# 撤销所有的种子
-node_modules\.bin\sequelize db:seed:undo:all
-# 数据表
-mysql&amp;gt; select * from shops;
-+----+-------+-----------+---------------------+---------------------+---------+
-| id | name  | thumb_url | created_at          | updated_at          | address |
-+----+-------+-----------+---------------------+---------------------+---------+
-|  5 | 店铺5 | 5.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-+----+-------+-----------+---------------------+---------------------+---------+
-1 row in set (0.00 sec)
-
-# 撤销指定的种子
-node_modules\.bin\sequelize db:seed:undo --seed XXXXXXXXXXXXXX-demo-user.js
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;sequelize-连接-mysql-数据库&#34;&gt;Sequelize 连接 MySQL 数据库&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sequelize 连接数据库的核心代码主要就是通过 new Sequelize（database, username, password, options） 来实现，其中 options 中的配置选项，除了最基础的 host 与 port、数据库类型外，还可以设置连接池的连接参数 pool，数据模型命名规范 underscored 等等。具体可以查阅官方手册 &lt;a href=&#34;http://docs.sequelizejs.com/manual/installation/usage.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;基础使用&lt;/a&gt;。&lt;strong&gt;希望遵循 MySQL 数据库表字段的下划线命名规范，所以，需要全局开启一个 &lt;code&gt;underscore: true&lt;/code&gt; 的定义，来使系统中默认的 createdAt 与 updatedAt 能以下划线的方式，与表结构保持一致。&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;定义数据库业务相关的-model&#34;&gt;定义数据库业务相关的 model&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;结合业务所需，可以在存放 models 目录下继续创建一系列的 model 来与数据库表结构做对应：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── models                       # 数据库 model
-│   ├── index.js                 # model 入口与连接
-│   ├── goods.js                 # 商品表
-│   ├── shops.js                 # 店铺表
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;实现接口&#34;&gt;实现接口&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;很多时候，我们并不希望 findAll 来将数据表中的所有数据全都暴露出来，比如在查询用户列表时，用户的密码的值，便是特别敏感的数据。 我们可以在 findAll 中加入一个 &lt;code&gt;attributes&lt;/code&gt; 的约束，可以是一个要查询的属性（字段）列表，或者是一个 key 为 &lt;code&gt;include&lt;/code&gt; 或 &lt;code&gt;exclude&lt;/code&gt; 对象的键，比如对于用户表，&lt;code&gt;findAll({ attributes: { exclude: [&#39;password&#39;] } })&lt;/code&gt;，就可以排除密码字段的查询露出。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const Joi = require(&#39;joi&#39;)
-const models = require(&#39;../models&#39;)
-
-const GROUP_NAME = &#39;shops&#39;
-
-module.exports = [
-  {
-    method: &#39;GET&#39;,
-    path: `/${GROUP_NAME}`,
-    handler: async (request, reply) =&amp;gt; {
-      // 查找数据
-      const result = await models.shops.findAll({
-        // 只返回 id 和 name
-        attributes: [&#39;id&#39;, &#39;name&#39;]
-      })
-      reply(result)
-    },
-    config: {
-      tags: [&#39;api&#39;, GROUP_NAME],
-      description: &#39;获取店铺列表&#39;,
-      // 适用于 GET 接口的 query（URL 路径参数）
-      validate: {
-        query: {
-          limit: Joi.number().integer().min(1).default(10).description(&#39;每页条数&#39;),
-          // error(new Error(&#39;页码数不能为0！&#39;))  显示的错误信息为中文（message）
-          page: Joi.number().integer().min(1).default(1).description(&#39;页码数&#39;).error(new Error(&#39;页码数不能为0！&#39;))
-        }
-      }
-    }
-  },
-  ...
-]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;列表分页 &lt;code&gt;options&lt;/code&gt; 的具体配置参数细节说明，参见 &lt;a href=&#34;https://github.com/fknop/hapi-pagination/tree/v1.6.5&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;hapi-pagination&lt;/a&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# 安装适配 hapi v16 的 hapi-pagination
-$ npm i hapi-pagination@1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;基于-jwt-的身份验证&#34;&gt;基于 JWT 的身份验证&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;JWT 全称 JSON Web Token，是为了方便在各系统之间安全地传送 JSON 对象格式的信息，而采用的一个开发标准，基于 RFC 7519 定义。服务器在接收到 JWT 之后，可以验证它的合法性，用户登录与否的身份验证便是 JWT 的使用场景之一。&lt;/li&gt;
-&lt;li&gt;JWT 具有「紧凑」与「自包含」的两大特点: 紧凑（compact）、自包含（self-contained）&lt;/li&gt;
-&lt;li&gt;JWT 的构成&amp;mdash;JSON Web Token 由 header、payload、signature 三部分组成，使用点号 . 分隔，下面是一段典型的 JWT 串:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# header
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-# payload
-eyJ1c2VySWQiOjEsImV4cCI6MTUzNTMyMjc0NSwiaWF0IjoxNTM0NzE3OTQ1fQ.
-# signature
-6tOdn2R82bxJbXjAnwU5g4g9EKqGNe-qo4qCo6UZnQ
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;header &amp;ndash; JWT 第一部分 header 指定了该 JWT 使用的签名算法：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{ &amp;quot;alg&amp;quot;: &amp;quot;HS256&amp;quot;, &amp;quot;typ&amp;quot;:&amp;quot;JWT&amp;quot; }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;payload &amp;ndash; JWT 的第二部分 &lt;code&gt;payload&lt;/code&gt; 包含了该 JWT 的签发内容信息。以如上述 JWT 串为例，被解码之后，可以得到如下信息，包涵有用户 &lt;code&gt;ID&lt;/code&gt;，&lt;code&gt;JWT&lt;/code&gt; 过期时间 &lt;code&gt;exp&lt;/code&gt;，&lt;code&gt;JWT&lt;/code&gt; 签发时间 &lt;code&gt;iat&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;userId&amp;quot;: 1,
-  &amp;quot;exp&amp;quot;: 1535322745,
-  &amp;quot;iat&amp;quot;: 1534717945
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;其中 JWT 的规范有一套预设的标准注册声明，非必要项，在业务场景需要的时候加入：&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;iss(issuer)&lt;/code&gt;：JWT 的签发者&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sub(subject)&lt;/code&gt;：JWT 所面向的用户&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;aud(audience)&lt;/code&gt;：接收 JWT 的一方&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;exp(expiresIn)&lt;/code&gt;：JWT 的过期时间，这个时间必须大于签发时间&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;nbf(notBefore)&lt;/code&gt;：定义在什么时间之前，该 JWT 都是不可用的&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;iat(issuedAt)&lt;/code&gt;：JWT 的签发时间&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;jti(jwtid)&lt;/code&gt;：JWT 的唯一身份标识，主要用来作为一次性 token，从而避免重放攻击&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;其他的信息数据，可以在 payload 中额外追加，避免与预设保留字冲突就好。&lt;br /&gt;
-&lt;em&gt;注意&lt;/em&gt; ：对于已签发的 JWT, 尽管信息是可以受到下文 signature 的签名防篡改保护，但 payload 部分的内容，依旧任何人都可以 decode 解码阅读。故而不要在 payload 中存放诸如密码密秘类的安全敏感数据。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;signature &amp;ndash; JWT 的第三部分 signature 用来验证签发数据的合法性，是否存在第三方篡改伪造行为。由 header + payload + 签发 secret 组合而成。有心的读者可以发现，其中的参数条件 header 和 payload 皆为 base64 的编码内容，base64 是一种可双向的编码算法，所以不具备数据安全性。唯有 secret 的参数条件，在 JWT 最终的生成串中并不公开，所以在服务端保管好 secret 的签发字符串的私密性尤为重要，随意地将其提交进 git 的代码版本库，是一种极度不严谨行为。 以 HS256 算法为例，signature 的签发算法如下：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;HMACSHA256(base64UrlEncode(header) + &amp;quot;.&amp;quot; + base64UrlEncode(payload), secret)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;Secret&lt;/code&gt; 的秘钥签发，可以通过一些在线的 AES 加密工具来生成一串长度 32 或 64 的随机字符串。比如： &lt;a href=&#34;http://tool.oschina.net/encrypt/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;tool.oschina.net/encrypt/&lt;/a&gt; 。太长的字符串会一定程度上影响 jwt 验证的计算效率，所以找寻一个平衡点为宜。&lt;/p&gt;
-
-&lt;h4 id=&#34;基于-jwt-的身份验证的好处&#34;&gt;基于 JWT 的身份验证的好处&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;跨语言性&lt;/strong&gt;：payload 数据结构基于 JSON，可以被任何主流语言支持。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;免疫 CSRF&lt;/strong&gt;：对 Cookie 的不依赖性，决定了天然免疫 CSRF 攻击。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;可跨域性&lt;/strong&gt;：同样是对 Cookie 的不依赖性，决定了更好的跨域支持与独立服务化属性。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;多端适配&lt;/strong&gt;：iOS， Android，微信小程序等非网页客户端，Cookie 是不被支持的，JWT 的认证机制则会简单很多。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;去耦可扩展性&lt;/strong&gt;：JWT 可以在任何拥有正确 secret 私钥的 API 服务环境被身份验证和使用，便于微服务拆分。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;基于-jwt-身份验证的注意项&#34;&gt;基于 JWT 身份验证的注意项&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;不要在 JWT 的 payload 中签入敏感信息&lt;/li&gt;
-&lt;li&gt;保护好 secret 秘钥&lt;/li&gt;
-&lt;li&gt;使用 HTTPS 传输 JWT&lt;/li&gt;
-&lt;li&gt;设置较短的 JWT 失效时间，并结合一个失效较长的 JWT RefreshToken 组合为宜。因为 JWT 无法轻易失效已签发的合法 JWT&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;使用-jsonwebtoken-签发-jwt&#34;&gt;使用 jsonwebtoken 签发 JWT&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;jsonwebtoken 是 Node.js 生态里用于签发与校验 JWT 的流行插件。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i jsonwebtoken
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&#34;jwt-sign-签发&#34;&gt;jwt.sign 签发&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;JWT 的签发语法是 &lt;code&gt;jwt.sign(payload, secretOrPrivateKey, [options, callback])&lt;/code&gt;。默认的签发算法基于 &lt;code&gt;HS256 (HMAC SHA256)&lt;/code&gt;，可以在 options 参数的 &lt;code&gt;algorithm&lt;/code&gt; 另行修改。JWT 签发规范中的一些标准保留字段比如 &lt;code&gt;exp&lt;/code&gt;，&lt;code&gt;nbf&lt;/code&gt;，&lt;code&gt;aud&lt;/code&gt;，&lt;code&gt;sub&lt;/code&gt;，&lt;code&gt;iss&lt;/code&gt; 等都没有默认值，可以一并在 &lt;code&gt;payload&lt;/code&gt;参数中按需声明使用，亦可以在第三个参数 options 中，通过 &lt;code&gt;expiresIn&lt;/code&gt;，&lt;code&gt;notBefore&lt;/code&gt;，&lt;code&gt;audience&lt;/code&gt;，&lt;code&gt;subject&lt;/code&gt;，&lt;code&gt;issuer&lt;/code&gt; 来分别赋值，但是不允许在两处同时声明。&lt;/li&gt;
-&lt;li&gt;可以通过 &lt;a href=&#34;https://jwt.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JWT&lt;/a&gt; 来 decode JWT 中的 payload 信息。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&#34;hapi-auth-jwt2-接口用户验证&#34;&gt;hapi-auth-jwt2 接口用户验证&lt;/h5&gt;
-
-&lt;ul&gt;
-&lt;li&gt;安装&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i hapi-auth-jwt2@7
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;hapi-auth-jwt2 配置&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;├── plugins                       # hapi 插件配置
-│ ├── hapi-auth-jwt2.js           # jwt 配置插件
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;sequelize-支持两种使用事务的方法&#34;&gt;Sequelize 支持两种使用事务的方法&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;托管事务&lt;/li&gt;
-&lt;li&gt;非托管事务&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;在一个事务中，可能会包含开始（start）、提交（commit）、回滚（rollback）等操作，Sequelize 通过 &lt;a href=&#34;http://docs.sequelizejs.com/manual/tutorial/transactions.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Transaction&lt;/a&gt;类来实现事务相关功能。以满足一些对操作过程的完整性比较高的使用场景。&lt;/em&gt;
-&lt;em&gt;托管事务基于 Promise 结果链进行自动提交或回滚。非托管事务则交由用户自行控制提交或回滚。&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;微信接收的数据与返回的格式都是以-text-xml-的格式-而非-application-json-需要引入-xml2js-的插件帮助在-javascript-的-ojbect-与-xml-的-object-数据关系之间快速转换&#34;&gt;微信接收的数据与返回的格式都是以 text/xml 的格式，而非 application/json ，需要引入 xml2js 的插件帮助在 JavaScript 的 Ojbect 与 XML 的 Object 数据关系之间快速转换&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i xml2js
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;系统监控与记录-使用-good-插件&#34;&gt;系统监控与记录 —— 使用 Good 插件&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Good 是一个 hapi 插件，用于监视和报告来自主机的各种 hapi 服务器事件以及 ops 信息。它侦听 hapi 服务器实例发出的事件，并将标准化事件推送到流集合中。Good 插件目前有这四个扩展功能： good-squeeze、good-console、good-file、good-http。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i good@7
-npm i good-squeeze@5
-npm i good-console@7
-npm i good-file@6
-npm i good-http@6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;good-squeeze：good-squeeze 是一个小转换流的集合。它提供了两个类，Squeeze 和 SafeJson, Squeeze 流基于良好的事件选项来过滤事件。SafeJson 流用于把对象转成 JSON 字符串，并且可以防止对象中循环引用引起的错误。&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;good-console：good-console 能够将服务 good 服务事件转化为格式化字符串的转换流插件，最终通过 stdout 在控制台打印输出。
-&amp;gt; GoodConsole([config])
-&amp;gt; good-console 本身提供 3 个参数来简单配置控制台的打印信息：
-&amp;gt; * format：使用 MomentJS 格式化时间， 默认值 YYMMDD/HHmmss.SSS
-&amp;gt; * utc：boolean 输出时间是否为布尔值， 默认值 true
-&amp;gt; * color：boolean 是否彩色输出，默认值 true&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;good-file：基于 good-console 的控制台输出日志，当遇到控制台断开或是重启的时候，历史日志将无法找回，此时，在本地生成一份写文件的日志记录，会更好地便于日后的追溯。good-file 插件很好地解决了这样的需求痛点。
-&amp;gt; GoodFile (path, options)
-&amp;gt; * path：必填项，用来定义日志的写入目录
-&amp;gt; * options：选填项，文件流的选项。 默认值为&lt;code&gt;{ encoding: &#39;utf8&#39;, flags: &#39;a&#39;, mode: 0o666 }&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;good-http：除此之外，在实际应用场景中，我们会遇到一些高危异常的错误情况，这类日志我们更希望能在错误发生的第一时间，就通过自动报警的方式，来通知开发人员及时介入响应。这里可以使用 good-http 插件，它可以构造一个 post 的请求接口，将定义的重要日志信息以 JSON 的数据结构方式，推送到目标端点。
-&amp;gt; GoodHttp (endpoint, config)
-&amp;gt; * endpoint：日志发送的目标地址
-&amp;gt; * config：Object 类型的配置项目&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;组合使用日志插件：在实际项目使用中，可以进行组合性配置，在 reporters 字段中使用不同的 key 来区分即可&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;reporters: {
-  typeConsole: [
-    // good-console 的一系列配置
-  ],
-  typeFile: [
-    // good-file 的一系列配置
-  ],
-  typeHttpA: [
-    // good-http 针对 A 平台的一系列配置
-  ],
-  typeHttpB: [
-    // good-http 针对 B 平台的一系列配置
-  ],
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;使用-good-http-结合-sentry-自动收集错误日志&#34;&gt;使用 good-http 结合 Sentry 自动收集错误日志&lt;/h3&gt;
-
-&lt;h4 id=&#34;sentry-简介&#34;&gt;Sentry 简介&lt;/h4&gt;
-
-&lt;p&gt;Sentry 中文翻译过来是哨兵的意思，从字面中可以知道 「站岗、放哨、巡逻、稽查的士兵」，不错，Sentry 是程序的「哨兵」 。它可以监控我们在生产环境中项目的运行状态，一旦某段代码运行报错，或者异常，会第一时间把报错的 路由，异常文件，请求方式 等一些非常详细的信息以消息或者邮件给我们，让我们第一时间知道：程序出错了，然后我们可以从 Sentry 给我们的详细的错误信息中瞬间找到我们需要处理的代码，并及时修正。&lt;/p&gt;
-
-&lt;h4 id=&#34;sentry-服务搭建流程&#34;&gt;Sentry 服务搭建流程&lt;/h4&gt;
-
-&lt;p&gt;利用 hapi 的 API 服务能力再搭建一个简易的内网 API 服务，该服务使用 Sentry 的 raven 插件进行错误日志的收集与汇报，日志的信息源来自应用服务的 good-http 插件&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;申请 Sentry 的 API key&lt;/li&gt;
-&lt;li&gt;配置 Sentry 的错误收集与报告插件 raven&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;npm i raven
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;const Raven = require(&#39;raven&#39;)
-Raven.config(&#39;https://your-sentry-api-key@sentry.io/182062&#39;).install()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;提供错误日志接收服务&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{
-  method: &#39;POST&#39;,
-  path: &#39;/reportErrorLog&#39;,
-  handler: async (request, reply) =&amp;gt; {
-    //直接将请求参数上报到 Sentry
-    Raven.captureException(request.payload)
-    reply()
-  },
-  config: {
-    tags: [&#39;api&#39;, &#39;report&#39;],
-    auth: false,
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;配置应用服务中 good-http 的错误日志推送到上述含有 Sentry raven 的 API 微服务&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;server.register({
-  plugin: require(&#39;good&#39;),
-  {
-    ops: {
-      interval: 1000
-    },
-    reporters: {
-      typeHttp: [
-        {
-          module: &#39;good-squeeze&#39;,
-          name: &#39;Squeeze&#39;,
-          args: [{ error: &#39;*&#39; }]
-        },
-        {
-          module: &#39;good-http&#39;,
-          args: [&#39;http://your-sentry-server/reportErrorLog&#39;, {}]
-        }
-      ]
-    }
-  }
-})
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

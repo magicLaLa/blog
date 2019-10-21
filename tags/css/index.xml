@@ -23,6 +23,15 @@
     </item>
     
     <item>
+      <title>行内样式</title>
+      <link>/2019/%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0/</guid>
+      <description>行内元素 img 元素外面包裹住一个块元素，实现自适应，然后块元素底部会有留白，类似下面这样：  是因为行内元素有行高，可以设置为 display: block; 转换为块元素，或者设置 vertical-align: top，可以解决。</description>
+    </item>
+    
+    <item>
       <title>text-decoration 文本修饰</title>
       <link>/2017/%E6%96%87%E6%9C%AC%E4%BF%AE%E9%A5%B0/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
