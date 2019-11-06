@@ -55,6 +55,15 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
     </item>
     
     <item>
+      <title>.eslintrc.js配置详解</title>
+      <link>/2019/eslintrc%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/eslintrc%E9%85%8D%E7%BD%AE/</guid>
+      <description>{ &amp;quot;extends&amp;quot;: [ &amp;quot;alloy&amp;quot;, &amp;quot;alloy/react&amp;quot;, &amp;quot;alloy/typescript&amp;quot;, ], &amp;quot;env&amp;quot;: { &amp;quot;browser&amp;quot;: true, &amp;quot;node&amp;quot;: true, &amp;quot;commonjs&amp;quot;: true }, &amp;quot;globals&amp;quot;: { // 这里填入你的项目需要的全局变量 // false 表示这个全局变量不允许被重新赋值，比如： // // myGlobal: false }, &amp;quot;ecmaFeatures&amp;quot;: { // lambda表达式 &amp;quot;arrowFunctions&amp;quot;: true, // 解构赋值 &amp;quot;destructuring&amp;quot;: true, // class &amp;quot;classes&amp;quot;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &amp;quot;defaultParams&amp;quot;: true, // 块级作用域，允许使用let const &amp;quot;blockBindings&amp;quot;: true, // 允许使用模块，模块内默认严格模式 &amp;quot;modules&amp;quot;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &amp;quot;objectLiteralComputedProperties&amp;quot;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &amp;quot;Hello!</description>
+    </item>
+    
+    <item>
       <title>弹出遮照阻止底部页面滚动</title>
       <link>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</link>
       <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
@@ -118,15 +127,6 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
 2xx 系列的状态最熟悉的就是 200，这通常是网页请求成功的标志，也是大家最喜欢的状态码。
 3xx 系列比较复杂，301 和 302 两个状态表示当前资源已经被转移，只不过一个是永久性转移，一个是临时性转移。实际上 301 更接近于一种报错，提示客户端下次别来了。
 304 又是一个每个前端必知必会的状态，产生这个状态的前提是：客户端本地已经有缓存的版本，并且在 Request 中告诉了服务端，当服务端通过时间或者 tag，发现没有更新的时候，就会返回一个不含 body 的 304 状态。</description>
-    </item>
-    
-    <item>
-      <title>.eslintrc.js配置详解</title>
-      <link>/1/eslintrc%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/1/eslintrc%E9%85%8D%E7%BD%AE/</guid>
-      <description>{ &amp;quot;extends&amp;quot;: [ &amp;quot;alloy&amp;quot;, &amp;quot;alloy/react&amp;quot;, &amp;quot;alloy/typescript&amp;quot;, ], &amp;quot;env&amp;quot;: { &amp;quot;browser&amp;quot;: true, &amp;quot;node&amp;quot;: true, &amp;quot;commonjs&amp;quot;: true }, &amp;quot;globals&amp;quot;: { // 这里填入你的项目需要的全局变量 // false 表示这个全局变量不允许被重新赋值，比如： // // myGlobal: false }, &amp;quot;ecmaFeatures&amp;quot;: { // lambda表达式 &amp;quot;arrowFunctions&amp;quot;: true, // 解构赋值 &amp;quot;destructuring&amp;quot;: true, // class &amp;quot;classes&amp;quot;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &amp;quot;defaultParams&amp;quot;: true, // 块级作用域，允许使用let const &amp;quot;blockBindings&amp;quot;: true, // 允许使用模块，模块内默认严格模式 &amp;quot;modules&amp;quot;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &amp;quot;objectLiteralComputedProperties&amp;quot;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &amp;quot;Hello!</description>
     </item>
     
   </channel>

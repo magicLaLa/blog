@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 17 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>链表-leetCode-删除链表中的节点</title>
+      <link>/2019/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</guid>
+      <description>删除链表中的节点 描述 请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
+现有一个链表 &amp;ndash; head = [4,5,1,9]，它可以表示为: 示例 1: 输入: head = [4,5,1,9], node = 5 输出: [4,1,9] 解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 1 -&amp;gt; 9. 示例 2: 输入: head = [4,5,1,9], node = 1 输出: [4,5,9] 解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 5 -&amp;gt; 9.  分析 从链表里删除一个节点 node 的最常见方法是修改之前节点的 next 指针，使其指向之后的节点。 因为，我们无法访问我们想要删除的节点 之前 的节点，我们始终不能修改该节点的 next 指针。相反，我们必须将想要删除的节点的值替换为它后面节点中的值，然后删除它之后的节点。 因为我们知道要删除的节点不是列表的末尾，所以我们可以保证这种方法是可行的。
+/** * @param {ListNode} node * @return {void} Do not return anything, modify node in-place instead.</description>
+    </item>
     
     <item>
       <title>TS重新定义模块</title>
@@ -57,22 +68,9 @@ declare var am: any; // 支付宝 declare interface Window { ap: any; // 支付�
     </item>
     
     <item>
-      <title>链表-leetCode-删除排序链表中的重复元素</title>
-      <link>/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</link>
-      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</guid>
-      <description>删除排序链表中的重复元素 描述 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
-示例 1: 输入: 1-&amp;gt;1-&amp;gt;2 输出: 1-&amp;gt;2 示例 2: 输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3 输出: 1-&amp;gt;2-&amp;gt;3  分析 一、直接法
- 仅测试你操作列表的结点指针的能力。由于输入的列表已排序，因此我们可以通过将结点的值与它之后的结点进行比较来确定它是否为重复结点。如果它是重复的，我们更改当前结点的 next 指针，以便它跳过下一个结点并直接指向下一个结点之后的结点。
- 思路
- 指定 cur 指针指向头部 head 当 cur 和 cur.next 的存在为循环结束条件，当二者有一个不存在时说明链表没有去重复的必要了 当 cur.val 和 cur.next.val 相等时说明需要去重，则将 cur 的下一个指针指向下一个的下一个，这样就能达到去重复的效果 如果不相等则 cur 移动到下一个位置继续循环 时间复杂度：O(n)O(n)   /** * @param {ListNode} head * @return {ListNode} */ var deleteDuplicates = function(head) { let current = head; while (current !== null &amp;amp;&amp;amp; current.</description>
-    </item>
-    
-    <item>
       <title>链表-leetCode-合并两个有序链表</title>
       <link>/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</link>
-      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</guid>
       <description>由于单链表是线性的，使用递归方式将导致栈的使用也是线性的，当链表长度达到一定程度时，递归会导致爆栈，因此，现实中并不推荐使用递归方式来操作链表。
@@ -87,45 +85,11 @@ declare var am: any; // 支付宝 declare interface Window { ap: any; // 支付�
     <item>
       <title>链表-leetCode-回文链表</title>
       <link>/2019/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</link>
-      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</guid>
       <description>回文链表 描述 判断一个链表是否为回文链表
 示例 1: 输入: 1-&amp;gt;2 输出: false 示例 2: 输入: 1-&amp;gt;2-&amp;gt;2-&amp;gt;1 输出: true  分析  用2个指针，一个low，一个fast，fast是low的2倍，所以可以达到2分链表的效果 在移动指针时同时对前半部分链表进行反转，最后直接比较被分开的2个链表 因为不能改变当前slow的next，不然就无法跳到下一个元素，所以这里用pre和prepre实现指针的反转  /** * @param {ListNode} head * @return {boolean} */ var isPalindrome = function(head) { if (!head || !head.next) return true; let slow = head; let fast = head.next; let pre = null; let prepre = null; while (fast &amp;amp;&amp;amp; fast.next) { // 反转前半段链表 pre = slow; slow = slow.</description>
-    </item>
-    
-    <item>
-      <title>链表-leetCode-环形链表</title>
-      <link>/2019/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link>
-      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid>
-      <description>环形链表 描述 给定一个链表，判断链表中是否有环。
-为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
-示例 1： 输入：head = [3,2,0,-4], pos = 1 输出：true 解释：链表中有一个环，其尾部连接到第二个节点。  示例 2： 输入：head = [1,2], pos = 0 输出：true 解释：链表中有一个环，其尾部连接到第一个节点。  示例 3： 输入：head = [1], pos = -1 输出：false 解释：链表中没有环。  分析  一、由上到下给每一层遍历到的结点做上标记，如果在下一个结点中出现了这个标记，则表示存在环形结构。如果不想篡改原始数据，可以先用 temp 保存。  /** * @param {ListNode} head * @return {boolean} */ var hasCycle = function(head) { while (head) { if (head.</description>
-    </item>
-    
-    <item>
-      <title>链表-leetCode-相交链表</title>
-      <link>/2019/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</link>
-      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</guid>
-      <description>相交链表 描述 编写一个程序，找到两个单链表相交的起始节点。
-注意： - 如果两个链表没有交点，返回 null. - 在返回结果后，两个链表仍须保持原有的结构。 - 可假定整个链表结构中没有循环。 - 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
-分析 根据题目意思
-如果两个链表相交，那么相交点之后的长度是相同的
-我们需要做的事情是，让两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。 为此，我们必须消除两个链表的长度差
- 指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历 如果 pA 到了末尾，则 pA = headB 继续遍历 如果 pB 到了末尾，则 pB = headA 继续遍历 比较长的链表指针指向较短链表head时，长度差就消除了 如此，只需要将最短链表遍历两次即可找到位置  var getIntersectionNode = function(headA, headB) { if (headA === null || headB === null) return null; let pA = headA; let pB = headB; while(pA !</description>
-    </item>
-    
-    <item>
-      <title>链表-leetCode-移除链表元素</title>
-      <link>/2019/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/</link>
-      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/</guid>
-      <description>移除链表元素  删除链表中等于给定值 val 的所有节点。  示例: 输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6 输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  分析 /** * @param {ListNode} head * @param {number} val * @return {ListNode} */ var removeElements = function(head, val) { let tem = head; let pre = null; while (tem) { if (tem.val === val) { if (pre) { pre.next = tem.next; } else { head = tem.next; } } else { pre = tem; } tem = tem.</description>
     </item>
     
     <item>
@@ -140,6 +104,40 @@ declare var am: any; // 支付宝 declare interface Window { ap: any; // 支付�
 与App native的交互 目前使用频率最多的，还是客户端内嵌的webview，都是webview打开m页去承接的。目前javascript和客户端（后面统称native）交互的常见方式有两种，一种是通过JSBridge的方式，另一种是通过schema的方式。
 JSBridge 体现的形式其实就是，当我们在native内打开m页，native会在全局的window下，为我们注入一个Bridge。这个Bridge里面，会包含我们与native交互的各种方法、比如判断第三方App是否安装、获取网络信息等等功能。
 /** * 作用域下的JSBridge， * 和实例化后的getNetInfomation， * 均根据实际约定情况而定， * 这里只是用来举例说明 */ const bridge = window.JSBridge; console.log(bridge.getNetInfomation());   IOS端: 在IOS中，主要使用WebViewJavascriptBridge来注册，可以参考Github WebViewJavascriptBridge  self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView]; [self.bridge registerHandler:@&amp;quot;ObjC Echo&amp;quot; handler:^(id data, WVJBResponseCallback responseCallback) { // to do... }];   Android: 在Android中，需要通过addJavascriptInterface来注册  class JSBridge { @JavascriptInterface //注意这里的注解。出于安全的考虑，4.2 之后强制要求，不然无法从 Javascript 中发起调用 public void getNetInfomation(){ // to do }; } webView.</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-相交链表</title>
+      <link>/2019/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</guid>
+      <description>相交链表 描述 编写一个程序，找到两个单链表相交的起始节点。
+注意： - 如果两个链表没有交点，返回 null. - 在返回结果后，两个链表仍须保持原有的结构。 - 可假定整个链表结构中没有循环。 - 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
+分析 根据题目意思
+如果两个链表相交，那么相交点之后的长度是相同的
+我们需要做的事情是，让两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。 为此，我们必须消除两个链表的长度差
+ 指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历 如果 pA 到了末尾，则 pA = headB 继续遍历 如果 pB 到了末尾，则 pB = headA 继续遍历 比较长的链表指针指向较短链表head时，长度差就消除了 如此，只需要将最短链表遍历两次即可找到位置  var getIntersectionNode = function(headA, headB) { if (headA === null || headB === null) return null; let pA = headA; let pB = headB; while(pA !</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-环形链表</title>
+      <link>/2019/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Thu, 15 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid>
+      <description>环形链表 描述 给定一个链表，判断链表中是否有环。
+为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+示例 1： 输入：head = [3,2,0,-4], pos = 1 输出：true 解释：链表中有一个环，其尾部连接到第二个节点。  示例 2： 输入：head = [1,2], pos = 0 输出：true 解释：链表中有一个环，其尾部连接到第一个节点。  示例 3： 输入：head = [1], pos = -1 输出：false 解释：链表中没有环。  分析  一、由上到下给每一层遍历到的结点做上标记，如果在下一个结点中出现了这个标记，则表示存在环形结构。如果不想篡改原始数据，可以先用 temp 保存。  /** * @param {ListNode} head * @return {boolean} */ var hasCycle = function(head) { while (head) { if (head.</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-移除链表元素</title>
+      <link>/2019/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/</guid>
+      <description>移除链表元素  删除链表中等于给定值 val 的所有节点。  示例: 输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6 输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  分析 /** * @param {ListNode} head * @param {number} val * @return {ListNode} */ var removeElements = function(head, val) { let tem = head; let pre = null; while (tem) { if (tem.val === val) { if (pre) { pre.next = tem.next; } else { head = tem.next; } } else { pre = tem; } tem = tem.</description>
     </item>
     
     <item>
@@ -194,6 +192,19 @@ Since PM2’s deployment command runs on a non-interactive SSH connection, we ne
     </item>
     
     <item>
+      <title>链表-leetCode-删除排序链表中的重复元素</title>
+      <link>/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</guid>
+      <description>删除排序链表中的重复元素 描述 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+示例 1: 输入: 1-&amp;gt;1-&amp;gt;2 输出: 1-&amp;gt;2 示例 2: 输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3 输出: 1-&amp;gt;2-&amp;gt;3  分析 一、直接法
+ 仅测试你操作列表的结点指针的能力。由于输入的列表已排序，因此我们可以通过将结点的值与它之后的结点进行比较来确定它是否为重复结点。如果它是重复的，我们更改当前结点的 next 指针，以便它跳过下一个结点并直接指向下一个结点之后的结点。
+ 思路
+ 指定 cur 指针指向头部 head 当 cur 和 cur.next 的存在为循环结束条件，当二者有一个不存在时说明链表没有去重复的必要了 当 cur.val 和 cur.next.val 相等时说明需要去重，则将 cur 的下一个指针指向下一个的下一个，这样就能达到去重复的效果 如果不相等则 cur 移动到下一个位置继续循环 时间复杂度：O(n)O(n)   /** * @param {ListNode} head * @return {ListNode} */ var deleteDuplicates = function(head) { let current = head; while (current !== null &amp;amp;&amp;amp; current.</description>
+    </item>
+    
+    <item>
       <title>css3 适配iphoneX 安全区域</title>
       <link>/2019/%E9%80%82%E9%85%8Diphonex/</link>
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
@@ -239,6 +250,15 @@ Since PM2’s deployment command runs on a non-interactive SSH connection, we ne
       
       <guid>/2019/%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0/</guid>
       <description>行内元素 img 元素外面包裹住一个块元素，实现自适应，然后块元素底部会有留白，类似下面这样：  是因为行内元素有行高，可以设置为 display: block; 转换为块元素，或者设置 vertical-align: top，可以解决。</description>
+    </item>
+    
+    <item>
+      <title>.eslintrc.js配置详解</title>
+      <link>/2019/eslintrc%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/eslintrc%E9%85%8D%E7%BD%AE/</guid>
+      <description>{ &amp;quot;extends&amp;quot;: [ &amp;quot;alloy&amp;quot;, &amp;quot;alloy/react&amp;quot;, &amp;quot;alloy/typescript&amp;quot;, ], &amp;quot;env&amp;quot;: { &amp;quot;browser&amp;quot;: true, &amp;quot;node&amp;quot;: true, &amp;quot;commonjs&amp;quot;: true }, &amp;quot;globals&amp;quot;: { // 这里填入你的项目需要的全局变量 // false 表示这个全局变量不允许被重新赋值，比如： // // myGlobal: false }, &amp;quot;ecmaFeatures&amp;quot;: { // lambda表达式 &amp;quot;arrowFunctions&amp;quot;: true, // 解构赋值 &amp;quot;destructuring&amp;quot;: true, // class &amp;quot;classes&amp;quot;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &amp;quot;defaultParams&amp;quot;: true, // 块级作用域，允许使用let const &amp;quot;blockBindings&amp;quot;: true, // 允许使用模块，模块内默认严格模式 &amp;quot;modules&amp;quot;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &amp;quot;objectLiteralComputedProperties&amp;quot;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &amp;quot;Hello!</description>
     </item>
     
     <item>
@@ -597,15 +617,6 @@ git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795   git 远程服务器�
 https://github.com/tj/n
 因为我的电脑是 windows 系统，所以使用的是 nvm for windows
 nvm for windows  下载地址： https://github.com/coreybutler/nvm-windows/releases   nvm-noinstall.zip： 这个是绿色免安装版本，但是使用之前需要配置 nvm-setup.zip：这是一个安装包，下载之后点击安装，无需配置就可以使用，方便 Source code(zip)：zip压缩的源码 Sourc code(tar.</description>
-    </item>
-    
-    <item>
-      <title>.eslintrc.js配置详解</title>
-      <link>/1/eslintrc%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/1/eslintrc%E9%85%8D%E7%BD%AE/</guid>
-      <description>{ &amp;quot;extends&amp;quot;: [ &amp;quot;alloy&amp;quot;, &amp;quot;alloy/react&amp;quot;, &amp;quot;alloy/typescript&amp;quot;, ], &amp;quot;env&amp;quot;: { &amp;quot;browser&amp;quot;: true, &amp;quot;node&amp;quot;: true, &amp;quot;commonjs&amp;quot;: true }, &amp;quot;globals&amp;quot;: { // 这里填入你的项目需要的全局变量 // false 表示这个全局变量不允许被重新赋值，比如： // // myGlobal: false }, &amp;quot;ecmaFeatures&amp;quot;: { // lambda表达式 &amp;quot;arrowFunctions&amp;quot;: true, // 解构赋值 &amp;quot;destructuring&amp;quot;: true, // class &amp;quot;classes&amp;quot;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &amp;quot;defaultParams&amp;quot;: true, // 块级作用域，允许使用let const &amp;quot;blockBindings&amp;quot;: true, // 允许使用模块，模块内默认严格模式 &amp;quot;modules&amp;quot;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &amp;quot;objectLiteralComputedProperties&amp;quot;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &amp;quot;Hello!</description>
     </item>
     
   </channel>

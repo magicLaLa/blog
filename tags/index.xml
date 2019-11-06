@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 17 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>leetCode</title>
+      <link>/tags/leetcode/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/leetcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>链表-easy</title>
+      <link>/tags/%E9%93%BE%E8%A1%A8-easy/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E9%93%BE%E8%A1%A8-easy/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>TypeScript</title>
@@ -39,29 +57,11 @@
     </item>
     
     <item>
-      <title>leetCode</title>
-      <link>/tags/leetcode/</link>
-      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/leetcode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>链表</title>
       <link>/tags/%E9%93%BE%E8%A1%A8/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/%E9%93%BE%E8%A1%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>链表-easy</title>
-      <link>/tags/%E9%93%BE%E8%A1%A8-easy/</link>
-      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E9%93%BE%E8%A1%A8-easy/</guid>
       <description></description>
     </item>
     
@@ -134,6 +134,15 @@
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/%E6%9D%82%E9%A1%B9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>eslintrc</title>
+      <link>/tags/eslintrc/</link>
+      <pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/eslintrc/</guid>
       <description></description>
     </item>
     
@@ -215,15 +224,6 @@
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/other/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>eslintrc</title>
-      <link>/tags/eslintrc/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/eslintrc/</guid>
       <description></description>
     </item>
     

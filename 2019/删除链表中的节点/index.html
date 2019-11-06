@@ -10,9 +10,9 @@
   
   
   
-  <link rel="prev" href="/2019/webview/" />
-  <link rel="next" href="/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" />
-  <link rel="canonical" href="/2019/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/" />
+  <link rel="prev" href="/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/" />
+  
+  <link rel="canonical" href="/2019/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,10 +24,10 @@
   <title>
        
        
-           链表-leetCode-回文链表 | Magic
+           链表-leetCode-删除链表中的节点 | Magic
        
   </title>
-  <meta name="title" content="链表-leetCode-回文链表 | Magic">
+  <meta name="title" content="链表-leetCode-删除链表中的节点 | Magic">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -35,25 +35,25 @@
 
 
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="链表-leetCode-回文链表"/>
+<meta name="twitter:title" content="链表-leetCode-删除链表中的节点"/>
 <meta name="twitter:description" content="链表"/>
 
   <script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "链表-leetCode-回文链表",
+  "headline": "链表-leetCode-删除链表中的节点",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "\/2019\/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8\/"
+    "@id": "\/2019\/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9\/"
   },
   
   "genre": "posts",
   "keywords": "leetCode, 链表-easy",
-  "wordcount":  113 ,
-  "url": "\/2019\/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8\/",
-  "datePublished": "2019-08-29T00:00:00\x2b00:00",
-  "dateModified": "2019-08-29T00:00:00\x2b00:00",
+  "wordcount":  89 ,
+  "url": "\/2019\/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9\/",
+  "datePublished": "2019-10-25T00:00:00\x2b00:00",
+  "dateModified": "2019-10-25T00:00:00\x2b00:00",
   
   "publisher": {
     "@type": "Organization",
@@ -129,14 +129,14 @@
       		
 <article class="post-warp">
     <header class="post-header">
-        <h1 class="post-title">链表-leetCode-回文链表</h1>
+        <h1 class="post-title">链表-leetCode-删除链表中的节点</h1>
         <div class="post-meta">
             Written by <a href="/"
                 rel="author">Magic</a>
             with ♥
             <span class="post-time">
                 on <time
-                    datetime=2019-08-29>29 August 2019</time>
+                    datetime=2019-10-25>25 October 2019</time>
             </span>
             in
             <i class="iconfont icon-folder"></i>
@@ -152,71 +152,56 @@
         
 
         
-
         
         
 
         
         
-        
 
         
         
         
 
         
+        
+        
 
-<h2 id="回文链表">回文链表</h2>
+        
+
+<h2 id="删除链表中的节点">删除链表中的节点</h2>
 
 <h3 id="描述">描述</h3>
 
-<p>判断一个链表是否为回文链表</p>
+<p>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。</p>
+
+<p>现有一个链表 &ndash; head = [4,5,1,9]，它可以表示为: <figure><img src="/ring.svg" data-sizes="auto" data-src="https://s2.ax1x.com/2019/10/25/KwtOGq.png" alt="示例" class="lazyload"><figcaption class="image-caption">示例</figcaption></figure></p>
 
 <pre><code class="language-bash">示例 1:
-  输入: 1-&gt;2
-  输出: false
+  输入: head = [4,5,1,9], node = 5
+  输出: [4,1,9]
+  解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.
 
 示例 2:
-  输入: 1-&gt;2-&gt;2-&gt;1
-  输出: true
+  输入: head = [4,5,1,9], node = 1
+  输出: [4,5,9]
+  解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.
 </code></pre>
 
 <h3 id="分析">分析</h3>
 
-<ul>
-<li>用2个指针，一个low，一个fast，fast是low的2倍，所以可以达到2分链表的效果</li>
-<li>在移动指针时同时对前半部分链表进行反转，最后直接比较被分开的2个链表</li>
-<li>因为不能改变当前slow的next，不然就无法跳到下一个元素，所以这里用pre和prepre实现指针的反转</li>
-</ul>
+<p>从链表里删除一个节点 node 的最常见方法是修改之前节点的 next 指针，使其指向之后的节点。
+<figure><img src="/ring.svg" data-sizes="auto" data-src="https://s2.ax1x.com/2019/10/25/KwUinS.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure>
+因为，我们无法访问我们想要删除的节点 之前 的节点，我们始终不能修改该节点的 next 指针。相反，我们必须将想要删除的节点的值替换为它后面节点中的值，然后删除它之后的节点。
+<figure><img src="/ring.svg" data-sizes="auto" data-src="https://s2.ax1x.com/2019/10/25/KwUCX8.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure>
+因为我们知道要删除的节点不是列表的末尾，所以我们可以保证这种方法是可行的。</p>
 
 <pre><code class="language-javascript">/**
- * @param {ListNode} head
- * @return {boolean}
+ * @param {ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
  */
-var isPalindrome = function(head) {
-  if (!head || !head.next) return true;
-  let slow = head;
-  let fast = head.next;
-  let pre = null;
-  let prepre = null;
-  while (fast &amp;&amp; fast.next) {
-    // 反转前半段链表
-    pre = slow;
-    slow = slow.next;
-    fast = fast.next.next;
-    // 先移动指针再来反转
-    pre.next = prepre;
-    prepre = pre;
-  }
-  let p2 = slow.next;
-  slow.next = pre;
-  let p1 = !fast ? slow.next : slow;
-  while(p1) {
-    if (p1.val !== p2.val) return false;
-    p1 = p1.next;
-    p2 = p2.next;
-  }
-  return true;
+var deleteNode = function(node) {
+  node.val = node.next.val;
+  node.next = node.next.next;
 };
 </code></pre>
 
@@ -232,7 +217,7 @@ var isPalindrome = function(head) {
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>113</span>
+            <span>89</span>
         </p>
 
         <p class="copyright-item">
@@ -241,13 +226,13 @@ var isPalindrome = function(head) {
             <span>
 
       
-        <a href="//twitter.com/share?url=%2f2019%2f%25E5%259B%259E%25E6%2596%2587%25E9%2593%25BE%25E8%25A1%25A8%2f&amp;text=%e9%93%be%e8%a1%a8-leetCode-%e5%9b%9e%e6%96%87%e9%93%be%e8%a1%a8&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=%2f2019%2f%25E5%2588%25A0%25E9%2599%25A4%25E9%2593%25BE%25E8%25A1%25A8%25E4%25B8%25AD%25E7%259A%2584%25E8%258A%2582%25E7%2582%25B9%2f&amp;text=%e9%93%be%e8%a1%a8-leetCode-%e5%88%a0%e9%99%a4%e9%93%be%e8%a1%a8%e4%b8%ad%e7%9a%84%e8%8a%82%e7%82%b9&amp;via=" target="_blank" title="Share on Twitter">
           <i class="iconfont icon-twitter"></i>
         </a>
         
       
       
-        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2f%25E5%259B%259E%25E6%2596%2587%25E9%2593%25BE%25E8%25A1%25A8%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2f%25E5%2588%25A0%25E9%2599%25A4%25E9%2593%25BE%25E8%25A1%25A8%25E4%25B8%25AD%25E7%259A%2584%25E8%258A%2582%25E7%2582%25B9%2f" target="_blank" title="Share on Facebook">
           <i class="iconfont icon-facebook"></i>
         </a>
         
@@ -269,7 +254,7 @@ var isPalindrome = function(head) {
           
 
           
-        <a href="//service.weibo.com/share/share.php?url=%2f2019%2f%25E5%259B%259E%25E6%2596%2587%25E9%2593%25BE%25E8%25A1%25A8%2f&amp;appkey=&amp;title=%e9%93%be%e8%a1%a8-leetCode-%e5%9b%9e%e6%96%87%e9%93%be%e8%a1%a8" target="_blank" title="Share on Douban ">
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2f%25E5%2588%25A0%25E9%2599%25A4%25E9%2593%25BE%25E8%25A1%25A8%25E4%25B8%25AD%25E7%259A%2584%25E8%258A%2582%25E7%2582%25B9%2f&amp;appkey=&amp;title=%e9%93%be%e8%a1%a8-leetCode-%e5%88%a0%e9%99%a4%e9%93%be%e8%a1%a8%e4%b8%ad%e7%9a%84%e8%8a%82%e7%82%b9" target="_blank" title="Share on Douban ">
             <i class="iconfont icon-weibo"></i>
           </a>
           
@@ -306,12 +291,9 @@ var isPalindrome = function(head) {
 
     <div class="post-nav">
         
-        <a href="/2019/webview/" class="prev" rel="prev" title="你真的了解webview么？"><i
-                class="iconfont icon-dajiantou"></i>&nbsp;你真的了解webview么？</a>
+        <a href="/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/" class="prev" rel="prev" title="TS重新定义模块"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;TS重新定义模块</a>
         
-        
-        <a href="/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="next" rel="next"
-            title="链表-leetCode-合并两个有序链表">链表-leetCode-合并两个有序链表&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 
@@ -365,8 +347,9 @@ var isPalindrome = function(head) {
 
 
     
-    
-    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
     
   
 
