@@ -73,6 +73,15 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
     </item>
     
     <item>
+      <title>Shadowsocks安装流程</title>
+      <link>/2019/shadowsocks%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/shadowsocks%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B/</guid>
+      <description> 安装  wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh。注意 (warning) : 国外服务器运行脚本时容易出错，如出现错误提示 bash: wget: command not found，可以请在先执行 yum -y install wget 命令。成功后，再执行上面的命令。如果没有出现提示错误，请略过。 chmod +x shadowsocks-all.sh ./shadowsocks-all.sh 2&amp;gt;&amp;amp;1 | tee shadowsocks-all.log  </description>
+    </item>
+    
+    <item>
       <title>ua检测</title>
       <link>/2019/ua%E6%A3%80%E6%B5%8B/</link>
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>

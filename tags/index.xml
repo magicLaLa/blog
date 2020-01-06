@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker</title>
+      <link>/tags/docker/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker-Jenkins</title>
+      <link>/tags/docker-jenkins/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/docker-jenkins/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>leetCode</title>
@@ -147,6 +165,15 @@
     </item>
     
     <item>
+      <title>ssr</title>
+      <link>/tags/ssr/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ssr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Webpack</title>
       <link>/tags/webpack/</link>
       <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
@@ -161,15 +188,6 @@
       <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/%E6%8A%80%E6%9C%AF%E7%9B%B8%E5%85%B3%E9%9A%8F%E7%AC%94/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Docker</title>
-      <link>/tags/docker/</link>
-      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/docker/</guid>
       <description></description>
     </item>
     

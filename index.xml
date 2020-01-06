@@ -5,8 +5,152 @@
     <description>Recent content in Magic on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Docker Gitlab</title>
+      <link>/2019/docker-gitlab/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/docker-gitlab/</guid>
+      <description>
+
+&lt;h1 id=&#34;安装-gitlab&#34;&gt;安装 Gitlab&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;目录类似 Jenkins，使用 docker-compose 安装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;version: &#39;3&#39;
+services:
+    docker-gitlab:
+      image: &#39;twang2218/gitlab-ce-zh:9.4&#39;
+      restart: &#39;no&#39;
+      container_name: gitlab
+      hostname: &#39;gitlab.xxxxx.com&#39;
+      environment:
+        TZ: &#39;Asia/Shanghai&#39;
+        GITLAB_OMNIBUS_CONFIG: |
+          external_url &#39;http://gitlab.xxxxxx.com&#39;
+          unicorn[&#39;worker_timeout&#39;] = 60
+          unicorn[&#39;worker_processes&#39;] = 2
+          gitlab_rails[&#39;time_zone&#39;] = &#39;Asia/Shanghai&#39;
+          gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 26
+          nginx[&#39;client_max_body_size&#39;] = &#39;250m&#39;
+      ports:
+       - &#39;81:80&#39;
+       - &#39;443:443&#39;
+       - &#39;26:22&#39;
+      volumes:
+       - /home/gitlab/gitlab_home/config:/etc/gitlab
+       - /home/gitlab/gitlab_home/data:/var/opt/gitlab
+       - /home/gitlab/gitlab_home/logs:/var/log/gitlab
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在当前目录下运行 &lt;code&gt;docker-compose up -d&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;nginx-代理&#34;&gt;Nginx 代理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;upstream gitlab {
+ server 116.62.201.97:81;
+}
+
+server {
+ listen 80;
+ server_name gitlab.xxx.com;
+
+ location / {
+  client_max_body_size 900m;
+  proxy_redirect off;
+  # 以下确保 gitlab中项目的 url 是域名而不是 http://git，不可缺少
+  proxy_set_header Host $host;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  # 反向代理到 gitlab 内置的 nginx
+  proxy_pass http://gitlab;
+  index index.html index.htm;
+ }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Jenkins</title>
+      <link>/2019/docker-jenkins/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/docker-jenkins/</guid>
+      <description>
+
+&lt;h1 id=&#34;安装-jenkins&#34;&gt;安装 jenkins&lt;/h1&gt;
+
+&lt;p&gt;在安装jenkins我选择了使用docker-compose，docker-compose 是一个用来把 docker 自动化的东西&lt;br /&gt;
+有了 docker-compose 你可以把所有繁复的 docker 操作全都一条命令，自动化的完成。&lt;/p&gt;
+
+&lt;h3 id=&#34;首先我们需要在服务器上创建一个目录机构&#34;&gt;首先我们需要在服务器上创建一个目录机构&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;/home/jenkins
+  - docker-compose.yml
+  - jenkins-home
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;接下来我们来编写-docker-compose-yml-安装jenkins&#34;&gt;接下来我们来编写 docker-compose.yml 安装jenkins&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;version: &#39;3&#39;    # 指定 docker-compose.yml 文件的写法格式
+
+services:       # 多个容器集合
+  docker_jenkins:
+    user: root  # 为了避免一些权限问题 在这我使用了root
+    restart: always # 重启方式
+    image: jenkins/jenkins:lts  # 指定服务所使用的镜像 在这里我选择了 LTS (长期支持)
+    container_name: jenkins # 容器名称
+    ports:      # 对外暴露的端口定义
+      - &#39;8899:8080&#39;
+      - &#39;50000:50000&#39;
+    volumes:    # 卷挂载路径
+      - /home/jenkins/jenkins_home/:/var/jenkins_home  # 这是我们一开始创建的目录挂载到容器内的jenkins_home目录
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker     # 这是为了我们可以在容器内使用docker命令
+      - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose # 同样的这是为了使用docker-compose命令
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们需要进入到 jenkins 目录下执行：&lt;code&gt;docker-compose up -d&lt;/code&gt;，开启守护进程后台执行(停止 &lt;code&gt;docker-compose down&lt;/code&gt;)这个命令会帮我们自动拉取镜像并配置，不出意外你现在可以打开你的服务器地址 &lt;a href=&#34;http://xxxxxxx&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://xxxxxxx&lt;/a&gt;:端口号 就能看到这个界面：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/05/Q8sYxP.png&#34; alt=&#34;Q8sYxP.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;打开你所创建的jenkins目录进入到jenkins_home：&lt;code&gt;/home/jenkins/jenkins-home&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;进入 secrets 目录并打印下： &lt;code&gt;cat initialAdminPassword&lt;/code&gt;：（dadasdf324324dasdasd3243432）,然后把里面的文本复制出来填到管理员密码中：
+&lt;img src=&#34;https://s2.ax1x.com/2019/12/05/Q8yAeS.png&#34; alt=&#34;Q8yAeS.png&#34; /&gt;
+接下来需要安装几个插件：&lt;code&gt;NodeJS Plugin&lt;/code&gt;，&lt;code&gt;Publish Over SSH&lt;/code&gt;，&lt;code&gt;Git Parameter Plug-In&lt;/code&gt;（举例）
+&lt;img src=&#34;https://s2.ax1x.com/2019/12/05/Q867DK.png&#34; alt=&#34;Q867DK.png&#34; /&gt;
+然后到全局工具配置（举例）
+&lt;img src=&#34;https://s2.ax1x.com/2019/12/05/Q8cgMt.png&#34; alt=&#34;Q8cgMt.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;nginx-代理&#34;&gt;Nginx 代理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;upstream jenkins {
+ server xxxxxxxxxxxx:8899;
+}
+
+server {
+ listen 80;
+ server_name jenkins.ex.com;
+
+ location / {
+  proxy_pass http://jenkins;
+ }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sudo nginx -t&lt;/code&gt; 检测配置是否正确&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo service nginx restart&lt;/code&gt; 重启 nginx&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>链表-leetCode-删除链表中的节点</title>
@@ -353,6 +497,139 @@ var reverseList = function(head) {
     }
   }
 }
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker 相关</title>
+      <link>/2019/docker/</link>
+      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/docker/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-相关&#34;&gt;Docker 相关&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;服务器环境: ubuntu16&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;使用apt安装&#34;&gt;使用APT安装&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;添加软件源的 GRP 密钥&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+# 官方源
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后，我们需要向 source.list 中添加 Docker 软件源&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo add-apt-repository &amp;quot;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable&amp;quot;
+
+# 官方源
+# $ sudo add-apt-repository &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上命令会添加稳定版本的 Docker CE APT 镜像源，如果需要测试或每日构建版本的 Docker CE 请将 stable 改为 test 或者 nightly。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装-docker-ce&#34;&gt;安装 Docker CE&lt;/h2&gt;
+
+&lt;p&gt;更新 apt 软件包缓存，并安装 docker-ce&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get update
+sudo apt-get install docker-ce
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;使用脚本自动安装&#34;&gt;使用脚本自动安装&lt;/h3&gt;
+
+&lt;p&gt;在测试或开发环境中 Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，Ubuntu 系统上可以使用这套脚本安装：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -fsSL get.docker.com -o get-docker.sh
+sudo sh get-docker.sh --mirror Aliyun
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;启动-docker-ce&#34;&gt;启动 Docker CE&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo systemctl enable docker
+sudo systemctl start docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;建立-docker-用户组&#34;&gt;建立 Docker 用户组&lt;/h3&gt;
+
+&lt;p&gt;默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。因此，更好地做法是将需要使用 docker 的用户加入 docker 用户组。&lt;/p&gt;
+
+&lt;p&gt;建立 docker 组：&lt;code&gt;sudo groupadd docker&lt;/code&gt;，将当前用户加入 docker 组：&lt;code&gt;sudo usermod -aG docker $USER&lt;/code&gt;，退出当前终端并重新登录，进行如下测试。&lt;/p&gt;
+
+&lt;h3 id=&#34;测试-docker-是否安装正确&#34;&gt;测试 Docker 是否安装正确&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker run hello-world
+# Unable to find image &#39;hello-world:latest&#39; locally
+#     latest: Pulling from library/hello-world
+#     d1725b59e92d: Pull complete
+#     Digest: sha256:0add3ace90ecb4adbf7777e9aacf18357296e799f81cabc9fde470971e499788
+#     Status: Downloaded newer image for hello-world:latest
+#     
+#     Hello from Docker!
+#     This message shows that your installation appears to be working correctly.
+#     
+#     To generate this message, Docker took the following steps:
+#      1. The Docker client contacted the Docker daemon.
+#      2. The Docker daemon pulled the &amp;quot;hello-world&amp;quot; image from the Docker Hub.
+#         (amd64)
+#      3. The Docker daemon created a new container from that image which runs the
+#         executable that produces the output you are currently reading.
+#      4. The Docker daemon streamed that output to the Docker client, which sent it
+#         to your terminal.
+#     
+#     To try something more ambitious, you can run an Ubuntu container with:
+#      $ docker run -it ubuntu bash
+#     
+#     Share images, automate workflows, and more with a free Docker ID:
+#      https://hub.docker.com/
+#     
+#     For more examples and ideas, visit:
+#      https://docs.docker.com/get-started/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若能正常输出以上信息，则说明安装成功。&lt;/p&gt;
+
+&lt;h3 id=&#34;镜像加速&#34;&gt;镜像加速&lt;/h3&gt;
+
+&lt;p&gt;如果在使用过程中发现拉取 Docker 镜像十分缓慢，可以配置 Docker 国内镜像加速。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://cr.console.aliyun.com/cn-shanghai/instances/mirrors&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;阿里云镜像加速&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;安装-docker-compose&#34;&gt;安装 docker-compose&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/compose/install/#install-compose&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;参考文档&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;运行此命令以下载docker-compose的当前稳定版本&#34;&gt;运行此命令以下载Docker Compose的当前稳定版本&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo curl -L &amp;quot;https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)&amp;quot; -o /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;对二进制文件应用可执行权限&#34;&gt;对二进制文件应用可执行权限&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo chmod +x /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;查看版本&#34;&gt;查看版本&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker-compose --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;搜索镜像&#34;&gt;搜索镜像&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker search gitlab-ce
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;查看镜像&#34;&gt;查看镜像&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker images
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -1282,484 +1559,6 @@ Cloning into &#39;/www/node-deploy-static/production/source&#39;...
 &lt;ol&gt;
 &lt;li&gt;本地目录下输入命令：&lt;code&gt;pm2 deploy ecosystem.yaml production&lt;/code&gt; 更新和运行，&lt;em&gt;注：使用nvm安装的node和pm2 会报 &lt;code&gt;bash: pm2: command not found / post-deploy hook failed / Deploy failed&lt;/code&gt;，网上搜出来说是没有进行加 软链接&amp;ndash;待定&lt;/em&gt;&lt;/li&gt;
 &lt;/ol&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>安装与配置MongoDB数据库</title>
-      <link>/2019/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEmongodb%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEmongodb%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-      <description>
-
-&lt;p&gt;服务器系统为 Ubuntu 14.04&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;mongodump&lt;/code&gt; 逻辑备份工具。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mongorestore&lt;/code&gt; 逻辑恢复工具。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mongoexport&lt;/code&gt;  数据导出工具。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;mongoimport&lt;/code&gt;  数据导入工具。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;可以使用 Navicat for MongoDB 来管理数据库&lt;/p&gt;
-
-&lt;h3 id=&#34;安装-mongodb-并开启等命令&#34;&gt;安装 MongoDB 并开启等命令&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://docs.mongodb.com/manual/administration/install-enterprise/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;MongoDB社区安装&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-&lt;li&gt;加入公钥 &lt;del&gt;&lt;code&gt;sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6&lt;/code&gt;&lt;/del&gt; 使用后面这个命令：&lt;code&gt;sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;为 MongoDB 创建一个列表文件，可以选择使用 Aliyun 的镜像文件 &lt;del&gt;&lt;code&gt;echo &amp;quot;deb [ arch=amd64 ] http://mirrors.aliyun.com/MongoDB/apt/ubuntu trusty/MongoDB-org/4.0 multiverse&amp;quot; | sudo tee /etc/apt/sources.list.d/MongoDB-org-4.0.list&lt;/code&gt;&lt;/del&gt; &lt;code&gt;echo &#39;deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen&#39; | sudo tee /etc/apt/sources.list.d/mongodb.list&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;重新加载更新本地的包库 &lt;code&gt;sudo apt-get update&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;安装 MongoDB 稳定版 &lt;code&gt;sudo apt-get install -y MongoDB-org&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;在安装的时候有可能会遇到这个问题：定位不到本地的 MongoDB-org 的安装包，可能是因为我们使用的是阿里云的服务器，所以默认的是阿里云的源。可以先把阿里云的源屏蔽掉试一下:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo vi /etc/apt/apt.conf
-# 把下面一行给注释掉，在前面加一个#号即可：
-Acquire::http::Proxy &amp;quot;http://mirrors.aliyun.com/&amp;quot;;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/blockquote&gt;
-
-&lt;ol&gt;
-&lt;li&gt;开启命令：&lt;code&gt;sudo service mongod start&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;查看 MongoDB 是否成功开始服务，使用 &lt;code&gt;cat /var/log/mongodb/mongod.log&lt;/code&gt; 查看 MongoDB 日志文件，或者直接使用命令链接一下：&lt;code&gt;mongo&lt;/code&gt; &amp;ndash;&lt;em&gt;默认情况下，运行此命令将查找在localhost接口上侦听端口27017的MongoDB服务器（如果您想连接到在不同端口上运行的MongoDB服务器，请使用-port选项。例如，如果要连接到侦听端口22222的本地MongoDB服务器，则会发出以下命令：&lt;code&gt;mongo --port 22222&lt;/code&gt;）&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;如果没有成功进入 MongoDB 的命令行界面，可以检查下阿里云安全组包括本地的防火墙 27017 端口有没有开启（MongoDB 的端口是默认的 27017 端口），如果能从终端进入到 MongoDB 命令行环境，说明我们的 MongoDB 服务开启成功了。&lt;/li&gt;
-&lt;li&gt;停止数据库服务：&lt;code&gt;sudo service mongod stop&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;重启数据库服务：&lt;code&gt;sudo service mongod restart&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;检查 MongoDB 服务状态：&lt;code&gt;sudo service mongod status&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;状态统计摘要列表（连续）：&lt;code&gt;mongostat&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;状态统计摘要列表（5行，每2秒汇总）：&lt;code&gt;mongostat --rowcount 5 2&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;注：输入 &lt;code&gt;moongo&lt;/code&gt; 后，报 &lt;code&gt;BadValue Invalid or no user locale set. Please ensure LANG and/or LC_* environment variables are set correctly&lt;/code&gt;，可以 使用 &lt;code&gt;locale-gen en_US.UTF-8&lt;/code&gt; 这个命令来生成缺少的语言环境，然后重新启动 数据库&lt;/p&gt;
-
-&lt;h3 id=&#34;修改-mongodb-数据库默认运行端口&#34;&gt;修改 MongoDB 数据库默认运行端口&lt;/h3&gt;
-
-&lt;p&gt;现在服务器上 MongoDB 运行的端口是默认的 27017 端口，全世界都知道，也是出于最最基本的安全考虑。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;打开 MongoDB 数据库配置文件：&lt;code&gt;sudo vi /etc/mongod.conf&lt;/code&gt; &lt;strong&gt;输入法必须为英文&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;可以把 net 下面的 port 改成一个你喜欢的端口号，比如 19999。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;storage:
-  dbPath: /var/lib/MongoDB
-  journal:
-    enabled: true
-#  engine:
-#  mmapv1:
-#  wiredTiger:
-
-# where to write logging data.
-systemLog:
-  destination: file
-  logAppend: true
-  path: /var/log/MongoDB/mongod.log
-
-# network interfaces
-net:
-  port: 19999
-  bindIp: 127.0.0.1
-  
-#processManagement:
-#security:
-  #authorization: &#39;enabled&#39;
-
-#operationProfiling:
-#replication:
-#sharding:
-## Enterprise-Only Options:
-
-#auditLog:
-#snmp
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;保存后重启服务：&lt;code&gt;sudo service mongod restart&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;加端口号后连接：&lt;code&gt;mongo --port 19999&lt;/code&gt; &lt;em&gt;提醒：MongoDB 的运行端口是在 27017 的，这里将 MongoDB 的默认端口修改后，比如改成 19999，那么对应的 iptables 也要更新下，包括阿里云的安全组也要配置下，这里容易被遗忘。&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;本地线上的数据导入导出&#34;&gt;本地线上的数据导入导出&lt;/h3&gt;
-
-&lt;h4 id=&#34;本地安装-和运行-mongodb&#34;&gt;本地安装 和运行 mongodb&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;可以现在本地搭建一个数据库，使用 &lt;code&gt;brew&lt;/code&gt; 来安装 &lt;code&gt;mongodb&lt;/code&gt;：&lt;code&gt;brew install mongodb&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;创建一个数据库存储目录：&lt;code&gt;sudo mkdir -p /data/db&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;启动 mongodb，默认数据库目录即为 /data/db：&lt;code&gt;sudo mongod&lt;/code&gt; || &lt;code&gt;brew services start mongodb&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;重新启动：&lt;code&gt;brew services restart mongodb&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;往线上空库导入单表数据或数据库&#34;&gt;往线上空库导入单表数据或数据库&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;把本地数据导入到本地数据库：&lt;code&gt;mongorestore -p 27017 -d [dbnames] [file-path]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;对本地数据库进行整库备份，把数据库导入 &lt;code&gt;[local-file-name]&lt;/code&gt; 下，然后在压缩打包成 &lt;code&gt;[file-name].tar.gz&lt;/code&gt; 文件包&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mongodump -h 127.0.0.1:27017 -d [dbname] -o [local-file-path]
-
-# tar 是打包
-# tar zxvf 解压
-# tar zcvf 压缩
-# tar xvf 解压
-tar zcvf [file-name].tar.gz [local-file-name]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;通过 &lt;code&gt;scp&lt;/code&gt; 上传到服务器 &lt;code&gt;scp -P 39999 ./imooc-movie.tar.gz rn_manager@116.62.201.97:/home/rn_manager/loaclBD/&lt;/code&gt;。注：服务器上找不到目录可以新建一个目录&lt;/li&gt;
-&lt;li&gt;使用  &lt;code&gt;tar xvf ./loaclBD/imooc-movie.tar.gz&lt;/code&gt; 解压&lt;/li&gt;
-&lt;li&gt;使用 &lt;code&gt;mongorestore --host 127.0.0.1:19999 -d imooc-movie ./imooc-movie/imooc-movie/&lt;/code&gt; 导入数据到数据库中 &lt;em&gt;服务器上操作，执行这个命令时在当前目录下不能有 db 这个目录&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;为非空数据库导入数据&#34;&gt;为非空数据库导入数据&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;例如需要为一个已有的数据库导入一张或者几张单表，这种情况适用于：新增一些用户列表，新增一些创意数据，或者初始化一些管理员角色等。&lt;/li&gt;
-&lt;li&gt;有一个 xxx 的用户，它是有超级权限的，我们希望通过本地的这张用户表导入到线上以后，等到应用发布了，这个应用就默认拥有了一个 xxx 的高权限用户，通过它就能管理应用的数据。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-&lt;li&gt;首先，需要在本地把这张用户表导出来：&lt;code&gt;mongoexport -d imooc-movie -c users -q &#39;{&amp;quot;name&amp;quot;: {$ne: null}}&#39; -o ./movie-users.json&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;然后上传这张表到服务器：&lt;code&gt;scp -P 39999 ./movie-users.json rn_manager@116.62.201.97:/home/rn_manager/loaclBD/&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;然后登录到服务器上导入用户数据：&lt;code&gt;mongoimport --host 127.0.0.1:19999 -d imooc-movie -c users ./movie-users.json&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;如果导入了数据库之后后悔了，可以通过 &lt;code&gt;mongo --host 127.0.0.1:19999 imooc-movie --eval &amp;quot;db.dropDatabase()&amp;quot;&lt;/code&gt; 命令来删除数据库&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&#34;为项目配置数据库读写权限&#34;&gt;为项目配置数据库读写权限&lt;/h4&gt;
-
-&lt;p&gt;MongoDB 权限系统有一个大概的了解：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;MongoDB 是没有默认管理员账号，所以要先添加管理员账号，再开启权限认证。&lt;/li&gt;
-&lt;li&gt;只有在切换到 admin 数据库后，添加的账号才是管理员账号。&lt;/li&gt;
-&lt;li&gt;用户只能在用户所在数据库登录，包括管理员账号。&lt;/li&gt;
-&lt;li&gt;管理员可以管理所有数据库，但是不能直接管理其他数据库，要先在 admin 数据库认证后才可以。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-&lt;li&gt;首先是对整个 MongoDB 的数据库设立一个超级权限，其实就是一个管理员，&lt;code&gt;mongo -p 19999&lt;/code&gt;  从服务器进入到数据库命令行模式：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 切换到 admin
-use admin
-# 创建管理员权限的账号
-# db.createUser({user: &#39;dba&#39;,pwd:&#39;123456.!$&#39;,roles:[{role:&#39;root&#39;,db:&#39;admin&#39;}]})
-db.createUser({user: &#39;test_owner&#39;,pwd:&#39;123456.!$&#39;,roles:[{role:&#39;userAdminAnyDatabase&#39;,db:&#39;admin&#39;}]})
-&amp;gt; Successfully added user: {
-    &amp;quot;user&amp;quot; : &amp;quot;test_owner&amp;quot;,
-    &amp;quot;roles&amp;quot; : [
-      {
-        &amp;quot;role&amp;quot; : &amp;quot;userAdminAnyDatabase&amp;quot;,
-        &amp;quot;db&amp;quot; : &amp;quot;admin&amp;quot;
-      }
-    ]
-  }
-# 用刚创建的用户授权进入
-db.auth(&#39;test_owner&#39;, &#39;123456.!$&#39;)
-# 切换到业务数据库
-use imooc-movie
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;然后添加普通用户，配置应用调用权限&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 为业务数据库添加一个读写权限的账号
-db.createUser({user:&#39;ordinary_test&#39;,pwd:&#39;123456.f&#39;,roles:[{role:&#39;readWrite&#39;,db:&#39;imooc-movie&#39;}]})
-&amp;gt; Successfully added user: {
-    &amp;quot;user&amp;quot; : &amp;quot;ordinary_test&amp;quot;,
-    &amp;quot;roles&amp;quot; : [
-      {
-        &amp;quot;role&amp;quot; : &amp;quot;readWrite&amp;quot;,
-        &amp;quot;db&amp;quot; : &amp;quot;imooc-movie&amp;quot;
-      }
-    ]
-  }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;再为这个数据库创建一个备份角色，权限配置为可读&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;db.createUser({user: &#39;imooc_movie_wheel&#39;, pwd: &#39;123456..&#39;, roles: [{role: &#39;read&#39;, db: &#39;imooc-movie&#39;}]})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;开启验证模式，打开配置文件：&lt;code&gt;sudo vi /etc/mongod.conf&lt;/code&gt; &lt;em&gt;Mac 上输入 &lt;code&gt;brew list mongodb&lt;/code&gt; 找到安装目录，然后进一步找到配置文件&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#security:
-  #authorization: enabled
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;把上面这 2 行代码的注释拿掉，如果没有的话，需要输入这 2 行来配置 MongoDB 的认证模式，然后，按下 esc 键，同时按下 shift + 冒号键，输入 wq! 回车就保存了，再把 MongoDB 重启一下，用刚才介绍的命令：&lt;code&gt;sudo service mongod restart&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;对数据库建立自动备份&#34;&gt;对数据库建立自动备份&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;先来创建存放任务文件的目录和目标文件：&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo mkdir -p /www/tasks
-sudo touch /www/tasks/movie.backup.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;用来存放备份文件的目录也可以创建下：&lt;code&gt;sudo mkdir -p /www/dbbackup/movie/&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;编辑这个备份脚本：&lt;code&gt;sudo vi /www/tasks/movie.backup.sh&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/sh
-
-#备份数据库目录 根据自己的需求确定路径
-backUpsFolder=/www/dbbackup/movie/
-
-date_now=`date +%Y_%m_%d_%H%M`
-backFileName=movie_$date_now
-
-#进入备份文件夹，这个文件夹，如果大家在公司或者自己重要的项目里面，可以放到数据盘上，
-#而不是这样扔到系统盘上，我们现在为了节约成本，是放到系统盘上的
-
-cd $backUpsFolder
-
-mkdir -p $backFileName
-
-#导出
-
-MongoDBdump -h 127.0.0.1:19999 -d imooc-movie -o $backFileName
-
-tar zcvf $backFileName.tar.gz $backFileName
-
-MongoDBdump -h 127.0.0.1:19999 -d imooc-movie -o $backFileName
-#清理
-rm -rf $backFileName
-
-#在备份到本地之后，我们最好把这个数据库，再传到一个私密的云端上，比如七牛或者阿里云对象上，
-#这样就多了一重备份，万一哪一天这个服务器磁盘坏了，我们也可以有云端的备份来恢复数据。
-
-NODE_ENV=$backUpsFolder@$backFileName node /www/tasks/upload.js
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;通过 crontab 设置定时任务：&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 启动 crontab 对话窗口
-crontab -e
-
-# 第一次使用会 
-# o crontab for rn_manager - using an empty one
-# 
-# Select an editor.  To change later, run &#39;select-editor&#39;.
-#   1. /bin/ed
-#   2. /bin/nano        &amp;lt;---- easiest
-#   3. /usr/bin/vim.basic
-#   4. /usr/bin/vim.tiny
-# 
-# Choose 1-4 [2]: 3
-
-59 23 * * * sh /home/imooc_manager/tasks/movie.backup.sh
-
-00 4 * * * sh /www/bash.tasks/backup.sh
-00 8 * * * sh /www/bash.tasks/backup.sh
-00 12 * * * sh /www/bash.tasks/backup.sh
-00 16 * * * sh /www/bash.tasks/backup.sh
-00 20 * * * sh /www/bash.tasks/backup.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;上传数据库备份到七牛&#34;&gt;上传数据库备份到七牛&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;创建一个上传脚本 &lt;code&gt;upload.js&lt;/code&gt;: &lt;code&gt;sudo touch /www/tasks/upload.js&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;upload.js 文件和 &lt;code&gt;movie.backup.sh&lt;/code&gt; 处在同一个目录下，&lt;code&gt;movie.backup.sh&lt;/code&gt; 最后一行调用了 upload.js 文件，这样定时任务在执行 &lt;code&gt;movie.backup.sh&lt;/code&gt; 脚本文件的时候会自动备份数据库，并自动上传到七牛云。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var qiniu = require(&#39;qiniu&#39;)
-
-// 首先通过获取启动 Node 的服务时候传过来的环境变量
-var parts = env.split(&#39;@&#39;)
-var file = parts[1] + &#39;.tar.gz&#39;
-var filePath = parts[0] + &#39;/&#39; + file
-
-//需要填写你的 Access Key 和 Secret Key
-qiniu.conf.ACCESS_KEY = &#39;Access_Key&#39;;
-qiniu.conf.SECRET_KEY = &#39;Secret_Key&#39;;
-
-//要上传的空间
-bucket = &#39;imoocdeploydb&#39;
-
-//构建上传策略函数
-function uptoken(bucket, key) {
-  var putPolicy = new qiniu.rs.PutPolicy(bucket + &#39;:&#39; + file);
-  return putPolicy.token()
-}
-
-//生成上传 Token
-token = uptoken(bucket, key)
-
-//构造上传函数
-function uploadFile(uptoken, key, localFile) {
-  var extra = new qiniu.io.PutExtra()
-  
-  qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
-      if(!err) {
-        // 上传成功， 处理返回值
-        console.log(ret.hash, ret.key, ret.persistentId)       
-      }
-      else {
-        // 上传失败， 处理返回代码
-        console.log(err)
-      }
-  })
-}
-
-//调用uploadFile上传
-uploadFile(token, file, filePath)
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>搭建 Node.js 与阿里云 Alinode 环境</title>
-      <link>/2019/%E6%90%AD%E5%BB%BAnode.js%E4%B8%8E%E9%98%BF%E9%87%8C%E4%BA%91alinode%E7%8E%AF%E5%A2%83/</link>
-      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E6%90%AD%E5%BB%BAnode.js%E4%B8%8E%E9%98%BF%E9%87%8C%E4%BA%91alinode%E7%8E%AF%E5%A2%83/</guid>
-      <description>
-
-&lt;h3 id=&#34;搭建-node-js-环境&#34;&gt;搭建 Node.js 环境&lt;/h3&gt;
-
-&lt;h4 id=&#34;系统更新-安装基础包&#34;&gt;系统更新，安装基础包&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get update
-sudo apt-get install vim openssl build-essential libssl-dev wget curl git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;安装-node-js&#34;&gt;安装 node.js&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;使用 &lt;code&gt;nvm&lt;/code&gt; 这个工具，方便升级和管理 node.js 版本 &lt;code&gt;curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;安装 node.js&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;nvm install v10.14.2
-nvm use v10.14.2
-nvm alias default v10.14.2
-node -v
-v10.14.2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;安装-阿里云的-alinode&#34;&gt;安装 阿里云的 alinode&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;或者可以直接安装阿里云的 alinode，这也是我推荐给大家的 Node，因为它对 Node 做了必要的定制，可以无缝接入到 alinode 的监控中心，对于 &lt;strong&gt;多机器多应用运维&lt;/strong&gt; 非常有用。大家可以参考 &lt;a href=&#34;https://help.aliyun.com/document_detail/60338.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;alinode 安装文档&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;安装一些常用的全局工具包&#34;&gt;安装一些常用的全局工具包&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;可以配置一个简单的 registry 参数来指定使用国内的 taobao 镜像来下载： &lt;code&gt;npm --registry=https://registry.npm.taobao.org install -g npm&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;npm install pm2 -g
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>配置Nginx反向代理Node.js端口</title>
-      <link>/2019/%E9%85%8D%E7%BD%AEnginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86node.js%E7%AB%AF%E5%8F%A3/</link>
-      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/%E9%85%8D%E7%BD%AEnginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86node.js%E7%AB%AF%E5%8F%A3/</guid>
-      <description>
-
-&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install nginx
-sudo vi /etc/nginx/sites-available/default
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;安装完毕后，检查下 Nginx 的版本：&lt;code&gt;nginx -v&lt;/code&gt;。这个版本号通常可以在 Web 端的 header 里看到。安全起见，可以通过配置隐藏掉，如下打开 nginx.conf 文件：&lt;code&gt;sudo vi /etc/nginx/nginx.conf&lt;/code&gt;，把&lt;code&gt;nginx.conf&lt;/code&gt; 文件中的&lt;code&gt;server_tokens on&lt;/code&gt; 改成 &lt;code&gt;server_tokens off&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;配置-nginx-反向代理-node-js-端口&#34;&gt;配置 Nginx 反向代理 Node.js 端口&lt;/h3&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;我们的网站静态服务是跑在 4321 端口上的，直接通过 80 端口无法启动，原因是我们 rn_manager 下的 Node 并不具备 root 的运行权限，不能监听 0 ~ 1024 之间的端口，当然也包括 80 端口。通过 sudo 来强制启动 Node 服务也不是不可以，但是，这多少会带来一些额外的成本和风险：一是我们需要额外配置，二是需要放大 Node 程序的权限。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;用 ip 访问，使用 nginx，用 root 级的权限来启动对 80 端口的监听，同时把来自 80 端口的流量分配给 Node 服务的另外一个端口，实现这种服务的代理。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;如果服务器只需放一个网站程序，那么解析网站到服务器网址，网站程序监听 80 端口即可。如果服务器有多个应用（你有多个网站），借助 Nginx 不仅可以实现端口代理，还可以实现负载均衡，由它来判断是来自哪个域名或 IP 的访问，从而根据配置的规则，将这个请求原封不动地转发给特定的端口或特定的某几台机器。在我们的这个案例中，就是把 80 端口的 IP 请求都转发到 Node.js 的 8081 端口。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;第一步要在 /etc/nginx/conf.d 文件夹下面新增一个配置文件：&lt;code&gt;sudo vi  /etc/nginx/conf.d/imooc-com-4321.conf&lt;/code&gt;(看一下配置文件，就可以知道哪个域名对应到哪个端口)，详细配置如下：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;# 通过 upstream 我们可以设定一个简单的负载均衡策略，以应对将来可能的升级
-# 首先定义一个 server 集群 gougou，里面可以加多个 server，每个 server 对应的值可以用域名，也可以直接用 IP，但我们通常不会用 IP 来访问，而是通过域名:
-
-upstream imooc {
-    server 127.0.0.1:4321;
-}
-
-server {
-    listen 80;
-    server_name test1.luck-year.top;
-
-    # Gzip Compression
-    gzip on;
-    gzip_comp_level 6;
-    gzip_vary on;
-    gzip_min_length  1000;
-    gzip_proxied any;
-    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
-    gzip_buffers 16 8k;
-    
-    location / {
-        # remote_addr 代表客户端的 IP
-        proxy_set_header X-Real-IP $remote_addr;
-        # proxy_add_x_forwarded_for 获取真实的 IP
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        # http_host 表示请求的 host 头
-        proxy_set_header Host $http_host;
-        proxy_set_header X-NginX-Proxy true;
-      
-        # proxy_pass 指令实现代理。把域名代理到集群名上面
-        proxy_pass http://imooc;
-        proxy_redirect off;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;保存后，通过 &lt;code&gt;sudo nginx -t&lt;/code&gt;  来验证配置是否正确，有没有语法错误，然后我们把 Nginx 的服务重启一下: &lt;code&gt;sudo service nginx restart&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;访问：&lt;code&gt;http://test1.luck-year.top/&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;code&gt;server_name test1.luck-year.top&lt;/code&gt; 这个对应的耳机域名需要在 域名解析里添加记录，需要先对域名进行备案。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;/images/totalimgs/域名解析.png&#34; alt=&#34;域名解析png&#34; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;扩展&#34;&gt;扩展&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;ps -ef | grep nginx&lt;/code&gt; 查看nginx安装目录和nginx配置文件目录&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

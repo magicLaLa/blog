@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="/2019/docker-jenkins/" />
+  
+  <link rel="canonical" href="/2019/docker-gitlab/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Docker Gitlab | Magic
+       
+  </title>
+  <meta name="title" content="Docker Gitlab | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker Gitlab"/>
+<meta name="twitter:description" content="安装 Gitlab  目录类似 Jenkins，使用 docker-compose 安装  version: &#39;3&#39; services: docker-gitlab: image: &#39;twang2218/gitlab-ce-zh:9.4&#39; restart: &#39;no&#39; container_name: gitlab hostname: &#39;gitlab.xxxxx.com&#39; environment: TZ: &#39;Asia/Shanghai&#39; GITLAB_OMNIBUS_CONFIG: | external_url &#39;http://gitlab.xxxxxx.com&#39; unicorn[&#39;worker_timeout&#39;] = 60 unicorn[&#39;worker_processes&#39;] = 2 gitlab_rails[&#39;time_zone&#39;] = &#39;Asia/Shanghai&#39; gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 26 nginx[&#39;client_max_body_size&#39;] = &#39;250m&#39; ports: - &#39;81:80&#39; - &#39;443:443&#39; - &#39;26:22&#39; volumes: - /home/gitlab/gitlab_home/config:/etc/gitlab - /home/gitlab/gitlab_home/data:/var/opt/gitlab - /home/gitlab/gitlab_home/logs:/var/log/gitlab  在当前目录下运行 docker-compose up -d
+Nginx 代理 upstream gitlab { server 116.62.201.97:81; } server { listen 80; server_name gitlab."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Docker Gitlab",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2019\/docker-gitlab\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "Docker, Docker-Jenkins",
+  "wordcount":  106 ,
+  "url": "\/2019\/docker-gitlab\/",
+  "datePublished": "2019-12-02T00:00:00\x2b00:00",
+  "dateModified": "2019-12-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="/">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="/">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Docker Gitlab</h1>
+        <div class="post-meta">
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2019-12-02>2 December 2019</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/docker/"> Docker </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            1 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+<h1 id="安装-gitlab">安装 Gitlab</h1>
+
+<ul>
+<li>目录类似 Jenkins，使用 docker-compose 安装</li>
+</ul>
+
+<pre><code class="language-sh">version: '3'
+services:
+    docker-gitlab:
+      image: 'twang2218/gitlab-ce-zh:9.4'
+      restart: 'no'
+      container_name: gitlab
+      hostname: 'gitlab.xxxxx.com'
+      environment:
+        TZ: 'Asia/Shanghai'
+        GITLAB_OMNIBUS_CONFIG: |
+          external_url 'http://gitlab.xxxxxx.com'
+          unicorn['worker_timeout'] = 60
+          unicorn['worker_processes'] = 2
+          gitlab_rails['time_zone'] = 'Asia/Shanghai'
+          gitlab_rails['gitlab_shell_ssh_port'] = 26
+          nginx['client_max_body_size'] = '250m'
+      ports:
+       - '81:80'
+       - '443:443'
+       - '26:22'
+      volumes:
+       - /home/gitlab/gitlab_home/config:/etc/gitlab
+       - /home/gitlab/gitlab_home/data:/var/opt/gitlab
+       - /home/gitlab/gitlab_home/logs:/var/log/gitlab
+</code></pre>
+
+<p>在当前目录下运行 <code>docker-compose up -d</code></p>
+
+<h2 id="nginx-代理">Nginx 代理</h2>
+
+<pre><code class="language-sh">upstream gitlab {
+ server 116.62.201.97:81;
+}
+
+server {
+ listen 80;
+ server_name gitlab.xxx.com;
+
+ location / {
+  client_max_body_size 900m;
+  proxy_redirect off;
+  # 以下确保 gitlab中项目的 url 是域名而不是 http://git，不可缺少
+  proxy_set_header Host $host;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  # 反向代理到 gitlab 内置的 nginx
+  proxy_pass http://gitlab;
+  index index.html index.htm;
+ }
+}
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>106</span>
+        </p>
+
+        <p class="copyright-item">
+            
+            <span>Share:</span>
+            <span>
+
+      
+        <a href="//twitter.com/share?url=%2f2019%2fdocker-gitlab%2f&amp;text=Docker%20Gitlab&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2fdocker-gitlab%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2fdocker-gitlab%2f&amp;appkey=&amp;title=Docker%20Gitlab" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+        </p>
+        
+
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/docker/">
+                    #Docker</a></span>
+            
+            <span class="tag"><a href="/tags/docker-jenkins/">
+                    #Docker-Jenkins</a></span>
+            
+        </section>
+        
+        <section>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/docker-jenkins/" class="prev" rel="prev" title="Docker Jenkins"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;Docker Jenkins</a>
+        
+        
+    </div>
+
+    <div class="post-comment">
+        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+        
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

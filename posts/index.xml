@@ -6,10 +6,31 @@
     <description>Recent content in Posts on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker Gitlab</title>
+      <link>/2019/docker-gitlab/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/docker-gitlab/</guid>
+      <description>安装 Gitlab  目录类似 Jenkins，使用 docker-compose 安装  version: &#39;3&#39; services: docker-gitlab: image: &#39;twang2218/gitlab-ce-zh:9.4&#39; restart: &#39;no&#39; container_name: gitlab hostname: &#39;gitlab.xxxxx.com&#39; environment: TZ: &#39;Asia/Shanghai&#39; GITLAB_OMNIBUS_CONFIG: | external_url &#39;http://gitlab.xxxxxx.com&#39; unicorn[&#39;worker_timeout&#39;] = 60 unicorn[&#39;worker_processes&#39;] = 2 gitlab_rails[&#39;time_zone&#39;] = &#39;Asia/Shanghai&#39; gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 26 nginx[&#39;client_max_body_size&#39;] = &#39;250m&#39; ports: - &#39;81:80&#39; - &#39;443:443&#39; - &#39;26:22&#39; volumes: - /home/gitlab/gitlab_home/config:/etc/gitlab - /home/gitlab/gitlab_home/data:/var/opt/gitlab - /home/gitlab/gitlab_home/logs:/var/log/gitlab  在当前目录下运行 docker-compose up -d
+Nginx 代理 upstream gitlab { server 116.62.201.97:81; } server { listen 80; server_name gitlab.</description>
+    </item>
+    
+    <item>
+      <title>Docker Jenkins</title>
+      <link>/2019/docker-jenkins/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/docker-jenkins/</guid>
+      <description>安装 jenkins 在安装jenkins我选择了使用docker-compose，docker-compose 是一个用来把 docker 自动化的东西
+有了 docker-compose 你可以把所有繁复的 docker 操作全都一条命令，自动化的完成。
+首先我们需要在服务器上创建一个目录机构 /home/jenkins - docker-compose.yml - jenkins-home  接下来我们来编写 docker-compose.yml 安装jenkins version: &#39;3&#39; # 指定 docker-compose.yml 文件的写法格式 services: # 多个容器集合 docker_jenkins: user: root # 为了避免一些权限问题 在这我使用了root restart: always # 重启方式 image: jenkins/jenkins:lts # 指定服务所使用的镜像 在这里我选择了 LTS (长期支持) container_name: jenkins # 容器名称 ports: # 对外暴露的端口定义 - &#39;8899:8080&#39; - &#39;50000:50000&#39; volumes: # 卷挂载路径 - /home/jenkins/jenkins_home/:/var/jenkins_home # 这是我们一开始创建的目录挂载到容器内的jenkins_home目录 - /var/run/docker.sock:/var/run/docker.sock - /usr/bin/docker:/usr/bin/docker # 这是为了我们可以在容器内使用docker命令 - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose # 同样的这是为了使用docker-compose命令  我们需要进入到 jenkins 目录下执行：docker-compose up -d，开启守护进程后台执行(停止 docker-compose down)这个命令会帮我们自动拉取镜像并配置，不出意外你现在可以打开你的服务器地址 http://xxxxxxx:端口号 就能看到这个界面：</description>
+    </item>
     
     <item>
       <title>链表-leetCode-删除链表中的节点</title>
@@ -52,6 +73,18 @@ declare var am: any; // 支付宝 declare interface Window { ap: any; // 支付�
       <description>设计链表 描述 设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针/引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。
 在链表类中实现这些功能：
  get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。 addAtHead(val)：在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。 addAtTail(val)：将值为 val 的节点追加到链表的最后一个元素。 addAtIndex(index,val)：在链表中的第 index 个节点之前添加值为 val 的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点。 deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。  分析 // 假设链表为 5 -&amp;gt; 3 &amp;gt; 1 { val: 5, next: { val: 3, next: { val: 1, next: null } } } // 双链表的结构就会多一个prev  一、数组（不推荐） class MyLinkedList { constructor() { this.</description>
+    </item>
+    
+    <item>
+      <title>Docker 相关</title>
+      <link>/2019/docker/</link>
+      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/docker/</guid>
+      <description>Docker 相关 服务器环境: ubuntu16
+使用APT安装 sudo apt-get update sudo apt-get install apt-transport-https ca-certificates curl software-properties-common  添加软件源的 GRP 密钥
+curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add - # 官方源 # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  然后，我们需要向 source.list 中添加 Docker 软件源
+$ sudo add-apt-repository &amp;quot;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable&amp;quot; # 官方源 # $ sudo add-apt-repository &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&amp;quot;  以上命令会添加稳定版本的 Docker CE APT 镜像源，如果需要测试或每日构建版本的 Docker CE 请将 stable 改为 test 或者 nightly。</description>
     </item>
     
     <item>
@@ -271,6 +304,15 @@ Since PM2’s deployment command runs on a non-interactive SSH connection, we ne
     </item>
     
     <item>
+      <title>Shadowsocks安装流程</title>
+      <link>/2019/shadowsocks%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/shadowsocks%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B/</guid>
+      <description> 安装  wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh。注意 (warning) : 国外服务器运行脚本时容易出错，如出现错误提示 bash: wget: command not found，可以请在先执行 yum -y install wget 命令。成功后，再执行上面的命令。如果没有出现提示错误，请略过。 chmod +x shadowsocks-all.sh ./shadowsocks-all.sh 2&amp;gt;&amp;amp;1 | tee shadowsocks-all.log  </description>
+    </item>
+    
+    <item>
       <title>ua检测</title>
       <link>/2019/ua%E6%A3%80%E6%B5%8B/</link>
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
@@ -317,15 +359,6 @@ loader: &#39;babel-loader?cacheDirectory=true&#39;  抽离第三库  DllPlugin�
       
       <guid>/2018/local-stroge/</guid>
       <description>设置本地存储  function setStorage(key: string, value: any) { try { localStorage.setItem(key, JSON.stringify({ data: value, time: Date.now(), })); } catch { console.log(&#39;localStorage.setItem error&#39;); console.log(key, value); } }   获取本地存储  // 注意：stringify 会过滤掉undefined的值 function getStorage(key: string) { const result = localStorage.getItem(key); if (result) { try { const objRes = JSON.parse(result); return objRes; } catch (e) { console.log(&#39;JSON.parse error:&#39;, result); return result; } } else { return result; } }   删除本地存储  function removeStorage(key: string) { localStorage.</description>
-    </item>
-    
-    <item>
-      <title>Docker 相关</title>
-      <link>/2018/docker/</link>
-      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/docker/</guid>
-      <description> Docker 相关 搭建 gitLab 搜索镜像 docker search gitlab-ce  查看镜像 docker images  </description>
     </item>
     
     <item>

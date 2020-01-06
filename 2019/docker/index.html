@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" />
+  <link rel="next" href="/2019/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/" />
+  <link rel="canonical" href="/2019/docker/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Docker 相关 | Magic
+       
+  </title>
+  <meta name="title" content="Docker 相关 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker 相关"/>
+<meta name="twitter:description" content="Docker 相关 服务器环境: ubuntu16
+使用APT安装 sudo apt-get update sudo apt-get install apt-transport-https ca-certificates curl software-properties-common  添加软件源的 GRP 密钥
+curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add - # 官方源 # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  然后，我们需要向 source.list 中添加 Docker 软件源
+$ sudo add-apt-repository &quot;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot; # 官方源 # $ sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot;  以上命令会添加稳定版本的 Docker CE APT 镜像源，如果需要测试或每日构建版本的 Docker CE 请将 stable 改为 test 或者 nightly。"/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Docker 相关",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2019\/docker\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "Docker",
+  "wordcount":  363 ,
+  "url": "\/2019\/docker\/",
+  "datePublished": "2019-09-02T00:00:00\x2b00:00",
+  "dateModified": "2019-09-02T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="/">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="/">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Docker 相关</h1>
+        <div class="post-meta">
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2019-09-02>2 September 2019</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/docker/"> Docker </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            2 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        
+
+<h1 id="docker-相关">Docker 相关</h1>
+
+<p><em>服务器环境: ubuntu16</em></p>
+
+<h2 id="使用apt安装">使用APT安装</h2>
+
+<pre><code class="language-sh">sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+</code></pre>
+
+<p>添加软件源的 GRP 密钥</p>
+
+<pre><code class="language-sh">curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+# 官方源
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+</code></pre>
+
+<p>然后，我们需要向 source.list 中添加 Docker 软件源</p>
+
+<pre><code class="language-sh">$ sudo add-apt-repository &quot;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot;
+
+# 官方源
+# $ sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot;
+</code></pre>
+
+<p>以上命令会添加稳定版本的 Docker CE APT 镜像源，如果需要测试或每日构建版本的 Docker CE 请将 stable 改为 test 或者 nightly。</p>
+
+<h2 id="安装-docker-ce">安装 Docker CE</h2>
+
+<p>更新 apt 软件包缓存，并安装 docker-ce</p>
+
+<pre><code class="language-sh">sudo apt-get update
+sudo apt-get install docker-ce
+</code></pre>
+
+<h3 id="使用脚本自动安装">使用脚本自动安装</h3>
+
+<p>在测试或开发环境中 Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，Ubuntu 系统上可以使用这套脚本安装：</p>
+
+<pre><code class="language-sh">curl -fsSL get.docker.com -o get-docker.sh
+sudo sh get-docker.sh --mirror Aliyun
+</code></pre>
+
+<h3 id="启动-docker-ce">启动 Docker CE</h3>
+
+<pre><code class="language-sh">sudo systemctl enable docker
+sudo systemctl start docker
+</code></pre>
+
+<h3 id="建立-docker-用户组">建立 Docker 用户组</h3>
+
+<p>默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。因此，更好地做法是将需要使用 docker 的用户加入 docker 用户组。</p>
+
+<p>建立 docker 组：<code>sudo groupadd docker</code>，将当前用户加入 docker 组：<code>sudo usermod -aG docker $USER</code>，退出当前终端并重新登录，进行如下测试。</p>
+
+<h3 id="测试-docker-是否安装正确">测试 Docker 是否安装正确</h3>
+
+<pre><code class="language-sh">docker run hello-world
+# Unable to find image 'hello-world:latest' locally
+#     latest: Pulling from library/hello-world
+#     d1725b59e92d: Pull complete
+#     Digest: sha256:0add3ace90ecb4adbf7777e9aacf18357296e799f81cabc9fde470971e499788
+#     Status: Downloaded newer image for hello-world:latest
+#     
+#     Hello from Docker!
+#     This message shows that your installation appears to be working correctly.
+#     
+#     To generate this message, Docker took the following steps:
+#      1. The Docker client contacted the Docker daemon.
+#      2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
+#         (amd64)
+#      3. The Docker daemon created a new container from that image which runs the
+#         executable that produces the output you are currently reading.
+#      4. The Docker daemon streamed that output to the Docker client, which sent it
+#         to your terminal.
+#     
+#     To try something more ambitious, you can run an Ubuntu container with:
+#      $ docker run -it ubuntu bash
+#     
+#     Share images, automate workflows, and more with a free Docker ID:
+#      https://hub.docker.com/
+#     
+#     For more examples and ideas, visit:
+#      https://docs.docker.com/get-started/
+</code></pre>
+
+<p>若能正常输出以上信息，则说明安装成功。</p>
+
+<h3 id="镜像加速">镜像加速</h3>
+
+<p>如果在使用过程中发现拉取 Docker 镜像十分缓慢，可以配置 Docker 国内镜像加速。</p>
+
+<p><a href="https://cr.console.aliyun.com/cn-shanghai/instances/mirrors" rel="nofollow noreferrer" target="_blank">阿里云镜像加速</a></p>
+
+<h1 id="安装-docker-compose">安装 docker-compose</h1>
+
+<p><a href="https://docs.docker.com/compose/install/#install-compose" rel="nofollow noreferrer" target="_blank">参考文档</a></p>
+
+<h3 id="运行此命令以下载docker-compose的当前稳定版本">运行此命令以下载Docker Compose的当前稳定版本</h3>
+
+<pre><code class="language-sh">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+</code></pre>
+
+<h3 id="对二进制文件应用可执行权限">对二进制文件应用可执行权限</h3>
+
+<pre><code class="language-sh">sudo chmod +x /usr/local/bin/docker-compose
+</code></pre>
+
+<h3 id="查看版本">查看版本</h3>
+
+<pre><code class="language-sh">docker-compose --version
+</code></pre>
+
+<h1 id="搜索镜像">搜索镜像</h1>
+
+<pre><code class="language-sh">docker search gitlab-ce
+</code></pre>
+
+<h1 id="查看镜像">查看镜像</h1>
+
+<pre><code class="language-sh">docker images
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>363</span>
+        </p>
+
+        <p class="copyright-item">
+            
+            <span>Share:</span>
+            <span>
+
+      
+        <a href="//twitter.com/share?url=%2f2019%2fdocker%2f&amp;text=Docker%20%e7%9b%b8%e5%85%b3&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2019%2fdocker%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=%2f2019%2fdocker%2f&amp;appkey=&amp;title=Docker%20%e7%9b%b8%e5%85%b3" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+        </p>
+        
+
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/docker/">
+                    #Docker</a></span>
+            
+        </section>
+        
+        <section>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" class="prev" rel="prev" title="链表-leetCode-两数相加"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;链表-leetCode-两数相加</a>
+        
+        
+        <a href="/2019/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/" class="next" rel="next"
+            title="链表-leetCode-设计链表">链表-leetCode-设计链表&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+        
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>
