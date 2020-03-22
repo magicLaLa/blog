@@ -10,8 +10,8 @@
   
   
   
-  <link rel="prev" href="/2017/vue-blind-spot/" />
-  <link rel="next" href="/2017/vue-watch/" />
+  <link rel="prev" href="/2017/debugtools/" />
+  <link rel="next" href="/2017/vue-blind-spot/" />
   <link rel="canonical" href="/2017/vue/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Vue配置相关"/>
-<meta name="twitter:description" content="Vue配置相关 代理配置 module.exports = { ........, dev: { // 开发环境配置 env: require(&#39;./dev.env&#39;), // 使用 config/dev.env.js 中定义的编译环境 port: 8686, // 运行测试页面的端口号 autoOpenBrowser: true, assetsSubDirectory: &#39;static&#39;, // 编译输出的二级目录 assetsPublicPath: &#39;/&#39;, // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名 // 需要 proxyTable 代理的接口（可跨域） proxyTable: { &#39;**&#39;: { target: &#39;https://xxxxxxx&#39;, changeOrigin: true, filter: function (pathname, req) { // 接口地址 /******-server/****/****** return pathname.match(&#39;^\/.&#43;-server.*&#39;) } } }, cssSourceMap: false } }  多入口配置 /* utils.js */ const path = require(&#39;path&#39;); // glob 是 webpack 安装时依赖的一个第三方模块，还模块允许你使用 * 等符号, // 例如 lib/*."/>
+<meta name="twitter:description" content="Vue配置相关 代理配置 module.exports = {........,dev: { // 开发环境配置 env: require(&#39;./dev.env&#39;), // 使用 config/dev.env.js 中定义的编译环境 port: 8686, // 运行测试页面的端口号 autoOpenBrowser: true,assetsSubDirectory: &#39;static&#39;, // 编译输出的二级目录 assetsPublicPath: &#39;/&#39;, // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名 // 需要 proxyTable 代理的接口（可跨域） proxyTable: {&#39;**&#39;: {target: &#39;https://xxxxxxx&#39;,changeOrigin: true,filter: function (pathname, req) {// 接口地址 /******-server/****/****** return pathname.match(&#39;^\/.&#43;-server.*&#39;)}}},cssSourceMap: false}}多入口配置 /* utils."/>
 
   <script type="application/ld+json">
 {
@@ -164,225 +164,201 @@
         
         
 
-        
-
-<h2 id="vue配置相关">Vue配置相关</h2>
-
+        <h2 id="vue配置相关">Vue配置相关</h2>
 <h3 id="代理配置">代理配置</h3>
-
-<pre><code class="language-js">module.exports = {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
   ........,
-  dev: {      // 开发环境配置
-    env: require('./dev.env'),      // 使用 config/dev.env.js 中定义的编译环境
-    port: 8686,     // 运行测试页面的端口号
-    autoOpenBrowser: true,
-    assetsSubDirectory: 'static',     // 编译输出的二级目录
-    assetsPublicPath: '/',      // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
-    // 需要 proxyTable 代理的接口（可跨域）
-    proxyTable: {
-      '**': {
-        target: 'https://xxxxxxx',
-        changeOrigin: true,
-        filter: function (pathname, req) {
-          // 接口地址 /******-server/****/******
-          return pathname.match('^\/.+-server.*')
+  <span style="color:#a6e22e">dev</span><span style="color:#f92672">:</span> {      <span style="color:#75715e">// 开发环境配置
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">env</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;./dev.env&#39;</span>),      <span style="color:#75715e">// 使用 config/dev.env.js 中定义的编译环境
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">8686</span>,     <span style="color:#75715e">// 运行测试页面的端口号
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">autoOpenBrowser</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+    <span style="color:#a6e22e">assetsSubDirectory</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;static&#39;</span>,     <span style="color:#75715e">// 编译输出的二级目录
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">assetsPublicPath</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/&#39;</span>,      <span style="color:#75715e">// 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 需要 proxyTable 代理的接口（可跨域）
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">proxyTable</span><span style="color:#f92672">:</span> {
+      <span style="color:#e6db74">&#39;**&#39;</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">target</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;https://xxxxxxx&#39;</span>,
+        <span style="color:#a6e22e">changeOrigin</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+        <span style="color:#a6e22e">filter</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pathname</span>, <span style="color:#a6e22e">req</span>) {
+          <span style="color:#75715e">// 接口地址 /******-server/****/******
+</span><span style="color:#75715e"></span>          <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pathname</span>.<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">&#39;^\/.+-server.*&#39;</span>)
         }
       }
     },
-    cssSourceMap: false
+    <span style="color:#a6e22e">cssSourceMap</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
   }
 }
-</code></pre>
+</code></pre></div><h3 id="多入口配置">多入口配置</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* utils.js */</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
 
-<h3 id="多入口配置">多入口配置</h3>
+<span style="color:#75715e">// glob 是 webpack 安装时依赖的一个第三方模块，还模块允许你使用 * 等符号,
+</span><span style="color:#75715e">// 例如 lib/*.js 就是获取 lib 文件夹下的所有 js 后缀名的文件
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">glob</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;glob&#39;</span>);
 
-<pre><code class="language-js">/* utils.js */
-const path = require('path');
+<span style="color:#75715e">// 取得相应的页面路径，因为之前的配置，所以是 src 文件夹下的 pages 文件夹
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">PAGE_PATH</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;../src/pages&#39;</span>);
 
-// glob 是 webpack 安装时依赖的一个第三方模块，还模块允许你使用 * 等符号,
-// 例如 lib/*.js 就是获取 lib 文件夹下的所有 js 后缀名的文件
-const glob = require('glob');
+<span style="color:#75715e">/*
+</span><span style="color:#75715e">* 多入口配置
+</span><span style="color:#75715e">* 通过 glob 模块读取 pages 文件夹下的所有对应文件夹下的 js * 后缀文件，如果该文件存在
+</span><span style="color:#75715e">* 那么就作为入口处理
+</span><span style="color:#75715e">*/</span>
+<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">getEntries</span> <span style="color:#f92672">=</span> () =&gt; {
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">entryFiles</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">glob</span>.<span style="color:#a6e22e">sync</span>(<span style="color:#a6e22e">PAGE_PATH</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/*/*.js&#39;</span>) <span style="color:#75715e">// 同步读取所有入口文件
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> {}
 
-// 取得相应的页面路径，因为之前的配置，所以是 src 文件夹下的 pages 文件夹
-const PAGE_PATH = path.resolve(__dirname, '../src/pages');
+  <span style="color:#75715e">// 遍历所有入口文件
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">entryFiles</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">filePath</span> =&gt; {
+    <span style="color:#75715e">// 获取文件名
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">substring</span>(<span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">lastIndexOf</span>(<span style="color:#e6db74">&#39;\/&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">lastIndexOf</span>(<span style="color:#e6db74">&#39;.&#39;</span>))
 
-/*
-* 多入口配置
-* 通过 glob 模块读取 pages 文件夹下的所有对应文件夹下的 js * 后缀文件，如果该文件存在
-* 那么就作为入口处理
-*/
-exports.getEntries = () =&gt; {
-  let entryFiles = glob.sync(PAGE_PATH + '/*/*.js') // 同步读取所有入口文件
-  let map = {}
-
-  // 遍历所有入口文件
-  entryFiles.forEach(filePath =&gt; {
-    // 获取文件名
-    let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
-
-    // 以键值对的形式存储
-    map[filename] = filePath
+    <span style="color:#75715e">// 以键值对的形式存储
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">filename</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">filePath</span>
   })
 
-  return map
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">map</span>
 }
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>上方我们使用了 <code>glob</code> 这一第三方模块读取所有 pages 文件夹下的入口文件，其需要进行安装：<code>yarn add glob --dev</code></li>
 <li>可以将返回的入口文件对象其设置到 webpack 的 entry 属性上</li>
 </ul>
-
 <h3 id="多模板配置">多模板配置</h3>
-
 <ul>
 <li>模板文件的作用主要用于 webpack 中 <code>html-webpack-plugin</code> 插件的配置，其会根据模板文件生产一个编译后的 html 文件并自动加入携带 hash 的脚本和样式，基本配置如下：</li>
 </ul>
-
-<pre><code class="language-js">/* webpack 配置文件 */
-const HtmlWebpackPlugin = require('html-webpack-plugin') // 安装并引用插件
-
-module.exports = {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* webpack 配置文件 */</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HtmlWebpackPlugin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;html-webpack-plugin&#39;</span>) <span style="color:#75715e">// 安装并引用插件
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
     ...
-    plugins: [
-      new HtmlWebpackPlugin({
-        title: 'My Page', // 生成 html 中的 title
-        filename: 'demo.html', // 生成 html 的文件名
-        template: 'xxx/xxx/demo.html', // 模板路径
-        chunks: ['manifest', 'vendor', 'demo'], // 所要包含的模块
-        inject: true, // 是否注入资源
-      })
+    <span style="color:#a6e22e">plugins</span><span style="color:#f92672">:</span> [
+      <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HtmlWebpackPlugin</span>({
+        <span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;My Page&#39;</span>, <span style="color:#75715e">// 生成 html 中的 title
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;demo.html&#39;</span>, <span style="color:#75715e">// 生成 html 的文件名
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">template</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;xxx/xxx/demo.html&#39;</span>, <span style="color:#75715e">// 模板路径
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">chunks</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;manifest&#39;</span>, <span style="color:#e6db74">&#39;vendor&#39;</span>, <span style="color:#e6db74">&#39;demo&#39;</span>], <span style="color:#75715e">// 所要包含的模块
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">inject</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// 是否注入资源
+</span><span style="color:#75715e"></span>      })
     ]
     ...
 }
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>以上是单模板的配置，那么如果是多模板只要继续往 plugins 数组中添加 HtmlWebpackPlugin 即可，但是为了和多入口一样能够灵活的获取 pages 目录下所有模板文件并进行配置，可以在 utils.js 中添加多模板的读取解析方法：</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* utils.js */</span>
 
-<pre><code class="language-js">/* utils.js */
-
-// 多页面输出配置
-// 与上面的多页面入口配置相同，读取 page 文件夹下的对应的 html 后缀文件，然后放入数组中
-exports.htmlPlugin = configs =&gt; {
-    let entryHtml = glob.sync(PAGE_PATH + '/*/*.html')
-    let arr = []
-    entryHtml.forEach(filePath =&gt; {
-      let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'))
-      let conf = {
-        template: filePath, // 模板路径
-        filename: filename + '.html', // 生成 html 的文件名
-        chunks: ['manifest', 'vendor', filename],
-        inject: true,
+<span style="color:#75715e">// 多页面输出配置
+</span><span style="color:#75715e">// 与上面的多页面入口配置相同，读取 page 文件夹下的对应的 html 后缀文件，然后放入数组中
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">htmlPlugin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">configs</span> =&gt; {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">entryHtml</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">glob</span>.<span style="color:#a6e22e">sync</span>(<span style="color:#a6e22e">PAGE_PATH</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/*/*.html&#39;</span>)
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> []
+    <span style="color:#a6e22e">entryHtml</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">filePath</span> =&gt; {
+      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">substring</span>(<span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">lastIndexOf</span>(<span style="color:#e6db74">&#39;\/&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">lastIndexOf</span>(<span style="color:#e6db74">&#39;.&#39;</span>))
+      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">conf</span> <span style="color:#f92672">=</span> {
+        <span style="color:#a6e22e">template</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">filePath</span>, <span style="color:#75715e">// 模板路径
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.html&#39;</span>, <span style="color:#75715e">// 生成 html 的文件名
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">chunks</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;manifest&#39;</span>, <span style="color:#e6db74">&#39;vendor&#39;</span>, <span style="color:#a6e22e">filename</span>],
+        <span style="color:#a6e22e">inject</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
       }
-      // 如果有自定义配置可以进行 merge
-      if (configs) {
-        conf = merge(conf, configs)
+      <span style="color:#75715e">// 如果有自定义配置可以进行 merge
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">configs</span>) {
+        <span style="color:#a6e22e">conf</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">conf</span>, <span style="color:#a6e22e">configs</span>)
       }
-      // 针对生产环境配置
-      if (process.env.NODE_ENV === 'production') {
-        conf = merge(conf, {
-          minify: {
-            removeComments: true, // 删除 html 中的注释代码
-            collapseWhitespace: true, // 删除 html 中的空白符
-            // removeAttributeQuotes: true // 删除 html 元素中属性的引号
-          },
-          chunksSortMode: 'manual' // 按 manual 的顺序引入
-        })
+      <span style="color:#75715e">// 针对生产环境配置
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">NODE_ENV</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;production&#39;</span>) {
+        <span style="color:#a6e22e">conf</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">conf</span>, {
+          <span style="color:#a6e22e">minify</span><span style="color:#f92672">:</span> {
+            <span style="color:#a6e22e">removeComments</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// 删除 html 中的注释代码
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">collapseWhitespace</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// 删除 html 中的空白符
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// removeAttributeQuotes: true // 删除 html 元素中属性的引号
+</span><span style="color:#75715e"></span>          },
+          <span style="color:#a6e22e">chunksSortMode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;manual&#39;</span> <span style="color:#75715e">// 按 manual 的顺序引入
+</span><span style="color:#75715e"></span>        })
       }
 
-      arr.push(new HtmlWebpackPlugin(conf))
+      <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HtmlWebpackPlugin</span>(<span style="color:#a6e22e">conf</span>))
     })
-    return arr
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">arr</span>
 }
-</code></pre>
-
-<blockquote>
-<p>注：<a href="https://github.com/kangax/html-minifier" rel="nofollow noreferrer" target="_blank">minify</a> 配置的作用：将 html-minifier 的选项作为对象来缩小输出</p>
+</code></pre></div><blockquote>
+<p>注：<a href="https://github.com/kangax/html-minifier">minify</a> 配置的作用：将 html-minifier 的选项作为对象来缩小输出</p>
 </blockquote>
-
 <h3 id="在-vue-cli3-使用-pages-配置">在 vue-cli3 使用 pages 配置</h3>
-
 <ul>
 <li>将多入口和多模板的方法就可以合并成一个函数来进行多页的处理，合并后的 setPages 方法如下：</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>)
 
-<pre><code class="language-js">const path = require('path')
+<span style="color:#75715e">// glob是webpack安装时依赖的一个第三方模块，还模块允许你使用 *等符号,
+</span><span style="color:#75715e">// 例如lib/*.js就是获取lib文件夹下的所有js后缀名的文件
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">glob</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;glob&#39;</span>)
 
-// glob是webpack安装时依赖的一个第三方模块，还模块允许你使用 *等符号,
-// 例如lib/*.js就是获取lib文件夹下的所有js后缀名的文件
-const glob = require('glob')
+<span style="color:#75715e">// 取得相应的页面路径，因为之前的配置，所以是src文件夹下的pages文件夹
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">PAGE_PATH</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;../src/pages/&#39;</span>)
 
-// 取得相应的页面路径，因为之前的配置，所以是src文件夹下的pages文件夹
-const PAGE_PATH = path.resolve(__dirname, '../src/pages/')
+<span style="color:#75715e">// 用于做相应的merge处理
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">merge</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;webpack-merge&#39;</span>)
 
-// 用于做相应的merge处理
-const merge = require('webpack-merge')
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HtmlWebpackPlugin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;html-webpack-plugin&#39;</span>)
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ENTRY</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;main.js&#39;</span>
+<span style="color:#75715e">// pages 多入口配置
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">setPages</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">configs</span> =&gt; {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">entryFiles</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">glob</span>.<span style="color:#a6e22e">sync</span>(<span style="color:#a6e22e">PAGE_PATH</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/**/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">ENTRY</span>);
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> {};
 
-let ENTRY = 'main.js'
-// pages 多入口配置
-exports.setPages = configs =&gt; {
-    let entryFiles = glob.sync(PAGE_PATH + '/**/' + ENTRY);
-    let map = {};
+    <span style="color:#a6e22e">entryFiles</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">filePath</span> =&gt; {
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">tmp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">substring</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#a6e22e">ENTRY</span>));
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fileName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">substring</span>(<span style="color:#a6e22e">PAGE_PATH</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#a6e22e">ENTRY</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
 
-    entryFiles.forEach(filePath =&gt; {
-        let tmp = filePath.substring(0, filePath.indexOf(ENTRY));
-        let fileName = filePath.substring(PAGE_PATH.length + 1, filePath.indexOf(ENTRY) - 1)
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">conf</span> <span style="color:#f92672">=</span> {
+          <span style="color:#75715e">// page 的入口
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">entry</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">filePath</span>,
+          <span style="color:#75715e">// 模板来源
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">template</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">tmp</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;index.html&#39;</span>,
+          <span style="color:#75715e">// 在 dist/index.html 的输出
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">fileName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.html&#39;</span>,
+          <span style="color:#75715e">// 页面模板需要加对应的js脚本，如果不加这行则每个页面都会引入所有的js脚本
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">chunks</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;chunk-vendors&#39;</span>, <span style="color:#e6db74">&#39;chunk-common&#39;</span>, <span style="color:#a6e22e">fileName</span>]
+          <span style="color:#75715e">// inject: true
+</span><span style="color:#75715e"></span>        };
 
-        let conf = {
-          // page 的入口
-          entry: filePath,
-          // 模板来源
-          template: tmp + 'index.html',
-          // 在 dist/index.html 的输出
-          filename: fileName + '.html',
-          // 页面模板需要加对应的js脚本，如果不加这行则每个页面都会引入所有的js脚本
-          chunks: ['chunk-vendors', 'chunk-common', fileName]
-          // inject: true
-        };
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;conf&#39;</span>, <span style="color:#a6e22e">conf</span>)
 
-        console.log('conf', conf)
-
-        if (configs) {
-            conf = merge(conf, configs)
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">configs</span>) {
+            <span style="color:#a6e22e">conf</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">conf</span>, <span style="color:#a6e22e">configs</span>)
         }
 
-        if (process.env.NODE_ENV === 'production') {
-            conf = merge(conf, {
-                minify: {
-                    removeComments: true, // 删除html中的注释代码
-                    collapseWhitespace: true, // 删除html中的空白符
-                },
-                chunksSortMode: 'manual'// 按manual的顺序引入
-            })
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">NODE_ENV</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;production&#39;</span>) {
+            <span style="color:#a6e22e">conf</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">conf</span>, {
+                <span style="color:#a6e22e">minify</span><span style="color:#f92672">:</span> {
+                    <span style="color:#a6e22e">removeComments</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// 删除html中的注释代码
+</span><span style="color:#75715e"></span>                    <span style="color:#a6e22e">collapseWhitespace</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#75715e">// 删除html中的空白符
+</span><span style="color:#75715e"></span>                },
+                <span style="color:#a6e22e">chunksSortMode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;manual&#39;</span><span style="color:#75715e">// 按manual的顺序引入
+</span><span style="color:#75715e"></span>            })
         }
 
-        map[fileName] = conf;
+        <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">fileName</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">conf</span>;
     })
 
-    return map
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">map</span>
 }
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>上述代码我们 return 出的 map 对象就是 pages 所需要的配置项结构，我们只需在 vue.config.js 中引用即可：</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/* vue.config.js */</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">utils</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;./build/utils&#39;</span>)
 
-<pre><code class="language-js">/* vue.config.js */
-const utils = require('./build/utils')
-
-module.exports = {
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
   ...
 
-  pages: utils.setPages(),
+  <span style="color:#a6e22e">pages</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">setPages</span>(),
 
   ...
 }
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">
@@ -466,12 +442,12 @@ module.exports = {
 
     <div class="post-nav">
         
-        <a href="/2017/vue-blind-spot/" class="prev" rel="prev" title="vue中盲点"><i
-                class="iconfont icon-dajiantou"></i>&nbsp;vue中盲点</a>
+        <a href="/2017/debugtools/" class="prev" rel="prev" title="debugTools"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;debugTools</a>
         
         
-        <a href="/2017/vue-watch/" class="next" rel="next"
-            title="Vue watch选项">Vue watch选项&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        <a href="/2017/vue-blind-spot/" class="next" rel="next"
+            title="vue中盲点">vue中盲点&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 

@@ -11,7 +11,7 @@
   
   
   <link rel="prev" href="/2017/template/" />
-  <link rel="next" href="/2017/vue-blind-spot/" />
+  <link rel="next" href="/2017/gulp/" />
   <link rel="canonical" href="/2017/httpstatus/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)"/>
-<meta name="twitter:description" content="常见的状态码  1xx：临时回应，表示客户端请继续。 2xx：请求成功：  200：请求成功。  3xx: 表示请求的目标有变化，希望客户端进一步处理：  301&amp;302：永久性与临时性跳转。 304：客户端缓存没有更新。  4xx：客户端请求错误：  403：无权限。 404：表示请求的页面不存在。 418：It’s a teapot. 这是一个彩蛋，来自 ietf 的一个愚人节玩笑。（超文本咖啡壶控制协议）  5xx：服务端请求错误：  500：服务端错误。 503：服务端暂时性错误，可以一会再试。   对我们前端来说，1xx 系列的状态码是非常陌生的，原因是 1xx 的状态被浏览器 http 库直接处理掉了，不会让上层应用知晓。
+<meta name="twitter:description" content="常见的状态码  1xx：临时回应，表示客户端请继续。 2xx：请求成功：  200：请求成功。   3xx: 表示请求的目标有变化，希望客户端进一步处理：  301&amp;302：永久性与临时性跳转。 304：客户端缓存没有更新。   4xx：客户端请求错误：  403：无权限。 404：表示请求的页面不存在。 418：It’s a teapot. 这是一个彩蛋，来自 ietf 的一个愚人节玩笑。（超文本咖啡壶控制协议）   5xx：服务端请求错误：  500：服务端错误。 503：服务端暂时性错误，可以一会再试。    对我们前端来说，1xx 系列的状态码是非常陌生的，原因是 1xx 的状态被浏览器 http 库直接处理掉了，不会让上层应用知晓。
 2xx 系列的状态最熟悉的就是 200，这通常是网页请求成功的标志，也是大家最喜欢的状态码。
 3xx 系列比较复杂，301 和 302 两个状态表示当前资源已经被转移，只不过一个是永久性转移，一个是临时性转移。实际上 301 更接近于一种报错，提示客户端下次别来了。
 304 又是一个每个前端必知必会的状态，产生这个状态的前提是：客户端本地已经有缓存的版本，并且在 Request 中告诉了服务端，当服务端通过时间或者 tag，发现没有更新的时候，就会返回一个不含 body 的 304 状态。"/>
@@ -167,44 +167,37 @@
         
         
 
-        
-
-<h3 id="常见的状态码">常见的状态码</h3>
-
+        <h3 id="常见的状态码">常见的状态码</h3>
 <ul>
 <li>1xx：临时回应，表示客户端请继续。</li>
 <li>2xx：请求成功：
-
 <ul>
 <li>200：请求成功。</li>
-</ul></li>
+</ul>
+</li>
 <li>3xx: 表示请求的目标有变化，希望客户端进一步处理：
-
 <ul>
 <li>301&amp;302：永久性与临时性跳转。</li>
 <li>304：客户端缓存没有更新。</li>
-</ul></li>
+</ul>
+</li>
 <li>4xx：客户端请求错误：
-
 <ul>
 <li>403：无权限。</li>
 <li>404：表示请求的页面不存在。</li>
-<li>418：It’s a teapot. 这是一个彩蛋，来自 ietf 的一个愚人节玩笑。（<a href="https://tools.ietf.org/html/rfc2324" rel="nofollow noreferrer" target="_blank">超文本咖啡壶控制协议</a>）</li>
-</ul></li>
+<li>418：It’s a teapot. 这是一个彩蛋，来自 ietf 的一个愚人节玩笑。（<a href="https://tools.ietf.org/html/rfc2324">超文本咖啡壶控制协议</a>）</li>
+</ul>
+</li>
 <li>5xx：服务端请求错误：
-
 <ul>
 <li>500：服务端错误。</li>
 <li>503：服务端暂时性错误，可以一会再试。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>对我们前端来说，1xx 系列的状态码是非常陌生的，原因是 1xx 的状态被浏览器 http 库直接处理掉了，不会让上层应用知晓。</p>
-
 <p>2xx 系列的状态最熟悉的就是 200，这通常是网页请求成功的标志，也是大家最喜欢的状态码。</p>
-
 <p>3xx 系列比较复杂，301 和 302 两个状态表示当前资源已经被转移，只不过一个是永久性转移，一个是临时性转移。实际上 301 更接近于一种报错，提示客户端下次别来了。</p>
-
 <p>304 又是一个每个前端必知必会的状态，产生这个状态的前提是：客户端本地已经有缓存的版本，并且在 Request 中告诉了服务端，当服务端通过时间或者 tag，发现没有更新的时候，就会返回一个不含 body 的 304 状态。</p>
 
     </div>
@@ -297,8 +290,8 @@
                 class="iconfont icon-dajiantou"></i>&nbsp;JS 模板</a>
         
         
-        <a href="/2017/vue-blind-spot/" class="next" rel="next"
-            title="vue中盲点">vue中盲点&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        <a href="/2017/gulp/" class="next" rel="next"
+            title="gulp 配置">gulp 配置&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 

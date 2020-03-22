@@ -11,7 +11,7 @@
   
   
   <link rel="prev" href="/2019/docker-jenkins/" />
-  
+  <link rel="next" href="/2020/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B/" />
   <link rel="canonical" href="/2019/docker-gitlab/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -36,8 +36,8 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Docker Gitlab"/>
-<meta name="twitter:description" content="安装 Gitlab  目录类似 Jenkins，使用 docker-compose 安装  version: &#39;3&#39; services: docker-gitlab: image: &#39;twang2218/gitlab-ce-zh:9.4&#39; restart: &#39;no&#39; container_name: gitlab hostname: &#39;gitlab.xxxxx.com&#39; environment: TZ: &#39;Asia/Shanghai&#39; GITLAB_OMNIBUS_CONFIG: | external_url &#39;http://gitlab.xxxxxx.com&#39; unicorn[&#39;worker_timeout&#39;] = 60 unicorn[&#39;worker_processes&#39;] = 2 gitlab_rails[&#39;time_zone&#39;] = &#39;Asia/Shanghai&#39; gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 26 nginx[&#39;client_max_body_size&#39;] = &#39;250m&#39; ports: - &#39;81:80&#39; - &#39;443:443&#39; - &#39;26:22&#39; volumes: - /home/gitlab/gitlab_home/config:/etc/gitlab - /home/gitlab/gitlab_home/data:/var/opt/gitlab - /home/gitlab/gitlab_home/logs:/var/log/gitlab  在当前目录下运行 docker-compose up -d
-Nginx 代理 upstream gitlab { server 116.62.201.97:81; } server { listen 80; server_name gitlab."/>
+<meta name="twitter:description" content="安装 Gitlab  目录类似 Jenkins，使用 docker-compose 安装  version: &#39;3&#39;services:docker-gitlab:image: &#39;twang2218/gitlab-ce-zh:9.4&#39;restart: &#39;no&#39;container_name: gitlabhostname: &#39;gitlab.xxxxx.com&#39;environment:TZ: &#39;Asia/Shanghai&#39;GITLAB_OMNIBUS_CONFIG: |external_url &#39;http://gitlab.xxxxxx.com&#39;unicorn[&#39;worker_timeout&#39;] = 60unicorn[&#39;worker_processes&#39;] = 2gitlab_rails[&#39;time_zone&#39;] = &#39;Asia/Shanghai&#39;gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 26nginx[&#39;client_max_body_size&#39;] = &#39;250m&#39;ports:- &#39;81:80&#39;- &#39;443:443&#39;- &#39;26:22&#39;volumes:- /home/gitlab/gitlab_home/config:/etc/gitlab- /home/gitlab/gitlab_home/data:/var/opt/gitlab- /home/gitlab/gitlab_home/logs:/var/log/gitlab在当前目录下运行 docker-compose up -d
+Nginx 代理 upstream gitlab {server 116.62.201.97:81;}server {listen 80;server_name gitlab."/>
 
   <script type="application/ld+json">
 {
@@ -165,66 +165,57 @@ Nginx 代理 upstream gitlab { server 116.62.201.97:81; } server { listen 80; se
         
         
 
-        
-
-<h1 id="安装-gitlab">安装 Gitlab</h1>
-
+        <h1 id="安装-gitlab">安装 Gitlab</h1>
 <ul>
 <li>目录类似 Jenkins，使用 docker-compose 安装</li>
 </ul>
-
-<pre><code class="language-sh">version: '3'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">version: <span style="color:#e6db74">&#39;3&#39;</span>
 services:
     docker-gitlab:
-      image: 'twang2218/gitlab-ce-zh:9.4'
-      restart: 'no'
+      image: <span style="color:#e6db74">&#39;twang2218/gitlab-ce-zh:9.4&#39;</span>
+      restart: <span style="color:#e6db74">&#39;no&#39;</span>
       container_name: gitlab
-      hostname: 'gitlab.xxxxx.com'
+      hostname: <span style="color:#e6db74">&#39;gitlab.xxxxx.com&#39;</span>
       environment:
-        TZ: 'Asia/Shanghai'
+        TZ: <span style="color:#e6db74">&#39;Asia/Shanghai&#39;</span>
         GITLAB_OMNIBUS_CONFIG: |
-          external_url 'http://gitlab.xxxxxx.com'
-          unicorn['worker_timeout'] = 60
-          unicorn['worker_processes'] = 2
-          gitlab_rails['time_zone'] = 'Asia/Shanghai'
-          gitlab_rails['gitlab_shell_ssh_port'] = 26
-          nginx['client_max_body_size'] = '250m'
+          external_url <span style="color:#e6db74">&#39;http://gitlab.xxxxxx.com&#39;</span>
+          unicorn<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;worker_timeout&#39;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 60
+          unicorn<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;worker_processes&#39;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 2
+          gitlab_rails<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;time_zone&#39;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Asia/Shanghai&#39;</span>
+          gitlab_rails<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;gitlab_shell_ssh_port&#39;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 26
+          nginx<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;client_max_body_size&#39;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;250m&#39;</span>
       ports:
-       - '81:80'
-       - '443:443'
-       - '26:22'
+       - <span style="color:#e6db74">&#39;81:80&#39;</span>
+       - <span style="color:#e6db74">&#39;443:443&#39;</span>
+       - <span style="color:#e6db74">&#39;26:22&#39;</span>
       volumes:
        - /home/gitlab/gitlab_home/config:/etc/gitlab
        - /home/gitlab/gitlab_home/data:/var/opt/gitlab
        - /home/gitlab/gitlab_home/logs:/var/log/gitlab
-</code></pre>
-
-<p>在当前目录下运行 <code>docker-compose up -d</code></p>
-
+</code></pre></div><p>在当前目录下运行 <code>docker-compose up -d</code></p>
 <h2 id="nginx-代理">Nginx 代理</h2>
-
-<pre><code class="language-sh">upstream gitlab {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">upstream gitlab <span style="color:#f92672">{</span>
  server 116.62.201.97:81;
-}
+<span style="color:#f92672">}</span>
 
-server {
+server <span style="color:#f92672">{</span>
  listen 80;
  server_name gitlab.xxx.com;
 
- location / {
+ location / <span style="color:#f92672">{</span>
   client_max_body_size 900m;
   proxy_redirect off;
-  # 以下确保 gitlab中项目的 url 是域名而不是 http://git，不可缺少
+  <span style="color:#75715e"># 以下确保 gitlab中项目的 url 是域名而不是 http://git，不可缺少</span>
   proxy_set_header Host $host;
   proxy_set_header X-Real-IP $remote_addr;
   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-  # 反向代理到 gitlab 内置的 nginx
+  <span style="color:#75715e"># 反向代理到 gitlab 内置的 nginx</span>
   proxy_pass http://gitlab;
   index index.html index.htm;
- }
-}
-</code></pre>
-
+ <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div>
     </div>
 
     <div class="post-copyright">
@@ -314,6 +305,9 @@ server {
         <a href="/2019/docker-jenkins/" class="prev" rel="prev" title="Docker Jenkins"><i
                 class="iconfont icon-dajiantou"></i>&nbsp;Docker Jenkins</a>
         
+        
+        <a href="/2020/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B/" class="next" rel="next"
+            title="单例模式-创建型">单例模式-创建型&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows Terminal on Magic</title>
+    <link>/tags/windows-terminal/</link>
+    <description>Recent content in Windows Terminal on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	<atom:link href="/tags/windows-terminal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Windows Terminal 美化</title>
+      <link>/1/windowsterminal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/1/windowsterminal/</guid>
+      <description>参考和部分引用自: SpencerWoo：新生代 Windows 终端：Windows Terminal 的全面自定义
+Windows Terminal 美化 安装 Windows Terminal  可以到 Microsoft Store 中安装 Windows Terminal（Preview）   也可以从 https://github.com/microsoft/terminal 来安装  使用 scoop 来管理软件  用 Scoop 管理你的 Windows 软件 可以使用 scoop help 来查看更多命令 scoop 语法 scoop + 动作 + 对象，对象是可以省略的 scoop bucket add nerd-fonts 用来添加字体库，后续需要使用这个 scoop search FantasqueSansMono-NF 搜索需要安装的字体，下图所示   scoop install FantasqueSansMono-NF 安装字体  安装 oh-my-posh  官网 安装 posh-git 和 oh-my-posh 这两个模块  Install-Module posh-git -Scope CurrentUser Install-Module oh-my-posh -Scope CurrentUser让 PowerShell 主题配置生效  新增（或修改）你的 PowerShell 配置文件  # 如果之前没有配置文件，就新建一个 PowerShell 配置文件if (!</description>
+    </item>
+    
+  </channel>
+</rss>

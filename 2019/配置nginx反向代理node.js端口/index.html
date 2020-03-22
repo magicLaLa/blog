@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="配置Nginx反向代理Node.js端口"/>
-<meta name="twitter:description" content="安装 sudo apt-get install nginx sudo vi /etc/nginx/sites-available/default   安装完毕后，检查下 Nginx 的版本：nginx -v。这个版本号通常可以在 Web 端的 header 里看到。安全起见，可以通过配置隐藏掉，如下打开 nginx.conf 文件：sudo vi /etc/nginx/nginx.conf，把nginx.conf 文件中的server_tokens on 改成 server_tokens off。  配置 Nginx 反向代理 Node.js 端口  我们的网站静态服务是跑在 4321 端口上的，直接通过 80 端口无法启动，原因是我们 rn_manager 下的 Node 并不具备 root 的运行权限，不能监听 0 ~ 1024 之间的端口，当然也包括 80 端口。通过 sudo 来强制启动 Node 服务也不是不可以，但是，这多少会带来一些额外的成本和风险：一是我们需要额外配置，二是需要放大 Node 程序的权限。
+<meta name="twitter:description" content="安装 sudo apt-get install nginxsudo vi /etc/nginx/sites-available/default 安装完毕后，检查下 Nginx 的版本：nginx -v。这个版本号通常可以在 Web 端的 header 里看到。安全起见，可以通过配置隐藏掉，如下打开 nginx.conf 文件：sudo vi /etc/nginx/nginx.conf，把nginx.conf 文件中的server_tokens on 改成 server_tokens off。  配置 Nginx 反向代理 Node.js 端口  我们的网站静态服务是跑在 4321 端口上的，直接通过 80 端口无法启动，原因是我们 rn_manager 下的 Node 并不具备 root 的运行权限，不能监听 0 ~ 1024 之间的端口，当然也包括 80 端口。通过 sudo 来强制启动 Node 服务也不是不可以，但是，这多少会带来一些额外的成本和风险：一是我们需要额外配置，二是需要放大 Node 程序的权限。
   用 ip 访问，使用 nginx，用 root 级的权限来启动对 80 端口的监听，同时把来自 80 端口的流量分配给 Node 服务的另外一个端口，实现这种服务的代理。   如果服务器只需放一个网站程序，那么解析网站到服务器网址，网站程序监听 80 端口即可。如果服务器有多个应用（你有多个网站），借助 Nginx 不仅可以实现端口代理，还可以实现负载均衡，由它来判断是来自哪个域名或 IP 的访问，从而根据配置的规则，将这个请求原封不动地转发给特定的端口或特定的某几台机器。在我们的这个案例中，就是把 80 端口的 IP 请求都转发到 Node."/>
 
   <script type="application/ld+json">
@@ -169,37 +169,26 @@
         
         
 
-        
-
-<h3 id="安装">安装</h3>
-
-<pre><code class="language-sh">sudo apt-get install nginx
+        <h3 id="安装">安装</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install nginx
 sudo vi /etc/nginx/sites-available/default
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>安装完毕后，检查下 Nginx 的版本：<code>nginx -v</code>。这个版本号通常可以在 Web 端的 header 里看到。安全起见，可以通过配置隐藏掉，如下打开 nginx.conf 文件：<code>sudo vi /etc/nginx/nginx.conf</code>，把<code>nginx.conf</code> 文件中的<code>server_tokens on</code> 改成 <code>server_tokens off</code>。</li>
 </ul>
-
-<h3 id="配置-nginx-反向代理-node-js-端口">配置 Nginx 反向代理 Node.js 端口</h3>
-
+<h3 id="配置-nginx-反向代理-nodejs-端口">配置 Nginx 反向代理 Node.js 端口</h3>
 <blockquote>
 <p>我们的网站静态服务是跑在 4321 端口上的，直接通过 80 端口无法启动，原因是我们 rn_manager 下的 Node 并不具备 root 的运行权限，不能监听 0 ~ 1024 之间的端口，当然也包括 80 端口。通过 sudo 来强制启动 Node 服务也不是不可以，但是，这多少会带来一些额外的成本和风险：一是我们需要额外配置，二是需要放大 Node 程序的权限。</p>
 </blockquote>
-
 <ul>
 <li>用 ip 访问，使用 nginx，用 root 级的权限来启动对 80 端口的监听，同时把来自 80 端口的流量分配给 Node 服务的另外一个端口，实现这种服务的代理。</li>
 </ul>
-
 <blockquote>
 <p>如果服务器只需放一个网站程序，那么解析网站到服务器网址，网站程序监听 80 端口即可。如果服务器有多个应用（你有多个网站），借助 Nginx 不仅可以实现端口代理，还可以实现负载均衡，由它来判断是来自哪个域名或 IP 的访问，从而根据配置的规则，将这个请求原封不动地转发给特定的端口或特定的某几台机器。在我们的这个案例中，就是把 80 端口的 IP 请求都转发到 Node.js 的 8081 端口。</p>
 </blockquote>
-
 <ul>
 <li>第一步要在 /etc/nginx/conf.d 文件夹下面新增一个配置文件：<code>sudo vi  /etc/nginx/conf.d/imooc-com-4321.conf</code>(看一下配置文件，就可以知道哪个域名对应到哪个端口)，详细配置如下：</li>
 </ul>
-
-<pre><code class="language-conf"># 通过 upstream 我们可以设定一个简单的负载均衡策略，以应对将来可能的升级
+<pre><code class="language-conf" data-lang="conf"># 通过 upstream 我们可以设定一个简单的负载均衡策略，以应对将来可能的升级
 # 首先定义一个 server 集群 gougou，里面可以加多个 server，每个 server 对应的值可以用域名，也可以直接用 IP，但我们通常不会用 IP 来访问，而是通过域名:
 
 upstream imooc {
@@ -233,20 +222,13 @@ server {
         proxy_redirect off;
     }
 }
-</code></pre>
-
-<ul>
+</code></pre><ul>
 <li>保存后，通过 <code>sudo nginx -t</code>  来验证配置是否正确，有没有语法错误，然后我们把 Nginx 的服务重启一下: <code>sudo service nginx restart</code></li>
 </ul>
-
 <p>访问：<code>http://test1.luck-year.top/</code></p>
-
 <p><strong>注意</strong>：<code>server_name test1.luck-year.top</code> 这个对应的耳机域名需要在 域名解析里添加记录，需要先对域名进行备案。</p>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/域名解析.png" alt="域名解析png" class="lazyload"><figcaption class="image-caption">域名解析png</figcaption></figure></p>
-
+<p><img src="/images/totalimgs/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90.png" alt="域名解析png"></p>
 <h4 id="扩展">扩展</h4>
-
 <ul>
 <li><code>ps -ef | grep nginx</code> 查看nginx安装目录和nginx配置文件目录</li>
 </ul>

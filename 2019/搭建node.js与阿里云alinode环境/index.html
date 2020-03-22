@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="搭建 Node.js 与阿里云 Alinode 环境"/>
-<meta name="twitter:description" content="搭建 Node.js 环境 系统更新，安装基础包 sudo apt-get update sudo apt-get install vim openssl build-essential libssl-dev wget curl git  安装 node.js  使用 nvm 这个工具，方便升级和管理 node.js 版本 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash 安装 node.js  nvm install v10.14.2 nvm use v10.14.2 nvm alias default v10.14.2 node -v v10.14.2  安装 阿里云的 alinode  或者可以直接安装阿里云的 alinode，这也是我推荐给大家的 Node，因为它对 Node 做了必要的定制，可以无缝接入到 alinode 的监控中心，对于 多机器多应用运维 非常有用。大家可以参考 alinode 安装文档  安装一些常用的全局工具包  可以配置一个简单的 registry 参数来指定使用国内的 taobao 镜像来下载： npm --registry=https://registry."/>
+<meta name="twitter:description" content="搭建 Node.js 环境 系统更新，安装基础包 sudo apt-get updatesudo apt-get install vim openssl build-essential libssl-dev wget curl git安装 node.js  使用 nvm 这个工具，方便升级和管理 node.js 版本 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash 安装 node.js  nvm install v10.14.2nvm use v10.14.2nvm alias default v10.14.2node -vv10.14.2安装 阿里云的 alinode  或者可以直接安装阿里云的 alinode，这也是我推荐给大家的 Node，因为它对 Node 做了必要的定制，可以无缝接入到 alinode 的监控中心，对于 多机器多应用运维 非常有用。大家可以参考 alinode 安装文档  安装一些常用的全局工具包  可以配置一个简单的 registry 参数来指定使用国内的 taobao 镜像来下载： npm --registry=https://registry."/>
 
   <script type="application/ld+json">
 {
@@ -164,45 +164,30 @@
         
         
 
-        
-
-<h3 id="搭建-node-js-环境">搭建 Node.js 环境</h3>
-
-<h4 id="系统更新-安装基础包">系统更新，安装基础包</h4>
-
-<pre><code class="language-sh">sudo apt-get update
+        <h3 id="搭建-nodejs-环境">搭建 Node.js 环境</h3>
+<h4 id="系统更新安装基础包">系统更新，安装基础包</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get update
 sudo apt-get install vim openssl build-essential libssl-dev wget curl git
-</code></pre>
-
-<h4 id="安装-node-js">安装 node.js</h4>
-
+</code></pre></div><h4 id="安装-nodejs">安装 node.js</h4>
 <ul>
 <li>使用 <code>nvm</code> 这个工具，方便升级和管理 node.js 版本 <code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash</code></li>
 <li>安装 node.js</li>
 </ul>
-
-<pre><code class="language-sh">nvm install v10.14.2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">nvm install v10.14.2
 nvm use v10.14.2
 nvm alias default v10.14.2
 node -v
 v10.14.2
-</code></pre>
-
-<h4 id="安装-阿里云的-alinode">安装 阿里云的 alinode</h4>
-
+</code></pre></div><h4 id="安装-阿里云的-alinode">安装 阿里云的 alinode</h4>
 <ul>
-<li>或者可以直接安装阿里云的 alinode，这也是我推荐给大家的 Node，因为它对 Node 做了必要的定制，可以无缝接入到 alinode 的监控中心，对于 <strong>多机器多应用运维</strong> 非常有用。大家可以参考 <a href="https://help.aliyun.com/document_detail/60338.html" rel="nofollow noreferrer" target="_blank">alinode 安装文档</a></li>
+<li>或者可以直接安装阿里云的 alinode，这也是我推荐给大家的 Node，因为它对 Node 做了必要的定制，可以无缝接入到 alinode 的监控中心，对于 <strong>多机器多应用运维</strong> 非常有用。大家可以参考 <a href="https://help.aliyun.com/document_detail/60338.html">alinode 安装文档</a></li>
 </ul>
-
 <h4 id="安装一些常用的全局工具包">安装一些常用的全局工具包</h4>
-
 <ul>
 <li>可以配置一个简单的 registry 参数来指定使用国内的 taobao 镜像来下载： <code>npm --registry=https://registry.npm.taobao.org install -g npm</code></li>
 </ul>
-
-<pre><code class="language-sh">npm install pm2 -g
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">npm install pm2 -g
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

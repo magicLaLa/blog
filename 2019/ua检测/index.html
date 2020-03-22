@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ua检测"/>
-<meta name="twitter:description" content="代码如下： const userAgent = window.navigator.userAgent.toLowerCase(); export const uaJudge = { get isAndroid() { return /android|adr/gi.test(userAgent); }, get isVivo() { return /vivo/gi.test(userAgent); }, get isIos() { return /iphone|ipod|ipad/gi.test(userAgent); }, /** 微信（包含小程序） */ get isWeChat() { return /micromessenger/gi.test(userAgent); }, /** 微信小程序 */ get isWeChatMini() { if (this.isWeChat) { return new Promise((resolve, reject) =&gt; { wx.miniProgram.getEnv((res: any) =&gt; { resolve(res.miniprogram); }); setTimeout(resolve, 1000); }); } else { return Promise.resolve(false); } }, /** 支付宝 */ get isAlipay() { return /alipay/gi."/>
+<meta name="twitter:description" content="代码如下： const userAgent = window.navigator.userAgent.toLowerCase();export const uaJudge = {get isAndroid() {return /android|adr/gi.test(userAgent);},get isVivo() {return /vivo/gi.test(userAgent);},get isIos() {return /iphone|ipod|ipad/gi.test(userAgent);},/** 微信（包含小程序） */get isWeChat() {return /micromessenger/gi.test(userAgent);},/** 微信小程序 */get isWeChatMini() {if (this.isWeChat) {return new Promise((resolve, reject) =&gt; {wx.miniProgram.getEnv((res: any) =&gt; {resolve(res.miniprogram);});setTimeout(resolve, 1000);});} else {return Promise.resolve(false);}},/** 支付宝 */get isAlipay() {return /alipay/gi."/>
 
   <script type="application/ld+json">
 {
@@ -164,103 +164,99 @@
         
         
 
-        
-
-<h4 id="代码如下">代码如下：</h4>
-
-<pre><code class="language-ts">const userAgent = window.navigator.userAgent.toLowerCase();
-export const uaJudge = {
-  get isAndroid() {
-    return /android|adr/gi.test(userAgent);
+        <h4 id="代码如下">代码如下：</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userAgent</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">userAgent</span>.<span style="color:#a6e22e">toLowerCase</span>();
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uaJudge</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isAndroid() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/android|adr/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  get isVivo() {
-    return /vivo/gi.test(userAgent);
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isVivo() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/vivo/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  get isIos() {
-    return /iphone|ipod|ipad/gi.test(userAgent);
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isIos() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/iphone|ipod|ipad/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 微信（包含小程序） */
-  get isWeChat() {
-    return /micromessenger/gi.test(userAgent);
+  <span style="color:#75715e">/** 微信（包含小程序） */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isWeChat() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/micromessenger/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 微信小程序 */
-  get isWeChatMini() {
-    if (this.isWeChat) {
-      return new Promise((resolve, reject) =&gt; {
-        wx.miniProgram.getEnv((res: any) =&gt; {
-          resolve(res.miniprogram);
+  <span style="color:#75715e">/** 微信小程序 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isWeChatMini() {</span>
+    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">isWeChat</span>) {
+      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Promise</span>((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) <span style="color:#f92672">=&gt;</span> {
+        <span style="color:#a6e22e">wx</span>.<span style="color:#a6e22e">miniProgram</span>.<span style="color:#a6e22e">getEnv</span>((<span style="color:#a6e22e">res</span>: <span style="color:#66d9ef">any</span>) <span style="color:#f92672">=&gt;</span> {
+          <span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">miniprogram</span>);
         });
-        setTimeout(resolve, 1000);
+        <span style="color:#a6e22e">setTimeout</span>(<span style="color:#a6e22e">resolve</span>, <span style="color:#ae81ff">1000</span>);
       });
-    } else {
-      return Promise.resolve(false);
+    } <span style="color:#66d9ef">else</span> {
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Promise</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#66d9ef">false</span>);
     }
   },
-  /** 支付宝 */
-  get isAlipay() {
-    return /alipay/gi.test(userAgent);
+  <span style="color:#75715e">/** 支付宝 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isAlipay() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/alipay/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 百度 */
-  get isBaidu() {
-    return /baiduboxapp/gi.test(userAgent);
+  <span style="color:#75715e">/** 百度 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isBaidu() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/baiduboxapp/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 百度网盘 */
-  get isWangPan() {
-    return /bdnetdisk/gi.test(userAgent);
+  <span style="color:#75715e">/** 百度网盘 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isWangPan() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/bdnetdisk/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 新浪微博 */
-  get isWeiBo() {
-    return /weibo/gi.test(userAgent);
+  <span style="color:#75715e">/** 新浪微博 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isWeiBo() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/weibo/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 钉钉 */
-  get isDingDing() {
-    return /dingtalk/gi.test(userAgent);
+  <span style="color:#75715e">/** 钉钉 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isDingDing() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/dingtalk/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** qq，qq浏览器 */
-  get isQQ() {
-    return /QQ/gi.test(window.navigator.userAgent);
+  <span style="color:#75715e">/** qq，qq浏览器 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isQQ() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/QQ/gi</span>.<span style="color:#a6e22e">test</span>(window.<span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">userAgent</span>);
   },
-  /** uc浏览器 */
-  get isUC() {
-    return /ucbrowser/gi.test(userAgent);
+  <span style="color:#75715e">/** uc浏览器 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isUC() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/ucbrowser/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 网易云音乐 */
-  get isWYMusic() {
-    return /neteasemusic/gi.test(userAgent);
+  <span style="color:#75715e">/** 网易云音乐 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isWYMusic() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/neteasemusic/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 美图系（包含潮自拍，美图贴贴等） */
-  get isMTSeries() {
-    return /com.meitu/gi.test(userAgent);
+  <span style="color:#75715e">/** 美图系（包含潮自拍，美图贴贴等） */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isMTSeries() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/com.meitu/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 潮自拍 */
-  get isChaoZiPai() {
-    return /com.meitu.wheecam/gi.test(userAgent);
+  <span style="color:#75715e">/** 潮自拍 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isChaoZiPai() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/com.meitu.wheecam/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 潮自拍3.6.4及以上版本支持新协议 */
-  get isNewChaoZiPai() {
-    const result = /com.meitu.wheecam\/([\d.]*)/.exec(userAgent);
-    const version = result &amp;&amp; result[1];
-    if (version) {
-      return parseInt(version.replace(/\./g, '').substring(0, 3), 10) &gt;= 364;
-    } else {
-      return false;
+  <span style="color:#75715e">/** 潮自拍3.6.4及以上版本支持新协议 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isNewChaoZiPai() {</span>
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/com.meitu.wheecam\/([\d.]*)/</span>.<span style="color:#a6e22e">exec</span>(<span style="color:#a6e22e">userAgent</span>);
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">version</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">result</span>[<span style="color:#ae81ff">1</span>];
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">version</span>) {
+      <span style="color:#66d9ef">return</span> parseInt(<span style="color:#a6e22e">version</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/\./g</span>, <span style="color:#e6db74">&#39;&#39;</span>).<span style="color:#a6e22e">substring</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">10</span>) <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">364</span>;
+    } <span style="color:#66d9ef">else</span> {
+      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
     }
   },
-  /** 无他相机 */
-  get isWuTa() {
-    return /wuta_browser/gi.test(userAgent);
+  <span style="color:#75715e">/** 无他相机 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isWuTa() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/wuta_browser/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 她face++ */
-  get isTaFace() {
-    return /taface/gi.test(userAgent);
+  <span style="color:#75715e">/** 她face++ */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isTaFace() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/taface/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
-  /** 小恩爱 */
-  get isXiaoenai() {
-    return /mzdw/gi.test(userAgent);
+  <span style="color:#75715e">/** 小恩爱 */</span>
+  <span style="color:#a6e22e">get</span> <span style="color:#a6e22e">isXiaoenai() {</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">/mzdw/gi</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">userAgent</span>);
   },
 };
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

@@ -164,34 +164,22 @@
         
         
 
-        
-
-<h3 id="两数相加">两数相加</h3>
-
+        <h3 id="两数相加">两数相加</h3>
 <h4 id="描述">描述</h4>
-
 <p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
-
 <p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
-
-<pre><code class="language-bash">输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
-输出：7 -&gt; 0 -&gt; 8
-原因：342 + 465 = 807
-</code></pre>
-
-<h4 id="分析">分析</h4>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">输入：<span style="color:#f92672">(</span><span style="color:#ae81ff">2</span> -&gt; <span style="color:#ae81ff">4</span> -&gt; 3<span style="color:#f92672">)</span> + <span style="color:#f92672">(</span><span style="color:#ae81ff">5</span> -&gt; <span style="color:#ae81ff">6</span> -&gt; 4<span style="color:#f92672">)</span>
+输出：7 -&gt; <span style="color:#ae81ff">0</span> -&gt; 8
+原因：342 + 465 <span style="color:#f92672">=</span> 807
+</code></pre></div><h4 id="分析">分析</h4>
 <ul>
 <li>单链表的数据结构：<code>val</code>属性存储当前的值，<code>next</code>属性存储下一个节点的引用。</li>
 </ul>
-
-<p>从链表表头开始，然后进行每一位进行相加，每位的数字在 0~9 之间，相加有可能会出现 <em>溢出</em> 。
+<p>从链表表头开始，然后进行每一位进行相加，每位的数字在 0~9 之间，相加有可能会出现 <em>溢出</em> 。 
 例如：5+7=12，这种情况下，将个位设置为当前值（也就是2），并将进位 carry=1 带入下一次迭代。进位必定是 0 | 1，因为两个数字相加（考虑到进位）最大和为 9+9+1=19。</p>
-
 <blockquote>
 <p>对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。<strong>使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。</strong></p>
 </blockquote>
-
 <ul>
 <li>先初始化一个哑结点</li>
 <li>初始化 sum 为 0</li>
@@ -203,44 +191,41 @@
 <li>将 carry 从初始化</li>
 <li>返回哑结点的下一个结点</li>
 </ul>
-
 <h4 id="代码">代码</h4>
-
-<pre><code class="language-js">/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
-/**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
-var addTwoNumbers = function(l1, l2) {
-  let res = new ListNode(0)
-      dummy = res,
-      sum = 0, carry = 0;
-  while(l1 || l2 || sum &gt; 0) {
-      if(l1) {
-          sum += l1.val;
-          l1 = l1.next;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Definition for singly-linked list.
+</span><span style="color:#75715e"> * function ListNode(val) {
+</span><span style="color:#75715e"> *     this.val = val;
+</span><span style="color:#75715e"> *     this.next = null;
+</span><span style="color:#75715e"> * }
+</span><span style="color:#75715e"> */</span>
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @param {ListNode} l1
+</span><span style="color:#75715e"> * @param {ListNode} l2
+</span><span style="color:#75715e"> * @return {ListNode}
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">addTwoNumbers</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">l1</span>, <span style="color:#a6e22e">l2</span>) {
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ListNode</span>(<span style="color:#ae81ff">0</span>)
+      <span style="color:#a6e22e">dummy</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">res</span>,
+      <span style="color:#a6e22e">sum</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">carry</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">while</span>(<span style="color:#a6e22e">l1</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">l2</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">sum</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+      <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">l1</span>) {
+          <span style="color:#a6e22e">sum</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">val</span>;
+          <span style="color:#a6e22e">l1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">next</span>;
       }
-      if(l2) {
-          sum += l2.val;
-          l2 = l2.next;
+      <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">l2</span>) {
+          <span style="color:#a6e22e">sum</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">val</span>;
+          <span style="color:#a6e22e">l2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">next</span>;
       }
-      carry = ~~(sum / 10);
-      dummy.next = new ListNode(sum % 10)
-      dummy = dummy.next;
-      sum = carry;
-      carry = 0;
+      <span style="color:#a6e22e">carry</span> <span style="color:#f92672">=</span> <span style="color:#f92672">~~</span>(<span style="color:#a6e22e">sum</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>);
+      <span style="color:#a6e22e">dummy</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ListNode</span>(<span style="color:#a6e22e">sum</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>)
+      <span style="color:#a6e22e">dummy</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dummy</span>.<span style="color:#a6e22e">next</span>;
+      <span style="color:#a6e22e">sum</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">carry</span>;
+      <span style="color:#a6e22e">carry</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
   }
-  return res.next;
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">next</span>;
 };
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

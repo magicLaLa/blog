@@ -38,9 +38,9 @@
 <meta name="twitter:title" content="Webpack 优化相关"/>
 <meta name="twitter:description" content="官网  Webpack 优化 构建过程提速策略 不要让 loader 做太多事情  以 babel-loader 为例：  babel-loader 无疑是强大的，但它也是慢的。
 最常见的优化方式是，用 include 或 exclude 来帮我们避免不必要的转译，比如 webpack 官方在介绍 babel-loader 时给出的示例：
-module: { rules: [ { test: /\.js$/, exclude: /(node_modules|bower_components)/, use: { loader: &#39;babel-loader&#39;, options: { presets: [&#39;@babel/preset-env&#39;] } } } ] }  除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：
-loader: &#39;babel-loader?cacheDirectory=true&#39;  抽离第三库  DllPlugin是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。  用 DllPlugin 处理文件，要分两步走：
- 基于 dll 专属的配置文件，打包 dll 库 基于 webpack."/>
+module: {rules: [{test: /\.js$/,exclude: /(node_modules|bower_components)/,use: {loader: &#39;babel-loader&#39;,options: {presets: [&#39;@babel/preset-env&#39;]}}}]}除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：
+loader: &#39;babel-loader?cacheDirectory=true&#39;抽离第三库  DllPlugin是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。  用 DllPlugin 处理文件，要分两步走：
+ 基于 dll 专属的配置文件，打包 dll 库 基于 webpack.config.js 文件，打包业务代码  举例&ndash;配置文件如下："/>
 
   <script type="application/ld+json">
 {
@@ -170,257 +170,216 @@ loader: &#39;babel-loader?cacheDirectory=true&#39;  抽离第三库  DllPlugin�
         
         
 
-        
-
-<ul>
-<li><a href="https://webpack.js.org/" rel="nofollow noreferrer" target="_blank">官网</a></li>
+        <ul>
+<li><a href="https://webpack.js.org/">官网</a></li>
 </ul>
-
 <h2 id="webpack-优化">Webpack 优化</h2>
-
 <h3 id="构建过程提速策略">构建过程提速策略</h3>
-
 <h4 id="不要让-loader-做太多事情">不要让 loader 做太多事情</h4>
-
 <ul>
 <li>以 babel-loader 为例：</li>
 </ul>
-
 <p>babel-loader 无疑是强大的，但它也是慢的。</p>
-
 <p>最常见的优化方式是，用 include 或 exclude 来帮我们避免不必要的转译，比如 webpack 官方在介绍 babel-loader 时给出的示例：</p>
-
-<pre><code class="language-js">module: {
-  rules: [
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">module</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">rules</span><span style="color:#f92672">:</span> [
     {
-      test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env']
+      <span style="color:#a6e22e">test</span><span style="color:#f92672">:</span> <span style="color:#e6db74">/\.js$/</span>,
+      <span style="color:#a6e22e">exclude</span><span style="color:#f92672">:</span> <span style="color:#e6db74">/(node_modules|bower_components)/</span>,
+      <span style="color:#a6e22e">use</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">loader</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;babel-loader&#39;</span>,
+        <span style="color:#a6e22e">options</span><span style="color:#f92672">:</span> {
+          <span style="color:#a6e22e">presets</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;@babel/preset-env&#39;</span>]
         }
       }
     }
   ]
 }
-</code></pre>
-
-<p>除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：</p>
-
-<pre><code class="language-js">loader: 'babel-loader?cacheDirectory=true'
-</code></pre>
-
-<h4 id="抽离第三库">抽离第三库</h4>
-
+</code></pre></div><p>除此之外，选择开启缓存将转译结果缓存至文件系统，只需要为 loader 增加相应的参数设定：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">loader</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;babel-loader?cacheDirectory=true&#39;</span>
+</code></pre></div><h4 id="抽离第三库">抽离第三库</h4>
 <ul>
 <li><code>DllPlugin</code>是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。</li>
 </ul>
-
 <p>用 DllPlugin 处理文件，要分两步走：</p>
-
 <ul>
 <li>基于 dll 专属的配置文件，打包 dll 库</li>
 <li>基于 webpack.config.js 文件，打包业务代码</li>
 </ul>
-
 <p>举例&ndash;配置文件如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// webpack.dll.config.js
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;path&#34;</span>)
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">webpack</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;webpack&#34;</span>)
 
-<pre><code class="language-js">// webpack.dll.config.js
-const path = require(&quot;path&quot;)
-const webpack = require(&quot;webpack&quot;)
-
-module.exports = {
-  entry: {
-    // 依赖的库数组
-    vendor: [
-      'mint-ui',
-      'vue/dist/vue.common.js',
-      'whatwg-fetch',
-      'vuex',
-      'vue-router'
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">entry</span><span style="color:#f92672">:</span> {
+    <span style="color:#75715e">// 依赖的库数组
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">vendor</span><span style="color:#f92672">:</span> [
+      <span style="color:#e6db74">&#39;mint-ui&#39;</span>,
+      <span style="color:#e6db74">&#39;vue/dist/vue.common.js&#39;</span>,
+      <span style="color:#e6db74">&#39;whatwg-fetch&#39;</span>,
+      <span style="color:#e6db74">&#39;vuex&#39;</span>,
+      <span style="color:#e6db74">&#39;vue-router&#39;</span>
     ]
   },
-  output: {
-    path: path.join(__dirname, '../static/js'),
-    filename: '[name].dll.js',
-    library: '[name]_library'
+  <span style="color:#a6e22e">output</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;../static/js&#39;</span>),
+    <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;[name].dll.js&#39;</span>,
+    <span style="color:#a6e22e">library</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;[name]_library&#39;</span>
   },
-  plugins: [
-    new webpack.DllPlugin({
-      // DllPlugin的name属性需要和libary保持一致
-      path: path.join(__dirname, '..', '[name]-manifest.json'),
-      name: '[name]_library',
-      // context需要和webpack.config.js保持一致
-      context: __dirname
+  <span style="color:#a6e22e">plugins</span><span style="color:#f92672">:</span> [
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">webpack</span>.<span style="color:#a6e22e">DllPlugin</span>({
+      <span style="color:#75715e">// DllPlugin的name属性需要和libary保持一致
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;..&#39;</span>, <span style="color:#e6db74">&#39;[name]-manifest.json&#39;</span>),
+      <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;[name]_library&#39;</span>,
+      <span style="color:#75715e">// context需要和webpack.config.js保持一致
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">context</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">__dirname</span>
     }),
-    // 压缩打包的文件
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
+    <span style="color:#75715e">// 压缩打包的文件
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">webpack</span>.<span style="color:#a6e22e">optimize</span>.<span style="color:#a6e22e">UglifyJsPlugin</span>({
+      <span style="color:#a6e22e">compress</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">warnings</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
       }
     })
   ]
 };
-</code></pre>
-
-<p>在 <code>package.json--&gt;scripts</code>下添加</p>
-
-<pre><code class="language-json">{
-  &quot;build:dll&quot;: &quot;webpack --config build/webpack.dll.config.js&quot;
+</code></pre></div><p>在 <code>package.json--&gt;scripts</code>下添加</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;build:dll&#34;</span>: <span style="color:#e6db74">&#34;webpack --config build/webpack.dll.config.js&#34;</span>
 }
-</code></pre>
-
-<p>命令，运行<code>npm run build:dll</code>会在<code>static/js</code>文件夹里会出现<code>vendor.dll.js</code>文件，在根目录下出现<code>vendor-manifest.json</code>文件。<br />
-<code>vendor.dll.js</code>是我们第三方库打包的结果，<code>vendor-manifest.json</code>则用于描述每个第三方库对应的具体路径。<br />
+</code></pre></div><p>命令，运行<code>npm run build:dll</code>会在<code>static/js</code>文件夹里会出现<code>vendor.dll.js</code>文件，在根目录下出现<code>vendor-manifest.json</code>文件。<br>
+<code>vendor.dll.js</code>是我们第三方库打包的结果，<code>vendor-manifest.json</code>则用于描述每个第三方库对应的具体路径。<br>
 随后在<code>webpack.base.conf.js || webpack.config.js</code>里针对 dll 稍作配置：</p>
-
-<pre><code class="language-js">const path = require('path');
-const webpack = require('webpack')
-module.exports = {
-  mode: 'production',
-  // 编译入口
-  entry: {
-    main: './src/index.js'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">webpack</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;webpack&#39;</span>)
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;production&#39;</span>,
+  <span style="color:#75715e">// 编译入口
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">entry</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">main</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./src/index.js&#39;</span>
   },
-  // 目标文件
-  output: {
-    path: path.join(__dirname, 'dist/'),
-    filename: '[name].js'
+  <span style="color:#75715e">// 目标文件
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">output</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;dist/&#39;</span>),
+    <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;[name].js&#39;</span>
   },
-  // dll相关配置
-  plugins: [
-    new webpack.DllReferencePlugin({
-      context: __dirname,
-      // manifest就是我们第一步中打包出来的json文件
-      manifest: require('../vendor-manifest.json')
+  <span style="color:#75715e">// dll相关配置
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">plugins</span><span style="color:#f92672">:</span> [
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">webpack</span>.<span style="color:#a6e22e">DllReferencePlugin</span>({
+      <span style="color:#a6e22e">context</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">__dirname</span>,
+      <span style="color:#75715e">// manifest就是我们第一步中打包出来的json文件
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">manifest</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../vendor-manifest.json&#39;</span>)
     }),
-    // 将 vendor.dll.js 插入HTML里 需要安装 html-webpack-include-assets-plugin
-    new HtmlWebpackIncludeAssetsPlugin({
-      assets: [utils.assetsPath('js/vendor.dll.js')],
-      files: ['index.html'],
-      append: false
+    <span style="color:#75715e">// 将 vendor.dll.js 插入HTML里 需要安装 html-webpack-include-assets-plugin
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HtmlWebpackIncludeAssetsPlugin</span>({
+      <span style="color:#a6e22e">assets</span><span style="color:#f92672">:</span> [<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">assetsPath</span>(<span style="color:#e6db74">&#39;js/vendor.dll.js&#39;</span>)],
+      <span style="color:#a6e22e">files</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;index.html&#39;</span>],
+      <span style="color:#a6e22e">append</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
     })
-    // 多页面下 可以在每个 index.html 手动引入 vendor.dll.js
-  ]
+    <span style="color:#75715e">// 多页面下 可以在每个 index.html 手动引入 vendor.dll.js
+</span><span style="color:#75715e"></span>  ]
 }
-</code></pre>
-
-<h4 id="happypack-将-loader-由单进程转为多进程">Happypack——将 loader 由单进程转为多进程</h4>
-
+</code></pre></div><h4 id="happypack将-loader-由单进程转为多进程">Happypack——将 loader 由单进程转为多进程</h4>
 <ul>
 <li><code>webpack</code> 是单线程的，就算此刻存在多个任务，你也只能排队一个接一个地等待处理。这是 webpack 的缺点，好在我们的 CPU 是多核的，<code>Happypack</code> 会充分释放 <code>CPU</code> 在多核并发方面的优势，帮我们把任务分解给多个子进程去并发执行，大大提升打包效率。</li>
 </ul>
-
-<pre><code class="language-js">/**
- * 共享线程池
- * 通常，在内部创建的每个HappyPack插件都会创建自己的线程，用于运行加载器。
- * 但是，如果您使用多个HappyPack插件，那么最好自己创建一个线程池，然后配置插
- * 件以共享该池，从而最大限度地减少其中线程的空闲时间
- * 使用5个线程的自定义线程池
- */
-const Happypack = require('happypack')
-const happyThreadPool = Happypack.ThreadPool({size: 5}) // HappyPack.ThreadPool({ size: os.cpus().length })
-
-module.exports = {
-  module: {
-    rules: [
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 共享线程池
+</span><span style="color:#75715e"> * 通常，在内部创建的每个HappyPack插件都会创建自己的线程，用于运行加载器。
+</span><span style="color:#75715e"> * 但是，如果您使用多个HappyPack插件，那么最好自己创建一个线程池，然后配置插
+</span><span style="color:#75715e"> * 件以共享该池，从而最大限度地减少其中线程的空闲时间
+</span><span style="color:#75715e"> * 使用5个线程的自定义线程池
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Happypack</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;happypack&#39;</span>)
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">happyThreadPool</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Happypack</span>.<span style="color:#a6e22e">ThreadPool</span>({<span style="color:#a6e22e">size</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5</span>}) <span style="color:#75715e">// HappyPack.ThreadPool({ size: os.cpus().length })
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">module</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">rules</span><span style="color:#f92672">:</span> [
       ...
       {
-        test: /\.js$/,
-        // 问号后面的查询参数指定了处理这类文件的HappyPack实例的名字
-        loader: 'happypack/loader?id=happyBabel',
+        <span style="color:#a6e22e">test</span><span style="color:#f92672">:</span> <span style="color:#e6db74">/\.js$/</span>,
+        <span style="color:#75715e">// 问号后面的查询参数指定了处理这类文件的HappyPack实例的名字
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">loader</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;happypack/loader?id=happyBabel&#39;</span>,
         ...
       },
     ],
   },
-  plugins: [
+  <span style="color:#a6e22e">plugins</span><span style="color:#f92672">:</span> [
     ...
-    new HappyPack({
-      // 这个HappyPack的“名字”就叫做happyBabel，和楼上的查询参数遥相呼应
-      id: 'happyBabel',
-      // 指定进程池
-      threadPool: happyThreadPool,
-      loaders: ['babel-loader?cacheDirectory']
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HappyPack</span>({
+      <span style="color:#75715e">// 这个HappyPack的“名字”就叫做happyBabel，和楼上的查询参数遥相呼应
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;happyBabel&#39;</span>,
+      <span style="color:#75715e">// 指定进程池
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">threadPool</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">happyThreadPool</span>,
+      <span style="color:#a6e22e">loaders</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;babel-loader?cacheDirectory&#39;</span>]
     })
   ],
 }
-</code></pre>
-
-<h3 id="构建结果体积压缩">构建结果体积压缩</h3>
-
-<h4 id="文件结构可视化-找出导致体积过大的原因">文件结构可视化，找出导致体积过大的原因</h4>
-
+</code></pre></div><h3 id="构建结果体积压缩">构建结果体积压缩</h3>
+<h4 id="文件结构可视化找出导致体积过大的原因">文件结构可视化，找出导致体积过大的原因</h4>
 <ul>
 <li><code>webpack-bundle-analyzer</code>配置方法和普通的 plugin 无异，它会以矩形树图的形式将包内各个模块的大小和依赖关系呈现出来，格局如官方所提供这张图所示：</li>
 </ul>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/webpack1.gif" alt="webpack1" class="lazyload"><figcaption class="image-caption">webpack1</figcaption></figure></p>
-
+<p><img src="/images/totalimgs/webpack1.gif" alt="webpack1"></p>
 <ul>
 <li>使用方式：</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">BundleAnalyzerPlugin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;webpack-bundle-analyzer&#39;</span>).<span style="color:#a6e22e">BundleAnalyzerPlugin</span>
 
-<pre><code class="language-js">const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-
-module.exports = {
-  plugins: [
-    new BundleAnalyzerPlugin()
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">plugins</span><span style="color:#f92672">:</span> [
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BundleAnalyzerPlugin</span>()
   ]
 }
-</code></pre>
-
-<h4 id="按需加载">按需加载</h4>
-
+</code></pre></div><h4 id="按需加载">按需加载</h4>
 <ul>
 <li><code>require.ensure</code> 是 Webpack 的特殊语法，用来设置 组件根路径 按需加载。</li>
-<li><a href="https://webpack.js.org/api/module-methods/#require-ensure" rel="nofollow noreferrer" target="_blank">官网</a></li>
+<li><a href="https://webpack.js.org/api/module-methods/#require-ensure">官网</a></li>
 </ul>
-
 <p>以 <code>VUE</code> 项目举例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// vue Router
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Vue</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Router</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;vue-router&#39;</span>
 
-<pre><code class="language-js">// vue Router
-import Vue from 'vue'
-import Router from 'vue-router'
+<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">Router</span>)
 
-Vue.use(Router)
-
-export default new Router({
-  // require.ensure 是 Webpack 的特殊语法，用来设置 组件根路径 按需加载
-  routes: [
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Router</span>({
+  <span style="color:#75715e">// require.ensure 是 Webpack 的特殊语法，用来设置 组件根路径 按需加载
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">routes</span><span style="color:#f92672">:</span> [
     {
-      path: '/',
-      name: 'index',
-      redirect: '/home',
-      component (reslove) {
-        require.ensure(['../App.vue'], () =&gt; {
-          reslove(require('../App.vue'))// 完成调用
-        })
+      <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/&#39;</span>,
+      <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;index&#39;</span>,
+      <span style="color:#a6e22e">redirect</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/home&#39;</span>,
+      <span style="color:#a6e22e">component</span> (<span style="color:#a6e22e">reslove</span>) {
+        <span style="color:#a6e22e">require</span>.<span style="color:#a6e22e">ensure</span>([<span style="color:#e6db74">&#39;../App.vue&#39;</span>], () =&gt; {
+          <span style="color:#a6e22e">reslove</span>(<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../App.vue&#39;</span>))<span style="color:#75715e">// 完成调用
+</span><span style="color:#75715e"></span>        })
       },
-      children: [{
-        path: '/order',
-        name: 'order',
-        component (reslove) {
-          require.ensure('../components/order/Order.vue', () =&gt; {
-            reslove(require('../components/order/Order.vue'))
+      <span style="color:#a6e22e">children</span><span style="color:#f92672">:</span> [{
+        <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/order&#39;</span>,
+        <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;order&#39;</span>,
+        <span style="color:#a6e22e">component</span> (<span style="color:#a6e22e">reslove</span>) {
+          <span style="color:#a6e22e">require</span>.<span style="color:#a6e22e">ensure</span>(<span style="color:#e6db74">&#39;../components/order/Order.vue&#39;</span>, () =&gt; {
+            <span style="color:#a6e22e">reslove</span>(<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../components/order/Order.vue&#39;</span>))
           })
         }
       },
       {
-        path: '/home',
-        name: 'home',
-        component (reslove) {
-          require.ensure('../components/homepage/Home.vue', () =&gt; {
-            reslove(require('../components/homepage/Home.vue'))
+        <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/home&#39;</span>,
+        <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;home&#39;</span>,
+        <span style="color:#a6e22e">component</span> (<span style="color:#a6e22e">reslove</span>) {
+          <span style="color:#a6e22e">require</span>.<span style="color:#a6e22e">ensure</span>(<span style="color:#e6db74">&#39;../components/homepage/Home.vue&#39;</span>, () =&gt; {
+            <span style="color:#a6e22e">reslove</span>(<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../components/homepage/Home.vue&#39;</span>))
           })
         }
       },
       {
-        path: '/drag',
-        name: 'drag',
-        component (reslove) {
-          require.ensure('../components/drag/drag.vue', () =&gt; {
-            reslove(require('../components/drag/drag.vue'))
+        <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/drag&#39;</span>,
+        <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;drag&#39;</span>,
+        <span style="color:#a6e22e">component</span> (<span style="color:#a6e22e">reslove</span>) {
+          <span style="color:#a6e22e">require</span>.<span style="color:#a6e22e">ensure</span>(<span style="color:#e6db74">&#39;../components/drag/drag.vue&#39;</span>, () =&gt; {
+            <span style="color:#a6e22e">reslove</span>(<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../components/drag/drag.vue&#39;</span>))
           })
         }
       }]
@@ -428,24 +387,17 @@ export default new Router({
   ]
 })
 
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li><strong>注：</strong> <code>Vue Router</code> 官方文档还推荐使用动态 import 语法来进行代码分块，比如上述 require.ensure 代码可以修改为：</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 引入 Order 组件
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Order</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#66d9ef">import</span>(<span style="color:#e6db74">&#39;../components/order/Order.vue&#39;</span>);
 
-<pre><code class="language-js">// 引入 Order 组件
-const Order = () =&gt; import('../components/order/Order.vue');
-
-// 引入 Home 组件
-const Home = () =&gt; import('../components/homepage/Home.vue');
-</code></pre>
-
-<p>其余代码可以保持不变，仍然可以实现同样的功能。如果你想给拆分出的文件命名，可以尝试一下 webpack 提供的 <code>Magic Comments</code>（魔法注释）：</p>
-
-<pre><code class="language-js">const Home = () =&gt; import(/* webpackChunkName:'home'*/ './views/Home.vue');
-</code></pre>
-
+<span style="color:#75715e">// 引入 Home 组件
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Home</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#66d9ef">import</span>(<span style="color:#e6db74">&#39;../components/homepage/Home.vue&#39;</span>);
+</code></pre></div><p>其余代码可以保持不变，仍然可以实现同样的功能。如果你想给拆分出的文件命名，可以尝试一下 webpack 提供的 <code>Magic Comments</code>（魔法注释）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Home</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#66d9ef">import</span>(<span style="color:#75715e">/* webpackChunkName:&#39;home&#39;*/</span> <span style="color:#e6db74">&#39;./views/Home.vue&#39;</span>);
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

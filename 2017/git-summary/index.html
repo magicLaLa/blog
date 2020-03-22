@@ -36,13 +36,15 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="git 相关总结"/>
-<meta name="twitter:description" content="关于git的总结 git工作流 git相关  git 提交规范 git 简明指南 git 在线教程 git pro 中文教程
- Commitizen是一个撰写合格 Commit message 的工具。
+<meta name="twitter:description" content="关于git的总结 git工作流 git相关   git 提交规范
+  git 简明指南
+  git 在线教程
+  git pro 中文教程
+  Commitizen是一个撰写合格 Commit message 的工具。
   1.安装命令如下:
-npm install -g commitizen  2.然后，在项目目录里，运行下面的命令，使其支持 Angular 的 Commit message 格式
-commitizen init cz-conventional-changelog --save --save-exact  3.以后，凡是用到git commit命令，一律改为使用git cz。这时，就会出现选项，用来生成符合格式的 Commit message
- 更多关于Commit message 和 Change log 编写指南可以到Commit message 和 Change log 编写指南查看&hellip;  git操作 合并某个分支上的文件到应一个分支、回退到某个版本和 远程服务器上面回退到某个版本  git 合并某个分支上的文件到另一个分支上git checkout branch &lt;path&gt; git 本地回退到某个版本
-git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795   git 远程服务器上面回退到某个版本"/>
+npm install -g commitizen2.然后，在项目目录里，运行下面的命令，使其支持 Angular 的 Commit message 格式
+commitizen init cz-conventional-changelog --save --save-exact3.以后，凡是用到git commit命令，一律改为使用git cz。这时，就会出现选项，用来生成符合格式的 Commit message
+ 更多关于Commit message 和 Change log 编写指南可以到Commit message 和 Change log 编写指南查看&hellip;  git操作 合并某个分支上的文件到应一个分支、回退到某个版本和 远程服务器上面回退到某个版本  git 合并某个分支上的文件到另一个分支上git checkout branch &lt;path&gt; git 本地回退到某个版本  git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795git 远程服务器上面回退到某个版本  # 可以 先把本地回退到某个版本# 例如：git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795# 然后再 强推到远程上面git push -f删除远程仓库上的某个文件夹 # 查看有哪些文件夹$ dir# 删除某个文件夹（本地项目中的文件夹不受操作影响,删除的只是远程仓库中的文件夹）$ git rm -r --cached target# 提交,添加操作说明$ git commit -m &#39;删除了xxx文件夹&#39;# 列子git rm -r --cached ."/>
 
   <script type="application/ld+json">
 {
@@ -56,7 +58,7 @@ git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795   git 远程服务器�
   
   "genre": "posts",
   "keywords": "git",
-  "wordcount":  1027 ,
+  "wordcount":  1176 ,
   "url": "\/2017\/git-summary\/",
   "datePublished": "2017-06-02T00:00:00\x2b00:00",
   "dateModified": "2017-06-02T00:00:00\x2b00:00",
@@ -151,7 +153,7 @@ git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795   git 远程服务器�
                 
             </span>
             <i class="iconfont icon-timer"></i>
-            5 min
+            6 min
         </div>
     </header>
     <div class="post-content">
@@ -172,323 +174,288 @@ git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795   git 远程服务器�
         
         
 
-        
-
-<h1 id="关于git的总结">关于git的总结</h1>
-
+        <h1 id="关于git的总结">关于git的总结</h1>
 <h2 id="git工作流">git工作流</h2>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/git-flow.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
-
+<p><img src="/images/totalimgs/git-flow.png" alt="pic"></p>
 <h2 id="git相关">git相关</h2>
-
 <ul>
-<li><a href="https://www.conventionalcommits.org/zh/v1.0.0-beta.2/" rel="nofollow noreferrer" target="_blank">git 提交规范</a></li>
-<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html" rel="nofollow noreferrer" target="_blank">git 简明指南</a></li>
-<li><a href="https://learngitbranching.js.org/" rel="nofollow noreferrer" target="_blank">git 在线教程</a></li>
-
-<li><p><a href="https://git-scm.com/book/zh/v2" rel="nofollow noreferrer" target="_blank">git pro 中文教程</a></p></li>
-
-<li><p><a href="https://github.com/commitizen/cz-cli" rel="nofollow noreferrer" target="_blank">Commitizen</a>是一个撰写合格 Commit message 的工具。</p></li>
+<li>
+<p><a href="https://www.conventionalcommits.org/zh/v1.0.0-beta.2/">git 提交规范</a></p>
+</li>
+<li>
+<p><a href="http://rogerdudler.github.io/git-guide/index.zh.html">git 简明指南</a></p>
+</li>
+<li>
+<p><a href="https://learngitbranching.js.org/">git 在线教程</a></p>
+</li>
+<li>
+<p><a href="https://git-scm.com/book/zh/v2">git pro 中文教程</a></p>
+</li>
+<li>
+<p><a href="https://github.com/commitizen/cz-cli">Commitizen</a>是一个撰写合格 Commit message 的工具。</p>
+</li>
 </ul>
-
 <p>1.安装命令如下:</p>
-
-<pre><code class="language-bash">npm install -g commitizen
-</code></pre>
-
-<p>2.然后，在项目目录里，运行下面的命令，使其支持 Angular 的 Commit message 格式</p>
-
-<pre><code class="language-bash">commitizen init cz-conventional-changelog --save --save-exact
-</code></pre>
-
-<p>3.以后，凡是用到git commit命令，一律改为使用git cz。这时，就会出现选项，用来生成符合格式的 Commit message</p>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/add-commit.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install -g commitizen
+</code></pre></div><p>2.然后，在项目目录里，运行下面的命令，使其支持 Angular 的 Commit message 格式</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">commitizen init cz-conventional-changelog --save --save-exact
+</code></pre></div><p>3.以后，凡是用到git commit命令，一律改为使用git cz。这时，就会出现选项，用来生成符合格式的 Commit message</p>
+<p><img src="/images/totalimgs/add-commit.png" alt="Alt text"></p>
 <ul>
-<li>更多关于<code>Commit message 和 Change log 编写指南</code>可以到<a href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" rel="nofollow noreferrer" target="_blank">Commit message 和 Change log 编写指南</a>查看&hellip;</li>
+<li>更多关于<code>Commit message 和 Change log 编写指南</code>可以到<a href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html">Commit message 和 Change log 编写指南</a>查看&hellip;</li>
 </ul>
-
 <h2 id="git操作">git操作</h2>
-
-<h3 id="合并某个分支上的文件到应一个分支-回退到某个版本和-远程服务器上面回退到某个版本">合并某个分支上的文件到应一个分支、回退到某个版本和 远程服务器上面回退到某个版本</h3>
-
+<h3 id="合并某个分支上的文件到应一个分支回退到某个版本和-远程服务器上面回退到某个版本">合并某个分支上的文件到应一个分支、回退到某个版本和 远程服务器上面回退到某个版本</h3>
 <ol>
 <li>git 合并某个分支上的文件到另一个分支上<code>git checkout branch &lt;path&gt;</code></li>
-
-<li><p>git 本地回退到某个版本</p>
-
-<pre><code class="language-sh">git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795
-</code></pre>
-
-<ol>
-<li><p>git 远程服务器上面回退到某个版本</p>
-
-<pre><code class="language-sh"># 可以 先把本地回退到某个版本
-# 例如：
-git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795
-# 然后再 强推到远程上面
-git push -f
-</code></pre></li>
-</ol></li>
+<li>git 本地回退到某个版本</li>
 </ol>
-
-<h3 id="删除远程仓库上的某个文件夹">删除远程仓库上的某个文件夹</h3>
-
-<pre><code class="language-bash"># 查看有哪些文件夹
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795
+</code></pre></div><ol start="3">
+<li>git 远程服务器上面回退到某个版本</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 可以 先把本地回退到某个版本</span>
+<span style="color:#75715e"># 例如：</span>
+git reset --hard 23bc94cf7e3c74c33dd4575dfbf72d6647333795
+<span style="color:#75715e"># 然后再 强推到远程上面</span>
+git push -f
+</code></pre></div><h3 id="删除远程仓库上的某个文件夹">删除远程仓库上的某个文件夹</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 查看有哪些文件夹</span>
 $ dir
-# 删除某个文件夹（本地项目中的文件夹不受操作影响,删除的只是远程仓库中的文件夹）
+<span style="color:#75715e"># 删除某个文件夹（本地项目中的文件夹不受操作影响,删除的只是远程仓库中的文件夹）</span>
 $ git rm -r --cached target
-# 提交,添加操作说明
-$ git commit -m '删除了xxx文件夹'
+<span style="color:#75715e"># 提交,添加操作说明</span>
+$ git commit -m <span style="color:#e6db74">&#39;删除了xxx文件夹&#39;</span>
 
-# 列子
-git rm -r --cached .idea  #--cached不会把本地的.idea删除
-git commit -m 'delete .idea dir'
+<span style="color:#75715e"># 列子</span>
+git rm -r --cached .idea  <span style="color:#75715e">#--cached不会把本地的.idea删除</span>
+git commit -m <span style="color:#e6db74">&#39;delete .idea dir&#39;</span>
 git push -u origin master
-</code></pre>
-
-<h3 id="tag">Tag</h3>
-
+</code></pre></div><h3 id="tag">Tag</h3>
 <ul>
 <li><code>git tag</code>查看所有的标签</li>
 <li><code>git tag -d tagName</code> 删除某个标签</li>
 <li><code>git tag -a newName -m &quot;注释&quot;</code> 创建一个带注释的标签</li>
 <li><code>git tag newName</code> 创建一个轻量级标签</li>
 <li><code>git checkout tagName</code> 切换到某个标签</li>
-
-<li><p>可以按照特定的表达式搜索某些标签</p>
-
-<pre><code class="language-sh">$ git tag -l v1.2.*
-v1.2.1
-v1.2.2
-v1.2.3
-</code></pre>
-
-<ul>
+<li>可以按照特定的表达式搜索某些标签</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ git tag -l v1.2.*
+  v1.2.1
+  v1.2.2
+  v1.2.3
+</code></pre></div><ul>
 <li><code>git push --tags</code> 默认情况下，<code>git push</code> 不会把 tag 上传到远程，为了共享这个 tag，可以在 git push 后面加 <code>--tags</code></li>
 <li><code>git stash</code> 暂存区和工作区的状态都会被保存</li>
 <li><code>git show tagName</code> 查看该标签的信息</li>
 <li>注意 <em><code>tag</code>实际指向的是一次<code>commit</code>，<code>show tagName</code>展示出来的<code>diff</code>也是该次<code>commit</code>的<code>diff</code></em></li>
-<li>删除本地标签 <code>git tag -d 标签名</code></li>
+<li>删除本地标签 <code>git tag -d 标签名 </code></li>
 <li>删除远程标签 <code>git push origin :refs/tags/标签名</code></li>
 </ul>
-
 <h3 id="git-推送本地分支到远程和拉去远程分支到本地">git 推送本地分支到远程和拉去远程分支到本地</h3>
-
-<pre><code class="language-bash">git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;
 git fetch origin &lt;远程分支名&gt;:&lt;本地分支名&gt;
-</code></pre></li>
-</ul>
-
-<h3 id="git-回到远程仓库的状态">git 回到远程仓库的状态</h3>
-
-<pre><code class="language-sh">git fetch --all &amp;&amp; git reset --hard origin/master
-</code></pre>
-
-<h3 id="git-放弃工作区的修改">git 放弃工作区的修改</h3>
-
-<pre><code class="language-sh">git checkout &lt;file-name&gt;
-# 放弃所有更改:
+</code></pre></div><h3 id="git-回到远程仓库的状态">git 回到远程仓库的状态</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git fetch --all <span style="color:#f92672">&amp;&amp;</span> git reset --hard origin/master
+</code></pre></div><h3 id="git-放弃工作区的修改">git 放弃工作区的修改</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git checkout &lt;file-name&gt;
+<span style="color:#75715e"># 放弃所有更改:</span>
 git checkout .
-</code></pre>
-
-<h3 id="以新增一个commit的方式还原某一个commit的修改">以新增一个commit的方式还原某一个commit的修改</h3>
-
-<pre><code class="language-sh">git revert &lt;commit-id&gt;
-</code></pre>
-
-<h3 id="回到某个commit的状态-并删除后面的commit">回到某个commit的状态，并删除后面的commit</h3>
-
+</code></pre></div><h3 id="以新增一个commit的方式还原某一个commit的修改">以新增一个commit的方式还原某一个commit的修改</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git revert &lt;commit-id&gt;
+</code></pre></div><h3 id="回到某个commit的状态并删除后面的commit">回到某个commit的状态，并删除后面的commit</h3>
 <p>和revert的区别：reset命令会抹去某个commit id之后的所有commit</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git reset &lt;commit-id&gt;  <span style="color:#75715e">#默认就是-mixed参数。</span>
 
-<pre><code class="language-sh">git reset &lt;commit-id&gt;  #默认就是-mixed参数。
+git reset –mixed HEAD^  <span style="color:#75715e">#回退至上个版本，它将重置HEAD到另外一个commit,并且重置暂存区和HEAD相匹配，但是也到此为止。工作区不会被更改。</span>
 
-git reset –mixed HEAD^  #回退至上个版本，它将重置HEAD到另外一个commit,并且重置暂存区和HEAD相匹配，但是也到此为止。工作区不会被更改。
+git reset –soft HEAD~3  <span style="color:#75715e">#回退至三个版本之前，只回退了commit的信息，暂存区和工作区与回前保持一致。如果还要提交，直接commit即可</span>   
 
-git reset –soft HEAD~3  #回退至三个版本之前，只回退了commit的信息，暂存区和工作区与回前保持一致。如果还要提交，直接commit即可   
-
-git reset –hard &lt;commit-id&gt;  #彻底回退到指定commit-id的状态，暂存区和工作区也会变为commit-id版本的内容
-</code></pre>
-
-<h3 id="以上是常用的几种-更多">以上是常用的几种，更多：</h3>
-
+git reset –hard &lt;commit-id&gt;  <span style="color:#75715e">#彻底回退到指定commit-id的状态，暂存区和工作区也会变为commit-id版本的内容</span>
+</code></pre></div><h3 id="以上是常用的几种更多">以上是常用的几种，更多：</h3>
 <ul>
-<li><a href="https://github.com/magicLaLa/git-tips" rel="nofollow noreferrer" target="_blank">关于git的操作请访问Fork=&gt;https://github.com/521xueweihan</a></li>
+<li><a href="https://github.com/magicLaLa/git-tips">关于git的操作请访问Fork=&gt;https://github.com/521xueweihan</a></li>
 </ul>
-
-<h2 id="git设置-powershell-插件-posh-git-安装-可视化界面的项目版本控制软件-适用于git项目管理">git设置、PowerShell 插件 posh-git 安装、可视化界面的项目版本控制软件，适用于git项目管理</h2>
-
+<h2 id="git设置powershell-插件-posh-git-安装可视化界面的项目版本控制软件适用于git项目管理">git设置、PowerShell 插件 posh-git 安装、可视化界面的项目版本控制软件，适用于git项目管理</h2>
 <ul>
 <li>Git 设置</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 设置 Git 全局：用户名、邮箱 ↓</span>
+git config --global user.name <span style="color:#e6db74">&#34;youName&#34;</span>
+git config --global user.email yourEmail@example.com
 
-<pre><code class="language-sh"># 设置提交时的用户信息
-git config --global user.name &quot;用户名&quot;
-git config --global user.email &quot;邮箱&quot;
-# 禁用git自动LF转CRLF
+<span style="color:#75715e"># 下面是针对每个 Git 项目的，非全局 ↓</span>
+git config user.email yourEmail@example.com
+git config user.name <span style="color:#e6db74">&#34;youName&#34;</span>
+
+<span style="color:#75715e"># 禁用git自动LF转CRLF</span>
 git config --global core.autocrlf false
-# 生成密钥（默认文件名id_rsa）
-# -t 密钥类型
-# -C 注释
-ssh-keygen -t rsa -C &quot;邮箱&quot;
-</code></pre>
-
+<span style="color:#75715e"># 生成密钥（默认文件名id_rsa）</span>
+<span style="color:#75715e"># -t 密钥类型</span>
+<span style="color:#75715e"># -C 注释</span>
+ssh-keygen -t rsa -C <span style="color:#e6db74">&#34;邮箱&#34;</span>
+</code></pre></div><p>哪个设为全局，哪个设为当前项目，按个人需求而定，并无绝对。</p>
 <ul>
 <li>PowerShell 插件 posh-git 安装</li>
 </ul>
-
-<pre><code class="language-sh">VSCode 默认使用PowerShell，启动powershell，分别执行下面3个命令（提示都输入Yes）
-# 1.设置权限
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">VSCode 默认使用PowerShell，启动powershell，分别执行下面3个命令（提示都输入Yes）
+<span style="color:#75715e"># 1.设置权限</span>
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
-# 2.使用PowerShellGet安装
-PowerShellGet\Install-Module posh-git -Scope CurrentUser
-# 3.全局导入posh-git
+<span style="color:#75715e"># 2.使用PowerShellGet安装</span>
+PowerShellGet<span style="color:#ae81ff">\I</span>nstall-Module posh-git -Scope CurrentUser
+<span style="color:#75715e"># 3.全局导入posh-git</span>
 Add-PoshGitToProfile -AllHosts
-</code></pre>
-
-<ul>
-<li>SourceTree拥有可视化界面的项目版本控制软件，适用于git项目管理<br />
-<a href="https://www.sourcetreeapp.com/" rel="nofollow noreferrer" target="_blank">官网</a><br />
-基本使用: <a href="https://www.cnblogs.com/tian-xie/p/6264104.html" rel="nofollow noreferrer" target="_blank">https://www.cnblogs.com/tian-xie/p/6264104.html</a><br />
-<br /></li>
+</code></pre></div><ul>
+<li>
+<p>SourceTree拥有可视化界面的项目版本控制软件，适用于git项目管理<br>
+<a href="https://www.sourcetreeapp.com/">官网</a><br>
+基本使用: <a href="https://www.cnblogs.com/tian-xie/p/6264104.html">https://www.cnblogs.com/tian-xie/p/6264104.html</a></p>
+<p><img src="/images/totalimgs/sourcetree.png" alt="SourceTree"></p>
+</li>
 </ul>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/sourcetree.png" alt="SourceTree" class="lazyload"><figcaption class="image-caption">SourceTree</figcaption></figure></p>
-
 <h2 id="git常见错误处理">git常见错误处理</h2>
-
-<h3 id="在-git-commit-或者-git-add-的时候报-git-fatal-unable-to-create-f-vue-learning-git-index-lock-file-exists-这个错误">在 git commit 或者 git add 的时候报 Git: fatal: Unable to create &lsquo;f:/Vue-learning/.git/index.lock&rsquo;: File exists. 这个错误</h3>
-
+<h3 id="在-git-commit-或者-git-add-的时候报-git-fatal-unable-to-create-fvue-learninggitindexlock-file-exists-这个错误">在 git commit 或者 git add 的时候报 Git: fatal: Unable to create &lsquo;f:/Vue-learning/.git/index.lock&rsquo;: File exists. 这个错误</h3>
 <ul>
 <li>git 遇到这个错误时，需要把 当前项目下 .git -&gt; index.lock 这个文件删除即可</li>
 </ul>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/1323758-20180206172305857-1172749425.png" alt="Alt text" class="lazyload"><figcaption class="image-caption">Alt text</figcaption></figure></p>
-
-<h3 id="git-merge-冲突-提示you-have-not-concluded-your-merge-merge-head-exists">git merge 冲突，提示You have not concluded your merge (MERGE_HEAD exists)</h3>
-
-<pre><code class="language-sh"># You have not concluded your merge (MERGE_HEAD exists).
-# Please, commit your changes before you can merge.
-# 可以先撤销合并(git的版本不同撤销命令也不同)
-git merge --abort [Since git version 1.7.4]
-git reset --merge [prior git versions]
-</code></pre>
-
-<h3 id="git-clone-远程仓库地址url-在登录时输错密码或者账户导致clong失败">git clone 远程仓库地址url，在登录时输错密码或者账户导致clong失败</h3>
-
+<p><img src="/images/totalimgs/1323758-20180206172305857-1172749425.png" alt="Alt text"></p>
+<h3 id="git-merge-冲突提示you-have-not-concluded-your-merge-merge_head-exists">git merge 冲突，提示You have not concluded your merge (MERGE_HEAD exists)</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># You have not concluded your merge (MERGE_HEAD exists).</span>
+<span style="color:#75715e"># Please, commit your changes before you can merge.</span>
+<span style="color:#75715e"># 可以先撤销合并(git的版本不同撤销命令也不同)</span>
+git merge --abort <span style="color:#f92672">[</span>Since git version 1.7.4<span style="color:#f92672">]</span>
+git reset --merge <span style="color:#f92672">[</span>prior git versions<span style="color:#f92672">]</span>
+</code></pre></div><h3 id="git-clone-远程仓库地址url在登录时输错密码或者账户导致clong失败">git clone 远程仓库地址url，在登录时输错密码或者账户导致clong失败</h3>
 <ol>
 <li>打开电脑控制面板：</li>
 </ol>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/kzmb.png" alt="控制面板" class="lazyload"><figcaption class="image-caption">控制面板</figcaption></figure></p>
-
-<ol>
+<p><img src="/images/totalimgs/kzmb.png" alt="控制面板"></p>
+<ol start="2">
 <li>选择用户账户&ndash;&gt;管理你的凭据</li>
 </ol>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/dnpz.png" alt="电脑凭证" class="lazyload"><figcaption class="image-caption">电脑凭证</figcaption></figure></p>
-
-<ol>
+<p><img src="/images/totalimgs/dnpz.png" alt="电脑凭证"></p>
+<ol start="3">
 <li>可以在下方用红框的地方修改</li>
 </ol>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/pz.png" alt="修改" class="lazyload"><figcaption class="image-caption">修改</figcaption></figure>
-<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/xg.png" alt="修改" class="lazyload"><figcaption class="image-caption">修改</figcaption></figure></p>
-
-<h3 id="git-push-到-github-上报错-fatal-httprequestexception-encountered">git push 到 github 上报错：fatal: HttpRequestException encountered</h3>
-
-<pre><code class="language-sh">fatal: HttpRequestException encountered.
+<p><img src="/images/totalimgs/pz.png" alt="修改">
+<img src="/images/totalimgs/xg.png" alt="修改"></p>
+<h3 id="git-push-到-github-上报错fatal-httprequestexception-encountered">git push 到 github 上报错：fatal: HttpRequestException encountered</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">fatal: HttpRequestException encountered.
    发送请求时出错。
-      0 [main] bash (32364) e:\Program Files (x86)\Git\usr\bin\bash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x2E49408.
+      <span style="color:#ae81ff">0</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#f92672">(</span>32364<span style="color:#f92672">)</span> e:<span style="color:#ae81ff">\P</span>rogram Files <span style="color:#f92672">(</span>x86<span style="color:#f92672">)</span><span style="color:#ae81ff">\G</span>it<span style="color:#ae81ff">\u</span>sr<span style="color:#ae81ff">\b</span>in<span style="color:#ae81ff">\b</span>ash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x2E49408.
 This problem is probably due to using incompatible versions of the cygwin DLL.
-Search for cygwin1.dll using the Windows Start-&gt;Find/Search facility
+Search <span style="color:#66d9ef">for</span> cygwin1.dll using the Windows Start-&gt;Find/Search facility
 and delete all but the most recent version.  The most recent version *should*
-reside in x:\cygwin\bin, where 'x' is the drive on which you have
-installed the cygwin distribution.  Rebooting is also suggested if you
+reside in x:<span style="color:#ae81ff">\c</span>ygwin<span style="color:#ae81ff">\b</span>in, where <span style="color:#e6db74">&#39;x&#39;</span> is the drive on which you have
+installed the cygwin distribution.  Rebooting is also suggested <span style="color:#66d9ef">if</span> you
 are unable to find another cygwin DLL.
-      0 [main] bash 31852 fork: child -1 - forked process 32364 died unexpectedly, retry 0, exit code 0xC0000142, errno 11
+      <span style="color:#ae81ff">0</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#ae81ff">31852</span> fork: child -1 - forked process <span style="color:#ae81ff">32364</span> died unexpectedly, retry 0, exit code 0xC0000142, errno 11
 bash: fork: retry: Resource temporarily unavailable
-      0 [main] bash (31984) e:\Program Files (x86)\Git\usr\bin\bash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x2EB9408.
+      <span style="color:#ae81ff">0</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#f92672">(</span>31984<span style="color:#f92672">)</span> e:<span style="color:#ae81ff">\P</span>rogram Files <span style="color:#f92672">(</span>x86<span style="color:#f92672">)</span><span style="color:#ae81ff">\G</span>it<span style="color:#ae81ff">\u</span>sr<span style="color:#ae81ff">\b</span>in<span style="color:#ae81ff">\b</span>ash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x2EB9408.
 This problem is probably due to using incompatible versions of the cygwin DLL.
-Search for cygwin1.dll using the Windows Start-&gt;Find/Search facility
+Search <span style="color:#66d9ef">for</span> cygwin1.dll using the Windows Start-&gt;Find/Search facility
 and delete all but the most recent version.  The most recent version *should*
-reside in x:\cygwin\bin, where 'x' is the drive on which you have
-installed the cygwin distribution.  Rebooting is also suggested if you
+reside in x:<span style="color:#ae81ff">\c</span>ygwin<span style="color:#ae81ff">\b</span>in, where <span style="color:#e6db74">&#39;x&#39;</span> is the drive on which you have
+installed the cygwin distribution.  Rebooting is also suggested <span style="color:#66d9ef">if</span> you
 are unable to find another cygwin DLL.
-1104150 [main] bash 31852 fork: child -1 - forked process 31984 died unexpectedly, retry 0, exit code 0xC0000142, errno 11
+<span style="color:#ae81ff">1104150</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#ae81ff">31852</span> fork: child -1 - forked process <span style="color:#ae81ff">31984</span> died unexpectedly, retry 0, exit code 0xC0000142, errno 11
 bash: fork: retry: Resource temporarily unavailable
-      0 [main] bash (32460) e:\Program Files (x86)\Git\usr\bin\bash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x2EE9408.
+      <span style="color:#ae81ff">0</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#f92672">(</span>32460<span style="color:#f92672">)</span> e:<span style="color:#ae81ff">\P</span>rogram Files <span style="color:#f92672">(</span>x86<span style="color:#f92672">)</span><span style="color:#ae81ff">\G</span>it<span style="color:#ae81ff">\u</span>sr<span style="color:#ae81ff">\b</span>in<span style="color:#ae81ff">\b</span>ash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x2EE9408.
 This problem is probably due to using incompatible versions of the cygwin DLL.
-Search for cygwin1.dll using the Windows Start-&gt;Find/Search facility
+Search <span style="color:#66d9ef">for</span> cygwin1.dll using the Windows Start-&gt;Find/Search facility
 and delete all but the most recent version.  The most recent version *should*
-reside in x:\cygwin\bin, where 'x' is the drive on which you have
-installed the cygwin distribution.  Rebooting is also suggested if you
+reside in x:<span style="color:#ae81ff">\c</span>ygwin<span style="color:#ae81ff">\b</span>in, where <span style="color:#e6db74">&#39;x&#39;</span> is the drive on which you have
+installed the cygwin distribution.  Rebooting is also suggested <span style="color:#66d9ef">if</span> you
 are unable to find another cygwin DLL.
-3187630 [main] bash 31852 fork: child -1 - forked process 32460 died unexpectedly, retry 0, exit code 0xC0000142, errno 11
+<span style="color:#ae81ff">3187630</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#ae81ff">31852</span> fork: child -1 - forked process <span style="color:#ae81ff">32460</span> died unexpectedly, retry 0, exit code 0xC0000142, errno 11
 bash: fork: retry: Resource temporarily unavailable
-      0 [main] bash (20400) e:\Program Files (x86)\Git\usr\bin\bash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x3019408.
+      <span style="color:#ae81ff">0</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#f92672">(</span>20400<span style="color:#f92672">)</span> e:<span style="color:#ae81ff">\P</span>rogram Files <span style="color:#f92672">(</span>x86<span style="color:#f92672">)</span><span style="color:#ae81ff">\G</span>it<span style="color:#ae81ff">\u</span>sr<span style="color:#ae81ff">\b</span>in<span style="color:#ae81ff">\b</span>ash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x3019408.
 This problem is probably due to using incompatible versions of the cygwin DLL.
-Search for cygwin1.dll using the Windows Start-&gt;Find/Search facility
+Search <span style="color:#66d9ef">for</span> cygwin1.dll using the Windows Start-&gt;Find/Search facility
 and delete all but the most recent version.  The most recent version *should*
-reside in x:\cygwin\bin, where 'x' is the drive on which you have
-installed the cygwin distribution.  Rebooting is also suggested if you
+reside in x:<span style="color:#ae81ff">\c</span>ygwin<span style="color:#ae81ff">\b</span>in, where <span style="color:#e6db74">&#39;x&#39;</span> is the drive on which you have
+installed the cygwin distribution.  Rebooting is also suggested <span style="color:#66d9ef">if</span> you
 are unable to find another cygwin DLL.
-7278726 [main] bash 31852 fork: child -1 - forked process 20400 died unexpectedly, retry 0, exit code 0xC0000142, errno 11
+<span style="color:#ae81ff">7278726</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#ae81ff">31852</span> fork: child -1 - forked process <span style="color:#ae81ff">20400</span> died unexpectedly, retry 0, exit code 0xC0000142, errno 11
 bash: fork: retry: Resource temporarily unavailable
-      0 [main] bash (9192) e:\Program Files (x86)\Git\usr\bin\bash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x2EF9408.
+      <span style="color:#ae81ff">0</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#f92672">(</span>9192<span style="color:#f92672">)</span> e:<span style="color:#ae81ff">\P</span>rogram Files <span style="color:#f92672">(</span>x86<span style="color:#f92672">)</span><span style="color:#ae81ff">\G</span>it<span style="color:#ae81ff">\u</span>sr<span style="color:#ae81ff">\b</span>in<span style="color:#ae81ff">\b</span>ash.exe: *** fatal error - cygheap base mismatch detected - 0x30C9408/0x2EF9408.
 This problem is probably due to using incompatible versions of the cygwin DLL.
-Search for cygwin1.dll using the Windows Start-&gt;Find/Search facility
+Search <span style="color:#66d9ef">for</span> cygwin1.dll using the Windows Start-&gt;Find/Search facility
 and delete all but the most recent version.  The most recent version *should*
-reside in x:\cygwin\bin, where 'x' is the drive on which you have
-installed the cygwin distribution.  Rebooting is also suggested if you
+reside in x:<span style="color:#ae81ff">\c</span>ygwin<span style="color:#ae81ff">\b</span>in, where <span style="color:#e6db74">&#39;x&#39;</span> is the drive on which you have
+installed the cygwin distribution.  Rebooting is also suggested <span style="color:#66d9ef">if</span> you
 are unable to find another cygwin DLL.
-15370228 [main] bash 31852 fork: child -1 - forked process 9192 died unexpectedly, retry 0, exit code 0xC0000142, errno 11
+<span style="color:#ae81ff">15370228</span> <span style="color:#f92672">[</span>main<span style="color:#f92672">]</span> bash <span style="color:#ae81ff">31852</span> fork: child -1 - forked process <span style="color:#ae81ff">9192</span> died unexpectedly, retry 0, exit code 0xC0000142, errno 11
 bash: fork: Resource temporarily unavailable
-error: failed to execute prompt script (exit code 254)
-fatal: could not read Username for 'https://github.com': No error
-</code></pre>
-
-<ul>
-<li>导致：<code>fatal: HttpRequestException encountered</code> 这个的原因是github禁用了TLS1.0/1.1协议，<a href="https://githubengineering.com/crypto-deprecation-notice/" rel="nofollow noreferrer" target="_blank">github禁用了对弱加密的支持</a>，我们可以对 <a href="https://github.com/git-for-windows/git/releases" rel="nofollow noreferrer" target="_blank">git for windows</a> 更新到最新的版本或者去更新<a href="https://github.com/Microsoft/Git-Credential-Manager-for-Windows" rel="nofollow noreferrer" target="_blank">windows的git凭证管理器</a>，这样就可以了。</li>
+error: failed to execute prompt script <span style="color:#f92672">(</span>exit code 254<span style="color:#f92672">)</span>
+fatal: could not read Username <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;https://github.com&#39;</span>: No error
+</code></pre></div><ul>
+<li>导致：<code>fatal: HttpRequestException encountered</code> 这个的原因是github禁用了TLS1.0/1.1协议，<a href="https://githubengineering.com/crypto-deprecation-notice/">github禁用了对弱加密的支持</a>，我们可以对 <a href="https://github.com/git-for-windows/git/releases">git for windows</a> 更新到最新的版本或者去更新<a href="https://github.com/Microsoft/Git-Credential-Manager-for-Windows">windows的git凭证管理器</a>，这样就可以了。</li>
 </ul>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/1323758-20180712112225701-1623212436.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
-
-<h3 id="git-merge-冲突-提示you-have-not-concluded-your-merge-merge-head-exists-1">git merge 冲突，提示You have not concluded your merge (MERGE_HEAD exists)</h3>
-
-<pre><code class="language-sh">You have not concluded your merge (MERGE_HEAD exists).Please, commit your changes before you can merge.
-</code></pre>
-
-<ul>
+<p><img src="/images/totalimgs/1323758-20180712112225701-1623212436.png" alt="pic"></p>
+<h3 id="git-merge-冲突提示you-have-not-concluded-your-merge-merge_head-exists-1">git merge 冲突，提示You have not concluded your merge (MERGE_HEAD exists)</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">You have not concluded your merge <span style="color:#f92672">(</span>MERGE_HEAD exists<span style="color:#f92672">)</span>.Please, commit your changes before you can merge.
+</code></pre></div><ul>
 <li>可以先撤销合并</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git merge --abort <span style="color:#f92672">[</span>Since git version 1.7.4<span style="color:#f92672">]</span>
 
-<pre><code class="language-sh">git merge --abort [Since git version 1.7.4]
-
-git reset --merge [prior git versions]
-</code></pre>
-
-<h3 id="撤销上一次-commit-将改动保留在暂存区">撤销上一次 commit，将改动保留在暂存区</h3>
-
+git reset --merge <span style="color:#f92672">[</span>prior git versions<span style="color:#f92672">]</span>
+</code></pre></div><h3 id="撤销上一次-commit将改动保留在暂存区">撤销上一次 commit，将改动保留在暂存区</h3>
 <ul>
 <li>只想为之前的commit增加更多的改动，或者改变之前的提交信息</li>
 </ul>
-
-<pre><code class="language-sh"># 和git rest HEAD~ 有些类似，但是会将你的改动保留在暂存区内
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 和git rest HEAD~ 有些类似，但是会将你的改动保留在暂存区内</span>
 get reset --soft HEAD~
-</code></pre>
-
-<h3 id="通过-ssh-add-管理-ssh密钥-重启电脑后需要再次输入密钥密码">通过 ssh-add 管理 ssh密钥，重启电脑后需要再次输入密钥密码</h3>
-
+</code></pre></div><h3 id="通过-ssh-add-管理-ssh密钥重启电脑后需要再次输入密钥密码">通过 ssh-add 管理 ssh密钥，重启电脑后需要再次输入密钥密码</h3>
 <ul>
 <li>ssh-add 这个命令不是用来永久性的记住你所使用的私钥的。实际上，它的作用只是把你指定的私钥添加到 ssh-agent 所管理的一个 session 当中。而 ssh-agent 是一个用于存储私钥的临时性的 session 服务，也就是说当你重启之后，ssh-agent 服务也就重置了。</li>
 <li>Mac 系统内置了一个 Keychain 的服务及其管理程序，可以方便的帮你管理各种秘钥，其中包括 ssh 秘钥。ssh-add 默认将制定的秘钥添加在当前运行的 ssh-agent 服务中，但是你可以改变这个默认行为让它添加到 keychain 服务中，让 Mac 来帮你记住、管理并保障这些秘钥的安全性，命令如下：</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ssh-add -K <span style="color:#f92672">[</span>path/to/your/ssh-key<span style="color:#f92672">]</span>
+</code></pre></div><h3 id="windows-使用-ssh-add-管理-ssh密钥">windows 使用 ssh-add 管理 ssh密钥</h3>
+<ul>
+<li>windows 上可以使用 <code>scoop</code> 来安装 <code>git openssh</code></li>
+<li>使用 <code>ssh-add</code> 来添加密钥，如果失败，可以查看 <code>ssh-agent</code> 服务是否开启: <em><a href="https://stackoverflow.com/questions/52113738/starting-ssh-agent-on-windows-10-fails-unable-to-start-ssh-agent-service-erro">stackoverflow相关问题</a></em></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">&gt; Get-Service ssh-agent
+Status   Name               DisplayName
+------   ----               -----------
+Stopped  ssh-agent          OpenSSH Authentication Agent
 
-<pre><code class="language-sh">ssh-add -K [path/to/your/ssh-key]
-</code></pre>
+&gt; Set-Service -Name ssh-agent -StartupType Manual
+&gt; Start-Service ssh-agent
+&gt; Get-Service ssh-agent
+Status   Name               DisplayName
+------   ----               -----------
+Running  ssh-agent          OpenSSH Authentication Agent
+</code></pre></div><ul>
+<li>可以通过 <code>ssh-add -l</code> 来确私钥列表</li>
+<li>可以通过 <code>ssh-add -D</code> 来清空私钥列表</li>
+</ul>
+<h3 id="配置多个ssh-key">配置多个SSH-Key</h3>
+<p>创建多个 ssh-key 并添加到远程仓库中，</p>
+<ul>
+<li><code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot; -f ~/.ssh/id_rsa_github</code></li>
+<li><code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot; -f ~/.ssh/id_rsa_gitlab</code></li>
+</ul>
+<p>然后在本地 <code>.ssh</code> 文件夹下创建 <code>config</code> 文件 <code>touch config</code>，写入如下配置（<em>windows下路径为 <code>C:\Users\{用户}\.ssh</code></em>）:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># gitlab</span>
+Host gitlab.com
+    HostName gitlab.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa_gitlab
+<span style="color:#75715e"># github</span>
+Host github.com
+    HostName github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa_github
+</code></pre></div><p><em>注意：即使是同一个email地址，在不同的电脑上，都需要重新生成SSH-Key；然后再添加到git服务器的SSH-Key配置中。</em></p>
+<h4 id="测试">测试</h4>
+<ul>
+<li>执行如下命令，查看我们配置是否成功 <code>ssh -T git@github.com</code>，如果成功输出欢迎语句，则表示配置成功。例如：<code>Hi hdszylcd19! You've successfully authenticated, but GitHub does not provide shell access.</code></li>
+<li>如果遇到错误的话，则可以使用如下命令，查看详细信息，定位具体原因 <code>ssh -vT git@github.com</code> <em>一般有问题大部分都是 host 写错啦~</em></li>
+</ul>
 
     </div>
 
@@ -502,7 +469,7 @@ get reset --soft HEAD~
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>1027</span>
+            <span>1176</span>
         </p>
 
         <p class="copyright-item">

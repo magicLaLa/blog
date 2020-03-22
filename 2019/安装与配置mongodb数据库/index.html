@@ -167,42 +167,31 @@
         
         
 
-        
-
-<p>服务器系统为 Ubuntu 14.04</p>
-
+        <p>服务器系统为 Ubuntu 14.04</p>
 <ul>
 <li><code>mongodump</code> 逻辑备份工具。</li>
 <li><code>mongorestore</code> 逻辑恢复工具。</li>
 <li><code>mongoexport</code>  数据导出工具。</li>
 <li><code>mongoimport</code>  数据导入工具。</li>
 </ul>
-
 <p>可以使用 Navicat for MongoDB 来管理数据库</p>
-
 <h3 id="安装-mongodb-并开启等命令">安装 MongoDB 并开启等命令</h3>
-
 <ul>
-<li><a href="https://docs.mongodb.com/manual/administration/install-enterprise/" rel="nofollow noreferrer" target="_blank">MongoDB社区安装</a></li>
+<li><a href="https://docs.mongodb.com/manual/administration/install-enterprise/">MongoDB社区安装</a></li>
 </ul>
-
 <ol>
 <li>加入公钥 <del><code>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6</code></del> 使用后面这个命令：<code>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10</code></li>
 <li>为 MongoDB 创建一个列表文件，可以选择使用 Aliyun 的镜像文件 <del><code>echo &quot;deb [ arch=amd64 ] http://mirrors.aliyun.com/MongoDB/apt/ubuntu trusty/MongoDB-org/4.0 multiverse&quot; | sudo tee /etc/apt/sources.list.d/MongoDB-org-4.0.list</code></del> <code>echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list</code></li>
 <li>重新加载更新本地的包库 <code>sudo apt-get update</code></li>
 <li>安装 MongoDB 稳定版 <code>sudo apt-get install -y MongoDB-org</code></li>
 </ol>
-
 <blockquote>
 <p>在安装的时候有可能会遇到这个问题：定位不到本地的 MongoDB-org 的安装包，可能是因为我们使用的是阿里云的服务器，所以默认的是阿里云的源。可以先把阿里云的源屏蔽掉试一下:</p>
-
-<pre><code class="language-sh">sudo vi /etc/apt/apt.conf
-# 把下面一行给注释掉，在前面加一个#号即可：
-Acquire::http::Proxy &quot;http://mirrors.aliyun.com/&quot;;
-</code></pre>
 </blockquote>
-
-<ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo vi /etc/apt/apt.conf
+<span style="color:#75715e"># 把下面一行给注释掉，在前面加一个#号即可：</span>
+Acquire::http::Proxy <span style="color:#e6db74">&#34;http://mirrors.aliyun.com/&#34;</span>;
+</code></pre></div><ol start="5">
 <li>开启命令：<code>sudo service mongod start</code></li>
 <li>查看 MongoDB 是否成功开始服务，使用 <code>cat /var/log/mongodb/mongod.log</code> 查看 MongoDB 日志文件，或者直接使用命令链接一下：<code>mongo</code> &ndash;<em>默认情况下，运行此命令将查找在localhost接口上侦听端口27017的MongoDB服务器（如果您想连接到在不同端口上运行的MongoDB服务器，请使用-port选项。例如，如果要连接到侦听端口22222的本地MongoDB服务器，则会发出以下命令：<code>mongo --port 22222</code>）</em></li>
 <li>如果没有成功进入 MongoDB 的命令行界面，可以检查下阿里云安全组包括本地的防火墙 27017 端口有没有开启（MongoDB 的端口是默认的 27017 端口），如果能从终端进入到 MongoDB 命令行环境，说明我们的 MongoDB 服务开启成功了。</li>
@@ -212,19 +201,14 @@ Acquire::http::Proxy &quot;http://mirrors.aliyun.com/&quot;;
 <li>状态统计摘要列表（连续）：<code>mongostat</code></li>
 <li>状态统计摘要列表（5行，每2秒汇总）：<code>mongostat --rowcount 5 2</code></li>
 </ol>
-
 <p>注：输入 <code>moongo</code> 后，报 <code>BadValue Invalid or no user locale set. Please ensure LANG and/or LC_* environment variables are set correctly</code>，可以 使用 <code>locale-gen en_US.UTF-8</code> 这个命令来生成缺少的语言环境，然后重新启动 数据库</p>
-
 <h3 id="修改-mongodb-数据库默认运行端口">修改 MongoDB 数据库默认运行端口</h3>
-
 <p>现在服务器上 MongoDB 运行的端口是默认的 27017 端口，全世界都知道，也是出于最最基本的安全考虑。</p>
-
 <ol>
 <li>打开 MongoDB 数据库配置文件：<code>sudo vi /etc/mongod.conf</code> <strong>输入法必须为英文</strong></li>
 <li>可以把 net 下面的 port 改成一个你喜欢的端口号，比如 19999。</li>
 </ol>
-
-<pre><code class="language-conf">storage:
+<pre><code class="language-conf" data-lang="conf">storage:
   dbPath: /var/lib/MongoDB
   journal:
     enabled: true
@@ -254,252 +238,209 @@ net:
 
 #auditLog:
 #snmp
-</code></pre>
-
-<ol>
+</code></pre><ol start="3">
 <li>保存后重启服务：<code>sudo service mongod restart</code></li>
 <li>加端口号后连接：<code>mongo --port 19999</code> <em>提醒：MongoDB 的运行端口是在 27017 的，这里将 MongoDB 的默认端口修改后，比如改成 19999，那么对应的 iptables 也要更新下，包括阿里云的安全组也要配置下，这里容易被遗忘。</em></li>
 </ol>
-
 <h3 id="本地线上的数据导入导出">本地线上的数据导入导出</h3>
-
 <h4 id="本地安装-和运行-mongodb">本地安装 和运行 mongodb</h4>
-
 <ul>
 <li>可以现在本地搭建一个数据库，使用 <code>brew</code> 来安装 <code>mongodb</code>：<code>brew install mongodb</code></li>
 <li>创建一个数据库存储目录：<code>sudo mkdir -p /data/db</code></li>
 <li>启动 mongodb，默认数据库目录即为 /data/db：<code>sudo mongod</code> || <code>brew services start mongodb</code></li>
 <li>重新启动：<code>brew services restart mongodb</code></li>
 </ul>
-
 <h4 id="往线上空库导入单表数据或数据库">往线上空库导入单表数据或数据库</h4>
-
 <ul>
 <li>把本地数据导入到本地数据库：<code>mongorestore -p 27017 -d [dbnames] [file-path]</code></li>
 <li>对本地数据库进行整库备份，把数据库导入 <code>[local-file-name]</code> 下，然后在压缩打包成 <code>[file-name].tar.gz</code> 文件包</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mongodump -h 127.0.0.1:27017 -d <span style="color:#f92672">[</span>dbname<span style="color:#f92672">]</span> -o <span style="color:#f92672">[</span>local-file-path<span style="color:#f92672">]</span>
 
-<pre><code class="language-sh">mongodump -h 127.0.0.1:27017 -d [dbname] -o [local-file-path]
-
-# tar 是打包
-# tar zxvf 解压
-# tar zcvf 压缩
-# tar xvf 解压
-tar zcvf [file-name].tar.gz [local-file-name]
-</code></pre>
-
-<ul>
+<span style="color:#75715e"># tar 是打包</span>
+<span style="color:#75715e"># tar zxvf 解压</span>
+<span style="color:#75715e"># tar zcvf 压缩</span>
+<span style="color:#75715e"># tar xvf 解压</span>
+tar zcvf <span style="color:#f92672">[</span>file-name<span style="color:#f92672">]</span>.tar.gz <span style="color:#f92672">[</span>local-file-name<span style="color:#f92672">]</span>
+</code></pre></div><ul>
 <li>通过 <code>scp</code> 上传到服务器 <code>scp -P 39999 ./imooc-movie.tar.gz rn_manager@116.62.201.97:/home/rn_manager/loaclBD/</code>。注：服务器上找不到目录可以新建一个目录</li>
-<li>使用  <code>tar xvf ./loaclBD/imooc-movie.tar.gz</code> 解压</li>
+<li>使用  <code> tar xvf ./loaclBD/imooc-movie.tar.gz</code> 解压</li>
 <li>使用 <code>mongorestore --host 127.0.0.1:19999 -d imooc-movie ./imooc-movie/imooc-movie/</code> 导入数据到数据库中 <em>服务器上操作，执行这个命令时在当前目录下不能有 db 这个目录</em></li>
 </ul>
-
 <h4 id="为非空数据库导入数据">为非空数据库导入数据</h4>
-
 <ul>
 <li>例如需要为一个已有的数据库导入一张或者几张单表，这种情况适用于：新增一些用户列表，新增一些创意数据，或者初始化一些管理员角色等。</li>
 <li>有一个 xxx 的用户，它是有超级权限的，我们希望通过本地的这张用户表导入到线上以后，等到应用发布了，这个应用就默认拥有了一个 xxx 的高权限用户，通过它就能管理应用的数据。</li>
 </ul>
-
 <ol>
 <li>首先，需要在本地把这张用户表导出来：<code>mongoexport -d imooc-movie -c users -q '{&quot;name&quot;: {$ne: null}}' -o ./movie-users.json</code></li>
 <li>然后上传这张表到服务器：<code>scp -P 39999 ./movie-users.json rn_manager@116.62.201.97:/home/rn_manager/loaclBD/</code></li>
 <li>然后登录到服务器上导入用户数据：<code>mongoimport --host 127.0.0.1:19999 -d imooc-movie -c users ./movie-users.json</code></li>
 <li>如果导入了数据库之后后悔了，可以通过 <code>mongo --host 127.0.0.1:19999 imooc-movie --eval &quot;db.dropDatabase()&quot;</code> 命令来删除数据库</li>
 </ol>
-
 <h4 id="为项目配置数据库读写权限">为项目配置数据库读写权限</h4>
-
 <p>MongoDB 权限系统有一个大概的了解：</p>
-
 <ol>
 <li>MongoDB 是没有默认管理员账号，所以要先添加管理员账号，再开启权限认证。</li>
 <li>只有在切换到 admin 数据库后，添加的账号才是管理员账号。</li>
 <li>用户只能在用户所在数据库登录，包括管理员账号。</li>
 <li>管理员可以管理所有数据库，但是不能直接管理其他数据库，要先在 admin 数据库认证后才可以。</li>
 </ol>
-
 <ul>
 <li>首先是对整个 MongoDB 的数据库设立一个超级权限，其实就是一个管理员，<code>mongo -p 19999</code>  从服务器进入到数据库命令行模式：</li>
 </ul>
-
-<pre><code class="language-sh"># 切换到 admin
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 切换到 admin</span>
 use admin
-# 创建管理员权限的账号
-# db.createUser({user: 'dba',pwd:'123456.!$',roles:[{role:'root',db:'admin'}]})
-db.createUser({user: 'test_owner',pwd:'123456.!$',roles:[{role:'userAdminAnyDatabase',db:'admin'}]})
-&gt; Successfully added user: {
-    &quot;user&quot; : &quot;test_owner&quot;,
-    &quot;roles&quot; : [
-      {
-        &quot;role&quot; : &quot;userAdminAnyDatabase&quot;,
-        &quot;db&quot; : &quot;admin&quot;
-      }
-    ]
-  }
-# 用刚创建的用户授权进入
-db.auth('test_owner', '123456.!$')
-# 切换到业务数据库
+<span style="color:#75715e"># 创建管理员权限的账号</span>
+<span style="color:#75715e"># db.createUser({user: &#39;dba&#39;,pwd:&#39;123456.!$&#39;,roles:[{role:&#39;root&#39;,db:&#39;admin&#39;}]})</span>
+db.createUser<span style="color:#f92672">({</span>user: <span style="color:#e6db74">&#39;test_owner&#39;</span>,pwd:<span style="color:#e6db74">&#39;123456.!$&#39;</span>,roles:<span style="color:#f92672">[{</span>role:<span style="color:#e6db74">&#39;userAdminAnyDatabase&#39;</span>,db:<span style="color:#e6db74">&#39;admin&#39;</span><span style="color:#f92672">}]})</span>
+&gt; Successfully added user: <span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;user&#34;</span> : <span style="color:#e6db74">&#34;test_owner&#34;</span>,
+    <span style="color:#e6db74">&#34;roles&#34;</span> : <span style="color:#f92672">[</span>
+      <span style="color:#f92672">{</span>
+        <span style="color:#e6db74">&#34;role&#34;</span> : <span style="color:#e6db74">&#34;userAdminAnyDatabase&#34;</span>,
+        <span style="color:#e6db74">&#34;db&#34;</span> : <span style="color:#e6db74">&#34;admin&#34;</span>
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">]</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#75715e"># 用刚创建的用户授权进入</span>
+db.auth<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;test_owner&#39;</span>, <span style="color:#e6db74">&#39;123456.!$&#39;</span><span style="color:#f92672">)</span>
+<span style="color:#75715e"># 切换到业务数据库</span>
 use imooc-movie
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>然后添加普通用户，配置应用调用权限</li>
 </ul>
-
-<pre><code class="language-sh"># 为业务数据库添加一个读写权限的账号
-db.createUser({user:'ordinary_test',pwd:'123456.f',roles:[{role:'readWrite',db:'imooc-movie'}]})
-&gt; Successfully added user: {
-    &quot;user&quot; : &quot;ordinary_test&quot;,
-    &quot;roles&quot; : [
-      {
-        &quot;role&quot; : &quot;readWrite&quot;,
-        &quot;db&quot; : &quot;imooc-movie&quot;
-      }
-    ]
-  }
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 为业务数据库添加一个读写权限的账号</span>
+db.createUser<span style="color:#f92672">({</span>user:<span style="color:#e6db74">&#39;ordinary_test&#39;</span>,pwd:<span style="color:#e6db74">&#39;123456.f&#39;</span>,roles:<span style="color:#f92672">[{</span>role:<span style="color:#e6db74">&#39;readWrite&#39;</span>,db:<span style="color:#e6db74">&#39;imooc-movie&#39;</span><span style="color:#f92672">}]})</span>
+&gt; Successfully added user: <span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;user&#34;</span> : <span style="color:#e6db74">&#34;ordinary_test&#34;</span>,
+    <span style="color:#e6db74">&#34;roles&#34;</span> : <span style="color:#f92672">[</span>
+      <span style="color:#f92672">{</span>
+        <span style="color:#e6db74">&#34;role&#34;</span> : <span style="color:#e6db74">&#34;readWrite&#34;</span>,
+        <span style="color:#e6db74">&#34;db&#34;</span> : <span style="color:#e6db74">&#34;imooc-movie&#34;</span>
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">]</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div><ul>
 <li>再为这个数据库创建一个备份角色，权限配置为可读</li>
 </ul>
-
-<pre><code class="language-sh">db.createUser({user: 'imooc_movie_wheel', pwd: '123456..', roles: [{role: 'read', db: 'imooc-movie'}]})
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">db.createUser<span style="color:#f92672">({</span>user: <span style="color:#e6db74">&#39;imooc_movie_wheel&#39;</span>, pwd: <span style="color:#e6db74">&#39;123456..&#39;</span>, roles: <span style="color:#f92672">[{</span>role: <span style="color:#e6db74">&#39;read&#39;</span>, db: <span style="color:#e6db74">&#39;imooc-movie&#39;</span><span style="color:#f92672">}]})</span>
+</code></pre></div><ul>
 <li>开启验证模式，打开配置文件：<code>sudo vi /etc/mongod.conf</code> <em>Mac 上输入 <code>brew list mongodb</code> 找到安装目录，然后进一步找到配置文件</em></li>
 </ul>
-
-<pre><code class="language-sh">#security:
-  #authorization: enabled
-</code></pre>
-
-<p>把上面这 2 行代码的注释拿掉，如果没有的话，需要输入这 2 行来配置 MongoDB 的认证模式，然后，按下 esc 键，同时按下 shift + 冒号键，输入 wq! 回车就保存了，再把 MongoDB 重启一下，用刚才介绍的命令：<code>sudo service mongod restart</code></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#security:</span>
+  <span style="color:#75715e">#authorization: enabled</span>
+</code></pre></div><p>把上面这 2 行代码的注释拿掉，如果没有的话，需要输入这 2 行来配置 MongoDB 的认证模式，然后，按下 esc 键，同时按下 shift + 冒号键，输入 wq! 回车就保存了，再把 MongoDB 重启一下，用刚才介绍的命令：<code>sudo service mongod restart</code></p>
 <h3 id="对数据库建立自动备份">对数据库建立自动备份</h3>
-
 <ol>
 <li>先来创建存放任务文件的目录和目标文件：</li>
 </ol>
-
-<pre><code class="language-sh">sudo mkdir -p /www/tasks
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir -p /www/tasks
 sudo touch /www/tasks/movie.backup.sh
-</code></pre>
-
-<ol>
+</code></pre></div><ol start="2">
 <li>用来存放备份文件的目录也可以创建下：<code>sudo mkdir -p /www/dbbackup/movie/</code></li>
 <li>编辑这个备份脚本：<code>sudo vi /www/tasks/movie.backup.sh</code></li>
 </ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#备份数据库目录 根据自己的需求确定路径</span>
+backUpsFolder<span style="color:#f92672">=</span>/www/dbbackup/movie/
 
-<pre><code class="language-sh">#!/bin/sh
+date_now<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>date +%Y_%m_%d_%H%M<span style="color:#e6db74">`</span>
+backFileName<span style="color:#f92672">=</span>movie_$date_now
 
-#备份数据库目录 根据自己的需求确定路径
-backUpsFolder=/www/dbbackup/movie/
-
-date_now=`date +%Y_%m_%d_%H%M`
-backFileName=movie_$date_now
-
-#进入备份文件夹，这个文件夹，如果大家在公司或者自己重要的项目里面，可以放到数据盘上，
-#而不是这样扔到系统盘上，我们现在为了节约成本，是放到系统盘上的
+<span style="color:#75715e">#进入备份文件夹，这个文件夹，如果大家在公司或者自己重要的项目里面，可以放到数据盘上，</span>
+<span style="color:#75715e">#而不是这样扔到系统盘上，我们现在为了节约成本，是放到系统盘上的</span>
 
 cd $backUpsFolder
 
 mkdir -p $backFileName
 
-#导出
+<span style="color:#75715e">#导出</span>
 
 MongoDBdump -h 127.0.0.1:19999 -d imooc-movie -o $backFileName
 
 tar zcvf $backFileName.tar.gz $backFileName
 
 MongoDBdump -h 127.0.0.1:19999 -d imooc-movie -o $backFileName
-#清理
+<span style="color:#75715e">#清理</span>
 rm -rf $backFileName
 
-#在备份到本地之后，我们最好把这个数据库，再传到一个私密的云端上，比如七牛或者阿里云对象上，
-#这样就多了一重备份，万一哪一天这个服务器磁盘坏了，我们也可以有云端的备份来恢复数据。
+<span style="color:#75715e">#在备份到本地之后，我们最好把这个数据库，再传到一个私密的云端上，比如七牛或者阿里云对象上，</span>
+<span style="color:#75715e">#这样就多了一重备份，万一哪一天这个服务器磁盘坏了，我们也可以有云端的备份来恢复数据。</span>
 
-NODE_ENV=$backUpsFolder@$backFileName node /www/tasks/upload.js
-</code></pre>
-
-<ol>
+NODE_ENV<span style="color:#f92672">=</span>$backUpsFolder@$backFileName node /www/tasks/upload.js
+</code></pre></div><ol start="4">
 <li>通过 crontab 设置定时任务：</li>
 </ol>
-
-<pre><code class="language-sh"># 启动 crontab 对话窗口
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 启动 crontab 对话窗口</span>
 crontab -e
 
-# 第一次使用会 
-# o crontab for rn_manager - using an empty one
+<span style="color:#75715e"># 第一次使用会</span> 
+<span style="color:#75715e"># o crontab for rn_manager - using an empty one</span>
 # 
-# Select an editor.  To change later, run 'select-editor'.
-#   1. /bin/ed
-#   2. /bin/nano        &lt;---- easiest
-#   3. /usr/bin/vim.basic
-#   4. /usr/bin/vim.tiny
+<span style="color:#75715e"># Select an editor.  To change later, run &#39;select-editor&#39;.</span>
+<span style="color:#75715e">#   1. /bin/ed</span>
+<span style="color:#75715e">#   2. /bin/nano        &lt;---- easiest</span>
+<span style="color:#75715e">#   3. /usr/bin/vim.basic</span>
+<span style="color:#75715e">#   4. /usr/bin/vim.tiny</span>
 # 
-# Choose 1-4 [2]: 3
+<span style="color:#75715e"># Choose 1-4 [2]: 3</span>
 
-59 23 * * * sh /home/imooc_manager/tasks/movie.backup.sh
+<span style="color:#ae81ff">59</span> <span style="color:#ae81ff">23</span> * * * sh /home/imooc_manager/tasks/movie.backup.sh
 
-00 4 * * * sh /www/bash.tasks/backup.sh
-00 8 * * * sh /www/bash.tasks/backup.sh
-00 12 * * * sh /www/bash.tasks/backup.sh
-00 16 * * * sh /www/bash.tasks/backup.sh
-00 20 * * * sh /www/bash.tasks/backup.sh
-</code></pre>
-
-<h3 id="上传数据库备份到七牛">上传数据库备份到七牛</h3>
-
+<span style="color:#ae81ff">00</span> <span style="color:#ae81ff">4</span> * * * sh /www/bash.tasks/backup.sh
+<span style="color:#ae81ff">00</span> <span style="color:#ae81ff">8</span> * * * sh /www/bash.tasks/backup.sh
+<span style="color:#ae81ff">00</span> <span style="color:#ae81ff">12</span> * * * sh /www/bash.tasks/backup.sh
+<span style="color:#ae81ff">00</span> <span style="color:#ae81ff">16</span> * * * sh /www/bash.tasks/backup.sh
+<span style="color:#ae81ff">00</span> <span style="color:#ae81ff">20</span> * * * sh /www/bash.tasks/backup.sh
+</code></pre></div><h3 id="上传数据库备份到七牛">上传数据库备份到七牛</h3>
 <ul>
 <li>创建一个上传脚本 <code>upload.js</code>: <code>sudo touch /www/tasks/upload.js</code></li>
 <li>upload.js 文件和 <code>movie.backup.sh</code> 处在同一个目录下，<code>movie.backup.sh</code> 最后一行调用了 upload.js 文件，这样定时任务在执行 <code>movie.backup.sh</code> 脚本文件的时候会自动备份数据库，并自动上传到七牛云。</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">qiniu</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;qiniu&#39;</span>)
 
-<pre><code class="language-js">var qiniu = require('qiniu')
+<span style="color:#75715e">// 首先通过获取启动 Node 的服务时候传过来的环境变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">parts</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;@&#39;</span>)
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">file</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">parts</span>[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.tar.gz&#39;</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">filePath</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">parts</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">file</span>
 
-// 首先通过获取启动 Node 的服务时候传过来的环境变量
-var parts = env.split('@')
-var file = parts[1] + '.tar.gz'
-var filePath = parts[0] + '/' + file
+<span style="color:#75715e">//需要填写你的 Access Key 和 Secret Key
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">qiniu</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">ACCESS_KEY</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Access_Key&#39;</span>;
+<span style="color:#a6e22e">qiniu</span>.<span style="color:#a6e22e">conf</span>.<span style="color:#a6e22e">SECRET_KEY</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Secret_Key&#39;</span>;
 
-//需要填写你的 Access Key 和 Secret Key
-qiniu.conf.ACCESS_KEY = 'Access_Key';
-qiniu.conf.SECRET_KEY = 'Secret_Key';
+<span style="color:#75715e">//要上传的空间
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">bucket</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;imoocdeploydb&#39;</span>
 
-//要上传的空间
-bucket = 'imoocdeploydb'
-
-//构建上传策略函数
-function uptoken(bucket, key) {
-  var putPolicy = new qiniu.rs.PutPolicy(bucket + ':' + file);
-  return putPolicy.token()
+<span style="color:#75715e">//构建上传策略函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">uptoken</span>(<span style="color:#a6e22e">bucket</span>, <span style="color:#a6e22e">key</span>) {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">putPolicy</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">qiniu</span>.<span style="color:#a6e22e">rs</span>.<span style="color:#a6e22e">PutPolicy</span>(<span style="color:#a6e22e">bucket</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;:&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">file</span>);
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">putPolicy</span>.<span style="color:#a6e22e">token</span>()
 }
 
-//生成上传 Token
-token = uptoken(bucket, key)
+<span style="color:#75715e">//生成上传 Token
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">uptoken</span>(<span style="color:#a6e22e">bucket</span>, <span style="color:#a6e22e">key</span>)
 
-//构造上传函数
-function uploadFile(uptoken, key, localFile) {
-  var extra = new qiniu.io.PutExtra()
+<span style="color:#75715e">//构造上传函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">uploadFile</span>(<span style="color:#a6e22e">uptoken</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">localFile</span>) {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">extra</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">qiniu</span>.<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">PutExtra</span>()
   
-  qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
-      if(!err) {
-        // 上传成功， 处理返回值
-        console.log(ret.hash, ret.key, ret.persistentId)       
+  <span style="color:#a6e22e">qiniu</span>.<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">putFile</span>(<span style="color:#a6e22e">uptoken</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">localFile</span>, <span style="color:#a6e22e">extra</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">ret</span>) {
+      <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">err</span>) {
+        <span style="color:#75715e">// 上传成功， 处理返回值
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">ret</span>.<span style="color:#a6e22e">hash</span>, <span style="color:#a6e22e">ret</span>.<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">ret</span>.<span style="color:#a6e22e">persistentId</span>)       
       }
-      else {
-        // 上传失败， 处理返回代码
-        console.log(err)
+      <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e">// 上传失败， 处理返回代码
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>)
       }
   })
 }
 
-//调用uploadFile上传
-uploadFile(token, file, filePath)
-</code></pre>
-
+<span style="color:#75715e">//调用uploadFile上传
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">uploadFile</span>(<span style="color:#a6e22e">token</span>, <span style="color:#a6e22e">file</span>, <span style="color:#a6e22e">filePath</span>)
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

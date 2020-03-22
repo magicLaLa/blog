@@ -164,117 +164,101 @@
         
         
 
-        
-
-<blockquote>
+        <blockquote>
 <p>由于单链表是线性的，使用递归方式将导致栈的使用也是线性的，当链表长度达到一定程度时，递归会导致爆栈，因此，现实中并不推荐使用递归方式来操作链表。</p>
 </blockquote>
-
 <h3 id="合并两个有序链表">合并两个有序链表</h3>
-
 <h4 id="描述">描述</h4>
-
 <p>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。</p>
-
-<pre><code class="language-bash">输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4
 输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
-</code></pre>
-
-<h4 id="分析">分析</h4>
-
+</code></pre></div><h4 id="分析">分析</h4>
 <p>一、 递归</p>
-
 <p>可以使用 递归，两个链表头部较小的一个与剩下元素的 merge 操作结果合并。</p>
-
 <ul>
-<li><p>特殊的，如果 l1 或者 l2 一开始就是 null ，那么没有任何操作需要合并，所以我们只需要返回非空链表。否则，我们要判断 l1 和 l2 哪一个的头元素更小，然后递归地决定下一个添加到结果里的值。如果两个链表都是空的，那么过程终止，所以递归过程最终一定会终止。</p></li>
-
-<li><p>思路</p>
-
+<li>
+<p>特殊的，如果 l1 或者 l2 一开始就是 null ，那么没有任何操作需要合并，所以我们只需要返回非空链表。否则，我们要判断 l1 和 l2 哪一个的头元素更小，然后递归地决定下一个添加到结果里的值。如果两个链表都是空的，那么过程终止，所以递归过程最终一定会终止。</p>
+</li>
+<li>
+<p>思路</p>
 <ul>
 <li>这道题可以使用递归实现，新链表也不需要构造新节点，我们下面列举递归三个要素</li>
 <li>终止条件：两条链表分别名为 l1 和 l2，当 l1 为空或 l2 为空时结束</li>
 <li>返回值：每一层调用都返回排序好的链表头</li>
 <li>本级递归内容：如果 l1 的 val 值更小，则将 l1.next 与排序好的链表头相接，l2 同理</li>
 <li>O(m+n)O(m+n)，mm 为 l1的长度，nn 为 l2 的长度</li>
-</ul></li>
 </ul>
-
-<pre><code class="language-js">/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
-/**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
-var mergeTwoLists = function(l1, l2) {
-  if(l1 === null){
-      return l2;
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Definition for singly-linked list.
+</span><span style="color:#75715e"> * function ListNode(val) {
+</span><span style="color:#75715e"> *     this.val = val;
+</span><span style="color:#75715e"> *     this.next = null;
+</span><span style="color:#75715e"> * }
+</span><span style="color:#75715e"> */</span>
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @param {ListNode} l1
+</span><span style="color:#75715e"> * @param {ListNode} l2
+</span><span style="color:#75715e"> * @return {ListNode}
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">mergeTwoLists</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">l1</span>, <span style="color:#a6e22e">l2</span>) {
+  <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">l1</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span>){
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">l2</span>;
   }
-  if(l2 === null){
-      return l1;
+  <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">l2</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span>){
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">l1</span>;
   }
-  if(l1.val &lt; l2.val){
-      l1.next = mergeTwoLists(l1.next, l2);
-      return l1;
-  }else{
-      l2.next = mergeTwoLists(l1, l2.next);
-      return l2;
+  <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">val</span>){
+      <span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">mergeTwoLists</span>(<span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">next</span>, <span style="color:#a6e22e">l2</span>);
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">l1</span>;
+  }<span style="color:#66d9ef">else</span>{
+      <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">mergeTwoLists</span>(<span style="color:#a6e22e">l1</span>, <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">next</span>);
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">l2</span>;
   }
 };
-</code></pre>
-
-<p>二、迭代</p>
-
+</code></pre></div><p>二、迭代</p>
 <p>可以用迭代的方法来实现上述算法。我们假设 l1 元素严格比 l2元素少，我们可以将 l2 中的元素逐一插入 l1 中正确的位置。</p>
-
 <ul>
 <li>思路:
-
 <ul>
 <li>首先，我们设定一个哨兵节点 <code>preheat</code> ，这可以在最后让我们比较容易地返回合并后的链表。我们维护一个 prev 指针，我们需要做的是调整它的 next 指针。然后，我们重复以下过程，直到 l1 或者 l2 指向了 null ：如果 l1 当前位置的值小于等于 l2 ，我们就把 l1 的值接在 prev 节点的后面同时将 l1 指针往后移一个。否则，我们对 l2 做同样的操作。不管我们将哪一个元素接在了后面，我们都把 prev 向后移一个元素。</li>
 <li>在循环终止的时候， l1 和 l2 至多有一个是非空的。由于输入的两个链表都是有序的，所以不管哪个链表是非空的，它包含的所有元素都比前面已经合并链表中的所有元素都要大。这意味着我们只需要简单地将非空链表接在合并链表的后面，并返回合并链表。</li>
-</ul></li>
 </ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Definition for singly-linked list.
+</span><span style="color:#75715e"> * function ListNode(val) {
+</span><span style="color:#75715e"> *     this.val = val;
+</span><span style="color:#75715e"> *     this.next = null;
+</span><span style="color:#75715e"> * }
+</span><span style="color:#75715e"> */</span>
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @param {ListNode} l1
+</span><span style="color:#75715e"> * @param {ListNode} l2
+</span><span style="color:#75715e"> * @return {ListNode}
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">mergeTwoLists</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">l1</span>, <span style="color:#a6e22e">l2</span>) {
+  <span style="color:#75715e">// 在返回节点之前保持对节点的不变引用
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">preheat</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ListNode</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">preheat</span>;
 
-<pre><code class="language-js">/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
-/**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
-var mergeTwoLists = function(l1, l2) {
-  // 在返回节点之前保持对节点的不变引用
-  const preheat = new ListNode(-1);
-  let prev = preheat;
-
-  while (l1 &amp;&amp; l2) {
-    if (l1.val &lt; l2.val) {
-      prev.next = l1;
-      l1 = l1.next;
-    } else {
-      prev.next = l2;
-      l2 = l2.next;
+  <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">l1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">l2</span>) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">val</span>) {
+      <span style="color:#a6e22e">prev</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l1</span>;
+      <span style="color:#a6e22e">l1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">next</span>;
+    } <span style="color:#66d9ef">else</span> {
+      <span style="color:#a6e22e">prev</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l2</span>;
+      <span style="color:#a6e22e">l2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">next</span>;
     }
-    prev = prev.next;
+    <span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">prev</span>.<span style="color:#a6e22e">next</span>;
   }
-  // 此时l1和l2中恰好有一个是非空的，将非空链表接在合并链表的后面
-  prev.next = l1 ? l1 : l2;
-  return preheat.next;
+  <span style="color:#75715e">// 此时l1和l2中恰好有一个是非空的，将非空链表接在合并链表的后面
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">prev</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l1</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">l1</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">l2</span>;
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">preheat</span>.<span style="color:#a6e22e">next</span>;
 };
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

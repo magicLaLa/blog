@@ -10,7 +10,7 @@
   
   
   
-  <link rel="prev" href="/2017/vue/" />
+  <link rel="prev" href="/2017/vue-blind-spot/" />
   <link rel="next" href="/2017/workrelated/" />
   <link rel="canonical" href="/2017/vue-watch/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
@@ -36,9 +36,9 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Vue watch选项"/>
-<meta name="twitter:description" content="Vue watch选项  watch 的用法
- watch 对象里的 value 是对应的回调函数
-  data () { return { a: 1 } }, watch: { a: function (newVal, oldVal) { console.log(newVal, oldVal) // 2 1 } }, created () { this.a = 2 }   value 也可以是方法名  data () { return { a: 1 } }, watch: { a: &#39;foo&#39; }, created () { this.a = 2 }, methods: { foo (newVal, oldVal) { console."/>
+<meta name="twitter:description" content="Vue watch选项   watch 的用法
+  watch 对象里的 value 是对应的回调函数
+  data () {return {a: 1}},watch: {a: function (newVal, oldVal) {console.log(newVal, oldVal)// 2 1 }},created () {this.a = 2} value 也可以是方法名  data () {return {a: 1}},watch: {a: &#39;foo&#39;},created () {this.a = 2},methods: {foo (newVal, oldVal) {console."/>
 
   <script type="application/ld+json">
 {
@@ -166,237 +166,208 @@
         
         
 
-        
-
-<h2 id="vue-watch选项">Vue watch选项</h2>
-
+        <h2 id="vue-watch选项">Vue watch选项</h2>
 <ul>
-<li><p>watch 的用法</p></li>
-
-<li><p>watch 对象里的 value 是对应的回调函数</p></li>
+<li>
+<p>watch 的用法</p>
+</li>
+<li>
+<p>watch 对象里的 value 是对应的回调函数</p>
+</li>
 </ul>
-
-<pre><code class="language-javascript">data () {
-  return {
-    a: 1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">a</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>
   }
 },
-watch: {
-  a: function (newVal, oldVal) {
-    console.log(newVal, oldVal)
-    // 2 1
-  }
+<span style="color:#a6e22e">watch</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">a</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>)
+    <span style="color:#75715e">// 2 1
+</span><span style="color:#75715e"></span>  }
 },
-created () {
-  this.a = 2
+<span style="color:#a6e22e">created</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
 }
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>value 也可以是方法名</li>
 </ul>
-
-<pre><code class="language-javascript">data () {
-  return {
-    a: 1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">a</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>
   }
 },
-watch: {
-  a: 'foo'
+<span style="color:#a6e22e">watch</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">a</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;foo&#39;</span>
 },
-created () {
-  this.a = 2
+<span style="color:#a6e22e">created</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
 },
-methods: {
-  foo (newVal, oldVal) {
-    console.log(newVal, oldVal)
-    // 2 1
-  }
+<span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">foo</span> (<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>)
+    <span style="color:#75715e">// 2 1
+</span><span style="color:#75715e"></span>  }
 }
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>深度监听 <em>对象内部属性或方法发生改变，须使用深度监听模式才能监听到该对象的改变</em></li>
 </ul>
-
-<pre><code class="language-javascript">data () {
-  return {
-    box: {
-      name: 'jordan'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> {
+      <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;jordan&#39;</span>
     }
   }
 },
-watch: {
-  box: {
-    handler: function (newVal, oldVal) {
-      console.log(newVal.name, oldVal.name)
-      // kobe kobe
-    },
-    deep: true  // 深度监听模式
-  }
+<span style="color:#a6e22e">watch</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">handler</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>) {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newVal</span>.<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">oldVal</span>.<span style="color:#a6e22e">name</span>)
+      <span style="color:#75715e">// kobe kobe
+</span><span style="color:#75715e"></span>    },
+    <span style="color:#a6e22e">deep</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>  <span style="color:#75715e">// 深度监听模式
+</span><span style="color:#75715e"></span>  }
 },
-created () {
-  this.box.name = 'kobe'
+<span style="color:#a6e22e">created</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;kobe&#39;</span>
 }
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>不使用深度监听时，可以直接监听 xxx.name</li>
 </ul>
-
-<pre><code class="language-javascript">data () {
-  return {
-    box: {
-      name: 'jordan'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> {
+      <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;jordan&#39;</span>
     }
   }
 },
-watch: {
-  'box.name': {
-    handler: function (newVal, oldVal) {
-      console.log(newVal, oldVal)
-      // kobe jordan
-    }
+<span style="color:#a6e22e">watch</span><span style="color:#f92672">:</span> {
+  <span style="color:#e6db74">&#39;box.name&#39;</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">handler</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>) {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>)
+      <span style="color:#75715e">// kobe jordan
+</span><span style="color:#75715e"></span>    }
   }
 },
-created () {
-  this.box.name = 'lalala'
+<span style="color:#a6e22e">created</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;lalala&#39;</span>
 }
-// 这时 box.name 又是一个简单值，所以输出 'lalala jordan'
-</code></pre>
-
-<ul>
+<span style="color:#75715e">// 这时 box.name 又是一个简单值，所以输出 &#39;lalala jordan&#39;
+</span></code></pre></div><ul>
 <li>数组的监听</li>
 </ul>
-
-<pre><code class="language-javascript">data () {
-  return {
-    box: [1, 1, 1]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>]
   }
 },
-watch: {
-  box: {
-    handler: function () {
-      console.log('watch works')
+<span style="color:#a6e22e">watch</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">handler</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;watch works&#39;</span>)
     }
   }
 },
-created () {
-  this.box[0] = 2
-  this.box.length = 4
-  this.box.push(1)  // watch works
-  this.box.splice(0, 1, 2)  // watch works
-}
-</code></pre>
-
-<blockquote>
-<p><em>created 里使用了4种方式对 box 进行操作，第一种和第二种方式 watch 是监听不到的，即便使用深度监听模式也无法监听的到。</em> <a href="https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" rel="nofollow noreferrer" target="_blank">可以参考</a></p>
+<span style="color:#a6e22e">created</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span>.<span style="color:#a6e22e">push</span>(<span style="color:#ae81ff">1</span>)  <span style="color:#75715e">// watch works
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span>.<span style="color:#a6e22e">splice</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)  <span style="color:#75715e">// watch works
+</span><span style="color:#75715e"></span>}
+</code></pre></div><blockquote>
+<p><em>created 里使用了4种方式对 box 进行操作，第一种和第二种方式 watch 是监听不到的，即便使用深度监听模式也无法监听的到。</em> <a href="https://cn.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">可以参考</a></p>
 </blockquote>
-
 <ul>
 <li>使用 immediate</li>
 </ul>
-
-<pre><code class="language-javascript">data () {
-  return {
-    box: 1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>
   }
 },
-watch: {
-  box: {
-    handler: function () {
-      console.log('watch works')
+<span style="color:#a6e22e">watch</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">handler</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;watch works&#39;</span>)
     },
-    immediate: true
+    <span style="color:#a6e22e">immediate</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
   }
 }
 
-// watch works
-</code></pre>
-
-<blockquote>
+<span style="color:#75715e">// watch works
+</span></code></pre></div><blockquote>
 <p>增加 immediate: true 选项，handler 会在侦听开始之后被立即调用，即便 box 的值没有改变。如果对 this.box 的值加以修改，便会输出两次 &lsquo;watch works&rsquo;，一次是侦听开始的时候，一次是 box 的值被修改的时候</p>
 </blockquote>
-
 <ul>
 <li>watch 里的 value 可以是放在一个数组里面的多个 handler</li>
 </ul>
-
-<pre><code class="language-javascript">data () {
-  return {
-    box: 1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>
   }
 },
-watch: {
-  box: [
-    function foo (newVal, oldVal) {
-      console.log(newVal, oldVal)
-      // 2 1
-    },
-    function bar (newVal, oldVal) {
-      console.log(newVal, oldVal)
-      // 2 1
-    }
+<span style="color:#a6e22e">watch</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> [
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span> (<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>) {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>)
+      <span style="color:#75715e">// 2 1
+</span><span style="color:#75715e"></span>    },
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">bar</span> (<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>) {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>)
+      <span style="color:#75715e">// 2 1
+</span><span style="color:#75715e"></span>    }
   ]
 },
-created () {
-  this.box = 2
+<span style="color:#a6e22e">created</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
 }
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>每一个 handler 都可以接收 new value 和 old value 两个参数，并且会按各自在数组中的顺序先后触发。当然下面的操作也能实现这样的场景：</li>
 </ul>
-
-<pre><code class="language-javascript">data () {
-  return {
-    box: 1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>
   }
 },
-watch: {
-  box: function (newVal, oldVal) {
-    this.foo(newVal, oldVal)
-    this.bar(newVal, oldVal)
+<span style="color:#a6e22e">watch</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">foo</span>(<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>)
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">bar</span>(<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>)
   }
 },
-created () {
-  this.box = 2
+<span style="color:#a6e22e">created</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
 },
-methods: {
-  foo (newVal, oldVal) {
-    console.log(newVal, oldVal)
+<span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">foo</span> (<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>)
   },
-  bar (newVal, oldVal) {
-    console.log(newVal, oldVal)
+  <span style="color:#a6e22e">bar</span> (<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">newVal</span>, <span style="color:#a6e22e">oldVal</span>)
   }
 }
-</code></pre>
-
-<blockquote>
+</code></pre></div><blockquote>
 <p><strong>不应该使用箭头函数来定义 watcher 函数</strong></p>
 </blockquote>
-
-<pre><code class="language-javascript">data () {
-  return {
-    box: 1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">data</span> () {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>
   }
 },
-watch: {
-  box: newVal =&gt; {
-    this.updateBox(newVal)
+<span style="color:#a6e22e">watch</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">box</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">newVal</span> =&gt; {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">updateBox</span>(<span style="color:#a6e22e">newVal</span>)
   }
 },
-created () {
-  this.box = 2
+<span style="color:#a6e22e">created</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
 },
-methods: {
-  updateBox (newVal) {
-    this.box = newVal
+<span style="color:#a6e22e">methods</span><span style="color:#f92672">:</span> {
+  <span style="color:#a6e22e">updateBox</span> (<span style="color:#a6e22e">newVal</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">box</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">newVal</span>
   }
 }
-</code></pre>
-
-<blockquote>
+</code></pre></div><blockquote>
 <p><strong>上面的例子会报错，是因为箭头函数绑定了父级作用域的上下文，所以 this 将不会指向 Vue 实例，也就没有 this.updateBox 这个方法，可以参考 es6箭头函数this的指向</strong></p>
 </blockquote>
 
@@ -483,8 +454,8 @@ methods: {
 
     <div class="post-nav">
         
-        <a href="/2017/vue/" class="prev" rel="prev" title="Vue配置相关"><i
-                class="iconfont icon-dajiantou"></i>&nbsp;Vue配置相关</a>
+        <a href="/2017/vue-blind-spot/" class="prev" rel="prev" title="vue中盲点"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;vue中盲点</a>
         
         
         <a href="/2017/workrelated/" class="next" rel="next"

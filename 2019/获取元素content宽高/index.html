@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="获取元素content宽高"/>
-<meta name="twitter:description" content="代码如下： /** * 获取元素content宽高 * @param el */ export function getContentSize(el: HTMLElement) { const width = el.offsetWidth; const height = el.offsetHeight; const style = window.getComputedStyle(el); // border const blw = parseFloat(style.borderLeftWidth || &#39;0&#39;); const brw = parseFloat(style.borderRightWidth || &#39;0&#39;); const btw = parseFloat(style.borderTopWidth || &#39;0&#39;); const bbw = parseFloat(style.borderBottomWidth || &#39;0&#39;); // padding const plw = parseFloat(style.paddingLeft || &#39;0&#39;); const prw = parseFloat(style.paddingRight || &#39;0&#39;); const ptw = parseFloat(style.paddingTop || &#39;0&#39;); const pbw = parseFloat(style."/>
+<meta name="twitter:description" content="代码如下： /*** 获取元素content宽高* @param el*/export function getContentSize(el: HTMLElement) {const width = el.offsetWidth;const height = el.offsetHeight;const style = window.getComputedStyle(el);// border const blw = parseFloat(style.borderLeftWidth || &#39;0&#39;);const brw = parseFloat(style.borderRightWidth || &#39;0&#39;);const btw = parseFloat(style.borderTopWidth || &#39;0&#39;);const bbw = parseFloat(style.borderBottomWidth || &#39;0&#39;);// padding const plw = parseFloat(style.paddingLeft || &#39;0&#39;);const prw = parseFloat(style.paddingRight || &#39;0&#39;);const ptw = parseFloat(style."/>
 
   <script type="application/ld+json">
 {
@@ -164,35 +164,31 @@
         
         
 
-        
-
-<h4 id="代码如下">代码如下：</h4>
-
-<pre><code class="language-js">/**
- * 获取元素content宽高
- * @param el
- */
-export function getContentSize(el: HTMLElement) {
-  const width = el.offsetWidth;
-  const height = el.offsetHeight;
-  const style = window.getComputedStyle(el);
-  // border
-  const blw = parseFloat(style.borderLeftWidth || '0');
-  const brw = parseFloat(style.borderRightWidth || '0');
-  const btw = parseFloat(style.borderTopWidth || '0');
-  const bbw = parseFloat(style.borderBottomWidth || '0');
-  // padding
-  const plw = parseFloat(style.paddingLeft || '0');
-  const prw = parseFloat(style.paddingRight || '0');
-  const ptw = parseFloat(style.paddingTop || '0');
-  const pbw = parseFloat(style.paddingBottom || '0');
-  return {
-    width: width - blw - brw - plw - prw,
-    height: height - btw - bbw - ptw - pbw,
+        <h4 id="代码如下">代码如下：</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 获取元素content宽高
+</span><span style="color:#75715e"> * @param el
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getContentSize</span>(<span style="color:#a6e22e">el</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">HTMLElement</span>) {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">el</span>.<span style="color:#a6e22e">offsetWidth</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">el</span>.<span style="color:#a6e22e">offsetHeight</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">style</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">getComputedStyle</span>(<span style="color:#a6e22e">el</span>);
+  <span style="color:#75715e">// border
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">blw</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">borderLeftWidth</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">brw</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">borderRightWidth</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">btw</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">borderTopWidth</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bbw</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">borderBottomWidth</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+  <span style="color:#75715e">// padding
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">plw</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">paddingLeft</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">prw</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">paddingRight</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ptw</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">paddingTop</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pbw</span> <span style="color:#f92672">=</span> parseFloat(<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">paddingBottom</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">width</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">blw</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">brw</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">plw</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">prw</span>,
+    <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">height</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">btw</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">bbw</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">ptw</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">pbw</span>,
   };
 }
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

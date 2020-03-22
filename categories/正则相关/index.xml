@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>正则相关 on Magic</title>
+    <link>/categories/%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3/</link>
+    <description>Recent content in 正则相关 on Magic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 18 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>正则相关</title>
+      <link>/2019/reg/</link>
+      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/reg/</guid>
+      <description> 匹配类似 first-paint=4859.53ms&amp;amp;first-contentful-paint=4859.53ms 这种其中某个值 （first-paint=4859.53ms 中的 4859.53）&amp;mdash;&amp;gt; /(?&amp;lt;=first-paint=)[\d.]+/gi  </description>
+    </item>
+    
+  </channel>
+</rss>

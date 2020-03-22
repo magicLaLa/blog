@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TS重新定义模块"/>
 <meta name="twitter:description" content="重新定义模块：
-declare var am: any; // 支付宝 declare interface Window { ap: any; // 支付宝注入 } declare module &#39;dva/dynamic&#39; { const dynamic: (config: any) =&gt; React.ComponentType; export default dynamic; }  "/>
+declare var am: any; // 支付宝declare interface Window {ap: any; // 支付宝注入}declare module &#39;dva/dynamic&#39; {const dynamic: (config: any) =&gt; React.ComponentType;export default dynamic;}"/>
 
   <script type="application/ld+json">
 {
@@ -166,19 +166,17 @@ declare var am: any; // 支付宝 declare interface Window { ap: any; // 支付�
         
 
         <p>重新定义模块：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">declare</span> <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">am</span>: <span style="color:#66d9ef">any</span>; <span style="color:#75715e">// 支付宝
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">declare</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Window</span> {
+  <span style="color:#a6e22e">ap</span>: <span style="color:#66d9ef">any</span>; <span style="color:#75715e">// 支付宝注入
+</span><span style="color:#75715e"></span>}
 
-<pre><code class="language-ts">declare var am: any; // 支付宝
-
-declare interface Window {
-  ap: any; // 支付宝注入
+<span style="color:#66d9ef">declare</span> <span style="color:#a6e22e">module</span> <span style="color:#e6db74">&#39;dva/dynamic&#39;</span> {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">dynamic</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">config</span>: <span style="color:#66d9ef">any</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">ComponentType</span>;
+  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">dynamic</span>;
 }
-
-declare module 'dva/dynamic' {
-  const dynamic: (config: any) =&gt; React.ComponentType;
-  export default dynamic;
-}
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

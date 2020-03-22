@@ -36,9 +36,11 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="leetCode Medium"/>
-<meta name="twitter:description" content="Add Two Numbers 两数相加(2)  给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
- 例子:
-  Input: (2 -&gt; 4 -&gt; 3) &#43; (5 -&gt; 6 -&gt; 4) Output: 7 -&gt; 0 -&gt; 8 Explanation: 342 &#43; 465 = 807   解:  // 单链表的定义 function ListNode(val) { this.val = val; this.next = null; } // 第一种 /** * @param {ListNode} l1 * @param {ListNode} l2 * @return {ListNode} */ var addTwoNumbers = function(l1, l2) { if (l1===null) return l2; if (l2===null) return l1; //new a ListNode here, with head."/>
+<meta name="twitter:description" content="Add Two Numbers 两数相加(2)   给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+  如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
+  您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+  例子:
+  Input: (2 -&gt; 4 -&gt; 3) &#43; (5 -&gt; 6 -&gt; 4)Output: 7 -&gt; 0 -&gt; 8Explanation: 342 &#43; 465 = 807 解:  // 单链表的定义function ListNode(val) {this.val = val;this.next = null;}// 第一种/*** @param {ListNode} l1* @param {ListNode} l2* @return {ListNode}*/var addTwoNumbers = function(l1, l2) {if (l1===null) return l2;if (l2===null) return l1;//new a ListNode here, with head."/>
 
   <script type="application/ld+json">
 {
@@ -166,151 +168,145 @@
         
         
 
-        
-
-<h3 id="add-two-numbers-两数相加-2">Add Two Numbers 两数相加(2)</h3>
-
+        <h3 id="add-two-numbers-两数相加2">Add Two Numbers 两数相加(2)</h3>
 <ul>
-<li>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</li>
-<li>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</li>
-
-<li><p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p></li>
-
-<li><p>例子:</p></li>
+<li>
+<p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
+</li>
+<li>
+<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
+</li>
+<li>
+<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+</li>
+<li>
+<p>例子:</p>
+</li>
 </ul>
-
-<pre><code class="language-sh">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
-Output: 7 -&gt; 0 -&gt; 8
-Explanation: 342 + 465 = 807
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Input: <span style="color:#f92672">(</span><span style="color:#ae81ff">2</span> -&gt; <span style="color:#ae81ff">4</span> -&gt; 3<span style="color:#f92672">)</span> + <span style="color:#f92672">(</span><span style="color:#ae81ff">5</span> -&gt; <span style="color:#ae81ff">6</span> -&gt; 4<span style="color:#f92672">)</span>
+Output: <span style="color:#ae81ff">7</span> -&gt; <span style="color:#ae81ff">0</span> -&gt; 8
+Explanation: <span style="color:#ae81ff">342</span> + 465 <span style="color:#f92672">=</span> 807
+</code></pre></div><ul>
 <li>解:</li>
 </ul>
-
-<pre><code class="language-js">// 单链表的定义
-function ListNode(val) {
-  this.val = val;
-  this.next = null;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 单链表的定义
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ListNode</span>(<span style="color:#a6e22e">val</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">val</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
 }
 
-// 第一种
-/**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
-var addTwoNumbers = function(l1, l2) {
-    if (l1===null) return l2;
-    if (l2===null) return l1;
+<span style="color:#75715e">// 第一种
+</span><span style="color:#75715e"></span><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @param {ListNode} l1
+</span><span style="color:#75715e"> * @param {ListNode} l2
+</span><span style="color:#75715e"> * @return {ListNode}
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">addTwoNumbers</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">l1</span>, <span style="color:#a6e22e">l2</span>) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">l1</span><span style="color:#f92672">===</span><span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">l2</span>;
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">l2</span><span style="color:#f92672">===</span><span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">l1</span>;
 
-    //new a ListNode here, with head.next as header, pos as a pointer points to current position
-    // 创建一个 listnode 实例，head.next作为头，pos作为指针指向当前位置
-    var head = new ListNode(0); // ListNode {val: 0, next: null}
-    var pos = head;
-    var temp = 0;
-    while (l2!==null || l1!==null || temp&gt;0){
+    <span style="color:#75715e">//new a ListNode here, with head.next as header, pos as a pointer points to current position
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 创建一个 listnode 实例，head.next作为头，pos作为指针指向当前位置
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ListNode</span>(<span style="color:#ae81ff">0</span>); <span style="color:#75715e">// ListNode {val: 0, next: null}
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">head</span>;
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">temp</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">l2</span><span style="color:#f92672">!==</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">l1</span><span style="color:#f92672">!==</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">temp</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>){
         
-        //(l2!==null || l1!==null || temp&gt;0) 表示下一个数字不为空，因此新建一个节点并移动到它
-        pos.next = new ListNode(0);
-        pos = pos.next;
+        <span style="color:#75715e">//(l2!==null || l1!==null || temp&gt;0) 表示下一个数字不为空，因此新建一个节点并移动到它
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">pos</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ListNode</span>(<span style="color:#ae81ff">0</span>);
+        <span style="color:#a6e22e">pos</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pos</span>.<span style="color:#a6e22e">next</span>;
         
-        if (l1!==null){
-            temp += l1.val;
-            l1 = l1.next;
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">l1</span><span style="color:#f92672">!==</span><span style="color:#66d9ef">null</span>){
+            <span style="color:#a6e22e">temp</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">val</span>;
+            <span style="color:#a6e22e">l1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">next</span>;
         }
-        if (l2!==null){
-            temp += l2.val;
-            l2 = l2.next;
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">l2</span><span style="color:#f92672">!==</span><span style="color:#66d9ef">null</span>){
+            <span style="color:#a6e22e">temp</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">val</span>;
+            <span style="color:#a6e22e">l2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">next</span>;
         }
         
-        pos.val = temp%10;
-        temp = parseInt(temp/10);
-        //console.log(temp);
-    }
-    return head.next;
+        <span style="color:#a6e22e">pos</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">temp</span><span style="color:#f92672">%</span><span style="color:#ae81ff">10</span>;
+        <span style="color:#a6e22e">temp</span> <span style="color:#f92672">=</span> parseInt(<span style="color:#a6e22e">temp</span><span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>);
+        <span style="color:#75715e">//console.log(temp);
+</span><span style="color:#75715e"></span>    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span>;
 };
-</code></pre>
-
-<h3 id="longest-substring-without-repeating-characters-没有重复字符的最长子串-3">Longest Substring Without Repeating Characters 没有重复字符的最长子串(3)</h3>
-
+</code></pre></div><h3 id="longest-substring-without-repeating-characters-没有重复字符的最长子串3">Longest Substring Without Repeating Characters 没有重复字符的最长子串(3)</h3>
 <ul>
-<li><p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p></li>
-
-<li><p>例子:</p></li>
+<li>
+<p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p>
+</li>
+<li>
+<p>例子:</p>
+</li>
 </ul>
-
-<pre><code class="language-sh">示例 1:
-  输入: &quot;abcabcbb&quot;
-  输出: 3 
-  解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">示例 1:
+  输入: <span style="color:#e6db74">&#34;abcabcbb&#34;</span>
+  输出: <span style="color:#ae81ff">3</span> 
+  解释: 因为无重复字符的最长子串是 <span style="color:#e6db74">&#34;abc&#34;</span>，所以其长度为 3。
 
 示例 2:
-  输入: &quot;bbbbb&quot;
+  输入: <span style="color:#e6db74">&#34;bbbbb&#34;</span>
   输出: 1
-  解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。
+  解释: 因为无重复字符的最长子串是 <span style="color:#e6db74">&#34;b&#34;</span>，所以其长度为 1。
 
 示例 3:
-  输入: &quot;pwwkew&quot;
+  输入: <span style="color:#e6db74">&#34;pwwkew&#34;</span>
   输出: 3
-  解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。
-      请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。
-</code></pre>
-
-<ul>
+  解释: 因为无重复字符的最长子串是 <span style="color:#e6db74">&#34;wke&#34;</span>，所以其长度为 3。
+      请注意，你的答案必须是 子串 的长度，<span style="color:#e6db74">&#34;pwke&#34;</span> 是一个子序列，不是子串。
+</code></pre></div><ul>
 <li>解:</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @param {string} s
+</span><span style="color:#75715e"> * @return {number}
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">lengthOfLongestSubstring</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">s</span>) {
+  <span style="color:#75715e">// 第一种
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> {};
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;&#39;</span>).<span style="color:#a6e22e">reduce</span>((<span style="color:#a6e22e">max</span>, <span style="color:#a6e22e">v</span>, <span style="color:#a6e22e">i</span>) =&gt; {
+      <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">v</span>] <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">v</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">left</span>;
+      <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">v</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">i</span>;
+      <span style="color:#66d9ef">return</span> Math.<span style="color:#a6e22e">max</span>(<span style="color:#a6e22e">max</span>, <span style="color:#a6e22e">i</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+  }, <span style="color:#ae81ff">0</span>);
 
-<pre><code class="language-js">/**
- * @param {string} s
- * @return {number}
- */
-var lengthOfLongestSubstring = function(s) {
-  // 第一种
-  const map = {};
-  var left = 0;
-  return s.split('').reduce((max, v, i) =&gt; {
-      left = map[v] &gt;= left ? map[v] + 1 : left;
-      map[v] = i;
-      return Math.max(max, i - left + 1);
-  }, 0);
-
-  // 第二种
-  if(s.length === 0 || s === null) return 0
-  const map ={}, len = s.length
-  let l=0, r=0,max=0
-  for(;r&lt;len; r++){
-    let ch = s.charAt(r)
-    map[ch] ? map[ch]++ : map[ch] = 1
-    while(map[ch]&gt;1 &amp;&amp; l&lt;r){
-      map[s.charAt(l)]--
-      l++
+  <span style="color:#75715e">// 第二种
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span>{}, <span style="color:#a6e22e">len</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span>
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">l</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">r</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,<span style="color:#a6e22e">max</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+  <span style="color:#66d9ef">for</span>(;<span style="color:#a6e22e">r</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">len</span>; <span style="color:#a6e22e">r</span><span style="color:#f92672">++</span>){
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ch</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">charAt</span>(<span style="color:#a6e22e">r</span>)
+    <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">ch</span>] <span style="color:#f92672">?</span> <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">ch</span>]<span style="color:#f92672">++</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">ch</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">while</span>(<span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">ch</span>]<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">l</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">r</span>){
+      <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">charAt</span>(<span style="color:#a6e22e">l</span>)]<span style="color:#f92672">--</span>
+      <span style="color:#a6e22e">l</span><span style="color:#f92672">++</span>
     }
-    // console.log(map)
-    max=Math.max(max,r-l+1)
+    <span style="color:#75715e">// console.log(map)
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">max</span><span style="color:#f92672">=</span>Math.<span style="color:#a6e22e">max</span>(<span style="color:#a6e22e">max</span>,<span style="color:#a6e22e">r</span><span style="color:#f92672">-</span><span style="color:#a6e22e">l</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
   }
-  return max
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>
 
-  // 第三种
-  if (!s || s.length === 0 || s.length === 1) return s.length;
-  let max = 0;
-  let left = 0;
-  let map = new Map();
+  <span style="color:#75715e">// 第三种
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">s</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">max</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>();
   
-  for (let i = 0; i &lt; s.length; i++) {
-      if (map.has(s[i]) &amp;&amp; map.get(s[i]) &gt; 0) {
-          while (map.get(s[i]) &gt; 0) {
-              map.set(s[left], map.get(s[left]) - 1);
-              left++;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">has</span>(<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>]) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>]) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+          <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>]) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+              <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">left</span>], <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">left</span>]) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+              <span style="color:#a6e22e">left</span><span style="color:#f92672">++</span>;
           }
       }
-      map.set(s[i], 1);
-      max = Math.max(max, i - left + 1);
+      <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>], <span style="color:#ae81ff">1</span>);
+      <span style="color:#a6e22e">max</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(<span style="color:#a6e22e">max</span>, <span style="color:#a6e22e">i</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
   }
-  return max;
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">max</span>;
 };
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

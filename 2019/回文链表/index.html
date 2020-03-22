@@ -164,62 +164,52 @@
         
         
 
-        
-
-<h2 id="回文链表">回文链表</h2>
-
+        <h2 id="回文链表">回文链表</h2>
 <h3 id="描述">描述</h3>
-
 <p>判断一个链表是否为回文链表</p>
-
-<pre><code class="language-bash">示例 1:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">示例 1:
   输入: 1-&gt;2
   输出: false
 
 示例 2:
   输入: 1-&gt;2-&gt;2-&gt;1
   输出: true
-</code></pre>
-
-<h3 id="分析">分析</h3>
-
+</code></pre></div><h3 id="分析">分析</h3>
 <ul>
 <li>用2个指针，一个low，一个fast，fast是low的2倍，所以可以达到2分链表的效果</li>
 <li>在移动指针时同时对前半部分链表进行反转，最后直接比较被分开的2个链表</li>
 <li>因为不能改变当前slow的next，不然就无法跳到下一个元素，所以这里用pre和prepre实现指针的反转</li>
 </ul>
-
-<pre><code class="language-javascript">/**
- * @param {ListNode} head
- * @return {boolean}
- */
-var isPalindrome = function(head) {
-  if (!head || !head.next) return true;
-  let slow = head;
-  let fast = head.next;
-  let pre = null;
-  let prepre = null;
-  while (fast &amp;&amp; fast.next) {
-    // 反转前半段链表
-    pre = slow;
-    slow = slow.next;
-    fast = fast.next.next;
-    // 先移动指针再来反转
-    pre.next = prepre;
-    prepre = pre;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @param {ListNode} head
+</span><span style="color:#75715e"> * @return {boolean}
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">isPalindrome</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">head</span>) {
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">slow</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">head</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fast</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">pre</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">prepre</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+  <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">fast</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">fast</span>.<span style="color:#a6e22e">next</span>) {
+    <span style="color:#75715e">// 反转前半段链表
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">pre</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">slow</span>;
+    <span style="color:#a6e22e">slow</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">slow</span>.<span style="color:#a6e22e">next</span>;
+    <span style="color:#a6e22e">fast</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fast</span>.<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">next</span>;
+    <span style="color:#75715e">// 先移动指针再来反转
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">pre</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">prepre</span>;
+    <span style="color:#a6e22e">prepre</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pre</span>;
   }
-  let p2 = slow.next;
-  slow.next = pre;
-  let p1 = !fast ? slow.next : slow;
-  while(p1) {
-    if (p1.val !== p2.val) return false;
-    p1 = p1.next;
-    p2 = p2.next;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">p2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">slow</span>.<span style="color:#a6e22e">next</span>;
+  <span style="color:#a6e22e">slow</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pre</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">p1</span> <span style="color:#f92672">=</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">fast</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">slow</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">slow</span>;
+  <span style="color:#66d9ef">while</span>(<span style="color:#a6e22e">p1</span>) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">p1</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">p2</span>.<span style="color:#a6e22e">val</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#a6e22e">p1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">p1</span>.<span style="color:#a6e22e">next</span>;
+    <span style="color:#a6e22e">p2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">p2</span>.<span style="color:#a6e22e">next</span>;
   }
-  return true;
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
 };
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

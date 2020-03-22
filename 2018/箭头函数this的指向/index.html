@@ -38,10 +38,10 @@
 <meta name="twitter:title" content="箭头函数this的指向"/>
 <meta name="twitter:description" content="箭头函数this的指向  介绍   箭头函数this的定义：箭头函数中的this是在定义函数的时候绑定，而不是在执行函数的时候绑定。
  一、 何为定义时绑定（看下面的例子）
-let x = 11; let obj = { x: 22, say: function () { console.log(this.x) } } obj.say() // 22  一般的定义函数跟我们的理解是一样的，运行的时候决定this的指向，我们可以知道当运行obj.say()时候，this指向的是obj这个对象。
-let x = 11; let obj = { x: 22, say: () =&gt; { console.log(this.x) } } obj.say() // 11  这个this指向的是外部的 x = 11。
-所谓的定义时候绑定， *就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值*，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而obj的父执行上下文就是window，因此这里的this.x实际上表示的是window.x，因此输出的是11。(this只有在函数被调用，或者通过构造函数new Object()的形式才会有this)。
- 类似的还有：  // 不使用箭头函数 let a = 11; function test () { this."/>
+let x = 11;let obj = {x: 22,say: function () {console.log(this.x)}}obj.say() // 22一般的定义函数跟我们的理解是一样的，运行的时候决定this的指向，我们可以知道当运行obj.say()时候，this指向的是obj这个对象。
+let x = 11;let obj = {x: 22,say: () =&gt; {console.log(this.x)}}obj.say() // 11这个this指向的是外部的 x = 11。
+所谓的定义时候绑定， 就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而obj的父执行上下文就是window，因此这里的this.x实际上表示的是window.x，因此输出的是11。(this只有在函数被调用，或者通过构造函数new Object()的形式才会有this)。
+ 类似的还有：  // 不使用箭头函数let a = 11;function test () {this."/>
 
   <script type="application/ld+json">
 {
@@ -169,80 +169,60 @@ let x = 11; let obj = { x: 22, say: () =&gt; { console.log(this.x) } } obj.say()
         
         
 
-        
-
-<h1 id="箭头函数this的指向">箭头函数this的指向</h1>
-
+        <h1 id="箭头函数this的指向">箭头函数this的指向</h1>
 <ul>
 <li>介绍</li>
 </ul>
-
 <blockquote>
 <p>箭头函数this的定义：箭头函数中的this是在定义函数的时候绑定，而不是在执行函数的时候绑定。</p>
 </blockquote>
-
 <p>一、 何为定义时绑定（看下面的例子）</p>
-
-<pre><code class="language-javascript">let x = 11;
-let obj = {
-  x: 22,
-  say: function () {
-    console.log(this.x)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">x</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">22</span>,
+  <span style="color:#a6e22e">say</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">x</span>)
   }
 }
-obj.say() // 22
-</code></pre>
-
-<p>一般的定义函数跟我们的理解是一样的，运行的时候决定this的指向，我们可以知道当运行obj.say()时候，this指向的是obj这个对象。</p>
-
-<pre><code class="language-javascript">let x = 11;
-let obj = {
-  x: 22,
-  say: () =&gt; {
-    console.log(this.x)
+<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">say</span>() <span style="color:#75715e">// 22
+</span></code></pre></div><p>一般的定义函数跟我们的理解是一样的，运行的时候决定this的指向，我们可以知道当运行obj.say()时候，this指向的是obj这个对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">x</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">22</span>,
+  <span style="color:#a6e22e">say</span><span style="color:#f92672">:</span> () =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">x</span>)
   }
 }
-obj.say() // 11
-</code></pre>
-
-<p>这个this指向的是外部的 <code>x = 11</code>。</p>
-
-<p>所谓的定义时候绑定， *就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值*，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而obj的父执行上下文就是window，因此这里的this.x实际上表示的是window.x，因此输出的是11。(this只有在函数被调用，或者通过构造函数new Object()的形式才会有this)。</p>
-
+<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">say</span>() <span style="color:#75715e">// 11
+</span></code></pre></div><p>这个this指向的是外部的 <code>x = 11</code>。</p>
+<p>所谓的定义时候绑定， <em>就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值</em>，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而obj的父执行上下文就是window，因此这里的this.x实际上表示的是window.x，因此输出的是11。(this只有在函数被调用，或者通过构造函数new Object()的形式才会有this)。</p>
 <ul>
 <li>类似的还有：</li>
 </ul>
-
-<pre><code class="language-javascript">// 不使用箭头函数
-let a = 11;
-function test () {
-  this.a = 22;
-  let b = function () {
-    console.log(this.a)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 不使用箭头函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">test</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">22</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">a</span>)
   }
-  b()
+  <span style="color:#a6e22e">b</span>()
 }
-new test() //  console.log(this.a) 11
-</code></pre>
-
-<pre><code class="language-javascript">// 使用箭头函数
-let a = 11;
-function test () {
-  this.a = 22;
-  let b = () =&gt; {
-    console.log(this.a)
+<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">test</span>() <span style="color:#75715e">//  console.log(this.a) 11
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 使用箭头函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">test</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">22</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> () =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">a</span>)
   }
-  b()
+  <span style="color:#a6e22e">b</span>()
 }
-new test() //  console.log(this.a) 22
-</code></pre>
-
-<ul>
-<li>箭头函数中的<code>this</code>*就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值*。</li>
+<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">test</span>() <span style="color:#75715e">//  console.log(this.a) 22
+</span></code></pre></div><ul>
+<li>箭头函数中的<code>this</code><em>就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值</em>。</li>
 </ul>
-
 <p>二、注意</p>
-
 <ol>
 <li>箭头函数作为函数的一种形式,对于this的处理和普通函数有所区别,其没有自己的this上下文,也就是说通过bind/call/apply函数方法设置this值时无效的，会被忽略。</li>
 <li>因为箭头函数没有自己的this上下文，那么当它作为对象的方法函数运行时，this并不指向这个对象。</li>
@@ -250,27 +230,24 @@ new test() //  console.log(this.a) 22
 <li>你可以认为箭头函数的this和调用者无关，只和其定义时所在的上下文相关。</li>
 <li>箭头函数没有<code>this</code>，所以也就不能用作构造函数。</li>
 </ol>
-
 <ul>
 <li>箭头函数转换成ES5</li>
 </ul>
-
-<pre><code class="language-javascript">// ES6
-function foo () {
-  setTimeout(() =&gt; {
-    console.log('id', this.id)
-  }, 100)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// ES6
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span> () {
+  <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">id</span>)
+  }, <span style="color:#ae81ff">100</span>)
 }
 
-// ES5
-function () {
-  var _this = this;
-  setTimeout(function () {
-    console.log('id', _this.id)
-  }, 100)
+<span style="color:#75715e">// ES5
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">_this</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+  <span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">function</span> () {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#a6e22e">_this</span>.<span style="color:#a6e22e">id</span>)
+  }, <span style="color:#ae81ff">100</span>)
 }
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

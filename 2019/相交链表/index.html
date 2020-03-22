@@ -50,7 +50,7 @@
   
   "genre": "posts",
   "keywords": "leetCode, 链表-easy",
-  "wordcount":  97 ,
+  "wordcount":  93 ,
   "url": "\/2019\/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8\/",
   "datePublished": "2019-08-25T00:00:00\x2b00:00",
   "dateModified": "2019-08-25T00:00:00\x2b00:00",
@@ -166,32 +166,23 @@
         
         
 
-        
-
-<h3 id="相交链表">相交链表</h3>
-
+        <h3 id="相交链表">相交链表</h3>
 <h4 id="描述">描述</h4>
-
 <p>编写一个程序，找到两个单链表相交的起始节点。</p>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="https://s2.ax1x.com/2019/09/27/uMQiZ9.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure>
-<figure><img src="/ring.svg" data-sizes="auto" data-src="https://s2.ax1x.com/2019/09/27/uMQFaR.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
-
-<p>注意：
-- 如果两个链表没有交点，返回 null.
-- 在返回结果后，两个链表仍须保持原有的结构。
-- 可假定整个链表结构中没有循环。
-- 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。</p>
-
+<p><img src="https://s2.ax1x.com/2019/09/27/uMQiZ9.png" alt="pic">
+<img src="https://s2.ax1x.com/2019/09/27/uMQFaR.png" alt="pic"></p>
+<p>注意：</p>
+<ul>
+<li>如果两个链表没有交点，返回 null.</li>
+<li>在返回结果后，两个链表仍须保持原有的结构。</li>
+<li>可假定整个链表结构中没有循环。</li>
+<li>程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。</li>
+</ul>
 <h4 id="分析">分析</h4>
-
 <p>根据题目意思</p>
-
 <p>如果两个链表相交，那么相交点之后的长度是相同的</p>
-
 <p>我们需要做的事情是，让两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。
 为此，我们必须消除两个链表的长度差</p>
-
 <ul>
 <li>指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历</li>
 <li>如果 pA 到了末尾，则 pA = headB 继续遍历</li>
@@ -199,21 +190,18 @@
 <li>比较长的链表指针指向较短链表head时，长度差就消除了</li>
 <li>如此，只需要将最短链表遍历两次即可找到位置</li>
 </ul>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/xtjd.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
-
-<pre><code class="language-js">var getIntersectionNode = function(headA, headB) {
-  if (headA === null || headB === null) return null;
-  let pA = headA;
-  let pB = headB;
-  while(pA !== pB) {
-    pA = (pA === null) ? headB : pA.next;
-    pB = (pB === null) ? headA : pB.next;
+<p><img src="/images/totalimgs/xtjd.png" alt="pic"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">getIntersectionNode</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">headA</span>, <span style="color:#a6e22e">headB</span>) {
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">headA</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">headB</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">pA</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">headA</span>;
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">pB</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">headB</span>;
+  <span style="color:#66d9ef">while</span>(<span style="color:#a6e22e">pA</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">pB</span>) {
+    <span style="color:#a6e22e">pA</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">pA</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span>) <span style="color:#f92672">?</span> <span style="color:#a6e22e">headB</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">pA</span>.<span style="color:#a6e22e">next</span>;
+    <span style="color:#a6e22e">pB</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">pB</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span>) <span style="color:#f92672">?</span> <span style="color:#a6e22e">headA</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">pB</span>.<span style="color:#a6e22e">next</span>;
   }
-  return pA;
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pA</span>;
 }
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">
@@ -226,7 +214,7 @@
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>97</span>
+            <span>93</span>
         </p>
 
         <p class="copyright-item">

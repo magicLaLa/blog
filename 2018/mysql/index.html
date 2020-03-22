@@ -36,8 +36,8 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MySQL 使用"/>
-<meta name="twitter:description" content="MySQL 在 cmder 上连接远程服务器 ssh root@**.**.**.*** 远程服务器地址IP root@**.**.**.***&#39;s password: *********** // [root@vultr ~]#  安装 mysql 我是在vultr上安装的，系统是CentOS 7，可以在网上找相关教程安装。
-连接数据库 [root@vultr ~]# mysql -u root -p Enter password: **********  查看数据库 mysql&gt; show databases; &#43;--------------------&#43; | Database | &#43;--------------------&#43; | information_schema | | PRACTTEST | | mysql | | performance_schema | | sys | &#43;--------------------&#43; 5 rows in set (0.01 sec)  使用某个数据库 mysql&gt; use information_schema; Reading table information for completion of table and column names You can turn off this feature to get a quicker startup with -A Database changed  查看表 mysql&gt; show tables; &#43;----------------------&#43; | Tables_in_PRACTTEST | &#43;----------------------&#43; | DATA_PARICT | | _mysql_session_store | | pract_tbl | | transaction_tbl | | user | &#43;----------------------&#43; 5 rows in set (0."/>
+<meta name="twitter:description" content="MySQL 在 cmder 上连接远程服务器 ssh root@**.**.**.*** 远程服务器地址IProot@**.**.**.***&#39;s password: ***********// [root@vultr ~]#安装 mysql 我是在vultr上安装的，系统是CentOS 7，可以在网上找相关教程安装。
+连接数据库 [root@vultr ~]# mysql -u root -pEnter password: **********查看数据库 mysql&gt; show databases;&#43;--------------------&#43;| Database |&#43;--------------------&#43;| information_schema || PRACTTEST || mysql || performance_schema || sys |&#43;--------------------&#43;5 rows in set (0.01 sec)使用某个数据库 mysql&gt; use information_schema;Reading table information for completion of table and column namesYou can turn off this feature to get a quicker startup with -ADatabase changed查看表 mysql&gt; show tables;&#43;----------------------&#43;| Tables_in_PRACTTEST |&#43;----------------------&#43;| DATA_PARICT || _mysql_session_store || pract_tbl || transaction_tbl || user |&#43;----------------------&#43;5 rows in set (0."/>
 
   <script type="application/ld+json">
 {
@@ -165,31 +165,19 @@
         
         
 
-        
-
-<h1 id="mysql">MySQL</h1>
-
+        <h1 id="mysql">MySQL</h1>
 <h3 id="在-cmder-上连接远程服务器">在 cmder 上连接远程服务器</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh root@**.**.**.*** 远程服务器地址IP
+root@**.**.**.***<span style="color:#960050;background-color:#1e0010">&#39;</span>s password: ***********
 
-<pre><code class="language-bash">ssh root@**.**.**.*** 远程服务器地址IP
-root@**.**.**.***'s password: ***********
-
-// [root@vultr ~]#
-</code></pre>
-
-<h3 id="安装-mysql">安装 mysql</h3>
-
-<p>我是在<a href="https://www.vultr.com/" rel="nofollow noreferrer" target="_blank">vultr</a>上安装的，系统是<code>CentOS 7</code>，可以在网上找相关教程安装。</p>
-
+// <span style="color:#f92672">[</span>root@vultr ~<span style="color:#f92672">]</span>#
+</code></pre></div><h3 id="安装-mysql">安装 mysql</h3>
+<p>我是在<a href="https://www.vultr.com/">vultr</a>上安装的，系统是<code>CentOS 7</code>，可以在网上找相关教程安装。</p>
 <h3 id="连接数据库">连接数据库</h3>
-
-<pre><code class="language-bash">[root@vultr ~]# mysql -u root -p
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>root@vultr ~<span style="color:#f92672">]</span><span style="color:#75715e"># mysql -u root -p</span>
 Enter password: **********
-</code></pre>
-
-<h3 id="查看数据库">查看数据库</h3>
-
-<pre><code class="language-bash">mysql&gt; show databases;
+</code></pre></div><h3 id="查看数据库">查看数据库</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; show databases;
 
 +--------------------+
 | Database           |
@@ -200,21 +188,15 @@ Enter password: **********
 | performance_schema |
 | sys                |
 +--------------------+
-5 rows in set (0.01 sec)
-</code></pre>
-
-<h3 id="使用某个数据库">使用某个数据库</h3>
-
-<pre><code class="language-bash">mysql&gt; use information_schema;
-Reading table information for completion of table and column names
+<span style="color:#ae81ff">5</span> rows in set <span style="color:#f92672">(</span>0.01 sec<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="使用某个数据库">使用某个数据库</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; use information_schema;
+Reading table information <span style="color:#66d9ef">for</span> completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Database changed
-</code></pre>
-
-<h3 id="查看表">查看表</h3>
-
-<pre><code class="language-bash">mysql&gt; show tables;
+</code></pre></div><h3 id="查看表">查看表</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; show tables;
 
 +----------------------+
 | Tables_in_PRACTTEST  |
@@ -225,123 +207,110 @@ Database changed
 | transaction_tbl      |
 | user                 |
 +----------------------+
-5 rows in set (0.00 sec)
-</code></pre>
-
-<h3 id="查看具体表的数据">查看具体表的数据</h3>
-
-<pre><code class="language-bash">mysql&gt; SELECT * from prpract_tbl;
+<span style="color:#ae81ff">5</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="查看具体表的数据">查看具体表的数据</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; SELECT * from prpract_tbl;
 +----------+------------------+--------------+-----------------+
 | pract_id | pract_title      | pract_author | submission_date |
 +----------+------------------+--------------+-----------------+
-|        1 | 李拉拉           | MrSun        | 2018-07-24      |
-|        2 | 啦啦啦 MYsQL     | MrSun        | 2018-07-24      |
-|        3 | 啦啦啦 node      | MrSun        | 2018-07-24      |
-|        4 | 啦啦啦 小柴      | MrSun        | 2018-07-24      |
-|        6 | 萨科             | 胡比比       | 2018-07-24      |
-|        7 | 天鹅             | 胡比比       | 2018-07-24      |
-|        8 | 邬奎             | 贲作         | 2018-07-24      |
-|        9 | 秦巨改           | 史寺亦       | 2018-07-24      |
-|       10 | 龚扉持           | 缪瞑         | 2018-07-24      |
-|       11 | 俞然础           | 娄表诈       | 2018-07-24      |
+|        <span style="color:#ae81ff">1</span> | 李拉拉           | MrSun        | 2018-07-24      |
+|        <span style="color:#ae81ff">2</span> | 啦啦啦 MYsQL     | MrSun        | 2018-07-24      |
+|        <span style="color:#ae81ff">3</span> | 啦啦啦 node      | MrSun        | 2018-07-24      |
+|        <span style="color:#ae81ff">4</span> | 啦啦啦 小柴      | MrSun        | 2018-07-24      |
+|        <span style="color:#ae81ff">6</span> | 萨科             | 胡比比       | 2018-07-24      |
+|        <span style="color:#ae81ff">7</span> | 天鹅             | 胡比比       | 2018-07-24      |
+|        <span style="color:#ae81ff">8</span> | 邬奎             | 贲作         | 2018-07-24      |
+|        <span style="color:#ae81ff">9</span> | 秦巨改           | 史寺亦       | 2018-07-24      |
+|       <span style="color:#ae81ff">10</span> | 龚扉持           | 缪瞑         | 2018-07-24      |
+|       <span style="color:#ae81ff">11</span> | 俞然础           | 娄表诈       | 2018-07-24      |
 +----------+------------------+--------------+-----------------+
-10 rows in set (0.00 sec)
-</code></pre>
-
-<h3 id="创建一个新的用户-和-用户授权">创建一个新的用户 和 用户授权</h3>
-
-<pre><code class="language-bash">mysql&gt; CREATE USER 'username'@'host' IDENTIFIED BY 'password';
+<span style="color:#ae81ff">10</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="创建一个新的用户-和-用户授权">创建一个新的用户 和 用户授权</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; CREATE USER <span style="color:#e6db74">&#39;username&#39;</span>@<span style="color:#e6db74">&#39;host&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;password&#39;</span>;
 
 说明:username - 你将创建的用户名, host - 指定该用户在哪个主机上可以登陆,如果是本地用户可用localhost, 如果想让该用户可以从任意远程主机登陆,可以使用通配符%. password - 该用户的登陆密码,密码可以为空,如果为空则该用户可以不需要密码登陆服务器.
 
-例子: CREATE USER 'dog'@'localhost' IDENTIFIED BY '123456'
-CREATE USER 'pig'@'192.168.1.101_' IDENDIFIED BY '123456'
-CREATE USER 'pig'@'%' IDENTIFIED BY '123456'
-CREATE USER 'pig'@'%' IDENTIFIED BY ''
-CREATE USER 'pig'@'%'
-</code></pre>
+例子: CREATE USER <span style="color:#e6db74">&#39;dog&#39;</span>@<span style="color:#e6db74">&#39;localhost&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;123456&#39;</span>
+CREATE USER <span style="color:#e6db74">&#39;pig&#39;</span>@<span style="color:#e6db74">&#39;192.168.1.101_&#39;</span> IDENDIFIED BY <span style="color:#e6db74">&#39;123456&#39;</span>
+CREATE USER <span style="color:#e6db74">&#39;pig&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;123456&#39;</span>
+CREATE USER <span style="color:#e6db74">&#39;pig&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;&#39;</span>
+CREATE USER <span style="color:#e6db74">&#39;pig&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; GRANT privileges ON databasename.tablename TO <span style="color:#e6db74">&#39;username&#39;</span>@<span style="color:#e6db74">&#39;host&#39;</span>
 
-<pre><code class="language-bash">mysql&gt; GRANT privileges ON databasename.tablename TO 'username'@'host'
+说明: privileges - 用户的操作权限,如SELECT , INSERT , UPDATE 等<span style="color:#f92672">(</span>详细列表见该文最后面<span style="color:#f92672">)</span>.如果要授予所的权限则使用ALL.;databasename - 数据库名,tablename-表名,如果要授予该用户对所有数据库和表的相应操作权限则可用*表示, 如*.*.
 
-说明: privileges - 用户的操作权限,如SELECT , INSERT , UPDATE 等(详细列表见该文最后面).如果要授予所的权限则使用ALL.;databasename - 数据库名,tablename-表名,如果要授予该用户对所有数据库和表的相应操作权限则可用*表示, 如*.*.
-
-例子: GRANT SELECT, INSERT ON test.user TO 'pig'@'%';
-GRANT ALL ON *.* TO 'pig'@'%';
+例子: GRANT SELECT, INSERT ON test.user TO <span style="color:#e6db74">&#39;pig&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span>;
+GRANT ALL ON *.* TO <span style="color:#e6db74">&#39;pig&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span>;
 
 注意:用以上命令授权的用户不能给其它用户授权,如果想让该用户可以授权,用以下命令:
-GRANT privileges ON databasename.tablename TO 'username'@'host' WITH GRANT OPTION;
-</code></pre>
-
-<ul>
+GRANT privileges ON databasename.tablename TO <span style="color:#e6db74">&#39;username&#39;</span>@<span style="color:#e6db74">&#39;host&#39;</span> WITH GRANT OPTION;
+</code></pre></div><ul>
 <li>参考：</li>
-<li><a href="https://blog.csdn.net/justdb/article/details/7964319" rel="nofollow noreferrer" target="_blank">MySQL命令行创建用户与授权</a></li>
-<li><a href="https://blog.csdn.net/adu198888/article/details/54092857" rel="nofollow noreferrer" target="_blank">MySql 5.7中添加用户,新建数据库,用户授权,删除用户,修改密码</a></li>
-<li><a href="https://www.jb51.net/article/31850.htm" rel="nofollow noreferrer" target="_blank">MySQL创建用户与授权方法</a></li>
+<li><a href="https://blog.csdn.net/justdb/article/details/7964319">MySQL命令行创建用户与授权</a></li>
+<li><a href="https://blog.csdn.net/adu198888/article/details/54092857">MySql 5.7中添加用户,新建数据库,用户授权,删除用户,修改密码</a></li>
+<li><a href="https://www.jb51.net/article/31850.htm">MySQL创建用户与授权方法</a></li>
 </ul>
-
 <h3 id="node-链接数据库">Node 链接数据库</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mysql</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;mysql&#39;</span>)
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">randomName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;chinese-random-name&#39;</span>)
 
-<pre><code class="language-js">const mysql = require('mysql')
-const randomName = require('chinese-random-name')
-
-// 创建数据库会话
-let conection = mysql.createConnection({
-  host: '**.**.**.***',
-  user: '*****', // 临时用户
-  port: '3306',
-  password: '***********', // 临时用户密码
-  database: 'PRACTTEST'
+<span style="color:#75715e">// 创建数据库会话
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">conection</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">mysql</span>.<span style="color:#a6e22e">createConnection</span>({
+  <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;**.**.**.***&#39;</span>,
+  <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;*****&#39;</span>, <span style="color:#75715e">// 临时用户
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;3306&#39;</span>,
+  <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;***********&#39;</span>, <span style="color:#75715e">// 临时用户密码
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">database</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;PRACTTEST&#39;</span>
 })
 
-conection.connect()
+<span style="color:#a6e22e">conection</span>.<span style="color:#a6e22e">connect</span>()
 
-let date = new Date().toLocaleDateString().split('/').join('-')
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">date</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Date().<span style="color:#a6e22e">toLocaleDateString</span>().<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;/&#39;</span>).<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;-&#39;</span>)
 
-// 查询当前数据表
-let sql = 'select * from pract_tbl'
-// 插入数据
-let addSql = `insert into pract_tbl(pract_title,pract_author,submission_date)
-              VALUES
-              (?,?,?)`
-let addSqlData = [randomName.generate(), randomName.generate(), date]
-// 更新数据
-let modSql = 'UPDATE pract_tbl SET pract_title = ? WHERE pract_id = ?'
-let modSqlParams = ['胡比比',6]
+<span style="color:#75715e">// 查询当前数据表
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">sql</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;select * from pract_tbl&#39;</span>
+<span style="color:#75715e">// 插入数据
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">addSql</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`insert into pract_tbl(pract_title,pract_author,submission_date)
+</span><span style="color:#e6db74">              VALUES
+</span><span style="color:#e6db74">              (?,?,?)`</span>
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">addSqlData</span> <span style="color:#f92672">=</span> [<span style="color:#a6e22e">randomName</span>.<span style="color:#a6e22e">generate</span>(), <span style="color:#a6e22e">randomName</span>.<span style="color:#a6e22e">generate</span>(), <span style="color:#a6e22e">date</span>]
+<span style="color:#75715e">// 更新数据
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">modSql</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UPDATE pract_tbl SET pract_title = ? WHERE pract_id = ?&#39;</span>
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">modSqlParams</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;胡比比&#39;</span>,<span style="color:#ae81ff">6</span>]
 
-conection.query(addSql, addSqlData, (err, res,fields) =&gt; {
-  if (err) throw err
-  console.log('--------------------------SELECT----------------------------');
-  console.log('INSERT ID', res);
-  console.log('------------------------------------------------------------\n\n');
-  upData()
+<span style="color:#a6e22e">conection</span>.<span style="color:#a6e22e">query</span>(<span style="color:#a6e22e">addSql</span>, <span style="color:#a6e22e">addSqlData</span>, (<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">res</span>,<span style="color:#a6e22e">fields</span>) =&gt; {
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">err</span>) <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">err</span>
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;--------------------------SELECT----------------------------&#39;</span>);
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;INSERT ID&#39;</span>, <span style="color:#a6e22e">res</span>);
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;------------------------------------------------------------\n\n&#39;</span>);
+  <span style="color:#a6e22e">upData</span>()
 })
 
-function upData () {
-  conection.query(modSql, modSqlParams, (err, res) =&gt; {
-    if (err) throw err
-    console.log('--------------------------SELECT----------------------------');
-    console.log('UPDATE affectedRows',res.affectedRows);
-    console.log('------------------------------------------------------------\n\n');
-    serch()
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">upData</span> () {
+  <span style="color:#a6e22e">conection</span>.<span style="color:#a6e22e">query</span>(<span style="color:#a6e22e">modSql</span>, <span style="color:#a6e22e">modSqlParams</span>, (<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">err</span>) <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">err</span>
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;--------------------------SELECT----------------------------&#39;</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;UPDATE affectedRows&#39;</span>,<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">affectedRows</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;------------------------------------------------------------\n\n&#39;</span>);
+    <span style="color:#a6e22e">serch</span>()
   })
 }
 
-function serch () {
-  conection.query(sql, (err, res, fields) =&gt; {
-    if (err) throw err
-    console.log('--------------------------SELECT----------------------------');
-    console.log(res);
-    console.log('------------------------------------------------------------\n\n');
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">serch</span> () {
+  <span style="color:#a6e22e">conection</span>.<span style="color:#a6e22e">query</span>(<span style="color:#a6e22e">sql</span>, (<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">fields</span>) =&gt; {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">err</span>) <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">err</span>
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;--------------------------SELECT----------------------------&#39;</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;------------------------------------------------------------\n\n&#39;</span>);
 
 
-      // 结束会话
-      connection.release()
+      <span style="color:#75715e">// 结束会话
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">connection</span>.<span style="color:#a6e22e">release</span>()
   })
 }
 
-// conection.end()
-</code></pre>
-
+<span style="color:#75715e">// conection.end()
+</span></code></pre></div>
     </div>
 
     <div class="post-copyright">

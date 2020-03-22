@@ -10,7 +10,7 @@
   
   
   
-  <link rel="prev" href="/2017/leetcode-easy/" />
+  <link rel="prev" href="/2017/httpstatus/" />
   <link rel="next" href="/2017/git-summary/" />
   <link rel="canonical" href="/2017/gulp/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="gulp 配置"/>
-<meta name="twitter:description" content="项目中 gulp 的配置 项目目录结构 . ├── dist // 打包后的文件 ├── node_modules // 依赖模块 ├── src // 具体页面 | ├── namePage | ├── img // 图片 | └── xxx.png | ├── js // js文件 | └── xxx.js | ├── pages // 页面 | └── xxx.html | ├── sass // sass文件 | └── xxx.scss | └── sprite // 需要合成雪碧图的文件 | └── namePage | ├── img // 图片 | └── xxx.png | ├── js // js文件 | └── xxx."/>
+<meta name="twitter:description" content="项目中 gulp 的配置 项目目录结构 .├── dist // 打包后的文件├── node_modules // 依赖模块├── src // 具体页面| ├── namePage| ├── img // 图片| └── xxx.png| ├── js // js文件| └── xxx.js| ├── pages // 页面| └── xxx.html| ├── sass // sass文件| └── xxx.scss| └── sprite // 需要合成雪碧图的文件| └── namePage| ├── img // 图片| └── xxx.png| ├── js // js文件| └── xxx."/>
 
   <script type="application/ld+json">
 {
@@ -50,7 +50,7 @@
   
   "genre": "posts",
   "keywords": "other",
-  "wordcount":  1160 ,
+  "wordcount":  1157 ,
   "url": "\/2017\/gulp\/",
   "datePublished": "2017-06-02T00:00:00\x2b00:00",
   "dateModified": "2017-06-02T00:00:00\x2b00:00",
@@ -164,12 +164,8 @@
         
         
 
-        
-
-<h1 id="项目中-gulp-的配置">项目中 gulp 的配置</h1>
-
+        <h1 id="项目中-gulp-的配置">项目中 gulp 的配置</h1>
 <h4 id="项目目录结构">项目目录结构</h4>
-
 <pre><code>.
 ├── dist // 打包后的文件
 ├── node_modules // 依赖模块
@@ -205,438 +201,431 @@
 ├── README.md
 ├── scss.template.handlebars
 └── yarn.lock
-</code></pre>
-
-<h4 id="scss-template-handlebars-的配置">scss.template.handlebars 的配置</h4>
-
-<pre><code class="language-scss">{{#block &quot;spritesheet&quot;}}
-.sprite {
-  background-image:url(../images/{{spritesheet.escaped_image}});
-  background-size: {{spritesheet.px.width}} {{spritesheet.px.height}};
-  background-repeat: no-repeat;
+</code></pre><h4 id="scsstemplatehandlebars-的配置">scss.template.handlebars 的配置</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scss" data-lang="scss">{{#block <span style="color:#e6db74">&#34;spritesheet&#34;</span>}}
+<span style="color:#a6e22e">.sprite</span> {
+  <span style="color:#f92672">background-image</span><span style="color:#a6e22e">:url</span><span style="color:#f92672">(</span><span style="color:#a6e22e">..</span><span style="color:#f92672">/</span><span style="color:#f92672">images</span><span style="color:#f92672">/</span>{{<span style="color:#f92672">spritesheet</span><span style="color:#a6e22e">.escaped_image</span>}}<span style="color:#f92672">)</span>;
+  <span style="color:#f92672">background-size</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">spritesheet</span><span style="color:#a6e22e">.px.width</span>}} {{<span style="color:#f92672">spritesheet</span><span style="color:#a6e22e">.px.height</span>}};
+  <span style="color:#f92672">background-repeat</span><span style="color:#a6e22e">:</span> <span style="color:#f92672">no-repeat</span>;
 }
-.dib {
-  display: inline-block;
-  content: '';
-  vertical-align: middle;
+<span style="color:#a6e22e">.dib</span> {
+  <span style="color:#f92672">display</span><span style="color:#a6e22e">:</span> <span style="color:#f92672">inline-block</span>;
+  <span style="color:#f92672">content</span><span style="color:#a6e22e">:</span> <span style="color:#e6db74">&#39;&#39;</span>;
+  <span style="color:#f92672">vertical-align</span><span style="color:#a6e22e">:</span> <span style="color:#f92672">middle</span>;
 }
-{{/block}}
-@mixin sprite($filename) {
+{{<span style="color:#f92672">/</span><span style="color:#f92672">block</span>}}
+<span style="color:#66d9ef">@mixin</span><span style="color:#a6e22e"> sprite</span>($filename) {
     {{#sprites}}
-    @if $filename == {{name}} {
-      @extend .sprite;
-      background-position: {{px.offset_x}} {{px.offset_y}};
-      height: {{px.height}};
-      width: {{px.width}};
+    <span style="color:#66d9ef">@if</span> $filename <span style="color:#f92672">==</span> {{<span style="color:#f92672">name</span>}} {
+      <span style="color:#66d9ef">@extend</span> <span style="color:#a6e22e">.sprite</span>;
+      <span style="color:#f92672">background-position</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.offset_x</span>}} {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.offset_y</span>}};
+      <span style="color:#f92672">height</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.height</span>}};
+      <span style="color:#f92672">width</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.width</span>}};
     }
-    {{/sprites}}
+    {{<span style="color:#f92672">/</span><span style="color:#f92672">sprites</span>}}
 }
-@mixin spriteBefore($filename) {
+<span style="color:#66d9ef">@mixin</span><span style="color:#a6e22e"> spriteBefore</span>($filename) {
 
-  &amp;:before {
-    @extend .dib;
+  <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">:before</span> {
+    <span style="color:#66d9ef">@extend</span> <span style="color:#a6e22e">.dib</span>;
     {{#sprites}}
-    @if $filename == {{name}} {
-      @extend .sprite;
-      background-position: {{px.offset_x}} {{px.offset_y}};
-      height: {{px.height}};
-      width: {{px.width}};
+    <span style="color:#66d9ef">@if</span> $filename <span style="color:#f92672">==</span> {{<span style="color:#f92672">name</span>}} {
+      <span style="color:#66d9ef">@extend</span> <span style="color:#a6e22e">.sprite</span>;
+      <span style="color:#f92672">background-position</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.offset_x</span>}} {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.offset_y</span>}};
+      <span style="color:#f92672">height</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.height</span>}};
+      <span style="color:#f92672">width</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.width</span>}};
     }
-    {{/sprites}}
+    {{<span style="color:#f92672">/</span><span style="color:#f92672">sprites</span>}}
   }
 }
-@mixin spriteAfter($filename) {
+<span style="color:#66d9ef">@mixin</span><span style="color:#a6e22e"> spriteAfter</span>($filename) {
 
-  &amp;:after {
-    @extend .dib;
+  <span style="color:#66d9ef">&amp;</span><span style="color:#a6e22e">:after</span> {
+    <span style="color:#66d9ef">@extend</span> <span style="color:#a6e22e">.dib</span>;
     {{#sprites}}
-    @if $filename == {{name}} {
-      @extend .sprite;
-      background-position: {{px.offset_x}} {{px.offset_y}};
-      height: {{px.height}};
-      width: {{px.width}};
+    <span style="color:#66d9ef">@if</span> $filename <span style="color:#f92672">==</span> {{<span style="color:#f92672">name</span>}} {
+      <span style="color:#66d9ef">@extend</span> <span style="color:#a6e22e">.sprite</span>;
+      <span style="color:#f92672">background-position</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.offset_x</span>}} {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.offset_y</span>}};
+      <span style="color:#f92672">height</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.height</span>}};
+      <span style="color:#f92672">width</span><span style="color:#a6e22e">:</span> {{<span style="color:#f92672">px</span><span style="color:#a6e22e">.width</span>}};
     }
-    {{/sprites}}
+    {{<span style="color:#f92672">/</span><span style="color:#f92672">sprites</span>}}
   }
 }
-</code></pre>
+</code></pre></div><h4 id="gulpfilejs">gulpfile.js</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">gulp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp&#39;</span>)
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">plugins</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-load-plugins&#39;</span>)() <span style="color:#75715e">// 加载 gulp 插件
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">browserSync</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;browser-sync&#39;</span>).<span style="color:#a6e22e">create</span>() <span style="color:#75715e">// 自动刷新
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">reload</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">browserSync</span>.<span style="color:#a6e22e">reload</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">merge</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;merge-stream&#39;</span>)
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">htmlmin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-html-minifier&#39;</span>) <span style="color:#75715e">// 压缩 html
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">sass</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-sass&#39;</span>) <span style="color:#75715e">// 编译 sass
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">spritesmith</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp.spritesmith&#39;</span>) <span style="color:#75715e">// 雪碧图
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buffer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;vinyl-buffer&#39;</span>)
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">imagemin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-imagemin&#39;</span>) <span style="color:#75715e">// 压缩图片
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pngquant</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;imagemin-pngquant&#39;</span>) <span style="color:#75715e">// 压缩 png
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">mozjpeg</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;imagemin-mozjpeg&#39;</span>) <span style="color:#75715e">// 压缩 jpg
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">runSequence</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;run-sequence&#39;</span>) <span style="color:#75715e">// 序列
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">dateFormat</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;dateformat&#39;</span>) <span style="color:#75715e">// 日期格式化
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">now</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Date() <span style="color:#75715e">// 当前时间
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">glob</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;glob&#39;</span>)
 
-<h4 id="gulpfile-js">gulpfile.js</h4>
-
-<pre><code class="language-js">var gulp = require('gulp')
-var plugins = require('gulp-load-plugins')() // 加载 gulp 插件
-var browserSync = require('browser-sync').create() // 自动刷新
-var reload = browserSync.reload
-var merge = require('merge-stream')
-var htmlmin = require('gulp-html-minifier') // 压缩 html
-var sass = require('gulp-sass') // 编译 sass
-var spritesmith = require('gulp.spritesmith') // 雪碧图
-var buffer = require('vinyl-buffer')
-var imagemin = require('gulp-imagemin') // 压缩图片
-var pngquant = require('imagemin-pngquant') // 压缩 png
-var mozjpeg = require('imagemin-mozjpeg') // 压缩 jpg
-var runSequence = require('run-sequence') // 序列
-var dateFormat = require('dateformat') // 日期格式化
-var now = new Date() // 当前时间
-
-var glob = require('glob')
-
-var remUnit = 46.875 // 根元素字体大小 = 设计宽度 / 320 * 20
-
-// 获取页面文件名
-function getPagesName () {
-  var pages = []
-  glob.sync('src/**/pages/').forEach(function (filePath) {
-    var page = filePath.substring('src/'.length, filePath.indexOf('/pages/'))
-    pages.push(page)
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">remUnit</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">46.875</span> <span style="color:#75715e">// 根元素字体大小 = 设计宽度 / 320 * 20
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 获取页面文件名
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getPagesName</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pages</span> <span style="color:#f92672">=</span> []
+  <span style="color:#a6e22e">glob</span>.<span style="color:#a6e22e">sync</span>(<span style="color:#e6db74">&#39;src/**/pages/&#39;</span>).<span style="color:#a6e22e">forEach</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">filePath</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">page</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">substring</span>(<span style="color:#e6db74">&#39;src/&#39;</span>.<span style="color:#a6e22e">length</span>, <span style="color:#a6e22e">filePath</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#e6db74">&#39;/pages/&#39;</span>))
+    <span style="color:#a6e22e">pages</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">page</span>)
   })
-  pages.push('public')
-  return pages
+  <span style="color:#a6e22e">pages</span>.<span style="color:#a6e22e">push</span>(<span style="color:#e6db74">&#39;public&#39;</span>)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pages</span>
 }
 
-var pagesName = getPagesName()
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pagesName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getPagesName</span>()
 
-// 复制 html
-gulp.task('html', function () {
-  var tasks = pagesName.map(function (pageName) {
-    const DEST = 'dist/xxxx/' + pageName + '/pages'
-    return gulp.src('src/' + pageName + '/pages/**/*.html')
-      .pipe(plugins.changed(DEST))
-      .pipe(gulp.dest(DEST))
+<span style="color:#75715e">// 复制 html
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;html&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/pages&#39;</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;src/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/pages/**/*.html&#39;</span>)
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">changed</span>(<span style="color:#a6e22e">DEST</span>))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#a6e22e">DEST</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 压缩 html
-gulp.task('compress-html', function () {
-  var tasks = pagesName.map(function (pageName) {
-    const DEST = 'dist/xxxx/' + pageName + '/pages'
+<span style="color:#75715e">// 压缩 html
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;compress-html&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/pages&#39;</span>
 
-    return gulp.src('src/' + pageName + '/pages/**/*.html')
-      // 压缩 html
-      .pipe(htmlmin({
-        collapseWhitespace: true,
-        minifyJS: true,
-        minifyCSS: true,
-        removeComments: true
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;src/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/pages/**/*.html&#39;</span>)
+      <span style="color:#75715e">// 压缩 html
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">htmlmin</span>({
+        <span style="color:#a6e22e">collapseWhitespace</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+        <span style="color:#a6e22e">minifyJS</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+        <span style="color:#a6e22e">minifyCSS</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+        <span style="color:#a6e22e">removeComments</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>
       }))
 
-      .pipe(gulp.dest(DEST))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#a6e22e">DEST</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 处理 css
-gulp.task('css', function () {
-  var tasks = pagesName.map(function (pageName) {
-    const DEST = 'dist/xxxx/' + pageName + '/css'
+<span style="color:#75715e">// 处理 css
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;css&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/css&#39;</span>
 
-    return gulp.src('src/' + pageName + '/sass/**/*.scss')
-      .pipe(plugins.sourcemaps.init())
-      // 转换 sass
-      .pipe(sass().on('error', sass.logError))
-      // px 转 rem
-      .pipe(plugins.pxtorem({
-        rootValue: remUnit,
-        propList: ['*']
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;src/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/sass/**/*.scss&#39;</span>)
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">sourcemaps</span>.<span style="color:#a6e22e">init</span>())
+      <span style="color:#75715e">// 转换 sass
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">sass</span>().<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#a6e22e">sass</span>.<span style="color:#a6e22e">logError</span>))
+      <span style="color:#75715e">// px 转 rem
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">pxtorem</span>({
+        <span style="color:#a6e22e">rootValue</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">remUnit</span>,
+        <span style="color:#a6e22e">propList</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;*&#39;</span>]
       }, {}))
-      // 自动前缀
-      .pipe(plugins.autoprefixer({
-        browsers: ['Android &gt;= 2.3', 'iOS &gt;= 4.3']
+      <span style="color:#75715e">// 自动前缀
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">autoprefixer</span>({
+        <span style="color:#a6e22e">browsers</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;Android &gt;= 2.3&#39;</span>, <span style="color:#e6db74">&#39;iOS &gt;= 4.3&#39;</span>]
       }))
-      .pipe(plugins.sourcemaps.write())
-      .pipe(gulp.dest(DEST))
-      // 注入 browserSync
-      .pipe(browserSync.stream())
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">sourcemaps</span>.<span style="color:#a6e22e">write</span>())
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#a6e22e">DEST</span>))
+      <span style="color:#75715e">// 注入 browserSync
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">browserSync</span>.<span style="color:#a6e22e">stream</span>())
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 压缩 css
-gulp.task('compress-css', function () {
-  var tasks = pagesName.map(function (pageName) {
-    return gulp.src('dist/xxxx/' + pageName + '/css/**/*.css', {base: '.'})
-      // 压缩 css
-      .pipe(plugins.cssnano({
-        reduceIdents: false, // 不压缩动画名字
-        autoprefixer: false, // 不需要自动前缀
-        zindex: false // 不压缩z-index
-      }))
+<span style="color:#75715e">// 压缩 css
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;compress-css&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/css/**/*.css&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;.&#39;</span>})
+      <span style="color:#75715e">// 压缩 css
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">cssnano</span>({
+        <span style="color:#a6e22e">reduceIdents</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#75715e">// 不压缩动画名字
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">autoprefixer</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#75715e">// 不需要自动前缀
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">zindex</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span> <span style="color:#75715e">// 不压缩z-index
+</span><span style="color:#75715e"></span>      }))
 
-      .pipe(gulp.dest('.'))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;.&#39;</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 复制 js
-gulp.task('js', function () {
-  var tasks = pagesName.map(function (pageName) {
-    const DEST = 'dist/xxxx/' + pageName + '/js'
-    return gulp.src('src/' + pageName + '/js/**/*.js')
-      .pipe(plugins.changed(DEST))
-      .pipe(gulp.dest(DEST))
+<span style="color:#75715e">// 复制 js
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;js&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/js&#39;</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;src/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/js/**/*.js&#39;</span>)
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">changed</span>(<span style="color:#a6e22e">DEST</span>))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#a6e22e">DEST</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 压缩 js
-gulp.task('compress-js', function () {
-  var tasks = pagesName.map(function (pageName) {
-    const DEST = 'dist/xxxx/' + pageName + '/js'
-    return gulp.src('src/' + pageName + '/js/**/*.js')
-      // 压缩 js
-      .pipe(plugins.uglify())
+<span style="color:#75715e">// 压缩 js
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;compress-js&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/js&#39;</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;src/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/js/**/*.js&#39;</span>)
+      <span style="color:#75715e">// 压缩 js
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">uglify</span>())
 
-      .pipe(gulp.dest(DEST))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#a6e22e">DEST</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 复制图片
-gulp.task('img', function () {
-  var tasks = pagesName.map(function (pageName) {
-    const DEST = 'dist/xxxx/' + pageName + '/images'
+<span style="color:#75715e">// 复制图片
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;img&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/images&#39;</span>
 
-    return gulp.src('src/' + pageName + '/img/**/*.{jpg,png,gif,svg}')
-      .pipe(plugins.changed(DEST))
-      .pipe(gulp.dest(DEST))
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;src/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/img/**/*.{jpg,png,gif,svg}&#39;</span>)
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">changed</span>(<span style="color:#a6e22e">DEST</span>))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#a6e22e">DEST</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 压缩图片
-gulp.task('compress-img', function () {
-  var tasks = pagesName.map(function (pageName) {
-    const DEST = 'dist/xxxx/' + pageName + '/images'
+<span style="color:#75715e">// 压缩图片
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;compress-img&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/images&#39;</span>
 
-    return gulp.src('src/' + pageName + '/img/**/*.{jpg,png,gif,svg}')
-      // 压缩图片
-      .pipe(imagemin([
-        pngquant({quality: '60'}),
-        mozjpeg({quality: 60})
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;src/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/img/**/*.{jpg,png,gif,svg}&#39;</span>)
+      <span style="color:#75715e">// 压缩图片
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">imagemin</span>([
+        <span style="color:#a6e22e">pngquant</span>({<span style="color:#a6e22e">quality</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;60&#39;</span>}),
+        <span style="color:#a6e22e">mozjpeg</span>({<span style="color:#a6e22e">quality</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">60</span>})
       ]))
-      .pipe(gulp.dest(DEST))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#a6e22e">DEST</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 雪碧图
-gulp.task('sprite', function () {
-  var tasks = pagesName.map(function (pageName) {
-    const DEST = 'dist/xxxx/' + pageName + '/images'
+<span style="color:#75715e">// 雪碧图
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;sprite&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/images&#39;</span>
 
-    var spriteData = gulp.src('src/' + pageName + '/sprite/*.{png,gif}')
-      .pipe(plugins.changed(DEST))
-      .pipe(spritesmith({
-        imgName: 'sprite.png',
-        cssName: '_sprite.scss',
-        cssTemplate: 'scss.template.handlebars',
-        // 图片间距
-        padding: 6
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">spriteData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;src/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/sprite/*.{png,gif}&#39;</span>)
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">changed</span>(<span style="color:#a6e22e">DEST</span>))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">spritesmith</span>({
+        <span style="color:#a6e22e">imgName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;sprite.png&#39;</span>,
+        <span style="color:#a6e22e">cssName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;_sprite.scss&#39;</span>,
+        <span style="color:#a6e22e">cssTemplate</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;scss.template.handlebars&#39;</span>,
+        <span style="color:#75715e">// 图片间距
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">padding</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">6</span>
       }))
 
-    var imgStream = spriteData.img
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">imgStream</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">spriteData</span>.<span style="color:#a6e22e">img</span>
 
-      .pipe(buffer())
-      .pipe(imagemin([
-        pngquant({quality: '60'})
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">buffer</span>())
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">imagemin</span>([
+        <span style="color:#a6e22e">pngquant</span>({<span style="color:#a6e22e">quality</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;60&#39;</span>})
       ]))
-      .pipe(gulp.dest(DEST))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#a6e22e">DEST</span>))
 
-    var cssStream = spriteData.css
-      .pipe(gulp.dest('src/' + pageName + '/sass'))
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cssStream</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">spriteData</span>.<span style="color:#a6e22e">css</span>
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;src/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/sass&#39;</span>))
 
-    return merge(imgStream, cssStream)
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">imgStream</span>, <span style="color:#a6e22e">cssStream</span>)
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 删除 dist
-gulp.task('clean', function () {
-  return gulp.src(['dist', '【打包输出】'], {read: false})
-    .pipe(plugins.clean())
+<span style="color:#75715e">// 删除 dist
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;clean&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>([<span style="color:#e6db74">&#39;dist&#39;</span>, <span style="color:#e6db74">&#39;【打包输出】&#39;</span>], {<span style="color:#a6e22e">read</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>})
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">clean</span>())
 })
 
-// 合并
-gulp.task('all', function () {
-  runSequence('sprite', ['html', 'css', 'img', 'js'], 'manifest')
+<span style="color:#75715e">// 合并
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;all&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#a6e22e">runSequence</span>(<span style="color:#e6db74">&#39;sprite&#39;</span>, [<span style="color:#e6db74">&#39;html&#39;</span>, <span style="color:#e6db74">&#39;css&#39;</span>, <span style="color:#e6db74">&#39;img&#39;</span>, <span style="color:#e6db74">&#39;js&#39;</span>], <span style="color:#e6db74">&#39;manifest&#39;</span>)
 })
 
-// 生成压缩包(正式)
-gulp.task('zip', function () {
-  return gulp.src('dist/xxxx/**/*', {base: 'dist'})
-    .pipe(plugins.zip(dateFormat(now, 'yyyymmddHHMM') + 'xxxx.zip'))
-    .pipe(gulp.dest('【打包输出】'))
+<span style="color:#75715e">// 生成压缩包(正式)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;zip&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;dist/xxxx/**/*&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;dist&#39;</span>})
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">zip</span>(<span style="color:#a6e22e">dateFormat</span>(<span style="color:#a6e22e">now</span>, <span style="color:#e6db74">&#39;yyyymmddHHMM&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;xxxx.zip&#39;</span>))
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;【打包输出】&#39;</span>))
 })
 
-// 生成压缩包(测试)
-gulp.task('zip:test', function () {
-  return gulp.src('dist/xxxx/**/*', {base: 'dist'})
-    .pipe(plugins.zip(dateFormat(now, 'yyyymmddHHMM') + 'xxxxtest.zip'))
-    .pipe(gulp.dest('【打包输出】'))
+<span style="color:#75715e">// 生成压缩包(测试)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;zip:test&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;dist/xxxx/**/*&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;dist&#39;</span>})
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">zip</span>(<span style="color:#a6e22e">dateFormat</span>(<span style="color:#a6e22e">now</span>, <span style="color:#e6db74">&#39;yyyymmddHHMM&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;xxxxtest.zip&#39;</span>))
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;【打包输出】&#39;</span>))
 })
 
-// 上传压缩包
-gulp.task('sftp', function () {
-  return gulp.src('【打包输出】/*xxxx*.zip', {base: '【打包输出】'})
-    .pipe(plugins.sftp({
-      host: 'xxxxxxx',
-      user: 'xxxxx',
-      pass: 'xxxxxxx',
-      remotePath: 'xxxx/xxxx/xxx/xx'
+<span style="color:#75715e">// 上传压缩包
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;sftp&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;【打包输出】/*xxxx*.zip&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;【打包输出】&#39;</span>})
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">sftp</span>({
+      <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;xxxxxxx&#39;</span>,
+      <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;xxxxx&#39;</span>,
+      <span style="color:#a6e22e">pass</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;xxxxxxx&#39;</span>,
+      <span style="color:#a6e22e">remotePath</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;xxxx/xxxx/xxx/xx&#39;</span>
     }))
 })
 
-gulp.task('manifest', function () {
-  var tasks = pagesName.map(function (pageName) {
-    const DEST = 'dist/xxxx/' + pageName + '/manifest'
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;manifest&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">DEST</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/manifest&#39;</span>
 
-    return gulp.src(['dist/xxxx/' + pageName + '/**/*', 'dist/xxxx/public/**/*', '!dist/xxxx/**/manifest/*'], {base: 'dist/xxxx/' + pageName + '/**'})
-      .pipe(plugins.manifest({
-        hash: true,
-        network: ['*'],
-        filename: 'app.manifest',
-        exclude: 'app.manifest'
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>([<span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/**/*&#39;</span>, <span style="color:#e6db74">&#39;dist/xxxx/public/**/*&#39;</span>, <span style="color:#e6db74">&#39;!dist/xxxx/**/manifest/*&#39;</span>], {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/**&#39;</span>})
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">manifest</span>({
+        <span style="color:#a6e22e">hash</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+        <span style="color:#a6e22e">network</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;*&#39;</span>],
+        <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;app.manifest&#39;</span>,
+        <span style="color:#a6e22e">exclude</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;app.manifest&#39;</span>
       }))
-      .pipe(gulp.dest(DEST))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#a6e22e">DEST</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-// 输出 dist 文件
-gulp.task('dist', function () {
-  runSequence('clean', ['compress-html', 'compress-js', 'compress-img', 'css'], 'compress-css', 'sprite')
+<span style="color:#75715e">// 输出 dist 文件
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;dist&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#a6e22e">runSequence</span>(<span style="color:#e6db74">&#39;clean&#39;</span>, [<span style="color:#e6db74">&#39;compress-html&#39;</span>, <span style="color:#e6db74">&#39;compress-js&#39;</span>, <span style="color:#e6db74">&#39;compress-img&#39;</span>, <span style="color:#e6db74">&#39;css&#39;</span>], <span style="color:#e6db74">&#39;compress-css&#39;</span>, <span style="color:#e6db74">&#39;sprite&#39;</span>)
 })
 
-// 接口地址改成正式环境
-gulp.task('replace', function () {
-  return gulp.src('./dist/xxxx/public/js/publicClient.js', {base: './'})
-    .pipe(plugins.replace('https://xxxxxx', 'https://xxxxxxx'))
-    .pipe(gulp.dest('.'))
+<span style="color:#75715e">// 接口地址改成正式环境
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;replace&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;./dist/xxxx/public/js/publicClient.js&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./&#39;</span>})
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;https://xxxxxx&#39;</span>, <span style="color:#e6db74">&#39;https://xxxxxxx&#39;</span>))
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;.&#39;</span>))
 })
 
-// 接口地址改成测试环境
-gulp.task('replace:test', function () {
-  return gulp.src('./dist/xxxx/public/js/publicClient.js', {base: './'})
-    .pipe(plugins.replace('https://xxxxxxx', 'https://xxxxxxxxx'))
-    .pipe(gulp.dest('.'))
+<span style="color:#75715e">// 接口地址改成测试环境
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;replace:test&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;./dist/xxxx/public/js/publicClient.js&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./&#39;</span>})
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;https://xxxxxxx&#39;</span>, <span style="color:#e6db74">&#39;https://xxxxxxxxx&#39;</span>))
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;.&#39;</span>))
 })
 
-// 打包（正式）
-gulp.task('db', function () {
-  runSequence('replace', 'zip')
+<span style="color:#75715e">// 打包（正式）
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;db&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#a6e22e">runSequence</span>(<span style="color:#e6db74">&#39;replace&#39;</span>, <span style="color:#e6db74">&#39;zip&#39;</span>)
 })
 
-// 打包（测试）
-gulp.task('db:test', function () {
-  runSequence('replace:test', 'zip:test')
+<span style="color:#75715e">// 打包（测试）
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;db:test&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#a6e22e">runSequence</span>(<span style="color:#e6db74">&#39;replace:test&#39;</span>, <span style="color:#e6db74">&#39;zip:test&#39;</span>)
 })
 
-gulp.task('dev', function () {
-  browserSync.init({
-    server: {
-      baseDir: './dist'
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;dev&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#a6e22e">browserSync</span>.<span style="color:#a6e22e">init</span>({
+    <span style="color:#a6e22e">server</span><span style="color:#f92672">:</span> {
+      <span style="color:#a6e22e">baseDir</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./dist&#39;</span>
     },
-    open: 'external'
+    <span style="color:#a6e22e">open</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;external&#39;</span>
   })
 
-  gulp.watch('dist/**/*.html').on('change', reload)
-  gulp.watch('dist/**/*.js').on('change', reload)
-  gulp.watch('dist/**/*.{png,gif,jpg}').on('change', reload)
-  gulp.watch('dist/**/*.{html,js,css,png,jpg,gif}', ['manifest'])
-  gulp.watch('src/**/pages/*.html', ['html'])
-  gulp.watch('src/**/js/*.js', ['js'])
-  gulp.watch('src/**/sprite/*.{png,gif}', ['sprite'])
-  gulp.watch('src/**/sass/*.scss', ['css'])
+  <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">watch</span>(<span style="color:#e6db74">&#39;dist/**/*.html&#39;</span>).<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;change&#39;</span>, <span style="color:#a6e22e">reload</span>)
+  <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">watch</span>(<span style="color:#e6db74">&#39;dist/**/*.js&#39;</span>).<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;change&#39;</span>, <span style="color:#a6e22e">reload</span>)
+  <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">watch</span>(<span style="color:#e6db74">&#39;dist/**/*.{png,gif,jpg}&#39;</span>).<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;change&#39;</span>, <span style="color:#a6e22e">reload</span>)
+  <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">watch</span>(<span style="color:#e6db74">&#39;dist/**/*.{html,js,css,png,jpg,gif}&#39;</span>, [<span style="color:#e6db74">&#39;manifest&#39;</span>])
+  <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">watch</span>(<span style="color:#e6db74">&#39;src/**/pages/*.html&#39;</span>, [<span style="color:#e6db74">&#39;html&#39;</span>])
+  <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">watch</span>(<span style="color:#e6db74">&#39;src/**/js/*.js&#39;</span>, [<span style="color:#e6db74">&#39;js&#39;</span>])
+  <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">watch</span>(<span style="color:#e6db74">&#39;src/**/sprite/*.{png,gif}&#39;</span>, [<span style="color:#e6db74">&#39;sprite&#39;</span>])
+  <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">watch</span>(<span style="color:#e6db74">&#39;src/**/sass/*.scss&#39;</span>, [<span style="color:#e6db74">&#39;css&#39;</span>])
 })
 
-gulp.task('revJs', function () {
-  var tasks = pagesName.map(function (pageName) {
-    return gulp.src('./dist/xxxx/' + pageName + '/js/*.js', {base: './dist'})
-      .pipe(plugins.rev()) // 给文件添加hash编码
-      .pipe(gulp.dest('./dist'))
-      .pipe(plugins.rev.manifest()) // 生成rev-mainfest.json文件作为记录
-      .pipe(gulp.dest('./dist/xxxx/' + pageName + '/rev/js'))
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;revJs&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;./dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/js/*.js&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./dist&#39;</span>})
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">rev</span>()) <span style="color:#75715e">// 给文件添加hash编码
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;./dist&#39;</span>))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">rev</span>.<span style="color:#a6e22e">manifest</span>()) <span style="color:#75715e">// 生成rev-mainfest.json文件作为记录
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;./dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/rev/js&#39;</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-gulp.task('revHtmlJs', function () {
-  var tasks = pagesName.map(function (pageName) {
-    return gulp.src(['./dist/xxxx/**/rev/js/*.json', './dist/xxxx/' + pageName + '/pages/*.html'])
-      .pipe(plugins.revCollector())
-      .pipe(gulp.dest('./dist/xxxx/' + pageName + '/pages/'))
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;revHtmlJs&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>([<span style="color:#e6db74">&#39;./dist/xxxx/**/rev/js/*.json&#39;</span>, <span style="color:#e6db74">&#39;./dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/pages/*.html&#39;</span>])
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">revCollector</span>())
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;./dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/pages/&#39;</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-gulp.task('revCss', function () {
-  var tasks = pagesName.map(function (pageName) {
-    return gulp.src('./dist/xxxx/' + pageName + '/css/*.css', {base: './dist'})
-      .pipe(plugins.rev()) // 给文件添加hash编码
-      .pipe(gulp.dest('./dist'))
-      .pipe(plugins.rev.manifest()) // 生成rev-mainfest.json文件作为记录
-      .pipe(gulp.dest('./dist/xxxx/' + pageName + '/rev/css'))
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;revCss&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;./dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/css/*.css&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./dist&#39;</span>})
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">rev</span>()) <span style="color:#75715e">// 给文件添加hash编码
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;./dist&#39;</span>))
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">rev</span>.<span style="color:#a6e22e">manifest</span>()) <span style="color:#75715e">// 生成rev-mainfest.json文件作为记录
+</span><span style="color:#75715e"></span>      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;./dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/rev/css&#39;</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-gulp.task('revHtmlCss', function () {
-  var tasks = pagesName.map(function (pageName) {
-    return gulp.src(['./dist/xxxx/**/rev/css/*.json', './dist/xxxx/' + pageName + '/pages/*.html'])
-      .pipe(plugins.revCollector())
-      .pipe(gulp.dest('./dist/xxxx/' + pageName + '/pages/'))
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;revHtmlCss&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">tasks</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pagesName</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">pageName</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>([<span style="color:#e6db74">&#39;./dist/xxxx/**/rev/css/*.json&#39;</span>, <span style="color:#e6db74">&#39;./dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/pages/*.html&#39;</span>])
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">revCollector</span>())
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;./dist/xxxx/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pageName</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/pages/&#39;</span>))
   })
-  return merge(tasks)
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">tasks</span>)
 })
 
-gulp.task('rev', function () {
-  runSequence(['revJs', 'revCss'], ['revHtmlJs', 'revHtmlCss'], 'manifest')
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;rev&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#a6e22e">runSequence</span>([<span style="color:#e6db74">&#39;revJs&#39;</span>, <span style="color:#e6db74">&#39;revCss&#39;</span>], [<span style="color:#e6db74">&#39;revHtmlJs&#39;</span>, <span style="color:#e6db74">&#39;revHtmlCss&#39;</span>], <span style="color:#e6db74">&#39;manifest&#39;</span>)
 })
 
 
-// 灰度打包
-gulp.task('copy:gray', function () {
-  return gulp.src('dist/**/*')
-    .pipe(plugins.copy('dist/xxxx_tmp', {prefix: 2}))
+<span style="color:#75715e">// 灰度打包
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;copy:gray&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;dist/**/*&#39;</span>)
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">copy</span>(<span style="color:#e6db74">&#39;dist/xxxx_tmp&#39;</span>, {<span style="color:#a6e22e">prefix</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2</span>}))
 })
-gulp.task('replace:gray', function () {
-  return gulp.src('dist/xxxx_tmp/**/*.html', {base: './'})
-    .pipe(plugins.replace('/xxxx/', '/xxxx_tmp/'))
-    .pipe(gulp.dest('.'))
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;replace:gray&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;dist/xxxx_tmp/**/*.html&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./&#39;</span>})
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;/xxxx/&#39;</span>, <span style="color:#e6db74">&#39;/xxxx_tmp/&#39;</span>))
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;.&#39;</span>))
 })
-gulp.task('zip:gray', function () {
-  return gulp.src('dist/xxxx_tmp/**/*', {base: 'dist'})
-    .pipe(plugins.zip(dateFormat(now, 'yyyymmddHHMM') + 'xxxx_tmp.zip'))
-    .pipe(gulp.dest('【打包输出】'))
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;zip:gray&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;dist/xxxx_tmp/**/*&#39;</span>, {<span style="color:#a6e22e">base</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;dist&#39;</span>})
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">plugins</span>.<span style="color:#a6e22e">zip</span>(<span style="color:#a6e22e">dateFormat</span>(<span style="color:#a6e22e">now</span>, <span style="color:#e6db74">&#39;yyyymmddHHMM&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;xxxx_tmp.zip&#39;</span>))
+    .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;【打包输出】&#39;</span>))
 })
-gulp.task('db:gray', function () {
-  runSequence('copy:gray', 'replace:gray', 'zip:gray')
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;db:gray&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#a6e22e">runSequence</span>(<span style="color:#e6db74">&#39;copy:gray&#39;</span>, <span style="color:#e6db74">&#39;replace:gray&#39;</span>, <span style="color:#e6db74">&#39;zip:gray&#39;</span>)
 })
-</code></pre>
-
-<ul>
-<li><p><strong>注:有些gulp插件是通过<code>plugins</code>来调用的，需要自行安装gulp-xxx，然后再通过<code>plugins.xxxx</code>来调用</strong></p></li>
-
-<li><p>使用方法</p></li>
+</code></pre></div><ul>
+<li>
+<p><strong>注:有些gulp插件是通过<code>plugins</code>来调用的，需要自行安装gulp-xxx，然后再通过<code>plugins.xxxx</code>来调用</strong></p>
+</li>
+<li>
+<p>使用方法</p>
+</li>
 </ul>
-
-<pre><code class="language-bash"># 安装依赖
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 安装依赖</span>
 yarn
 
-# 开发，注意需要先有自己的工程目录才能启动开发服务
+<span style="color:#75715e"># 开发，注意需要先有自己的工程目录才能启动开发服务</span>
 yarn dev
 
-# 打包（正式）
+<span style="color:#75715e"># 打包（正式）</span>
 yarn db
 
-# 打包（灰度）
+<span style="color:#75715e"># 打包（灰度）</span>
 yarn db:gray
 
-# 打包（测试）
+<span style="color:#75715e"># 打包（测试）</span>
 yarn db:test
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">
@@ -649,7 +638,7 @@ yarn db:test
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>1160</span>
+            <span>1157</span>
         </p>
 
         <p class="copyright-item">
@@ -720,8 +709,8 @@ yarn db:test
 
     <div class="post-nav">
         
-        <a href="/2017/leetcode-easy/" class="prev" rel="prev" title="leetCode Easy One"><i
-                class="iconfont icon-dajiantou"></i>&nbsp;leetCode Easy One</a>
+        <a href="/2017/httpstatus/" class="prev" rel="prev" title="HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)</a>
         
         
         <a href="/2017/git-summary/" class="next" rel="next"

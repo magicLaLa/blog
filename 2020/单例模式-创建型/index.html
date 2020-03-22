@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="/2019/docker-gitlab/" />
+  
+  <link rel="canonical" href="/2020/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           单例模式-创建型 | Magic
+       
+  </title>
+  <meta name="title" content="单例模式-创建型 | Magic">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="单例模式-创建型"/>
+<meta name="twitter:description" content="单例模式 保证一个类仅有一个实例，并提供一个访问它的全局访问点，这样的模式就叫做单例模式。
+实现思路 class Single {show() {console.log(&#39;我是一个单例对象&#39;);}}const s1 = new Single();const s2 = new Single();// s1 === s2 false先 new 了一个 s1，又 new 了一个 s2，很明显 s1 和 s2 之间没有任何瓜葛，两者是相互独立的对象，各占一块内存空间。而单例模式想要做到的是，不管我们尝试去创建多少次，它都只给你返回第一次所创建的那唯一的一个实例。要做到这一点，就需要构造函数 具备判断自己是否已经创建过一个实例的能力。
+ 🌰1  /*** 实现：静态方法版*/class Storage {static getInstance() {if (!Storage.instance) {Storage.instance = new Storage();}return Storage.instance;}getItem(key) {return localStorage.getItem(key);}setItem(key, val) {return localStorage."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "单例模式-创建型",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2020\/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "js, Javascript设计模式与应用实践",
+  "wordcount":  242 ,
+  "url": "\/2020\/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B\/",
+  "datePublished": "2020-02-13T00:00:00\x2b00:00",
+  "dateModified": "2020-02-13T00:00:00\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Magic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "\/logo.png",
+      "width":  50 ,
+      "height":  50 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Magic"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="/">Magic</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="/">Magic</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">单例模式-创建型</h1>
+        <div class="post-meta">
+            Written by <a href="/"
+                rel="author">Magic</a>
+            with ♥
+            <span class="post-time">
+                on <time
+                    datetime=2020-02-13>13 February 2020</time>
+            </span>
+            in
+            <i class="iconfont icon-folder"></i>
+            <span class="post-category">
+                <a href="/categories/js/"> js </a>
+                
+            </span>
+            <i class="iconfont icon-timer"></i>
+            2 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+
+        
+        
+        
+
+        
+        
+        
+
+        <h2 id="单例模式">单例模式</h2>
+<p><strong>保证一个类仅有一个实例，并提供一个访问它的全局访问点，这样的模式就叫做单例模式。</strong></p>
+<h3 id="实现思路">实现思路</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Single</span> {
+    <span style="color:#a6e22e">show</span>() {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;我是一个单例对象&#39;</span>);
+    }
+}
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">s1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Single</span>();
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">s2</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Single</span>();
+<span style="color:#75715e">// s1 === s2 false
+</span></code></pre></div><p>先 new 了一个 s1，又 new 了一个 s2，很明显 s1 和 s2 之间没有任何瓜葛，两者是相互独立的对象，各占一块内存空间。而单例模式想要做到的是，<strong>不管我们尝试去创建多少次，它都只给你返回第一次所创建的那唯一的一个实例</strong>。要做到这一点，就需要构造函数 <strong>具备判断自己是否已经创建过一个实例的能力</strong>。</p>
+<ul>
+<li>🌰1</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 实现：静态方法版
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Storage</span> {
+  <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">getInstance</span>() {
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">Storage</span>.<span style="color:#a6e22e">instance</span>) {
+      <span style="color:#a6e22e">Storage</span>.<span style="color:#a6e22e">instance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Storage</span>();
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Storage</span>.<span style="color:#a6e22e">instance</span>;
+  }
+  <span style="color:#a6e22e">getItem</span>(<span style="color:#a6e22e">key</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">localStorage</span>.<span style="color:#a6e22e">getItem</span>(<span style="color:#a6e22e">key</span>);
+  }
+  <span style="color:#a6e22e">setItem</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">val</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">localStorage</span>.<span style="color:#a6e22e">setItem</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">val</span>);
+  }
+}
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">storage1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Storage</span>.<span style="color:#a6e22e">getInstance</span>()
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">storage2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Storage</span>.<span style="color:#a6e22e">getInstance</span>()
+<span style="color:#a6e22e">storage1</span>.<span style="color:#a6e22e">setItem</span>(<span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#e6db74">&#39;李雷&#39;</span>)
+<span style="color:#75715e">// 李雷
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">storage1</span>.<span style="color:#a6e22e">getItem</span>(<span style="color:#e6db74">&#39;name&#39;</span>)
+<span style="color:#75715e">// 也是李雷
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">storage2</span>.<span style="color:#a6e22e">getItem</span>(<span style="color:#e6db74">&#39;name&#39;</span>)
+<span style="color:#75715e">// 返回true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">storage1</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">storage2</span>
+</code></pre></div><ul>
+<li>🌰2</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 闭包版
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">StorageBase</span>() {}
+<span style="color:#a6e22e">StorageBase</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">getItem</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">localStorage</span>.<span style="color:#a6e22e">getItem</span>(<span style="color:#a6e22e">key</span>);
+}
+<span style="color:#a6e22e">StorageBase</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">setItem</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">val</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">localStorage</span>.<span style="color:#a6e22e">setItem</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">val</span>);
+}
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Storagev2</span> <span style="color:#f92672">=</span> (<span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">instance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span> () {
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">instance</span>) {
+      <span style="color:#a6e22e">instance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">StorageBase</span>();
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">instance</span>;
+  }
+})();
+<span style="color:#75715e">// 这里其实不用 new Storage 的形式调用，直接 Storage() 也会有一样的效果 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">storage3</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Storagev2</span>()
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">storage4</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Storagev2</span>()
+<span style="color:#a6e22e">storage3</span>.<span style="color:#a6e22e">setItem</span>(<span style="color:#e6db74">&#39;name&#39;</span>, <span style="color:#e6db74">&#39;李雷&#39;</span>)
+<span style="color:#75715e">// 李雷
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">storage4</span>.<span style="color:#a6e22e">getItem</span>(<span style="color:#e6db74">&#39;name&#39;</span>)
+<span style="color:#75715e">// 也是李雷
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">storage3</span>.<span style="color:#a6e22e">getItem</span>(<span style="color:#e6db74">&#39;name&#39;</span>)
+<span style="color:#75715e">// 返回true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">storage3</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">storage4</span>
+</code></pre></div><ul>
+<li>🌰3</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 实现一个全局模态框
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Model</span> {
+  <span style="color:#a6e22e">constructor</span>() {
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">Model</span>.<span style="color:#a6e22e">instance</span>) {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">div</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#39;div&#39;</span>);
+      <span style="color:#a6e22e">div</span>.<span style="color:#a6e22e">innerText</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;我是一个全局模态框&#39;</span>;
+      <span style="color:#a6e22e">div</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>;
+      <span style="color:#a6e22e">div</span>.<span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;model&#39;</span>;
+      document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">div</span>);
+      <span style="color:#a6e22e">Model</span>.<span style="color:#a6e22e">instance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">div</span>;
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Model</span>.<span style="color:#a6e22e">instance</span>;
+  }
+  <span style="color:#a6e22e">show</span>() {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">div</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;block&#39;</span>;
+  }
+  <span style="color:#a6e22e">hide</span>() {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">div</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">display</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;none&#39;</span>;
+  }
+}
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;open&#39;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;click&#39;</span>, () =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">model</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Model</span>.<span style="color:#a6e22e">getInstance</span>();
+  <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">show</span>();
+});
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;close&#39;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;click&#39;</span>, () =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">model</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Model</span>.<span style="color:#a6e22e">getInstance</span>();
+  <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">hide</span>();
+});
+</code></pre></div>
+    </div>
+
+    <div class="post-copyright">
+        
+        <p class="copyright-item">
+            <span>Author:</span>
+            <span>Magic </span>
+        </p>
+        
+
+        <p class="copyright-item">
+            <span>Words:</span>
+            <span>242</span>
+        </p>
+
+        <p class="copyright-item">
+            
+            <span>Share:</span>
+            <span>
+
+      
+        <a href="//twitter.com/share?url=%2f2020%2f%25E5%258D%2595%25E4%25BE%258B%25E6%25A8%25A1%25E5%25BC%258F-%25E5%2588%259B%25E5%25BB%25BA%25E5%259E%258B%2f&amp;text=%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f-%e5%88%9b%e5%bb%ba%e5%9e%8b&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f2020%2f%25E5%258D%2595%25E4%25BE%258B%25E6%25A8%25A1%25E5%25BC%258F-%25E5%2588%259B%25E5%25BB%25BA%25E5%259E%258B%2f" target="_blank" title="Share on Facebook">
+          <i class="iconfont icon-facebook"></i>
+        </a>
+        
+      
+      
+      
+      
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+        <a href="//service.weibo.com/share/share.php?url=%2f2020%2f%25E5%258D%2595%25E4%25BE%258B%25E6%25A8%25A1%25E5%25BC%258F-%25E5%2588%259B%25E5%25BB%25BA%25E5%259E%258B%2f&amp;appkey=&amp;title=%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f-%e5%88%9b%e5%bb%ba%e5%9e%8b" target="_blank" title="Share on Douban ">
+            <i class="iconfont icon-weibo"></i>
+          </a>
+          
+</span>
+        </p>
+        
+
+        
+        <p class="copyright-item">
+            Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+        </p>
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>Tag:
+            
+            <span class="tag"><a href="/tags/js/">
+                    #js</a></span>
+            
+            <span class="tag"><a href="/tags/javascript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E8%B7%B5/">
+                    #Javascript设计模式与应用实践</a></span>
+            
+        </section>
+        
+        <section>
+            <a href="javascript:window.history.back();">Back</a></span> ·
+            <span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/docker-gitlab/" class="prev" rel="prev" title="Docker Gitlab"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;Docker Gitlab</a>
+        
+        
+    </div>
+
+    <div class="post-comment">
+        
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'yourdiscussshortname';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+
+        
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2017 - 2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Magic</a> | </span>
+         
+
+		  <span>Crafted with ❤️ by <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreffer">KeepIt</a> & <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

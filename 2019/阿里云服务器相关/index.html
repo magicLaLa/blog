@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="阿里云服务器相关"/>
 <meta name="twitter:description" content="根据 慕课网 专栏 ‘一条龙的 Node·Vue·React 服务器部署’ 笔记。
-购买  到阿里云官网购买一个服务器 配置相关信息 记录登录名 root 和 登录密码  使用 登录  通过 ssh 登录 例如：ssh root@116.62.201.97 后面会要求输入密码 可以通过 sudo lsb_release -a 来查看服务器版本 登录成功后可以首先运行 sudo apt-get update，作用是先把服务器上所有的包和源都 check 和更新一遍，让服务器处在一个崭新的状态 可以把一些常用的开发者套件先安装上 sudo apt-get install -y software-properties-common  添加一个用户  增加一个用户 adduser rn_manager，完成后记录住密码，赋予账号更高权限:可以在 visudo 权限配置文件配置一下:sudo visudo，加入 rn_manager ALL=(ALL:ALL) ALL 这行，然后可以重启 ssh 服务：service ssh restart  配置无密码登录 那么，首先来本地电脑上配置这把钥匙，而且要生成两把钥匙，分别是 私钥 和 公钥
+购买  到阿里云官网购买一个服务器 配置相关信息 记录登录名 root 和 登录密码  使用 登录  通过 ssh 登录 例如：ssh root@116.62.201.97 后面会要求输入密码 可以通过 sudo lsb_release -a 来查看服务器版本 登录成功后可以首先运行 sudo apt-get update，作用是先把服务器上所有的包和源都 check 和更新一遍，让服务器处在一个崭新的状态 可以把一些常用的开发者套件先安装上 sudo apt-get install -y software-properties-common  添加一个用户  增加一个用户 adduser rn_manager，完成后记录住密码，赋予账号更高权限:可以在 __visudo 权限配置文件__配置一下:sudo visudo，加入 rn_manager ALL=(ALL:ALL) ALL 这行，然后可以重启 ssh 服务：service ssh restart  配置无密码登录 那么，首先来本地电脑上配置这把钥匙，而且要生成两把钥匙，分别是 私钥 和 公钥
  提示：如果你之前用过 GitHub 或者 GitLab 之类基于 Git 的仓库管理系统，那么你本地应该是配置过这个公钥和私钥的，这里要切记，不用再重复配置一遍了！不用重新配置一遍了！ 可能你会覆盖掉你本地用的钥匙，这样的话，你可能就连不上你之前有权限的 Git 仓库了，我会演示这一步。"/>
 
   <script type="application/ld+json">
@@ -52,7 +52,7 @@
   
   "genre": "posts",
   "keywords": "serves",
-  "wordcount":  858 ,
+  "wordcount":  857 ,
   "url": "\/2019\/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3\/",
   "datePublished": "2019-07-02T00:00:00\x2b00:00",
   "dateModified": "2019-07-02T00:00:00\x2b00:00",
@@ -166,279 +166,202 @@
         
         
 
-        
-
-<p>根据 慕课网 专栏 ‘一条龙的 Node·Vue·React 服务器部署’ 笔记。</p>
-
+        <p>根据 慕课网 专栏 ‘一条龙的 Node·Vue·React 服务器部署’ 笔记。</p>
 <h3 id="购买">购买</h3>
-
 <ol>
-<li>到阿里云官网购买一个<a href="https://www.aliyun.com/product/ecs?spm=5176.12825654.eofdhaal5.2.54212c4a2B4irr" rel="nofollow noreferrer" target="_blank">服务器</a></li>
+<li>到阿里云官网购买一个<a href="https://www.aliyun.com/product/ecs?spm=5176.12825654.eofdhaal5.2.54212c4a2B4irr">服务器</a></li>
 <li>配置相关信息</li>
 <li>记录登录名 root 和 登录密码</li>
 </ol>
-
 <h3 id="使用">使用</h3>
-
 <h4 id="登录">登录</h4>
-
 <ol>
 <li>通过 ssh 登录 例如：<code>ssh root@116.62.201.97</code> 后面会要求输入密码</li>
 <li>可以通过 <code>sudo lsb_release -a</code> 来查看服务器版本</li>
 <li>登录成功后可以首先运行 <code>sudo apt-get update</code>，作用是先把服务器上所有的包和源都 check 和更新一遍，让服务器处在一个崭新的状态</li>
 <li>可以把一些常用的开发者套件先安装上 <code>sudo apt-get install -y software-properties-common</code></li>
 </ol>
-
 <h4 id="添加一个用户">添加一个用户</h4>
-
 <ol>
-<li>增加一个用户 <code>adduser rn_manager</code>，完成后记录住密码，<strong>赋予账号更高权限</strong>:可以在 <strong>visudo 权限配置文件</strong>配置一下:<code>sudo visudo</code>，加入 <code>rn_manager ALL=(ALL:ALL) ALL</code> 这行，然后可以重启 ssh 服务：<code>service ssh restart</code></li>
+<li>增加一个用户 <code>adduser rn_manager</code>，完成后记录住密码，<strong>赋予账号更高权限</strong>:可以在 __visudo 权限配置文件__配置一下:<code>sudo visudo</code>，加入 <code>rn_manager ALL=(ALL:ALL) ALL</code> 这行，然后可以重启 ssh 服务：<code>service ssh restart</code></li>
 </ol>
-
 <h4 id="配置无密码登录">配置无密码登录</h4>
-
 <p>那么，首先来本地电脑上配置这把钥匙，而且要生成两把钥匙，分别是 <strong>私钥</strong> 和 <strong>公钥</strong></p>
-
 <blockquote>
 <p>提示：如果你之前用过 GitHub 或者 GitLab 之类基于 Git 的仓库管理系统，那么你本地应该是配置过这个公钥和私钥的，这里要切记，<strong>不用再重复配置一遍了！不用重新配置一遍了！</strong> 可能你会覆盖掉你本地用的钥匙，这样的话，你可能就连不上你之前有权限的 Git 仓库了，我会演示这一步。</p>
 </blockquote>
-
 <p>配置</p>
-
-<pre><code class="language-sh"># 通过 mkdir 创建这个目录
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 通过 mkdir 创建这个目录</span>
 mkdir .ssh
-# 通过 cd 进入到该目录下
+<span style="color:#75715e"># 通过 cd 进入到该目录下</span>
 cd .ssh
 
-ssh-keygen -t rsa -b 4096 -C &quot;你的邮箱（可以随便填写）&quot;
-</code></pre>
-
-<p>一路回车到底，对于新手这里就先不要设置密码了，不然就搞得太复杂了。执行完这一步命令之后，可以看到 .ssh 的目录下面生成了两个文件 id_rsa（私钥）和 id_rsa.pub（公钥），然后开起来 ssh 代理：</p>
-
-<pre><code class="language-sh">eval &quot;$(ssh-agent -s)&quot;
-</code></pre>
-
-<p>最后，把 ssh key 加入到 ssh 代理中</p>
-
-<pre><code class="language-sh">ssh-add ~/.ssh/id_rsa
-</code></pre>
-
-<p>理论上走完这一步，你本地已经有了配置好的钥匙文件，强调一下，这里要切换到本地操作，不是服务器上，在本地的根目录的 ssh 文件夹下。<br />
+ssh-keygen -t rsa -b <span style="color:#ae81ff">4096</span> -C <span style="color:#e6db74">&#34;你的邮箱（可以随便填写）&#34;</span>
+</code></pre></div><p>一路回车到底，对于新手这里就先不要设置密码了，不然就搞得太复杂了。执行完这一步命令之后，可以看到 .ssh 的目录下面生成了两个文件 id_rsa（私钥）和 id_rsa.pub（公钥），然后开起来 ssh 代理：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>ssh-agent -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>最后，把 ssh key 加入到 ssh 代理中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ssh-add ~/.ssh/id_rsa
+</code></pre></div><p>理论上走完这一步，你本地已经有了配置好的钥匙文件，强调一下，这里要切换到本地操作，不是服务器上，在本地的根目录的 ssh 文件夹下。<br>
 通过 cat 命令打印这个公钥文件内容：</p>
-
-<pre><code class="language-sh">cat .ssh/id_rsa.pub
-</code></pre>
-
-<p>然后选中整段内容，复制一下，再来到服务器上。
-&gt; 注意：这时候我们可能打开了至少 3 个终端窗口，一个是 root 账号的，一个是 rn_manager 新账号的（这两个都是服务器上的），还有一个是在本地，也就是当前这个终端窗口。我们进入到 rn_manager 用户登录的终端中，输入 ls 命令，显然是什么都没有的。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cat .ssh/id_rsa.pub
+</code></pre></div><p>然后选中整段内容，复制一下，再来到服务器上。</p>
+<blockquote>
+<p>注意：这时候我们可能打开了至少 3 个终端窗口，一个是 root 账号的，一个是 rn_manager 新账号的（这两个都是服务器上的），还有一个是在本地，也就是当前这个终端窗口。我们进入到 rn_manager 用户登录的终端中，输入 ls 命令，显然是什么都没有的。</p>
+</blockquote>
 <p>然后，这一步很重要哈！这一步是为了，以后我们可以从 GitHub 或者 GitLab 之类的仓库获得仓库的权限，因此我们要把刚才生成私钥的过程重复一遍，这一步不做是不影响我们配置无密码登录的，再把刚才的流程走一遍，一模一样的步骤：</p>
-
-<pre><code class="language-sh">ssh-keygen -t rsa -b 4096 -C &quot;scott@imooc.com&quot;
-eval &quot;$(ssh-agent -s)&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ssh-keygen -t rsa -b <span style="color:#ae81ff">4096</span> -C <span style="color:#e6db74">&#34;scott@imooc.com&#34;</span>
+eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>ssh-agent -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 ssh-add ~/.ssh/id_rsa
-</code></pre>
-
-<p>然后，通过简单的 vim 命令，我们需要创建一个授权文件：</p>
-
-<pre><code class="language-sh">vi .ssh/authorized_keys
-</code></pre>
-
-<p>会打开一个编辑页面，不要做任何输入，切记，不要做任何输入，同时要保证当前的输入法切换到英文输入状态，然后按下键盘上的 <code>i</code>  键后，command+v 把刚才复制的公钥拷贝进来，再按一下键盘上的 ESC 退出键确保回到编辑状态，然后同时按下 shift 和 <strong>冒号键</strong>，最后输入 <code>wq!</code> 回车，这个文件就自动创建了。这是简单的 vim 快捷键，大家还是要多少了解一点点的，才能方便在服务器上增改文件。<br />
+</code></pre></div><p>然后，通过简单的 vim 命令，我们需要创建一个授权文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vi .ssh/authorized_keys
+</code></pre></div><p>会打开一个编辑页面，不要做任何输入，切记，不要做任何输入，同时要保证当前的输入法切换到英文输入状态，然后按下键盘上的 <code>i</code>  键后，command+v 把刚才复制的公钥拷贝进来，再按一下键盘上的 ESC 退出键确保回到编辑状态，然后同时按下 shift 和 <strong>冒号键</strong>，最后输入 <code>wq!</code> 回车，这个文件就自动创建了。这是简单的 vim 快捷键，大家还是要多少了解一点点的，才能方便在服务器上增改文件。<br>
 然后，我们之前不是复制过本地的公钥文件吗，这时候还在系统的剪贴板里面呢，我们这时候要注意，切换到 rn_manager 这个账号下面的终端里，不是切换到 root 账号的终端里面，我们在新的账号终端环境操作。再次通过</p>
-
-<pre><code class="language-sh">vi .ssh/authorized_keys
-</code></pre>
-
-<p>或者按一下键盘上的上选择键，来调出历史中缓存的刚才所使用的一条命令来打开授权文件，然后记住输入法是英文状态下，按一下键盘上的 i 键，切记，是 uijk 的 i 键，然后 command+v 粘贴进去（如果是 Windows 系统，是 ctrl+v 粘贴）。<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vi .ssh/authorized_keys
+</code></pre></div><p>或者按一下键盘上的上选择键，来调出历史中缓存的刚才所使用的一条命令来打开授权文件，然后记住输入法是英文状态下，按一下键盘上的 i 键，切记，是 uijk 的 i 键，然后 command+v 粘贴进去（如果是 Windows 系统，是 ctrl+v 粘贴）。<br>
 之后，按一下 ESC 退出键，再同时按下 shift+; 键，输入 <code>wq!</code>  回车即可。这个操作很容易由于不熟悉 Linux 下的 vim 编辑而出错，要多体会几遍，再动手做。</p>
-
 <p>如果没有生效，可以对该文件进行一个 600 可读授权，再重启下 ssh 服务：</p>
-
-<pre><code class="language-sh">chmod 600 ~/.ssh/authorized_keys
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">chmod <span style="color:#ae81ff">600</span> ~/.ssh/authorized_keys
 sudo service ssh restart
-</code></pre>
-
-<p>在重启这个 ssh 服务的时候，应该会提示你要输入密码，这时候要输入刚才创建 rn_manager 账户的密码，千万注意，这里输入的密码不是 root 账号的密码，而是新账号的密码。</p>
-
+</code></pre></div><p>在重启这个 ssh 服务的时候，应该会提示你要输入密码，这时候要输入刚才创建 rn_manager 账户的密码，千万注意，这里输入的密码不是 root 账号的密码，而是新账号的密码。</p>
 <p>最后，我们先不要关闭这个终端窗口，再另外开一个 <code>Iterm</code> 窗口，通过 <code>ssh rn_manager@116.62.201.97</code> 就可以直接登录了，不需要输入密码</p>
-
 <h4 id="修改服务起端口号">修改服务起端口号</h4>
-
 <p>可以在 root 或者 rn_manager 用户下操作：</p>
-
-<pre><code class="language-sh">sudo vim /etc/ssh/sshd_config
-</code></pre>
-
-<pre><code class="language-sh"># 不允许空密码
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo vim /etc/ssh/sshd_config
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 不允许空密码</span>
 PermitEmptyPasswords no
-# 关闭密码验证登录，前提是你已经使用了 ssh 密钥验证方式登录
+<span style="color:#75715e"># 关闭密码验证登录，前提是你已经使用了 ssh 密钥验证方式登录</span>
 PasswordAuthentication no
-# 如果你在服务器上手动添加了用户并将用户分配到 root 用户组，可以考虑禁止root用户登录
+<span style="color:#75715e"># 如果你在服务器上手动添加了用户并将用户分配到 root 用户组，可以考虑禁止root用户登录</span>
 PermitRootLogin no
 
-# 允许 pubkey 登录
+<span style="color:#75715e"># 允许 pubkey 登录</span>
 PubkeyAuthentication yes
 
-# Expect .ssh/authorized_keys2 to be disregarded by default in future.
+<span style="color:#75715e"># Expect .ssh/authorized_keys2 to be disregarded by default in future.</span>
 AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2
 
-# 登录的端口号
+<span style="color:#75715e"># 登录的端口号</span>
 Port 39999
 UseDNS no
 AllowUsers rn_manager
-# 只允许 ip4
+<span style="color:#75715e"># 只允许 ip4</span>
 AddressFamily inet
-</code></pre>
-
-<blockquote>
+</code></pre></div><blockquote>
 <p>补充：单独聊一聊端口，这个很容易被人忽视，一般来说，0 ~ 65536 端口号都是可用范围内的数，但是 0 ~ 1024 最好不要使用，通常会被系统程序占用，必须以 root 身份才能启动，那么在 1024 以上到 65536 之间我们都可以选择性的使用。可以设置得稍微大一些，这样做不仅是禁用掉了 22 默认端口的登录途径，也缩小了被扫描和猜测到的概率，在安全层面我们是增加了一点点的安全防护，多多益善吧。</p>
 </blockquote>
-
 <p>完成后可以重启 ssh 服务: <code>sudo service ssh restart</code>，之后就可以使用 <code>ssh -p 39999 rn_manager@116.62.201.97</code> 来进行登录。</p>
-
 <blockquote>
 <p>阿里云需要去 管理-&gt;本实例安全组-&gt;安全组列表-&gt;配置规则-&gt;添加安全组规则。否则会连接不上服务器，报超时</p>
 </blockquote>
-
-<h4 id="安全防护-配置-iptables-和-fail2ban-增强安全防护">安全防护：配置 IPTables 和 Fail2Ban 增强安全防护</h4>
-
+<h4 id="安全防护配置-iptables-和-fail2ban-增强安全防护">安全防护：配置 IPTables 和 Fail2Ban 增强安全防护</h4>
 <h5 id="iptables">iptables</h5>
-
 <ul>
 <li>iptables 是一个允许灵活配置的安全策略防火墙框架，简言之就是防火墙。对于一堵墙，我们的操作原则就是设置一些出入的大门，有些大门关闭，有些大门设置一些出入规则，尽量筛选掉一些恶意或者可疑的访问，留出安全的通道对外或者对内提供访问服务。</li>
 <li>可以先把 Ubuntu 升级更新一下：<code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code>，如果遇到:</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">E: Could not get lock /var/lib/dpkg/lock - open <span style="color:#f92672">(</span><span style="color:#ae81ff">11</span> Resource temporarily unavailable<span style="color:#f92672">)</span>
+E: Unable to lock the administration directory <span style="color:#f92672">(</span>/var/lib/dpkg/<span style="color:#f92672">)</span> is another process using it? 
+</code></pre></div><p>这种错误，可以采用：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ps aux | grep apt
 
-<pre><code class="language-sh">E: Could not get lock /var/lib/dpkg/lock - open (11 Resource temporarily unavailable)
-E: Unable to lock the administration directory (/var/lib/dpkg/) is another process using it? 
-</code></pre>
-
-<p>这种错误，可以采用：</p>
-
-<pre><code class="language-sh">ps aux | grep apt
-
-root      1531  0.0  0.0  53340  3732 ?        S    16:24   0:00 sudo apt-get upgrade
-root      1532  0.0  1.8 106184 75992 ?        S    16:24   0:07 apt-get upgrade
-</code></pre>
-
-<p>找到 apt-get 开头的，<code>sudo kill -9 1531 &amp;&amp; sudo kill -9 1532</code>，然后重新执行，如果还失败，可以再多执行个 <code>sudo rm /var/lib/dpkg/lock &amp;&amp; sudo rm /var/cache/apt/archives/lock</code>，然后再重新执行：<code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code></p>
-
+root      <span style="color:#ae81ff">1531</span>  0.0  0.0  <span style="color:#ae81ff">53340</span>  <span style="color:#ae81ff">3732</span> ?        S    16:24   0:00 sudo apt-get upgrade
+root      <span style="color:#ae81ff">1532</span>  0.0  1.8 <span style="color:#ae81ff">106184</span> <span style="color:#ae81ff">75992</span> ?        S    16:24   0:07 apt-get upgrade
+</code></pre></div><p>找到 apt-get 开头的，<code>sudo kill -9 1531 &amp;&amp; sudo kill -9 1532</code>，然后重新执行，如果还失败，可以再多执行个 <code>sudo rm /var/lib/dpkg/lock &amp;&amp; sudo rm /var/cache/apt/archives/lock</code>，然后再重新执行：<code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code></p>
 <ul>
 <li>然后我们把 iptables 的所有过滤规则都清空掉，输入：<code>iptables -F</code>，在命令行，是可以一条一条的添加规则的，但是整个过程不太好用文字形式来演示，我们就通过文件方式来配置吧，输入如下命令：</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">*filter
 
-<pre><code class="language-sh">*filter
-
-# Accepts all established inbound connections
+<span style="color:#75715e"># Accepts all established inbound connections</span>
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-# Allows all outbound traffic
-# You could modify this to only allow certain traffic
+<span style="color:#75715e"># Allows all outbound traffic</span>
+<span style="color:#75715e"># You could modify this to only allow certain traffic</span>
 -A OUTPUT -j ACCEPT
 
-# Allows HTTP and HTTPS connections from anywhere (the normal ports for websites)
- -A INPUT -p tcp --dport 443 -j ACCEPT
- -A INPUT -p tcp --dport 80 -j ACCEPT
-# Allows SSH connections for script kiddies
-# THE -dport NUMBER IS THE SAME ONE YOU SET UP IN THE SSHD_CONFIG FILE
- -A INPUT -p tcp -m state --state NEW --dport 39999 -j ACCEPT
+<span style="color:#75715e"># Allows HTTP and HTTPS connections from anywhere (the normal ports for websites)</span>
+ -A INPUT -p tcp --dport <span style="color:#ae81ff">443</span> -j ACCEPT
+ -A INPUT -p tcp --dport <span style="color:#ae81ff">80</span> -j ACCEPT
+<span style="color:#75715e"># Allows SSH connections for script kiddies</span>
+<span style="color:#75715e"># THE -dport NUMBER IS THE SAME ONE YOU SET UP IN THE SSHD_CONFIG FILE</span>
+ -A INPUT -p tcp -m state --state NEW --dport <span style="color:#ae81ff">39999</span> -j ACCEPT
 
-# Now you should read up on iptables rules and consider whether ssh access
-# for everyone is really desired. Most likely you will only allow access from certain IPs.
+<span style="color:#75715e"># Now you should read up on iptables rules and consider whether ssh access</span>
+<span style="color:#75715e"># for everyone is really desired. Most likely you will only allow access from certain IPs.</span>
 
-# allow ping
- -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
+<span style="color:#75715e"># allow ping</span>
+ -A INPUT -p icmp -m icmp --icmp-type <span style="color:#ae81ff">8</span> -j ACCEPT
  
-# Mongodb open prot
--A INPUT -s 127.0.0.1 -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
--A OUTPUT -d 127.0.0.1 -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
+<span style="color:#75715e"># Mongodb open prot</span>
+-A INPUT -s 127.0.0.1 -p tcp --destination-port <span style="color:#ae81ff">27017</span> -m state --state NEW,ESTABLISHED -j ACCEPT
+-A OUTPUT -d 127.0.0.1 -p tcp --source-port <span style="color:#ae81ff">27017</span> -m state --state ESTABLISHED -j ACCEPT
 
-# log iptables denied calls (access via 'dmesg' command)
--A INPUT -m limit --limit 5/min -j LOG --log-prefix &quot;iptables denied: &quot; --log-level 7
+<span style="color:#75715e"># log iptables denied calls (access via &#39;dmesg&#39; command)</span>
+-A INPUT -m limit --limit 5/min -j LOG --log-prefix <span style="color:#e6db74">&#34;iptables denied: &#34;</span> --log-level 7
 
-# Drop incoming connections if IP make more than 150 connection attempts to port 80 within 60 seconds
--A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --set
--A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --update --seconds 60  --hitcount 150 -j DROP
+<span style="color:#75715e"># Drop incoming connections if IP make more than 150 connection attempts to port 80 within 60 seconds</span>
+-A INPUT -p tcp --dport <span style="color:#ae81ff">80</span> -i eth0 -m state --state NEW -m recent --set
+-A INPUT -p tcp --dport <span style="color:#ae81ff">80</span> -i eth0 -m state --state NEW -m recent --update --seconds <span style="color:#ae81ff">60</span>  --hitcount <span style="color:#ae81ff">150</span> -j DROP
 
 COMMIT
-</code></pre>
-
-<p>这几条需要特别注意：</p>
-
-<pre><code class="language-sh"># 443 通常是 ssl 的端口，如果 VPS 是作为一台 web 应用的服务器并且启用 https，你需要这个
- -A INPUT -p tcp --dport 443 -j ACCEPT
- # 80 端口就不多说了
- -A INPUT -p tcp --dport 80 -j ACCEPT
- # 这是 ssh 默认的 22 端口，开放给自己登录使用
- -A INPUT -p tcp -m state --state NEW --dport 39999 -j ACCEPT
-</code></pre>
-
-<p>注意这里的 22 端口，你可以修改为其他的端口，并且关闭 22 端口。更有一种解决方案是：将生产机器 ssh 端口完全关闭，用一台同一子网下的跳板机来登录目标生产机器，其他的配置的话，你需要根据你的业务来具体配置相对应的安全策略。(需要把中文转译或者写为英文，否则下个操作会报错)</p>
-
+</code></pre></div><p>这几条需要特别注意：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 443 通常是 ssl 的端口，如果 VPS 是作为一台 web 应用的服务器并且启用 https，你需要这个</span>
+ -A INPUT -p tcp --dport <span style="color:#ae81ff">443</span> -j ACCEPT
+ <span style="color:#75715e"># 80 端口就不多说了</span>
+ -A INPUT -p tcp --dport <span style="color:#ae81ff">80</span> -j ACCEPT
+ <span style="color:#75715e"># 这是 ssh 默认的 22 端口，开放给自己登录使用</span>
+ -A INPUT -p tcp -m state --state NEW --dport <span style="color:#ae81ff">39999</span> -j ACCEPT
+</code></pre></div><p>注意这里的 22 端口，你可以修改为其他的端口，并且关闭 22 端口。更有一种解决方案是：将生产机器 ssh 端口完全关闭，用一台同一子网下的跳板机来登录目标生产机器，其他的配置的话，你需要根据你的业务来具体配置相对应的安全策略。(需要把中文转译或者写为英文，否则下个操作会报错)</p>
 <ul>
 <li>告诉 iptables 你的配置在哪：<code>sudo iptables-restore &lt; /etc/iptables.up.rules</code></li>
 <li>最后创建 shell 脚本来开机自启动：<code>sudo vi /etc/network/if-up.d/iptables</code>，写入:</li>
 </ul>
-
-<pre><code class="language-sh"># 防火墙的开启与禁用命令很简单，如下：
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 防火墙的开启与禁用命令很简单，如下：</span>
 
 sudo ufw start
 sudo ufw status
 sudo ufw disable
 
-# 然后把文件路径写入进去
+<span style="color:#75715e"># 然后把文件路径写入进去</span>
 
-#!/bin/sh
+<span style="color:#75715e">#!/bin/sh</span>
 iptables-restore /etc/iptables.up.rules
 
-# 给予可以执行的权限
+<span style="color:#75715e"># 给予可以执行的权限</span>
 
 chmod +x /etc/network/if-up.d/iptables
-</code></pre>
-
-<p>这样我们就把 iptables 配置好了。</p>
-
+</code></pre></div><p>这样我们就把 iptables 配置好了。</p>
 <h5 id="fail2ban">Fail2Ban</h5>
-
 <ul>
 <li>Fail2Ban 可以看做是防御性的动作库，通过监控系统的日志文件，根据检测到的任何可疑的行为，自动触发不同的防御动作，如将产生可疑行为的目标，执行 IP 锁定等。Fail2Ban 的安装很简单：</li>
 </ul>
-
-<pre><code class="language-sh">sudo apt-get install fail2ban
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install fail2ban
 sudo apt-get install nginx sendmail iptables-persistent
 
 /etc/iptables/rules.v4
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>拷贝一份新的配置文件出来，我们重新编辑这个配置文件：<code>awk '{ printf &quot;# &quot;; print; }' /etc/fail2ban/jail.conf | sudo tee /etc/fail2ban/jail.local</code></li>
 <li>打开配置文件 <code>sudo vi /etc/fail2ban/jail.conf</code></li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">[</span>DEFAULT<span style="color:#f92672">]</span>
+ignoreip <span style="color:#f92672">=</span> 127.0.0.1/8
+bantime  <span style="color:#f92672">=</span> 3600
+maxretry <span style="color:#f92672">=</span> 3
+destemail <span style="color:#f92672">=</span> youemail@domain.com
+action <span style="color:#f92672">=</span> %<span style="color:#f92672">(</span>action_mw<span style="color:#f92672">)</span>s
 
-<pre><code class="language-sh">[DEFAULT]
-ignoreip = 127.0.0.1/8
-bantime  = 3600
-maxretry = 3
-destemail = youemail@domain.com
-action = %(action_mw)s
-
-[ssh]
-enabled  = true
-port     = ssh
-filter   = sshd
-logpath  = /var/log/auth.log
-maxretry = 3
-</code></pre>
-
-<h3 id="阿里云安全组">阿里云安全组</h3>
-
+<span style="color:#f92672">[</span>ssh<span style="color:#f92672">]</span>
+enabled  <span style="color:#f92672">=</span> true
+port     <span style="color:#f92672">=</span> ssh
+filter   <span style="color:#f92672">=</span> sshd
+logpath  <span style="color:#f92672">=</span> /var/log/auth.log
+maxretry <span style="color:#f92672">=</span> 3
+</code></pre></div><h3 id="阿里云安全组">阿里云安全组</h3>
 <ul>
 <li>阿里云的服务器，默认就提供了安全组这样的高级防火墙，供我们使用，它可以控制从外网能访问到服务器的哪些端口，从内网能访问到服务器的哪些端口，流量的进和出，对哪些 IP 段的服务器授权，非常强大。</li>
 <li>根据实际使用情况，通常我们会选择开启下面这些端口：</li>
 </ul>
-
-<pre><code class="language-sh">协议	端口
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">协议	端口
 SSH	    22
 telnet	23
 HTTP	80
@@ -449,22 +372,16 @@ MySQL	3306
 RDP	    3389
 PostgreSQL	5432
 Redis	6379
-</code></pre>
-
-<h3 id="注">注：</h3>
-
+</code></pre></div><h3 id="注">注：</h3>
 <ul>
 <li>vi 中文乱码：</li>
 </ul>
-
-<pre><code class="language-sh"># 修改方法很简单,因为明确是vi编码的问题,就修改一下它的保存编码即可.. 
-# 编辑/etc/vim/vimrc文件,在最后添上 
-set encoding=utf-8 
-set fileencoding=utf-8 
-set fileencodings=utf-8,gb18030,utf-16,big5
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 修改方法很简单,因为明确是vi编码的问题,就修改一下它的保存编码即可..</span> 
+<span style="color:#75715e"># 编辑/etc/vim/vimrc文件,在最后添上</span> 
+set encoding<span style="color:#f92672">=</span>utf-8 
+set fileencoding<span style="color:#f92672">=</span>utf-8 
+set fileencodings<span style="color:#f92672">=</span>utf-8,gb18030,utf-16,big5
+</code></pre></div><ul>
 <li>服务器上可以安装 git ，然后通过设置 ssh 来拉取项目</li>
 </ul>
 
@@ -480,7 +397,7 @@ set fileencodings=utf-8,gb18030,utf-16,big5
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>858</span>
+            <span>857</span>
         </p>
 
         <p class="copyright-item">

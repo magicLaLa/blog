@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="localStorage 统一管理设置-增加时间"/>
-<meta name="twitter:description" content="设置本地存储  function setStorage(key: string, value: any) { try { localStorage.setItem(key, JSON.stringify({ data: value, time: Date.now(), })); } catch { console.log(&#39;localStorage.setItem error&#39;); console.log(key, value); } }   获取本地存储  // 注意：stringify 会过滤掉undefined的值 function getStorage(key: string) { const result = localStorage.getItem(key); if (result) { try { const objRes = JSON.parse(result); return objRes; } catch (e) { console.log(&#39;JSON.parse error:&#39;, result); return result; } } else { return result; } }   删除本地存储  function removeStorage(key: string) { localStorage."/>
+<meta name="twitter:description" content="设置本地存储  function setStorage(key: string, value: any) {try {localStorage.setItem(key, JSON.stringify({data: value,time: Date.now(),}));} catch {console.log(&#39;localStorage.setItem error&#39;);console.log(key, value);}} 获取本地存储  // 注意：stringify 会过滤掉undefined的值function getStorage(key: string) {const result = localStorage.getItem(key);if (result) {try {const objRes = JSON.parse(result);return objRes;} catch (e) {console.log(&#39;JSON.parse error:&#39;, result);return result;}} else {return result;}} 删除本地存储  function removeStorage(key: string) {localStorage."/>
 
   <script type="application/ld+json">
 {
@@ -168,50 +168,42 @@
         <ul>
 <li>设置本地存储</li>
 </ul>
-
-<pre><code class="language-js">function setStorage(key: string, value: any) {
-  try {
-    localStorage.setItem(key,  JSON.stringify({
-      data: value,
-      time: Date.now(),
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setStorage</span>(<span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>, <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">any</span>) {
+  <span style="color:#66d9ef">try</span> {
+    <span style="color:#a6e22e">localStorage</span>.<span style="color:#a6e22e">setItem</span>(<span style="color:#a6e22e">key</span>,  <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
+      <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">value</span>,
+      <span style="color:#a6e22e">time</span><span style="color:#f92672">:</span> Date.<span style="color:#a6e22e">now</span>(),
     }));
-  } catch {
-    console.log('localStorage.setItem error');
-    console.log(key, value);
+  } <span style="color:#66d9ef">catch</span> {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;localStorage.setItem error&#39;</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>);
   }
 }
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>获取本地存储</li>
 </ul>
-
-<pre><code class="language-js">// 注意：stringify 会过滤掉undefined的值
-function getStorage(key: string) {
-  const result = localStorage.getItem(key);
-  if (result) {
-    try {
-      const objRes = JSON.parse(result);
-      return objRes;
-    } catch (e) {
-      console.log('JSON.parse error:', result);
-      return result;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 注意：stringify 会过滤掉undefined的值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getStorage</span>(<span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">localStorage</span>.<span style="color:#a6e22e">getItem</span>(<span style="color:#a6e22e">key</span>);
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">result</span>) {
+    <span style="color:#66d9ef">try</span> {
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">objRes</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">result</span>);
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">objRes</span>;
+    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;JSON.parse error:&#39;</span>, <span style="color:#a6e22e">result</span>);
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
     }
-  } else {
-    return result;
+  } <span style="color:#66d9ef">else</span> {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
   }
 }
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>删除本地存储</li>
 </ul>
-
-<pre><code class="language-js">function removeStorage(key: string) {
-  localStorage.removeItem(key);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">removeStorage</span>(<span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>) {
+  <span style="color:#a6e22e">localStorage</span>.<span style="color:#a6e22e">removeItem</span>(<span style="color:#a6e22e">key</span>);
 }
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">

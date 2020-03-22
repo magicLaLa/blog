@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ES6的一些方法和技巧"/>
 <meta name="twitter:description" content="ES6的一些方法和技巧 声明变量 用let不用var ES6之前我们用var声明一个变量，但是它有很多弊病：
- 因为没有块级作用域，很容易声明全局变量 变量提升 可以重复声明 还记得这道面试题吗？  var a = []; for (var i = 0; i &lt; 10; i&#43;&#43;) { a[i] = function () { console.log(i); }; } a[6](); // 10 a[7](); // 10 a[8](); // 10 a[9](); // 10  所以要使用 let，可以避免 使用 var 来声明所带来的一些问题。
+ 因为没有块级作用域，很容易声明全局变量 变量提升 可以重复声明 还记得这道面试题吗？  var a = [];for (var i = 0; i &lt; 10; i&#43;&#43;) {a[i] = function () {console.log(i);};}a[6](); // 10a[7](); // 10a[8](); // 10a[9](); // 10所以要使用 let，可以避免 使用 var 来声明所带来的一些问题。
 const 和 let const 和 let 的区别就是 使用 const 来声明的变量，称为 常量
  更好的代码语义化，哪个可以修改，哪个不可以修改等等 函数声明应该使用 const 来声明  字符串 不要使用 &ldquo;双引号&rdquo;，一律使用 &lsquo;单引号&rsquo; 或者 `模板字符串`"/>
 
@@ -53,7 +53,7 @@ const 和 let const 和 let 的区别就是 使用 const 来声明的变量，�
   
   "genre": "posts",
   "keywords": "js",
-  "wordcount":  1027 ,
+  "wordcount":  1029 ,
   "url": "\/2018\/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7\/",
   "datePublished": "2018-03-03T00:00:00\x2b00:00",
   "dateModified": "2018-03-03T00:00:00\x2b00:00",
@@ -167,262 +167,193 @@ const 和 let const 和 let 的区别就是 使用 const 来声明的变量，�
         
         
 
-        
-
-<h1 id="es6的一些方法和技巧">ES6的一些方法和技巧</h1>
-
+        <h1 id="es6的一些方法和技巧">ES6的一些方法和技巧</h1>
 <h2 id="声明变量">声明变量</h2>
-
 <h3 id="用let不用var">用let不用var</h3>
-
 <p>ES6之前我们用var声明一个变量，但是它有很多弊病：</p>
-
 <ul>
 <li>因为没有块级作用域，很容易声明全局变量</li>
 <li>变量提升</li>
 <li>可以重复声明 还记得这道面试题吗？</li>
 </ul>
-
-<pre><code class="language-javascript">var a = [];
-for (var i = 0; i &lt; 10; i++) {
-  a[i] = function () {
-    console.log(i);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> [];
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+  <span style="color:#a6e22e">a</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">i</span>);
   };
 }
-a[6](); // 10
-a[7](); // 10
-a[8](); // 10
-a[9](); // 10
-</code></pre>
-
-<p>所以要使用 let，可以避免 使用 var 来声明所带来的一些问题。</p>
-
+<span style="color:#a6e22e">a</span>[<span style="color:#ae81ff">6</span>](); <span style="color:#75715e">// 10
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">a</span>[<span style="color:#ae81ff">7</span>](); <span style="color:#75715e">// 10
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">a</span>[<span style="color:#ae81ff">8</span>](); <span style="color:#75715e">// 10
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">a</span>[<span style="color:#ae81ff">9</span>](); <span style="color:#75715e">// 10
+</span></code></pre></div><p>所以要使用 let，可以避免 使用 var 来声明所带来的一些问题。</p>
 <h3 id="const-和-let">const 和 let</h3>
-
 <p>const 和 let 的区别就是 使用 const 来声明的变量，称为 <em>常量</em></p>
-
 <ul>
 <li>更好的代码语义化，哪个可以修改，哪个不可以修改等等</li>
 <li>函数声明应该使用 const 来声明</li>
 </ul>
-
 <h2 id="字符串">字符串</h2>
-
 <p>不要使用 &ldquo;双引号&rdquo;，一律使用 &lsquo;单引号&rsquo; 或者 `模板字符串`</p>
-
 <p>模板字符串可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// low
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;123&#34;</span>;
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;a&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;c&#34;</span>;
 
-<pre><code class="language-javascript">// low
-const a = &quot;123&quot;;
-let b = &quot;a&quot; + b + &quot;c&quot;;
-
-// good
-const str = '456'
-let arrStr = `123${ 变量/JavaScript 表达式 }456`
-</code></pre>
-
-<p>之前判断字符串是否在另一个字符串中存在，用的是 <code>indexOf</code> 来判断，在 ES6 中提供了三个新的方法:</p>
-
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;456&#39;</span>
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">arrStr</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`123</span><span style="color:#e6db74">${</span> <span style="color:#a6e22e">变量</span><span style="color:#f92672">/</span><span style="color:#a6e22e">JavaScript</span> <span style="color:#a6e22e">表达式</span> <span style="color:#e6db74">}</span><span style="color:#e6db74">456`</span>
+</code></pre></div><p>之前判断字符串是否在另一个字符串中存在，用的是 <code>indexOf</code> 来判断，在 ES6 中提供了三个新的方法:</p>
 <ul>
 <li>includes()：返回布尔值，表示是否找到了参数字符串。</li>
 <li>startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。</li>
 <li>endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部。</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello world!&#39;</span>;
 
-<pre><code class="language-javascript">let s = 'Hello world!';
+<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#e6db74">&#39;Hello&#39;</span>) <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">endsWith</span>(<span style="color:#e6db74">&#39;!&#39;</span>) <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;o&#39;</span>) <span style="color:#75715e">// true
+</span></code></pre></div><p>这三个方法都支持第二个参数，表示开始搜索的位置。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello world!&#39;</span>;
 
-s.startsWith('Hello') // true
-s.endsWith('!') // true
-s.includes('o') // true
-</code></pre>
-
-<p>这三个方法都支持第二个参数，表示开始搜索的位置。</p>
-
-<pre><code class="language-javascript">let s = 'Hello world!';
-
-s.startsWith('world', 6) // true
-s.endsWith('Hello', 5) // true
-s.includes('Hello', 6) // fals
-</code></pre>
-
-<ul>
+<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#e6db74">&#39;world&#39;</span>, <span style="color:#ae81ff">6</span>) <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">endsWith</span>(<span style="color:#e6db74">&#39;Hello&#39;</span>, <span style="color:#ae81ff">5</span>) <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;Hello&#39;</span>, <span style="color:#ae81ff">6</span>) <span style="color:#75715e">// fals
+</span></code></pre></div><ul>
 <li>repeat()方法返回一个新字符串，表示将原字符串重复n次。</li>
 </ul>
-
-<pre><code class="language-javascript">'-'.repeat(10) // '----------'
-// 可以在 console.log() 里面来使用，区分上下
-</code></pre>
-
-<h2 id="结构赋值">结构赋值</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#e6db74">&#39;-&#39;</span>.<span style="color:#a6e22e">repeat</span>(<span style="color:#ae81ff">10</span>) <span style="color:#75715e">// &#39;----------&#39;
+</span><span style="color:#75715e">// 可以在 console.log() 里面来使用，区分上下
+</span></code></pre></div><h2 id="结构赋值">结构赋值</h2>
 <h3 id="变量赋值">变量赋值</h3>
-
 <p>在用到数组成员对变量赋值时，尽量使用解构赋值。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>];
 
-<pre><code class="language-javascript">const arr = [1, 2, 3, 4];
+<span style="color:#75715e">// low
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">first</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>];
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">second</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">1</span>];
 
-// low
-const first = arr[0];
-const second = arr[1];
-
-// good
-const [first, second] = arr;
-</code></pre>
-
-<h3 id="函数参数为对象时">函数参数为对象时</h3>
-
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">first</span>, <span style="color:#a6e22e">second</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>;
+</code></pre></div><h3 id="函数参数为对象时">函数参数为对象时</h3>
 <p>函数的参数如果是对象的成员，优先使用解构赋值。</p>
-
-<pre><code class="language-javascript">// low
-function getFullName(user) {
-  const firstName = user.firstName;
-  const lastName = user.lastName;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// low
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getFullName</span>(<span style="color:#a6e22e">user</span>) {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">firstName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">firstName</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">lastName</span>;
 }
 
-// good
-function getFullName({ firstName, lastName }) {
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getFullName</span>({ <span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">lastName</span> }) {
   ...
 }
-</code></pre>
-
-<p>如果函数返回多个值，优先使用对象的解构赋值，而不是数组的解构赋值。这样便于以后添加返回值，以及更改返回值的顺序。</p>
-
-<pre><code class="language-javascript">// low
-function processInput(input) {
-  return [left, right, top, bottom];
+</code></pre></div><p>如果函数返回多个值，优先使用对象的解构赋值，而不是数组的解构赋值。这样便于以后添加返回值，以及更改返回值的顺序。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// low
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processInput</span>(<span style="color:#a6e22e">input</span>) {
+  <span style="color:#66d9ef">return</span> [<span style="color:#a6e22e">left</span>, <span style="color:#a6e22e">right</span>, <span style="color:#a6e22e">top</span>, <span style="color:#a6e22e">bottom</span>];
 }
 
-// good
-function processInput(input) {
-  return { left, right, top, bottom };
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">processInput</span>(<span style="color:#a6e22e">input</span>) {
+  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">left</span>, <span style="color:#a6e22e">right</span>, <span style="color:#a6e22e">top</span>, <span style="color:#a6e22e">bottom</span> };
 }
 
-const { left, right } = processInput(input);
-</code></pre>
-
-<h2 id="对象object">对象Object</h2>
-
-<h3 id="对象属性名是动态时-可以使用-属性表达式">对象属性名是动态时，可以使用 属性表达式</h3>
-
-<pre><code class="language-javascript">// low
-const obj = {
-  id: 5,
-  name: 'San Francisco',
+<span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">left</span>, <span style="color:#a6e22e">right</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">processInput</span>(<span style="color:#a6e22e">input</span>);
+</code></pre></div><h2 id="对象object">对象Object</h2>
+<h3 id="对象属性名是动态时可以使用-属性表达式">对象属性名是动态时，可以使用 属性表达式</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// low
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5</span>,
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;San Francisco&#39;</span>,
 };
-obj[getKey('enabled')] = true;
+<span style="color:#a6e22e">obj</span>[<span style="color:#a6e22e">getKey</span>(<span style="color:#e6db74">&#39;enabled&#39;</span>)] <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
 
-// good
-const obj = {
-  id: 5,
-  name: 'San Francisco',
-
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5</span>,
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;San Francisco&#39;</span>,
+  [<span style="color:#a6e22e">getKey</span>(<span style="color:#e6db74">&#39;enabled&#39;</span>)]<span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
 };
-</code></pre>
-
-<h3 id="再简洁一点">再简洁一点</h3>
-
+</code></pre></div><h3 id="再简洁一点">再简洁一点</h3>
 <p>在定义对象时，能简洁表达尽量简洁表达：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;John&#39;</span>;
 
-<pre><code class="language-javascript">let name = 'John';
-
-// low
-let obj = {
-  name: name,
-  age: 18,
-  sleep: function () {
-    console.log(`sleep`)
+<span style="color:#75715e">// low
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">name</span>,
+  <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">18</span>,
+  <span style="color:#a6e22e">sleep</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`sleep`</span>)
   }
 }
 
-// good
-let obj = {
-  name,
-  age: 18,
-  sleep: function () {
-    console.log(`sleep`)
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">name</span>,
+  <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">18</span>,
+  <span style="color:#a6e22e">sleep</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`sleep`</span>)
   }
 }
-</code></pre>
-
-<h3 id="简单的键值对优先map">简单的键值对优先Map</h3>
-
+</code></pre></div><h3 id="简单的键值对优先map">简单的键值对优先Map</h3>
 <p>如果只是简单的key: value结构，建议优先使用Map，因为Map提供方便的遍历机制。</p>
-
-<pre><code class="language-javascript">let map = new Map(obj);
-// 遍历key值
-for (let key of map.keys()) {
-  console.log(key);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>(<span style="color:#a6e22e">obj</span>);
+<span style="color:#75715e">// 遍历key值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">key</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">keys</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">key</span>);
 }
-// 遍历value值
-for (let value of map.values()) {
-  console.log(value);
+<span style="color:#75715e">// 遍历value值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">value</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">values</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">value</span>);
 }
-// 遍历key和value值
-for (let item of map.entries()) {
-  console.log(item[0], item[1]);
+<span style="color:#75715e">// 遍历key和value值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">item</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">entries</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">item</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">item</span>[<span style="color:#ae81ff">1</span>]);
 }
-</code></pre>
-
-<h2 id="数组">数组</h2>
-
-<h3 id="扩展运算符">&hellip; 扩展运算符</h3>
-
+</code></pre></div><h2 id="数组">数组</h2>
+<h3 id="-扩展运算符">&hellip; 扩展运算符</h3>
 <p>使用扩展运算符（&hellip;）拷贝数组：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 还在用for i 你就太low了
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">len</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">items</span>.<span style="color:#a6e22e">length</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">itemsCopy</span> <span style="color:#f92672">=</span> [];
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span>;
 
-<pre><code class="language-javascript">// 还在用for i 你就太low了
-const len = items.length;
-const itemsCopy = [];
-let i;
-
-for (i = 0; i &lt; len; i++) {
-  itemsCopy[i] = items[i];
+<span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">len</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+  <span style="color:#a6e22e">itemsCopy</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">items</span>[<span style="color:#a6e22e">i</span>];
 }
 
-// cool !
-const itemsCopy = [...items];
+<span style="color:#75715e">// cool !
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">itemsCopy</span> <span style="color:#f92672">=</span> [...<span style="color:#a6e22e">items</span>];
 
-// 可以结合 Set构造函数 来对数组进行去重
-let a = [...new Set([1,1,2,5,8,3,2,1])]
-// [1, 2, 5, 8, 3]
-</code></pre>
-
-<h3 id="类数组">类数组</h3>
-
+<span style="color:#75715e">// 可以结合 Set构造函数 来对数组进行去重
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> [...<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>])]
+<span style="color:#75715e">// [1, 2, 5, 8, 3]
+</span></code></pre></div><h3 id="类数组">类数组</h3>
 <p>可以用 <code>Array.from</code> 将类似数组的对象转为数组：</p>
-
-<pre><code class="language-javascript">const arr = Array.from(arguments);
-</code></pre>
-
-<h2 id="set-和-map">Set 和 Map</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> Array.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">arguments</span>);
+</code></pre></div><h2 id="set-和-map">Set 和 Map</h2>
 <ul>
 <li>Set 类似于数组，但数组可以允许元素重复，Set 不允许元素重复</li>
 <li>Map 类似于对象，但普通对象的 key 必须是字符串或者数字，而 Map 的 key 可以是任何数据类型</li>
 </ul>
-
 <p><strong>注：Set 和 Map 都是 ES6 中新增的数据结构，是对当前 JS 数组和对象这两种重要数据结构的扩展</strong></p>
-
 <h3 id="set">Set</h3>
-
 <ul>
 <li>Set 实例不允许元素有重复，可以通过以下示例证明。可以通过一个数组初始化一个 Set 实例，或者通过add添加元素，元素不能重复，重复的会被忽略。</li>
 </ul>
-
-<pre><code class="language-js">// 例1
-const set = new Set([1, 2, 3, 4, 4]);
-console.log(set) // Set(4) {1, 2, 3, 4}
-
-// 例2
-const set = new Set();
-[2, 3, 5, 4, 5, 8, 8].forEach(item =&gt; set.add(item));
-for (let item of set) {
-  console.log(item);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 例1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">set</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>]);
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">set</span>) <span style="color:#75715e">// Set(4) {1, 2, 3, 4}
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 例2
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">set</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>();
+[<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>].<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">item</span> =&gt; <span style="color:#a6e22e">set</span>.<span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">item</span>));
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">item</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">set</span>) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">item</span>);
 }
-// 2 3 5 4 8
-</code></pre>
-
-<p>Set 实例的属性和方法有：</p>
-
+<span style="color:#75715e">// 2 3 5 4 8
+</span></code></pre></div><p>Set 实例的属性和方法有：</p>
 <ul>
 <li><code>size</code>：获取元素数量。</li>
 <li><code>add(value)</code>：添加元素，返回 Set 实例本身。</li>
@@ -430,80 +361,68 @@ for (let item of set) {
 <li><code>has(value)</code>：返回一个布尔值，表示该值是否是 Set 实例的元素。</li>
 <li><code>clear()</code>：清除所有元素，没有返回值。</li>
 </ul>
-
-<pre><code class="language-js">const s = new Set();
-s.add(1).add(2).add(2); // 添加元素
-
-s.size // 2
-
-s.has(1) // true
-s.has(2) // true
-s.has(3) // false
-
-s.delete(2);
-s.has(2) // false
-
-s.clear();
-console.log(s);  // Set(0) {}
-</code></pre>
-
-<p>Set 实例的遍历，可使用如下方法</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>();
+<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">1</span>).<span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">2</span>); <span style="color:#75715e">// 添加元素
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">size</span> <span style="color:#75715e">// 2
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">has</span>(<span style="color:#ae81ff">1</span>) <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">has</span>(<span style="color:#ae81ff">2</span>) <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">has</span>(<span style="color:#ae81ff">3</span>) <span style="color:#75715e">// false
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">s</span>.<span style="color:#66d9ef">delete</span>(<span style="color:#ae81ff">2</span>);
+<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">has</span>(<span style="color:#ae81ff">2</span>) <span style="color:#75715e">// false
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">clear</span>();
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">s</span>);  <span style="color:#75715e">// Set(0) {}
+</span></code></pre></div><p>Set 实例的遍历，可使用如下方法</p>
 <ul>
 <li><code>keys()</code>：返回键名的遍历器。</li>
 <li><code>values()</code>：返回键值的遍历器。不过由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以<code>keys()</code>和<code>values()</code>返回结果一致。</li>
 <li><code>entries()</code>：返回键值对的遍历器。</li>
 <li><code>forEach()</code>：使用回调函数遍历每个成员。</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">set</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>([<span style="color:#e6db74">&#39;aaa&#39;</span>, <span style="color:#e6db74">&#39;bbb&#39;</span>, <span style="color:#e6db74">&#39;ccc&#39;</span>]);
 
-<pre><code class="language-js">let set = new Set(['aaa', 'bbb', 'ccc']);
-
-for (let item of set.keys()) {
-  console.log(item);
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">item</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">set</span>.<span style="color:#a6e22e">keys</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">item</span>);
 }
-// aaa
-// bbb
-// ccc
-
-for (let item of set.values()) {
-  console.log(item);
+<span style="color:#75715e">// aaa
+</span><span style="color:#75715e">// bbb
+</span><span style="color:#75715e">// ccc
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">item</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">set</span>.<span style="color:#a6e22e">values</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">item</span>);
 }
-// aaa
-// bbb
-// ccc
-
-for (let item of set.entries()) {
-  console.log(item);
+<span style="color:#75715e">// aaa
+</span><span style="color:#75715e">// bbb
+</span><span style="color:#75715e">// ccc
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">item</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">set</span>.<span style="color:#a6e22e">entries</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">item</span>);
 }
-// [&quot;aaa&quot;, &quot;aaa&quot;]
-// [&quot;bbb&quot;, &quot;bbb&quot;]
-// [&quot;ccc&quot;, &quot;ccc&quot;]
-
-set.forEach((value, key) =&gt; console.log(key + ' : ' + value))
-// aaa : aaa
-// bbb : bbb
-// ccc : ccc
-</code></pre>
-
-<h3 id="map">Map</h3>
-
+<span style="color:#75715e">// [&#34;aaa&#34;, &#34;aaa&#34;]
+</span><span style="color:#75715e">// [&#34;bbb&#34;, &#34;bbb&#34;]
+</span><span style="color:#75715e">// [&#34;ccc&#34;, &#34;ccc&#34;]
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">set</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">key</span>) =&gt; <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">key</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; : &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">value</span>))
+<span style="color:#75715e">// aaa : aaa
+</span><span style="color:#75715e">// bbb : bbb
+</span><span style="color:#75715e">// ccc : ccc
+</span></code></pre></div><h3 id="map">Map</h3>
 <ul>
 <li>Map 的用法和普通对象基本一致，先看一下它能用非字符串或者数字作为 key 的特性。</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>();
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> {<span style="color:#a6e22e">p</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Hello World&#39;</span>};
 
-<pre><code class="language-js">const map = new Map();
-const obj = {p: 'Hello World'};
-
-map.set(obj, 'OK')
-map.get(obj) // &quot;OK&quot;
-
-map.has(obj) // true
-map.delete(obj) // true
-map.has(obj) // false
-</code></pre>
-
-<p>Map 实例的属性和方法如下：</p>
-
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">obj</span>, <span style="color:#e6db74">&#39;OK&#39;</span>)
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">obj</span>) <span style="color:#75715e">// &#34;OK&#34;
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">has</span>(<span style="color:#a6e22e">obj</span>) <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">map</span>.<span style="color:#66d9ef">delete</span>(<span style="color:#a6e22e">obj</span>) <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">has</span>(<span style="color:#a6e22e">obj</span>) <span style="color:#75715e">// false
+</span></code></pre></div><p>Map 实例的属性和方法如下：</p>
 <ul>
 <li><code>size</code>：获取成员的数量</li>
 <li><code>set</code>：设置成员 key 和 value</li>
@@ -512,204 +431,164 @@ map.has(obj) // false
 <li><code>delete</code>：删除成员</li>
 <li><code>clear</code>：清空所有</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>();
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;aaa&#39;</span>, <span style="color:#ae81ff">100</span>);
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;bbb&#39;</span>, <span style="color:#ae81ff">200</span>);
 
-<pre><code class="language-js">const map = new Map();
-map.set('aaa', 100);
-map.set('bbb', 200);
-
-map.size // 2
-
-map.get('aaa') // 100
-
-map.has('aaa') // true
-
-map.delete('aaa')
-map.has('aaa') // false
-
-map.clear()
-</code></pre>
-
-<p>Map 实例的遍历方法有：</p>
-
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">size</span> <span style="color:#75715e">// 2
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;aaa&#39;</span>) <span style="color:#75715e">// 100
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#39;aaa&#39;</span>) <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">map</span>.<span style="color:#66d9ef">delete</span>(<span style="color:#e6db74">&#39;aaa&#39;</span>)
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#39;aaa&#39;</span>) <span style="color:#75715e">// false
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">clear</span>()
+</code></pre></div><p>Map 实例的遍历方法有：</p>
 <ul>
 <li><code>keys()</code>：返回键名的遍历器。</li>
 <li><code>values()</code>：返回键值的遍历器。</li>
 <li><code>entries()</code>：返回所有成员的遍历器。</li>
 <li><code>forEach()</code>：遍历 Map 的所有成员。</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>();
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;aaa&#39;</span>, <span style="color:#ae81ff">100</span>);
+<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;bbb&#39;</span>, <span style="color:#ae81ff">200</span>);
 
-<pre><code class="language-js">const map = new Map();
-map.set('aaa', 100);
-map.set('bbb', 200);
-
-for (let key of map.keys()) {
-  console.log(key);
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">key</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">keys</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">key</span>);
 }
-// &quot;aaa&quot;
-// &quot;bbb&quot;
-
-for (let value of map.values()) {
-  console.log(value);
+<span style="color:#75715e">// &#34;aaa&#34;
+</span><span style="color:#75715e">// &#34;bbb&#34;
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">value</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">values</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">value</span>);
 }
-// 100
-// 200
-
-for (let item of map.entries()) {
-  console.log(item[0], item[1]);
+<span style="color:#75715e">// 100
+</span><span style="color:#75715e">// 200
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">item</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">entries</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">item</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">item</span>[<span style="color:#ae81ff">1</span>]);
 }
-// aaa 100
-// bbb 200
-
-// 或者
-for (let [key, value] of map.entries()) {
-  console.log(key, value);
+<span style="color:#75715e">// aaa 100
+</span><span style="color:#75715e">// bbb 200
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 或者
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> [<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>] <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">entries</span>()) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>);
 }
-// aaa 100
-// bbb 200
-</code></pre>
-
-<h2 id="函数">函数</h2>
-
+<span style="color:#75715e">// aaa 100
+</span><span style="color:#75715e">// bbb 200
+</span></code></pre></div><h2 id="函数">函数</h2>
 <h3 id="参数设置默认值">参数设置默认值</h3>
-
-<pre><code class="language-javascript">// low
-function add (x, y) {
-  x = x || 0;
-  y = y || 0;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// low
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">add</span> (<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>) {
+  <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">0</span>;
 }
 
-// good
-function add (x, y = '1') {
-  return x + y
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">add</span> (<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;1&#39;</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y</span>
 }
-</code></pre>
-
-<h3 id="rest参数-变量名">rest参数 (&hellip;变量名)</h3>
-
+</code></pre></div><h3 id="rest参数-变量名">rest参数 (&hellip;变量名)</h3>
 <p>ES6 引入 rest 参数（形式为&hellip;变量名），用于获取函数的多余参数，这样就不需要使用arguments对象了。rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。</p>
-
-<pre><code class="language-javascript">// low
-function sortNum() {
-  let args = Array.prototype.slice.call(arguments);
-  return args.sort()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// low
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sortNum</span>() {
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">args</span> <span style="color:#f92672">=</span> Array.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">slice</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">arguments</span>);
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">sort</span>()
 }
 
-// good
-function sortNum(...args) {
-  return args.sort()
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sortNum</span>(...<span style="color:#a6e22e">args</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">sort</span>()
 }
-</code></pre>
-
-<h3 id="箭头函数">箭头函数 =&gt;</h3>
-
+</code></pre></div><h3 id="箭头函数-">箭头函数 =&gt;</h3>
 <ul>
 <li>立即执行函数</li>
 </ul>
-
-<pre><code class="language-javascript">(() =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">(() =&gt; {
   ...
-  console.log('***')
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;***&#39;</span>)
 })()
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>可以使代码变得简洁优雅</li>
 </ul>
-
-<pre><code class="language-javascript">// low
-[1, 2, 3].map(function (x) {
-  return x * x;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// low
+</span><span style="color:#75715e"></span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>].<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">x</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">x</span>;
 });
 
-// cool !
-[1, 2, 3].map(x =&gt; x * x);
-</code></pre>
-
-<ul>
+<span style="color:#75715e">// cool !
+</span><span style="color:#75715e"></span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>].<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">x</span>);
+</code></pre></div><ul>
 <li>箭头函数只有一行语句，且不需要返回值，可以采用下面的写法，就不用写大括号了</li>
 </ul>
-
-<pre><code class="language-javascript">let fn = () =&gt; void doesNotReturn();
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fn</span> <span style="color:#f92672">=</span> () =&gt; <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doesNotReturn</span>();
+</code></pre></div><ul>
 <li>箭头函数可以与变量解构结合使用</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">full</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">first</span>, <span style="color:#a6e22e">last</span> }) =&gt; <span style="color:#a6e22e">first</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">last</span>;
 
-<pre><code class="language-javascript">const full = ({ first, last }) =&gt; first + ' ' + last;
-
-// 等同于
-function full(person) {
-  return person.first + ' ' + person.last;
+<span style="color:#75715e">// 等同于
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">full</span>(<span style="color:#a6e22e">person</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">person</span>.<span style="color:#a6e22e">first</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">person</span>.<span style="color:#a6e22e">last</span>;
 }
-</code></pre>
-
-<h2 id="async-await">async、await</h2>
-
+</code></pre></div><h2 id="asyncawait">async、await</h2>
 <p>async 函数返回的是一个 Promise 对象，可以在后面<code>.then((res)) =&gt; {})</code>来添加回调函数，内部遇到<code>await</code>会等待返回结果，<code>await</code>后面是一个 <code>Promise</code> 对象，如果不是，会被转成一个立即resolve的 Promise 对象。</p>
-
 <p>async 函数内部报错时，可以被<code>.catch()</code>捕获。</p>
-
-<pre><code class="language-javascript">async function add(reqBody) {
-  let data = await fetch({
-    url: '...',
-    data: {
-      reqBody: reqBody
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">add</span>(<span style="color:#a6e22e">reqBody</span>) {
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>({
+    <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;...&#39;</span>,
+    <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> {
+      <span style="color:#a6e22e">reqBody</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">reqBody</span>
     }
   })
-  return data
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>
 }
 
-add({a, b}).then(res =&gt; {
-  console.log(res)
+<span style="color:#a6e22e">add</span>({<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>}).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">res</span> =&gt; {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">res</span>)
 })
-</code></pre>
-
-<h2 id="简洁直观的class语法">简洁直观的class语法</h2>
-
-<pre><code class="language-javascript">// low
-function Query(arr1, arr2) {
-  this._arr = [...arr1, ...arr2] // 合并数组
-}
-Query.prototype.push = function (item) {
-  this._arr = this._arr.splice(this._arr.length, 0, item)
+</code></pre></div><h2 id="简洁直观的class语法">简洁直观的class语法</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// low
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Query</span>(<span style="color:#a6e22e">arr1</span>, <span style="color:#a6e22e">arr2</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_arr</span> <span style="color:#f92672">=</span> [...<span style="color:#a6e22e">arr1</span>, ...<span style="color:#a6e22e">arr2</span>] <span style="color:#75715e">// 合并数组
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">Query</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">push</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">item</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_arr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_arr</span>.<span style="color:#a6e22e">splice</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_arr</span>.<span style="color:#a6e22e">length</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">item</span>)
 }
 
-// good
-class Query {
-  constructor (arr1, arr2) {
-    this._arr = [...arr1, ...arr2]
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Query</span> {
+  <span style="color:#a6e22e">constructor</span> (<span style="color:#a6e22e">arr1</span>, <span style="color:#a6e22e">arr2</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_arr</span> <span style="color:#f92672">=</span> [...<span style="color:#a6e22e">arr1</span>, ...<span style="color:#a6e22e">arr2</span>]
   }
 
-  push (item) {
-    this._arr = this._arr.splice(this._arr.length, 0, item)
+  <span style="color:#a6e22e">push</span> (<span style="color:#a6e22e">item</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_arr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_arr</span>.<span style="color:#a6e22e">splice</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_arr</span>.<span style="color:#a6e22e">length</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">item</span>)
   }
 }
-</code></pre>
-
-<h2 id="es6模块化">ES6模块化</h2>
-
+</code></pre></div><h2 id="es6模块化">ES6模块化</h2>
 <h3 id="引入模块-和-输出模块">引入模块 和 输出模块</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// 第一种
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">func1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {...}
+<span style="color:#a6e22e">gggport</span> { <span style="color:#a6e22e">func1</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;moduleA&#39;</span>
 
-<pre><code class="language-javascript">// 第一种
-export const func1 = function () {...}
-gggport { func1 } from 'moduleA'
+<span style="color:#75715e">// 第二种
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">func2</span> () {...}
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">func1</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;moduleA&#39;</span>
 
-// 第二种
-export default function func2 () {...}
-import func1 from 'moduleA'
-
-// 第三种
-export const func1 = function () {...}
-export const func2 = function () {...}
-export const func3 = function () {...}
-import { func1, func2, func3 } from 'moduleA'
-// 或者
-import * as types from 'moduleA'
-// types.BUILD_CITYTREE
-</code></pre>
-
-<ul>
+<span style="color:#75715e">// 第三种
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">func1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {...}
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">func2</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {...}
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">func3</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {...}
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">func1</span>, <span style="color:#a6e22e">func2</span>, <span style="color:#a6e22e">func3</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;moduleA&#39;</span>
+<span style="color:#75715e">// 或者
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">types</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;moduleA&#39;</span>
+<span style="color:#75715e">// types.BUILD_CITYTREE
+</span></code></pre></div><ul>
 <li>输出单个值，使用export default</li>
 <li>输出多个值，使用export</li>
 <li>export default与普通的export不要同时使用</li>
@@ -727,7 +606,7 @@ import * as types from 'moduleA'
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>1027</span>
+            <span>1029</span>
         </p>
 
         <p class="copyright-item">

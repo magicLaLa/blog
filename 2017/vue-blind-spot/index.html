@@ -10,8 +10,8 @@
   
   
   
-  <link rel="prev" href="/2017/httpstatus/" />
-  <link rel="next" href="/2017/vue/" />
+  <link rel="prev" href="/2017/vue/" />
+  <link rel="next" href="/2017/vue-watch/" />
   <link rel="canonical" href="/2017/vue-blind-spot/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -36,11 +36,11 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="vue中盲点"/>
-<meta name="twitter:description" content="vue中盲点 使用 performance 开启性能追踪  performance API 是 Vue 全局配置 API 中的一个，我们可以使用它来进行网页性能的追踪，我们可以在入口文件中添加：  if (process.env.NODE_ENV !== &#39;production&#39;) { Vue.config.performance = true; }  来开启这一功能，该 API（2.2.0 新增）功能只适用于开发模式和支持 performance.mark API 的浏览器上，开启后我们可以下载 Vue Performance Devtool 这一 chrome 插件来看查看各个组件的加载情况，如图：
+<meta name="twitter:description" content="vue中盲点 使用 performance 开启性能追踪  performance API 是 Vue 全局配置 API 中的一个，我们可以使用它来进行网页性能的追踪，我们可以在入口文件中添加：  if (process.env.NODE_ENV !== &#39;production&#39;) {Vue.config.performance = true;}来开启这一功能，该 API（2.2.0 新增）功能只适用于开发模式和支持 performance.mark API 的浏览器上，开启后我们可以下载 Vue Performance Devtool 这一 chrome 插件来看查看各个组件的加载情况，如图：
 从中我们可以清晰的看到页面组件在每个阶段的耗时情况，而针对耗时比较久的组件，我们便可以对其进行相应优化。
 而其在 Vue 源码中主要使用了 window.performance 来获取网页性能数据，其中包含了 performance.mark 和 performance.measure。
  performance.mark 主要用于创建标记 performance.measure 主要用于记录两个标记的时间间隔  例如：
-performance.mark(&#39;start&#39;); // 创建 start 标记 performance.mark(&#39;end&#39;); // 创建 end 标记 performance.measure(&#39;output&#39;, &#39;start&#39;, &#39;end&#39;); // 计算两者时间间隔 performance.getEntriesByName(&#39;output&#39;); // 获取标记，返回值是一个数组，包含了间隔时间数据  熟练的使用 performance 我们可以查看并分析网页的很多数据，为我们项目优化提供保障。"/>
+performance.mark(&#39;start&#39;); // 创建 start 标记performance.mark(&#39;end&#39;); // 创建 end 标记performance.measure(&#39;output&#39;, &#39;start&#39;, &#39;end&#39;); // 计算两者时间间隔performance.getEntriesByName(&#39;output&#39;); // 获取标记，返回值是一个数组，包含了间隔时间数据熟练的使用 performance 我们可以查看并分析网页的很多数据，为我们项目优化提供保障。"/>
 
   <script type="application/ld+json">
 {
@@ -170,95 +170,65 @@ performance.mark(&#39;start&#39;); // 创建 start 标记 performance.mark(&#39;
         
         
 
-        
-
-<h2 id="vue中盲点">vue中盲点</h2>
-
+        <h2 id="vue中盲点">vue中盲点</h2>
 <h3 id="使用-performance-开启性能追踪">使用 performance 开启性能追踪</h3>
-
 <ul>
 <li>performance API 是 Vue 全局配置 API 中的一个，我们可以使用它来进行网页性能的追踪，我们可以在入口文件中添加：</li>
 </ul>
-
-<pre><code class="language-js">if (process.env.NODE_ENV !== 'production') {
-    Vue.config.performance = true;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">NODE_ENV</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;production&#39;</span>) {
+    <span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">performance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
 }
-</code></pre>
-
-<p>来开启这一功能，该 API（2.2.0 新增）功能只适用于开发模式和支持 performance.mark API 的浏览器上，开启后我们可以下载 Vue Performance Devtool 这一 chrome 插件来看查看各个组件的加载情况，如图：</p>
-
-<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/performance.png" alt="performance" class="lazyload"><figcaption class="image-caption">performance</figcaption></figure></p>
-
-<p>从中我们可以清晰的看到页面组件在每个阶段的耗时情况，而针对耗时比较久的组件，我们便可以对其进行相应优化。<br />
-而其在 Vue 源码中主要使用了 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Performance" rel="nofollow noreferrer" target="_blank">window.performance</a> 来获取网页性能数据，其中包含了 performance.mark 和 performance.measure。</p>
-
+</code></pre></div><p>来开启这一功能，该 API（2.2.0 新增）功能只适用于开发模式和支持 performance.mark API 的浏览器上，开启后我们可以下载 Vue Performance Devtool 这一 chrome 插件来看查看各个组件的加载情况，如图：</p>
+<p><img src="/images/totalimgs/performance.png" alt="performance"></p>
+<p>从中我们可以清晰的看到页面组件在每个阶段的耗时情况，而针对耗时比较久的组件，我们便可以对其进行相应优化。<br>
+而其在 Vue 源码中主要使用了 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Performance">window.performance</a> 来获取网页性能数据，其中包含了 performance.mark 和 performance.measure。</p>
 <ul>
 <li>performance.mark 主要用于创建标记</li>
 <li>performance.measure 主要用于记录两个标记的时间间隔</li>
 </ul>
-
 <p>例如：</p>
-
-<pre><code class="language-js">performance.mark('start'); // 创建 start 标记
-performance.mark('end'); // 创建 end 标记
-
-performance.measure('output', 'start', 'end'); // 计算两者时间间隔
-
-performance.getEntriesByName('output'); // 获取标记，返回值是一个数组，包含了间隔时间数据
-</code></pre>
-
-<p>熟练的使用 performance 我们可以查看并分析网页的很多数据，为我们项目优化提供保障。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">performance</span>.<span style="color:#a6e22e">mark</span>(<span style="color:#e6db74">&#39;start&#39;</span>); <span style="color:#75715e">// 创建 start 标记
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">performance</span>.<span style="color:#a6e22e">mark</span>(<span style="color:#e6db74">&#39;end&#39;</span>); <span style="color:#75715e">// 创建 end 标记
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">performance</span>.<span style="color:#a6e22e">measure</span>(<span style="color:#e6db74">&#39;output&#39;</span>, <span style="color:#e6db74">&#39;start&#39;</span>, <span style="color:#e6db74">&#39;end&#39;</span>); <span style="color:#75715e">// 计算两者时间间隔
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">performance</span>.<span style="color:#a6e22e">getEntriesByName</span>(<span style="color:#e6db74">&#39;output&#39;</span>); <span style="color:#75715e">// 获取标记，返回值是一个数组，包含了间隔时间数据
+</span></code></pre></div><p>熟练的使用 performance 我们可以查看并分析网页的很多数据，为我们项目优化提供保障。</p>
 <h3 id="对低开销的静态组件使用-v-once">对低开销的静态组件使用 v-once</h3>
-
 <p>Vue 提供了 v-once 指令用于只渲染元素和组件一次，一般可以用于存在大量静态数据组件的更新性能优化，注意是大量静态数据，因为少数情况下我们的页面渲染会因为一些静态数据而变慢。如果需要对一个组件使用 v-once，可以直接在组件上绑定：</p>
-
-<pre><code class="language-vue">&lt;box-content v-once :data=&quot;msg&quot;&gt;&lt;/box-content&gt;
-</code></pre>
-
-<p>这时候因为组件绑定了 v-once，所以无论 msg 的值如何变化，组件内渲染的永远是其第一次获取到的初始值。因此我们在使用 v-once 的时候需要考虑该组件今后的更新情况，避免不必要的问题产生。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vue" data-lang="vue">&lt;<span style="color:#f92672">box-content</span> <span style="color:#a6e22e">v</span><span style="color:#f92672">-once</span> <span style="color:#f92672">:data</span><span style="color:#e6db74">=&#34;msg&#34;</span>&gt;<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/box-content&gt;</span>
+</code></pre></div><p>这时候因为组件绑定了 v-once，所以无论 msg 的值如何变化，组件内渲染的永远是其第一次获取到的初始值。因此我们在使用 v-once 的时候需要考虑该组件今后的更新情况，避免不必要的问题产生。</p>
 <h3 id="使用-isserver-判断当前实例是否运行于服务器">使用 $isServer 判断当前实例是否运行于服务器</h3>
-
 <p>当我们的 Vue 项目中存在服务端渲染（SSR）的时候，有些项目文件可能会同时在客户端和服务端加载，这时候代码中的一些客户端浏览器才支持的属性或变量在服务端便会加载出错，比如 window、 document 等，这时候我们需要进行环境的判断来区分客户端和服务端，如果你不知道 <code>$isServer</code>，那么你可能会使用 <code>try ... catch</code> 或者 <code>process.env.VUE_ENV</code> 来判断：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">try</span> {
+    document.<span style="color:#a6e22e">title</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test&#39;</span>;
+} <span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">e</span>) {}
 
-<pre><code class="language-js">try {
-    document.title = 'test';
-} catch(e) {}
-
-// process.env.VUE_ENV 需要在 webpack 中进行配置
-if (process.env.VUE_ENV === 'client') {
-    document.title = 'test';
+<span style="color:#75715e">// process.env.VUE_ENV 需要在 webpack 中进行配置
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">VUE_ENV</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;client&#39;</span>) {
+    document.<span style="color:#a6e22e">title</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test&#39;</span>;
 }
-</code></pre>
-
-<p>而使用 $isServer 则无需进行配置，在组件中直接使用该 API 即可：</p>
-
-<pre><code class="language-js">if (this.$isServer) {
-    document.title = 'test';
+</code></pre></div><p>而使用 $isServer 则无需进行配置，在组件中直接使用该 API 即可：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$isServer</span>) {
+    document.<span style="color:#a6e22e">title</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test&#39;</span>;
 }
-</code></pre>
-
-<p>其源码中使用了 Object.defineProperty 来进行数据监测：</p>
-
-<pre><code class="language-js">Object.defineProperty(Vue.prototype, '$isServer', {
-    get: isServerRendering
+</code></pre></div><p>其源码中使用了 Object.defineProperty 来进行数据监测：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">Object.<span style="color:#a6e22e">defineProperty</span>(<span style="color:#a6e22e">Vue</span>.<span style="color:#a6e22e">prototype</span>, <span style="color:#e6db74">&#39;$isServer&#39;</span>, {
+    <span style="color:#a6e22e">get</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">isServerRendering</span>
 });
 
-var _isServer;
-var isServerRendering = function () {
-    if (_isServer === undefined) {
-        if (!inBrowser &amp;&amp; !inWeex &amp;&amp; typeof global !== 'undefined') {
-            _isServer = global['process'].env.VUE_ENV === 'server';
-        } else {
-            _isServer = false;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">_isServer</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">isServerRendering</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">_isServer</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">undefined</span>) {
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">inBrowser</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">inWeex</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">global</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;undefined&#39;</span>) {
+            <span style="color:#a6e22e">_isServer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">global</span>[<span style="color:#e6db74">&#39;process&#39;</span>].<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">VUE_ENV</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;server&#39;</span>;
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#a6e22e">_isServer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
         }
     }
-    return _isServer
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">_isServer</span>
 };
-</code></pre>
-
-<p>当我们访问 $isServer 属性时，其会调用 <code>isServerRendering</code>方法，该方法会首先判断当前环境，如果在浏览器或者 Weex 下则返回 false，否则继续判断当前全局环境下的 <code>process.env.VUE_ENV</code> 是否为 server 来返回最终结果。</p>
+</code></pre></div><p>当我们访问 $isServer 属性时，其会调用 <code>isServerRendering</code>方法，该方法会首先判断当前环境，如果在浏览器或者 Weex 下则返回 false，否则继续判断当前全局环境下的 <code>process.env.VUE_ENV</code> 是否为 server 来返回最终结果。</p>
 
     </div>
 
@@ -343,12 +313,12 @@ var isServerRendering = function () {
 
     <div class="post-nav">
         
-        <a href="/2017/httpstatus/" class="prev" rel="prev" title="HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)"><i
-                class="iconfont icon-dajiantou"></i>&nbsp;HTTP Status code（状态码）和 Status text（状态文本）(简单随笔)</a>
+        <a href="/2017/vue/" class="prev" rel="prev" title="Vue配置相关"><i
+                class="iconfont icon-dajiantou"></i>&nbsp;Vue配置相关</a>
         
         
-        <a href="/2017/vue/" class="next" rel="next"
-            title="Vue配置相关">Vue配置相关&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        <a href="/2017/vue-watch/" class="next" rel="next"
+            title="Vue watch选项">Vue watch选项&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 
