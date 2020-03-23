@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>js on Magic</title>
@@ -18,8 +18,8 @@
       
       <guid>/2020/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B/</guid>
       <description>单例模式 保证一个类仅有一个实例，并提供一个访问它的全局访问点，这样的模式就叫做单例模式。
-实现思路 class Single {show() {console.log(&amp;#39;我是一个单例对象&amp;#39;);}}const s1 = new Single();const s2 = new Single();// s1 === s2 false先 new 了一个 s1，又 new 了一个 s2，很明显 s1 和 s2 之间没有任何瓜葛，两者是相互独立的对象，各占一块内存空间。而单例模式想要做到的是，不管我们尝试去创建多少次，它都只给你返回第一次所创建的那唯一的一个实例。要做到这一点，就需要构造函数 具备判断自己是否已经创建过一个实例的能力。
- 🌰1  /*** 实现：静态方法版*/class Storage {static getInstance() {if (!Storage.instance) {Storage.instance = new Storage();}return Storage.instance;}getItem(key) {return localStorage.getItem(key);}setItem(key, val) {return localStorage.</description>
+实现思路 class Single { show() { console.log(&#39;我是一个单例对象&#39;); } } const s1 = new Single(); const s2 = new Single(); // s1 === s2 false  先 new 了一个 s1，又 new 了一个 s2，很明显 s1 和 s2 之间没有任何瓜葛，两者是相互独立的对象，各占一块内存空间。而单例模式想要做到的是，不管我们尝试去创建多少次，它都只给你返回第一次所创建的那唯一的一个实例。要做到这一点，就需要构造函数 具备判断自己是否已经创建过一个实例的能力。
+ 🌰1  /** * 实现：静态方法版 */ class Storage { static getInstance() { if (!Storage.instance) { Storage.instance = new Storage(); } return Storage.instance; } getItem(key) { return localStorage.getItem(key); } setItem(key, val) { return localStorage.</description>
     </item>
     
     <item>
@@ -29,7 +29,7 @@
       
       <guid>/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/</guid>
       <description>第一种：将数组字符串话  利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。
- let arr = [[222, 333, 444], [55, 66, 77], 11, ]arr += &amp;#39;&amp;#39;;arr = arr.split(&amp;#39;,&amp;#39;);arr = arr.map(item =&amp;gt; Number(item));console.log(arr); // [222, 333, 444, 55, 66, 77, 11]第二种：自定义函数 const reduceDimension = (arr) =&amp;gt; {let ret = [];let toArr = function(arr){arr.forEach(function(item){Array.isArray(item) ? toArr(item) : ret.push(item);});}toArr(arr);return ret;}let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];第三种 ES6数组的扩展 Array.</description>
+ let arr = [[222, 333, 444], [55, 66, 77], 11, ] arr += &#39;&#39;; arr = arr.split(&#39;,&#39;); arr = arr.map(item =&amp;gt; Number(item)); console.log(arr); // [222, 333, 444, 55, 66, 77, 11]  第二种：自定义函数 const reduceDimension = (arr) =&amp;gt; { let ret = []; let toArr = function(arr){ arr.forEach(function(item){ Array.isArray(item) ? toArr(item) : ret.push(item); }); } toArr(arr); return ret; } let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];  第三种 ES6数组的扩展 Array.</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@
       <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</guid>
-      <description>代码如下： const bodyEl = document.body;let top = 0;/*** 阻止页面滚动* @param {boolean} isFixed*/export function stopBodyScroll(isFixed: boolean) {if (isFixed) {top = window.scrollY;bodyEl.style.position = &amp;#39;fixed&amp;#39;;bodyEl.style.top = -top + &amp;#39;px&amp;#39;;} else {bodyEl.style.position = &amp;#39;&amp;#39;;bodyEl.style.top = &amp;#39;&amp;#39;;window.scrollTo(0, top); // 回到原先的top }}</description>
+      <description> 代码如下： const bodyEl = document.body; let top = 0; /** * 阻止页面滚动 * @param {boolean} isFixed */ export function stopBodyScroll(isFixed: boolean) { if (isFixed) { top = window.scrollY; bodyEl.style.position = &#39;fixed&#39;; bodyEl.style.top = -top + &#39;px&#39;; } else { bodyEl.style.position = &#39;&#39;; bodyEl.style.top = &#39;&#39;; window.scrollTo(0, top); // 回到原先的top } }  </description>
     </item>
     
     <item>
@@ -47,7 +47,7 @@
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/ua%E6%A3%80%E6%B5%8B/</guid>
-      <description>代码如下： const userAgent = window.navigator.userAgent.toLowerCase();export const uaJudge = {get isAndroid() {return /android|adr/gi.test(userAgent);},get isVivo() {return /vivo/gi.test(userAgent);},get isIos() {return /iphone|ipod|ipad/gi.test(userAgent);},/** 微信（包含小程序） */get isWeChat() {return /micromessenger/gi.test(userAgent);},/** 微信小程序 */get isWeChatMini() {if (this.isWeChat) {return new Promise((resolve, reject) =&amp;gt; {wx.miniProgram.getEnv((res: any) =&amp;gt; {resolve(res.miniprogram);});setTimeout(resolve, 1000);});} else {return Promise.resolve(false);}},/** 支付宝 */get isAlipay() {return /alipay/gi.</description>
+      <description>代码如下： const userAgent = window.navigator.userAgent.toLowerCase(); export const uaJudge = { get isAndroid() { return /android|adr/gi.test(userAgent); }, get isVivo() { return /vivo/gi.test(userAgent); }, get isIos() { return /iphone|ipod|ipad/gi.test(userAgent); }, /** 微信（包含小程序） */ get isWeChat() { return /micromessenger/gi.test(userAgent); }, /** 微信小程序 */ get isWeChatMini() { if (this.isWeChat) { return new Promise((resolve, reject) =&amp;gt; { wx.miniProgram.getEnv((res: any) =&amp;gt; { resolve(res.miniprogram); }); setTimeout(resolve, 1000); }); } else { return Promise.resolve(false); } }, /** 支付宝 */ get isAlipay() { return /alipay/gi.</description>
     </item>
     
     <item>
@@ -56,7 +56,7 @@
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</guid>
-      <description>代码如下： /*** 获取元素content宽高* @param el*/export function getContentSize(el: HTMLElement) {const width = el.offsetWidth;const height = el.offsetHeight;const style = window.getComputedStyle(el);// border const blw = parseFloat(style.borderLeftWidth || &amp;#39;0&amp;#39;);const brw = parseFloat(style.borderRightWidth || &amp;#39;0&amp;#39;);const btw = parseFloat(style.borderTopWidth || &amp;#39;0&amp;#39;);const bbw = parseFloat(style.borderBottomWidth || &amp;#39;0&amp;#39;);// padding const plw = parseFloat(style.paddingLeft || &amp;#39;0&amp;#39;);const prw = parseFloat(style.paddingRight || &amp;#39;0&amp;#39;);const ptw = parseFloat(style.</description>
+      <description>代码如下： /** * 获取元素content宽高 * @param el */ export function getContentSize(el: HTMLElement) { const width = el.offsetWidth; const height = el.offsetHeight; const style = window.getComputedStyle(el); // border const blw = parseFloat(style.borderLeftWidth || &#39;0&#39;); const brw = parseFloat(style.borderRightWidth || &#39;0&#39;); const btw = parseFloat(style.borderTopWidth || &#39;0&#39;); const bbw = parseFloat(style.borderBottomWidth || &#39;0&#39;); // padding const plw = parseFloat(style.paddingLeft || &#39;0&#39;); const prw = parseFloat(style.paddingRight || &#39;0&#39;); const ptw = parseFloat(style.paddingTop || &#39;0&#39;); const pbw = parseFloat(style.</description>
     </item>
     
     <item>
@@ -65,7 +65,7 @@
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E9%80%9A%E8%BF%87http%E9%93%BE%E6%8E%A5%E5%8A%A0%E8%BD%BDscript/</guid>
-      <description>function loadScript(src: string, async: boolean = true) {return new Promise((resolve, reject) =&amp;gt; {const script = document.createElement(&amp;#39;script&amp;#39;);async &amp;amp;&amp;amp; (script.async = true);script.onload = resolve;script.onerror = reject;script.src = src;document.body.appendChild(script);});}// 注意：使用appendChild，不要使用append，ios9不支持append。</description>
+      <description>function loadScript(src: string, async: boolean = true) { return new Promise((resolve, reject) =&amp;gt; { const script = document.createElement(&#39;script&#39;); async &amp;amp;&amp;amp; (script.async = true); script.onload = resolve; script.onerror = reject; script.src = src; document.body.appendChild(script); }); } // 注意：使用appendChild，不要使用append，ios9不支持append。  </description>
     </item>
     
     <item>
@@ -74,7 +74,7 @@
       <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/local-stroge/</guid>
-      <description>设置本地存储  function setStorage(key: string, value: any) {try {localStorage.setItem(key, JSON.stringify({data: value,time: Date.now(),}));} catch {console.log(&amp;#39;localStorage.setItem error&amp;#39;);console.log(key, value);}} 获取本地存储  // 注意：stringify 会过滤掉undefined的值function getStorage(key: string) {const result = localStorage.getItem(key);if (result) {try {const objRes = JSON.parse(result);return objRes;} catch (e) {console.log(&amp;#39;JSON.parse error:&amp;#39;, result);return result;}} else {return result;}} 删除本地存储  function removeStorage(key: string) {localStorage.</description>
+      <description>设置本地存储  function setStorage(key: string, value: any) { try { localStorage.setItem(key, JSON.stringify({ data: value, time: Date.now(), })); } catch { console.log(&#39;localStorage.setItem error&#39;); console.log(key, value); } }   获取本地存储  // 注意：stringify 会过滤掉undefined的值 function getStorage(key: string) { const result = localStorage.getItem(key); if (result) { try { const objRes = JSON.parse(result); return objRes; } catch (e) { console.log(&#39;JSON.parse error:&#39;, result); return result; } } else { return result; } }   删除本地存储  function removeStorage(key: string) { localStorage.</description>
     </item>
     
     <item>
@@ -85,10 +85,10 @@
       <guid>/2018/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0this%E7%9A%84%E6%8C%87%E5%90%91/</guid>
       <description>箭头函数this的指向  介绍   箭头函数this的定义：箭头函数中的this是在定义函数的时候绑定，而不是在执行函数的时候绑定。
  一、 何为定义时绑定（看下面的例子）
-let x = 11;let obj = {x: 22,say: function () {console.log(this.x)}}obj.say() // 22一般的定义函数跟我们的理解是一样的，运行的时候决定this的指向，我们可以知道当运行obj.say()时候，this指向的是obj这个对象。
-let x = 11;let obj = {x: 22,say: () =&amp;gt; {console.log(this.x)}}obj.say() // 11这个this指向的是外部的 x = 11。
-所谓的定义时候绑定， 就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而obj的父执行上下文就是window，因此这里的this.x实际上表示的是window.x，因此输出的是11。(this只有在函数被调用，或者通过构造函数new Object()的形式才会有this)。
- 类似的还有：  // 不使用箭头函数let a = 11;function test () {this.</description>
+let x = 11; let obj = { x: 22, say: function () { console.log(this.x) } } obj.say() // 22  一般的定义函数跟我们的理解是一样的，运行的时候决定this的指向，我们可以知道当运行obj.say()时候，this指向的是obj这个对象。
+let x = 11; let obj = { x: 22, say: () =&amp;gt; { console.log(this.x) } } obj.say() // 11  这个this指向的是外部的 x = 11。
+所谓的定义时候绑定， *就是它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值*，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而obj的父执行上下文就是window，因此这里的this.x实际上表示的是window.x，因此输出的是11。(this只有在函数被调用，或者通过构造函数new Object()的形式才会有this)。
+ 类似的还有：  // 不使用箭头函数 let a = 11; function test () { this.</description>
     </item>
     
     <item>
@@ -98,7 +98,7 @@ let x = 11;let obj = {x: 22,say: () =&amp;gt; {console.log(this.x)}}obj.s
       
       <guid>/2018/es6%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E5%B7%A7/</guid>
       <description>ES6的一些方法和技巧 声明变量 用let不用var ES6之前我们用var声明一个变量，但是它有很多弊病：
- 因为没有块级作用域，很容易声明全局变量 变量提升 可以重复声明 还记得这道面试题吗？  var a = [];for (var i = 0; i &amp;lt; 10; i++) {a[i] = function () {console.log(i);};}a[6](); // 10a[7](); // 10a[8](); // 10a[9](); // 10所以要使用 let，可以避免 使用 var 来声明所带来的一些问题。
+ 因为没有块级作用域，很容易声明全局变量 变量提升 可以重复声明 还记得这道面试题吗？  var a = []; for (var i = 0; i &amp;lt; 10; i++) { a[i] = function () { console.log(i); }; } a[6](); // 10 a[7](); // 10 a[8](); // 10 a[9](); // 10  所以要使用 let，可以避免 使用 var 来声明所带来的一些问题。
 const 和 let const 和 let 的区别就是 使用 const 来声明的变量，称为 常量
  更好的代码语义化，哪个可以修改，哪个不可以修改等等 函数声明应该使用 const 来声明  字符串 不要使用 &amp;ldquo;双引号&amp;rdquo;，一律使用 &amp;lsquo;单引号&amp;rsquo; 或者 `模板字符串`</description>
     </item>
@@ -115,7 +115,10 @@ JavaScript 运行机制详解：再谈Event Loop@阮一峰
 进程与线程的一个简单解释
 事件循环机制 线程与进程   进程：CPU资源分配的最小单位 线程：CPU调度的最小单位   浏览器打开即为打开一个进程（任务管理器查看），浏览器就是多进程、多线程的，浏览器打开后占用CPU的资源，可将这些资源分别分配给不同的tab页面进行并发处理，互不影响；如：一个浏览器打开多个窗口，多个窗口同时运行网页（浏览器中任务管理查看）
 浏览器 浏览器进程 作为主进程，主要负责页面管理以及其他进程的创建及销毁，常驻的线程有：(工厂-&amp;gt; 部门)
-  GUI渲染线程    主要负责页面的渲染，解析HTML、CSS，构建DOM树，布局和绘制等。 当界面需要重绘或者由于某种操作引发回流时，将执行该线程。（回流必将引起重绘，重绘不一定会引起回流） 该线程与JS引擎线程互斥，当执行JS引擎线程时，GUI渲染会被挂起，当任务队列空闲时，JS引擎才会去执行 GUI 渲染。    JS引擎线程    该线程当然是主要负责处理 JavaScript脚本，执行代码； 也是主要负责执行准备好待执行的事件，即定时器计数结束，或者异步请求成功并返回正确时，将依次进入任务队列，等待JS引擎线程的执行； 当然，该线程与 GUI渲染线程互斥，当 JS引擎线程执行 JavaScript脚本时间过长，将导致页面渲染的阻塞。    事件触发线程    主要负责将准备好的事件交给Js引擎线程执行 比如setTimeout定时器计数结束，ajax等异步请求成功并出发回调函数，或者用户出发点击事件，该线程将会整装待发的事件依次加入到任务队列的队尾，等待Js引擎线程的执行    定时器触发线程    顾名思义，负责执行异步定时器一类的函数的线程，如： setTimeout，setInterval。 主线程依次执行代码时，遇到定时器，会将定时器交给该线程处理，当计数完毕后，事件触发线程会将计数完毕后的事件加入到任务队列的尾部，等待JS引擎线程执行。    HTTP请求线程    顾名思义，负责执行异步请求一类的函数的线程，如： Promise，axios，ajax等。 主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列的尾部，等待JS引擎线程执行。  多个线程之间配合工作，各司其职。</description>
+手机工厂(浏览器)[进程] ↓ 造手机部 &amp;mdash;&amp;ndash; 造手机壳部 &amp;mdash;&amp;ndash; 造膜部等(tab页面)[进程] ↓ 各个岗位(html、css、js、事件触发等)[线程]
+  GUI渲染线程  主要负责页面的渲染，解析HTML、CSS，构建DOM树，布局和绘制等。
+ 当界面需要重绘或者由于某种操作引发回流时，将执行该线程。（回流必将引起重绘，重绘不一定会引起回流） 该线程与JS引擎线程互斥，当执行JS引擎线程时，GUI渲染会被挂起，当任务队列空闲时，JS引擎才会去执行 GUI 渲染。  JS引擎线程
+ 该线程当然是主要负责处理 JavaScript脚本，执行代码； 也是主要负责执行准备好待执行的事件，即定时器计数结束，或者异步请求成功并返回正确时，将依次进入任务队列，等待JS引擎线程的执行； 当然，该线程与 GUI渲染线程互斥，当 JS引擎线程执行 JavaScript脚本时间过长，将导致页面渲染的阻塞。  事件触发线程  主要负责将准备好的事件交给Js引擎线程执行 比如setTimeout定时器计数结束，ajax等异步请求成功并出发回调函数，或者用户出发点击事件，该线程将会整装待发的事件依次加入到任务队列的队尾，等待Js引擎线程的执行  定时器触发线程  顾名思义，负责执行异步定时器一类的函数的线程，如： setTimeout，setInterval。 主线程依次执行代码时，遇到定时器，会将定时器交给该线程处理，当计数完毕后，事件触发线程会将计数完毕后的事件加入到任务队列的尾部，等待JS引擎线程执行。  HTTP请求线程  顾名思义，负责执行异步请求一类的函数的线程，如： Promise，axios，ajax等。 主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列的尾部，等待JS引擎线程执行。    多个线程之间配合工作，各司其职。</description>
     </item>
     
     <item>
@@ -124,10 +127,12 @@ JavaScript 运行机制详解：再谈Event Loop@阮一峰
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/debugs/</guid>
-      <description>Js调试命令 Console  Console 对象提供对浏览器控制台的接入。不同浏览器上它的工作方式是不一样的。 Console 对象可以在任何全局对象中访问，如 Window，WorkerGlobalScope 以及通过属性工作台提供的特殊定义。 它被浏览器定义为 Window.Console，也可被简单的 Console 调用。  最常用的方法就是 console.log() 就是在控制台输出内容。console 对象还有除了 log 之外的其他方法。
+      <description>Js调试命令 Console  Console 对象提供对浏览器控制台的接入。不同浏览器上它的工作方式是不一样的。
+ Console 对象可以在任何全局对象中访问，如 Window，WorkerGlobalScope 以及通过属性工作台提供的特殊定义。
+ 它被浏览器定义为 Window.Console，也可被简单的 Console 调用。  最常用的方法就是 console.log() 就是在控制台输出内容。console 对象还有除了 log 之外的其他方法。
 注意：因为 Console 对象提供对浏览器控制台的接入 ，所以在不同浏览器中的支持以及表现方法可能不太一样，但是调试内容只有开发者会看，所以保证在开发环境用这些方法就可以。
-分类输出  不同类别信息的输出。  console.log(&amp;#39;文字信息&amp;#39;);console.info(&amp;#39;提示信息&amp;#39;);console.warn(&amp;#39;警告信息&amp;#39;);console.error(&amp;#39;错误信息&amp;#39;);分组输出  使用 Console.group()和 Console.groupEnd()包裹分组内容。 还可以使用 Console.groupCollapsed()来代替 Console.group()生成折叠的分组。  console.group(&amp;#39;第一个组&amp;#39;);console.log(&amp;#34;1-1&amp;#34;);console.log(&amp;#34;1-2&amp;#34;);console.log(&amp;#34;1-3&amp;#34;);console.groupEnd();console.group(&amp;#39;第二个组&amp;#39;);console.log(&amp;#34;2-1&amp;#34;);console.log(&amp;#34;2-2&amp;#34;);console.log(&amp;#34;2-3&amp;#34;);console.groupEnd();Console.group()还可以嵌套使用。
-console.group(&amp;#39;第一个组&amp;#39;);console.group(&amp;#34;1-1&amp;#34;);console.group(&amp;#34;1-1-1&amp;#34;);console.log(&amp;#39;内容&amp;#39;);console.groupEnd();console.groupEnd();console.group(&amp;#34;1-2&amp;#34;);console.log(&amp;#39;内容&amp;#39;);console.log(&amp;#39;内容&amp;#39;);console.log(&amp;#39;内容&amp;#39;);console.groupEnd();console.groupEnd();console.groupCollapsed(&amp;#39;第二个组&amp;#39;);console.group(&amp;#34;2-1&amp;#34;);console.groupEnd();console.group(&amp;#34;2-2&amp;#34;);console.groupEnd();console.groupEnd();表格输出  使用 console.</description>
+分类输出  不同类别信息的输出。  console.log(&#39;文字信息&#39;); console.info(&#39;提示信息&#39;); console.warn(&#39;警告信息&#39;); console.error(&#39;错误信息&#39;);  分组输出  使用 Console.group()和 Console.groupEnd()包裹分组内容。 还可以使用 Console.groupCollapsed()来代替 Console.group()生成折叠的分组。  console.group(&#39;第一个组&#39;); console.log(&amp;quot;1-1&amp;quot;); console.log(&amp;quot;1-2&amp;quot;); console.log(&amp;quot;1-3&amp;quot;); console.groupEnd(); console.group(&#39;第二个组&#39;); console.log(&amp;quot;2-1&amp;quot;); console.log(&amp;quot;2-2&amp;quot;); console.log(&amp;quot;2-3&amp;quot;); console.groupEnd();  Console.group()还可以嵌套使用。
+console.group(&#39;第一个组&#39;); console.group(&amp;quot;1-1&amp;quot;); console.group(&amp;quot;1-1-1&amp;quot;); console.log(&#39;内容&#39;); console.groupEnd(); console.groupEnd(); console.group(&amp;quot;1-2&amp;quot;); console.log(&#39;内容&#39;); console.log(&#39;内容&#39;); console.log(&#39;内容&#39;); console.groupEnd(); console.groupEnd(); console.groupCollapsed(&#39;第二个组&#39;); console.</description>
     </item>
     
     <item>
@@ -136,7 +141,7 @@ console.group(&amp;#39;第一个组&amp;#39;);console.group(&amp;#34;1-1&amp;#3
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/js-essay/</guid>
-      <description>JS随笔 等待多好毫秒后执行后面代码 export const sleep = async (ms: number) =&amp;gt; {return new Promise((resolve) =&amp;gt; setTimeout(resolve, ms || 0));};点击按钮复制一个文本或者链接地址 &amp;lt;div id=&amp;#34;lalala&amp;#34;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt;&amp;lt;button onclick=&amp;#34;but()&amp;#34;&amp;gt;点我&amp;lt;/button&amp;gt;&amp;lt;script&amp;gt;function but () {var copyDOM = document.getElementById(&amp;#39;lalala&amp;#39;); var range = document.createRange();// 选中需要复制的节点 range.selectNode(copyDOM);// 执行选中元素 window.getSelection().addRange(range);// 执行 copy 操作 var successful = document.execCommand(&amp;#39;copy&amp;#39;); try { var msg = successful ? &amp;#39;successful&amp;#39; : &amp;#39;unsuccessful&amp;#39;; console.log(&amp;#39;copy is&amp;#39; + msg); } catch(err) { console.</description>
+      <description>JS随笔 等待多好毫秒后执行后面代码 export const sleep = async (ms: number) =&amp;gt; { return new Promise((resolve) =&amp;gt; setTimeout(resolve, ms || 0)); };  点击按钮复制一个文本或者链接地址 &amp;lt;div id=&amp;quot;lalala&amp;quot;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt; &amp;lt;button onclick=&amp;quot;but()&amp;quot;&amp;gt;点我&amp;lt;/button&amp;gt; &amp;lt;script&amp;gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; + msg); } catch(err) { console.</description>
     </item>
     
     <item>
@@ -145,7 +150,7 @@ console.group(&amp;#39;第一个组&amp;#39;);console.group(&amp;#34;1-1&amp;#3
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/template/</guid>
-      <description>JS 模板 Juicer  GitHub  Soda  官方文档 GitHub  </description>
+      <description> JS 模板 Juicer  GitHub  Soda  官方文档 GitHub  </description>
     </item>
     
   </channel>

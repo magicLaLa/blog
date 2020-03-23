@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=".eslintrc.js配置详解"/>
-<meta name="twitter:description" content="{&#34;extends&#34;: [&#34;alloy&#34;,&#34;alloy/react&#34;,&#34;alloy/typescript&#34;,],&#34;env&#34;: { &#34;browser&#34;: true, &#34;node&#34;: true, &#34;commonjs&#34;: true }, &#34;globals&#34;: {// 这里填入你的项目需要的全局变量// false 表示这个全局变量不允许被重新赋值，比如：//// myGlobal: false},&#34;ecmaFeatures&#34;: { // lambda表达式 &#34;arrowFunctions&#34;: true, // 解构赋值 &#34;destructuring&#34;: true, // class &#34;classes&#34;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &#34;defaultParams&#34;: true, // 块级作用域，允许使用let const &#34;blockBindings&#34;: true, // 允许使用模块，模块内默认严格模式 &#34;modules&#34;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &#34;objectLiteralComputedProperties&#34;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &#34;Hello!"/>
+<meta name="twitter:description" content="{ &quot;extends&quot;: [ &quot;alloy&quot;, &quot;alloy/react&quot;, &quot;alloy/typescript&quot;, ], &quot;env&quot;: { &quot;browser&quot;: true, &quot;node&quot;: true, &quot;commonjs&quot;: true }, &quot;globals&quot;: { // 这里填入你的项目需要的全局变量 // false 表示这个全局变量不允许被重新赋值，比如： // // myGlobal: false }, &quot;ecmaFeatures&quot;: { // lambda表达式 &quot;arrowFunctions&quot;: true, // 解构赋值 &quot;destructuring&quot;: true, // class &quot;classes&quot;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &quot;defaultParams&quot;: true, // 块级作用域，允许使用let const &quot;blockBindings&quot;: true, // 允许使用模块，模块内默认严格模式 &quot;modules&quot;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &quot;objectLiteralComputedProperties&quot;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &quot;Hello!"/>
 
   <script type="application/ld+json">
 {
@@ -164,316 +164,317 @@
         
         
 
-        <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;extends&#34;</span>: [
-    <span style="color:#e6db74">&#34;alloy&#34;</span>,
-    <span style="color:#e6db74">&#34;alloy/react&#34;</span>,
-    <span style="color:#e6db74">&#34;alloy/typescript&#34;</span>,
+        <pre><code class="language-json">{
+  &quot;extends&quot;: [
+    &quot;alloy&quot;,
+    &quot;alloy/react&quot;,
+    &quot;alloy/typescript&quot;,
   ],
-  <span style="color:#f92672">&#34;env&#34;</span>: {  
-    <span style="color:#f92672">&#34;browser&#34;</span>: <span style="color:#66d9ef">true</span>,  
-    <span style="color:#f92672">&#34;node&#34;</span>: <span style="color:#66d9ef">true</span>,  
-    <span style="color:#f92672">&#34;commonjs&#34;</span>: <span style="color:#66d9ef">true</span>  
+  &quot;env&quot;: {  
+    &quot;browser&quot;: true,  
+    &quot;node&quot;: true,  
+    &quot;commonjs&quot;: true  
   },  
-  <span style="color:#f92672">&#34;globals&#34;</span>: {
-      <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">这里填入你的项目需要的全局变量</span>
-      <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">false</span> <span style="color:#960050;background-color:#1e0010">表示这个全局变量不允许被重新赋值，比如：</span>
-      <span style="color:#960050;background-color:#1e0010">//</span>
-      <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">myGlobal:</span> <span style="color:#960050;background-color:#1e0010">false</span>
+  &quot;globals&quot;: {
+      // 这里填入你的项目需要的全局变量
+      // false 表示这个全局变量不允许被重新赋值，比如：
+      //
+      // myGlobal: false
   },
-  <span style="color:#f92672">&#34;ecmaFeatures&#34;</span>: {  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">lambda表达式</span>  
-    <span style="color:#f92672">&#34;arrowFunctions&#34;</span>: <span style="color:#66d9ef">true</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">解构赋值</span>  
-    <span style="color:#f92672">&#34;destructuring&#34;</span>: <span style="color:#66d9ef">true</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">class</span>  
-    <span style="color:#f92672">&#34;classes&#34;</span>: <span style="color:#66d9ef">true</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">http://es6.ruanyifeng.com/#docs/function#函数参数的默认值</span>  
-    <span style="color:#f92672">&#34;defaultParams&#34;</span>: <span style="color:#66d9ef">true</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">块级作用域，允许使用let</span> <span style="color:#960050;background-color:#1e0010">const</span>  
-    <span style="color:#f92672">&#34;blockBindings&#34;</span>: <span style="color:#66d9ef">true</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">允许使用模块，模块内默认严格模式</span>  
-    <span style="color:#f92672">&#34;modules&#34;</span>: <span style="color:#66d9ef">true</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">允许字面量定义对象时，用表达式做属性名</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">http://es6.ruanyifeng.com/#docs/object#属性名表达式</span>  
-    <span style="color:#f92672">&#34;objectLiteralComputedProperties&#34;</span>: <span style="color:#66d9ef">true</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">允许对象字面量方法名简写</span>  
-    <span style="color:#960050;background-color:#1e0010">/*var</span> <span style="color:#960050;background-color:#1e0010">o</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">{</span> 
-        <span style="color:#960050;background-color:#1e0010">method()</span> <span style="color:#960050;background-color:#1e0010">{</span> 
-          <span style="color:#960050;background-color:#1e0010">return</span> <span style="color:#f92672">&#34;Hello!&#34;</span><span style="color:#960050;background-color:#1e0010">;</span> 
+  &quot;ecmaFeatures&quot;: {  
+    // lambda表达式  
+    &quot;arrowFunctions&quot;: true,  
+    // 解构赋值  
+    &quot;destructuring&quot;: true,  
+    // class  
+    &quot;classes&quot;: true,  
+    // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值  
+    &quot;defaultParams&quot;: true,  
+    // 块级作用域，允许使用let const  
+    &quot;blockBindings&quot;: true,  
+    // 允许使用模块，模块内默认严格模式  
+    &quot;modules&quot;: true,  
+    // 允许字面量定义对象时，用表达式做属性名  
+    // http://es6.ruanyifeng.com/#docs/object#属性名表达式  
+    &quot;objectLiteralComputedProperties&quot;: true,  
+    // 允许对象字面量方法名简写  
+    /*var o = { 
+        method() { 
+          return &quot;Hello!&quot;; 
         } 
-     }<span style="color:#960050;background-color:#1e0010">;</span> 
+     }; 
  
-     <span style="color:#960050;background-color:#1e0010">等同于</span> 
+     等同于 
  
-     <span style="color:#960050;background-color:#1e0010">var</span> <span style="color:#960050;background-color:#1e0010">o</span> <span style="color:#960050;background-color:#1e0010">=</span> { 
-       <span style="color:#960050;background-color:#1e0010">method:</span> <span style="color:#960050;background-color:#1e0010">function()</span> <span style="color:#960050;background-color:#1e0010">{</span> 
-         <span style="color:#960050;background-color:#1e0010">return</span> <span style="color:#f92672">&#34;Hello!&#34;</span><span style="color:#960050;background-color:#1e0010">;</span> 
+     var o = { 
+       method: function() { 
+         return &quot;Hello!&quot;; 
        } 
-     <span style="color:#960050;background-color:#1e0010">};</span> 
-    <span style="color:#960050;background-color:#1e0010">*/</span>  
-    <span style="color:#e6db74">&#34;objectLiteralShorthandMethods&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">/*</span> 
-      <span style="color:#960050;background-color:#1e0010">对象字面量属性名简写</span> 
-      <span style="color:#960050;background-color:#1e0010">var</span> <span style="color:#960050;background-color:#1e0010">foo</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">&#39;bar&#39;;</span> 
-      <span style="color:#960050;background-color:#1e0010">var</span> <span style="color:#960050;background-color:#1e0010">baz</span> <span style="color:#960050;background-color:#1e0010">=</span> {<span style="color:#960050;background-color:#1e0010">foo</span>}<span style="color:#960050;background-color:#1e0010">;</span> 
-      <span style="color:#960050;background-color:#1e0010">baz</span> <span style="color:#960050;background-color:#1e0010">//</span> {<span style="color:#960050;background-color:#1e0010">foo:</span> <span style="color:#f92672">&#34;bar&#34;</span>} 
+     }; 
+    */  
+    &quot;objectLiteralShorthandMethods&quot;: true,  
+    /* 
+      对象字面量属性名简写 
+      var foo = 'bar'; 
+      var baz = {foo}; 
+      baz // {foo: &quot;bar&quot;} 
  
-      <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">等同于</span> 
-      <span style="color:#960050;background-color:#1e0010">var</span> <span style="color:#960050;background-color:#1e0010">baz</span> <span style="color:#960050;background-color:#1e0010">=</span> {<span style="color:#960050;background-color:#1e0010">foo:</span> <span style="color:#960050;background-color:#1e0010">foo</span>}<span style="color:#960050;background-color:#1e0010">;</span> 
-    <span style="color:#960050;background-color:#1e0010">*/</span>  
-    <span style="color:#e6db74">&#34;objectLiteralShorthandProperties&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">http://es</span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">.ruanyifeng.com/#docs/function#rest参数</span>  
-    <span style="color:#e6db74">&#34;restParams&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">http://es</span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">.ruanyifeng.com/#docs/function#扩展运算符</span>  
-    <span style="color:#e6db74">&#34;spread&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">http://es</span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">.ruanyifeng.com/#docs/iterator#for---of循环</span>  
-    <span style="color:#e6db74">&#34;forOf&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">http://es</span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">.ruanyifeng.com/#docs/generator</span>  
-    <span style="color:#e6db74">&#34;generators&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">http://es</span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">.ruanyifeng.com/#docs/string#模板字符串</span>  
-    <span style="color:#e6db74">&#34;templateStrings&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#e6db74">&#34;superInFunctions&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">http://es</span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">.ruanyifeng.com/#docs/object#对象的扩展运算符</span>  
-    <span style="color:#e6db74">&#34;experimentalObjectRestSpread&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">true</span>  
-  <span style="color:#960050;background-color:#1e0010">},</span>  
+      // 等同于 
+      var baz = {foo: foo}; 
+    */  
+    &quot;objectLiteralShorthandProperties&quot;: true,  
+    // http://es6.ruanyifeng.com/#docs/function#rest参数  
+    &quot;restParams&quot;: true,  
+    // http://es6.ruanyifeng.com/#docs/function#扩展运算符  
+    &quot;spread&quot;: true,  
+    // http://es6.ruanyifeng.com/#docs/iterator#for---of循环  
+    &quot;forOf&quot;: true,  
+    // http://es6.ruanyifeng.com/#docs/generator  
+    &quot;generators&quot;: true,  
+    // http://es6.ruanyifeng.com/#docs/string#模板字符串  
+    &quot;templateStrings&quot;: true,  
+    &quot;superInFunctions&quot;: true,  
+    // http://es6.ruanyifeng.com/#docs/object#对象的扩展运算符  
+    &quot;experimentalObjectRestSpread&quot;: true  
+  },  
   
-  <span style="color:#e6db74">&#34;rules&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">定义对象的set存取器属性时，强制定义get</span>  
-    <span style="color:#f92672">&#34;accessor-pairs&#34;</span>: <span style="color:#ae81ff">2</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">指定数组的元素之间要以空格隔开(,后面)，</span> <span style="color:#960050;background-color:#1e0010">never参数：[</span> <span style="color:#960050;background-color:#1e0010">之前和</span> <span style="color:#960050;background-color:#1e0010">]</span> <span style="color:#960050;background-color:#1e0010">之后不能带空格，always参数：[</span> <span style="color:#960050;background-color:#1e0010">之前和</span> <span style="color:#960050;background-color:#1e0010">]</span> <span style="color:#960050;background-color:#1e0010">之后必须带空格</span>  
-    <span style="color:#f92672">&#34;array-bracket-spacing&#34;</span>: [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;never&#34;</span>],  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">在块级作用域外访问块内定义的变量是否报错提示</span>  
-    <span style="color:#f92672">&#34;block-scoped-var&#34;</span>: <span style="color:#ae81ff">0</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">if</span> <span style="color:#960050;background-color:#1e0010">while</span> <span style="color:#960050;background-color:#1e0010">function</span> <span style="color:#960050;background-color:#1e0010">后面的{必须与if在同一行，java风格。</span>  
-    <span style="color:#f92672">&#34;brace-style&#34;</span>: [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;1tbs&#34;</span>, { <span style="color:#f92672">&#34;allowSingleLine&#34;</span>: <span style="color:#66d9ef">true</span> }],  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">双峰驼命名格式</span>  
-    <span style="color:#f92672">&#34;camelcase&#34;</span>: <span style="color:#ae81ff">2</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">数组和对象键值对最后一个逗号，</span> <span style="color:#960050;background-color:#1e0010">never参数：不能带末尾的逗号,</span> <span style="color:#960050;background-color:#1e0010">always参数：必须带末尾的逗号，</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">always-multiline：多行模式必须带逗号，单行模式不能带逗号</span>  
-    <span style="color:#f92672">&#34;comma-dangle&#34;</span>: [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;never&#34;</span>],  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">控制逗号前后的空格</span>  
-    <span style="color:#f92672">&#34;comma-spacing&#34;</span>: [<span style="color:#ae81ff">2</span>, { <span style="color:#f92672">&#34;before&#34;</span>: <span style="color:#66d9ef">false</span>, <span style="color:#f92672">&#34;after&#34;</span>: <span style="color:#66d9ef">true</span> }],  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">控制逗号在行尾出现还是在行首出现</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">http://eslint.org/docs/rules/comma-style</span>  
-    <span style="color:#f92672">&#34;comma-style&#34;</span>: [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;last&#34;</span>],  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">圈复杂度</span>  
-    <span style="color:#f92672">&#34;complexity&#34;</span>: [<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">9</span>],  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">以方括号取对象属性时，[</span> <span style="color:#960050;background-color:#1e0010">后面和</span> <span style="color:#960050;background-color:#1e0010">]</span> <span style="color:#960050;background-color:#1e0010">前面是否需要空格,</span> <span style="color:#960050;background-color:#1e0010">可选参数</span> <span style="color:#960050;background-color:#1e0010">never,</span> <span style="color:#960050;background-color:#1e0010">always</span>  
-    <span style="color:#f92672">&#34;computed-property-spacing&#34;</span>: [<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#34;never&#34;</span>],  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">强制方法必须返回值，TypeScript强类型，不配置</span>  
-    <span style="color:#f92672">&#34;consistent-return&#34;</span>: <span style="color:#ae81ff">0</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">用于指统一在回调函数中指向this的变量名，箭头函数中的this已经可以指向外层调用者，应该没卵用了</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">e.g</span> <span style="color:#960050;background-color:#1e0010">[0,</span><span style="color:#f92672">&#34;that&#34;</span><span style="color:#960050;background-color:#1e0010">]</span> <span style="color:#960050;background-color:#1e0010">指定只能</span> <span style="color:#960050;background-color:#1e0010">var</span> <span style="color:#960050;background-color:#1e0010">that</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">this.</span> <span style="color:#960050;background-color:#1e0010">that不能指向其他任何值，this也不能赋值给that以外的其他值</span>  
-    <span style="color:#e6db74">&#34;consistent-this&#34;</span>: <span style="color:#ae81ff">0</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">强制在子类构造函数中用super()调用父类构造函数，TypeScrip的编译器也会提示</span>  
-    <span style="color:#f92672">&#34;constructor-super&#34;</span>: <span style="color:#ae81ff">0</span>,  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">if</span> <span style="color:#960050;background-color:#1e0010">else</span> <span style="color:#960050;background-color:#1e0010">while</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">do后面的代码块是否需要{</span> }<span style="color:#960050;background-color:#1e0010">包围，参数：</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>    <span style="color:#960050;background-color:#1e0010">multi</span>  <span style="color:#960050;background-color:#1e0010">只有块中有多行语句时才需要</span>{ }<span style="color:#960050;background-color:#1e0010">包围</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>    <span style="color:#960050;background-color:#1e0010">multi-line</span>  <span style="color:#960050;background-color:#1e0010">只有块中有多行语句时才需要</span>{ }<span style="color:#960050;background-color:#1e0010">包围,</span> <span style="color:#960050;background-color:#1e0010">但是块中的执行语句只有一行时，</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>                   <span style="color:#960050;background-color:#1e0010">块中的语句只能跟和if语句在同一行。if</span> <span style="color:#960050;background-color:#1e0010">(foo)</span> <span style="color:#960050;background-color:#1e0010">foo++;</span> <span style="color:#960050;background-color:#1e0010">else</span> <span style="color:#960050;background-color:#1e0010">doSomething();</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>    <span style="color:#960050;background-color:#1e0010">multi-or-nest</span> <span style="color:#960050;background-color:#1e0010">只有块中有多行语句时才需要</span>{ }<span style="color:#960050;background-color:#1e0010">包围,</span> <span style="color:#960050;background-color:#1e0010">如果块中的执行语句只有一行，执行语句可以零另起一行也可以跟在if语句后面</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>    [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;multi&#34;</span>, <span style="color:#e6db74">&#34;consistent&#34;</span>] <span style="color:#960050;background-color:#1e0010">保持前后语句的</span>{ }<span style="color:#960050;background-color:#1e0010">一致</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>    <span style="color:#960050;background-color:#1e0010">default:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;all&#34;</span>] <span style="color:#960050;background-color:#1e0010">全都需要</span>{ }<span style="color:#960050;background-color:#1e0010">包围</span>  
-    <span style="color:#e6db74">&#34;curly&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;all&#34;</span>]<span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">switch语句强制default分支，也可添加</span> <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">no</span> <span style="color:#960050;background-color:#1e0010">default</span> <span style="color:#960050;background-color:#1e0010">注释取消此次警告</span>  
-    <span style="color:#e6db74">&#34;default-case&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">强制object.key</span> <span style="color:#960050;background-color:#1e0010">中</span> <span style="color:#960050;background-color:#1e0010">.</span> <span style="color:#960050;background-color:#1e0010">的位置，参数:</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>      <span style="color:#960050;background-color:#1e0010">property，&#39;.&#39;号应与属性在同一行</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>      <span style="color:#960050;background-color:#1e0010">object,</span> <span style="color:#960050;background-color:#1e0010">&#39;.&#39;</span> <span style="color:#960050;background-color:#1e0010">号应与对象名在同一行</span>  
-    <span style="color:#e6db74">&#34;dot-location&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;property&#34;</span>]<span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">强制使用.号取属性</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>    <span style="color:#960050;background-color:#1e0010">参数：</span> <span style="color:#960050;background-color:#1e0010">allowKeywords：</span><span style="color:#66d9ef">true</span> <span style="color:#960050;background-color:#1e0010">使用保留字做属性名时，只能使用.方式取属性</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>                          <span style="color:#66d9ef">false</span> <span style="color:#960050;background-color:#1e0010">使用保留字做属性名时,</span> <span style="color:#960050;background-color:#1e0010">只能使用</span>[]<span style="color:#960050;background-color:#1e0010">方式取属性</span> <span style="color:#960050;background-color:#1e0010">e.g</span> [<span style="color:#ae81ff">2</span>, {<span style="color:#f92672">&#34;allowKeywords&#34;</span>: <span style="color:#66d9ef">false</span>}]  
-    <span style="color:#960050;background-color:#1e0010">//</span>           <span style="color:#960050;background-color:#1e0010">allowPattern:</span>  <span style="color:#960050;background-color:#1e0010">当属性名匹配提供的正则表达式时，允许使用</span>[]<span style="color:#960050;background-color:#1e0010">方式取值,否则只能用.号取值</span> <span style="color:#960050;background-color:#1e0010">e.g</span> [<span style="color:#ae81ff">2</span>, {<span style="color:#f92672">&#34;allowPattern&#34;</span>: <span style="color:#e6db74">&#34;^[a-z]+(_[a-z]+)+$&#34;</span>}]  
-    <span style="color:#e6db74">&#34;dot-notation&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, {<span style="color:#f92672">&#34;allowKeywords&#34;</span>: <span style="color:#66d9ef">true</span>}]<span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">文件末尾强制换行</span>  
-    <span style="color:#e6db74">&#34;eol-last&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#960050;background-color:#1e0010">===</span> <span style="color:#960050;background-color:#1e0010">替代</span> <span style="color:#960050;background-color:#1e0010">==</span>  
-    <span style="color:#e6db74">&#34;eqeqeq&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;allow-null&#34;</span>]<span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">方法表达式是否需要命名</span>  
-    <span style="color:#e6db74">&#34;func-names&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">方法定义风格，参数：</span>  
-    <span style="color:#960050;background-color:#1e0010">//</span>    <span style="color:#960050;background-color:#1e0010">declaration:</span> <span style="color:#960050;background-color:#1e0010">强制使用方法声明的方式，function</span> <span style="color:#960050;background-color:#1e0010">f()</span>{} <span style="color:#960050;background-color:#1e0010">e.g</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;declaration&#34;</span>]  
-    <span style="color:#960050;background-color:#1e0010">//</span>    <span style="color:#960050;background-color:#1e0010">expression：强制使用方法表达式的方式，var</span> <span style="color:#960050;background-color:#1e0010">f</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">function()</span> {}  <span style="color:#960050;background-color:#1e0010">e.g</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;expression&#34;</span>]  
-    <span style="color:#960050;background-color:#1e0010">//</span>    <span style="color:#960050;background-color:#1e0010">allowArrowFunctions:</span> <span style="color:#960050;background-color:#1e0010">declaration风格中允许箭头函数。</span> <span style="color:#960050;background-color:#1e0010">e.g</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;declaration&#34;</span>, { <span style="color:#f92672">&#34;allowArrowFunctions&#34;</span>: <span style="color:#66d9ef">true</span> }]  
-    <span style="color:#e6db74">&#34;func-style&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,</span>  
-    <span style="color:#e6db74">&#34;no-alert&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用alert</span> <span style="color:#960050;background-color:#1e0010">confirm</span> <span style="color:#960050;background-color:#1e0010">prompt</span>
-    <span style="color:#e6db74">&#34;no-array-constructor&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用数组构造器</span>
-    <span style="color:#e6db74">&#34;no-bitwise&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用按位运算符</span>
-    <span style="color:#e6db74">&#34;no-caller&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//禁止使用arguments.caller或arguments.callee</span>
-    <span style="color:#e6db74">&#34;no-catch-shadow&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止catch子句参数与外部作用域变量同名</span>
-    <span style="color:#e6db74">&#34;no-class-assign&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止给类赋值</span>
-    <span style="color:#e6db74">&#34;no-cond-assign&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止在条件表达式中使用赋值语句</span>
-    <span style="color:#e6db74">&#34;no-console&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用console</span>
-    <span style="color:#e6db74">&#34;no-const-assign&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止修改const声明的变量</span>
-    <span style="color:#e6db74">&#34;no-constant-condition&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止在条件中使用常量表达式</span> <span style="color:#960050;background-color:#1e0010">if(</span><span style="color:#66d9ef">true</span><span style="color:#960050;background-color:#1e0010">)</span> <span style="color:#960050;background-color:#1e0010">if(</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">)</span>
-    <span style="color:#e6db74">&#34;no-continue&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用continue</span>
-    <span style="color:#e6db74">&#34;no-control-regex&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止在正则表达式中使用控制字符</span>
-    <span style="color:#e6db74">&#34;no-debugger&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用debugger</span>
-    <span style="color:#e6db74">&#34;no-delete-var&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//不能对var声明的变量使用delete操作符</span>
-    <span style="color:#e6db74">&#34;no-div-regex&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//不能使用看起来像除法的正则表达式/=foo/</span>
-    <span style="color:#e6db74">&#34;no-dupe-keys&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//在创建对象字面量时不允许键重复</span> {<span style="color:#960050;background-color:#1e0010">a:1,a:1</span>}
-    <span style="color:#e6db74">&#34;no-dupe-args&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//函数参数不能重复</span>
-    <span style="color:#e6db74">&#34;no-duplicate-case&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//switch中的case标签不能重复</span>
-    <span style="color:#e6db74">&#34;no-else-return&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//如果if语句里面有return,后面不能跟else语句</span>
-    <span style="color:#e6db74">&#34;no-empty&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//块语句中的内容不能为空</span>
-    <span style="color:#e6db74">&#34;no-empty-character-class&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//正则表达式中的</span>[]<span style="color:#960050;background-color:#1e0010">内容不能为空</span>
-    <span style="color:#e6db74">&#34;no-empty-label&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用空label</span>
-    <span style="color:#e6db74">&#34;no-eq-null&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止对null使用==或!=运算符</span>
-    <span style="color:#e6db74">&#34;no-eval&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//禁止使用eval</span>
-    <span style="color:#e6db74">&#34;no-ex-assign&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止给catch语句中的异常参数赋值</span>
-    <span style="color:#e6db74">&#34;no-extend-native&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止扩展native对象</span>
-    <span style="color:#e6db74">&#34;no-extra-bind&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止不必要的函数绑定</span>
-    <span style="color:#e6db74">&#34;no-extra-boolean-cast&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止不必要的bool转换</span>
-    <span style="color:#e6db74">&#34;no-extra-parens&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止非必要的括号</span>
-    <span style="color:#e6db74">&#34;no-extra-semi&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止多余的冒号</span>
-    <span style="color:#e6db74">&#34;no-fallthrough&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//禁止switch穿透</span>
-    <span style="color:#e6db74">&#34;no-floating-decimal&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止省略浮点数中的</span><span style="color:#ae81ff">0</span> <span style="color:#960050;background-color:#1e0010">.</span><span style="color:#ae81ff">5</span> <span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">.</span>
-    <span style="color:#e6db74">&#34;no-func-assign&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止重复的函数声明</span>
-    <span style="color:#e6db74">&#34;no-implicit-coercion&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//禁止隐式转换</span>
-    <span style="color:#e6db74">&#34;no-implied-eval&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用隐式eval</span>
-    <span style="color:#e6db74">&#34;no-inline-comments&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止行内备注</span>
-    <span style="color:#e6db74">&#34;no-inner-declarations&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;functions&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//禁止在块语句中使用声明（变量或函数）</span>
-    <span style="color:#e6db74">&#34;no-invalid-regexp&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止无效的正则表达式</span>
-    <span style="color:#e6db74">&#34;no-invalid-this&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止无效的this，只能用在构造器，类，对象字面量</span>
-    <span style="color:#e6db74">&#34;no-irregular-whitespace&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//不能有不规则的空格</span>
-    <span style="color:#e6db74">&#34;no-iterator&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用__iterator__</span> <span style="color:#960050;background-color:#1e0010">属性</span>
-    <span style="color:#e6db74">&#34;no-label-var&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//label名不能与var声明的变量名相同</span>
-    <span style="color:#e6db74">&#34;no-labels&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止标签声明</span>
-    <span style="color:#e6db74">&#34;no-lone-blocks&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止不必要的嵌套块</span>
-    <span style="color:#e6db74">&#34;no-lonely-if&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止else语句内只有if语句</span>
-    <span style="color:#e6db74">&#34;no-loop-func&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//禁止在循环中使用函数（如果没有引用外部变量不形成闭包就可以）</span>
-    <span style="color:#e6db74">&#34;no-mixed-requires&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">false</span>]<span style="color:#960050;background-color:#1e0010">,//声明时不能混用声明类型</span>
-    <span style="color:#e6db74">&#34;no-mixed-spaces-and-tabs&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#66d9ef">false</span>]<span style="color:#960050;background-color:#1e0010">,//禁止混用tab和空格</span>
-    <span style="color:#e6db74">&#34;linebreak-style&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;windows&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//换行风格</span>
-    <span style="color:#e6db74">&#34;no-multi-spaces&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//不能用多余的空格</span>
-    <span style="color:#e6db74">&#34;no-multi-str&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//字符串不能用\换行</span>
-    <span style="color:#e6db74">&#34;no-multiple-empty-lines&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">1</span>, {<span style="color:#f92672">&#34;max&#34;</span>: <span style="color:#ae81ff">2</span>}]<span style="color:#960050;background-color:#1e0010">,//空行最多不能超过</span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">行</span>
-    <span style="color:#e6db74">&#34;no-native-reassign&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//不能重写native对象</span>
-    <span style="color:#e6db74">&#34;no-negated-in-lhs&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//in</span> <span style="color:#960050;background-color:#1e0010">操作符的左边不能有!</span>
-    <span style="color:#e6db74">&#34;no-nested-ternary&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用嵌套的三目运算</span>
-    <span style="color:#e6db74">&#34;no-new&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//禁止在使用new构造一个实例后不赋值</span>
-    <span style="color:#e6db74">&#34;no-new-func&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//禁止使用new</span> <span style="color:#960050;background-color:#1e0010">Function</span>
-    <span style="color:#e6db74">&#34;no-new-object&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用new</span> <span style="color:#960050;background-color:#1e0010">Object()</span>
-    <span style="color:#e6db74">&#34;no-new-require&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用new</span> <span style="color:#960050;background-color:#1e0010">require</span>
-    <span style="color:#e6db74">&#34;no-new-wrappers&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用new创建包装实例，new</span> <span style="color:#960050;background-color:#1e0010">String</span> <span style="color:#960050;background-color:#1e0010">new</span> <span style="color:#960050;background-color:#1e0010">Boolean</span> <span style="color:#960050;background-color:#1e0010">new</span> <span style="color:#960050;background-color:#1e0010">Number</span>
-    <span style="color:#e6db74">&#34;no-obj-calls&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//不能调用内置的全局对象，比如Math()</span> <span style="color:#960050;background-color:#1e0010">JSON()</span>
-    <span style="color:#e6db74">&#34;no-octal&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用八进制数字</span>
-    <span style="color:#e6db74">&#34;no-octal-escape&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用八进制转义序列</span>
-    <span style="color:#e6db74">&#34;no-param-reassign&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止给参数重新赋值</span>
-    <span style="color:#e6db74">&#34;no-path-concat&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//node中不能使用__dirname或__filename做路径拼接</span>
-    <span style="color:#e6db74">&#34;no-plusplus&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用++，--</span>
-    <span style="color:#e6db74">&#34;no-process-env&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用process.env</span>
-    <span style="color:#e6db74">&#34;no-process-exit&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用process.exit()</span>
-    <span style="color:#e6db74">&#34;no-proto&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止使用__proto__属性</span>
-    <span style="color:#e6db74">&#34;no-redeclare&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止重复声明变量</span>
-    <span style="color:#e6db74">&#34;no-regex-spaces&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止在正则表达式字面量中使用多个空格</span> <span style="color:#960050;background-color:#1e0010">/foo</span> <span style="color:#960050;background-color:#1e0010">bar/</span>
-    <span style="color:#e6db74">&#34;no-restricted-modules&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//如果禁用了指定模块，使用就会报错</span>
-    <span style="color:#e6db74">&#34;no-return-assign&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//return</span> <span style="color:#960050;background-color:#1e0010">语句中不能有赋值表达式</span>
-    <span style="color:#e6db74">&#34;no-script-url&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用javascript:void(</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">)</span>
-    <span style="color:#e6db74">&#34;no-self-compare&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//不能比较自身</span>
-    <span style="color:#e6db74">&#34;no-sequences&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用逗号运算符</span>
-    <span style="color:#e6db74">&#34;no-shadow&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//外部作用域中的变量不能与它所包含的作用域中的变量或参数同名</span>
-    <span style="color:#e6db74">&#34;no-shadow-restricted-names&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//严格模式中规定的限制标识符不能作为声明时的变量名使用</span>
-    <span style="color:#e6db74">&#34;no-spaced-func&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//函数调用时</span> <span style="color:#960050;background-color:#1e0010">函数名与()之间不能有空格</span>
-    <span style="color:#e6db74">&#34;no-sparse-arrays&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止稀疏数组，</span> [<span style="color:#ae81ff">1</span>,,<span style="color:#ae81ff">2</span>]
-    <span style="color:#e6db74">&#34;no-sync&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//nodejs</span> <span style="color:#960050;background-color:#1e0010">禁止同步方法</span>
-    <span style="color:#e6db74">&#34;no-ternary&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁止使用三目运算符</span>
-    <span style="color:#e6db74">&#34;no-trailing-spaces&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//一行结束后面不要有空格</span>
-    <span style="color:#e6db74">&#34;no-this-before-super&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//在调用super()之前不能使用this或super</span>
-    <span style="color:#e6db74">&#34;no-throw-literal&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止抛出字面量错误</span> <span style="color:#960050;background-color:#1e0010">throw</span> <span style="color:#e6db74">&#34;error&#34;</span><span style="color:#960050;background-color:#1e0010">;</span>
-    <span style="color:#e6db74">&#34;no-undef&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//不能有未定义的变量</span>
-    <span style="color:#e6db74">&#34;no-undef-init&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//变量初始化时不能直接给它赋值为undefined</span>
-    <span style="color:#e6db74">&#34;no-undefined&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//不能使用undefined</span>
-    <span style="color:#e6db74">&#34;no-unexpected-multiline&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//避免多行表达式</span>
-    <span style="color:#e6db74">&#34;no-underscore-dangle&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//标识符不能以_开头或结尾</span>
-    <span style="color:#e6db74">&#34;no-unneeded-ternary&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止不必要的嵌套</span> <span style="color:#960050;background-color:#1e0010">var</span> <span style="color:#960050;background-color:#1e0010">isYes</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">answer</span> <span style="color:#960050;background-color:#1e0010">===</span> <span style="color:#ae81ff">1</span> <span style="color:#960050;background-color:#1e0010">?</span> <span style="color:#66d9ef">true</span> <span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#66d9ef">false</span><span style="color:#960050;background-color:#1e0010">;</span>
-    <span style="color:#e6db74">&#34;no-unreachable&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//不能有无法执行的代码</span>
-    <span style="color:#e6db74">&#34;no-unused-expressions&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止无用的表达式</span>
-    <span style="color:#e6db74">&#34;no-unused-vars&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, {<span style="color:#f92672">&#34;vars&#34;</span>: <span style="color:#e6db74">&#34;all&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: <span style="color:#e6db74">&#34;after-used&#34;</span>}]<span style="color:#960050;background-color:#1e0010">,//不能有声明后未被使用的变量或参数</span>
-    <span style="color:#e6db74">&#34;no-use-before-define&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//未定义前不能使用</span>
-    <span style="color:#e6db74">&#34;no-useless-call&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁止不必要的call和apply</span>
-    <span style="color:#e6db74">&#34;no-void&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁用void操作符</span>
-    <span style="color:#e6db74">&#34;no-var&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//禁用var，用let和const代替</span>
-    <span style="color:#e6db74">&#34;no-warning-comments&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">1</span>, { <span style="color:#f92672">&#34;terms&#34;</span>: [<span style="color:#e6db74">&#34;todo&#34;</span>, <span style="color:#e6db74">&#34;fixme&#34;</span>, <span style="color:#e6db74">&#34;xxx&#34;</span>], <span style="color:#f92672">&#34;location&#34;</span>: <span style="color:#e6db74">&#34;start&#34;</span> }]<span style="color:#960050;background-color:#1e0010">,//不能有警告备注</span>
-    <span style="color:#e6db74">&#34;no-with&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//禁用with</span>
-    <span style="color:#e6db74">&#34;array-bracket-spacing&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;never&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//是否允许非空数组里面有多余的空格</span>
-    <span style="color:#e6db74">&#34;arrow-parens&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//箭头函数用小括号括起来</span>
-    <span style="color:#e6db74">&#34;arrow-spacing&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//=&gt;的前/后括号</span>
-    <span style="color:#e6db74">&#34;accessor-pairs&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//在对象中使用getter/setter</span>
-    <span style="color:#e6db74">&#34;block-scoped-var&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//块语句中使用var</span>
-    <span style="color:#e6db74">&#34;brace-style&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;1tbs&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//大括号风格</span>
-    <span style="color:#e6db74">&#34;callback-return&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//避免多次调用回调什么的</span>
-    <span style="color:#e6db74">&#34;camelcase&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//强制驼峰法命名</span>
-    <span style="color:#e6db74">&#34;comma-dangle&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;never&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//对象字面量项尾不能有逗号</span>
-    <span style="color:#e6db74">&#34;comma-spacing&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//逗号前后的空格</span>
-    <span style="color:#e6db74">&#34;comma-style&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;last&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//逗号风格，换行时在行首还是行尾</span>
-    <span style="color:#e6db74">&#34;complexity&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">11</span>]<span style="color:#960050;background-color:#1e0010">,//循环复杂度</span>
-    <span style="color:#e6db74">&#34;computed-property-spacing&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;never&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//是否允许计算后的键名什么的</span>
-    <span style="color:#e6db74">&#34;consistent-return&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//return</span> <span style="color:#960050;background-color:#1e0010">后面是否允许省略</span>
-    <span style="color:#e6db74">&#34;consistent-this&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;that&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//this别名</span>
-    <span style="color:#e6db74">&#34;constructor-super&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//非派生类不能调用super，派生类必须调用super</span>
-    <span style="color:#e6db74">&#34;curly&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;all&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//必须使用</span> <span style="color:#960050;background-color:#1e0010">if()</span>{} <span style="color:#960050;background-color:#1e0010">中的</span>{}
-    <span style="color:#e6db74">&#34;default-case&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//switch语句最后必须有default</span>
-    <span style="color:#e6db74">&#34;dot-location&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//对象访问符的位置，换行的时候在行首还是行尾</span>
-    <span style="color:#e6db74">&#34;dot-notation&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, { <span style="color:#f92672">&#34;allowKeywords&#34;</span>: <span style="color:#66d9ef">true</span> }]<span style="color:#960050;background-color:#1e0010">,//避免不必要的方括号</span>
-    <span style="color:#e6db74">&#34;eol-last&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//文件以单一的换行符结束</span>
-    <span style="color:#e6db74">&#34;eqeqeq&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//必须使用全等</span>
-    <span style="color:#e6db74">&#34;func-names&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//函数表达式必须有名字</span>
-    <span style="color:#e6db74">&#34;func-style&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;declaration&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//函数风格，规定只能使用函数声明/函数表达式</span>
-    <span style="color:#e6db74">&#34;generator-star-spacing&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//生成器函数*的前后空格</span>
-    <span style="color:#e6db74">&#34;guard-for-in&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//for</span> <span style="color:#960050;background-color:#1e0010">in循环要用if语句过滤</span>
-    <span style="color:#e6db74">&#34;handle-callback-err&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//nodejs</span> <span style="color:#960050;background-color:#1e0010">处理错误</span>
-    <span style="color:#e6db74">&#34;id-length&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//变量名长度</span>
-    <span style="color:#e6db74">&#34;indent&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>]<span style="color:#960050;background-color:#1e0010">,//缩进风格</span>
-    <span style="color:#e6db74">&#34;init-declarations&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//声明时必须赋初值</span>
-    <span style="color:#e6db74">&#34;key-spacing&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, { <span style="color:#f92672">&#34;beforeColon&#34;</span>: <span style="color:#66d9ef">false</span>, <span style="color:#f92672">&#34;afterColon&#34;</span>: <span style="color:#66d9ef">true</span> }]<span style="color:#960050;background-color:#1e0010">,//对象字面量中冒号的前后空格</span>
-    <span style="color:#e6db74">&#34;lines-around-comment&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//行前/行后备注</span>
-    <span style="color:#e6db74">&#34;max-depth&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">4</span>]<span style="color:#960050;background-color:#1e0010">,//嵌套块深度</span>
-    <span style="color:#e6db74">&#34;max-len&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">4</span>]<span style="color:#960050;background-color:#1e0010">,//字符串最大长度</span>
-    <span style="color:#e6db74">&#34;max-nested-callbacks&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>]<span style="color:#960050;background-color:#1e0010">,//回调嵌套深度</span>
-    <span style="color:#e6db74">&#34;max-params&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>]<span style="color:#960050;background-color:#1e0010">,//函数最多只能有</span><span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">个参数</span>
-    <span style="color:#e6db74">&#34;max-statements&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>]<span style="color:#960050;background-color:#1e0010">,//函数内最多有几个声明</span>
-    <span style="color:#e6db74">&#34;new-cap&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//函数名首行大写必须使用new方式调用，首行小写必须用不带new方式调用</span>
-    <span style="color:#e6db74">&#34;new-parens&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//new时必须加小括号</span>
-    <span style="color:#e6db74">&#34;newline-after-var&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//变量声明后是否需要空一行</span>
-    <span style="color:#e6db74">&#34;object-curly-spacing&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;never&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//大括号内是否允许不必要的空格</span>
-    <span style="color:#e6db74">&#34;object-shorthand&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//强制对象字面量缩写语法</span>
-    <span style="color:#e6db74">&#34;one-var&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">,//连续声明</span>
-    <span style="color:#e6db74">&#34;operator-assignment&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;always&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//赋值运算符</span> <span style="color:#960050;background-color:#1e0010">+=</span> <span style="color:#960050;background-color:#1e0010">-=什么的</span>
-    <span style="color:#e6db74">&#34;operator-linebreak&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;after&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//换行时运算符在行尾还是行首</span>
-    <span style="color:#e6db74">&#34;padded-blocks&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//块语句内行首行尾是否要空行</span>
-    <span style="color:#e6db74">&#34;prefer-const&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//首选const</span>
-    <span style="color:#e6db74">&#34;prefer-spread&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//首选展开运算</span>
-    <span style="color:#e6db74">&#34;prefer-reflect&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//首选Reflect的方法</span>
-    <span style="color:#e6db74">&#34;quotes&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;single&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//引号类型</span> <span style="color:#960050;background-color:#1e0010">``</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#960050;background-color:#1e0010">&#39;&#39;</span>
-    <span style="color:#e6db74">&#34;quote-props&#34;</span><span style="color:#960050;background-color:#1e0010">:</span>[<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;always&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//对象字面量中的属性名是否强制双引号</span>
-    <span style="color:#e6db74">&#34;radix&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,//parseInt必须指定第二个参数</span>
-    <span style="color:#e6db74">&#34;id-match&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//命名检测</span>
-    <span style="color:#e6db74">&#34;require-yield&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//生成器函数必须有yield</span>
-    <span style="color:#e6db74">&#34;semi&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;always&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//语句强制分号结尾</span>
-    <span style="color:#e6db74">&#34;semi-spacing&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, {<span style="color:#f92672">&#34;before&#34;</span>: <span style="color:#66d9ef">false</span>, <span style="color:#f92672">&#34;after&#34;</span>: <span style="color:#66d9ef">true</span>}]<span style="color:#960050;background-color:#1e0010">,//分号前后空格</span>
-    <span style="color:#e6db74">&#34;sort-vars&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">,//变量声明时排序</span>
-    <span style="color:#e6db74">&#34;space-after-keywords&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;always&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//关键字后面是否要空一格</span>
-    <span style="color:#e6db74">&#34;space-before-blocks&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> [<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;always&#34;</span>]<span style="color:#960050;background-color:#1e0010">,//不以新行开始的块</span>{<span style="color:#960050;background-color:#1e0010">前面要不要有空格</span>
-    <span style="color:#f92672">&#34;space-before-function-paren&#34;</span>: [<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;always&#34;</span>],<span style="color:#960050;background-color:#1e0010">//函数定义时括号前面要不要有空格</span>
-    <span style="color:#f92672">&#34;space-in-parens&#34;</span>: [<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;never&#34;</span>],<span style="color:#960050;background-color:#1e0010">//小括号里面要不要有空格</span>
-    <span style="color:#f92672">&#34;space-infix-ops&#34;</span>: <span style="color:#ae81ff">0</span>,<span style="color:#960050;background-color:#1e0010">//中缀操作符周围要不要有空格</span>
-    <span style="color:#f92672">&#34;space-return-throw-case&#34;</span>: <span style="color:#ae81ff">2</span>,<span style="color:#960050;background-color:#1e0010">//return</span> <span style="color:#960050;background-color:#1e0010">throw</span> <span style="color:#960050;background-color:#1e0010">case后面要不要加空格</span>
-    <span style="color:#f92672">&#34;space-unary-ops&#34;</span>: [<span style="color:#ae81ff">0</span>, { <span style="color:#f92672">&#34;words&#34;</span>: <span style="color:#66d9ef">true</span>, <span style="color:#f92672">&#34;nonwords&#34;</span>: <span style="color:#66d9ef">false</span> }],<span style="color:#960050;background-color:#1e0010">//一元运算符的前/后要不要加空格</span>
-    <span style="color:#f92672">&#34;spaced-comment&#34;</span>: <span style="color:#ae81ff">0</span>,<span style="color:#960050;background-color:#1e0010">//注释风格不要有空格什么的</span>
-    <span style="color:#f92672">&#34;strict&#34;</span>: <span style="color:#ae81ff">2</span>,<span style="color:#960050;background-color:#1e0010">//使用严格模式</span>
-    <span style="color:#f92672">&#34;use-isnan&#34;</span>: <span style="color:#ae81ff">2</span>,<span style="color:#960050;background-color:#1e0010">//禁止比较时使用NaN，只能用isNaN()</span>
-    <span style="color:#f92672">&#34;valid-jsdoc&#34;</span>: <span style="color:#ae81ff">0</span>,<span style="color:#960050;background-color:#1e0010">//jsdoc规则</span>
-    <span style="color:#f92672">&#34;valid-typeof&#34;</span>: <span style="color:#ae81ff">2</span>,<span style="color:#960050;background-color:#1e0010">//必须使用合法的typeof的值</span>
-    <span style="color:#f92672">&#34;vars-on-top&#34;</span>: <span style="color:#ae81ff">2</span>,<span style="color:#960050;background-color:#1e0010">//var必须放在作用域顶部</span>
-    <span style="color:#f92672">&#34;wrap-iife&#34;</span>: [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;inside&#34;</span>],<span style="color:#960050;background-color:#1e0010">//立即执行函数表达式的小括号风格</span>
-    <span style="color:#f92672">&#34;wrap-regex&#34;</span>: <span style="color:#ae81ff">0</span>,<span style="color:#960050;background-color:#1e0010">//正则表达式字面量用小括号包起来</span>
-    <span style="color:#f92672">&#34;yoda&#34;</span>: [<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#34;never&#34;</span>]<span style="color:#960050;background-color:#1e0010">//禁止尤达条件</span>
+  &quot;rules&quot;: {
+    // 定义对象的set存取器属性时，强制定义get  
+    &quot;accessor-pairs&quot;: 2,  
+    // 指定数组的元素之间要以空格隔开(,后面)， never参数：[ 之前和 ] 之后不能带空格，always参数：[ 之前和 ] 之后必须带空格  
+    &quot;array-bracket-spacing&quot;: [2, &quot;never&quot;],  
+    // 在块级作用域外访问块内定义的变量是否报错提示  
+    &quot;block-scoped-var&quot;: 0,  
+    // if while function 后面的{必须与if在同一行，java风格。  
+    &quot;brace-style&quot;: [2, &quot;1tbs&quot;, { &quot;allowSingleLine&quot;: true }],  
+    // 双峰驼命名格式  
+    &quot;camelcase&quot;: 2,  
+    // 数组和对象键值对最后一个逗号， never参数：不能带末尾的逗号, always参数：必须带末尾的逗号，  
+    // always-multiline：多行模式必须带逗号，单行模式不能带逗号  
+    &quot;comma-dangle&quot;: [2, &quot;never&quot;],  
+    // 控制逗号前后的空格  
+    &quot;comma-spacing&quot;: [2, { &quot;before&quot;: false, &quot;after&quot;: true }],  
+    // 控制逗号在行尾出现还是在行首出现  
+    // http://eslint.org/docs/rules/comma-style  
+    &quot;comma-style&quot;: [2, &quot;last&quot;],  
+    // 圈复杂度  
+    &quot;complexity&quot;: [2,9],  
+    // 以方括号取对象属性时，[ 后面和 ] 前面是否需要空格, 可选参数 never, always  
+    &quot;computed-property-spacing&quot;: [2,&quot;never&quot;],  
+    // 强制方法必须返回值，TypeScript强类型，不配置  
+    &quot;consistent-return&quot;: 0,  
+    // 用于指统一在回调函数中指向this的变量名，箭头函数中的this已经可以指向外层调用者，应该没卵用了  
+    // e.g [0,&quot;that&quot;] 指定只能 var that = this. that不能指向其他任何值，this也不能赋值给that以外的其他值  
+    &quot;consistent-this&quot;: 0,  
+    // 强制在子类构造函数中用super()调用父类构造函数，TypeScrip的编译器也会提示  
+    &quot;constructor-super&quot;: 0,  
+    // if else while for do后面的代码块是否需要{ }包围，参数：  
+    //    multi  只有块中有多行语句时才需要{ }包围  
+    //    multi-line  只有块中有多行语句时才需要{ }包围, 但是块中的执行语句只有一行时，  
+    //                   块中的语句只能跟和if语句在同一行。if (foo) foo++; else doSomething();  
+    //    multi-or-nest 只有块中有多行语句时才需要{ }包围, 如果块中的执行语句只有一行，执行语句可以零另起一行也可以跟在if语句后面  
+    //    [2, &quot;multi&quot;, &quot;consistent&quot;] 保持前后语句的{ }一致  
+    //    default: [2, &quot;all&quot;] 全都需要{ }包围  
+    &quot;curly&quot;: [2, &quot;all&quot;],  
+    // switch语句强制default分支，也可添加 // no default 注释取消此次警告  
+    &quot;default-case&quot;: 2,  
+    // 强制object.key 中 . 的位置，参数:  
+    //      property，'.'号应与属性在同一行  
+    //      object, '.' 号应与对象名在同一行  
+    &quot;dot-location&quot;: [2, &quot;property&quot;],  
+    // 强制使用.号取属性  
+    //    参数： allowKeywords：true 使用保留字做属性名时，只能使用.方式取属性  
+    //                          false 使用保留字做属性名时, 只能使用[]方式取属性 e.g [2, {&quot;allowKeywords&quot;: false}]  
+    //           allowPattern:  当属性名匹配提供的正则表达式时，允许使用[]方式取值,否则只能用.号取值 e.g [2, {&quot;allowPattern&quot;: &quot;^[a-z]+(_[a-z]+)+$&quot;}]  
+    &quot;dot-notation&quot;: [2, {&quot;allowKeywords&quot;: true}],  
+    // 文件末尾强制换行  
+    &quot;eol-last&quot;: 2,  
+    // 使用 === 替代 ==  
+    &quot;eqeqeq&quot;: [2, &quot;allow-null&quot;],  
+    // 方法表达式是否需要命名  
+    &quot;func-names&quot;: 0,  
+    // 方法定义风格，参数：  
+    //    declaration: 强制使用方法声明的方式，function f(){} e.g [2, &quot;declaration&quot;]  
+    //    expression：强制使用方法表达式的方式，var f = function() {}  e.g [2, &quot;expression&quot;]  
+    //    allowArrowFunctions: declaration风格中允许箭头函数。 e.g [2, &quot;declaration&quot;, { &quot;allowArrowFunctions&quot;: true }]  
+    &quot;func-style&quot;: 0,  
+    &quot;no-alert&quot;: 0,//禁止使用alert confirm prompt
+    &quot;no-array-constructor&quot;: 2,//禁止使用数组构造器
+    &quot;no-bitwise&quot;: 0,//禁止使用按位运算符
+    &quot;no-caller&quot;: 1,//禁止使用arguments.caller或arguments.callee
+    &quot;no-catch-shadow&quot;: 2,//禁止catch子句参数与外部作用域变量同名
+    &quot;no-class-assign&quot;: 2,//禁止给类赋值
+    &quot;no-cond-assign&quot;: 2,//禁止在条件表达式中使用赋值语句
+    &quot;no-console&quot;: 2,//禁止使用console
+    &quot;no-const-assign&quot;: 2,//禁止修改const声明的变量
+    &quot;no-constant-condition&quot;: 2,//禁止在条件中使用常量表达式 if(true) if(1)
+    &quot;no-continue&quot;: 0,//禁止使用continue
+    &quot;no-control-regex&quot;: 2,//禁止在正则表达式中使用控制字符
+    &quot;no-debugger&quot;: 2,//禁止使用debugger
+    &quot;no-delete-var&quot;: 2,//不能对var声明的变量使用delete操作符
+    &quot;no-div-regex&quot;: 1,//不能使用看起来像除法的正则表达式/=foo/
+    &quot;no-dupe-keys&quot;: 2,//在创建对象字面量时不允许键重复 {a:1,a:1}
+    &quot;no-dupe-args&quot;: 2,//函数参数不能重复
+    &quot;no-duplicate-case&quot;: 2,//switch中的case标签不能重复
+    &quot;no-else-return&quot;: 2,//如果if语句里面有return,后面不能跟else语句
+    &quot;no-empty&quot;: 2,//块语句中的内容不能为空
+    &quot;no-empty-character-class&quot;: 2,//正则表达式中的[]内容不能为空
+    &quot;no-empty-label&quot;: 2,//禁止使用空label
+    &quot;no-eq-null&quot;: 2,//禁止对null使用==或!=运算符
+    &quot;no-eval&quot;: 1,//禁止使用eval
+    &quot;no-ex-assign&quot;: 2,//禁止给catch语句中的异常参数赋值
+    &quot;no-extend-native&quot;: 2,//禁止扩展native对象
+    &quot;no-extra-bind&quot;: 2,//禁止不必要的函数绑定
+    &quot;no-extra-boolean-cast&quot;: 2,//禁止不必要的bool转换
+    &quot;no-extra-parens&quot;: 2,//禁止非必要的括号
+    &quot;no-extra-semi&quot;: 2,//禁止多余的冒号
+    &quot;no-fallthrough&quot;: 1,//禁止switch穿透
+    &quot;no-floating-decimal&quot;: 2,//禁止省略浮点数中的0 .5 3.
+    &quot;no-func-assign&quot;: 2,//禁止重复的函数声明
+    &quot;no-implicit-coercion&quot;: 1,//禁止隐式转换
+    &quot;no-implied-eval&quot;: 2,//禁止使用隐式eval
+    &quot;no-inline-comments&quot;: 0,//禁止行内备注
+    &quot;no-inner-declarations&quot;: [2, &quot;functions&quot;],//禁止在块语句中使用声明（变量或函数）
+    &quot;no-invalid-regexp&quot;: 2,//禁止无效的正则表达式
+    &quot;no-invalid-this&quot;: 2,//禁止无效的this，只能用在构造器，类，对象字面量
+    &quot;no-irregular-whitespace&quot;: 2,//不能有不规则的空格
+    &quot;no-iterator&quot;: 2,//禁止使用__iterator__ 属性
+    &quot;no-label-var&quot;: 2,//label名不能与var声明的变量名相同
+    &quot;no-labels&quot;: 2,//禁止标签声明
+    &quot;no-lone-blocks&quot;: 2,//禁止不必要的嵌套块
+    &quot;no-lonely-if&quot;: 2,//禁止else语句内只有if语句
+    &quot;no-loop-func&quot;: 1,//禁止在循环中使用函数（如果没有引用外部变量不形成闭包就可以）
+    &quot;no-mixed-requires&quot;: [0, false],//声明时不能混用声明类型
+    &quot;no-mixed-spaces-and-tabs&quot;: [2, false],//禁止混用tab和空格
+    &quot;linebreak-style&quot;: [0, &quot;windows&quot;],//换行风格
+    &quot;no-multi-spaces&quot;: 1,//不能用多余的空格
+    &quot;no-multi-str&quot;: 2,//字符串不能用\换行
+    &quot;no-multiple-empty-lines&quot;: [1, {&quot;max&quot;: 2}],//空行最多不能超过2行
+    &quot;no-native-reassign&quot;: 2,//不能重写native对象
+    &quot;no-negated-in-lhs&quot;: 2,//in 操作符的左边不能有!
+    &quot;no-nested-ternary&quot;: 0,//禁止使用嵌套的三目运算
+    &quot;no-new&quot;: 1,//禁止在使用new构造一个实例后不赋值
+    &quot;no-new-func&quot;: 1,//禁止使用new Function
+    &quot;no-new-object&quot;: 2,//禁止使用new Object()
+    &quot;no-new-require&quot;: 2,//禁止使用new require
+    &quot;no-new-wrappers&quot;: 2,//禁止使用new创建包装实例，new String new Boolean new Number
+    &quot;no-obj-calls&quot;: 2,//不能调用内置的全局对象，比如Math() JSON()
+    &quot;no-octal&quot;: 2,//禁止使用八进制数字
+    &quot;no-octal-escape&quot;: 2,//禁止使用八进制转义序列
+    &quot;no-param-reassign&quot;: 2,//禁止给参数重新赋值
+    &quot;no-path-concat&quot;: 0,//node中不能使用__dirname或__filename做路径拼接
+    &quot;no-plusplus&quot;: 0,//禁止使用++，--
+    &quot;no-process-env&quot;: 0,//禁止使用process.env
+    &quot;no-process-exit&quot;: 0,//禁止使用process.exit()
+    &quot;no-proto&quot;: 2,//禁止使用__proto__属性
+    &quot;no-redeclare&quot;: 2,//禁止重复声明变量
+    &quot;no-regex-spaces&quot;: 2,//禁止在正则表达式字面量中使用多个空格 /foo bar/
+    &quot;no-restricted-modules&quot;: 0,//如果禁用了指定模块，使用就会报错
+    &quot;no-return-assign&quot;: 1,//return 语句中不能有赋值表达式
+    &quot;no-script-url&quot;: 0,//禁止使用javascript:void(0)
+    &quot;no-self-compare&quot;: 2,//不能比较自身
+    &quot;no-sequences&quot;: 0,//禁止使用逗号运算符
+    &quot;no-shadow&quot;: 2,//外部作用域中的变量不能与它所包含的作用域中的变量或参数同名
+    &quot;no-shadow-restricted-names&quot;: 2,//严格模式中规定的限制标识符不能作为声明时的变量名使用
+    &quot;no-spaced-func&quot;: 2,//函数调用时 函数名与()之间不能有空格
+    &quot;no-sparse-arrays&quot;: 2,//禁止稀疏数组， [1,,2]
+    &quot;no-sync&quot;: 0,//nodejs 禁止同步方法
+    &quot;no-ternary&quot;: 0,//禁止使用三目运算符
+    &quot;no-trailing-spaces&quot;: 1,//一行结束后面不要有空格
+    &quot;no-this-before-super&quot;: 0,//在调用super()之前不能使用this或super
+    &quot;no-throw-literal&quot;: 2,//禁止抛出字面量错误 throw &quot;error&quot;;
+    &quot;no-undef&quot;: 1,//不能有未定义的变量
+    &quot;no-undef-init&quot;: 2,//变量初始化时不能直接给它赋值为undefined
+    &quot;no-undefined&quot;: 2,//不能使用undefined
+    &quot;no-unexpected-multiline&quot;: 2,//避免多行表达式
+    &quot;no-underscore-dangle&quot;: 1,//标识符不能以_开头或结尾
+    &quot;no-unneeded-ternary&quot;: 2,//禁止不必要的嵌套 var isYes = answer === 1 ? true : false;
+    &quot;no-unreachable&quot;: 2,//不能有无法执行的代码
+    &quot;no-unused-expressions&quot;: 2,//禁止无用的表达式
+    &quot;no-unused-vars&quot;: [2, {&quot;vars&quot;: &quot;all&quot;, &quot;args&quot;: &quot;after-used&quot;}],//不能有声明后未被使用的变量或参数
+    &quot;no-use-before-define&quot;: 2,//未定义前不能使用
+    &quot;no-useless-call&quot;: 2,//禁止不必要的call和apply
+    &quot;no-void&quot;: 2,//禁用void操作符
+    &quot;no-var&quot;: 0,//禁用var，用let和const代替
+    &quot;no-warning-comments&quot;: [1, { &quot;terms&quot;: [&quot;todo&quot;, &quot;fixme&quot;, &quot;xxx&quot;], &quot;location&quot;: &quot;start&quot; }],//不能有警告备注
+    &quot;no-with&quot;: 2,//禁用with
+    &quot;array-bracket-spacing&quot;: [2, &quot;never&quot;],//是否允许非空数组里面有多余的空格
+    &quot;arrow-parens&quot;: 0,//箭头函数用小括号括起来
+    &quot;arrow-spacing&quot;: 0,//=&gt;的前/后括号
+    &quot;accessor-pairs&quot;: 0,//在对象中使用getter/setter
+    &quot;block-scoped-var&quot;: 0,//块语句中使用var
+    &quot;brace-style&quot;: [1, &quot;1tbs&quot;],//大括号风格
+    &quot;callback-return&quot;: 1,//避免多次调用回调什么的
+    &quot;camelcase&quot;: 2,//强制驼峰法命名
+    &quot;comma-dangle&quot;: [2, &quot;never&quot;],//对象字面量项尾不能有逗号
+    &quot;comma-spacing&quot;: 0,//逗号前后的空格
+    &quot;comma-style&quot;: [2, &quot;last&quot;],//逗号风格，换行时在行首还是行尾
+    &quot;complexity&quot;: [0, 11],//循环复杂度
+    &quot;computed-property-spacing&quot;: [0, &quot;never&quot;],//是否允许计算后的键名什么的
+    &quot;consistent-return&quot;: 0,//return 后面是否允许省略
+    &quot;consistent-this&quot;: [2, &quot;that&quot;],//this别名
+    &quot;constructor-super&quot;: 0,//非派生类不能调用super，派生类必须调用super
+    &quot;curly&quot;: [2, &quot;all&quot;],//必须使用 if(){} 中的{}
+    &quot;default-case&quot;: 2,//switch语句最后必须有default
+    &quot;dot-location&quot;: 0,//对象访问符的位置，换行的时候在行首还是行尾
+    &quot;dot-notation&quot;: [0, { &quot;allowKeywords&quot;: true }],//避免不必要的方括号
+    &quot;eol-last&quot;: 0,//文件以单一的换行符结束
+    &quot;eqeqeq&quot;: 2,//必须使用全等
+    &quot;func-names&quot;: 0,//函数表达式必须有名字
+    &quot;func-style&quot;: [0, &quot;declaration&quot;],//函数风格，规定只能使用函数声明/函数表达式
+    &quot;generator-star-spacing&quot;: 0,//生成器函数*的前后空格
+    &quot;guard-for-in&quot;: 0,//for in循环要用if语句过滤
+    &quot;handle-callback-err&quot;: 0,//nodejs 处理错误
+    &quot;id-length&quot;: 0,//变量名长度
+    &quot;indent&quot;: [2, 4],//缩进风格
+    &quot;init-declarations&quot;: 0,//声明时必须赋初值
+    &quot;key-spacing&quot;: [0, { &quot;beforeColon&quot;: false, &quot;afterColon&quot;: true }],//对象字面量中冒号的前后空格
+    &quot;lines-around-comment&quot;: 0,//行前/行后备注
+    &quot;max-depth&quot;: [0, 4],//嵌套块深度
+    &quot;max-len&quot;: [0, 80, 4],//字符串最大长度
+    &quot;max-nested-callbacks&quot;: [0, 2],//回调嵌套深度
+    &quot;max-params&quot;: [0, 3],//函数最多只能有3个参数
+    &quot;max-statements&quot;: [0, 10],//函数内最多有几个声明
+    &quot;new-cap&quot;: 2,//函数名首行大写必须使用new方式调用，首行小写必须用不带new方式调用
+    &quot;new-parens&quot;: 2,//new时必须加小括号
+    &quot;newline-after-var&quot;: 2,//变量声明后是否需要空一行
+    &quot;object-curly-spacing&quot;: [0, &quot;never&quot;],//大括号内是否允许不必要的空格
+    &quot;object-shorthand&quot;: 0,//强制对象字面量缩写语法
+    &quot;one-var&quot;: 1,//连续声明
+    &quot;operator-assignment&quot;: [0, &quot;always&quot;],//赋值运算符 += -=什么的
+    &quot;operator-linebreak&quot;: [2, &quot;after&quot;],//换行时运算符在行尾还是行首
+    &quot;padded-blocks&quot;: 0,//块语句内行首行尾是否要空行
+    &quot;prefer-const&quot;: 0,//首选const
+    &quot;prefer-spread&quot;: 0,//首选展开运算
+    &quot;prefer-reflect&quot;: 0,//首选Reflect的方法
+    &quot;quotes&quot;: [1, &quot;single&quot;],//引号类型 `` &quot;&quot; ''
+    &quot;quote-props&quot;:[2, &quot;always&quot;],//对象字面量中的属性名是否强制双引号
+    &quot;radix&quot;: 2,//parseInt必须指定第二个参数
+    &quot;id-match&quot;: 0,//命名检测
+    &quot;require-yield&quot;: 0,//生成器函数必须有yield
+    &quot;semi&quot;: [2, &quot;always&quot;],//语句强制分号结尾
+    &quot;semi-spacing&quot;: [0, {&quot;before&quot;: false, &quot;after&quot;: true}],//分号前后空格
+    &quot;sort-vars&quot;: 0,//变量声明时排序
+    &quot;space-after-keywords&quot;: [0, &quot;always&quot;],//关键字后面是否要空一格
+    &quot;space-before-blocks&quot;: [0, &quot;always&quot;],//不以新行开始的块{前面要不要有空格
+    &quot;space-before-function-paren&quot;: [0, &quot;always&quot;],//函数定义时括号前面要不要有空格
+    &quot;space-in-parens&quot;: [0, &quot;never&quot;],//小括号里面要不要有空格
+    &quot;space-infix-ops&quot;: 0,//中缀操作符周围要不要有空格
+    &quot;space-return-throw-case&quot;: 2,//return throw case后面要不要加空格
+    &quot;space-unary-ops&quot;: [0, { &quot;words&quot;: true, &quot;nonwords&quot;: false }],//一元运算符的前/后要不要加空格
+    &quot;spaced-comment&quot;: 0,//注释风格不要有空格什么的
+    &quot;strict&quot;: 2,//使用严格模式
+    &quot;use-isnan&quot;: 2,//禁止比较时使用NaN，只能用isNaN()
+    &quot;valid-jsdoc&quot;: 0,//jsdoc规则
+    &quot;valid-typeof&quot;: 2,//必须使用合法的typeof的值
+    &quot;vars-on-top&quot;: 2,//var必须放在作用域顶部
+    &quot;wrap-iife&quot;: [2, &quot;inside&quot;],//立即执行函数表达式的小括号风格
+    &quot;wrap-regex&quot;: 0,//正则表达式字面量用小括号包起来
+    &quot;yoda&quot;: [2, &quot;never&quot;]//禁止尤达条件
   }  
-<span style="color:#960050;background-color:#1e0010">}</span>
-</code></pre></div>
+}
+</code></pre>
+
     </div>
 
     <div class="post-copyright">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>技术相关随笔 on Magic</title>
@@ -18,7 +18,7 @@
       
       <guid>/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/</guid>
       <description>重新定义模块：
-declare var am: any; // 支付宝declare interface Window {ap: any; // 支付宝注入}declare module &amp;#39;dva/dynamic&amp;#39; {const dynamic: (config: any) =&amp;gt; React.ComponentType;export default dynamic;}</description>
+declare var am: any; // 支付宝 declare interface Window { ap: any; // 支付宝注入 } declare module &#39;dva/dynamic&#39; { const dynamic: (config: any) =&amp;gt; React.ComponentType; export default dynamic; }  </description>
     </item>
     
     <item>
@@ -30,9 +30,9 @@ declare var am: any; // 支付宝declare interface Window {ap: any; // 支付
       <description>文章转载自微信公众号 大转转FE
 适用场景 像一些 App 的内嵌页面，提供各种各样的交互操作，其实webview的应用场景远远不止这些，其实在一些PC的软件里，和我们交互的也是我们的html页面，只是穿着webview的衣服，衣服太美而我们没有发现他们的真谛。
 另外，还有一些网络机顶盒里的交互，也是webview在和我们打交道，比如一些早期的IPTV里的EPG都是运行在webview里的，它们基于webkit内核，尽管我们使用的交互方式是遥控器。
- 与App native的交互 目前使用频率最多的，还是客户端内嵌的webview，都是webview打开m页去承接的。目前javascript和客户端（后面统称native）交互的常见方式有两种，一种是通过JSBridge的方式，另一种是通过schema的方式。
+与App native的交互 目前使用频率最多的，还是客户端内嵌的webview，都是webview打开m页去承接的。目前javascript和客户端（后面统称native）交互的常见方式有两种，一种是通过JSBridge的方式，另一种是通过schema的方式。
 JSBridge 体现的形式其实就是，当我们在native内打开m页，native会在全局的window下，为我们注入一个Bridge。这个Bridge里面，会包含我们与native交互的各种方法、比如判断第三方App是否安装、获取网络信息等等功能。
-/*** 作用域下的JSBridge，* 和实例化后的getNetInfomation，* 均根据实际约定情况而定，* 这里只是用来举例说明*/const bridge = window.JSBridge;console.log(bridge.getNetInfomation()); IOS端: 在IOS中，主要使用WebViewJavascriptBridge来注册，可以参考Github WebViewJavascriptBridge  self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];[self.bridge registerHandler:@&amp;#34;ObjC Echo&amp;#34; handler:^(id data, WVJBResponseCallback responseCallback) {// to do... }]; Android: 在Android中，需要通过addJavascriptInterface来注册  class JSBridge {@JavascriptInterface //注意这里的注解。出于安全的考虑，4.2 之后强制要求，不然无法从 Javascript 中发起调用 public void getNetInfomation(){// to do };}webView.</description>
+/** * 作用域下的JSBridge， * 和实例化后的getNetInfomation， * 均根据实际约定情况而定， * 这里只是用来举例说明 */ const bridge = window.JSBridge; console.log(bridge.getNetInfomation());   IOS端: 在IOS中，主要使用WebViewJavascriptBridge来注册，可以参考Github WebViewJavascriptBridge  self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView]; [self.bridge registerHandler:@&amp;quot;ObjC Echo&amp;quot; handler:^(id data, WVJBResponseCallback responseCallback) { // to do... }];   Android: 在Android中，需要通过addJavascriptInterface来注册  class JSBridge { @JavascriptInterface //注意这里的注解。出于安全的考虑，4.2 之后强制要求，不然无法从 Javascript 中发起调用 public void getNetInfomation(){ // to do }; } webView.</description>
     </item>
     
     <item>
@@ -51,7 +51,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       
       <guid>/2019/%E6%95%B0%E7%BB%84%E9%99%8D%E7%BA%AC/</guid>
       <description>第一种：将数组字符串话  利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。
- let arr = [[222, 333, 444], [55, 66, 77], 11, ]arr += &amp;#39;&amp;#39;;arr = arr.split(&amp;#39;,&amp;#39;);arr = arr.map(item =&amp;gt; Number(item));console.log(arr); // [222, 333, 444, 55, 66, 77, 11]第二种：自定义函数 const reduceDimension = (arr) =&amp;gt; {let ret = [];let toArr = function(arr){arr.forEach(function(item){Array.isArray(item) ? toArr(item) : ret.push(item);});}toArr(arr);return ret;}let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];第三种 ES6数组的扩展 Array.</description>
+ let arr = [[222, 333, 444], [55, 66, 77], 11, ] arr += &#39;&#39;; arr = arr.split(&#39;,&#39;); arr = arr.map(item =&amp;gt; Number(item)); console.log(arr); // [222, 333, 444, 55, 66, 77, 11]  第二种：自定义函数 const reduceDimension = (arr) =&amp;gt; { let ret = []; let toArr = function(arr){ arr.forEach(function(item){ Array.isArray(item) ? toArr(item) : ret.push(item); }); } toArr(arr); return ret; } let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];  第三种 ES6数组的扩展 Array.</description>
     </item>
     
     <item>
@@ -60,7 +60,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       <pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/eslintrc%E9%85%8D%E7%BD%AE/</guid>
-      <description>{&amp;#34;extends&amp;#34;: [&amp;#34;alloy&amp;#34;,&amp;#34;alloy/react&amp;#34;,&amp;#34;alloy/typescript&amp;#34;,],&amp;#34;env&amp;#34;: { &amp;#34;browser&amp;#34;: true, &amp;#34;node&amp;#34;: true, &amp;#34;commonjs&amp;#34;: true }, &amp;#34;globals&amp;#34;: {// 这里填入你的项目需要的全局变量// false 表示这个全局变量不允许被重新赋值，比如：//// myGlobal: false},&amp;#34;ecmaFeatures&amp;#34;: { // lambda表达式 &amp;#34;arrowFunctions&amp;#34;: true, // 解构赋值 &amp;#34;destructuring&amp;#34;: true, // class &amp;#34;classes&amp;#34;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &amp;#34;defaultParams&amp;#34;: true, // 块级作用域，允许使用let const &amp;#34;blockBindings&amp;#34;: true, // 允许使用模块，模块内默认严格模式 &amp;#34;modules&amp;#34;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &amp;#34;objectLiteralComputedProperties&amp;#34;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &amp;#34;Hello!</description>
+      <description>{ &amp;quot;extends&amp;quot;: [ &amp;quot;alloy&amp;quot;, &amp;quot;alloy/react&amp;quot;, &amp;quot;alloy/typescript&amp;quot;, ], &amp;quot;env&amp;quot;: { &amp;quot;browser&amp;quot;: true, &amp;quot;node&amp;quot;: true, &amp;quot;commonjs&amp;quot;: true }, &amp;quot;globals&amp;quot;: { // 这里填入你的项目需要的全局变量 // false 表示这个全局变量不允许被重新赋值，比如： // // myGlobal: false }, &amp;quot;ecmaFeatures&amp;quot;: { // lambda表达式 &amp;quot;arrowFunctions&amp;quot;: true, // 解构赋值 &amp;quot;destructuring&amp;quot;: true, // class &amp;quot;classes&amp;quot;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &amp;quot;defaultParams&amp;quot;: true, // 块级作用域，允许使用let const &amp;quot;blockBindings&amp;quot;: true, // 允许使用模块，模块内默认严格模式 &amp;quot;modules&amp;quot;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &amp;quot;objectLiteralComputedProperties&amp;quot;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &amp;quot;Hello!</description>
     </item>
     
     <item>
@@ -69,7 +69,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       <pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E5%BC%B9%E5%87%BA%E9%81%AE%E7%85%A7%E9%98%BB%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/</guid>
-      <description>代码如下： const bodyEl = document.body;let top = 0;/*** 阻止页面滚动* @param {boolean} isFixed*/export function stopBodyScroll(isFixed: boolean) {if (isFixed) {top = window.scrollY;bodyEl.style.position = &amp;#39;fixed&amp;#39;;bodyEl.style.top = -top + &amp;#39;px&amp;#39;;} else {bodyEl.style.position = &amp;#39;&amp;#39;;bodyEl.style.top = &amp;#39;&amp;#39;;window.scrollTo(0, top); // 回到原先的top }}</description>
+      <description> 代码如下： const bodyEl = document.body; let top = 0; /** * 阻止页面滚动 * @param {boolean} isFixed */ export function stopBodyScroll(isFixed: boolean) { if (isFixed) { top = window.scrollY; bodyEl.style.position = &#39;fixed&#39;; bodyEl.style.top = -top + &#39;px&#39;; } else { bodyEl.style.position = &#39;&#39;; bodyEl.style.top = &#39;&#39;; window.scrollTo(0, top); // 回到原先的top } }  </description>
     </item>
     
     <item>
@@ -78,7 +78,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/shadowsocks%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B/</guid>
-      <description>安装  wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh。注意 (warning) : 国外服务器运行脚本时容易出错，如出现错误提示 bash: wget: command not found，可以请在先执行 yum -y install wget 命令。成功后，再执行上面的命令。如果没有出现提示错误，请略过。 chmod +x shadowsocks-all.sh ./shadowsocks-all.sh 2&amp;gt;&amp;amp;1 | tee shadowsocks-all.log  </description>
+      <description> 安装  wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh。注意 (warning) : 国外服务器运行脚本时容易出错，如出现错误提示 bash: wget: command not found，可以请在先执行 yum -y install wget 命令。成功后，再执行上面的命令。如果没有出现提示错误，请略过。 chmod +x shadowsocks-all.sh ./shadowsocks-all.sh 2&amp;gt;&amp;amp;1 | tee shadowsocks-all.log  </description>
     </item>
     
     <item>
@@ -87,7 +87,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/ua%E6%A3%80%E6%B5%8B/</guid>
-      <description>代码如下： const userAgent = window.navigator.userAgent.toLowerCase();export const uaJudge = {get isAndroid() {return /android|adr/gi.test(userAgent);},get isVivo() {return /vivo/gi.test(userAgent);},get isIos() {return /iphone|ipod|ipad/gi.test(userAgent);},/** 微信（包含小程序） */get isWeChat() {return /micromessenger/gi.test(userAgent);},/** 微信小程序 */get isWeChatMini() {if (this.isWeChat) {return new Promise((resolve, reject) =&amp;gt; {wx.miniProgram.getEnv((res: any) =&amp;gt; {resolve(res.miniprogram);});setTimeout(resolve, 1000);});} else {return Promise.resolve(false);}},/** 支付宝 */get isAlipay() {return /alipay/gi.</description>
+      <description>代码如下： const userAgent = window.navigator.userAgent.toLowerCase(); export const uaJudge = { get isAndroid() { return /android|adr/gi.test(userAgent); }, get isVivo() { return /vivo/gi.test(userAgent); }, get isIos() { return /iphone|ipod|ipad/gi.test(userAgent); }, /** 微信（包含小程序） */ get isWeChat() { return /micromessenger/gi.test(userAgent); }, /** 微信小程序 */ get isWeChatMini() { if (this.isWeChat) { return new Promise((resolve, reject) =&amp;gt; { wx.miniProgram.getEnv((res: any) =&amp;gt; { resolve(res.miniprogram); }); setTimeout(resolve, 1000); }); } else { return Promise.resolve(false); } }, /** 支付宝 */ get isAlipay() { return /alipay/gi.</description>
     </item>
     
     <item>
@@ -96,7 +96,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0content%E5%AE%BD%E9%AB%98/</guid>
-      <description>代码如下： /*** 获取元素content宽高* @param el*/export function getContentSize(el: HTMLElement) {const width = el.offsetWidth;const height = el.offsetHeight;const style = window.getComputedStyle(el);// border const blw = parseFloat(style.borderLeftWidth || &amp;#39;0&amp;#39;);const brw = parseFloat(style.borderRightWidth || &amp;#39;0&amp;#39;);const btw = parseFloat(style.borderTopWidth || &amp;#39;0&amp;#39;);const bbw = parseFloat(style.borderBottomWidth || &amp;#39;0&amp;#39;);// padding const plw = parseFloat(style.paddingLeft || &amp;#39;0&amp;#39;);const prw = parseFloat(style.paddingRight || &amp;#39;0&amp;#39;);const ptw = parseFloat(style.</description>
+      <description>代码如下： /** * 获取元素content宽高 * @param el */ export function getContentSize(el: HTMLElement) { const width = el.offsetWidth; const height = el.offsetHeight; const style = window.getComputedStyle(el); // border const blw = parseFloat(style.borderLeftWidth || &#39;0&#39;); const brw = parseFloat(style.borderRightWidth || &#39;0&#39;); const btw = parseFloat(style.borderTopWidth || &#39;0&#39;); const bbw = parseFloat(style.borderBottomWidth || &#39;0&#39;); // padding const plw = parseFloat(style.paddingLeft || &#39;0&#39;); const prw = parseFloat(style.paddingRight || &#39;0&#39;); const ptw = parseFloat(style.paddingTop || &#39;0&#39;); const pbw = parseFloat(style.</description>
     </item>
     
     <item>
@@ -105,7 +105,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E9%80%9A%E8%BF%87http%E9%93%BE%E6%8E%A5%E5%8A%A0%E8%BD%BDscript/</guid>
-      <description>function loadScript(src: string, async: boolean = true) {return new Promise((resolve, reject) =&amp;gt; {const script = document.createElement(&amp;#39;script&amp;#39;);async &amp;amp;&amp;amp; (script.async = true);script.onload = resolve;script.onerror = reject;script.src = src;document.body.appendChild(script);});}// 注意：使用appendChild，不要使用append，ios9不支持append。</description>
+      <description>function loadScript(src: string, async: boolean = true) { return new Promise((resolve, reject) =&amp;gt; { const script = document.createElement(&#39;script&#39;); async &amp;amp;&amp;amp; (script.async = true); script.onload = resolve; script.onerror = reject; script.src = src; document.body.appendChild(script); }); } // 注意：使用appendChild，不要使用append，ios9不支持append。  </description>
     </item>
     
     <item>
@@ -114,7 +114,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/local-stroge/</guid>
-      <description>设置本地存储  function setStorage(key: string, value: any) {try {localStorage.setItem(key, JSON.stringify({data: value,time: Date.now(),}));} catch {console.log(&amp;#39;localStorage.setItem error&amp;#39;);console.log(key, value);}} 获取本地存储  // 注意：stringify 会过滤掉undefined的值function getStorage(key: string) {const result = localStorage.getItem(key);if (result) {try {const objRes = JSON.parse(result);return objRes;} catch (e) {console.log(&amp;#39;JSON.parse error:&amp;#39;, result);return result;}} else {return result;}} 删除本地存储  function removeStorage(key: string) {localStorage.</description>
+      <description>设置本地存储  function setStorage(key: string, value: any) { try { localStorage.setItem(key, JSON.stringify({ data: value, time: Date.now(), })); } catch { console.log(&#39;localStorage.setItem error&#39;); console.log(key, value); } }   获取本地存储  // 注意：stringify 会过滤掉undefined的值 function getStorage(key: string) { const result = localStorage.getItem(key); if (result) { try { const objRes = JSON.parse(result); return objRes; } catch (e) { console.log(&#39;JSON.parse error:&#39;, result); return result; } } else { return result; } }   删除本地存储  function removeStorage(key: string) { localStorage.</description>
     </item>
     
     <item>
@@ -123,7 +123,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/js-essay/</guid>
-      <description>JS随笔 等待多好毫秒后执行后面代码 export const sleep = async (ms: number) =&amp;gt; {return new Promise((resolve) =&amp;gt; setTimeout(resolve, ms || 0));};点击按钮复制一个文本或者链接地址 &amp;lt;div id=&amp;#34;lalala&amp;#34;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt;&amp;lt;button onclick=&amp;#34;but()&amp;#34;&amp;gt;点我&amp;lt;/button&amp;gt;&amp;lt;script&amp;gt;function but () {var copyDOM = document.getElementById(&amp;#39;lalala&amp;#39;); var range = document.createRange();// 选中需要复制的节点 range.selectNode(copyDOM);// 执行选中元素 window.getSelection().addRange(range);// 执行 copy 操作 var successful = document.execCommand(&amp;#39;copy&amp;#39;); try { var msg = successful ? &amp;#39;successful&amp;#39; : &amp;#39;unsuccessful&amp;#39;; console.log(&amp;#39;copy is&amp;#39; + msg); } catch(err) { console.</description>
+      <description>JS随笔 等待多好毫秒后执行后面代码 export const sleep = async (ms: number) =&amp;gt; { return new Promise((resolve) =&amp;gt; setTimeout(resolve, ms || 0)); };  点击按钮复制一个文本或者链接地址 &amp;lt;div id=&amp;quot;lalala&amp;quot;&amp;gt;www.baidu.com45646!!!!&amp;lt;/div&amp;gt; &amp;lt;button onclick=&amp;quot;but()&amp;quot;&amp;gt;点我&amp;lt;/button&amp;gt; &amp;lt;script&amp;gt; function but () { var copyDOM = document.getElementById(&#39;lalala&#39;); var range = document.createRange(); // 选中需要复制的节点 range.selectNode(copyDOM); // 执行选中元素 window.getSelection().addRange(range); // 执行 copy 操作 var successful = document.execCommand(&#39;copy&#39;); try { var msg = successful ? &#39;successful&#39; : &#39;unsuccessful&#39;; console.log(&#39;copy is&#39; + msg); } catch(err) { console.</description>
     </item>
     
     <item>
@@ -132,7 +132,7 @@ JSBridge 体现的形式其实就是，当我们在native内打开m页，native�
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/httpstatus/</guid>
-      <description>常见的状态码  1xx：临时回应，表示客户端请继续。 2xx：请求成功：  200：请求成功。   3xx: 表示请求的目标有变化，希望客户端进一步处理：  301&amp;amp;302：永久性与临时性跳转。 304：客户端缓存没有更新。   4xx：客户端请求错误：  403：无权限。 404：表示请求的页面不存在。 418：It’s a teapot. 这是一个彩蛋，来自 ietf 的一个愚人节玩笑。（超文本咖啡壶控制协议）   5xx：服务端请求错误：  500：服务端错误。 503：服务端暂时性错误，可以一会再试。    对我们前端来说，1xx 系列的状态码是非常陌生的，原因是 1xx 的状态被浏览器 http 库直接处理掉了，不会让上层应用知晓。
+      <description>常见的状态码  1xx：临时回应，表示客户端请继续。 2xx：请求成功：  200：请求成功。  3xx: 表示请求的目标有变化，希望客户端进一步处理：  301&amp;amp;302：永久性与临时性跳转。 304：客户端缓存没有更新。  4xx：客户端请求错误：  403：无权限。 404：表示请求的页面不存在。 418：It’s a teapot. 这是一个彩蛋，来自 ietf 的一个愚人节玩笑。（超文本咖啡壶控制协议）  5xx：服务端请求错误：  500：服务端错误。 503：服务端暂时性错误，可以一会再试。   对我们前端来说，1xx 系列的状态码是非常陌生的，原因是 1xx 的状态被浏览器 http 库直接处理掉了，不会让上层应用知晓。
 2xx 系列的状态最熟悉的就是 200，这通常是网页请求成功的标志，也是大家最喜欢的状态码。
 3xx 系列比较复杂，301 和 302 两个状态表示当前资源已经被转移，只不过一个是永久性转移，一个是临时性转移。实际上 301 更接近于一种报错，提示客户端下次别来了。
 304 又是一个每个前端必知必会的状态，产生这个状态的前提是：客户端本地已经有缓存的版本，并且在 Request 中告诉了服务端，当服务端通过时间或者 tag，发现没有更新的时候，就会返回一个不含 body 的 304 状态。</description>

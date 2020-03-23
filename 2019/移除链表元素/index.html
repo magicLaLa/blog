@@ -164,43 +164,53 @@
         
         
 
-        <h3 id="移除链表元素">移除链表元素</h3>
+        
+
+<h3 id="移除链表元素">移除链表元素</h3>
+
 <ul>
 <li>删除链表中等于给定值 val 的所有节点。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">示例:
-输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val <span style="color:#f92672">=</span> 6
+
+<pre><code class="language-bash">示例:
+输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6
 输出: 1-&gt;2-&gt;3-&gt;4-&gt;5
-</code></pre></div><h4 id="分析">分析</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {ListNode} head
-</span><span style="color:#75715e"> * @param {number} val
-</span><span style="color:#75715e"> * @return {ListNode}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">removeElements</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">head</span>, <span style="color:#a6e22e">val</span>) {
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">tem</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">head</span>;
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">pre</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-  <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">tem</span>) {
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">tem</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">val</span>) {
-      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">pre</span>) {
-        <span style="color:#a6e22e">pre</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tem</span>.<span style="color:#a6e22e">next</span>;
-      } <span style="color:#66d9ef">else</span> {
-        <span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tem</span>.<span style="color:#a6e22e">next</span>;
+</code></pre>
+
+<h4 id="分析">分析</h4>
+
+<pre><code class="language-javascript">/**
+ * @param {ListNode} head
+ * @param {number} val
+ * @return {ListNode}
+ */
+var removeElements = function(head, val) {
+  let tem = head;
+  let pre = null;
+  while (tem) {
+    if (tem.val === val) {
+      if (pre) {
+        pre.next = tem.next;
+      } else {
+        head = tem.next;
       }
-    } <span style="color:#66d9ef">else</span> {
-      <span style="color:#a6e22e">pre</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tem</span>;
+    } else {
+      pre = tem;
     }
-    <span style="color:#a6e22e">tem</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tem</span>.<span style="color:#a6e22e">next</span>;
+    tem = tem.next;
   }
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">head</span>;
+  return head;
 };
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">removeElements</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">head</span>, <span style="color:#a6e22e">val</span>) {
-  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">head</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">val</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">removeElements</span>(<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span>, <span style="color:#a6e22e">val</span>);
-  <span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">removeElements</span>(<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span>, <span style="color:#a6e22e">val</span>);
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">head</span>;
+</code></pre>
+
+<pre><code class="language-javascript">var removeElements = function(head, val) {
+  if (!head) return null;
+  if (head.val === val) return removeElements(head.next, val);
+  head.next = removeElements(head.next, val);
+  return head;
 };
-</code></pre></div>
+</code></pre>
+
     </div>
 
     <div class="post-copyright">

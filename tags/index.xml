@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Magic</title>
@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 13 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Windows Terminal</title>
+      <link>/tags/windows-terminal/</link>
+      <pubDate>Sun, 22 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/windows-terminal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>杂项</title>
+      <link>/tags/%E6%9D%82%E9%A1%B9/</link>
+      <pubDate>Sun, 22 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E6%9D%82%E9%A1%B9/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Javascript设计模式与应用实践</title>
@@ -57,29 +75,11 @@
     </item>
     
     <item>
-      <title>链表</title>
-      <link>/tags/%E9%93%BE%E8%A1%A8/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E9%93%BE%E8%A1%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>链表-easy</title>
       <link>/tags/%E9%93%BE%E8%A1%A8-easy/</link>
       <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/%E9%93%BE%E8%A1%A8-easy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>essay</title>
-      <link>/tags/essay/</link>
-      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/essay/</guid>
       <description></description>
     </item>
     
@@ -93,11 +93,29 @@
     </item>
     
     <item>
+      <title>essay</title>
+      <link>/tags/essay/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/essay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>easy</title>
       <link>/tags/easy/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/easy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>链表</title>
+      <link>/tags/%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E9%93%BE%E8%A1%A8/</guid>
       <description></description>
     </item>
     
@@ -120,20 +138,20 @@
     </item>
     
     <item>
-      <title>nginx</title>
-      <link>/tags/nginx/</link>
-      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/nginx/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Node</title>
       <link>/tags/node/</link>
       <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/node/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>/tags/nginx/</link>
+      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/nginx/</guid>
       <description></description>
     </item>
     
@@ -161,15 +179,6 @@
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/regex/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>杂项</title>
-      <link>/tags/%E6%9D%82%E9%A1%B9/</link>
-      <pubDate>Tue, 18 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E6%9D%82%E9%A1%B9/</guid>
       <description></description>
     </item>
     
@@ -237,15 +246,6 @@
     </item>
     
     <item>
-      <title>git</title>
-      <link>/tags/git/</link>
-      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>HTTP</title>
       <link>/tags/http/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
@@ -255,20 +255,20 @@
     </item>
     
     <item>
+      <title>git</title>
+      <link>/tags/git/</link>
+      <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>other</title>
       <link>/tags/other/</link>
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/other/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Windows Terminal</title>
-      <link>/tags/windows-terminal/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/windows-terminal/</guid>
       <description></description>
     </item>
     

@@ -11,7 +11,7 @@
   
   
   <link rel="prev" href="/2017/git-commit-emoji/" />
-  <link rel="next" href="/2017/vue/" />
+  <link rel="next" href="/2017/template/" />
   <link rel="canonical" href="/2017/debugtools/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -36,10 +36,8 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="debugTools"/>
-<meta name="twitter:description" content="抓包调试工具 Fidder的使用  下载地址  Fidder简介  抓包工具有很多，小到最常用的web调试工具firebug，达到通用的强大的抓包工具wireshark.为什么使用fiddler?原因如下：
- a.Firebug虽然可以抓包，但是对于分析http请求的详细信息，不够强大。模拟http请求的功能也不够，且firebug常常是需要“无刷新修改”，如果刷新了页面，所有的修改都不会保存。 b.Wireshark是通用的抓包工具，但是比较庞大，对于只需要抓取http请求的应用来说，似乎有些大材小用。 c.Httpwatch也是比较常用的http抓包工具，但是只支持IE和firefox浏览器（其他浏览器可能会有相应的插件），对于想要调试chrome浏览器的http请求，似乎稍显无力，而Fiddler 是一个使用本地 127.0.0.1:8888 的 HTTP 代理，任何能够设置 HTTP 代理为 127.0.0.1:8888 的浏览器和应用程序都可以使用 Fiddler。
-  对手机抓包  Tools &gt; Options &gt; https 勾选图中红线框出来的，之后会有弹窗提示安装证书。  Tools &gt; Options &gt; connections 勾选图中的  在手机上连接跟电脑在同一局域网下的网络，然后在无线网络中去设置代理，代理地址就是电脑ip地址和 端口号，之后在手机浏览器中输入 电脑ip地址和端口号 进行访问，会出下如下图，然后点击图中框出来的文字，下载并且安装证书。ios 比 安卓再多一个步骤，需要去 设置-&gt;通用-&gt;关于本机-&gt;证书信任设置 去信任证书才可以进行抓包。  在电脑上对浏览器进行抓包  可以在浏览器设置里面设置代理，或者安装 Proxy SwitchyOmega 这个插件来管理代理，代理协议为 http，代理服务器为 127.0.0.1，端口号是在 fidder 上设置的端口号。  可以对fidder自定义规则(Rules -&gt; Customize Rules)   下列设置中只能有一个OnBeforeResponse和OnBeforeResponse，下面只是为了方便演示代码位置才写了多个
-  修改请求"/>
+<meta name="twitter:description" content="抓包调试工具 Fidder的使用  下载地址  Fidder简介  抓包工具有很多，小到最常用的web调试工具firebug，达到通用的强大的抓包工具wireshark.为什么使用fiddler?原因如下： &gt; a.Firebug虽然可以抓包，但是对于分析http请求的详细信息，不够强大。模拟http请求的功能也不够，且firebug常常是需要“无刷新修改”，如果刷新了页面，所有的修改都不会保存。 &gt; b.Wireshark是通用的抓包工具，但是比较庞大，对于只需要抓取http请求的应用来说，似乎有些大材小用。 &gt; c.Httpwatch也是比较常用的http抓包工具，但是只支持IE和firefox浏览器（其他浏览器可能会有相应的插件），对于想要调试chrome浏览器的http请求，似乎稍显无力，而Fiddler 是一个使用本地 127.0.0.1:8888 的 HTTP 代理，任何能够设置 HTTP 代理为 127.0.0.1:8888 的浏览器和应用程序都可以使用 Fiddler。
+ 对手机抓包  Tools &gt; Options &gt; https 勾选图中红线框出来的，之后会有弹窗提示安装证书。   Tools &gt; Options &gt; connections 勾选图中的   在手机上连接跟电脑在同一局域网下的网络，然后在无线网络中去设置代理，代理地址就是电脑ip地址和 端口号，之后在手机浏览器中输入 电脑ip地址和端口号 进行访问，会出下如下图，然后点击图中框出来的文字，下载并且安装证书。ios 比 安卓再多一个步骤，需要去 设置-&gt;通用-&gt;关于本机-&gt;证书信任设置 去信任证书才可以进行抓包。  在电脑上对浏览器进行抓包  可以在浏览器设置里面设置代理，或者安装 Proxy SwitchyOmega 这个插件来管理代理，代理协议为 http，代理服务器为 127.0.0.1，端口号是在 fidder 上设置的端口号。  可以对fidder自定义规则(Rules -&gt; Customize Rules)  下列设置中只能有一个OnBeforeResponse和OnBeforeResponse，下面只是为了方便演示代码位置才写了多个"/>
 
   <script type="application/ld+json">
 {
@@ -53,7 +51,7 @@
   
   "genre": "posts",
   "keywords": "other",
-  "wordcount":  308 ,
+  "wordcount":  319 ,
   "url": "\/2017\/debugtools\/",
   "datePublished": "2017-06-02T00:00:00\x2b00:00",
   "dateModified": "2017-06-02T00:00:00\x2b00:00",
@@ -169,108 +167,133 @@
         
         
 
-        <h1 id="抓包调试工具">抓包调试工具</h1>
+        
+
+<h1 id="抓包调试工具">抓包调试工具</h1>
+
 <h2 id="fidder的使用">Fidder的使用</h2>
+
 <ul>
-<li><a href="https://www.telerik.com/fiddler">下载地址</a></li>
+<li><a href="https://www.telerik.com/fiddler" rel="nofollow noreferrer" target="_blank">下载地址</a></li>
 </ul>
+
 <h3 id="fidder简介">Fidder简介</h3>
+
 <blockquote>
-<p>抓包工具有很多，小到最常用的web调试工具firebug，达到通用的强大的抓包工具wireshark.为什么使用fiddler?原因如下：</p>
-<blockquote>
-<p>a.Firebug虽然可以抓包，但是对于分析http请求的详细信息，不够强大。模拟http请求的功能也不够，且firebug常常是需要“无刷新修改”，如果刷新了页面，所有的修改都不会保存。
-b.Wireshark是通用的抓包工具，但是比较庞大，对于只需要抓取http请求的应用来说，似乎有些大材小用。
-c.Httpwatch也是比较常用的http抓包工具，但是只支持IE和firefox浏览器（其他浏览器可能会有相应的插件），对于想要调试chrome浏览器的http请求，似乎稍显无力，而Fiddler 是一个使用本地 127.0.0.1:8888 的 HTTP 代理，任何能够设置 HTTP 代理为 127.0.0.1:8888 的浏览器和应用程序都可以使用 Fiddler。</p>
+<p>抓包工具有很多，小到最常用的web调试工具firebug，达到通用的强大的抓包工具wireshark.为什么使用fiddler?原因如下：
+&gt; a.Firebug虽然可以抓包，但是对于分析http请求的详细信息，不够强大。模拟http请求的功能也不够，且firebug常常是需要“无刷新修改”，如果刷新了页面，所有的修改都不会保存。
+&gt; b.Wireshark是通用的抓包工具，但是比较庞大，对于只需要抓取http请求的应用来说，似乎有些大材小用。
+&gt; c.Httpwatch也是比较常用的http抓包工具，但是只支持IE和firefox浏览器（其他浏览器可能会有相应的插件），对于想要调试chrome浏览器的http请求，似乎稍显无力，而Fiddler 是一个使用本地 127.0.0.1:8888 的 HTTP 代理，任何能够设置 HTTP 代理为 127.0.0.1:8888 的浏览器和应用程序都可以使用 Fiddler。</p>
 </blockquote>
-</blockquote>
-<p><img src="/images/totalimgs/fidder.png" alt="pic"></p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/fidder.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
+
 <h3 id="对手机抓包">对手机抓包</h3>
+
 <ol>
 <li>Tools &gt; Options &gt; https 勾选图中红线框出来的，之后会有弹窗提示安装证书。</li>
 </ol>
-<p><img src="/images/totalimgs/fidder2.png" alt="pic">
-<img src="/images/totalimgs/fidder3.png" alt="pic"></p>
-<ol start="2">
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/fidder2.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure>
+<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/fidder3.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
+
+<ol>
 <li>Tools &gt; Options &gt; connections 勾选图中的</li>
 </ol>
-<p><img src="/images/totalimgs/fidder4.png" alt="pic"></p>
-<ol start="3">
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/fidder4.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
+
+<ol>
 <li>在手机上连接跟电脑在同一局域网下的网络，然后在无线网络中去设置代理，代理地址就是电脑ip地址和 端口号，之后在手机浏览器中输入 电脑ip地址和端口号 进行访问，会出下如下图，然后点击图中框出来的文字，下载并且安装证书。ios 比 安卓再多一个步骤，需要去 <strong>设置-&gt;通用-&gt;关于本机-&gt;证书信任设置</strong> 去信任证书才可以进行抓包。</li>
 </ol>
-<p><img src="/images/totalimgs/fidder5.png" alt="pic"></p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/fidder5.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
+
 <h3 id="在电脑上对浏览器进行抓包">在电脑上对浏览器进行抓包</h3>
+
 <ul>
 <li>可以在浏览器设置里面设置代理，或者安装 <strong>Proxy SwitchyOmega</strong> 这个插件来管理代理，代理协议为 http，代理服务器为 127.0.0.1，端口号是在 fidder 上设置的端口号。</li>
 </ul>
-<h3 id="可以对fidder自定义规则rules---customize-rules">可以对fidder自定义规则(Rules -&gt; Customize Rules)</h3>
+
+<h3 id="可以对fidder自定义规则-rules-customize-rules">可以对fidder自定义规则(Rules -&gt; Customize Rules)</h3>
+
 <ul>
-<li>
-<p><strong>下列设置中只能有一个OnBeforeResponse和OnBeforeResponse，下面只是为了方便演示代码位置才写了多个</strong></p>
-</li>
-<li>
-<p><strong>修改请求</strong></p>
-</li>
+<li><p><strong>下列设置中只能有一个OnBeforeResponse和OnBeforeResponse，下面只是为了方便演示代码位置才写了多个</strong></p></li>
+
+<li><p><strong>修改请求</strong></p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">OnBeforeRequest</span>(<span style="color:#a6e22e">oSession</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Session</span>) {
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">uriContains</span>(<span style="color:#e6db74">&#34;https://****/biz-V2.2/SHD/goodsAttr/getGoodsAttr&#34;</span>)) {
-    <span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">utilReplaceInRequest</span>(<span style="color:#e6db74">&#39;&#34;prodId&#34;: 1016995&#39;</span>, <span style="color:#e6db74">&#39;&#34;prodId&#34;: 11111&#39;</span>)
+
+<pre><code class="language-js">static function OnBeforeRequest(oSession: Session) {
+  if (oSession.uriContains(&quot;https://****/biz-V2.2/SHD/goodsAttr/getGoodsAttr&quot;)) {
+    oSession.utilReplaceInRequest('&quot;prodId&quot;: 1016995', '&quot;prodId&quot;: 11111')
   }
 }
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li><strong>修改响应</strong></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">OnBeforeResponse</span>(<span style="color:#a6e22e">oSession</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Session</span>) {
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">uriContains</span>(<span style="color:#e6db74">&#34;https://****/biz-V2.2/SHG/verification/purchaseCMPForOldUser&#34;</span>)) {
-    <span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">utilReplaceInResponse</span>(<span style="color:#e6db74">&#39;&#34;status&#34;: &#34;1&#34;&#39;</span>, <span style="color:#e6db74">&#39;&#34;status&#34;: &#34;2&#34;&#39;</span>)
+
+<pre><code class="language-js">static function OnBeforeResponse(oSession: Session) {
+  if (oSession.uriContains(&quot;https://****/biz-V2.2/SHG/verification/purchaseCMPForOldUser&quot;)) {
+    oSession.utilReplaceInResponse('&quot;status&quot;: &quot;1&quot;', '&quot;status&quot;: &quot;2&quot;')
   }
 }
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li><strong>修改url传参</strong></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">OnBeforeRequest</span>(<span style="color:#a6e22e">oSession</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Session</span>) {
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">uriContains</span>(<span style="color:#e6db74">&#34;https://****/***-test/v2.0/pages/mall/productwith/productwith.html&#34;</span>)) {
-    <span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">fullUrl</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">fullUrl</span>.<span style="color:#a6e22e">Replace</span>(<span style="color:#e6db74">&#34;prodId=1017159&#34;</span>, <span style="color:#e6db74">&#34;prodId=111111&#34;</span>);
+
+<pre><code class="language-js">static function OnBeforeRequest(oSession: Session) {
+  if (oSession.uriContains(&quot;https://****/***-test/v2.0/pages/mall/productwith/productwith.html&quot;)) {
+    oSession.fullUrl = oSession.fullUrl.Replace(&quot;prodId=1017159&quot;, &quot;prodId=111111&quot;);
   }
 }
-</code></pre></div><ul>
-<li><strong>接口代理</strong></li>
-</ul>
-<blockquote>
-<p>使用场景：</p>
-<blockquote>
+</code></pre>
+
 <ul>
-<li>接口存在跨域问题</li>
-<li>本地服务启动后，再将接口代理到正式环境，这样修改本地代码相当于修改的是线上代码，这对于修改线上bug很方便，比起之前通过fiddler将线上文件指定到本地方便些，因为有可能依赖的文件很多，需要一个个都指定到本地，其实线上代码与本地代码的区别只是接口地址不一样。通过代理只改接口地址还是很方便。
-使用方法：
-1、打开自定义规则文件：菜单栏 &gt; Rules &gt; Customize Rules，快捷键 ctrl + r，文件路径C:\Users\用户名\Documents\Fiddler2\Scripts\CustomRules.js
-2、添加如下代码，可根据需求自己改</li>
+<li><strong>接口代理</strong>
+&gt; 使用场景：
+&gt;&gt; * 接口存在跨域问题
+&gt;&gt; * 本地服务启动后，再将接口代理到正式环境，这样修改本地代码相当于修改的是线上代码，这对于修改线上bug很方便，比起之前通过fiddler将线上文件指定到本地方便些，因为有可能依赖的文件很多，需要一个个都指定到本地，其实线上代码与本地代码的区别只是接口地址不一样。通过代理只改接口地址还是很方便。
+&gt; 使用方法：
+&gt;&gt; 1、打开自定义规则文件：菜单栏 &gt; Rules &gt; Customize Rules，快捷键 ctrl + r，文件路径C:\Users\用户名\Documents\Fiddler2\Scripts\CustomRules.js
+&gt;&gt; 2、添加如下代码，可根据需求自己改</li>
 </ul>
-</blockquote>
-</blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 设置一个开关自定义规则的名称
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">RulesOption</span>(<span style="color:#e6db74">&#34;随便取一个名字&#34;</span>)
 
-<span style="color:#75715e">// 规则默认开启状态
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">m_Proxy</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">boolean</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+<pre><code class="language-js">// 设置一个开关自定义规则的名称
+public static RulesOption(&quot;随便取一个名字&quot;)
 
-<span style="color:#75715e">// 请求之前规则
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">OnBeforeRequest</span>(<span style="color:#a6e22e">oSession</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Session</span>) {
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">m_Proxy</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">uriContains</span>(<span style="color:#e6db74">&#34;/biz-orange/&#34;</span>)){
-    <span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">host</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;*****download.huanqiulama*****.com&#34;</span>;
+// 规则默认开启状态
+var m_Proxy: boolean = false;
 
-    <span style="color:#75715e">// 如果请求接口是 https 需要加这句
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">fullUrl</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">fullUrl</span>.<span style="color:#a6e22e">Substring</span>(<span style="color:#a6e22e">oSession</span>.<span style="color:#a6e22e">fullUrl</span>.<span style="color:#a6e22e">IndexOf</span>(<span style="color:#e6db74">&#39;:&#39;</span>))
+// 请求之前规则
+static function OnBeforeRequest(oSession: Session) {
+  if (m_Proxy &amp;&amp; oSession.uriContains(&quot;/biz-orange/&quot;)){
+    oSession.host = &quot;*****download.huanqiulama*****.com&quot;;
+
+    // 如果请求接口是 https 需要加这句
+    oSession.fullUrl = &quot;https&quot; + oSession.fullUrl.Substring(oSession.fullUrl.IndexOf(':'))
   }
 }
-</code></pre></div><h3 id="willow是一款面向前端开发的fiddler插件简单易用尤其适合多人团队协作">Willow是一款面向前端开发的Fiddler插件，简单易用，尤其适合多人团队协作。</h3>
+</code></pre>
+
+<h3 id="willow是一款面向前端开发的fiddler插件-简单易用-尤其适合多人团队协作">Willow是一款面向前端开发的Fiddler插件，简单易用，尤其适合多人团队协作。</h3>
+
 <ul>
-<li><a href="http://qzonetouch.github.io/commonWidget/willow">Willow</a></li>
-<li><a href="https://github.com/QzoneTouch/commonWidget/releases">插件地址</a></li>
+<li><a href="http://qzonetouch.github.io/commonWidget/willow" rel="nofollow noreferrer" target="_blank">Willow</a></li>
+<li><a href="https://github.com/QzoneTouch/commonWidget/releases" rel="nofollow noreferrer" target="_blank">插件地址</a></li>
 </ul>
-<p><img src="/images/totalimgs/fidderWillow.png" alt="pic"></p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/fidderWillow.png" alt="pic" class="lazyload"><figcaption class="image-caption">pic</figcaption></figure></p>
+
 <h2 id="whistle">whistle</h2>
+
 <h3 id="很强大的一款基于-node-平台的调试工具">很强大的一款基于 node 平台的调试工具</h3>
-<p><a href="https://github.com/avwo/whistle">whistle(读音<code>[ˈwɪsəl]</code>，拼音<code>[wēisǒu]</code>)是基于Node实现的跨平台抓包调试代理工具</a>，有以下基本功能：</p>
+
+<p><a href="https://github.com/avwo/whistle" rel="nofollow noreferrer" target="_blank">whistle(读音<code>[ˈwɪsəl]</code>，拼音<code>[wēisǒu]</code>)是基于Node实现的跨平台抓包调试代理工具</a>，有以下基本功能：</p>
+
 <ol>
 <li>查看HTTP、HTTPS请求响应内容</li>
 <li>查看WebSocket、Socket收发的帧数据</li>
@@ -282,81 +305,104 @@ c.Httpwatch也是比较常用的http抓包工具，但是只支持IE和firefox�
 <li>作为HTTP代理或反向代理</li>
 <li>支持用Node编写插件扩展功能</li>
 </ol>
+
 <p>具体功能如图:
-<img src="/images/totalimgs/whistle.png" alt="基本功能"></p>
+<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/whistle.png" alt="基本功能" class="lazyload"><figcaption class="image-caption">基本功能</figcaption></figure></p>
+
 <h4 id="线上资源文件指向本地">线上资源文件指向本地</h4>
+
 <p>Rules: <code>app.10086.cn/xxxxxx file://D:\xxxx\file</code></p>
-<h4 id="注入调试-vconsole-或者-erudahttpsgithubcomwhistle-pluginswhistleinspect">注入调试 <a href="https://github.com/whistle-plugins/whistle.inspect">vConsole 或者 Eruda</a></h4>
+
+<h4 id="注入调试-vconsole-或者-eruda-https-github-com-whistle-plugins-whistle-inspect">注入调试 <a href="https://github.com/whistle-plugins/whistle.inspect" rel="nofollow noreferrer" target="_blank">vConsole 或者 Eruda</a></h4>
+
 <p>Rules: <code>xxxxx.html whistle.inspect://</code></p>
+
 <ul>
-<li>该规则需要安装插件：<code>npm i -g whistle.inspect</code>，插件<a href="https://github.com/whistle-plugins/whistle.inspect">官网</a></li>
+<li>该规则需要安装插件：<code>npm i -g whistle.inspect</code>，插件<a href="https://github.com/whistle-plugins/whistle.inspect" rel="nofollow noreferrer" target="_blank">官网</a></li>
 <li>如果需要注入 Eruda，只需改成 <code>whistle.inspect://e</code></li>
 </ul>
-<h4 id="注入-weinrehttpwproxyorgwhistlewebuiweinrehtml">注入 <a href="http://wproxy.org/whistle/webui/weinre.html">weinre</a></h4>
+
+<h4 id="注入-weinre-http-wproxy-org-whistle-webui-weinre-html">注入 <a href="http://wproxy.org/whistle/webui/weinre.html" rel="nofollow noreferrer" target="_blank">weinre</a></h4>
+
 <p>Rules: <code>app.10086.cn/xxxxxx.html weinre://id</code></p>
+
 <h4 id="打印日志">打印日志</h4>
+
 <p>ules：<code>app.10086.cn/xxxxxxxxx.html log://</code></p>
+
 <h4 id="使用-mock-修改响应">使用 mock 修改响应</h4>
-<p>Rules：<code>app.10086.cn/xxxx/xxx/xxxx whistle.vase://systemDate</code><br>
+
+<p>Rules：<code>app.10086.cn/xxxx/xxx/xxxx whistle.vase://systemDate</code><br />
 该规则需要安装插件</p>
+
 <ol>
-<li>
-<p>全局安装插件：<code>npm i -g whistle.vase</code>，插件<a href="https://github.com/whistle-plugins/whistle.vase">官网</a></p>
-</li>
-<li>
-<p>代理环境打开 <code>http://vase.local.whistlejs.com</code></p>
-</li>
-<li>
-<p>添加名为 <code>systemDate</code>，Engine为 <code>mock</code> 的数据</p>
-</li>
+<li><p>全局安装插件：<code>npm i -g whistle.vase</code>，插件<a href="https://github.com/whistle-plugins/whistle.vase" rel="nofollow noreferrer" target="_blank">官网</a></p></li>
+
+<li><p>代理环境打开 <code>http://vase.local.whistlejs.com</code></p></li>
+
+<li><p>添加名为 <code>systemDate</code>，Engine为 <code>mock</code> 的数据</p></li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-   <span style="color:#f92672">&#34;retCode&#34;</span>: <span style="color:#e6db74">&#34;000000&#34;</span>,
-   <span style="color:#f92672">&#34;retDesc&#34;</span>: <span style="color:#e6db74">&#34;SUCCESS&#34;</span>,
-   <span style="color:#f92672">&#34;rspBody&#34;</span>: {
-     <span style="color:#f92672">&#34;date&#34;</span>: <span style="color:#e6db74">&#34;2018-11-16 15:55:46&#34;</span>,
-     <span style="color:#f92672">&#34;test&#34;</span>: <span style="color:#e6db74">&#34;@cword(1,10)&#34;</span>
+
+<pre><code class="language-json">{
+   &quot;retCode&quot;: &quot;000000&quot;,
+   &quot;retDesc&quot;: &quot;SUCCESS&quot;,
+   &quot;rspBody&quot;: {
+     &quot;date&quot;: &quot;2018-11-16 15:55:46&quot;,
+     &quot;test&quot;: &quot;@cword(1,10)&quot;
    }
 }
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li><strong>注：<code>npm install -g whistle</code>默认下载是最新的版本（1.13.6），目前<code>whistle.vase</code>版本（1.2.0）上设置的规则会不起作用（如图1）。需要切换到之前的版本（如：1.1.0，如图2）</strong></li>
 </ul>
-<p>图1：<img src="/images/totalimgs/vase1.png" alt="图一">
-图2：<img src="/images/totalimgs/vase2.png" alt="图一"></p>
-<h4 id="修改响应解密数据">修改响应，解密数据</h4>
+
+<p>图1：<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/vase1.png" alt="图一" class="lazyload"><figcaption class="image-caption">图一</figcaption></figure>
+图2：<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/vase2.png" alt="图一" class="lazyload"><figcaption class="image-caption">图一</figcaption></figure></p>
+
+<h4 id="修改响应-解密数据">修改响应，解密数据</h4>
+
 <p>Rules：<code>app.10086.cn/xxxxxx script://decryptByAES</code></p>
+
 <p>该规则需要安装插件</p>
-<p>1.全局安装插件：<code>npm i -g whistle.script</code>，插件<a href="https://github.com/whistle-plugins/whistle.script">官网</a></p>
-<p>2.代理环境打开 <a href="http://script.local.whistlejs.com">http://script.local.whistlejs.com</a></p>
+
+<p>1.全局安装插件：<code>npm i -g whistle.script</code>，插件<a href="https://github.com/whistle-plugins/whistle.script" rel="nofollow noreferrer" target="_blank">官网</a></p>
+
+<p>2.代理环境打开 <a href="http://script.local.whistlejs.com" rel="nofollow noreferrer" target="_blank">http://script.local.whistlejs.com</a></p>
+
 <p>3.添加名为 <code>decryptByAES</code> 脚本</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 全局安装 npm i -g crypto-js
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">CryptoJS</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto-js&#39;</span>)
-<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">decryptByAES</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">data</span>) {
- <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">CryptoJS</span>.<span style="color:#a6e22e">enc</span>.<span style="color:#a6e22e">Utf8</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#e6db74">&#39;密钥&#39;</span>)
- <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">CryptoJS</span>.<span style="color:#a6e22e">enc</span>.<span style="color:#a6e22e">Utf8</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#e6db74">&#39;偏移量&#39;</span>)
- <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">out</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">CryptoJS</span>.<span style="color:#a6e22e">AES</span>.<span style="color:#a6e22e">decrypt</span>(<span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">key</span>, {
-   <span style="color:#a6e22e">iv</span>,
-   <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">CryptoJS</span>.<span style="color:#a6e22e">mode</span>.<span style="color:#a6e22e">CBC</span>
+
+<pre><code class="language-js">// 全局安装 npm i -g crypto-js
+let CryptoJS = require('crypto-js')
+let decryptByAES = function (data) {
+ const key = CryptoJS.enc.Utf8.parse('密钥')
+ const iv = CryptoJS.enc.Utf8.parse('偏移量')
+ let out = CryptoJS.AES.decrypt(data, key, {
+   iv,
+   mode: CryptoJS.mode.CBC
  })
- <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">CryptoJS</span>.<span style="color:#a6e22e">enc</span>.<span style="color:#a6e22e">Utf8</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">out</span>)
+ return CryptoJS.enc.Utf8.stringify(out)
 }
 
-<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">handleRequest</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span><span style="color:#f92672">*</span> (<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">next</span>) {
- <span style="color:#75715e">// 发送请求
-</span><span style="color:#75715e"></span> <span style="color:#66d9ef">yield</span> <span style="color:#a6e22e">next</span>()
+exports.handleRequest = function* (ctx, next) {
+ // 发送请求
+ yield next()
 
- <span style="color:#75715e">// 获取响应体
-</span><span style="color:#75715e"></span> <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">resBody</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">yield</span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">getResBody</span>()
+ // 获取响应体
+ let resBody = yield ctx.getResBody()
 
- <span style="color:#75715e">// 转成 JSON
-</span><span style="color:#75715e"></span> <span style="color:#a6e22e">resBody</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">resBody</span>)
+ // 转成 JSON
+ resBody = JSON.parse(resBody)
 
- <span style="color:#75715e">// 解密
-</span><span style="color:#75715e"></span> <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">decryptByAES</span>(<span style="color:#a6e22e">resBody</span>.<span style="color:#a6e22e">body</span>)
+ // 解密
+ ctx.body = decryptByAES(resBody.body)
 }
-</code></pre></div><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h4 id="更多关于whistlehttpwproxyorgwhistle">更多关于<a href="http://wproxy.org/whistle/">whistle</a></h4>
+</code></pre>
+
+<!-- // 修改响应头，目的不让前端再解密
+ ctx.set('x-pen', '') -->
+
+<h4 id="更多关于-whistle-http-wproxy-org-whistle">更多关于<a href="http://wproxy.org/whistle/" rel="nofollow noreferrer" target="_blank">whistle</a></h4>
 
     </div>
 
@@ -370,7 +416,7 @@ c.Httpwatch也是比较常用的http抓包工具，但是只支持IE和firefox�
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>308</span>
+            <span>319</span>
         </p>
 
         <p class="copyright-item">
@@ -445,8 +491,8 @@ c.Httpwatch也是比较常用的http抓包工具，但是只支持IE和firefox�
                 class="iconfont icon-dajiantou"></i>&nbsp;git commit emoji 使用指南</a>
         
         
-        <a href="/2017/vue/" class="next" rel="next"
-            title="Vue配置相关">Vue配置相关&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        <a href="/2017/template/" class="next" rel="next"
+            title="JS 模板">JS 模板&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 

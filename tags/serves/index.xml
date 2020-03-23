@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>serves on Magic</title>
@@ -28,7 +28,7 @@
       <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E6%90%AD%E5%BB%BAnode.js%E4%B8%8E%E9%98%BF%E9%87%8C%E4%BA%91alinode%E7%8E%AF%E5%A2%83/</guid>
-      <description>搭建 Node.js 环境 系统更新，安装基础包 sudo apt-get updatesudo apt-get install vim openssl build-essential libssl-dev wget curl git安装 node.js  使用 nvm 这个工具，方便升级和管理 node.js 版本 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash 安装 node.js  nvm install v10.14.2nvm use v10.14.2nvm alias default v10.14.2node -vv10.14.2安装 阿里云的 alinode  或者可以直接安装阿里云的 alinode，这也是我推荐给大家的 Node，因为它对 Node 做了必要的定制，可以无缝接入到 alinode 的监控中心，对于 多机器多应用运维 非常有用。大家可以参考 alinode 安装文档  安装一些常用的全局工具包  可以配置一个简单的 registry 参数来指定使用国内的 taobao 镜像来下载： npm --registry=https://registry.</description>
+      <description>搭建 Node.js 环境 系统更新，安装基础包 sudo apt-get update sudo apt-get install vim openssl build-essential libssl-dev wget curl git  安装 node.js  使用 nvm 这个工具，方便升级和管理 node.js 版本 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash 安装 node.js  nvm install v10.14.2 nvm use v10.14.2 nvm alias default v10.14.2 node -v v10.14.2  安装 阿里云的 alinode  或者可以直接安装阿里云的 alinode，这也是我推荐给大家的 Node，因为它对 Node 做了必要的定制，可以无缝接入到 alinode 的监控中心，对于 多机器多应用运维 非常有用。大家可以参考 alinode 安装文档  安装一些常用的全局工具包  可以配置一个简单的 registry 参数来指定使用国内的 taobao 镜像来下载： npm --registry=https://registry.</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@
       
       <guid>/2019/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3/</guid>
       <description>根据 慕课网 专栏 ‘一条龙的 Node·Vue·React 服务器部署’ 笔记。
-购买  到阿里云官网购买一个服务器 配置相关信息 记录登录名 root 和 登录密码  使用 登录  通过 ssh 登录 例如：ssh root@116.62.201.97 后面会要求输入密码 可以通过 sudo lsb_release -a 来查看服务器版本 登录成功后可以首先运行 sudo apt-get update，作用是先把服务器上所有的包和源都 check 和更新一遍，让服务器处在一个崭新的状态 可以把一些常用的开发者套件先安装上 sudo apt-get install -y software-properties-common  添加一个用户  增加一个用户 adduser rn_manager，完成后记录住密码，赋予账号更高权限:可以在 __visudo 权限配置文件__配置一下:sudo visudo，加入 rn_manager ALL=(ALL:ALL) ALL 这行，然后可以重启 ssh 服务：service ssh restart  配置无密码登录 那么，首先来本地电脑上配置这把钥匙，而且要生成两把钥匙，分别是 私钥 和 公钥
+购买  到阿里云官网购买一个服务器 配置相关信息 记录登录名 root 和 登录密码  使用 登录  通过 ssh 登录 例如：ssh root@116.62.201.97 后面会要求输入密码 可以通过 sudo lsb_release -a 来查看服务器版本 登录成功后可以首先运行 sudo apt-get update，作用是先把服务器上所有的包和源都 check 和更新一遍，让服务器处在一个崭新的状态 可以把一些常用的开发者套件先安装上 sudo apt-get install -y software-properties-common  添加一个用户  增加一个用户 adduser rn_manager，完成后记录住密码，赋予账号更高权限:可以在 visudo 权限配置文件配置一下:sudo visudo，加入 rn_manager ALL=(ALL:ALL) ALL 这行，然后可以重启 ssh 服务：service ssh restart  配置无密码登录 那么，首先来本地电脑上配置这把钥匙，而且要生成两把钥匙，分别是 私钥 和 公钥
  提示：如果你之前用过 GitHub 或者 GitLab 之类基于 Git 的仓库管理系统，那么你本地应该是配置过这个公钥和私钥的，这里要切记，不用再重复配置一遍了！不用重新配置一遍了！ 可能你会覆盖掉你本地用的钥匙，这样的话，你可能就连不上你之前有权限的 Git 仓库了，我会演示这一步。</description>
     </item>
     

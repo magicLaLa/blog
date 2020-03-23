@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>eslintrc on Magic</title>
@@ -17,7 +17,7 @@
       <pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/eslintrc%E9%85%8D%E7%BD%AE/</guid>
-      <description>{&amp;#34;extends&amp;#34;: [&amp;#34;alloy&amp;#34;,&amp;#34;alloy/react&amp;#34;,&amp;#34;alloy/typescript&amp;#34;,],&amp;#34;env&amp;#34;: { &amp;#34;browser&amp;#34;: true, &amp;#34;node&amp;#34;: true, &amp;#34;commonjs&amp;#34;: true }, &amp;#34;globals&amp;#34;: {// 这里填入你的项目需要的全局变量// false 表示这个全局变量不允许被重新赋值，比如：//// myGlobal: false},&amp;#34;ecmaFeatures&amp;#34;: { // lambda表达式 &amp;#34;arrowFunctions&amp;#34;: true, // 解构赋值 &amp;#34;destructuring&amp;#34;: true, // class &amp;#34;classes&amp;#34;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &amp;#34;defaultParams&amp;#34;: true, // 块级作用域，允许使用let const &amp;#34;blockBindings&amp;#34;: true, // 允许使用模块，模块内默认严格模式 &amp;#34;modules&amp;#34;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &amp;#34;objectLiteralComputedProperties&amp;#34;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &amp;#34;Hello!</description>
+      <description>{ &amp;quot;extends&amp;quot;: [ &amp;quot;alloy&amp;quot;, &amp;quot;alloy/react&amp;quot;, &amp;quot;alloy/typescript&amp;quot;, ], &amp;quot;env&amp;quot;: { &amp;quot;browser&amp;quot;: true, &amp;quot;node&amp;quot;: true, &amp;quot;commonjs&amp;quot;: true }, &amp;quot;globals&amp;quot;: { // 这里填入你的项目需要的全局变量 // false 表示这个全局变量不允许被重新赋值，比如： // // myGlobal: false }, &amp;quot;ecmaFeatures&amp;quot;: { // lambda表达式 &amp;quot;arrowFunctions&amp;quot;: true, // 解构赋值 &amp;quot;destructuring&amp;quot;: true, // class &amp;quot;classes&amp;quot;: true, // http://es6.ruanyifeng.com/#docs/function#函数参数的默认值 &amp;quot;defaultParams&amp;quot;: true, // 块级作用域，允许使用let const &amp;quot;blockBindings&amp;quot;: true, // 允许使用模块，模块内默认严格模式 &amp;quot;modules&amp;quot;: true, // 允许字面量定义对象时，用表达式做属性名 // http://es6.ruanyifeng.com/#docs/object#属性名表达式 &amp;quot;objectLiteralComputedProperties&amp;quot;: true, // 允许对象字面量方法名简写 /*var o = { method() { return &amp;quot;Hello!</description>
     </item>
     
   </channel>

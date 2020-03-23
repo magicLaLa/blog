@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hapi"/>
-<meta name="twitter:description" content="Hapi Hapi 相关使用总结  Hapi.js 是一个用来构建基于 Node.js 的应用和服务的富框架，使得开发者把重点放在便携可重用的应用逻辑而不是构建架构。内建输入验证、缓存、认证和其他 Web 应用开发常用的功能。  Hapi 框架模块接口文档  官网 Hapi-api  Supervisor / nodemon / PM2  有不少 Node.js 小工具能帮助我们监视代码的改动然后自动重启 Node.js 服务，好用的工具有 Supervisor / nodemon / PM2。  # 系统全局安装 supervisor$ npm i -g supervisor目录结构 ├── config # 项目配置目录| ├── index.js # 配置项目中的配置信息├── models # 数据库 model├── node_modules # node.js 的依赖目录├── plugins # 插件目录├── routes # 路由目录│ ├── hello-world."/>
+<meta name="twitter:description" content="Hapi Hapi 相关使用总结  Hapi.js 是一个用来构建基于 Node.js 的应用和服务的富框架，使得开发者把重点放在便携可重用的应用逻辑而不是构建架构。内建输入验证、缓存、认证和其他 Web 应用开发常用的功能。  Hapi 框架模块接口文档  官网 Hapi-api  Supervisor / nodemon / PM2  有不少 Node.js 小工具能帮助我们监视代码的改动然后自动重启 Node.js 服务，好用的工具有 Supervisor / nodemon / PM2。  # 系统全局安装 supervisor $ npm i -g supervisor  目录结构 ├── config # 项目配置目录 | ├── index.js # 配置项目中的配置信息 ├── models # 数据库 model ├── node_modules # node.js 的依赖目录 ├── plugins # 插件目录 ├── routes # 路由目录 │ ├── hello-world."/>
 
   <script type="application/ld+json">
 {
@@ -50,7 +50,7 @@
   
   "genre": "posts",
   "keywords": "Node",
-  "wordcount":  1802 ,
+  "wordcount":  1820 ,
   "url": "\/2018\/hapi\/",
   "datePublished": "2018-08-02T00:00:00\x2b00:00",
   "dateModified": "2018-08-02T00:00:00\x2b00:00",
@@ -164,68 +164,102 @@
         
         
 
-        <h1 id="hapi">Hapi</h1>
+        
+
+<h1 id="hapi">Hapi</h1>
+
 <h2 id="hapi-相关使用总结">Hapi 相关使用总结</h2>
+
 <ul>
 <li>Hapi.js 是一个用来构建基于 Node.js 的应用和服务的富框架，使得开发者把重点放在便携可重用的应用逻辑而不是构建架构。内建输入验证、缓存、认证和其他 Web 应用开发常用的功能。</li>
 </ul>
+
 <h3 id="hapi-框架模块接口文档">Hapi 框架模块接口文档</h3>
+
 <ul>
-<li><a href="https://hapijs.com/">官网</a></li>
-<li><a href="https://hapijs.com/api">Hapi-api</a></li>
+<li><a href="https://hapijs.com/" rel="nofollow noreferrer" target="_blank">官网</a></li>
+<li><a href="https://hapijs.com/api" rel="nofollow noreferrer" target="_blank">Hapi-api</a></li>
 </ul>
-<h3 id="supervisor--nodemon--pm2">Supervisor / nodemon / PM2</h3>
+
+<h3 id="supervisor-nodemon-pm2">Supervisor / nodemon / PM2</h3>
+
 <ul>
 <li>有不少 Node.js 小工具能帮助我们监视代码的改动然后自动重启 Node.js 服务，好用的工具有 <code>Supervisor / nodemon / PM2</code>。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 系统全局安装 supervisor</span>
+
+<pre><code class="language-bash"># 系统全局安装 supervisor
 $ npm i -g supervisor
-</code></pre></div><h3 id="目录结构">目录结构</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">├── config                       <span style="color:#75715e"># 项目配置目录</span>
-|   ├── index.js                 <span style="color:#75715e"># 配置项目中的配置信息</span>
-├── models                       <span style="color:#75715e"># 数据库 model</span>
-├── node_modules                 <span style="color:#75715e"># node.js 的依赖目录</span>
-├── plugins                      <span style="color:#75715e"># 插件目录</span>
-├── routes                       <span style="color:#75715e"># 路由目录</span>
-│   ├── hello-world.js           <span style="color:#75715e"># 测试接口 hello-world</span>
-├── utils                        <span style="color:#75715e"># 工具类相关目录</span>
-├── app.js                       <span style="color:#75715e"># 项目入口文件</span>
-├── package.json                 <span style="color:#75715e"># JS 项目工程依赖库</span>
-├── README.md                    <span style="color:#75715e"># 项目工程如何被使用的说明手册</span>
-</code></pre></div><h3 id="环境配置">环境配置</h3>
+</code></pre>
+
+<h3 id="目录结构">目录结构</h3>
+
+<pre><code class="language-sh">├── config                       # 项目配置目录
+|   ├── index.js                 # 配置项目中的配置信息
+├── models                       # 数据库 model
+├── node_modules                 # node.js 的依赖目录
+├── plugins                      # 插件目录
+├── routes                       # 路由目录
+│   ├── hello-world.js           # 测试接口 hello-world
+├── utils                        # 工具类相关目录
+├── app.js                       # 项目入口文件
+├── package.json                 # JS 项目工程依赖库
+├── README.md                    # 项目工程如何被使用的说明手册
+</code></pre>
+
+<h3 id="环境配置">环境配置</h3>
+
 <ul>
 <li>例子：</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># .env.example</span>
 
-<span style="color:#75715e"># 服务的启动名字和端口，但也可以缺省不填值，默认值的填写只是一定程度减少起始数据配置工作</span>
-HOST <span style="color:#f92672">=</span> 127.0.0.1
-PORT <span style="color:#f92672">=</span> 3000
-</code></pre></div><h3 id="读取-env-中的配置值">读取 .env 中的配置值</h3>
+<pre><code class="language-bash"># .env.example
+
+# 服务的启动名字和端口，但也可以缺省不填值，默认值的填写只是一定程度减少起始数据配置工作
+HOST = 127.0.0.1
+PORT = 3000
+</code></pre>
+
+<h3 id="读取-env-中的配置值">读取 .env 中的配置值</h3>
+
 <ul>
 <li>Node.js 可以通过 env2 的插件，来读取 .env 配置文件，加载后的环境配置参数，可以通过例如 process.env.PORT 来读取端口信息。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm i env2 -D
-</code></pre></div><h3 id="使用-swagger-插件配置接口文档">使用 Swagger 插件配置接口文档</h3>
+
+<pre><code class="language-bash">npm i env2 -D
+</code></pre>
+
+<h3 id="使用-swagger-插件配置接口文档">使用 Swagger 插件配置接口文档</h3>
+
 <h4 id="安装基础依赖与基础插件配置">安装基础依赖与基础插件配置</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 安装适配 hapi v16 的 swagger 插件</span>
+
+<pre><code class="language-bash"># 安装适配 hapi v16 的 swagger 插件
 npm i hapi-swagger@7
 npm i inert@4
 npm i vision@4
 npm i package
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">├── plugins                       <span style="color:#75715e"># hapi 插件配置</span>
-|   ├── hapi-swagger.js           <span style="color:#75715e"># swagger 插件</span>
-</code></pre></div><ul>
-<li>通过 <strong>自己的服务地址+/documentation</strong> 来查看 Swagger 文档。<em>http://192.168.31.10:8181/documentation</em></li>
+</code></pre>
+
+<pre><code class="language-sh">├── plugins                       # hapi 插件配置
+|   ├── hapi-swagger.js           # swagger 插件
+</code></pre>
+
+<ul>
+<li>通过 <strong>自己的服务地址+/documentation</strong> 来查看 Swagger 文档。<em><a href="http://192.168.31.10:8181/documentation" rel="nofollow noreferrer" target="_blank">http://192.168.31.10:8181/documentation</a></em></li>
 </ul>
+
 <h3 id="使用-joi-校验数据结构">使用 Joi 校验数据结构</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 安装适配 hapi v16 的 joi 插件</span>
+
+<pre><code class="language-bash"># 安装适配 hapi v16 的 joi 插件
 npm i joi@13
-</code></pre></div><h3 id="mysql修改默认编码">MySQL修改默认编码</h3>
+</code></pre>
+
+<h3 id="mysql修改默认编码">MySQL修改默认编码</h3>
+
 <ul>
 <li><code>show variables like '%char%';</code> 查看默认编码</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; show variables like <span style="color:#e6db74">&#39;%char%&#39;</span>;
+
+<pre><code class="language-bash">mysql&gt; show variables like '%char%';
 +--------------------------+---------------------------------------------------------+
 | Variable_name            | Value                                                   |
 +--------------------------+---------------------------------------------------------+
@@ -236,46 +270,50 @@ npm i joi@13
 | character_set_results    | gbk                                                     |
 | character_set_server     | utf8                                                    |
 | character_set_system     | utf8                                                    |
-| character_sets_dir       | C:<span style="color:#ae81ff">\P</span>rogram Files<span style="color:#ae81ff">\M</span>ySQL<span style="color:#ae81ff">\M</span>ySQL Server 5.7<span style="color:#ae81ff">\s</span>hare<span style="color:#ae81ff">\c</span>harsets<span style="color:#ae81ff">\ </span>|
+| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 5.7\share\charsets\ |
 +--------------------------+---------------------------------------------------------+
-<span style="color:#ae81ff">8</span> rows in set, <span style="color:#ae81ff">1</span> warning <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
-</code></pre></div><ul>
-<li>
-<p>修改mysql编码，（version：5.7.24）Window10下 <code>my.ini</code>文件路径在 <code>C:\ProgramData\MySQL\MySQL Server 5.7\</code></p>
-</li>
-<li>
-<p>在my.ini添加如下：</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">[mysqld]</span>
-<span style="color:#a6e22e">character-set-server</span><span style="color:#f92672">=</span><span style="color:#e6db74">utf8</span>
-<span style="color:#a6e22e">[client]</span>
-<span style="color:#a6e22e">default-character-set</span><span style="color:#f92672">=</span><span style="color:#e6db74">utf8</span>
-<span style="color:#a6e22e">[mysql]</span>
-<span style="color:#a6e22e">default-character-set</span><span style="color:#f92672">=</span><span style="color:#e6db74">utf8</span>
-</code></pre></div><h3 id="mysql-与-sequelize">MySQL 与 Sequelize</h3>
+8 rows in set, 1 warning (0.00 sec)
+</code></pre>
+
 <ul>
-<li>数据库为 MySQL 5.6。<a href="https://sequelize.readthedocs.io/en/v3/">Sequelize</a> 则是 Node.js 生态中一款知名的基于 promise 数据库 ORM 插件，提供了大量常用数据库增删改查的函数式 API，以帮助我们在实际开发中，大量减少书写冗长的基础数据库查询语句。</li>
+<li><p>修改mysql编码，（version：5.7.24）Window10下 <code>my.ini</code>文件路径在 <code>C:\ProgramData\MySQL\MySQL Server 5.7\</code></p></li>
+
+<li><p>在my.ini添加如下：</p></li>
+</ul>
+
+<pre><code class="language-ini">[mysqld]
+character-set-server=utf8
+[client]
+default-character-set=utf8
+[mysql]
+default-character-set=utf8
+</code></pre>
+
+<h3 id="mysql-与-sequelize">MySQL 与 Sequelize</h3>
+
+<ul>
+<li>数据库为 MySQL 5.6。<a href="https://sequelize.readthedocs.io/en/v3/" rel="nofollow noreferrer" target="_blank">Sequelize</a> 则是 Node.js 生态中一款知名的基于 promise 数据库 ORM 插件，提供了大量常用数据库增删改查的函数式 API，以帮助我们在实际开发中，大量减少书写冗长的基础数据库查询语句。</li>
 <li>Sequelize 支持的数据库有：<code>PostgreSQL，MySQL，MariaDB，SQLite 和 MSSQL。</code>在使用不同的数据库时候，需要我们开发者额外安装不同的对应数据库连接驱动，d当前使用的 MySQL，则依赖于插件 MySQL2 。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># MySQL 连接</span>
-<span style="color:#f92672">[</span>root@vultr ~<span style="color:#f92672">]</span><span style="color:#75715e"># mysql -u root -p</span>
+
+<pre><code class="language-bash"># MySQL 连接
+[root@vultr ~]# mysql -u root -p
 Enter password: *******
 
-Welcome to the MySQL monitor.  Commands end with ; or <span style="color:#ae81ff">\g</span>.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 3
-Server version: 5.7.22 MySQL Community Server <span style="color:#f92672">(</span>GPL<span style="color:#f92672">)</span>
+Server version: 5.7.22 MySQL Community Server (GPL)
 
-Copyright <span style="color:#f92672">(</span>c<span style="color:#f92672">)</span> 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
 
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
 owners.
 
-Type <span style="color:#e6db74">&#39;help;&#39;</span> or <span style="color:#e6db74">&#39;\h&#39;</span> <span style="color:#66d9ef">for</span> help. Type <span style="color:#e6db74">&#39;\c&#39;</span> to clear the current input statement.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-<span style="color:#75715e"># 查看数据库编码格式</span>
-mysql&gt; show variables like <span style="color:#e6db74">&#39;%char%&#39;</span>;
+# 查看数据库编码格式
+mysql&gt; show variables like '%char%';
 +--------------------------+---------------------------------------------------------+
 | Variable_name            | Value                                                   |
 +--------------------------+---------------------------------------------------------+
@@ -286,84 +324,103 @@ mysql&gt; show variables like <span style="color:#e6db74">&#39;%char%&#39;</span
 | character_set_results    | utf8                                                    |
 | character_set_server     | latin1                                                  |
 | character_set_system     | utf8                                                    |
-| character_sets_dir       | C:<span style="color:#ae81ff">\P</span>rogram Files<span style="color:#ae81ff">\M</span>ySQL<span style="color:#ae81ff">\M</span>ySQL Server 5.7<span style="color:#ae81ff">\s</span>hare<span style="color:#ae81ff">\c</span>harsets<span style="color:#ae81ff">\ </span>|
+| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 5.7\share\charsets\ |
 +--------------------------+---------------------------------------------------------+
-<span style="color:#ae81ff">8</span> rows in set, <span style="color:#ae81ff">1</span> warning <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
+8 rows in set, 1 warning (0.00 sec)
 
-<span style="color:#75715e"># 创建用户</span>
-<span style="color:#75715e"># 说明：</span>
-<span style="color:#75715e"># username：你将创建的用户名</span>
-<span style="color:#75715e"># host：指定该用户在哪个主机上可以登陆，如果是本地用户可用localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符%</span>
-<span style="color:#75715e"># password：该用户的登陆密码，密码可以为空，如果为空则该用户可以不需要密码登陆服务器</span>
-mysql&gt; CREATE USER <span style="color:#e6db74">&#39;username&#39;</span>@<span style="color:#e6db74">&#39;host&#39;</span> IDENTIFIED BY <span style="color:#e6db74">&#39;password&#39;</span>;
+# 创建用户
+# 说明：
+# username：你将创建的用户名
+# host：指定该用户在哪个主机上可以登陆，如果是本地用户可用localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符%
+# password：该用户的登陆密码，密码可以为空，如果为空则该用户可以不需要密码登陆服务器
+mysql&gt; CREATE USER 'username'@'host' IDENTIFIED BY 'password';
 
-<span style="color:#75715e"># 授权</span>
-<span style="color:#75715e"># 说明:</span>
-<span style="color:#75715e"># privileges：用户的操作权限，如SELECT，INSERT，UPDATE等，如果要授予所的权限则使用ALL</span>
-<span style="color:#75715e"># databasename：数据库名</span>
-<span style="color:#75715e"># tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用*表示，如*.*</span>
-<span style="color:#75715e"># 例子：</span>
-<span style="color:#75715e"># GRANT SELECT, INSERT ON test.user TO &#39;pig&#39;@&#39;%&#39;;</span>
-<span style="color:#75715e"># GRANT ALL ON *.* TO &#39;pig&#39;@&#39;%&#39;;</span>
-mysql&gt; GRANT privileges ON databasename.tablename TO <span style="color:#e6db74">&#39;username&#39;</span>@<span style="color:#e6db74">&#39;host&#39;</span>;
-<span style="color:#75715e"># 注意:用以上命令授权的用户不能给其它用户授权，如果想让该用户可以授权，用以下命令:</span>
-mysql&gt; GRANT privileges ON databasename.tablename TO <span style="color:#e6db74">&#39;username&#39;</span>@<span style="color:#e6db74">&#39;host&#39;</span> WITH GRANT OPTION;
+# 授权
+# 说明:
+# privileges：用户的操作权限，如SELECT，INSERT，UPDATE等，如果要授予所的权限则使用ALL
+# databasename：数据库名
+# tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用*表示，如*.*
+# 例子：
+# GRANT SELECT, INSERT ON test.user TO 'pig'@'%';
+# GRANT ALL ON *.* TO 'pig'@'%';
+mysql&gt; GRANT privileges ON databasename.tablename TO 'username'@'host';
+# 注意:用以上命令授权的用户不能给其它用户授权，如果想让该用户可以授权，用以下命令:
+mysql&gt; GRANT privileges ON databasename.tablename TO 'username'@'host' WITH GRANT OPTION;
 
-<span style="color:#75715e"># 设置与更改用户密码</span>
-mysql&gt; SET PASSWORD FOR <span style="color:#e6db74">&#39;username&#39;</span>@<span style="color:#e6db74">&#39;host&#39;</span> <span style="color:#f92672">=</span> PASSWORD<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;newpassword&#39;</span><span style="color:#f92672">)</span>;
-<span style="color:#75715e"># 如果是当前登陆用户用:</span>
-mysql&gt; SET PASSWORD <span style="color:#f92672">=</span> PASSWORD<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;newpassword&#34;</span><span style="color:#f92672">)</span>;
+# 设置与更改用户密码
+mysql&gt; SET PASSWORD FOR 'username'@'host' = PASSWORD('newpassword');
+# 如果是当前登陆用户用:
+mysql&gt; SET PASSWORD = PASSWORD(&quot;newpassword&quot;);
 
-<span style="color:#75715e"># 撤销用户权限</span>
-<span style="color:#75715e"># 说明：说明:privilege, databasename, tablename：同授权部分</span>
-<span style="color:#75715e"># 注意：</span>
-<span style="color:#75715e"># 假如你在给用户&#39;pig&#39;@&#39;%&#39;授权的时候是这样的（或类似的）：GRANT SELECT ON test.user TO &#39;pig&#39;@&#39;%&#39;，则在使用REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;命令并不能撤销该用户对test数据库中user表的SELECT 操作。相反，如果授权使用的是GRANT SELECT ON *.* TO &#39;pig&#39;@&#39;%&#39;;则REVOKE SELECT ON test.user FROM &#39;pig&#39;@&#39;%&#39;;命令也不能撤销该用户对test数据库中user表的Select权限。</span>
-<span style="color:#75715e"># 具体信息可以用命令SHOW GRANTS FOR &#39;pig&#39;@&#39;%&#39;; 查看</span>
-mysql&gt; REVOKE privilege ON databasename.tablename FROM <span style="color:#e6db74">&#39;username&#39;</span>@<span style="color:#e6db74">&#39;host&#39;</span>;
+# 撤销用户权限
+# 说明：说明:privilege, databasename, tablename：同授权部分
+# 注意：
+# 假如你在给用户'pig'@'%'授权的时候是这样的（或类似的）：GRANT SELECT ON test.user TO 'pig'@'%'，则在使用REVOKE SELECT ON *.* FROM 'pig'@'%';命令并不能撤销该用户对test数据库中user表的SELECT 操作。相反，如果授权使用的是GRANT SELECT ON *.* TO 'pig'@'%';则REVOKE SELECT ON test.user FROM 'pig'@'%';命令也不能撤销该用户对test数据库中user表的Select权限。
+# 具体信息可以用命令SHOW GRANTS FOR 'pig'@'%'; 查看
+mysql&gt; REVOKE privilege ON databasename.tablename FROM 'username'@'host';
 
-<span style="color:#75715e"># 删除用户</span>
-mysql&gt; DROP USER <span style="color:#e6db74">&#39;username&#39;</span>@<span style="color:#e6db74">&#39;host&#39;</span>;
-</code></pre></div><h4 id="sequelize-cli">Sequelize-cli</h4>
+# 删除用户
+mysql&gt; DROP USER 'username'@'host';
+</code></pre>
+
+<h4 id="sequelize-cli">Sequelize-cli</h4>
+
 <ul>
-<li>
-<p>Sequelize 插件的主要应用场景是实际应用开发过程中的代码逻辑层。与其相伴的还有一套 cli 工具，Sequelize-cli，提供了一系列好用的终端指令，来帮助我们完成一些常用的琐碎任务。</p>
-</li>
-<li>
-<p>安装依赖</p>
-</li>
+<li><p>Sequelize 插件的主要应用场景是实际应用开发过程中的代码逻辑层。与其相伴的还有一套 cli 工具，Sequelize-cli，提供了一系列好用的终端指令，来帮助我们完成一些常用的琐碎任务。</p></li>
+
+<li><p>安装依赖</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm i sequelize-cli -D
+
+<pre><code class="language-bash">npm i sequelize-cli -D
 npm i sequelize
 npm i mysql2
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li>sequelize init (通过 sequelize-cli 初始化 sequelize，我们将得到一个好用的初始化结构：)</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># windows下</span>
-node_modules<span style="color:#ae81ff">\.</span>bin<span style="color:#ae81ff">\s</span>equelize init
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">├── config                       <span style="color:#75715e"># 项目配置目录</span>
-|   ├── config.<span style="color:#f92672">[</span>json|js<span style="color:#f92672">]</span>              <span style="color:#75715e"># 数据库连接的配置</span>
-├── models                       <span style="color:#75715e"># 数据库 model</span>
-|   ├── index.js                 <span style="color:#75715e"># 数据库连接的样板代码</span>
-├── migrations                   <span style="color:#75715e"># 数据迁移的目录</span>
-├── seeders                      <span style="color:#75715e"># 数据填充的目录</span>
-</code></pre></div><ul>
+
+<pre><code class="language-bash"># windows下
+node_modules\.bin\sequelize init
+</code></pre>
+
+<pre><code class="language-sh">├── config                       # 项目配置目录
+|   ├── config.[json|js]              # 数据库连接的配置
+├── models                       # 数据库 model
+|   ├── index.js                 # 数据库连接的样板代码
+├── migrations                   # 数据迁移的目录
+├── seeders                      # 数据填充的目录
+</code></pre>
+
+<ul>
 <li>sequelize db:create</li>
 </ul>
-<p>执行下面的命令，可以默认使用 development 下的配置，来创建项目数据库。增加例如 &ndash;env production，则使用 config/config.js 中的 production 项配置，来完成数据库的创建。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">node_modules<span style="color:#ae81ff">\.</span>bin<span style="color:#ae81ff">\s</span>equelize db:create
 
-<span style="color:#75715e"># 通过 --env 参数，指定为生产环境创建项目数据库</span>
-<span style="color:#75715e"># node_modules\.bin\sequelize db:create --env production</span>
-</code></pre></div><h3 id="migrate-数据迁移">migrate 数据迁移</h3>
+<p>执行下面的命令，可以默认使用 development 下的配置，来创建项目数据库。增加例如 &ndash;env production，则使用 config/config.js 中的 production 项配置，来完成数据库的创建。</p>
+
+<pre><code class="language-bash">node_modules\.bin\sequelize db:create
+
+# 通过 --env 参数，指定为生产环境创建项目数据库
+# node_modules\.bin\sequelize db:create --env production
+</code></pre>
+
+<h3 id="migrate-数据迁移">migrate 数据迁移</h3>
+
 <ul>
 <li>sequelize migration:create <em>使用 sequelize migration:create 来创建一个迁移文件 create-shops-table。</em></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">node_modules<span style="color:#ae81ff">\.</span>bin<span style="color:#ae81ff">\s</span>equelize migration:create --name create-shops-table
-</code></pre></div><ul>
+
+<pre><code class="language-bash">node_modules\.bin\sequelize migration:create --name create-shops-table
+</code></pre>
+
+<ul>
 <li>sequelize db:migrate <em>帮助将 migrations 目录下的迁移行为定义，按时间戳的顺序，逐个地执行迁移描述，最终完成数据库表结构的自动化创建。并且，在数据库中会默认创建一个名为 SequelizeMeta 的表，用于记录在当前数据库上所运行的迁移历史版本。</em></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">node_modules<span style="color:#ae81ff">\.</span>bin<span style="color:#ae81ff">\s</span>equelize db:migrate
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; show tables;
+
+<pre><code class="language-bash">node_modules\.bin\sequelize db:migrate
+</code></pre>
+
+<pre><code class="language-bash">mysql&gt; show tables;
 +---------------------+
 | Tables_in_practtest |
 +---------------------+
@@ -371,166 +428,200 @@ node_modules<span style="color:#ae81ff">\.</span>bin<span style="color:#ae81ff">
 | sequelizemeta       |
 | shops               |
 +---------------------+
-<span style="color:#ae81ff">3</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
-</code></pre></div><ul>
-<li>
-<p>sequelize db:migrate:undo <em>sequelize db:migrate:undo 则可以帮助我们按照 down 方法中所定义的规则，回退一个数据库表结构迁移的状态。<code>node_modules\.bin\sequelize db:migrate:undo</code></em></p>
-</li>
-<li>
-<p>向表中追加字段 <em>创建一个名叫 add-columns-to-shops-table 的迁移迁移文件：<code>node_modules\.bin\sequelize migration:create --name add-columns-to-shops-table</code></em></p>
-</li>
+3 rows in set (0.00 sec)
+</code></pre>
+
+<ul>
+<li><p>sequelize db:migrate:undo <em>sequelize db:migrate:undo 则可以帮助我们按照 down 方法中所定义的规则，回退一个数据库表结构迁移的状态。<code>node_modules\.bin\sequelize db:migrate:undo</code></em></p></li>
+
+<li><p>向表中追加字段 <em>创建一个名叫 add-columns-to-shops-table 的迁移迁移文件：<code>node_modules\.bin\sequelize migration:create --name add-columns-to-shops-table</code></em></p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
-  <span style="color:#a6e22e">up</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">queryInterface</span>, <span style="color:#a6e22e">Sequelize</span>) =&gt; Promise.<span style="color:#a6e22e">all</span>([
-    <span style="color:#a6e22e">queryInterface</span>.<span style="color:#a6e22e">addColumn</span>(<span style="color:#e6db74">&#39;shops&#39;</span>, <span style="color:#e6db74">&#39;address&#39;</span>, { <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Sequelize</span>.<span style="color:#a6e22e">STRING</span> }),
+
+<pre><code class="language-js">module.exports = {
+  up: (queryInterface, Sequelize) =&gt; Promise.all([
+    queryInterface.addColumn('shops', 'address', { type: Sequelize.STRING }),
   ]),
 
-  <span style="color:#a6e22e">down</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">queryInterface</span> =&gt; Promise.<span style="color:#a6e22e">all</span>([
-    <span style="color:#a6e22e">queryInterface</span>.<span style="color:#a6e22e">removeColumn</span>(<span style="color:#e6db74">&#39;shops&#39;</span>, <span style="color:#e6db74">&#39;address&#39;</span>),
+  down: queryInterface =&gt; Promise.all([
+    queryInterface.removeColumn('shops', 'address'),
   ]),
 };
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 之前的表结构</span>
+</code></pre>
+
+<pre><code class="language-bash"># 之前的表结构
 mysql&gt; desc shops;
 +------------+--------------+------+-----+---------+----------------+
 | Field      | Type         | Null | Key | Default | Extra          |
 +------------+--------------+------+-----+---------+----------------+
-| id         | int<span style="color:#f92672">(</span>11<span style="color:#f92672">)</span>      | NO   | PRI | NULL    | auto_increment |
-| name       | varchar<span style="color:#f92672">(</span>255<span style="color:#f92672">)</span> | NO   |     | NULL    |                |
-| thumb_url  | varchar<span style="color:#f92672">(</span>255<span style="color:#f92672">)</span> | YES  |     | NULL    |                |
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(255) | NO   |     | NULL    |                |
+| thumb_url  | varchar(255) | YES  |     | NULL    |                |
 | created_at | datetime     | YES  |     | NULL    |                |
 | updated_at | datetime     | YES  |     | NULL    |                |
 +------------+--------------+------+-----+---------+----------------+
-<span style="color:#ae81ff">5</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 再次运行完 node_modules\.bin\sequelize db:migrate 后的表结构</span>
+5 rows in set (0.00 sec)
+</code></pre>
+
+<pre><code class="language-bash"># 再次运行完 node_modules\.bin\sequelize db:migrate 后的表结构
 mysql&gt; desc shops;
 +------------+--------------+------+-----+---------+----------------+
 | Field      | Type         | Null | Key | Default | Extra          |
 +------------+--------------+------+-----+---------+----------------+
-| id         | int<span style="color:#f92672">(</span>11<span style="color:#f92672">)</span>      | NO   | PRI | NULL    | auto_increment |
-| name       | varchar<span style="color:#f92672">(</span>255<span style="color:#f92672">)</span> | NO   |     | NULL    |                |
-| thumb_url  | varchar<span style="color:#f92672">(</span>255<span style="color:#f92672">)</span> | YES  |     | NULL    |                |
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(255) | NO   |     | NULL    |                |
+| thumb_url  | varchar(255) | YES  |     | NULL    |                |
 | created_at | datetime     | YES  |     | NULL    |                |
 | updated_at | datetime     | YES  |     | NULL    |                |
-| address    | varchar<span style="color:#f92672">(</span>255<span style="color:#f92672">)</span> | YES  |     | NULL    |                |
+| address    | varchar(255) | YES  |     | NULL    |                |
 +------------+--------------+------+-----+---------+----------------+
-<span style="color:#ae81ff">6</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
-</code></pre></div><h3 id="seeders-种子数据填充">seeders 种子数据填充</h3>
+6 rows in set (0.00 sec)
+</code></pre>
+
+<h3 id="seeders-种子数据填充">seeders 种子数据填充</h3>
+
 <ul>
-<li>
-<p>sequelize seed:create <em><code>node_modules\.bin\sequelize seed:create --name init-shops</code></em></p>
-</li>
-<li>
-<p>sequelize db:seed:all <em>与 db:migrate 相似，执行 sequelize db:seed:all ，将向数据库填充 seeders 目录中所有 up 方法所定义的数据。<code>node_modules\.bin\sequelize db:seed:all</code></em><strong>注意: seeders 的执行，不会将状态存储在 SequelizeMeta 表中。</strong>(当然，我们也可以通过 <code>--seed</code> 来制定特定的 <code>seed</code> 配置来做填充：
-<code>node_modules\.bin\sequelize db:seed --seed 20190103082032-init-goods.js</code>)</p>
-</li>
+<li><p>sequelize seed:create <em><code>node_modules\.bin\sequelize seed:create --name init-shops</code></em></p></li>
+
+<li><p>sequelize db:seed:all <em>与 db:migrate 相似，执行 sequelize db:seed:all ，将向数据库填充 seeders 目录中所有 up 方法所定义的数据。<code>node_modules\.bin\sequelize db:seed:all</code></em><strong>注意: seeders 的执行，不会将状态存储在 SequelizeMeta 表中。</strong>(当然，我们也可以通过 <code>--seed</code> 来制定特定的 <code>seed</code> 配置来做填充：
+<code>node_modules\.bin\sequelize db:seed --seed 20190103082032-init-goods.js</code>)</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 添加后的数据表</span>
-mysql&gt; <span style="color:#66d9ef">select</span> * from shops;
+
+<pre><code class="language-bash"># 添加后的数据表
+mysql&gt; select * from shops;
 +----+-------+-----------+---------------------+---------------------+---------+
 | id | name  | thumb_url | created_at          | updated_at          | address |
 +----+-------+-----------+---------------------+---------------------+---------+
-|  <span style="color:#ae81ff">1</span> | 店铺1 | 1.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-|  <span style="color:#ae81ff">2</span> | 店铺2 | 2.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-|  <span style="color:#ae81ff">3</span> | 店铺3 | 3.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-|  <span style="color:#ae81ff">4</span> | 店铺4 | 4.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
-|  <span style="color:#ae81ff">5</span> | 店铺5 | 5.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  1 | 店铺1 | 1.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  2 | 店铺2 | 2.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  3 | 店铺3 | 3.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  4 | 店铺4 | 4.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  5 | 店铺5 | 5.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
 +----+-------+-----------+---------------------+---------------------+---------+
-<span style="color:#ae81ff">5</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
-</code></pre></div><ul>
+5 rows in set (0.00 sec)
+</code></pre>
+
+<ul>
 <li>sequelize db:seed:undo <em>Seeders 所填充的数据，也与迁移的 db:migrate:undo 相仿，只是不会进入 SequelizeMeta 记录。两个可用的命令如下，很简单，不再赘述：</em></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-<span style="color:#75715e"># 撤销所有的种子</span>
-node_modules<span style="color:#ae81ff">\.</span>bin<span style="color:#ae81ff">\s</span>equelize db:seed:undo:all
-<span style="color:#75715e"># 数据表</span>
-mysql&gt; <span style="color:#66d9ef">select</span> * from shops;
+
+<pre><code class="language-bash">
+# 撤销所有的种子
+node_modules\.bin\sequelize db:seed:undo:all
+# 数据表
+mysql&gt; select * from shops;
 +----+-------+-----------+---------------------+---------------------+---------+
 | id | name  | thumb_url | created_at          | updated_at          | address |
 +----+-------+-----------+---------------------+---------------------+---------+
-|  <span style="color:#ae81ff">5</span> | 店铺5 | 5.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
+|  5 | 店铺5 | 5.png     | 2018-12-30 12:10:22 | 2018-12-30 12:10:22 | NULL    |
 +----+-------+-----------+---------------------+---------------------+---------+
-<span style="color:#ae81ff">1</span> row in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
+1 row in set (0.00 sec)
 
-<span style="color:#75715e"># 撤销指定的种子</span>
-node_modules<span style="color:#ae81ff">\.</span>bin<span style="color:#ae81ff">\s</span>equelize db:seed:undo --seed XXXXXXXXXXXXXX-demo-user.js
-</code></pre></div><h3 id="sequelize-连接-mysql-数据库">Sequelize 连接 MySQL 数据库</h3>
+# 撤销指定的种子
+node_modules\.bin\sequelize db:seed:undo --seed XXXXXXXXXXXXXX-demo-user.js
+</code></pre>
+
+<h3 id="sequelize-连接-mysql-数据库">Sequelize 连接 MySQL 数据库</h3>
+
 <ul>
-<li>Sequelize 连接数据库的核心代码主要就是通过 new Sequelize（database, username, password, options） 来实现，其中 options 中的配置选项，除了最基础的 host 与 port、数据库类型外，还可以设置连接池的连接参数 pool，数据模型命名规范 underscored 等等。具体可以查阅官方手册 <a href="http://docs.sequelizejs.com/manual/installation/usage.html">基础使用</a>。<strong>希望遵循 MySQL 数据库表字段的下划线命名规范，所以，需要全局开启一个 <code>underscore: true</code> 的定义，来使系统中默认的 createdAt 与 updatedAt 能以下划线的方式，与表结构保持一致。</strong></li>
+<li>Sequelize 连接数据库的核心代码主要就是通过 new Sequelize（database, username, password, options） 来实现，其中 options 中的配置选项，除了最基础的 host 与 port、数据库类型外，还可以设置连接池的连接参数 pool，数据模型命名规范 underscored 等等。具体可以查阅官方手册 <a href="http://docs.sequelizejs.com/manual/installation/usage.html" rel="nofollow noreferrer" target="_blank">基础使用</a>。<strong>希望遵循 MySQL 数据库表字段的下划线命名规范，所以，需要全局开启一个 <code>underscore: true</code> 的定义，来使系统中默认的 createdAt 与 updatedAt 能以下划线的方式，与表结构保持一致。</strong></li>
 </ul>
+
 <h4 id="定义数据库业务相关的-model">定义数据库业务相关的 model</h4>
+
 <ul>
 <li>结合业务所需，可以在存放 models 目录下继续创建一系列的 model 来与数据库表结构做对应：</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">├── models                       <span style="color:#75715e"># 数据库 model</span>
-│   ├── index.js                 <span style="color:#75715e"># model 入口与连接</span>
-│   ├── goods.js                 <span style="color:#75715e"># 商品表</span>
-│   ├── shops.js                 <span style="color:#75715e"># 店铺表</span>
-</code></pre></div><h4 id="实现接口">实现接口</h4>
+
+<pre><code class="language-sh">├── models                       # 数据库 model
+│   ├── index.js                 # model 入口与连接
+│   ├── goods.js                 # 商品表
+│   ├── shops.js                 # 店铺表
+</code></pre>
+
+<h4 id="实现接口">实现接口</h4>
+
 <ul>
 <li>很多时候，我们并不希望 findAll 来将数据表中的所有数据全都暴露出来，比如在查询用户列表时，用户的密码的值，便是特别敏感的数据。 我们可以在 findAll 中加入一个 <code>attributes</code> 的约束，可以是一个要查询的属性（字段）列表，或者是一个 key 为 <code>include</code> 或 <code>exclude</code> 对象的键，比如对于用户表，<code>findAll({ attributes: { exclude: ['password'] } })</code>，就可以排除密码字段的查询露出。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Joi</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;joi&#39;</span>)
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">models</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;../models&#39;</span>)
 
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">GROUP_NAME</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;shops&#39;</span>
+<pre><code class="language-js">const Joi = require('joi')
+const models = require('../models')
 
-<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> [
+const GROUP_NAME = 'shops'
+
+module.exports = [
   {
-    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span>,
-    <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">`/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">GROUP_NAME</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>,
-    <span style="color:#a6e22e">handler</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">request</span>, <span style="color:#a6e22e">reply</span>) =&gt; {
-      <span style="color:#75715e">// 查找数据
-</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">models</span>.<span style="color:#a6e22e">shops</span>.<span style="color:#a6e22e">findAll</span>({
-        <span style="color:#75715e">// 只返回 id 和 name
-</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">attributes</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#e6db74">&#39;name&#39;</span>]
+    method: 'GET',
+    path: `/${GROUP_NAME}`,
+    handler: async (request, reply) =&gt; {
+      // 查找数据
+      const result = await models.shops.findAll({
+        // 只返回 id 和 name
+        attributes: ['id', 'name']
       })
-      <span style="color:#a6e22e">reply</span>(<span style="color:#a6e22e">result</span>)
+      reply(result)
     },
-    <span style="color:#a6e22e">config</span><span style="color:#f92672">:</span> {
-      <span style="color:#a6e22e">tags</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;api&#39;</span>, <span style="color:#a6e22e">GROUP_NAME</span>],
-      <span style="color:#a6e22e">description</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;获取店铺列表&#39;</span>,
-      <span style="color:#75715e">// 适用于 GET 接口的 query（URL 路径参数）
-</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">validate</span><span style="color:#f92672">:</span> {
-        <span style="color:#a6e22e">query</span><span style="color:#f92672">:</span> {
-          <span style="color:#a6e22e">limit</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Joi</span>.<span style="color:#a6e22e">number</span>().<span style="color:#a6e22e">integer</span>().<span style="color:#a6e22e">min</span>(<span style="color:#ae81ff">1</span>).<span style="color:#66d9ef">default</span>(<span style="color:#ae81ff">10</span>).<span style="color:#a6e22e">description</span>(<span style="color:#e6db74">&#39;每页条数&#39;</span>),
-          <span style="color:#75715e">// error(new Error(&#39;页码数不能为0！&#39;))  显示的错误信息为中文（message）
-</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">page</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Joi</span>.<span style="color:#a6e22e">number</span>().<span style="color:#a6e22e">integer</span>().<span style="color:#a6e22e">min</span>(<span style="color:#ae81ff">1</span>).<span style="color:#66d9ef">default</span>(<span style="color:#ae81ff">1</span>).<span style="color:#a6e22e">description</span>(<span style="color:#e6db74">&#39;页码数&#39;</span>).<span style="color:#a6e22e">error</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;页码数不能为0！&#39;</span>))
+    config: {
+      tags: ['api', GROUP_NAME],
+      description: '获取店铺列表',
+      // 适用于 GET 接口的 query（URL 路径参数）
+      validate: {
+        query: {
+          limit: Joi.number().integer().min(1).default(10).description('每页条数'),
+          // error(new Error('页码数不能为0！'))  显示的错误信息为中文（message）
+          page: Joi.number().integer().min(1).default(1).description('页码数').error(new Error('页码数不能为0！'))
         }
       }
     }
   },
   ...
 ]
-</code></pre></div><ul>
-<li>列表分页 <code>options</code> 的具体配置参数细节说明，参见 <a href="https://github.com/fknop/hapi-pagination/tree/v1.6.5">hapi-pagination</a>。</li>
+</code></pre>
+
+<ul>
+<li>列表分页 <code>options</code> 的具体配置参数细节说明，参见 <a href="https://github.com/fknop/hapi-pagination/tree/v1.6.5" rel="nofollow noreferrer" target="_blank">hapi-pagination</a>。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 安装适配 hapi v16 的 hapi-pagination</span>
+
+<pre><code class="language-bash"># 安装适配 hapi v16 的 hapi-pagination
 $ npm i hapi-pagination@1
-</code></pre></div><h3 id="基于-jwt-的身份验证">基于 JWT 的身份验证</h3>
+</code></pre>
+
+<h3 id="基于-jwt-的身份验证">基于 JWT 的身份验证</h3>
+
 <ul>
 <li>JWT 全称 JSON Web Token，是为了方便在各系统之间安全地传送 JSON 对象格式的信息，而采用的一个开发标准，基于 RFC 7519 定义。服务器在接收到 JWT 之后，可以验证它的合法性，用户登录与否的身份验证便是 JWT 的使用场景之一。</li>
 <li>JWT 具有「紧凑」与「自包含」的两大特点: 紧凑（compact）、自包含（self-contained）</li>
 <li>JWT 的构成&mdash;JSON Web Token 由 header、payload、signature 三部分组成，使用点号 . 分隔，下面是一段典型的 JWT 串:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># header</span>
+
+<pre><code class="language-bash"># header
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-<span style="color:#75715e"># payload</span>
+# payload
 eyJ1c2VySWQiOjEsImV4cCI6MTUzNTMyMjc0NSwiaWF0IjoxNTM0NzE3OTQ1fQ.
-<span style="color:#75715e"># signature</span>
+# signature
 6tOdn2R82bxJbXjAnwU5g4g9EKqGNe-qo4qCo6UZnQ
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li>header &ndash; JWT 第一部分 header 指定了该 JWT 使用的签名算法：</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ <span style="color:#f92672">&#34;alg&#34;</span>: <span style="color:#e6db74">&#34;HS256&#34;</span>, <span style="color:#f92672">&#34;typ&#34;</span>:<span style="color:#e6db74">&#34;JWT&#34;</span> }
-</code></pre></div><ul>
+
+<pre><code class="language-json">{ &quot;alg&quot;: &quot;HS256&quot;, &quot;typ&quot;:&quot;JWT&quot; }
+</code></pre>
+
+<ul>
 <li>payload &ndash; JWT 的第二部分 <code>payload</code> 包含了该 JWT 的签发内容信息。以如上述 JWT 串为例，被解码之后，可以得到如下信息，包涵有用户 <code>ID</code>，<code>JWT</code> 过期时间 <code>exp</code>，<code>JWT</code> 签发时间 <code>iat</code>。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;userId&#34;</span>: <span style="color:#ae81ff">1</span>,
-  <span style="color:#f92672">&#34;exp&#34;</span>: <span style="color:#ae81ff">1535322745</span>,
-  <span style="color:#f92672">&#34;iat&#34;</span>: <span style="color:#ae81ff">1534717945</span>
+
+<pre><code class="language-json">{
+  &quot;userId&quot;: 1,
+  &quot;exp&quot;: 1535322745,
+  &quot;iat&quot;: 1534717945
 }
-</code></pre></div><p>其中 JWT 的规范有一套预设的标准注册声明，非必要项，在业务场景需要的时候加入：</p>
+</code></pre>
+
+<p>其中 JWT 的规范有一套预设的标准注册声明，非必要项，在业务场景需要的时候加入：</p>
+
 <blockquote>
 <ul>
 <li><code>iss(issuer)</code>：JWT 的签发者</li>
@@ -542,14 +633,21 @@ eyJ1c2VySWQiOjEsImV4cCI6MTUzNTMyMjc0NSwiaWF0IjoxNTM0NzE3OTQ1fQ.
 <li><code>jti(jwtid)</code>：JWT 的唯一身份标识，主要用来作为一次性 token，从而避免重放攻击</li>
 </ul>
 </blockquote>
-<p>其他的信息数据，可以在 payload 中额外追加，避免与预设保留字冲突就好。<br>
+
+<p>其他的信息数据，可以在 payload 中额外追加，避免与预设保留字冲突就好。<br />
 <em>注意</em> ：对于已签发的 JWT, 尽管信息是可以受到下文 signature 的签名防篡改保护，但 payload 部分的内容，依旧任何人都可以 decode 解码阅读。故而不要在 payload 中存放诸如密码密秘类的安全敏感数据。</p>
+
 <ul>
 <li>signature &ndash; JWT 的第三部分 signature 用来验证签发数据的合法性，是否存在第三方篡改伪造行为。由 header + payload + 签发 secret 组合而成。有心的读者可以发现，其中的参数条件 header 和 payload 皆为 base64 的编码内容，base64 是一种可双向的编码算法，所以不具备数据安全性。唯有 secret 的参数条件，在 JWT 最终的生成串中并不公开，所以在服务端保管好 secret 的签发字符串的私密性尤为重要，随意地将其提交进 git 的代码版本库，是一种极度不严谨行为。 以 HS256 算法为例，signature 的签发算法如下：</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">HMACSHA256</span>(<span style="color:#a6e22e">base64UrlEncode</span>(<span style="color:#a6e22e">header</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">base64UrlEncode</span>(<span style="color:#a6e22e">payload</span>), <span style="color:#a6e22e">secret</span>)
-</code></pre></div><p><code>Secret</code> 的秘钥签发，可以通过一些在线的 AES 加密工具来生成一串长度 32 或 64 的随机字符串。比如： <a href="http://tool.oschina.net/encrypt/">tool.oschina.net/encrypt/</a> 。太长的字符串会一定程度上影响 jwt 验证的计算效率，所以找寻一个平衡点为宜。</p>
+
+<pre><code class="language-js">HMACSHA256(base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload), secret)
+</code></pre>
+
+<p><code>Secret</code> 的秘钥签发，可以通过一些在线的 AES 加密工具来生成一串长度 32 或 64 的随机字符串。比如： <a href="http://tool.oschina.net/encrypt/" rel="nofollow noreferrer" target="_blank">tool.oschina.net/encrypt/</a> 。太长的字符串会一定程度上影响 jwt 验证的计算效率，所以找寻一个平衡点为宜。</p>
+
 <h4 id="基于-jwt-的身份验证的好处">基于 JWT 的身份验证的好处</h4>
+
 <ul>
 <li><strong>跨语言性</strong>：payload 数据结构基于 JSON，可以被任何主流语言支持。</li>
 <li><strong>免疫 CSRF</strong>：对 Cookie 的不依赖性，决定了天然免疫 CSRF 攻击。</li>
@@ -557,156 +655,186 @@ eyJ1c2VySWQiOjEsImV4cCI6MTUzNTMyMjc0NSwiaWF0IjoxNTM0NzE3OTQ1fQ.
 <li><strong>多端适配</strong>：iOS， Android，微信小程序等非网页客户端，Cookie 是不被支持的，JWT 的认证机制则会简单很多。</li>
 <li><strong>去耦可扩展性</strong>：JWT 可以在任何拥有正确 secret 私钥的 API 服务环境被身份验证和使用，便于微服务拆分。</li>
 </ul>
+
 <h4 id="基于-jwt-身份验证的注意项">基于 JWT 身份验证的注意项</h4>
+
 <ul>
 <li>不要在 JWT 的 payload 中签入敏感信息</li>
 <li>保护好 secret 秘钥</li>
 <li>使用 HTTPS 传输 JWT</li>
 <li>设置较短的 JWT 失效时间，并结合一个失效较长的 JWT RefreshToken 组合为宜。因为 JWT 无法轻易失效已签发的合法 JWT</li>
 </ul>
+
 <h4 id="使用-jsonwebtoken-签发-jwt">使用 jsonwebtoken 签发 JWT</h4>
+
 <ul>
 <li>jsonwebtoken 是 Node.js 生态里用于签发与校验 JWT 的流行插件。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm i jsonwebtoken
-</code></pre></div><h5 id="jwtsign-签发">jwt.sign 签发</h5>
+
+<pre><code class="language-bash">npm i jsonwebtoken
+</code></pre>
+
+<h5 id="jwt-sign-签发">jwt.sign 签发</h5>
+
 <ul>
 <li>JWT 的签发语法是 <code>jwt.sign(payload, secretOrPrivateKey, [options, callback])</code>。默认的签发算法基于 <code>HS256 (HMAC SHA256)</code>，可以在 options 参数的 <code>algorithm</code> 另行修改。JWT 签发规范中的一些标准保留字段比如 <code>exp</code>，<code>nbf</code>，<code>aud</code>，<code>sub</code>，<code>iss</code> 等都没有默认值，可以一并在 <code>payload</code>参数中按需声明使用，亦可以在第三个参数 options 中，通过 <code>expiresIn</code>，<code>notBefore</code>，<code>audience</code>，<code>subject</code>，<code>issuer</code> 来分别赋值，但是不允许在两处同时声明。</li>
-<li>可以通过 <a href="https://jwt.io/">JWT</a> 来 decode JWT 中的 payload 信息。</li>
+<li>可以通过 <a href="https://jwt.io/" rel="nofollow noreferrer" target="_blank">JWT</a> 来 decode JWT 中的 payload 信息。</li>
 </ul>
+
 <h5 id="hapi-auth-jwt2-接口用户验证">hapi-auth-jwt2 接口用户验证</h5>
+
 <ul>
 <li>安装</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm i hapi-auth-jwt2@7
-</code></pre></div><ul>
+
+<pre><code class="language-bash">npm i hapi-auth-jwt2@7
+</code></pre>
+
+<ul>
 <li>hapi-auth-jwt2 配置</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">├── plugins                       <span style="color:#75715e"># hapi 插件配置</span>
-│ ├── hapi-auth-jwt2.js           <span style="color:#75715e"># jwt 配置插件</span>
-</code></pre></div><h3 id="sequelize-支持两种使用事务的方法">Sequelize 支持两种使用事务的方法</h3>
+
+<pre><code class="language-sh">├── plugins                       # hapi 插件配置
+│ ├── hapi-auth-jwt2.js           # jwt 配置插件
+</code></pre>
+
+<h3 id="sequelize-支持两种使用事务的方法">Sequelize 支持两种使用事务的方法</h3>
+
 <ul>
 <li>托管事务</li>
 <li>非托管事务</li>
 </ul>
+
 <blockquote>
-<p><em>在一个事务中，可能会包含开始（start）、提交（commit）、回滚（rollback）等操作，Sequelize 通过 <a href="http://docs.sequelizejs.com/manual/tutorial/transactions.html">Transaction</a>类来实现事务相关功能。以满足一些对操作过程的完整性比较高的使用场景。</em>
-_托管事务基于 Promise 结果链进行自动提交或回滚。非托管事务则交由用户自行控制提交或回滚。_</p>
+<p><em>在一个事务中，可能会包含开始（start）、提交（commit）、回滚（rollback）等操作，Sequelize 通过 <a href="http://docs.sequelizejs.com/manual/tutorial/transactions.html" rel="nofollow noreferrer" target="_blank">Transaction</a>类来实现事务相关功能。以满足一些对操作过程的完整性比较高的使用场景。</em>
+<em>托管事务基于 Promise 结果链进行自动提交或回滚。非托管事务则交由用户自行控制提交或回滚。</em></p>
 </blockquote>
-<h3 id="微信接收的数据与返回的格式都是以-textxml-的格式而非-applicationjson-需要引入-xml2js-的插件帮助在-javascript-的-ojbect-与-xml-的-object-数据关系之间快速转换">微信接收的数据与返回的格式都是以 text/xml 的格式，而非 application/json ，需要引入 xml2js 的插件帮助在 JavaScript 的 Ojbect 与 XML 的 Object 数据关系之间快速转换</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm i xml2js
-</code></pre></div><h3 id="系统监控与记录--使用-good-插件">系统监控与记录 —— 使用 Good 插件</h3>
+
+<h3 id="微信接收的数据与返回的格式都是以-text-xml-的格式-而非-application-json-需要引入-xml2js-的插件帮助在-javascript-的-ojbect-与-xml-的-object-数据关系之间快速转换">微信接收的数据与返回的格式都是以 text/xml 的格式，而非 application/json ，需要引入 xml2js 的插件帮助在 JavaScript 的 Ojbect 与 XML 的 Object 数据关系之间快速转换</h3>
+
+<pre><code class="language-bash">npm i xml2js
+</code></pre>
+
+<h3 id="系统监控与记录-使用-good-插件">系统监控与记录 —— 使用 Good 插件</h3>
+
 <ul>
 <li>Good 是一个 hapi 插件，用于监视和报告来自主机的各种 hapi 服务器事件以及 ops 信息。它侦听 hapi 服务器实例发出的事件，并将标准化事件推送到流集合中。Good 插件目前有这四个扩展功能： good-squeeze、good-console、good-file、good-http。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm i good@7
+
+<pre><code class="language-bash">npm i good@7
 npm i good-squeeze@5
 npm i good-console@7
 npm i good-file@6
 npm i good-http@6
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li>good-squeeze：good-squeeze 是一个小转换流的集合。它提供了两个类，Squeeze 和 SafeJson, Squeeze 流基于良好的事件选项来过滤事件。SafeJson 流用于把对象转成 JSON 字符串，并且可以防止对象中循环引用引起的错误。</li>
-<li>good-console：good-console 能够将服务 good 服务事件转化为格式化字符串的转换流插件，最终通过 stdout 在控制台打印输出。</li>
+
+<li><p>good-console：good-console 能够将服务 good 服务事件转化为格式化字符串的转换流插件，最终通过 stdout 在控制台打印输出。
+&gt; GoodConsole([config])
+&gt; good-console 本身提供 3 个参数来简单配置控制台的打印信息：
+&gt; * format：使用 MomentJS 格式化时间， 默认值 YYMMDD/HHmmss.SSS
+&gt; * utc：boolean 输出时间是否为布尔值， 默认值 true
+&gt; * color：boolean 是否彩色输出，默认值 true</p></li>
+
+<li><p>good-file：基于 good-console 的控制台输出日志，当遇到控制台断开或是重启的时候，历史日志将无法找回，此时，在本地生成一份写文件的日志记录，会更好地便于日后的追溯。good-file 插件很好地解决了这样的需求痛点。
+&gt; GoodFile (path, options)
+&gt; * path：必填项，用来定义日志的写入目录
+&gt; * options：选填项，文件流的选项。 默认值为<code>{ encoding: 'utf8', flags: 'a', mode: 0o666 }</code></p></li>
+
+<li><p>good-http：除此之外，在实际应用场景中，我们会遇到一些高危异常的错误情况，这类日志我们更希望能在错误发生的第一时间，就通过自动报警的方式，来通知开发人员及时介入响应。这里可以使用 good-http 插件，它可以构造一个 post 的请求接口，将定义的重要日志信息以 JSON 的数据结构方式，推送到目标端点。
+&gt; GoodHttp (endpoint, config)
+&gt; * endpoint：日志发送的目标地址
+&gt; * config：Object 类型的配置项目</p></li>
+
+<li><p>组合使用日志插件：在实际项目使用中，可以进行组合性配置，在 reporters 字段中使用不同的 key 来区分即可</p></li>
 </ul>
-<blockquote>
-<p>GoodConsole([config])
-good-console 本身提供 3 个参数来简单配置控制台的打印信息：</p>
-<ul>
-<li>format：使用 MomentJS 格式化时间， 默认值 YYMMDD/HHmmss.SSS</li>
-<li>utc：boolean 输出时间是否为布尔值， 默认值 true</li>
-<li>color：boolean 是否彩色输出，默认值 true</li>
-</ul>
-</blockquote>
-<ul>
-<li>good-file：基于 good-console 的控制台输出日志，当遇到控制台断开或是重启的时候，历史日志将无法找回，此时，在本地生成一份写文件的日志记录，会更好地便于日后的追溯。good-file 插件很好地解决了这样的需求痛点。</li>
-</ul>
-<blockquote>
-<p>GoodFile (path, options)</p>
-<ul>
-<li>path：必填项，用来定义日志的写入目录</li>
-<li>options：选填项，文件流的选项。 默认值为<code>{ encoding: 'utf8', flags: 'a', mode: 0o666 }</code></li>
-</ul>
-</blockquote>
-<ul>
-<li>good-http：除此之外，在实际应用场景中，我们会遇到一些高危异常的错误情况，这类日志我们更希望能在错误发生的第一时间，就通过自动报警的方式，来通知开发人员及时介入响应。这里可以使用 good-http 插件，它可以构造一个 post 的请求接口，将定义的重要日志信息以 JSON 的数据结构方式，推送到目标端点。</li>
-</ul>
-<blockquote>
-<p>GoodHttp (endpoint, config)</p>
-<ul>
-<li>endpoint：日志发送的目标地址</li>
-<li>config：Object 类型的配置项目</li>
-</ul>
-</blockquote>
-<ul>
-<li>组合使用日志插件：在实际项目使用中，可以进行组合性配置，在 reporters 字段中使用不同的 key 来区分即可</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">reporters</span><span style="color:#f92672">:</span> {
-  <span style="color:#a6e22e">typeConsole</span><span style="color:#f92672">:</span> [
-    <span style="color:#75715e">// good-console 的一系列配置
-</span><span style="color:#75715e"></span>  ],
-  <span style="color:#a6e22e">typeFile</span><span style="color:#f92672">:</span> [
-    <span style="color:#75715e">// good-file 的一系列配置
-</span><span style="color:#75715e"></span>  ],
-  <span style="color:#a6e22e">typeHttpA</span><span style="color:#f92672">:</span> [
-    <span style="color:#75715e">// good-http 针对 A 平台的一系列配置
-</span><span style="color:#75715e"></span>  ],
-  <span style="color:#a6e22e">typeHttpB</span><span style="color:#f92672">:</span> [
-    <span style="color:#75715e">// good-http 针对 B 平台的一系列配置
-</span><span style="color:#75715e"></span>  ],
+
+<pre><code class="language-js">reporters: {
+  typeConsole: [
+    // good-console 的一系列配置
+  ],
+  typeFile: [
+    // good-file 的一系列配置
+  ],
+  typeHttpA: [
+    // good-http 针对 A 平台的一系列配置
+  ],
+  typeHttpB: [
+    // good-http 针对 B 平台的一系列配置
+  ],
 }
-</code></pre></div><h3 id="使用-good-http-结合-sentry-自动收集错误日志">使用 good-http 结合 Sentry 自动收集错误日志</h3>
+</code></pre>
+
+<h3 id="使用-good-http-结合-sentry-自动收集错误日志">使用 good-http 结合 Sentry 自动收集错误日志</h3>
+
 <h4 id="sentry-简介">Sentry 简介</h4>
+
 <p>Sentry 中文翻译过来是哨兵的意思，从字面中可以知道 「站岗、放哨、巡逻、稽查的士兵」，不错，Sentry 是程序的「哨兵」 。它可以监控我们在生产环境中项目的运行状态，一旦某段代码运行报错，或者异常，会第一时间把报错的 路由，异常文件，请求方式 等一些非常详细的信息以消息或者邮件给我们，让我们第一时间知道：程序出错了，然后我们可以从 Sentry 给我们的详细的错误信息中瞬间找到我们需要处理的代码，并及时修正。</p>
+
 <h4 id="sentry-服务搭建流程">Sentry 服务搭建流程</h4>
+
 <p>利用 hapi 的 API 服务能力再搭建一个简易的内网 API 服务，该服务使用 Sentry 的 raven 插件进行错误日志的收集与汇报，日志的信息源来自应用服务的 good-http 插件</p>
+
 <ul>
 <li>申请 Sentry 的 API key</li>
 <li>配置 Sentry 的错误收集与报告插件 raven</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm i raven
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Raven</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;raven&#39;</span>)
-<span style="color:#a6e22e">Raven</span>.<span style="color:#a6e22e">config</span>(<span style="color:#e6db74">&#39;https://your-sentry-api-key@sentry.io/182062&#39;</span>).<span style="color:#a6e22e">install</span>()
-</code></pre></div><ul>
+
+<pre><code class="language-bash">npm i raven
+</code></pre>
+
+<pre><code class="language-js">const Raven = require('raven')
+Raven.config('https://your-sentry-api-key@sentry.io/182062').install()
+</code></pre>
+
+<ul>
 <li>提供错误日志接收服务</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{
-  <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
-  <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/reportErrorLog&#39;</span>,
-  <span style="color:#a6e22e">handler</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">request</span>, <span style="color:#a6e22e">reply</span>) =&gt; {
-    <span style="color:#75715e">//直接将请求参数上报到 Sentry
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Raven</span>.<span style="color:#a6e22e">captureException</span>(<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">payload</span>)
-    <span style="color:#a6e22e">reply</span>()
+
+<pre><code class="language-js">{
+  method: 'POST',
+  path: '/reportErrorLog',
+  handler: async (request, reply) =&gt; {
+    //直接将请求参数上报到 Sentry
+    Raven.captureException(request.payload)
+    reply()
   },
-  <span style="color:#a6e22e">config</span><span style="color:#f92672">:</span> {
-    <span style="color:#a6e22e">tags</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;api&#39;</span>, <span style="color:#e6db74">&#39;report&#39;</span>],
-    <span style="color:#a6e22e">auth</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+  config: {
+    tags: ['api', 'report'],
+    auth: false,
   }
 }
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li>配置应用服务中 good-http 的错误日志推送到上述含有 Sentry raven 的 API 微服务</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">register</span>({
-  <span style="color:#a6e22e">plugin</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;good&#39;</span>),
+
+<pre><code class="language-js">server.register({
+  plugin: require('good'),
   {
-    <span style="color:#a6e22e">ops</span><span style="color:#f92672">:</span> {
-      <span style="color:#a6e22e">interval</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1000</span>
+    ops: {
+      interval: 1000
     },
-    <span style="color:#a6e22e">reporters</span><span style="color:#f92672">:</span> {
-      <span style="color:#a6e22e">typeHttp</span><span style="color:#f92672">:</span> [
+    reporters: {
+      typeHttp: [
         {
-          <span style="color:#a6e22e">module</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;good-squeeze&#39;</span>,
-          <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Squeeze&#39;</span>,
-          <span style="color:#a6e22e">args</span><span style="color:#f92672">:</span> [{ <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;*&#39;</span> }]
+          module: 'good-squeeze',
+          name: 'Squeeze',
+          args: [{ error: '*' }]
         },
         {
-          <span style="color:#a6e22e">module</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;good-http&#39;</span>,
-          <span style="color:#a6e22e">args</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;http://your-sentry-server/reportErrorLog&#39;</span>, {}]
+          module: 'good-http',
+          args: ['http://your-sentry-server/reportErrorLog', {}]
         }
       ]
     }
   }
 })
-</code></pre></div>
+</code></pre>
+
     </div>
 
     <div class="post-copyright">
@@ -719,7 +847,7 @@ good-console 本身提供 3 个参数来简单配置控制台的打印信息：<
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>1802</span>
+            <span>1820</span>
         </p>
 
         <p class="copyright-item">

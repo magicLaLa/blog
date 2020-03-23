@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>leetCode on Magic</title>
@@ -18,8 +18,8 @@
       
       <guid>/2019/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</guid>
       <description>删除链表中的节点 描述 请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
-现有一个链表 &amp;ndash; head = [4,5,1,9]，它可以表示为: 示例 1:输入: head = [4,5,1,9], node = 5输出: [4,1,9]解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 1 -&amp;gt; 9.示例 2:输入: head = [4,5,1,9], node = 1输出: [4,5,9]解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 5 -&amp;gt; 9.分析 从链表里删除一个节点 node 的最常见方法是修改之前节点的 next 指针，使其指向之后的节点。 因为，我们无法访问我们想要删除的节点 之前 的节点，我们始终不能修改该节点的 next 指针。相反，我们必须将想要删除的节点的值替换为它后面节点中的值，然后删除它之后的节点。 因为我们知道要删除的节点不是列表的末尾，所以我们可以保证这种方法是可行的。
-/*** @param {ListNode} node* @return {void} Do not return anything, modify node in-place instead.</description>
+现有一个链表 &amp;ndash; head = [4,5,1,9]，它可以表示为: 示例 1: 输入: head = [4,5,1,9], node = 5 输出: [4,1,9] 解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 1 -&amp;gt; 9. 示例 2: 输入: head = [4,5,1,9], node = 1 输出: [4,5,9] 解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 5 -&amp;gt; 9.  分析 从链表里删除一个节点 node 的最常见方法是修改之前节点的 next 指针，使其指向之后的节点。 因为，我们无法访问我们想要删除的节点 之前 的节点，我们始终不能修改该节点的 next 指针。相反，我们必须将想要删除的节点的值替换为它后面节点中的值，然后删除它之后的节点。 因为我们知道要删除的节点不是列表的末尾，所以我们可以保证这种方法是可行的。
+/** * @param {ListNode} node * @return {void} Do not return anything, modify node in-place instead.</description>
     </item>
     
     <item>
@@ -28,9 +28,9 @@
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</guid>
-      <description>反转链表 描述  反转一个单链表。  示例:输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL输出: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL分析 一、迭代
- 第一个节点无前置节点 所以需要声明初始化一个前置节点prev 开始迭代，结束提交为 当前节点不为null 先把当前节点后置节点变为当前节点的前置节点 然后把前置pre变为当前节点 因为下一次所需 再把当前节点设为后置节点  在遍历列表时，将当前节点的 next 指针改为指向前一个元素。由于节点没有引用其上一个节点，因此必须事先存储其前一个元素。在更改引用之前，还需要另一个指针来存储下一个节点。不要忘记在最后返回新的头引用！
-/*** @param {ListNode} head* @return {ListNode}*/var reverseList = function(head) {let cur = head;let pre = null;while(cur) {let temp = cur.next; // 保存当前节点的后置节点 之后循环到下一个节点需要 cur.next = pre;pre = cur;cur = temp;}return pre;};二、递归</description>
+      <description>反转链表 描述  反转一个单链表。  示例: 输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL 输出: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL  分析 一、迭代 - 第一个节点无前置节点 所以需要声明初始化一个前置节点prev - 开始迭代，结束提交为 当前节点不为null - 先把当前节点后置节点变为当前节点的前置节点 - 然后把前置pre变为当前节点 因为下一次所需 - 再把当前节点设为后置节点
+在遍历列表时，将当前节点的 next 指针改为指向前一个元素。由于节点没有引用其上一个节点，因此必须事先存储其前一个元素。在更改引用之前，还需要另一个指针来存储下一个节点。不要忘记在最后返回新的头引用！
+/** * @param {ListNode} head * @return {ListNode} */ var reverseList = function(head) { let cur = head; let pre = null; while(cur) { let temp = cur.next; // 保存当前节点的后置节点 之后循环到下一个节点需要 cur.next = pre; pre = cur; cur = temp; } return pre; };  二、递归</description>
     </item>
     
     <item>
@@ -41,7 +41,7 @@
       <guid>/2019/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/</guid>
       <description>设计链表 描述 设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针/引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。
 在链表类中实现这些功能：
- get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。 addAtHead(val)：在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。 addAtTail(val)：将值为 val 的节点追加到链表的最后一个元素。 addAtIndex(index,val)：在链表中的第 index 个节点之前添加值为 val 的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点。 deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。  分析 // 假设链表为 5 -&amp;gt; 3 &amp;gt; 1{val: 5,next: {val: 3,next: {val: 1,next: null}}}// 双链表的结构就会多一个prev一、数组（不推荐） class MyLinkedList {constructor() {this.list = [];}get(index) {if (index &amp;lt; 0 || index &amp;gt;= this.</description>
+ get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。 addAtHead(val)：在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。 addAtTail(val)：将值为 val 的节点追加到链表的最后一个元素。 addAtIndex(index,val)：在链表中的第 index 个节点之前添加值为 val 的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点。 deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。  分析 // 假设链表为 5 -&amp;gt; 3 &amp;gt; 1 { val: 5, next: { val: 3, next: { val: 1, next: null } } } // 双链表的结构就会多一个prev  一、数组（不推荐） class MyLinkedList { constructor() { this.</description>
     </item>
     
     <item>
@@ -52,9 +52,9 @@
       <guid>/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</guid>
       <description>两数相加 描述 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
-输入：(2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4)输出：7 -&amp;gt; 0 -&amp;gt; 8原因：342 + 465 = 807分析  单链表的数据结构：val属性存储当前的值，next属性存储下一个节点的引用。  从链表表头开始，然后进行每一位进行相加，每位的数字在 0~9 之间，相加有可能会出现 溢出 。 例如：5+7=12，这种情况下，将个位设置为当前值（也就是2），并将进位 carry=1 带入下一次迭代。进位必定是 0 | 1，因为两个数字相加（考虑到进位）最大和为 9+9+1=19。
+输入：(2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4) 输出：7 -&amp;gt; 0 -&amp;gt; 8 原因：342 + 465 = 807  分析  单链表的数据结构：val属性存储当前的值，next属性存储下一个节点的引用。  从链表表头开始，然后进行每一位进行相加，每位的数字在 0~9 之间，相加有可能会出现 溢出 。 例如：5+7=12，这种情况下，将个位设置为当前值（也就是2），并将进位 carry=1 带入下一次迭代。进位必定是 0 | 1，因为两个数字相加（考虑到进位）最大和为 9+9+1=19。
  对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。
-  先初始化一个哑结点 初始化 sum 为 0 进位 carry 初始化为 0 遍历列表 l1 和 l2 直至到达它们的尾端，并对 sum 进行累加，将 l1 和 l2 赋值为下一个节点 更新进位的值，carry = ~~(sum / 10carry=sum/10) 创建一个数值为 (sum % 10) 的新结点，并将其设置为当前结点的下一个结点，然后将当前结点前进到下一个结点 sum 赋值为 进位 carry，带入下一次循环 将 carry 从初始化 返回哑结点的下一个结点  代码 /*** Definition for singly-linked list.</description>
+  先初始化一个哑结点 初始化 sum 为 0 进位 carry 初始化为 0 遍历列表 l1 和 l2 直至到达它们的尾端，并对 sum 进行累加，将 l1 和 l2 赋值为下一个节点 更新进位的值，carry = ~~(sum / 10carry=sum/10) 创建一个数值为 (sum % 10) 的新结点，并将其设置为当前结点的下一个结点，然后将当前结点前进到下一个结点 sum 赋值为 进位 carry，带入下一次循环 将 carry 从初始化 返回哑结点的下一个结点  代码 /** * Definition for singly-linked list.</description>
     </item>
     
     <item>
@@ -65,11 +65,11 @@
       <guid>/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</guid>
       <description>由于单链表是线性的，使用递归方式将导致栈的使用也是线性的，当链表长度达到一定程度时，递归会导致爆栈，因此，现实中并不推荐使用递归方式来操作链表。
  合并两个有序链表 描述 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
-输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4分析 一、 递归
+输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4 输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4  分析 一、 递归
 可以使用 递归，两个链表头部较小的一个与剩下元素的 merge 操作结果合并。
-  特殊的，如果 l1 或者 l2 一开始就是 null ，那么没有任何操作需要合并，所以我们只需要返回非空链表。否则，我们要判断 l1 和 l2 哪一个的头元素更小，然后递归地决定下一个添加到结果里的值。如果两个链表都是空的，那么过程终止，所以递归过程最终一定会终止。
-  思路
- 这道题可以使用递归实现，新链表也不需要构造新节点，我们下面列举递归三个要素 终止条件：两条链表分别名为 l1 和 l2，当 l1 为空或 l2 为空时结束 返回值：每一层调用都返回排序好的链表头 本级递归内容：如果 l1 的 val 值更小，则将 l1.next 与排序好的链表头相接，l2 同理 O(m+n)O(m+n)，mm 为 l1的长度，nn 为 l2 的长度    /*** Definition for singly-linked list.* function ListNode(val) {* this.</description>
+ 特殊的，如果 l1 或者 l2 一开始就是 null ，那么没有任何操作需要合并，所以我们只需要返回非空链表。否则，我们要判断 l1 和 l2 哪一个的头元素更小，然后递归地决定下一个添加到结果里的值。如果两个链表都是空的，那么过程终止，所以递归过程最终一定会终止。
+ 思路
+ 这道题可以使用递归实现，新链表也不需要构造新节点，我们下面列举递归三个要素 终止条件：两条链表分别名为 l1 和 l2，当 l1 为空或 l2 为空时结束 返回值：每一层调用都返回排序好的链表头 本级递归内容：如果 l1 的 val 值更小，则将 l1.next 与排序好的链表头相接，l2 同理 O(m+n)O(m+n)，mm 为 l1的长度，nn 为 l2 的长度   /** * Definition for singly-linked list. * function ListNode(val) { * this.</description>
     </item>
     
     <item>
@@ -79,7 +79,7 @@
       
       <guid>/2019/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</guid>
       <description>回文链表 描述 判断一个链表是否为回文链表
-示例 1:输入: 1-&amp;gt;2输出: false示例 2:输入: 1-&amp;gt;2-&amp;gt;2-&amp;gt;1输出: true分析  用2个指针，一个low，一个fast，fast是low的2倍，所以可以达到2分链表的效果 在移动指针时同时对前半部分链表进行反转，最后直接比较被分开的2个链表 因为不能改变当前slow的next，不然就无法跳到下一个元素，所以这里用pre和prepre实现指针的反转  /*** @param {ListNode} head* @return {boolean}*/var isPalindrome = function(head) {if (!head || !head.next) return true;let slow = head;let fast = head.next;let pre = null;let prepre = null;while (fast &amp;amp;&amp;amp; fast.next) {// 反转前半段链表 pre = slow;slow = slow.</description>
+示例 1: 输入: 1-&amp;gt;2 输出: false 示例 2: 输入: 1-&amp;gt;2-&amp;gt;2-&amp;gt;1 输出: true  分析  用2个指针，一个low，一个fast，fast是low的2倍，所以可以达到2分链表的效果 在移动指针时同时对前半部分链表进行反转，最后直接比较被分开的2个链表 因为不能改变当前slow的next，不然就无法跳到下一个元素，所以这里用pre和prepre实现指针的反转  /** * @param {ListNode} head * @return {boolean} */ var isPalindrome = function(head) { if (!head || !head.next) return true; let slow = head; let fast = head.next; let pre = null; let prepre = null; while (fast &amp;amp;&amp;amp; fast.next) { // 反转前半段链表 pre = slow; slow = slow.</description>
     </item>
     
     <item>
@@ -89,11 +89,11 @@
       
       <guid>/2019/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</guid>
       <description>相交链表 描述 编写一个程序，找到两个单链表相交的起始节点。
-注意：
- 如果两个链表没有交点，返回 null. 在返回结果后，两个链表仍须保持原有的结构。 可假定整个链表结构中没有循环。 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。  分析 根据题目意思
+注意： - 如果两个链表没有交点，返回 null. - 在返回结果后，两个链表仍须保持原有的结构。 - 可假定整个链表结构中没有循环。 - 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
+分析 根据题目意思
 如果两个链表相交，那么相交点之后的长度是相同的
 我们需要做的事情是，让两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。 为此，我们必须消除两个链表的长度差
- 指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历 如果 pA 到了末尾，则 pA = headB 继续遍历 如果 pB 到了末尾，则 pB = headA 继续遍历 比较长的链表指针指向较短链表head时，长度差就消除了 如此，只需要将最短链表遍历两次即可找到位置  var getIntersectionNode = function(headA, headB) {if (headA === null || headB === null) return null;let pA = headA;let pB = headB;while(pA !</description>
+ 指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历 如果 pA 到了末尾，则 pA = headB 继续遍历 如果 pB 到了末尾，则 pB = headA 继续遍历 比较长的链表指针指向较短链表head时，长度差就消除了 如此，只需要将最短链表遍历两次即可找到位置  var getIntersectionNode = function(headA, headB) { if (headA === null || headB === null) return null; let pA = headA; let pB = headB; while(pA !</description>
     </item>
     
     <item>
@@ -104,7 +104,7 @@
       <guid>/2019/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/</guid>
       <description>环形链表 描述 给定一个链表，判断链表中是否有环。
 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
-示例 1：输入：head = [3,2,0,-4], pos = 1输出：true解释：链表中有一个环，其尾部连接到第二个节点。示例 2：输入：head = [1,2], pos = 0输出：true解释：链表中有一个环，其尾部连接到第一个节点。示例 3：输入：head = [1], pos = -1输出：false解释：链表中没有环。分析  一、由上到下给每一层遍历到的结点做上标记，如果在下一个结点中出现了这个标记，则表示存在环形结构。如果不想篡改原始数据，可以先用 temp 保存。  /*** @param {ListNode} head* @return {boolean}*/var hasCycle = function(head) {while (head) {if (head.val === &amp;#39;k.top&amp;#39;) return true;head.</description>
+示例 1： 输入：head = [3,2,0,-4], pos = 1 输出：true 解释：链表中有一个环，其尾部连接到第二个节点。  示例 2： 输入：head = [1,2], pos = 0 输出：true 解释：链表中有一个环，其尾部连接到第一个节点。  示例 3： 输入：head = [1], pos = -1 输出：false 解释：链表中没有环。  分析  一、由上到下给每一层遍历到的结点做上标记，如果在下一个结点中出现了这个标记，则表示存在环形结构。如果不想篡改原始数据，可以先用 temp 保存。  /** * @param {ListNode} head * @return {boolean} */ var hasCycle = function(head) { while (head) { if (head.</description>
     </item>
     
     <item>
@@ -113,7 +113,7 @@
       <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/</guid>
-      <description>移除链表元素  删除链表中等于给定值 val 的所有节点。  示例:输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5分析 /*** @param {ListNode} head* @param {number} val* @return {ListNode}*/var removeElements = function(head, val) {let tem = head;let pre = null;while (tem) {if (tem.val === val) {if (pre) {pre.next = tem.next;} else {head = tem.next;}} else {pre = tem;}tem = tem.</description>
+      <description>移除链表元素  删除链表中等于给定值 val 的所有节点。  示例: 输入: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6 输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  分析 /** * @param {ListNode} head * @param {number} val * @return {ListNode} */ var removeElements = function(head, val) { let tem = head; let pre = null; while (tem) { if (tem.val === val) { if (pre) { pre.next = tem.next; } else { head = tem.next; } } else { pre = tem; } tem = tem.</description>
     </item>
     
     <item>
@@ -123,8 +123,10 @@
       
       <guid>/2019/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</guid>
       <description>删除排序链表中的重复元素 描述 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
-示例 1:输入: 1-&amp;gt;1-&amp;gt;2输出: 1-&amp;gt;2示例 2:输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3输出: 1-&amp;gt;2-&amp;gt;3分析 一、直接法
- 仅测试你操作列表的结点指针的能力。由于输入的列表已排序，因此我们可以通过将结点的值与它之后的结点进行比较来确定它是否为重复结点。如果它是重复的，我们更改当前结点的 next 指针，以便它跳过下一个结点并直接指向下一个结点之后的结点。   思路  指定 cur 指针指向头部 head 当 cur 和 cur.next 的存在为循环结束条件，当二者有一个不存在时说明链表没有去重复的必要了 当 cur.val 和 cur.next.val 相等时说明需要去重，则将 cur 的下一个指针指向下一个的下一个，这样就能达到去重复的效果 如果不相等则 cur 移动到下一个位置继续循环 时间复杂度：O(n)O(n)    /*** @param {ListNode} head* @return {ListNode}*/var deleteDuplicates = function(head) {let current = head;while (current !== null &amp;amp;&amp;amp; current.</description>
+示例 1: 输入: 1-&amp;gt;1-&amp;gt;2 输出: 1-&amp;gt;2 示例 2: 输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3 输出: 1-&amp;gt;2-&amp;gt;3  分析 一、直接法
+ 仅测试你操作列表的结点指针的能力。由于输入的列表已排序，因此我们可以通过将结点的值与它之后的结点进行比较来确定它是否为重复结点。如果它是重复的，我们更改当前结点的 next 指针，以便它跳过下一个结点并直接指向下一个结点之后的结点。
+ 思路
+ 指定 cur 指针指向头部 head 当 cur 和 cur.next 的存在为循环结束条件，当二者有一个不存在时说明链表没有去重复的必要了 当 cur.val 和 cur.next.val 相等时说明需要去重，则将 cur 的下一个指针指向下一个的下一个，这样就能达到去重复的效果 如果不相等则 cur 移动到下一个位置继续循环 时间复杂度：O(n)O(n)   /** * @param {ListNode} head * @return {ListNode} */ var deleteDuplicates = function(head) { let current = head; while (current !== null &amp;amp;&amp;amp; current.</description>
     </item>
     
     <item>
@@ -133,7 +135,7 @@
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/leetcode-easy/</guid>
-      <description>Two Sum 两数之和(1)  给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。 例子：  Given nums = [2, 7, 11, 15], target = 9,Because nums[0] + nums[1] = 2 + 7 = 9,return [0, 1]. 解:  /*** @param {number[]} nums* @param {number} target* @return {number[]}*/var twoSum = function(nums, target) {// 第一种 let map = new Map()for (let i = 0; i &amp;lt; nums.length; i++) {if (map.</description>
+      <description>Two Sum 两数之和(1)  给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。 例子：   Given nums = [2, 7, 11, 15], target = 9, Because nums[0] + nums[1] = 2 + 7 = 9, return [0, 1].   解:  /** * @param {number[]} nums * @param {number} target * @return {number[]} */ var twoSum = function(nums, target) { // 第一种 let map = new Map() for (let i = 0; i &amp;lt; nums.length; i++) { if (map.</description>
     </item>
     
     <item>
@@ -142,11 +144,9 @@
       <pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/leetcode-medium/</guid>
-      <description>Add Two Numbers 两数相加(2)   给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
-  如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
-  您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
-  例子:
-  Input: (2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4)Output: 7 -&amp;gt; 0 -&amp;gt; 8Explanation: 342 + 465 = 807 解:  // 单链表的定义function ListNode(val) {this.val = val;this.next = null;}// 第一种/*** @param {ListNode} l1* @param {ListNode} l2* @return {ListNode}*/var addTwoNumbers = function(l1, l2) {if (l1===null) return l2;if (l2===null) return l1;//new a ListNode here, with head.</description>
+      <description>Add Two Numbers 两数相加(2)  给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+ 例子:
+  Input: (2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4) Output: 7 -&amp;gt; 0 -&amp;gt; 8 Explanation: 342 + 465 = 807   解:  // 单链表的定义 function ListNode(val) { this.val = val; this.next = null; } // 第一种 /** * @param {ListNode} l1 * @param {ListNode} l2 * @return {ListNode} */ var addTwoNumbers = function(l1, l2) { if (l1===null) return l2; if (l2===null) return l1; //new a ListNode here, with head.</description>
     </item>
     
   </channel>

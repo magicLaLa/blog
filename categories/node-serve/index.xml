@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>node serve on Magic</title>
@@ -18,7 +18,7 @@
       
       <guid>/2019/pm2/</guid>
       <description>PM2 的安装提示处理 在本地安装 PM2 之后，可能会看到下面的这个提示，可以按照提示操作一下：
-Since PM2’s deployment command runs on a non-interactive SSH connection, we need to resolve this by commenting out a few lines from the semaphoreci user’s ~/.bashrc file. We’re already logged in as this user on our droplet, so we simply need to open up this file and comment this out:Comment the following lines:#If not running interactively, don&amp;#39;t do anything#case $- in# *i*) ;;# * return;;#esacand this in /etc/bash.</description>
+Since PM2’s deployment command runs on a non-interactive SSH connection, we need to resolve this by commenting out a few lines from the semaphoreci user’s ~/.bashrc file. We’re already logged in as this user on our droplet, so we simply need to open up this file and comment this out: Comment the following lines: #If not running interactively, don&#39;t do anything #case $- in # *i*) ;; # * return;; #esac and this in /etc/bash.</description>
     </item>
     
   </channel>

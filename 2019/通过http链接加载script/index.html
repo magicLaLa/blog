@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="通过http链接加载script"/>
-<meta name="twitter:description" content="function loadScript(src: string, async: boolean = true) {return new Promise((resolve, reject) =&gt; {const script = document.createElement(&#39;script&#39;);async &amp;&amp; (script.async = true);script.onload = resolve;script.onerror = reject;script.src = src;document.body.appendChild(script);});}// 注意：使用appendChild，不要使用append，ios9不支持append。"/>
+<meta name="twitter:description" content="function loadScript(src: string, async: boolean = true) { return new Promise((resolve, reject) =&gt; { const script = document.createElement(&#39;script&#39;); async &amp;&amp; (script.async = true); script.onload = resolve; script.onerror = reject; script.src = src; document.body.appendChild(script); }); } // 注意：使用appendChild，不要使用append，ios9不支持append。  "/>
 
   <script type="application/ld+json">
 {
@@ -164,18 +164,19 @@
         
         
 
-        <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">loadScript</span>(<span style="color:#a6e22e">src</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>, <span style="color:#a6e22e">async</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">boolean</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>) {
-  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>, <span style="color:#a6e22e">reject</span>) =&gt; {
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">script</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#39;script&#39;</span>);
-    <span style="color:#a6e22e">async</span> <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">script</span>.<span style="color:#a6e22e">async</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>);
-    <span style="color:#a6e22e">script</span>.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">resolve</span>;
-    <span style="color:#a6e22e">script</span>.<span style="color:#a6e22e">onerror</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reject</span>;
-    <span style="color:#a6e22e">script</span>.<span style="color:#a6e22e">src</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">src</span>;
-    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">script</span>);
+        <pre><code class="language-js">function loadScript(src: string, async: boolean = true) {
+  return new Promise((resolve, reject) =&gt; {
+    const script = document.createElement('script');
+    async &amp;&amp; (script.async = true);
+    script.onload = resolve;
+    script.onerror = reject;
+    script.src = src;
+    document.body.appendChild(script);
   });
 }
-<span style="color:#75715e">// 注意：使用appendChild，不要使用append，ios9不支持append。
-</span></code></pre></div>
+// 注意：使用appendChild，不要使用append，ios9不支持append。
+</code></pre>
+
     </div>
 
     <div class="post-copyright">

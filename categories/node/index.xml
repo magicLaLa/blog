@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Node on Magic</title>
+    <title>node on Magic</title>
     <link>/categories/node/</link>
-    <description>Recent content in Node on Magic</description>
+    <description>Recent content in node on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 02 Jul 2019 00:00:00 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/%E9%85%8D%E7%BD%AEnginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86node.js%E7%AB%AF%E5%8F%A3/</guid>
-      <description>安装 sudo apt-get install nginxsudo vi /etc/nginx/sites-available/default 安装完毕后，检查下 Nginx 的版本：nginx -v。这个版本号通常可以在 Web 端的 header 里看到。安全起见，可以通过配置隐藏掉，如下打开 nginx.conf 文件：sudo vi /etc/nginx/nginx.conf，把nginx.conf 文件中的server_tokens on 改成 server_tokens off。  配置 Nginx 反向代理 Node.js 端口  我们的网站静态服务是跑在 4321 端口上的，直接通过 80 端口无法启动，原因是我们 rn_manager 下的 Node 并不具备 root 的运行权限，不能监听 0 ~ 1024 之间的端口，当然也包括 80 端口。通过 sudo 来强制启动 Node 服务也不是不可以，但是，这多少会带来一些额外的成本和风险：一是我们需要额外配置，二是需要放大 Node 程序的权限。
+      <description>安装 sudo apt-get install nginx sudo vi /etc/nginx/sites-available/default   安装完毕后，检查下 Nginx 的版本：nginx -v。这个版本号通常可以在 Web 端的 header 里看到。安全起见，可以通过配置隐藏掉，如下打开 nginx.conf 文件：sudo vi /etc/nginx/nginx.conf，把nginx.conf 文件中的server_tokens on 改成 server_tokens off。  配置 Nginx 反向代理 Node.js 端口  我们的网站静态服务是跑在 4321 端口上的，直接通过 80 端口无法启动，原因是我们 rn_manager 下的 Node 并不具备 root 的运行权限，不能监听 0 ~ 1024 之间的端口，当然也包括 80 端口。通过 sudo 来强制启动 Node 服务也不是不可以，但是，这多少会带来一些额外的成本和风险：一是我们需要额外配置，二是需要放大 Node 程序的权限。
   用 ip 访问，使用 nginx，用 root 级的权限来启动对 80 端口的监听，同时把来自 80 端口的流量分配给 Node 服务的另外一个端口，实现这种服务的代理。   如果服务器只需放一个网站程序，那么解析网站到服务器网址，网站程序监听 80 端口即可。如果服务器有多个应用（你有多个网站），借助 Nginx 不仅可以实现端口代理，还可以实现负载均衡，由它来判断是来自哪个域名或 IP 的访问，从而根据配置的规则，将这个请求原封不动地转发给特定的端口或特定的某几台机器。在我们的这个案例中，就是把 80 端口的 IP 请求都转发到 Node.</description>
     </item>
     
@@ -27,7 +27,7 @@
       <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/hapi/</guid>
-      <description>Hapi Hapi 相关使用总结  Hapi.js 是一个用来构建基于 Node.js 的应用和服务的富框架，使得开发者把重点放在便携可重用的应用逻辑而不是构建架构。内建输入验证、缓存、认证和其他 Web 应用开发常用的功能。  Hapi 框架模块接口文档  官网 Hapi-api  Supervisor / nodemon / PM2  有不少 Node.js 小工具能帮助我们监视代码的改动然后自动重启 Node.js 服务，好用的工具有 Supervisor / nodemon / PM2。  # 系统全局安装 supervisor$ npm i -g supervisor目录结构 ├── config # 项目配置目录| ├── index.js # 配置项目中的配置信息├── models # 数据库 model├── node_modules # node.js 的依赖目录├── plugins # 插件目录├── routes # 路由目录│ ├── hello-world.</description>
+      <description>Hapi Hapi 相关使用总结  Hapi.js 是一个用来构建基于 Node.js 的应用和服务的富框架，使得开发者把重点放在便携可重用的应用逻辑而不是构建架构。内建输入验证、缓存、认证和其他 Web 应用开发常用的功能。  Hapi 框架模块接口文档  官网 Hapi-api  Supervisor / nodemon / PM2  有不少 Node.js 小工具能帮助我们监视代码的改动然后自动重启 Node.js 服务，好用的工具有 Supervisor / nodemon / PM2。  # 系统全局安装 supervisor $ npm i -g supervisor  目录结构 ├── config # 项目配置目录 | ├── index.js # 配置项目中的配置信息 ├── models # 数据库 model ├── node_modules # node.js 的依赖目录 ├── plugins # 插件目录 ├── routes # 路由目录 │ ├── hello-world.</description>
     </item>
     
     <item>
@@ -36,8 +36,8 @@
       <pubDate>Sun, 15 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/mysql/</guid>
-      <description>MySQL 在 cmder 上连接远程服务器 ssh root@**.**.**.*** 远程服务器地址IProot@**.**.**.***&amp;#39;s password: ***********// [root@vultr ~]#安装 mysql 我是在vultr上安装的，系统是CentOS 7，可以在网上找相关教程安装。
-连接数据库 [root@vultr ~]# mysql -u root -pEnter password: **********查看数据库 mysql&amp;gt; show databases;+--------------------+| Database |+--------------------+| information_schema || PRACTTEST || mysql || performance_schema || sys |+--------------------+5 rows in set (0.01 sec)使用某个数据库 mysql&amp;gt; use information_schema;Reading table information for completion of table and column namesYou can turn off this feature to get a quicker startup with -ADatabase changed查看表 mysql&amp;gt; show tables;+----------------------+| Tables_in_PRACTTEST |+----------------------+| DATA_PARICT || _mysql_session_store || pract_tbl || transaction_tbl || user |+----------------------+5 rows in set (0.</description>
+      <description>MySQL 在 cmder 上连接远程服务器 ssh root@**.**.**.*** 远程服务器地址IP root@**.**.**.***&#39;s password: *********** // [root@vultr ~]#  安装 mysql 我是在vultr上安装的，系统是CentOS 7，可以在网上找相关教程安装。
+连接数据库 [root@vultr ~]# mysql -u root -p Enter password: **********  查看数据库 mysql&amp;gt; show databases; +--------------------+ | Database | +--------------------+ | information_schema | | PRACTTEST | | mysql | | performance_schema | | sys | +--------------------+ 5 rows in set (0.01 sec)  使用某个数据库 mysql&amp;gt; use information_schema; Reading table information for completion of table and column names You can turn off this feature to get a quicker startup with -A Database changed  查看表 mysql&amp;gt; show tables; +----------------------+ | Tables_in_PRACTTEST | +----------------------+ | DATA_PARICT | | _mysql_session_store | | pract_tbl | | transaction_tbl | | user | +----------------------+ 5 rows in set (0.</description>
     </item>
     
     <item>
@@ -46,7 +46,7 @@
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/npm/</guid>
-      <description>npm 镜像设置 npm config set registry https://registry.npm.taobao.orgnpm config set SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/</description>
+      <description> npm 镜像设置 npm config set registry https://registry.npm.taobao.org npm config set SASS_BINARY_SITE https://npm.taobao.org/mirrors/node-sass/  </description>
     </item>
     
     <item>
@@ -64,9 +64,7 @@
 所以这样看来，n 在其实现上是一个非常易理解的方案
 https://github.com/tj/n
 因为我的电脑是 windows 系统，所以使用的是 nvm for windows
-nvm for windows  下载地址： https://github.com/coreybutler/nvm-windows/releases    nvm-noinstall.zip： 这个是绿色免安装版本，但是使用之前需要配置
-  nvm-setup.zip：这是一个安装包，下载之后点击安装，无需配置就可以使用，方便
-  Source code(zip)：zip压缩的源码</description>
+nvm for windows  下载地址： https://github.com/coreybutler/nvm-windows/releases   nvm-noinstall.zip： 这个是绿色免安装版本，但是使用之前需要配置 nvm-setup.zip：这是一个安装包，下载之后点击安装，无需配置就可以使用，方便 Source code(zip)：zip压缩的源码 Sourc code(tar.</description>
     </item>
     
   </channel>

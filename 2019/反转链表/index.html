@@ -50,7 +50,7 @@
   
   "genre": "posts",
   "keywords": "leetCode, 链表, easy",
-  "wordcount":  145 ,
+  "wordcount":  149 ,
   "url": "\/2019\/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8\/",
   "datePublished": "2019-10-13T00:00:00\x2b00:00",
   "dateModified": "2019-10-13T00:00:00\x2b00:00",
@@ -164,60 +164,73 @@
         
         
 
-        <h2 id="反转链表">反转链表</h2>
+        
+
+<h2 id="反转链表">反转链表</h2>
+
 <h3 id="描述">描述</h3>
+
 <ul>
 <li>反转一个单链表。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">示例:
+
+<pre><code class="language-bash">示例:
   输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
   输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
-</code></pre></div><h3 id="分析">分析</h3>
-<p>一、迭代</p>
-<ul>
-<li>第一个节点无前置节点 所以需要声明初始化一个前置节点prev</li>
-<li>开始迭代，结束提交为 当前节点不为null</li>
-<li>先把当前节点后置节点变为当前节点的前置节点</li>
-<li>然后把前置pre变为当前节点 因为下一次所需</li>
-<li>再把当前节点设为后置节点</li>
-</ul>
+</code></pre>
+
+<h3 id="分析">分析</h3>
+
+<p>一、迭代
+  - 第一个节点无前置节点 所以需要声明初始化一个前置节点prev
+  - 开始迭代，结束提交为 当前节点不为null
+  - 先把当前节点后置节点变为当前节点的前置节点
+  - 然后把前置pre变为当前节点 因为下一次所需
+  - 再把当前节点设为后置节点</p>
+
 <p><strong>在遍历列表时，将当前节点的 next 指针改为指向前一个元素。由于节点没有引用其上一个节点，因此必须事先存储其前一个元素。在更改引用之前，还需要另一个指针来存储下一个节点。不要忘记在最后返回新的头引用！</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {ListNode} head
-</span><span style="color:#75715e"> * @return {ListNode}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">reverseList</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">head</span>) {
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">cur</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">head</span>;
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">pre</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-  <span style="color:#66d9ef">while</span>(<span style="color:#a6e22e">cur</span>) {
-    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">temp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cur</span>.<span style="color:#a6e22e">next</span>; <span style="color:#75715e">//  保存当前节点的后置节点 之后循环到下一个节点需要
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">cur</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pre</span>;
-    <span style="color:#a6e22e">pre</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cur</span>;
-    <span style="color:#a6e22e">cur</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">temp</span>;
+
+<pre><code class="language-javascript">/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  let cur = head;
+  let pre = null;
+  while(cur) {
+    let temp = cur.next; //  保存当前节点的后置节点 之后循环到下一个节点需要
+    cur.next = pre;
+    pre = cur;
+    cur = temp;
   }
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">pre</span>;
+  return pre;
 };
-</code></pre></div><p>二、递归</p>
+</code></pre>
+
+<p>二、递归</p>
+
 <ul>
 <li>递归版本稍微复杂一些，其关键在于反向工作。假设列表的其余部分已经被反转，现在我该如何反转它前面的部分？</li>
 <li>假设列表为：<code>n1 ​→ ... → nk−1 ​→ nk ​→ nk+1 ​→...→ nm ​→∅</code></li>
 <li>若从节点 <code>nk+1</code>到 <code>nm</code>已经被反转，而我们正处于 <code>nk</code>。</li>
 <li><code>n 1 ​ →...→n k−1 ​ →n k ​ →n k+1 ​ ←...←n m</code></li>
 <li>我们希望 <code>nk+1</code> 的下一个节点指向 <code>nk</code></li>
-<li>所以:<code> nk.next.next = nk</code> <em>要小心的是 <code>n1</code> 的下一个必须指向 Ø 。如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。</em></li>
+<li>所以:<code>nk.next.next = nk</code> <em>要小心的是 <code>n1</code> 的下一个必须指向 Ø 。如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。</em></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {ListNode} head
-</span><span style="color:#75715e"> * @return {ListNode}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">reverseList</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">head</span>) {
-  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">head</span>;
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reverseList</span>(<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span>);
-  <span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">head</span>;
-  <span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>;
+
+<pre><code class="language-javascript">/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  if (!head || !head.next) return head;
+  let p = reverseList(head.next);
+  head.next.next = head;
+  head.next = null;
+  return p;
 };
-</code></pre></div>
+</code></pre>
+
     </div>
 
     <div class="post-copyright">
@@ -230,7 +243,7 @@
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>145</span>
+            <span>149</span>
         </p>
 
         <p class="copyright-item">

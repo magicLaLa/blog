@@ -36,10 +36,9 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="css3 适配iphoneX 安全区域"/>
-<meta name="twitter:description" content="iphoneX 适配 第一步：设置网页在可视窗口的布局方式  ios11 引入 meta 标签的 viewpoint 扩展属性 viewpoint-fit，在 iOS 11 中 viewpoint-fit 也官方添加到 CSS Round Display 规范中了。 viewport-fit 有三个属性值：  Auto：默认值。这个值不影响初始布局视窗，整个 Web 页面是可视的。 Contain：最初的布局视窗和视觉布局视窗被设置为最大的矩形。 Cover：初始布局视窗和视觉布局视窗被设置为设备物理屏幕的限定矩形。    所以我们可以通过 viewpoint-fit=cover 来解决问题，使页面内容跳出安全区域的框框。
-&lt;meta name=&#34;viewport&#34; content=&#34;width=device-width,initial-scale=1.0,user-scalable=0,viewport-fit=cover&#34;&gt;第二步：页面主体内容限定在安全区域内   IOS11 提供了两个个新的 css 变量 env(safe-area-inset-※) 和 constant(safe-area-inset-※)
-  safe-area-inset-※ 提供了四个方向的值：
- safe-area-inset-top：在 Viewport 顶部的安全区域内设置量； safe-area-inset-bottom：在 Viewport 底部的安全区域内设置量； safe-area-inset-left：在 Viewport 左边的安全区域内设置量； safe-area-inset-right：在 Viewport 右边的安全区域内设置量；    constant() 和 env() 这个变量已经开始着手标准化，目前也可以被用在 margin、padding、top、bottom、left、right 等 css 属性中，同时在不支持的环境中将不会生效。而且，同样在 iOS 11 中，iPhone X 机型以下得到的值均为 0，iPhone X 得到其对应的设置量。"/>
+<meta name="twitter:description" content="iphoneX 适配 第一步：设置网页在可视窗口的布局方式  ios11 引入 meta 标签的 viewpoint 扩展属性 viewpoint-fit，在 iOS 11 中 viewpoint-fit 也官方添加到 CSS Round Display 规范中了。 viewport-fit 有三个属性值：  Auto：默认值。这个值不影响初始布局视窗，整个 Web 页面是可视的。 Contain：最初的布局视窗和视觉布局视窗被设置为最大的矩形。 Cover：初始布局视窗和视觉布局视窗被设置为设备物理屏幕的限定矩形。   所以我们可以通过 viewpoint-fit=cover 来解决问题，使页面内容跳出安全区域的框框。
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0,user-scalable=0,viewport-fit=cover&quot;&gt;  第二步：页面主体内容限定在安全区域内  IOS11 提供了两个个新的 css 变量 env(safe-area-inset-※) 和 constant(safe-area-inset-※) safe-area-inset-※ 提供了四个方向的值：
+ safe-area-inset-top：在 Viewport 顶部的安全区域内设置量； safe-area-inset-bottom：在 Viewport 底部的安全区域内设置量； safe-area-inset-left：在 Viewport 左边的安全区域内设置量； safe-area-inset-right：在 Viewport 右边的安全区域内设置量；  constant() 和 env() 这个变量已经开始着手标准化，目前也可以被用在 margin、padding、top、bottom、left、right 等 css 属性中，同时在不支持的环境中将不会生效。而且，同样在 iOS 11 中，iPhone X 机型以下得到的值均为 0，iPhone X 得到其对应的设置量。"/>
 
   <script type="application/ld+json">
 {
@@ -167,73 +166,94 @@
         
         
 
-        <h2 id="iphonex-适配">iphoneX 适配</h2>
-<h3 id="第一步设置网页在可视窗口的布局方式">第一步：设置网页在可视窗口的布局方式</h3>
+        
+
+<h2 id="iphonex-适配">iphoneX 适配</h2>
+
+<h3 id="第一步-设置网页在可视窗口的布局方式">第一步：设置网页在可视窗口的布局方式</h3>
+
 <ul>
 <li>ios11 引入 meta 标签的 viewpoint 扩展属性 <code>viewpoint-fit</code>，在 iOS 11 中 viewpoint-fit 也官方添加到 CSS Round Display 规范中了。</li>
 <li><code>viewport-fit</code> 有三个属性值：
+
 <ul>
 <li>Auto：默认值。这个值不影响初始布局视窗，整个 Web 页面是可视的。</li>
 <li>Contain：最初的布局视窗和视觉布局视窗被设置为最大的矩形。</li>
 <li>Cover：初始布局视窗和视觉布局视窗被设置为设备物理屏幕的限定矩形。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <p>所以我们可以通过 viewpoint-fit=cover 来解决问题，使页面内容跳出安全区域的框框。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width,initial-scale=1.0,user-scalable=0,viewport-fit=cover&#34;</span>&gt;
-</code></pre></div><h3 id="第二步页面主体内容限定在安全区域内">第二步：页面主体内容限定在安全区域内</h3>
+
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0,user-scalable=0,viewport-fit=cover&quot;&gt;
+</code></pre>
+
+<h3 id="第二步-页面主体内容限定在安全区域内">第二步：页面主体内容限定在安全区域内</h3>
+
 <ul>
-<li>
-<p>IOS11 提供了两个个新的 css 变量 <code>env(safe-area-inset-※)</code> 和 <code>constant(safe-area-inset-※)</code></p>
-</li>
-<li>
-<p><code>safe-area-inset-※</code> 提供了四个方向的值：</p>
+<li>IOS11 提供了两个个新的 css 变量 <code>env(safe-area-inset-※)</code> 和 <code>constant(safe-area-inset-※)</code></li>
+
+<li><p><code>safe-area-inset-※</code> 提供了四个方向的值：</p>
+
 <ul>
 <li><code>safe-area-inset-top</code>：在 Viewport 顶部的安全区域内设置量；</li>
 <li><code>safe-area-inset-bottom</code>：在 Viewport 底部的安全区域内设置量；</li>
 <li><code>safe-area-inset-left</code>：在 Viewport 左边的安全区域内设置量；</li>
 <li><code>safe-area-inset-right</code>：在 Viewport 右边的安全区域内设置量；</li>
+</ul></li>
+
+<li><p><code>constant()</code> 和 <code>env()</code> 这个变量已经开始着手标准化，目前也可以被用在 <code>margin、padding、top、bottom、left、right</code> 等 css 属性中，<strong>同时在不支持的环境中将不会生效</strong>。而且，同样在 iOS 11 中，iPhone X 机型以下得到的值均为 0，iPhone X 得到其对应的设置量。</p></li>
 </ul>
-</li>
-<li>
-<p><code>constant()</code> 和 <code>env()</code> 这个变量已经开始着手标准化，目前也可以被用在 <code>margin、padding、top、bottom、left、right</code> 等 css 属性中，<strong>同时在不支持的环境中将不会生效</strong>。而且，同样在 iOS 11 中，iPhone X 机型以下得到的值均为 0，iPhone X 得到其对应的设置量。</p>
-</li>
-</ul>
-<h3 id="第三步设置底部的样式">第三步：设置底部的样式</h3>
+
+<h3 id="第三步-设置底部的样式">第三步：设置底部的样式</h3>
+
 <ul>
 <li><code>safe-area-inset-bottom</code> 这个变量，因为它对应的就是小黑条的高度（横竖屏时值不一样）。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#f92672">body</span> {
-    <span style="color:#66d9ef">padding-bottom</span>: <span style="color:#a6e22e">constant</span>(safe<span style="color:#f92672">-</span>area<span style="color:#f92672">-</span><span style="color:#66d9ef">inset</span><span style="color:#f92672">-</span><span style="color:#66d9ef">bottom</span>);
-    <span style="color:#66d9ef">padding-bottom</span>: <span style="color:#a6e22e">env</span>(safe<span style="color:#f92672">-</span>area<span style="color:#f92672">-</span><span style="color:#66d9ef">inset</span><span style="color:#f92672">-</span><span style="color:#66d9ef">bottom</span>);
+
+<pre><code class="language-css">body {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
 }
-</code></pre></div><h3 id="扩展fixed-元素适配">扩展：fixed 元素适配</h3>
+</code></pre>
+
+<h3 id="扩展-fixed-元素适配">扩展：fixed 元素适配</h3>
+
 <ul>
 <li>类型一：fixed 完全吸底元素（bottom = 0）</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#a6e22e">fixed-bottom-box</span> {
-  <span style="color:#66d9ef">padding-bottom</span>: <span style="color:#a6e22e">constant</span>(safe<span style="color:#f92672">-</span>area<span style="color:#f92672">-</span><span style="color:#66d9ef">inset</span><span style="color:#f92672">-</span><span style="color:#66d9ef">bottom</span>);
-  <span style="color:#66d9ef">padding-bottom</span>: <span style="color:#a6e22e">env</span>(safe<span style="color:#f92672">-</span>area<span style="color:#f92672">-</span><span style="color:#66d9ef">inset</span><span style="color:#f92672">-</span><span style="color:#66d9ef">bottom</span>);
+
+<pre><code class="language-css">.fixed-bottom-box {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
 }
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li>类型二：fixed 非完全吸底元素（bottom ≠ 0），比如 “返回顶部”、“侧边广告” 等</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#f92672">div</span> {
-  <span style="color:#66d9ef">margin-bottom</span>: <span style="color:#a6e22e">constant</span>(safe<span style="color:#f92672">-</span>area<span style="color:#f92672">-</span><span style="color:#66d9ef">inset</span><span style="color:#f92672">-</span><span style="color:#66d9ef">bottom</span>);
-  <span style="color:#66d9ef">margin-bottom</span>: <span style="color:#a6e22e">env</span>(safe<span style="color:#f92672">-</span>area<span style="color:#f92672">-</span><span style="color:#66d9ef">inset</span><span style="color:#f92672">-</span><span style="color:#66d9ef">bottom</span>);
+
+<pre><code class="language-css">div {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
 }
-</code></pre></div><h3 id="扩展只希望-iphonex-才需要新增适配样式可以配合-supports-来隔离兼容样式">扩展：只希望 iPhoneX 才需要新增适配样式，可以配合 @supports 来隔离兼容样式</h3>
+</code></pre>
+
+<h3 id="扩展-只希望-iphonex-才需要新增适配样式-可以配合-supports-来隔离兼容样式">扩展：只希望 iPhoneX 才需要新增适配样式，可以配合 @supports 来隔离兼容样式</h3>
+
 <ul>
 <li><code>@supports</code> 来判断浏览器是否支持某个CSS属性，并且根据是否支持来定义样式。</li>
 <li><code>@supports</code> 中的“条件规则”可以声明一条或者几个由不同的逻辑运算符相结合的声明（比如说，非（not），或（or），与（and）等），而且还可以使用括号来确定其操作的优先级关系。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">@<span style="color:#66d9ef">supports</span> <span style="color:#f92672">(</span><span style="color:#f92672">bottom</span><span style="color:#f92672">:</span> <span style="color:#f92672">constant</span><span style="color:#f92672">(</span><span style="color:#f92672">safe-area-inset-bottom</span><span style="color:#f92672">))</span> <span style="color:#f92672">or</span> <span style="color:#f92672">(</span><span style="color:#f92672">bottom</span><span style="color:#f92672">:</span> <span style="color:#f92672">env</span><span style="color:#f92672">(</span><span style="color:#f92672">safe-area-inset-bottom</span><span style="color:#f92672">))</span> {
-    <span style="color:#f92672">div</span> {
-        <span style="color:#66d9ef">margin-bottom</span>: <span style="color:#a6e22e">constant</span>(safe<span style="color:#f92672">-</span>area<span style="color:#f92672">-</span><span style="color:#66d9ef">inset</span><span style="color:#f92672">-</span><span style="color:#66d9ef">bottom</span>);
-        <span style="color:#66d9ef">margin-bottom</span>: <span style="color:#a6e22e">env</span>(safe<span style="color:#f92672">-</span>area<span style="color:#f92672">-</span><span style="color:#66d9ef">inset</span><span style="color:#f92672">-</span><span style="color:#66d9ef">bottom</span>);
+
+<pre><code class="language-css">@supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
+    div {
+        margin-bottom: constant(safe-area-inset-bottom);
+        margin-bottom: env(safe-area-inset-bottom);
     }
 }
-</code></pre></div>
+</code></pre>
+
     </div>
 
     <div class="post-copyright">

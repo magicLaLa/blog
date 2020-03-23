@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Javascript设计模式与应用实践 on Magic</title>
@@ -18,8 +18,8 @@
       
       <guid>/2020/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B/</guid>
       <description>单例模式 保证一个类仅有一个实例，并提供一个访问它的全局访问点，这样的模式就叫做单例模式。
-实现思路 class Single {show() {console.log(&amp;#39;我是一个单例对象&amp;#39;);}}const s1 = new Single();const s2 = new Single();// s1 === s2 false先 new 了一个 s1，又 new 了一个 s2，很明显 s1 和 s2 之间没有任何瓜葛，两者是相互独立的对象，各占一块内存空间。而单例模式想要做到的是，不管我们尝试去创建多少次，它都只给你返回第一次所创建的那唯一的一个实例。要做到这一点，就需要构造函数 具备判断自己是否已经创建过一个实例的能力。
- 🌰1  /*** 实现：静态方法版*/class Storage {static getInstance() {if (!Storage.instance) {Storage.instance = new Storage();}return Storage.instance;}getItem(key) {return localStorage.getItem(key);}setItem(key, val) {return localStorage.</description>
+实现思路 class Single { show() { console.log(&#39;我是一个单例对象&#39;); } } const s1 = new Single(); const s2 = new Single(); // s1 === s2 false  先 new 了一个 s1，又 new 了一个 s2，很明显 s1 和 s2 之间没有任何瓜葛，两者是相互独立的对象，各占一块内存空间。而单例模式想要做到的是，不管我们尝试去创建多少次，它都只给你返回第一次所创建的那唯一的一个实例。要做到这一点，就需要构造函数 具备判断自己是否已经创建过一个实例的能力。
+ 🌰1  /** * 实现：静态方法版 */ class Storage { static getInstance() { if (!Storage.instance) { Storage.instance = new Storage(); } return Storage.instance; } getItem(key) { return localStorage.getItem(key); } setItem(key, val) { return localStorage.</description>
     </item>
     
   </channel>

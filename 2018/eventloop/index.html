@@ -42,7 +42,10 @@ JavaScript 运行机制详解：再谈Event Loop@阮一峰
 进程与线程的一个简单解释
 事件循环机制 线程与进程   进程：CPU资源分配的最小单位 线程：CPU调度的最小单位   浏览器打开即为打开一个进程（任务管理器查看），浏览器就是多进程、多线程的，浏览器打开后占用CPU的资源，可将这些资源分别分配给不同的tab页面进行并发处理，互不影响；如：一个浏览器打开多个窗口，多个窗口同时运行网页（浏览器中任务管理查看）
 浏览器 浏览器进程 作为主进程，主要负责页面管理以及其他进程的创建及销毁，常驻的线程有：(工厂-&gt; 部门)
-  GUI渲染线程    主要负责页面的渲染，解析HTML、CSS，构建DOM树，布局和绘制等。 当界面需要重绘或者由于某种操作引发回流时，将执行该线程。（回流必将引起重绘，重绘不一定会引起回流） 该线程与JS引擎线程互斥，当执行JS引擎线程时，GUI渲染会被挂起，当任务队列空闲时，JS引擎才会去执行 GUI 渲染。    JS引擎线程    该线程当然是主要负责处理 JavaScript脚本，执行代码； 也是主要负责执行准备好待执行的事件，即定时器计数结束，或者异步请求成功并返回正确时，将依次进入任务队列，等待JS引擎线程的执行； 当然，该线程与 GUI渲染线程互斥，当 JS引擎线程执行 JavaScript脚本时间过长，将导致页面渲染的阻塞。    事件触发线程    主要负责将准备好的事件交给Js引擎线程执行 比如setTimeout定时器计数结束，ajax等异步请求成功并出发回调函数，或者用户出发点击事件，该线程将会整装待发的事件依次加入到任务队列的队尾，等待Js引擎线程的执行    定时器触发线程    顾名思义，负责执行异步定时器一类的函数的线程，如： setTimeout，setInterval。 主线程依次执行代码时，遇到定时器，会将定时器交给该线程处理，当计数完毕后，事件触发线程会将计数完毕后的事件加入到任务队列的尾部，等待JS引擎线程执行。    HTTP请求线程    顾名思义，负责执行异步请求一类的函数的线程，如： Promise，axios，ajax等。 主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列的尾部，等待JS引擎线程执行。  多个线程之间配合工作，各司其职。"/>
+手机工厂(浏览器)[进程] ↓ 造手机部 &mdash;&ndash; 造手机壳部 &mdash;&ndash; 造膜部等(tab页面)[进程] ↓ 各个岗位(html、css、js、事件触发等)[线程]
+  GUI渲染线程  主要负责页面的渲染，解析HTML、CSS，构建DOM树，布局和绘制等。
+ 当界面需要重绘或者由于某种操作引发回流时，将执行该线程。（回流必将引起重绘，重绘不一定会引起回流） 该线程与JS引擎线程互斥，当执行JS引擎线程时，GUI渲染会被挂起，当任务队列空闲时，JS引擎才会去执行 GUI 渲染。  JS引擎线程
+ 该线程当然是主要负责处理 JavaScript脚本，执行代码； 也是主要负责执行准备好待执行的事件，即定时器计数结束，或者异步请求成功并返回正确时，将依次进入任务队列，等待JS引擎线程的执行； 当然，该线程与 GUI渲染线程互斥，当 JS引擎线程执行 JavaScript脚本时间过长，将导致页面渲染的阻塞。  事件触发线程  主要负责将准备好的事件交给Js引擎线程执行 比如setTimeout定时器计数结束，ajax等异步请求成功并出发回调函数，或者用户出发点击事件，该线程将会整装待发的事件依次加入到任务队列的队尾，等待Js引擎线程的执行  定时器触发线程  顾名思义，负责执行异步定时器一类的函数的线程，如： setTimeout，setInterval。 主线程依次执行代码时，遇到定时器，会将定时器交给该线程处理，当计数完毕后，事件触发线程会将计数完毕后的事件加入到任务队列的尾部，等待JS引擎线程执行。  HTTP请求线程  顾名思义，负责执行异步请求一类的函数的线程，如： Promise，axios，ajax等。 主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列的尾部，等待JS引擎线程执行。    多个线程之间配合工作，各司其职。"/>
 
   <script type="application/ld+json">
 {
@@ -56,7 +59,7 @@ JavaScript 运行机制详解：再谈Event Loop@阮一峰
   
   "genre": "posts",
   "keywords": "js, Browser",
-  "wordcount":  748 ,
+  "wordcount":  757 ,
   "url": "\/2018\/eventloop\/",
   "datePublished": "2018-03-03T00:00:00\x2b00:00",
   "dateModified": "2018-03-03T00:00:00\x2b00:00",
@@ -173,84 +176,96 @@ JavaScript 运行机制详解：再谈Event Loop@阮一峰
         
         
 
-        <h1 id="event-loop">Event Loop</h1>
-<p><em>参考资料：</em><br>
-<em><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html">JavaScript 运行机制详解：再谈Event Loop@阮一峰</a></em><br>
-<em><a href="https://segmentfault.com/a/1190000017224799">8张图帮你一步步看清 async/await 和 promise 的执行顺序</a></em><br>
-<em><a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程与线程的一个简单解释</a></em></p>
+        
+
+<h1 id="event-loop">Event Loop</h1>
+
+<p><em>参考资料：</em><br />
+<em><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" rel="nofollow noreferrer" target="_blank">JavaScript 运行机制详解：再谈Event Loop@阮一峰</a></em><br />
+<em><a href="https://segmentfault.com/a/1190000017224799" rel="nofollow noreferrer" target="_blank">8张图帮你一步步看清 async/await 和 promise 的执行顺序</a></em><br />
+<em><a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" rel="nofollow noreferrer" target="_blank">进程与线程的一个简单解释</a></em></p>
+
 <h2 id="事件循环机制">事件循环机制</h2>
+
 <h3 id="线程与进程">线程与进程</h3>
+
 <blockquote>
 <ul>
 <li>进程：CPU资源分配的最小单位</li>
 <li>线程：CPU调度的最小单位</li>
 </ul>
 </blockquote>
+
 <p>浏览器打开即为打开一个进程（任务管理器查看），浏览器就是多进程、多线程的，浏览器打开后占用CPU的资源，可将这些资源分别分配给不同的tab页面进行并发处理，互不影响；如：一个浏览器打开多个窗口，多个窗口同时运行网页（浏览器中任务管理查看）</p>
-<p><img src="/images/totalimgs/chrome.png" alt="浏览器进程"></p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/chrome.png" alt="浏览器进程" class="lazyload"><figcaption class="image-caption">浏览器进程</figcaption></figure></p>
+
 <h2 id="浏览器">浏览器</h2>
+
 <h3 id="浏览器进程">浏览器进程</h3>
+
 <p>作为主进程，主要负责页面管理以及其他进程的创建及销毁，常驻的线程有：(工厂-&gt; 部门)</p>
-<!-- raw HTML omitted -->
+
+<p><center>手机工厂(浏览器)[进程]</center>
+<center>↓</center>
+<center>造手机部 &mdash;&ndash; 造手机壳部 &mdash;&ndash; 造膜部等(tab页面)[进程]</center>
+<center>↓</center>
+<center>各个岗位(html、css、js、事件触发等)[线程]</center></p>
+
 <blockquote>
 <ul>
-<li>GUI渲染线程</li>
-</ul>
-</blockquote>
+<li>GUI渲染线程
+
 <ol>
-<li>主要负责页面的渲染，解析HTML、CSS，构建DOM树，布局和绘制等。</li>
+<li>主要负责页面的渲染，解析HTML、CSS，构建DOM树，布局和绘制等。<br /></li>
 <li>当界面需要重绘或者由于某种操作引发回流时，将执行该线程。（回流必将引起重绘，重绘不一定会引起回流）</li>
 <li>该线程与JS引擎线程互斥，当执行JS引擎线程时，GUI渲染会被挂起，当任务队列空闲时，JS引擎才会去执行 GUI 渲染。</li>
-</ol>
-<blockquote>
-<ul>
-<li>JS引擎线程</li>
-</ul>
-</blockquote>
+</ol></li>
+<li>JS引擎线程<br />
+
 <ol>
 <li>该线程当然是主要负责处理 JavaScript脚本，执行代码；</li>
 <li>也是主要负责执行准备好待执行的事件，即定时器计数结束，或者异步请求成功并返回正确时，将依次进入任务队列，等待JS引擎线程的执行；</li>
 <li>当然，该线程与 GUI渲染线程互斥，当 JS引擎线程执行 JavaScript脚本时间过长，将导致页面渲染的阻塞。</li>
-</ol>
-<blockquote>
-<ul>
-<li>事件触发线程</li>
-</ul>
-</blockquote>
+</ol></li>
+<li>事件触发线程
+
 <ol>
 <li>主要负责将准备好的事件交给Js引擎线程执行</li>
 <li>比如setTimeout定时器计数结束，ajax等异步请求成功并出发回调函数，或者用户出发点击事件，该线程将会整装待发的事件依次加入到任务队列的队尾，等待Js引擎线程的执行</li>
-</ol>
-<blockquote>
-<ul>
-<li>定时器触发线程</li>
-</ul>
-</blockquote>
+</ol></li>
+<li>定时器触发线程
+
 <ol>
 <li>顾名思义，负责执行异步定时器一类的函数的线程，如： setTimeout，setInterval。</li>
 <li>主线程依次执行代码时，遇到定时器，会将定时器交给该线程处理，当计数完毕后，事件触发线程会将计数完毕后的事件加入到任务队列的尾部，等待JS引擎线程执行。</li>
-</ol>
-<blockquote>
-<ul>
-<li>HTTP请求线程</li>
-</ul>
-</blockquote>
+</ol></li>
+<li>HTTP请求线程
+
 <ol>
 <li>顾名思义，负责执行异步请求一类的函数的线程，如： Promise，axios，ajax等。</li>
 <li>主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列的尾部，等待JS引擎线程执行。</li>
-</ol>
+</ol></li>
+</ul>
+</blockquote>
+
 <p>多个线程之间配合工作，各司其职。</p>
+
 <h3 id="render-进程">Render 进程</h3>
+
 <blockquote>
 <p>浏览器渲染进程（浏览器内核），主要负责页面的渲染、JS执行以及事件的循环。
 (render给与，表达  总经办 -&gt; 分管各个部门的副经理)</p>
 </blockquote>
+
 <h3 id="同步和异步任务">同步和异步任务</h3>
+
 <ul>
 <li><strong>同步任务</strong> 即可以立即执行的任务，例如 console.log() 打印一条日志、声明一个变量或者执行一次加法操作等。</li>
 <li><strong>异步任务</strong> 相反不会立即执行的事件任务。异步任务包括宏任务(<code>setTimeout</code>、<code>setInterval</code>)和微任务(<code>Promise</code>、<code>async</code>和<code>await</code>)等。</li>
 <li>常见的异步操作：</li>
 </ul>
+
 <blockquote>
 <ul>
 <li>ajax</li>
@@ -260,8 +275,10 @@ JavaScript 运行机制详解：再谈Event Loop@阮一峰
 <li>Node的读取文件</li>
 </ul>
 </blockquote>
+
 <p>同步任务和异步任务的执行流程：
-<img src="/images/totalimgs/eventLoop1.png" alt="同步任务和异步任务的执行流程"></p>
+<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/eventLoop1.png" alt="同步任务和异步任务的执行流程" class="lazyload"><figcaption class="image-caption">同步任务和异步任务的执行流程</figcaption></figure></p>
+
 <ul>
 <li><strong>栈</strong> 就像是一个容器，任务都是在栈中执行。</li>
 <li><strong>主线程</strong> 就像是操作员，负责执行栈中的任务。</li>
@@ -269,343 +286,430 @@ JavaScript 运行机制详解：再谈Event Loop@阮一峰
 <li>异步任务完成注册后会将回调函数加入任务队列等待主线程执行。</li>
 <li>执行栈中的同步任务执行完毕后，会查看并读取任务队列中的事件函数，于是任务队列的函数结束等待状态，进入执行栈，开始执行。</li>
 </ul>
+
 <h3 id="宏任务和微任务">宏任务和微任务</h3>
+
 <p>异步任务分为宏任务和微任务，宏任务队列可以有多个，微任务队列只有一个。</p>
+
 <ul>
-<li>宏任务： script(全局任务)， setTimeout， setInterval， setImmediate， I/O， UI rendering</li>
+<li>宏任务： script(全局任务)， setTimeout， setInterval， setImmediate， I/O， UI rendering<br /></li>
 <li>微任务： process.nextTick， Promise.then()， Object.observe， MutationObserver</li>
 </ul>
+
 <p><strong>在微任务中 process.nextTick 优先级高于Promise</strong></p>
+
 <p>当一个异步任务入栈时，主线程判断该任务为异步任务，并把该任务交给异步处理模块处理，当异步处理模块处理完达到触发条件时，根据任务的类型，将回调函数压入任务队列。</p>
+
 <ul>
 <li>如果是宏任务，则新增一个宏任务队列，任务队列中的宏任务可以有多个来源。</li>
 <li>如果是微任务，则直接压入微任务队列。</li>
 </ul>
+
 <p>所以上图的任务队列可以继续细化一下：
-<img src="/images/totalimgs/eventLoop2.png" alt="任务队列"></p>
+<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/eventLoop2.png" alt="任务队列" class="lazyload"><figcaption class="image-caption">任务队列</figcaption></figure></p>
+
 <p>可以执行以下代码观察如何输出:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">1</span>)
 
-<span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">2</span>)
-}, <span style="color:#ae81ff">0</span>)
+<pre><code class="language-js">console.log(1)
 
-Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(() =&gt; {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#ae81ff">3</span>)
+setTimeout(() =&gt; {
+    console.log(2)
+}, 0)
+
+Promise.resolve().then(() =&gt; {
+    console.log(3)
 })
-</code></pre></div><p>输出的永远是1, 3, 2, 也就是说 promise 在 setTimeout 之前执行了。所以执行的顺序是 执行栈中的代码 =&gt; 微任务 =&gt; 宏任务</p>
+</code></pre>
+
+<p>输出的永远是1, 3, 2, 也就是说 promise 在 setTimeout 之前执行了。所以执行的顺序是 执行栈中的代码 =&gt; 微任务 =&gt; 宏任务</p>
+
 <h3 id="event-loop-1">Event Loop</h3>
+
 <p>回顾单线程异步机制：</p>
+
 <ul>
 <li>js全局任务开始，任务一次进入执行栈，被主线程执行，执行完毕后出栈</li>
 <li>遇到异步任务，交给异步处理模块处理，如:<code>setTimeout</code>，<code>ajax</code></li>
-<li>当异步任务达到可执行状态时，事件触发线程将回调函数加入任务队列，等执行栈为空时，再依次进入执行栈中被执行</li>
+<li>当异步任务达到可执行状态时，事件触发线程将回调函数加入任务队列，等执行栈为空时，再依次进入执行栈中被执行<br /></li>
 </ul>
+
 <p>那么问题就来了，我们有宏任务和微任务，先执行谁呢？</p>
+
 <ul>
-<li>异步任务开始执行从全局任务开始执行（异步里边的var url = '&rsquo; &hellip;.），这些都属于宏任务，执行时js引擎会检查执行栈是否空闲，如果不空闲继续检查，当同步任务执行完毕，执行栈空闲下来,js引擎又会检查任务队列是否为空，如果不为空，会先提取任务队列中的微任务进行执行，如果为空，则继续检查；</li>
+<li>异步任务开始执行从全局任务开始执行（异步里边的var url = &ldquo; &hellip;.），这些都属于宏任务，执行时js引擎会检查执行栈是否空闲，如果不空闲继续检查，当同步任务执行完毕，执行栈空闲下来,js引擎又会检查任务队列是否为空，如果不为空，会先提取任务队列中的微任务进行执行，如果为空，则继续检查；</li>
 <li>微任务队列执行完毕之后，引擎检查到主线程又空闲下来了，再去任务队列提取排在最前的宏任务；</li>
 <li>执行宏任务的过程中 ，遇到了微任务，再将这个微任务加入任务队列中；</li>
 <li>待执行栈空闲时，再次去提取上边加入的微任务进行执行，该微任务执行结束后，又去检测任务队列中的任务，如果为空，提取最前边的任务，放入执行栈执行，如果为空了，就继续检查任务队列，以此类推。</li>
 </ul>
+
 <p>（另）：可放大宏任务（var xxx= &hellip;），将全局js任务和宏任务放一起理解，第一步宏任务先执行，遇到<code>setTimeout</code>同样放入事件队列，执行结束后，引擎检查微任务，将微任务放入执行栈执行，执行结束后，在第二轮 检查事件队列的是否含有宏任务，如有，放入执行栈执行，依次循环。</p>
+
 <h3 id="总结下">总结下</h3>
+
 <h5 id="执行栈">执行栈</h5>
+
 <ul>
 <li>执行栈中的代码永远最先执行</li>
 </ul>
-<h5 id="微任务microtask">微任务(microtask)</h5>
+
+<h5 id="微任务-microtask">微任务(microtask)</h5>
+
 <ul>
 <li>当执行栈中的代码执行完毕，会在执行宏任务队列之前先看看微任务队列中有没有任务，如果有会先将微任务队列中的任务清空才会去执行宏任务队列</li>
 </ul>
-<h5 id="宏任务task">宏任务(task)</h5>
+
+<h5 id="宏任务-task">宏任务(task)</h5>
+
 <ul>
 <li>等待执行栈和微任务队列都执行完毕才会执行，并且在执行完每一个宏任务之后，会去看看微任务队列有没有新添加的任务，如果有，会先将微任务队列中的任务清空，才会继续执行下一个宏任务</li>
 </ul>
+
 <p><strong>注意:</strong> 浏览器会先执行一个宏任务，接下来有异步代码的话才会先执行微任务。</p>
+
 <blockquote>
 <p>可以考虑以下代码输出顺序：</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">async1</span>() {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;async1 start&#39;</span>);
-    <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">async2</span>();
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;async1 end&#39;</span>);
-}
-<span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">async2</span>() {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;async2&#39;</span>);
-}
-<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;script start&#39;</span>);
-<span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">function</span>() {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;setTimeout&#39;</span>);
-}, <span style="color:#ae81ff">0</span>)
-<span style="color:#a6e22e">async1</span>();
-<span style="color:#66d9ef">new</span> Promise(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">resolve</span>) {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;promise1&#39;</span>);
-    <span style="color:#a6e22e">resolve</span>();
-}).<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>() {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;promise2&#39;</span>);
-});
-<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;script end&#39;</span>);
 
-<span style="color:#75715e">// 运行结果 浏览器环境：chrome 版本 75.0.3770.142
-</span><span style="color:#75715e">// script start
-</span><span style="color:#75715e">// async1 start
-</span><span style="color:#75715e">// async2
-</span><span style="color:#75715e">// promise1
-</span><span style="color:#75715e">// script end
-</span><span style="color:#75715e">// async1 end
-</span><span style="color:#75715e">// promise2
-</span><span style="color:#75715e">// setTimeout
-</span></code></pre></div><h2 id="nodejs">Node.js</h2>
+<pre><code class="language-js">async function async1() {
+    console.log('async1 start');
+    await async2();
+    console.log('async1 end');
+}
+async function async2() {
+    console.log('async2');
+}
+console.log('script start');
+setTimeout(function() {
+    console.log('setTimeout');
+}, 0)
+async1();
+new Promise(function(resolve) {
+    console.log('promise1');
+    resolve();
+}).then(function() {
+    console.log('promise2');
+});
+console.log('script end');
+
+// 运行结果 浏览器环境：chrome 版本 75.0.3770.142
+// script start
+// async1 start
+// async2
+// promise1
+// script end
+// async1 end
+// promise2
+// setTimeout
+</code></pre>
+
+<h2 id="node-js">Node.js</h2>
+
 <p>Node.js也是单线程的Event Loop，但是它的运行机制不同于浏览器环境。Node.js采用V8作为js的解析引擎，而I/O处理方面使用了自己设计的libuv，libuv是一个基于事件驱动的跨平台抽象层，封装了不同操作系统一些底层特性，对外提供统一的API，事件循环机制也是它里面的实现。</p>
-<p><img src="/images/totalimgs/node_event_loop.png" alt="node.js system"></p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/node_event_loop.png" alt="node.js system" class="lazyload"><figcaption class="image-caption">node.js system</figcaption></figure></p>
+
 <p>根据上图，Node的运行机制如下:</p>
+
 <ol>
 <li>V8引擎解析JavaScript脚本。</li>
 <li>解析后的代码，调用Node API。</li>
 <li>libuv库负责Node API的执行。它将不同的任务分配给不同的线程，形成一个Event Loop（事件循环），以异步的方式将任务的执行结果返回给V8引擎。</li>
 <li>V8引擎再将结果返回给用户。</li>
 </ol>
-<p><a href="https://github.com/libuv/libuv/blob/v1.x/src/unix/core.c#L352-L401">源码参考</a>：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">uv_run</span>(uv_loop_t<span style="color:#f92672">*</span> loop, uv_run_mode mode) {
-  <span style="color:#66d9ef">int</span> timeout;
-  <span style="color:#66d9ef">int</span> r;
-  <span style="color:#66d9ef">int</span> ran_pending;
 
-  r <span style="color:#f92672">=</span> uv__loop_alive(loop);
-  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>r)
+<p><a href="https://github.com/libuv/libuv/blob/v1.x/src/unix/core.c#L352-L401" rel="nofollow noreferrer" target="_blank">源码参考</a>：</p>
+
+<pre><code class="language-c">int uv_run(uv_loop_t* loop, uv_run_mode mode) {
+  int timeout;
+  int r;
+  int ran_pending;
+
+  r = uv__loop_alive(loop);
+  if (!r)
     uv__update_time(loop);
 
-  <span style="color:#66d9ef">while</span> (r <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> loop<span style="color:#f92672">-&gt;</span>stop_flag <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+  while (r != 0 &amp;&amp; loop-&gt;stop_flag == 0) {
     uv__update_time(loop);
-    <span style="color:#75715e">// timers阶段
-</span><span style="color:#75715e"></span>    uv__run_timers(loop);
-    <span style="color:#75715e">// I/O callbacks阶段
-</span><span style="color:#75715e"></span>    ran_pending <span style="color:#f92672">=</span> uv__run_pending(loop);
-    <span style="color:#75715e">// idle阶段
-</span><span style="color:#75715e"></span>    uv__run_idle(loop);
-    <span style="color:#75715e">// prepare阶段
-</span><span style="color:#75715e"></span>    uv__run_prepare(loop);
+    // timers阶段
+    uv__run_timers(loop);
+    // I/O callbacks阶段
+    ran_pending = uv__run_pending(loop);
+    // idle阶段
+    uv__run_idle(loop);
+    // prepare阶段
+    uv__run_prepare(loop);
 
-    timeout <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    <span style="color:#66d9ef">if</span> ((mode <span style="color:#f92672">==</span> UV_RUN_ONCE <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>ran_pending) <span style="color:#f92672">||</span> mode <span style="color:#f92672">==</span> UV_RUN_DEFAULT)
-      timeout <span style="color:#f92672">=</span> uv_backend_timeout(loop);
-    <span style="color:#75715e">// poll阶段
-</span><span style="color:#75715e"></span>    uv__io_poll(loop, timeout);
-    <span style="color:#75715e">// check阶段
-</span><span style="color:#75715e"></span>    uv__run_check(loop);
-    <span style="color:#75715e">// close callbacks阶段
-</span><span style="color:#75715e"></span>    uv__run_closing_handles(loop);
+    timeout = 0;
+    if ((mode == UV_RUN_ONCE &amp;&amp; !ran_pending) || mode == UV_RUN_DEFAULT)
+      timeout = uv_backend_timeout(loop);
+    // poll阶段
+    uv__io_poll(loop, timeout);
+    // check阶段
+    uv__run_check(loop);
+    // close callbacks阶段
+    uv__run_closing_handles(loop);
 
-    <span style="color:#66d9ef">if</span> (mode <span style="color:#f92672">==</span> UV_RUN_ONCE) {
-      <span style="color:#75715e">/* UV_RUN_ONCE implies forward progress: at least one callback must have
-</span><span style="color:#75715e">       * been invoked when it returns. uv__io_poll() can return without doing
-</span><span style="color:#75715e">       * I/O (meaning: no callbacks) when its timeout expires - which means we
-</span><span style="color:#75715e">       * have pending timers that satisfy the forward progress constraint.
-</span><span style="color:#75715e">       *
-</span><span style="color:#75715e">       * UV_RUN_NOWAIT makes no guarantees about progress so it&#39;s omitted from
-</span><span style="color:#75715e">       * the check.
-</span><span style="color:#75715e">       */</span>
+    if (mode == UV_RUN_ONCE) {
+      /* UV_RUN_ONCE implies forward progress: at least one callback must have
+       * been invoked when it returns. uv__io_poll() can return without doing
+       * I/O (meaning: no callbacks) when its timeout expires - which means we
+       * have pending timers that satisfy the forward progress constraint.
+       *
+       * UV_RUN_NOWAIT makes no guarantees about progress so it's omitted from
+       * the check.
+       */
       uv__update_time(loop);
       uv__run_timers(loop);
     }
 
-    r <span style="color:#f92672">=</span> uv__loop_alive(loop);
-    <span style="color:#66d9ef">if</span> (mode <span style="color:#f92672">==</span> UV_RUN_ONCE <span style="color:#f92672">||</span> mode <span style="color:#f92672">==</span> UV_RUN_NOWAIT)
-      <span style="color:#66d9ef">break</span>;
+    r = uv__loop_alive(loop);
+    if (mode == UV_RUN_ONCE || mode == UV_RUN_NOWAIT)
+      break;
   }
 
-  <span style="color:#75715e">/* The if statement lets gcc compile it to a conditional store. Avoids
-</span><span style="color:#75715e">   * dirtying a cache line.
-</span><span style="color:#75715e">   */</span>
-  <span style="color:#66d9ef">if</span> (loop<span style="color:#f92672">-&gt;</span>stop_flag <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)
-    loop<span style="color:#f92672">-&gt;</span>stop_flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  /* The if statement lets gcc compile it to a conditional store. Avoids
+   * dirtying a cache line.
+   */
+  if (loop-&gt;stop_flag != 0)
+    loop-&gt;stop_flag = 0;
 
-  <span style="color:#66d9ef">return</span> r;
+  return r;
 }
-</code></pre></div><h3 id="6个阶段">6个阶段</h3>
+</code></pre>
+
+<h3 id="6个阶段">6个阶段</h3>
+
 <p>Node 的 Event Loop 分为 6 个阶段，它们会按照顺序反复运行。每当进入某一个阶段的时候，都会从对应的回调队列中取出函数去执行。当队列为空或者执行的回调函数数量到达系统设定的阈值，就会进入下一阶段。</p>
-<p><img src="/images/totalimgs/node_6.png" alt="6个阶段"></p>
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/node_6.png" alt="6个阶段" class="lazyload"><figcaption class="image-caption">6个阶段</figcaption></figure></p>
+
 <h4 id="timer">timer</h4>
+
 <p>timers 阶段会执行 setTimeout 和 setInterval 回调，并且是由 poll 阶段控制的。 同样，<strong>在 Node 中定时器指定的时间也不是准确时间，只能是尽快执行</strong>。</p>
-<h4 id="io">I/O</h4>
-<p>I/O 阶段会处理一些上一轮循环中的__少数未执行__的 I/O 回调。</p>
+
+<h4 id="i-o">I/O</h4>
+
+<p>I/O 阶段会处理一些上一轮循环中的<strong>少数未执行</strong>的 I/O 回调。</p>
+
 <h4 id="idle-prepare">idle, prepare</h4>
+
 <p>仅node内部使用。</p>
+
 <h4 id="poll">poll</h4>
+
 <p>poll 是一个至关重要的阶段，这一阶段中，系统会做两件事情：</p>
+
 <ol>
 <li>回到 timer 阶段执行回调。</li>
 <li>执行 I/O 回调。</li>
 </ol>
+
 <p>并且在进入该阶段时如果没有设定了 timer 的话，会发生以下两件事情：</p>
+
 <ul>
 <li>如果 poll 队列不为空，会遍历回调队列并同步执行，直到队列为空或者达到系统限制。</li>
 <li>如果 poll 队列为空时，会有两件事发生：
+
 <ul>
 <li>如果有 setImmediate 回调需要执行，poll 阶段会停止并且进入到 check 阶段执行回调。</li>
 <li>如果没有 setImmediate 回调需要执行，会等待回调被加入到队列中并立即执行回调，这里同样会有个超时时间设置防止一直等待下去。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <p>当然设定了 timer 的话且 poll 队列为空，则会判断是否有 timer 超时，如果有的话会回到 timer 阶段执行回调。</p>
+
 <h4 id="check">check</h4>
+
 <p>check 阶段执行 setImmediate，setImmediate()的回调会被加入check队列中，从event loop的阶段图可以知道，check阶段的执行顺序在poll阶段之后。</p>
+
 <h4 id="close-callbacks">close callbacks</h4>
+
 <p>close callbacks 阶段执行 close 事件。</p>
+
 <p><strong>注意：上面六个阶段都不包括 process.nextTick()。</strong></p>
+
 <h3 id="注意点">注意点：</h3>
+
 <h4 id="settimeout-和-setimmediate">setTimeout 和 setImmediate</h4>
+
 <ul>
 <li>二者非常相似，区别主要在于调用时机不同:
+
 <ul>
 <li>setImmediate 设计在poll阶段完成时执行，即check阶段。</li>
 <li>setTimeout 设计在poll阶段为空闲时，且设定时间到达后执行，但它在timer阶段执行。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <p>首先在有些情况下，定时器的执行顺序其实是 <strong>随机</strong> 的</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">setTimeout</span>(<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">timeout</span> () {
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timeout&#39;</span>);
-},<span style="color:#ae81ff">0</span>);
-<span style="color:#a6e22e">setImmediate</span>(<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">immediate</span> () {
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;immediate&#39;</span>);
+
+<pre><code class="language-js">setTimeout(function timeout () {
+  console.log('timeout');
+},0);
+setImmediate(function immediate () {
+  console.log('immediate');
 });
-</code></pre></div><p>对于以上代码来说，setTimeout 可能执行在前，也可能执行在后。</p>
+</code></pre>
+
+<p>对于以上代码来说，setTimeout 可能执行在前，也可能执行在后。</p>
+
 <ul>
 <li>首先 setTimeout(fn, 0) === setTimeout(fn, 1)，这是由源码决定的。</li>
 <li>进入事件循环也是需要成本的，如果在准备时候花费了大于 1ms 的时间，那么在 timer 阶段就会直接执行 setTimeout 回调。</li>
 <li>如果准备时间花费小于 1ms，那么就是 setImmediate 回调先执行了 。</li>
 </ul>
+
 <p>当然在某些情况下，他们的执行顺序一定是固定的，比如以下代码：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>)
-<span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFile</span>(<span style="color:#a6e22e">__filename</span>, () =&gt; {
-    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timeout&#39;</span>);
-    }, <span style="color:#ae81ff">0</span>)
-    <span style="color:#a6e22e">setImmediate</span>(() =&gt; {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;immediate&#39;</span>)
+
+<pre><code class="language-js">const fs = require('fs')
+fs.readFile(__filename, () =&gt; {
+    setTimeout(() =&gt; {
+        console.log('timeout');
+    }, 0)
+    setImmediate(() =&gt; {
+        console.log('immediate')
     })
 })
-</code></pre></div><p>在上述代码中，<code>setImmediate</code> 永远 <strong>先执行</strong>。因为两个代码写在 IO 回调中，IO 回调是在 poll 阶段执行，当回调执行完毕后队列为空，发现存在 <code>setImmediate</code> 回调，所以就直接跳转到 check 阶段去执行回调了。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timer21&#39;</span>)
-}, <span style="color:#ae81ff">0</span>)
+</code></pre>
 
-Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>() {
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;promise1&#39;</span>)
-})
-</code></pre></div><p>对于以上代码来说，其实和浏览器中的输出是一样的，microtask 永远执行在 macrotask 前面。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;start&#39;</span>)
-<span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timer1&#39;</span>)
-  Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>() {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;promise1&#39;</span>)
-  })
-}, <span style="color:#ae81ff">0</span>)
-<span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timer2&#39;</span>)
-  Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>() {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;promise2&#39;</span>)
-  })
-}, <span style="color:#ae81ff">0</span>)
-Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>() {
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;promise3&#39;</span>)
-})
-<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;end&#39;</span>)
+<p>在上述代码中，<code>setImmediate</code> 永远 <strong>先执行</strong>。因为两个代码写在 IO 回调中，IO 回调是在 poll 阶段执行，当回调执行完毕后队列为空，发现存在 <code>setImmediate</code> 回调，所以就直接跳转到 check 阶段去执行回调了。</p>
 
-<span style="color:#75715e">// start
-</span><span style="color:#75715e">// end
-</span><span style="color:#75715e">// promise3
-</span><span style="color:#75715e">// timer1
-</span><span style="color:#75715e">// timer2
-</span><span style="color:#75715e">// promise1
-</span><span style="color:#75715e">// promise2
-</span></code></pre></div><p>对于以上代码来说，就和浏览器中的输出不太一样了：</p>
+<pre><code class="language-js">setTimeout(() =&gt; {
+  console.log('timer21')
+}, 0)
+
+Promise.resolve().then(function() {
+  console.log('promise1')
+})
+</code></pre>
+
+<p>对于以上代码来说，其实和浏览器中的输出是一样的，microtask 永远执行在 macrotask 前面。</p>
+
+<pre><code class="language-js">console.log('start')
+setTimeout(() =&gt; {
+  console.log('timer1')
+  Promise.resolve().then(function() {
+    console.log('promise1')
+  })
+}, 0)
+setTimeout(() =&gt; {
+  console.log('timer2')
+  Promise.resolve().then(function() {
+    console.log('promise2')
+  })
+}, 0)
+Promise.resolve().then(function() {
+  console.log('promise3')
+})
+console.log('end')
+
+// start
+// end
+// promise3
+// timer1
+// timer2
+// promise1
+// promise2
+</code></pre>
+
+<p>对于以上代码来说，就和浏览器中的输出不太一样了：</p>
+
 <ul>
 <li>一开始执行栈的同步任务（这属于宏任务）执行完毕后（依次打印出start end，并将2个timer依次放入timer队列）,会先去执行微任务（<strong>这点跟浏览器端的一样</strong>），所以打印出promise3。</li>
 <li>然后进入timers阶段，执行timer1的回调函数，打印timer1，并将promise.then回调放入microtask队列，同样的步骤执行timer2，打印timer2；这点跟浏览器端相差比较大，<strong>timers阶段有几个setTimeout/setInterval都会依次执行</strong>，并不像浏览器端，每执行一个宏任务后就去执行一个微任务。</li>
 </ul>
-<h4 id="processnexttick">process.nextTick</h4>
-<p>这个函数其实是独立于 Event Loop 之外的，它有一个自己的队列，当每个阶段完成后，如果存在 nextTick 队列，就会清空队列中的所有回调函数，并且优先于其他 microtask 执行。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">setTimeout</span>(() =&gt; {
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timer1&#39;</span>)
- 
-  Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>() {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;promise1&#39;</span>)
-  })
- }, <span style="color:#ae81ff">0</span>)
 
-<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">nextTick</span>(() =&gt; {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;nextTick1&#39;</span>)
-    <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">nextTick</span>(() =&gt; {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;nextTick2&#39;</span>)
-        <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">nextTick</span>(() =&gt; {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;nextTick3&#39;</span>)
-        <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">nextTick</span>(() =&gt; {
-            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;nextTick4&#39;</span>)
+<h4 id="process-nexttick">process.nextTick</h4>
+
+<p>这个函数其实是独立于 Event Loop 之外的，它有一个自己的队列，当每个阶段完成后，如果存在 nextTick 队列，就会清空队列中的所有回调函数，并且优先于其他 microtask 执行。</p>
+
+<pre><code class="language-js">setTimeout(() =&gt; {
+  console.log('timer1')
+ 
+  Promise.resolve().then(function() {
+    console.log('promise1')
+  })
+ }, 0)
+
+process.nextTick(() =&gt; {
+    console.log('nextTick1')
+    process.nextTick(() =&gt; {
+        console.log('nextTick2')
+        process.nextTick(() =&gt; {
+        console.log('nextTick3')
+        process.nextTick(() =&gt; {
+            console.log('nextTick4')
         })
         })
     })
 })
 
-<span style="color:#75715e">// nextTick1
-</span><span style="color:#75715e">// nextTick2
-</span><span style="color:#75715e">// nextTick3
-</span><span style="color:#75715e">// nextTick4
-</span><span style="color:#75715e">// timer1
-</span><span style="color:#75715e">// promise1
-</span></code></pre></div><h3 id="总结">总结</h3>
+// nextTick1
+// nextTick2
+// nextTick3
+// nextTick4
+// timer1
+// promise1
+</code></pre>
+
+<h3 id="总结">总结</h3>
+
 <ol>
 <li>Node.js 的事件循环分为6个阶段</li>
 <li>Node中递归的调用process.nextTick()会导致I/O starving，官方推荐使用setImmediate()</li>
 </ol>
+
 <h2 id="node与浏览器的-event-loop-差异">Node与浏览器的 Event Loop 差异</h2>
+
 <p>浏览器环境下，<strong>microtask的任务队列是每个macrotask执行完之后执行</strong>。而在Node.js中，<strong>microtask会在事件循环的各个阶段之间执行，也就是一个阶段执行完毕，就会去执行microtask队列的任务</strong>。</p>
-<p><img src="/images/totalimgs/node_browser.png" alt="browser node"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">setTimeout</span>(()=&gt;{
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timer1&#39;</span>)
-    Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>() {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;promise1&#39;</span>)
+
+<p><figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/node_browser.png" alt="browser node" class="lazyload"><figcaption class="image-caption">browser node</figcaption></figure></p>
+
+<pre><code class="language-js">setTimeout(()=&gt;{
+    console.log('timer1')
+    Promise.resolve().then(function() {
+        console.log('promise1')
     })
-}, <span style="color:#ae81ff">0</span>)
-<span style="color:#a6e22e">setTimeout</span>(()=&gt;{
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;timer2&#39;</span>)
-    Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>() {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;promise2&#39;</span>)
+}, 0)
+setTimeout(()=&gt;{
+    console.log('timer2')
+    Promise.resolve().then(function() {
+        console.log('promise2')
     })
-}, <span style="color:#ae81ff">0</span>)
-</code></pre></div><ul>
-<li>
-<p>浏览器端运行结果：timer1 =&gt; promise1 =&gt; timer2 =&gt; promise2</p>
+}, 0)
+</code></pre>
+
+<ul>
+<li><p>浏览器端运行结果：timer1 =&gt; promise1 =&gt; timer2 =&gt; promise2</p>
+
 <ul>
 <li>浏览器端的处理过程如下：
-<img src="/images/totalimgs/browser_loop.gif" alt="browser"></li>
-</ul>
-</li>
-<li>
-<p>Node端运行结果分两种情况：</p>
+<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/browser_loop.gif" alt="browser" class="lazyload"><figcaption class="image-caption">browser</figcaption></figure></li>
+</ul></li>
+
+<li><p>Node端运行结果分两种情况：</p>
+
 <ul>
 <li>如果是node11版本一旦执行一个阶段里的一个宏任务(setTimeout,setInterval和setImmediate)就立刻执行微任务队列，这就跟浏览器端运行一致，最后的结果为 <code>timer1 =&gt; promise1 =&gt; timer2 =&gt; promise2</code></li>
-<li>如果是node10及其之前版本：要看第一个定时器执行完，第二个定时器是否在完成队列中。
-<ul>
+<li>如果是node10及其之前版本：要看第一个定时器执行完，第二个定时器是否在完成队列中。</li>
 <li>如果是第二个定时器还未在完成队列中，最后的结果为 <code>timer1 =&gt; promise1 =&gt; timer2 =&gt; promise2</code></li>
 <li>如果是第二个定时器已经在完成队列中，则最后的结果为 <code>timer1 =&gt; timer2 =&gt; promise1 =&gt; promise2</code>(下文过程解释基于这种情况下)
+
 <ol>
 <li>全局脚本（main()）执行，将2个timer依次放入timer队列，main()执行完毕，调用栈空闲，任务队列开始执行；</li>
 <li>首先进入timers阶段，执行timer1的回调函数，打印timer1，并将promise1.then回调放入microtask队列，同样的步骤执行timer2，打印timer2；</li>
 <li>至此，timer阶段执行结束，event loop进入下一个阶段之前，执行microtask队列的所有任务，依次打印promise1、promise2。</li>
-</ol>
-</li>
+</ol></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
+
 <p>Node端的处理过程如下：
-<img src="/images/totalimgs/node_loop.gif" alt="node"></p>
+<figure><img src="/ring.svg" data-sizes="auto" data-src="/images/totalimgs/node_loop.gif" alt="node" class="lazyload"><figcaption class="image-caption">node</figcaption></figure></p>
+
 <h3 id="总结-1">总结</h3>
+
 <p>浏览器和Node 环境下，microtask 任务队列的执行时机不同</p>
+
 <ul>
 <li>Node.js中，microtask 在事件循环的各个阶段之间执行</li>
 <li>浏览器端，microtask 在事件循环的 macrotask 执行完之后执行</li>
@@ -623,7 +727,7 @@ Promise.<span style="color:#a6e22e">resolve</span>().<span style="color:#a6e22e"
 
         <p class="copyright-item">
             <span>Words:</span>
-            <span>748</span>
+            <span>757</span>
         </p>
 
         <p class="copyright-item">

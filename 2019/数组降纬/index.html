@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="数组降纬"/>
 <meta name="twitter:description" content="第一种：将数组字符串话  利用数组与字符串的隐式转换，使用&#43;符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。
- let arr = [[222, 333, 444], [55, 66, 77], 11, ]arr &#43;= &#39;&#39;;arr = arr.split(&#39;,&#39;);arr = arr.map(item =&gt; Number(item));console.log(arr); // [222, 333, 444, 55, 66, 77, 11]第二种：自定义函数 const reduceDimension = (arr) =&gt; {let ret = [];let toArr = function(arr){arr.forEach(function(item){Array.isArray(item) ? toArr(item) : ret.push(item);});}toArr(arr);return ret;}let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];第三种 ES6数组的扩展 Array."/>
+ let arr = [[222, 333, 444], [55, 66, 77], 11, ] arr &#43;= &#39;&#39;; arr = arr.split(&#39;,&#39;); arr = arr.map(item =&gt; Number(item)); console.log(arr); // [222, 333, 444, 55, 66, 77, 11]  第二种：自定义函数 const reduceDimension = (arr) =&gt; { let ret = []; let toArr = function(arr){ arr.forEach(function(item){ Array.isArray(item) ? toArr(item) : ret.push(item); }); } toArr(arr); return ret; } let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];  第三种 ES6数组的扩展 Array."/>
 
   <script type="application/ld+json">
 {
@@ -165,47 +165,63 @@
         
         
 
-        <h3 id="第一种将数组字符串话">第一种：将数组字符串话</h3>
+        
+
+<h3 id="第一种-将数组字符串话">第一种：将数组字符串话</h3>
+
 <blockquote>
 <p>利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组。</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">222</span>, <span style="color:#ae81ff">333</span>, <span style="color:#ae81ff">444</span>], [<span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>, <span style="color:#ae81ff">77</span>], <span style="color:#ae81ff">11</span>, ]
-<span style="color:#a6e22e">arr</span> <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;&#39;</span>;
-<span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;,&#39;</span>);
-<span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">item</span> =&gt; Number(<span style="color:#a6e22e">item</span>));
 
-<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">arr</span>); <span style="color:#75715e">// [222, 333, 444, 55, 66, 77, 11]
-</span></code></pre></div><h3 id="第二种自定义函数">第二种：自定义函数</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">reduceDimension</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">arr</span>) =&gt; {
-	<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ret</span> <span style="color:#f92672">=</span> [];
+<pre><code class="language-js">let arr = [[222, 333, 444], [55, 66, 77], 11, ]
+arr += '';
+arr = arr.split(',');
+arr = arr.map(item =&gt; Number(item));
 
-	<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">toArr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">arr</span>){
-		<span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">item</span>){
-			Array.<span style="color:#a6e22e">isArray</span>(<span style="color:#a6e22e">item</span>) <span style="color:#f92672">?</span> <span style="color:#a6e22e">toArr</span>(<span style="color:#a6e22e">item</span>) <span style="color:#f92672">:</span> <span style="color:#a6e22e">ret</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">item</span>);
+console.log(arr); // [222, 333, 444, 55, 66, 77, 11]
+</code></pre>
+
+<h3 id="第二种-自定义函数">第二种：自定义函数</h3>
+
+<pre><code class="language-js">const reduceDimension = (arr) =&gt; {
+	let ret = [];
+
+	let toArr = function(arr){
+		arr.forEach(function(item){
+			Array.isArray(item) ? toArr(item) : ret.push(item);
 		});
 	}
-	<span style="color:#a6e22e">toArr</span>(<span style="color:#a6e22e">arr</span>);
+	toArr(arr);
 
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ret</span>;
+	return ret;
 }
-<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">12</span>], <span style="color:#ae81ff">4</span>, [<span style="color:#ae81ff">333</span>, [<span style="color:#ae81ff">4444</span>, <span style="color:#ae81ff">5555</span>]], [<span style="color:#ae81ff">9</span>, [<span style="color:#ae81ff">111</span>, <span style="color:#ae81ff">222</span>]]];
-</code></pre></div><h3 id="第三种-es6数组的扩展-arrayprototypeflat">第三种 ES6数组的扩展 Array.prototype.flat()</h3>
+let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];
+</code></pre>
+
+<h3 id="第三种-es6数组的扩展-array-prototype-flat">第三种 ES6数组的扩展 Array.prototype.flat()</h3>
+
 <ul>
 <li>数组的成员有时还是数组，<code>Array.prototype.flat()</code>用于将嵌套的数组“拉平”，变成一维的数组。该方法返回一个新数组，对原数据没有影响。</li>
 <li>flat()默认只会“拉平”一层，如果想要“拉平”多层的嵌套数组，可以将flat()方法的参数写成一个整数，表示想要拉平的层数，默认为1。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, [<span style="color:#ae81ff">3</span>, [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]]].<span style="color:#a6e22e">flat</span>()
-<span style="color:#75715e">// [1, 2, 3, [4, 5]]
-</span><span style="color:#75715e"></span>
-[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, [<span style="color:#ae81ff">3</span>, [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]]].<span style="color:#a6e22e">flat</span>(<span style="color:#ae81ff">2</span>)
-<span style="color:#75715e">// [1, 2, 3, 4, 5]
-</span></code></pre></div><ul>
+
+<pre><code class="language-js">[1, 2, [3, [4, 5]]].flat()
+// [1, 2, 3, [4, 5]]
+
+[1, 2, [3, [4, 5]]].flat(2)
+// [1, 2, 3, 4, 5]
+</code></pre>
+
+<ul>
 <li>如果不管有多少层嵌套，都要转成一维数组，可以用Infinity关键字作为参数。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#ae81ff">1</span>, [<span style="color:#ae81ff">2</span>, [<span style="color:#ae81ff">3</span>]]].<span style="color:#a6e22e">flat</span>(<span style="color:#66d9ef">Infinity</span>)
-<span style="color:#75715e">// [1, 2, 3]
-</span></code></pre></div><ul>
-<li>更多请看 <a href="http://es6.ruanyifeng.com/#docs/array#%E6%95%B0%E7%BB%84%E5%AE%9E%E4%BE%8B%E7%9A%84-flat%EF%BC%8CflatMap">数组实例的-flat，flatMap</a></li>
+
+<pre><code class="language-js">[1, [2, [3]]].flat(Infinity)
+// [1, 2, 3]
+</code></pre>
+
+<ul>
+<li>更多请看 <a href="http://es6.ruanyifeng.com/#docs/array#%E6%95%B0%E7%BB%84%E5%AE%9E%E4%BE%8B%E7%9A%84-flat%EF%BC%8CflatMap" rel="nofollow noreferrer" target="_blank">数组实例的-flat，flatMap</a></li>
 </ul>
 
     </div>

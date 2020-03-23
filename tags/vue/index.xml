@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vue on Magic</title>
@@ -17,10 +17,9 @@
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/vueplugins/</guid>
-      <description>Vue Plugins And Expansion(后台模板) 条形码 vue-barcode   地址：vue-barcode
-  GitHub: https://github.com/fengyuanchen/vue-barcode
-  全局使用方式：
-  // main.jsimport VueBarcode from &amp;#39;@chenfengyuan/vue-barcode&amp;#39;;Vue.component(&amp;#39;barcode&amp;#39;, VueBarcode);&amp;lt;barcode :value=qualityInfo.tyOrderCode :options=&amp;#34;{ displayValue: false }&amp;#34; id=&amp;#34;canves&amp;#34;&amp;gt;&amp;lt;/barcode&amp;gt;vue图表-V-charts  V-charts 文档  vue后台管理模板  vue-element-admin  vant UI组件库  vant 使用 van-popup 来封装一个组件时，需要使用 :value=&amp;quot;value&amp;quot; 来绑定，避免使用 v-model 来绑定v-model，代码如下：  &amp;lt;!-- 可以查看 vue 文档 对 v-model 的解释 --&amp;gt;&amp;lt;van-popup :value=&amp;#34;isShowCash&amp;#34; @click-overlay=&amp;#34;closeCashPopup&amp;#34;&amp;gt;&amp;lt;!-- .... to do --&amp;gt;&amp;lt;/van-popup&amp;gt;</description>
+      <description> Vue Plugins And Expansion(后台模板) 条形码 vue-barcode  地址：vue-barcode GitHub: https://github.com/fengyuanchen/vue-barcode
+ 全局使用方式：
+  // main.js import VueBarcode from &#39;@chenfengyuan/vue-barcode&#39;; Vue.component(&#39;barcode&#39;, VueBarcode);  &amp;lt;barcode :value=qualityInfo.tyOrderCode :options=&amp;quot;{ displayValue: false }&amp;quot; id=&amp;quot;canves&amp;quot;&amp;gt;&amp;lt;/barcode&amp;gt;  vue图表-V-charts  V-charts 文档  vue后台管理模板  vue-element-admin  vant UI组件库  vant 使用 van-popup 来封装一个组件时，需要使用 :value=&amp;quot;value&amp;quot; 来绑定，避免使用 v-model 来绑定v-model，代码如下：  &amp;lt;!-- 可以查看 vue 文档 对 v-model 的解释 --&amp;gt; &amp;lt;van-popup :value=&amp;quot;isShowCash&amp;quot; @click-overlay=&amp;quot;closeCashPopup&amp;quot;&amp;gt; &amp;lt;!-- .... to do --&amp;gt; &amp;lt;/van-popup&amp;gt;  </description>
     </item>
     
     <item>
@@ -29,8 +28,8 @@
       <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/workrelated/</guid>
-      <description>使用 keep-alive 来包裹路由后，某个页面需要动态的去除缓存 可以使用动态的:include=&amp;quot;calcInclude&amp;quot; 来对需要的缓存的页面进行修改，calcInclude需要使用计算属性。整个include使用数组来储存string[]，数据可放到全局 store 中，通过 commit去修改，在需要的地方去更改。
-&amp;lt;keep-alive :include=&amp;#34;calcInclude&amp;#34;&amp;gt;&amp;lt;router-view /&amp;gt;&amp;lt;/keep-alive&amp;gt;get calcInclude() {return this.$store.state.includes;}const store = {state: {includes: [&amp;#39;...&amp;#39;},},}const mutations = {changeIncludes(state: State, obj: any) {const name = obj.name;const channel = obj.channel;const ind = state.includes.indexOf(name);if (ind &amp;gt; -1 &amp;amp;&amp;amp; channel === &amp;#39;remove&amp;#39;) {state.includes.splice(ind, 1);} else if (channel === &amp;#39;add&amp;#39;) {state.includes.push(name);state.includes = [.</description>
+      <description>使用 keep-alive 来包裹路由后，某个页面需要动态的去除缓存 可以使用动态的:include=&amp;quot;calcInclude&amp;quot; 来对需要的缓存的页面进行修改，calcInclude需要使用计算属性。整个include使用数组来储存*string[]*，数据可放到全局 store 中，通过 commit去修改，在需要的地方去更改。
+&amp;lt;keep-alive :include=&amp;quot;calcInclude&amp;quot;&amp;gt; &amp;lt;router-view /&amp;gt; &amp;lt;/keep-alive&amp;gt;  get calcInclude() { return this.$store.state.includes; } const store = { state: { includes: [&#39;...&#39;}, }, } const mutations = { changeIncludes(state: State, obj: any) { const name = obj.name; const channel = obj.channel; const ind = state.includes.indexOf(name); if (ind &amp;gt; -1 &amp;amp;&amp;amp; channel === &#39;remove&#39;) { state.includes.splice(ind, 1); } else if (channel === &#39;add&#39;) { state.</description>
     </item>
     
     <item>
@@ -39,22 +38,9 @@
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/vue-watch/</guid>
-      <description>Vue watch选项   watch 的用法
-  watch 对象里的 value 是对应的回调函数
-  data () {return {a: 1}},watch: {a: function (newVal, oldVal) {console.log(newVal, oldVal)// 2 1 }},created () {this.a = 2} value 也可以是方法名  data () {return {a: 1}},watch: {a: &amp;#39;foo&amp;#39;},created () {this.a = 2},methods: {foo (newVal, oldVal) {console.</description>
-    </item>
-    
-    <item>
-      <title>vue中盲点</title>
-      <link>/2017/vue-blind-spot/</link>
-      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/vue-blind-spot/</guid>
-      <description>vue中盲点 使用 performance 开启性能追踪  performance API 是 Vue 全局配置 API 中的一个，我们可以使用它来进行网页性能的追踪，我们可以在入口文件中添加：  if (process.env.NODE_ENV !== &amp;#39;production&amp;#39;) {Vue.config.performance = true;}来开启这一功能，该 API（2.2.0 新增）功能只适用于开发模式和支持 performance.mark API 的浏览器上，开启后我们可以下载 Vue Performance Devtool 这一 chrome 插件来看查看各个组件的加载情况，如图：
-从中我们可以清晰的看到页面组件在每个阶段的耗时情况，而针对耗时比较久的组件，我们便可以对其进行相应优化。
-而其在 Vue 源码中主要使用了 window.performance 来获取网页性能数据，其中包含了 performance.mark 和 performance.measure。
- performance.mark 主要用于创建标记 performance.measure 主要用于记录两个标记的时间间隔  例如：
-performance.mark(&amp;#39;start&amp;#39;); // 创建 start 标记performance.mark(&amp;#39;end&amp;#39;); // 创建 end 标记performance.measure(&amp;#39;output&amp;#39;, &amp;#39;start&amp;#39;, &amp;#39;end&amp;#39;); // 计算两者时间间隔performance.getEntriesByName(&amp;#39;output&amp;#39;); // 获取标记，返回值是一个数组，包含了间隔时间数据熟练的使用 performance 我们可以查看并分析网页的很多数据，为我们项目优化提供保障。</description>
+      <description>Vue watch选项  watch 的用法
+ watch 对象里的 value 是对应的回调函数
+  data () { return { a: 1 } }, watch: { a: function (newVal, oldVal) { console.log(newVal, oldVal) // 2 1 } }, created () { this.a = 2 }   value 也可以是方法名  data () { return { a: 1 } }, watch: { a: &#39;foo&#39; }, created () { this.a = 2 }, methods: { foo (newVal, oldVal) { console.</description>
     </item>
     
     <item>
@@ -63,7 +49,20 @@ performance.mark(&amp;#39;start&amp;#39;); // 创建 start 标记performance.ma
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/vue/</guid>
-      <description>Vue配置相关 代理配置 module.exports = {........,dev: { // 开发环境配置 env: require(&amp;#39;./dev.env&amp;#39;), // 使用 config/dev.env.js 中定义的编译环境 port: 8686, // 运行测试页面的端口号 autoOpenBrowser: true,assetsSubDirectory: &amp;#39;static&amp;#39;, // 编译输出的二级目录 assetsPublicPath: &amp;#39;/&amp;#39;, // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名 // 需要 proxyTable 代理的接口（可跨域） proxyTable: {&amp;#39;**&amp;#39;: {target: &amp;#39;https://xxxxxxx&amp;#39;,changeOrigin: true,filter: function (pathname, req) {// 接口地址 /******-server/****/****** return pathname.match(&amp;#39;^\/.+-server.*&amp;#39;)}}},cssSourceMap: false}}多入口配置 /* utils.</description>
+      <description>Vue配置相关 代理配置 module.exports = { ........, dev: { // 开发环境配置 env: require(&#39;./dev.env&#39;), // 使用 config/dev.env.js 中定义的编译环境 port: 8686, // 运行测试页面的端口号 autoOpenBrowser: true, assetsSubDirectory: &#39;static&#39;, // 编译输出的二级目录 assetsPublicPath: &#39;/&#39;, // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名 // 需要 proxyTable 代理的接口（可跨域） proxyTable: { &#39;**&#39;: { target: &#39;https://xxxxxxx&#39;, changeOrigin: true, filter: function (pathname, req) { // 接口地址 /******-server/****/****** return pathname.match(&#39;^\/.+-server.*&#39;) } } }, cssSourceMap: false } }  多入口配置 /* utils.js */ const path = require(&#39;path&#39;); // glob 是 webpack 安装时依赖的一个第三方模块，还模块允许你使用 * 等符号, // 例如 lib/*.</description>
+    </item>
+    
+    <item>
+      <title>vue中盲点</title>
+      <link>/2017/vue-blind-spot/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/vue-blind-spot/</guid>
+      <description>vue中盲点 使用 performance 开启性能追踪  performance API 是 Vue 全局配置 API 中的一个，我们可以使用它来进行网页性能的追踪，我们可以在入口文件中添加：  if (process.env.NODE_ENV !== &#39;production&#39;) { Vue.config.performance = true; }  来开启这一功能，该 API（2.2.0 新增）功能只适用于开发模式和支持 performance.mark API 的浏览器上，开启后我们可以下载 Vue Performance Devtool 这一 chrome 插件来看查看各个组件的加载情况，如图：
+从中我们可以清晰的看到页面组件在每个阶段的耗时情况，而针对耗时比较久的组件，我们便可以对其进行相应优化。
+而其在 Vue 源码中主要使用了 window.performance 来获取网页性能数据，其中包含了 performance.mark 和 performance.measure。
+ performance.mark 主要用于创建标记 performance.measure 主要用于记录两个标记的时间间隔  例如：
+performance.mark(&#39;start&#39;); // 创建 start 标记 performance.mark(&#39;end&#39;); // 创建 end 标记 performance.measure(&#39;output&#39;, &#39;start&#39;, &#39;end&#39;); // 计算两者时间间隔 performance.getEntriesByName(&#39;output&#39;); // 获取标记，返回值是一个数组，包含了间隔时间数据  熟练的使用 performance 我们可以查看并分析网页的很多数据，为我们项目优化提供保障。</description>
     </item>
     
   </channel>

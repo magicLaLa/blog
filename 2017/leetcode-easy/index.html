@@ -11,7 +11,7 @@
   
   
   <link rel="prev" href="/2017/leetcode-medium/" />
-  <link rel="next" href="/2017/template/" />
+  <link rel="next" href="/2017/gulp/" />
   <link rel="canonical" href="/2017/leetcode-easy/" />
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -36,7 +36,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="leetCode Easy One"/>
-<meta name="twitter:description" content="Two Sum 两数之和(1)  给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。 例子：  Given nums = [2, 7, 11, 15], target = 9,Because nums[0] &#43; nums[1] = 2 &#43; 7 = 9,return [0, 1]. 解:  /*** @param {number[]} nums* @param {number} target* @return {number[]}*/var twoSum = function(nums, target) {// 第一种 let map = new Map()for (let i = 0; i &lt; nums.length; i&#43;&#43;) {if (map."/>
+<meta name="twitter:description" content="Two Sum 两数之和(1)  给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。 例子：   Given nums = [2, 7, 11, 15], target = 9, Because nums[0] &#43; nums[1] = 2 &#43; 7 = 9, return [0, 1].   解:  /** * @param {number[]} nums * @param {number} target * @return {number[]} */ var twoSum = function(nums, target) { // 第一种 let map = new Map() for (let i = 0; i &lt; nums.length; i&#43;&#43;) { if (map."/>
 
   <script type="application/ld+json">
 {
@@ -164,53 +164,62 @@
         
         
 
-        <h3 id="two-sum-两数之和1">Two Sum 两数之和(1)</h3>
+        
+
+<h3 id="two-sum-两数之和-1">Two Sum 两数之和(1)</h3>
+
 <ul>
 <li>给定一个整数数组，返回两个数字的索引，使它们相加到特定目标。您可以假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。</li>
-<li>例子：</li>
+<li>例子：
+<br /></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Given nums <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>2, 7, 11, 15<span style="color:#f92672">]</span>, target <span style="color:#f92672">=</span> 9,
 
-Because nums<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> + nums<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> + 7 <span style="color:#f92672">=</span> 9,
-<span style="color:#66d9ef">return</span> <span style="color:#f92672">[</span>0, 1<span style="color:#f92672">]</span>.
-</code></pre></div><ul>
+<pre><code class="language-sh">Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+</code></pre>
+
+<ul>
 <li>解:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {number[]} nums
-</span><span style="color:#75715e"> * @param {number} target
-</span><span style="color:#75715e"> * @return {number[]}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">twoSum</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">nums</span>, <span style="color:#a6e22e">target</span>) {
-  <span style="color:#75715e">// 第一种
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>()
-  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">nums</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">has</span>(<span style="color:#a6e22e">target</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>])) {
-      <span style="color:#66d9ef">return</span> [<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">target</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>]), <span style="color:#a6e22e">i</span>];
-    } <span style="color:#66d9ef">else</span> {
-      <span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">i</span>);
+
+<pre><code class="language-js">/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+  // 第一种
+  let map = new Map()
+  for (let i = 0; i &lt; nums.length; i++) {
+    if (map.has(target - nums[i])) {
+      return [map.get(target - nums[i]), i];
+    } else {
+      map.set(nums[i], i);
     }
   }
-  <span style="color:#75715e">// 第二种
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> {};
-  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">nums</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">comp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">target</span><span style="color:#f92672">-</span><span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>];
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">comp</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">map</span>) {
-      <span style="color:#66d9ef">return</span> [<span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">comp</span>], <span style="color:#a6e22e">i</span>];
+  // 第二种
+  const map = {};
+  for (let i = 0; i &lt; nums.length; i++) {
+    const comp = target-nums[i];
+    if (comp in map) {
+      return [map[comp], i];
     }
-    <span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>]] <span style="color:#f92672">=</span> <span style="color:#a6e22e">i</span>;
+    map[nums[i]] = i;
   }
 };
-</code></pre></div><h3 id="反转整数-reverse-integer7">反转整数 Reverse Integer(7)</h3>
+</code></pre>
+
+<h3 id="反转整数-reverse-integer-7">反转整数 Reverse Integer(7)</h3>
+
 <ul>
-<li>
-<p>给定32位有符号整数，整数的反向数字</p>
-</li>
-<li>
-<p>例子:</p>
-</li>
+<li><p>给定32位有符号整数，整数的反向数字</p></li>
+
+<li><p>例子:</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">  Input: 123
+
+<pre><code class="language-sh">  Input: 123
   Output: 321
 
   Input: -123
@@ -218,58 +227,62 @@ Because nums<span style="color:#f92672">[</span>0<span style="color:#f92672">]</
 
   Input: 120
   Output: 21
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li>解:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {number} x
-</span><span style="color:#75715e"> * @return {number}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">reverse</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">x</span>) {
-  <span style="color:#75715e">// 第一种
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">maxInteger</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">pow</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">31</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">x</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">x</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
-      <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;-&#39;</span>
-      <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">x</span>);
-  }
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">list</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">toString</span>().<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;&#39;</span>);
-  <span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">reverse</span>()
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">list</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>) {
-      <span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">shift</span>()
-  }
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">num</span> <span style="color:#f92672">=</span> Number(<span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&#39;</span>)) <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">maxInteger</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> Number(<span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&#39;</span>))
-  <span style="color:#66d9ef">return</span> Number(<span style="color:#a6e22e">str</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">num</span>)
 
-  <span style="color:#75715e">// 第二种
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">x</span>);
-  <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">y</span>.<span style="color:#a6e22e">toString</span>(<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">31</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">y</span>.<span style="color:#a6e22e">toString</span>().<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;&#34;</span>).<span style="color:#a6e22e">reverse</span>();
-  <span style="color:#66d9ef">if</span>(Number(<span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#34;&#34;</span>)).<span style="color:#a6e22e">toString</span>(<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">31</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">z</span> <span style="color:#f92672">=</span> Number(<span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#34;&#34;</span>));
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">z</span> <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">z</span>;
+<pre><code class="language-js">/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {
+  // 第一种
+  let maxInteger = Math.pow(2, 31) - 1;
+  let str = ''
+  if (x === 0) return 0
+  if (x &lt; 0) {
+      str = '-'
+      x = Math.abs(x);
+  }
+  let list = x.toString().split('');
+  list.reverse()
+  if (list[0] === 0) {
+      list.shift()
+  }
+  let num = Number(list.join('')) &gt; maxInteger ? 0 : Number(list.join(''))
+  return Number(str + num)
 
-  <span style="color:#75715e">// 第三种
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">x</span>);
-  <span style="color:#66d9ef">while</span>(<span style="color:#a6e22e">y</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>){
-      <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
-      <span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// 按位或
-</span><span style="color:#75715e"></span>  }
-  <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">res</span> <span style="color:#f92672">&gt;</span> Math.<span style="color:#a6e22e">pow</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">31</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">&lt;</span> Math.<span style="color:#a6e22e">pow</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">31</span>)) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">res</span>;
+  // 第二种
+  let y = Math.abs(x);
+  if(y.toString(2).length &gt; 31) return 0;
+  let arr = y.toString().split(&quot;&quot;).reverse();
+  if(Number(arr.join(&quot;&quot;)).toString(2).length &gt; 31) return 0;
+  let z = Number(arr.join(&quot;&quot;));
+  return x &gt;= 0 ? z : -z;
+
+  // 第三种
+  let res = 0;
+  let y = Math.abs(x);
+  while(y &gt; 0){
+      res = res * 10 + y % 10;
+      y = y / 10 | 0; // 按位或
+  }
+  if(res &gt; Math.pow(2, 31) + 1 || x &lt; Math.pow(-2, 31)) return 0;
+  return x &gt; 0 ? res : -res;
 };
-</code></pre></div><h3 id="回文数-palindrome-number9">回文数 Palindrome Number(9)</h3>
+</code></pre>
+
+<h3 id="回文数-palindrome-number-9">回文数 Palindrome Number(9)</h3>
+
 <ul>
-<li>
-<p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
-</li>
-<li>
-<p>例子:</p>
-</li>
+<li><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p></li>
+
+<li><p>例子:</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">示例 1:
+
+<pre><code class="language-sh">示例 1:
   输入: 121
   输出: true
 
@@ -281,30 +294,36 @@ Because nums<span style="color:#f92672">[</span>0<span style="color:#f92672">]</
 示例 3:
   输入: 10
   输出: false
-  解释: 从右向左读, 为 <span style="color:#ae81ff">01</span> 。因此它不是一个回文数。
-</code></pre></div><ul>
+  解释: 从右向左读, 为 01 。因此它不是一个回文数。
+</code></pre>
+
+<ul>
 <li>解:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {number} x
-</span><span style="color:#75715e"> * @return {boolean}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">isPalindrome</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">x</span>) {
-  <span style="color:#75715e">// 第一种
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span>.<span style="color:#a6e22e">toString</span>().<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#39;&#39;</span>);
-  <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">reverse</span>();
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;&#39;</span>);
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">x</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">n</span>) {
-      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
-  } <span style="color:#66d9ef">else</span> {
-      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+
+<pre><code class="language-js">/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+  // 第一种
+  let a = x.toString().split('');
+  a.reverse();
+  let n = a.join('');
+  if (x == n) {
+      return true
+  } else {
+      return false
   }
 };
-</code></pre></div><h3 id="罗马数字转整数-roman-to-integer13">罗马数字转整数 Roman to Integer(13)</h3>
+</code></pre>
+
+<h3 id="罗马数字转整数-roman-to-integer-13">罗马数字转整数 Roman to Integer(13)</h3>
+
 <ul>
-<li>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">字符          数值
+<li><p>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。</p>
+
+<pre><code class="language-sh">字符          数值
 I             1
 V             5
 X             10
@@ -312,214 +331,234 @@ L             50
 C             100
 D             500
 M             1000
-</code></pre></div><ul>
-<li>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</li>
-<li>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：
+</code></pre>
+
 <ul>
+<li>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</li>
+<li>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</li>
 <li>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。</li>
 <li>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。</li>
 <li>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</li>
-</ul>
-</li>
 <li>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</li>
 <li>例子：</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">示例 1:
-    输入: <span style="color:#e6db74">&#34;III&#34;</span>
-    输出: 3
+
+<pre><code class="language-sh">示例 1:
+输入: &quot;III&quot;
+输出: 3
 示例 2:
-    输入: <span style="color:#e6db74">&#34;IV&#34;</span>
-    输出: 4
+输入: &quot;IV&quot;
+输出: 4
 示例 3:
-    输入: <span style="color:#e6db74">&#34;IX&#34;</span>
-    输出: 9
+输入: &quot;IX&quot;
+输出: 9
 示例 4:
-    输入: <span style="color:#e6db74">&#34;LVIII&#34;</span>
-    输出: 58
-    解释: L <span style="color:#f92672">=</span> 50, V<span style="color:#f92672">=</span> 5, III <span style="color:#f92672">=</span> 3
+输入: &quot;LVIII&quot;
+输出: 58
+解释: L = 50, V= 5, III = 3
 示例 5:
-    输入: <span style="color:#e6db74">&#34;MCMXCIV&#34;</span>
-    输出: 1994
-    解释: M <span style="color:#f92672">=</span> 1000, CM <span style="color:#f92672">=</span> 900, XC <span style="color:#f92672">=</span> 90, IV <span style="color:#f92672">=</span> 4
-</code></pre></div><ul>
-<li>解：</li>
+输入: &quot;MCMXCIV&quot;
+输出: 1994
+解释: M = 1000, CM = 900, XC = 90, IV = 4
+</code></pre></li>
+
+<li><p>解：</p></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {string} s
-</span><span style="color:#75715e"> * @return {number}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">romanToInt</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">s</span>) {
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">len</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span>;
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> {
-        <span style="color:#e6db74">&#39;I&#39;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>,
-        <span style="color:#e6db74">&#39;V&#39;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5</span>,
-        <span style="color:#e6db74">&#39;X&#39;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10</span>,
-        <span style="color:#e6db74">&#39;L&#39;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">50</span>,
-        <span style="color:#e6db74">&#39;C&#39;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">100</span>,
-        <span style="color:#e6db74">&#39;D&#39;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">500</span>,
-        <span style="color:#e6db74">&#39;M&#39;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1000</span>
+
+<pre><code class="language-js">/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    var len = s.length;
+    var hash = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
     };
-    <span style="color:#75715e">// charAt() 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1。
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">lastChar</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">hash</span>[<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">charAt</span>(<span style="color:#ae81ff">0</span>)];
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">r</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    // charAt() 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1。
+    var lastChar = hash[s.charAt(0)];
+    var r = 0;
     
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">len</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
-        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">currentChar</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">hash</span>[<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">charAt</span>(<span style="color:#a6e22e">i</span>)];
-        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">lastChar</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">currentChar</span>) {
-            <span style="color:#a6e22e">r</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">r</span> <span style="color:#f92672">-</span> (<span style="color:#a6e22e">lastChar</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">currentChar</span>;
-        } <span style="color:#66d9ef">else</span> {
-            <span style="color:#a6e22e">r</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">currentChar</span>;
+    for (var i = 0; i&lt; len; i++) {
+        var currentChar = hash[s.charAt(i)];
+        if (lastChar &lt; currentChar) {
+            r  = r - (lastChar * 2) + currentChar;
+        } else {
+            r += currentChar;
         }
-        <span style="color:#a6e22e">lastChar</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">currentChar</span>;
+        lastChar = currentChar;
     }
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>;
+    return r;
 };
-</code></pre></div><h3 id="最长公共前缀-longest-common-prefix14">最长公共前缀 Longest Common Prefix（14）</h3>
+</code></pre>
+
+<h3 id="最长公共前缀-longest-common-prefix-14">最长公共前缀 Longest Common Prefix（14）</h3>
+
 <ul>
 <li>编写一个函数来查找字符串数组中的最长公共前缀。</li>
-<li>如果不存在公共前缀，返回空字符串 &ldquo;&quot;。</li>
+<li>如果不存在公共前缀，返回空字符串 &ldquo;&ldquo;。</li>
 <li>所有输入只包含小写字母 a-z</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">示例 1:
-  输入: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;flower&#34;</span>,<span style="color:#e6db74">&#34;flow&#34;</span>,<span style="color:#e6db74">&#34;flight&#34;</span><span style="color:#f92672">]</span>
-  输出: <span style="color:#e6db74">&#34;fl&#34;</span>
+
+<pre><code class="language-sh">示例 1:
+  输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
+  输出: &quot;fl&quot;
 
 示例 2:
-  输入: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;dog&#34;</span>,<span style="color:#e6db74">&#34;racecar&#34;</span>,<span style="color:#e6db74">&#34;car&#34;</span><span style="color:#f92672">]</span>
-  输出: <span style="color:#e6db74">&#34;&#34;</span>
+  输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]
+  输出: &quot;&quot;
   解释: 输入不存在公共前缀。
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li>分析：选择其中一个字符串作为对照标准，与后面的比较获得最长公共前缀res，再用res继续与后面的字符串比较，最后获得最终结果。</li>
-<li>解:</li>
+<li>解:
+<br /></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {string[]} strs
-</span><span style="color:#75715e"> * @return {string}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">longestCommonPrefix</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">strs</span>) {
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">strs</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span>;
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">strs</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
-      <span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">str</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">strs</span>) {
-        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">str</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">!==</span> <span style="color:#a6e22e">strs</span>[<span style="color:#ae81ff">0</span>][<span style="color:#a6e22e">i</span>]) {
-          <span style="color:#75715e">// 直到找到不相同的字符
-</span><span style="color:#75715e"></span>          <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">i</span>)
+
+<pre><code class="language-js">/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function (strs) {
+    if (strs.length === 0) return '';
+    for (let i = 0; i &lt; strs[0].length; i++) {
+      for (str of strs) {
+        if (str[i] !== strs[0][i]) {
+          // 直到找到不相同的字符
+          return str.slice(0, i)
         }
       }
     }
 
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strs</span>[<span style="color:#ae81ff">0</span>]
+    return strs[0]
 };
-</code></pre></div><h3 id="有效的括号-valid-parentheses20">有效的括号 Valid Parentheses(20)</h3>
+</code></pre>
+
+<h3 id="有效的括号-valid-parentheses-20">有效的括号 Valid Parentheses(20)</h3>
+
 <ul>
-<li>
-<p>给定一个只包括 &lsquo;('，')'，'{'，'}'，'['，']&rsquo; 的字符串，判断字符串是否有效。</p>
-</li>
-<li>
-<p>有效字符串需满足：</p>
+<li>给定一个只包括 &lsquo;(&lsquo;，&rsquo;)&lsquo;，&rsquo;{&lsquo;，&rsquo;}&lsquo;，&rsquo;[&lsquo;，&rsquo;]&rsquo; 的字符串，判断字符串是否有效。</li>
+
+<li><p>有效字符串需满足：</p>
+
 <ul>
 <li>左括号必须用相同类型的右括号闭合。</li>
 <li>左括号必须以正确的顺序闭合。</li>
 <li>注意空字符串可被认为是有效字符串。</li>
+</ul></li>
+
+<li><p>例子：</p></li>
 </ul>
-</li>
-<li>
-<p>例子：</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">示例 1:
-  输入: <span style="color:#e6db74">&#34;()&#34;</span>
+
+<pre><code class="language-sh">示例 1:
+  输入: &quot;()&quot;
   输出: true
 
 示例 2:
-  输入: <span style="color:#e6db74">&#34;()[]{}&#34;</span>
+  输入: &quot;()[]{}&quot;
   输出: true
 
 示例 3:
-  输入: <span style="color:#e6db74">&#34;(]&#34;</span>
+  输入: &quot;(]&quot;
   输出: false
 
 示例 4:
-  输入: <span style="color:#e6db74">&#34;([)]&#34;</span>
+  输入: &quot;([)]&quot;
   输出: false
 
 示例 5:
-  输入: <span style="color:#e6db74">&#34;{[]}&#34;</span>
+  输入: &quot;{[]}&quot;
   输出: true
-</code></pre></div><ul>
-<li>
-<p>分析:</p>
+</code></pre>
+
+<ul>
+<li><p>分析:</p>
+
 <ul>
 <li>利用栈的先进后出特点</li>
 <li>遍历每一个字符，如果与栈顶元素匹配，则出栈，不匹配则进栈；最后为空栈说明是合法的</li>
+</ul></li>
+
+<li><p>解：</p></li>
 </ul>
-</li>
-<li>
-<p>解：</p>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {string} s
-</span><span style="color:#75715e"> * @return {boolean}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">isValid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">s</span>) {
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">temp</span> <span style="color:#f92672">=</span> [];
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> {
-    <span style="color:#e6db74">&#39;(&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;)&#39;</span>,
-    <span style="color:#e6db74">&#39;{&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;}&#39;</span>,
-    <span style="color:#e6db74">&#39;[&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;]&#39;</span>
+
+<pre><code class="language-js">/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+  var temp = [];
+  var map = {
+    '(': ')',
+    '{': '}',
+    '[': ']'
   };
-  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;(&#39;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;{&#39;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;[&#39;</span>)
-      <span style="color:#a6e22e">temp</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>]);
-    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">map</span>[<span style="color:#a6e22e">temp</span>.<span style="color:#a6e22e">pop</span>()] <span style="color:#f92672">!==</span> <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>]) {
-      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+  for (var i = 0; i &lt; s.length; i++) {
+    if (s[i] === '(' || s[i] === '{' || s[i] === '[')
+      temp.push(s[i]);
+    else if (map[temp.pop()] !== s[i]) {
+      return false;
     }
   }
-  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">temp</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-  <span style="color:#66d9ef">else</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+  if (temp.length &gt; 0)
+    return false;
+  else
+    return true;
 };
-</code></pre></div><h3 id="合并两个有序链表-merge-two-sorted-lists21">合并两个有序链表 Merge Two Sorted Lists(21)</h3>
+</code></pre>
+
+<h3 id="合并两个有序链表-merge-two-sorted-lists-21">合并两个有序链表 Merge Two Sorted Lists(21)</h3>
+
 <ul>
 <li>将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">示例：
+
+<pre><code class="language-sh">示例：
   输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4
   输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
-</code></pre></div><ul>
+</code></pre>
+
+<ul>
 <li>分析：迭代方法，每次选两个链表头结点最小的。</li>
 <li>解:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * Definition for singly-linked list.
-</span><span style="color:#75715e"> * function ListNode(val) {
-</span><span style="color:#75715e"> *     this.val = val;
-</span><span style="color:#75715e"> *     this.next = null;
-</span><span style="color:#75715e"> * }
-</span><span style="color:#75715e"> */</span>
-<span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {ListNode} l1
-</span><span style="color:#75715e"> * @param {ListNode} l2
-</span><span style="color:#75715e"> * @return {ListNode}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">mergeTwoLists</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">l1</span>, <span style="color:#a6e22e">l2</span>) {
-    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ListNode</span>();
-    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">cur</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">res</span>;
-    <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">l1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">l2</span>) {
-      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">val</span>) {
-        <span style="color:#a6e22e">cur</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ListNode</span>(<span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">val</span>);
-        <span style="color:#a6e22e">l1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l1</span>.<span style="color:#a6e22e">next</span>;
-      } <span style="color:#66d9ef">else</span> {
-        <span style="color:#a6e22e">cur</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ListNode</span>(<span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">val</span>);
-        <span style="color:#a6e22e">l2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l2</span>.<span style="color:#a6e22e">next</span>;
+
+<pre><code class="language-js">/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+    let res = new ListNode();
+    let cur = res;
+    while (l1 &amp;&amp; l2) {
+      if (l1.val &lt;= l2.val) {
+        cur.next = new ListNode(l1.val);
+        l1 = l1.next;
+      } else {
+        cur.next = new ListNode(l2.val);
+        l2 = l2.next;
       }
-      <span style="color:#a6e22e">cur</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cur</span>.<span style="color:#a6e22e">next</span>;
+      cur = cur.next;
     }
-    <span style="color:#a6e22e">cur</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">l1</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">l2</span>;
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">next</span>;
+    cur.next = l1 || l2;
+    return res.next;
 };
-</code></pre></div>
+</code></pre>
+
     </div>
 
     <div class="post-copyright">
@@ -607,8 +646,8 @@ M             1000
                 class="iconfont icon-dajiantou"></i>&nbsp;leetCode Medium</a>
         
         
-        <a href="/2017/template/" class="next" rel="next"
-            title="JS 模板">JS 模板&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        <a href="/2017/gulp/" class="next" rel="next"
+            title="gulp 配置">gulp 配置&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
     </div>
 

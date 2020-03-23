@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>技术相关随笔 on Magic</title>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 03 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/local-stroge/</guid>
-      <description>设置本地存储  function setStorage(key: string, value: any) {try {localStorage.setItem(key, JSON.stringify({data: value,time: Date.now(),}));} catch {console.log(&amp;#39;localStorage.setItem error&amp;#39;);console.log(key, value);}} 获取本地存储  // 注意：stringify 会过滤掉undefined的值function getStorage(key: string) {const result = localStorage.getItem(key);if (result) {try {const objRes = JSON.parse(result);return objRes;} catch (e) {console.log(&amp;#39;JSON.parse error:&amp;#39;, result);return result;}} else {return result;}} 删除本地存储  function removeStorage(key: string) {localStorage.</description>
+      <description>设置本地存储  function setStorage(key: string, value: any) { try { localStorage.setItem(key, JSON.stringify({ data: value, time: Date.now(), })); } catch { console.log(&#39;localStorage.setItem error&#39;); console.log(key, value); } }   获取本地存储  // 注意：stringify 会过滤掉undefined的值 function getStorage(key: string) { const result = localStorage.getItem(key); if (result) { try { const objRes = JSON.parse(result); return objRes; } catch (e) { console.log(&#39;JSON.parse error:&#39;, result); return result; } } else { return result; } }   删除本地存储  function removeStorage(key: string) { localStorage.</description>
     </item>
     
   </channel>

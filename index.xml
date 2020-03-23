@@ -5,25 +5,2390 @@
     <description>Recent content in Magic on Magic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 09 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Mar 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Posts</title>
-      <link>/posts/</link>
-      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      <title>Windows Terminal 美化</title>
+      <link>/2020/windowsterminal/</link>
+      <pubDate>Sun, 22 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/posts/</guid>
-      <description></description>
+      <guid>/2020/windowsterminal/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;参考和部分引用自: &lt;a href=&#34;https://sspai.com/post/59380&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;SpencerWoo：新生代 Windows 终端：Windows Terminal 的全面自定义&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;windows-terminal-美化&#34;&gt;Windows Terminal 美化&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/myTheme.png&#34; alt=&#34;Windows 奥里给！&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;安装-windows-terminal&#34;&gt;安装 Windows Terminal&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;可以到 Microsoft Store 中安装 Windows Terminal（Preview）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/windowsTerminalStore.png&#34; alt=&#34;windowsTerminalStore&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;也可以从 &lt;a href=&#34;https://github.com/microsoft/terminal&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/microsoft/terminal&lt;/a&gt; 来安装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/Releasespage.png&#34; alt=&#34;Releases page&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;使用-scoop-来管理软件&#34;&gt;使用 scoop 来管理软件&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/lukesampson/scoop&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;用 Scoop 管理你的 Windows 软件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;可以使用 &lt;code&gt;scoop help&lt;/code&gt; 来查看更多命令&lt;/li&gt;
+&lt;li&gt;scoop 语法 &lt;code&gt;scoop&lt;/code&gt; + 动作 + 对象，对象是可以省略的&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;scoop bucket add nerd-fonts&lt;/code&gt; 用来添加字体库，后续需要使用这个&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;scoop search FantasqueSansMono-NF&lt;/code&gt; 搜索需要安装的字体，下图所示
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/scoop-search.png&#34; alt=&#34;scoop-searc&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;scoop install FantasqueSansMono-NF&lt;/code&gt; 安装字体&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;安装-oh-my-posh&#34;&gt;安装 oh-my-posh&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/JanDeDobbeleer/oh-my-posh&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;安装 posh-git 和 oh-my-posh 这两个模块&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Install-Module posh-git -Scope CurrentUser 
+Install-Module oh-my-posh -Scope CurrentUser
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;让-powershell-主题配置生效&#34;&gt;让 PowerShell 主题配置生效&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;新增（或修改）你的 PowerShell 配置文件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 如果之前没有配置文件，就新建一个 PowerShell 配置文件
+if (!(Test-Path -Path $PROFILE )) { New-Item -Type File -Path $PROFILE -Force }
+# 用记事本打开配置文件
+notepad $PROFILE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在其中添加下面的内容&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Import-Module posh-git 
+Import-Module oh-my-posh 
+Set-Theme Paradox
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Set-Theme Paradox&lt;/code&gt; 设置主题，更过主题可以到 官网 查看 &lt;a href=&#34;https://github.com/JanDeDobbeleer/oh-my-posh&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/JanDeDobbeleer/oh-my-posh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;oh-my-posh 使用了一些非 Powerline 字体不支持的字符，因此如果你使用默认的等宽字体（比如 Consolas），在显示过程中就会出现乱码、字符显示不全的现象。（这里就需要把之前安装的字体换上了）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/powerline.png&#34; alt=&#34;字符显示不全的问题&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;windows-terminal-的配置文件&#34;&gt;Windows Terminal 的配置文件&lt;/h2&gt;
+
+&lt;p&gt;首先，我们进入 Windows Terminal 的设置文件。在 Windows Terminal 的下拉菜单中，选择 Settings（或使用快捷键 &lt;code&gt;Ctrl +&lt;/code&gt;,），这一操作会使用你系统默认的文本编辑器打开 Windows Terminal 的配置文件。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/Terminal.png&#34; alt=&#34;Terminal-Setting&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Windows Terminal 的配置文件是一个 JSON 格式的文件，我们会在其中定义全部 Windows Terminal 的属性。简单来讲，这个配置文件包含了如下的几个部分：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;全局属性：位于 JSON 最外侧，包含有设置亮暗主题、默认 Profile 等项目的配置。&lt;/li&gt;
+&lt;li&gt;环境入口 profiles：一个列表，其中包含有 Windows Terminal 下拉菜单中唤起的各种环境（比如打开 PowerShell 环境、WSL 环境或 SSH 至远程服务器的环境……）与各种环境里 Windows Terminal 的显示方案（比如字体、背景、色彩方案等）。&lt;/li&gt;
+&lt;li&gt;配色主题 schemes：一个配色方案列表，其中包含有 Windows Terminal 在上一项「环境入口」中可以调用的「色彩主题」。&lt;/li&gt;
+&lt;li&gt;快捷键绑定 keybindings：自定义快捷键。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/Terminal-JSON.png&#34; alt=&#34;Terminal-JSON&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;在配置文件中对-windows-terminal-进行自定义&#34;&gt;在配置文件中对 Windows Terminal &lt;strong&gt;进行自定义&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;全局属性的配置
+设置 Windows Terminal 从设置其全局属性开始，也就是它的配置文件 profiles.json 里面最开始的部分。在这里我们可以定义：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Terminal 亮暗主题设置 &amp;ldquo;requestedTheme&amp;rdquo;：可以为 &amp;ldquo;system&amp;rdquo;（跟随系统）、&amp;rdquo;light&amp;rdquo; 或 &amp;ldquo;dark&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Terminal 初始大小：&amp;rdquo;initialCols&amp;rdquo; 和 &amp;ldquo;initialRows&amp;rdquo;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Terminal 的默认配置文件：设置打开自动进入的环境（通过 GUID 唯一标识码来识别环境）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;……&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;之后，就是三个包含二级设置项目：「环境入口」、「配色主题」和「快捷键绑定」的设置。&lt;/p&gt;
+
+&lt;h3 id=&#34;设置-windows-terminal-的环境入口&#34;&gt;设置 Windows Terminal 的环境入口&lt;/h3&gt;
+
+&lt;p&gt;下拉菜单是 Windows Terminal 唤起各个环境的入口。我们通过点击「下拉菜单」的各个选项，即可唤起不同的 Windows Terminal 环境。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/Terminalmenu.png&#34; alt=&#34;Terminal-Menu&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;默认情况下，Windows Terminal 已经为我们配置了本机安装的全部命令行环境：包括 PowerShell 环境、cmd 环境以及自家云服务 Azure Cloud Shell 入口。如果你安装了 WSL（Windows Subsystem for Linux），那么 Windows Terminal 也同样将这一环境自动探测并添加。这些环境，就是 Windows Terminal 配置文件中 &amp;ldquo;profiles&amp;rdquo; 属性列表里面的内容，我们同样可以在这一列表中：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;自定义某一环境的性质&lt;/li&gt;
+&lt;li&gt;添加我们自己的环境或命令&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;自定义某一个环境的配置&#34;&gt;自定义某一个环境的配置&lt;/h3&gt;
+
+&lt;p&gt;Windows Terminal 的环境配置中可以设置其调用命令（&lt;code&gt;commandline&lt;/code&gt;）、字体（&lt;code&gt;fontFace&lt;/code&gt;）、颜色方案（&lt;code&gt;colorScheme&lt;/code&gt;）、背景颜色（&lt;code&gt;background&lt;/code&gt;）与背景图片（&lt;code&gt;backgroundImage&lt;/code&gt;）等等。这里我想重点介绍一下为 Windows Terminal 一个特定环境的背景进行设置的方法。&lt;/p&gt;
+
+&lt;p&gt;Windows Terminal 的背景可以是一个纯色，&lt;strong&gt;也可以是一张高清壁纸、GIF 动图&lt;/strong&gt; 等等。如果是纯色的背景，在未经设置的情况下这一颜色与你环境所定义的配色方案的颜色一致，你也可以通过控制 background 这一属性来更换颜色。比如这里我想让 PowerShell 的背景带有一抹独特的「蓝色」，即可这一进行设置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-JSON5&#34;&gt;// &amp;quot;profiles&amp;quot;: [ ... ] 项目中 PowerShell 环境的配置
+{
+    &amp;quot;background&amp;quot;: &amp;quot;#013456&amp;quot;,
+    &amp;quot;acrylicOpacity&amp;quot;: 0.8,
+    &amp;quot;useAcrylic&amp;quot;: true,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;&lt;code&gt;background&lt;/code&gt;&amp;rdquo; 与后面的 HEX 颜色即定义了背景颜色&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;&lt;code&gt;useAcrylic&lt;/code&gt;&amp;rdquo; 表示我们背景会添加 Windows Fluent 设计风格的亚克力着色&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;&lt;code&gt;acrylicOpacity&lt;/code&gt;&amp;rdquo; 定义了亚克力效果的透明度&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;当然，背景的设置不止步于此，我们可以直接一张图片作为 Windows Terminal 的背景，不仅可以用于装饰，还可以用于提醒我们当前所在环境。&lt;/p&gt;
+
+&lt;p&gt;首先我们需要进入 Windows Terminal 的素材文件夹，也就是 Windows Terminal 安装目录 &lt;code&gt;C:\Users\{用户名}\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe&lt;/code&gt; 里面的 &lt;code&gt;RoamingState&lt;/code&gt; 这一文件夹，将挑选好的「壁纸」背景放入其中，并记下其文件名。比如，这里我挑选了一张非常有 Windows 特色的壁纸（下载：&lt;a href=&#34;https://wallpaperhub.app/wallpapers/6277&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Untitled Goose Wallpaper&lt;/a&gt;），将之命名为 goose.png：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/terBackgroundImg.png&#34; alt=&#34;Windows 特色桌面壁纸&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;后，在 Windows Terminal PowerShell 的配置模块，我们加入如下的内容，依次定义：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;&lt;code&gt;backgroundImage&lt;/code&gt;&amp;ldquo;：设置背景图片为 goose.png，具体素材路径的语法格式为 &lt;code&gt;ms-appdata:///roaming/{图片名}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;&lt;code&gt;backgroundImageStretchMode&lt;/code&gt;&amp;ldquo;：设置背景图片伸缩模式为「按比例放大」&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;&lt;code&gt;backgroundImageOpacity&lt;/code&gt;&amp;ldquo;：设置背景图片透明度为 0.6&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json5&#34;&gt;&amp;quot;backgroundImage&amp;quot;: &amp;quot;ms-appdata:///roaming/goose.png&amp;quot;,
+&amp;quot;backgroundImageStretchMode&amp;quot;: &amp;quot;uniformToFill&amp;quot;,
+&amp;quot;backgroundImageOpacity&amp;quot;: 0.6,
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样，我们就得到了一个非常 Windows 风格的 PowerShell 终端环境：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/windowsTerminalBg.png&#34; alt=&#34;Windows 奥里给！&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当然，我们同样可以为其他环境配置相应的背景图案。为 Windows Terminal 的环境设置背景，还可以提示我们当前所处的位置，防止在生产环境做出错误的操作等。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/difrentbg.png&#34; alt=&#34;WSL - Ubuntu 环境 / Windows 环境！&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;启动环境时自动运行命令&#34;&gt;启动环境时自动运行命令&lt;/h3&gt;
+
+&lt;p&gt;Windows Terminal 唤起环境时，实际上是通过执行环境入口配置里面 commandline 这一属性所定义的命令，来进入相应的环境。&lt;strong&gt;那么，我们可以在点击 Windows Terminal 下拉菜单唤起一个环境时，执行我们自定义的一个命令&lt;/strong&gt;。这一命令可以是 SSH 登录远程服务器，可以是调用其他系统环境（比如 Anaconda 环境）等等。我们以 SSH 远程登录为例子，具体介绍如何利用 commandline 这一属性。&lt;/p&gt;
+
+&lt;p&gt;默认最简单的环境就是 Windows Terminal 的 cmd 环境了，其 profile 定义为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json5&#34;&gt;{
+  // Make changes here to the cmd.exe profile
+  &amp;quot;guid&amp;quot;: &amp;quot;{0caa0dad-35be-5f56-a8ff-afceeeaa6101}&amp;quot;,
+  &amp;quot;name&amp;quot;: &amp;quot;cmd&amp;quot;,
+  &amp;quot;commandline&amp;quot;: &amp;quot;cmd.exe&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到，事实上这一环境仅定义了 &lt;code&gt;&amp;quot;commandline&amp;quot;: &amp;quot;cmd.exe&amp;quot;&lt;/code&gt;，也就是在 Windows Terminal 唤起环境时执行 cmd.exe 这一命令，从而自动进入 cmd 环境。于是，我们只要添加一个执行 SSH 登录服务器的命令的环境配置，即可自动进入远程服务器环境。比如，我们登录服务器的命令是非常简单的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ssh root@10.0.0.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;即：在 PowerShell 环境下，执行上述命令，以 root 身份登录内网 IP 为 10.0.0.12 的服务器（手动输入密码）。那么我们即可这样添加执行这一命令的 Windows Terminal 环境入口：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;a href=&#34;https://www.uuidgenerator.net/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;在线 UUID 生成器&lt;/a&gt; 生成独一无二的 UUID：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/guuid.png&#34; alt=&#34;UUID：&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在 &amp;ldquo;&lt;code&gt;profiles&lt;/code&gt;&amp;rdquo; 列表中新建一个最简的环境入口配置，填写 UUID、环境名称、以及具体命令（注意这里我们需要指定用 powershell.exe，否则可能默认使用 cmd 环境）：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json5&#34;&gt;{
+  &amp;quot;guid&amp;quot;: &amp;quot;{a060905f-d089-43d9-9422-cd748e7f0230}&amp;quot;,
+  &amp;quot;name&amp;quot;: &amp;quot;SSH&amp;quot;,
+  &amp;quot;commandline&amp;quot;: &amp;quot;powershell.exe ssh root@10.0.0.1&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;为了更加美观实用，我们还可以添加一个图标。我事先准备了一个 GPU 的图标并将之命名为 gpu.png（因为我这台内网服务器是学校训练用的 GPU 服务器），将图标同样放置在 Windows Terminal 素材文件夹 RoamingState 里，并向刚刚创建的环境入口配置中填入图标的定义：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json5&#34;&gt;{
+  &amp;quot;icon&amp;quot;: &amp;quot;ms-appdata:///roaming/gpu.png&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/customIocn.png&#34; alt=&#34;自定义 profile 与对应图标&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这样，我们就可以直接唤起这一命令，执行 SSH 登录，进入远程服务器环境。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/ssh-login.gif&#34; alt=&#34;直接点击标签页即可执行相应的登录命令&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;想要寻找更多图标的同学，可以在 &lt;a href=&#34;https://icons8.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;icons8&lt;/a&gt;、&lt;a href=&#34;https://www.iconfont.cn/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;iconfont&lt;/a&gt; 等网站上进行搜索，特别是 icons8 的图标，非常精致，且同一类别风格一致，96px 的尺寸也足够用于 Windows Terminal 上，推荐大家使用！&lt;/p&gt;
+
+&lt;p&gt;另外，如果你日常使用的环境是 WSL 环境并使用 mosh 进行 SSH 登录（因为 mosh 并不支持 Windows），你同样可以在 commandline 一处将命令设置为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json5&#34;&gt;{
+  &amp;quot;commandline&amp;quot;: &amp;quot;wsl.exe mosh root@10.0.0.1&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样依然可以正常执行相应的操作：进入 WSL 环境 » 执行 Linux 独占工具。&lt;/p&gt;
+
+&lt;h2 id=&#34;添加额外的配色主题&#34;&gt;添加额外的配色主题&lt;/h2&gt;
+
+&lt;p&gt;Windows Terminal 的色彩主题同样是 JSON 文件，我们可以在上文介绍的 &lt;code&gt;profiles.json&lt;/code&gt; 文件的 schemes 属性处，添加自定义的色彩主题。可能是全网最丰富的终端配色方案集合：&lt;a href=&#34;https://github.com/mbadolato/iTerm2-Color-Schemes&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;iTerm2 Color Schemes&lt;/a&gt;，就包含有为 Windows Terminal 提供的 200 余中色彩方案，位于 windowsterminal 文件夹中。（主题的样式预览可以在 &lt;a href=&#34;https://iterm2colorschemes.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;iTerm2 Color Scheme&lt;/a&gt; 的官网 查看。）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json5&#34;&gt;{
+    // Make changes here to the powershell.exe profile
+    &amp;quot;guid&amp;quot;: &amp;quot;{61c54bbd-c2c6-5271-96e7-009a87ff44bf}&amp;quot;,
+    &amp;quot;name&amp;quot;: &amp;quot;Windows PowerShell&amp;quot;,
+    &amp;quot;commandline&amp;quot;: &amp;quot;powershell.exe&amp;quot;,
+    &amp;quot;fontFace&amp;quot;: &amp;quot;FantasqueSansMono NF&amp;quot;,
+    &amp;quot;backgroundImage&amp;quot;: &amp;quot;ms-appdata:///roaming/goose.png&amp;quot;,
+    &amp;quot;backgroundImageStretchMode&amp;quot;: &amp;quot;uniformToFill&amp;quot;,
+    &amp;quot;backgroundImageOpacity&amp;quot;: 0.3,
+    &amp;quot;colorScheme&amp;quot;: &amp;quot;BlulocoDark&amp;quot;, // 主题
+    &amp;quot;hidden&amp;quot;: false
+},
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/theneColor.png&#34; alt=&#34;自定义主题&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;自定义-windows-terminal-的快捷键&#34;&gt;自定义 Windows Terminal 的快捷键&lt;/h2&gt;
+
+&lt;p&gt;在 Windows Terminal 的配置文件末尾，我们可以在 &amp;ldquo;keybindings&amp;rdquo;: [] 里定义其快捷键绑定。默认的 Windows Terminal 快捷键实际上就非常好用，可以用来快速开启某个环境、实施分屏操作等。这里举几个比较典型的、无需设置即可使用的例子：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ctrl + Shift + T 打开新标签页&lt;/li&gt;
+&lt;li&gt;Ctrl + Shift + 1 进入配置文件中定义的第一个环境（Ctrl + Shift + 2 进入第二个，以此类推）&lt;/li&gt;
+&lt;li&gt;Alt + Shift + - 横向分屏；Alt + Shift + + 纵向分屏&lt;/li&gt;
+&lt;li&gt;Ctrl + + 放大、Ctrl + - 缩小、Ctrl + 0 恢复默认缩放比例&lt;/li&gt;
+&lt;li&gt;……&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我们可以在按住 Alt 的时候，点击 Windows Terminal 下拉菜单的「设置」，进入 Windows Terminal 自动生成的默认配置文件（不要更改这一文件，更改也不会有用的！）。在文件的最后，有 Windows Terminal 默认快捷键绑定可以参考：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/keybindings.png&#34; alt=&#34;keybindings&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;如何更快地进入工作环境&#34;&gt;如何更快地进入工作环境&lt;/h2&gt;
+
+&lt;p&gt;从 &lt;a href=&#34;https://devblogs.microsoft.com/commandline/windows-terminal-preview-v0-9-release/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Windows Terminal v0.9&lt;/a&gt; 版本开始，Windows Terminal 支持了「命令行参数」。也就是说，我们现在可以用 &lt;code&gt;wt -xxx&lt;/code&gt; 的命令来唤起 &lt;code&gt;Windows Terminal&lt;/code&gt; 打开不同的环境、进入特定的目录，设置直接设置分屏、同时打开多个标签页等。&lt;/p&gt;
+
+&lt;p&gt;举几个比较常用的「命令行参数」的例子：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在当前路径下进入默认的 Windows Terminal 环境：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;wt -d .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用名为 Ubuntu 的 WSL 环境打开当前路径：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;wt -p &amp;quot;Ubuntu&amp;quot; -d .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;垂直分屏打开 PowerShell 与 WSL 环境：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;wt -p &amp;quot;Windows PowerShell&amp;quot; -d . ; split-pane -V -p &amp;quot;Ubuntu&amp;quot; -d .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/split-pane.gif&#34; alt=&#34;垂直分屏打开 PowerShell 与 WSL 环境&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;注：完整的 Windows Terminal 命令行参数文档位于 &lt;a href=&#34;https://github.com/microsoft/terminal/blob/master/doc/user-docs/UsingCommandlineArguments.md&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Using the wt.exe Commandline&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;我的配置&#34;&gt;我的配置&lt;/h2&gt;
+
+&lt;h3 id=&#34;profile-json&#34;&gt;profile.json&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json5&#34;&gt;{
+  &amp;quot;$schema&amp;quot;: &amp;quot;https://aka.ms/terminal-profiles-schema&amp;quot;,
+  &amp;quot;defaultProfile&amp;quot;: &amp;quot;{61c54bbd-c2c6-5271-96e7-009a87ff44bf}&amp;quot;,
+  &amp;quot;profiles&amp;quot;:
+  {
+    &amp;quot;list&amp;quot;:
+    [
+      {
+        // Make changes here to the powershell.exe profile
+        &amp;quot;guid&amp;quot;: &amp;quot;{61c54bbd-c2c6-5271-96e7-009a87ff44bf}&amp;quot;,
+        &amp;quot;name&amp;quot;: &amp;quot;Windows PowerShell&amp;quot;,
+        &amp;quot;commandline&amp;quot;: &amp;quot;powershell.exe&amp;quot;,
+        &amp;quot;fontFace&amp;quot;: &amp;quot;FantasqueSansMono NF&amp;quot;,
+        &amp;quot;backgroundImage&amp;quot;: &amp;quot;ms-appdata:///roaming/goose.png&amp;quot;,
+        &amp;quot;backgroundImageStretchMode&amp;quot;: &amp;quot;uniformToFill&amp;quot;,
+        &amp;quot;backgroundImageOpacity&amp;quot;: 0.3,
+        &amp;quot;colorScheme&amp;quot;: &amp;quot;BlulocoDark&amp;quot;,
+        &amp;quot;hidden&amp;quot;: false
+      },
+    ]
+  },
+  // Add custom color schemes to this array
+  &amp;quot;schemes&amp;quot;: [
+    {
+      &amp;quot;name&amp;quot;: &amp;quot;BlulocoDark&amp;quot;,
+      &amp;quot;black&amp;quot;: &amp;quot;#4a505d&amp;quot;,
+      &amp;quot;red&amp;quot;: &amp;quot;#f81141&amp;quot;,
+      &amp;quot;green&amp;quot;: &amp;quot;#23974a&amp;quot;,
+      &amp;quot;yellow&amp;quot;: &amp;quot;#fd7e57&amp;quot;,
+      &amp;quot;blue&amp;quot;: &amp;quot;#285bff&amp;quot;,
+      &amp;quot;purple&amp;quot;: &amp;quot;#8c62fd&amp;quot;,
+      &amp;quot;cyan&amp;quot;: &amp;quot;#366f9a&amp;quot;,
+      &amp;quot;white&amp;quot;: &amp;quot;#ccd5e5&amp;quot;,
+      &amp;quot;brightBlack&amp;quot;: &amp;quot;#61697a&amp;quot;,
+      &amp;quot;brightRed&amp;quot;: &amp;quot;#fc4a6d&amp;quot;,
+      &amp;quot;brightGreen&amp;quot;: &amp;quot;#37bd58&amp;quot;,
+      &amp;quot;brightYellow&amp;quot;: &amp;quot;#f6be48&amp;quot;,
+      &amp;quot;brightBlue&amp;quot;: &amp;quot;#199ffd&amp;quot;,
+      &amp;quot;brightPurple&amp;quot;: &amp;quot;#fc58f6&amp;quot;,
+      &amp;quot;brightCyan&amp;quot;: &amp;quot;#50acae&amp;quot;,
+      &amp;quot;brightWhite&amp;quot;: &amp;quot;#ffffff&amp;quot;,
+      &amp;quot;background&amp;quot;: &amp;quot;#1e2127&amp;quot;,
+      &amp;quot;foreground&amp;quot;: &amp;quot;#abb2bf&amp;quot;
+    },
+  ],
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;windowspowershell-microsoft-powershell-profile-ps1&#34;&gt;WindowsPowerShell\Microsoft.PowerShell_profile.ps1&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/joonro/Get-ChildItemColor&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Get-ChildItemColor&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ps&#34;&gt;Import-Module Get-ChildItemColor
+
+$env:PYTHONIOENCODING=&amp;quot;utf-8&amp;quot;
+# Remove curl alias
+If (Test-Path Alias:curl) {Remove-Item Alias:curl}
+If (Test-Path Alias:curl) {Remove-Item Alias:curl}
+# Remove-Item alias:ls -force
+Set-Alias l Get-ChildItemColor -option AllScope
+Set-Alias ls Get-ChildItemColorFormatWide -option AllScope
+
+function GitLogPretty {
+  git log --graph --pretty=&#39;%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)&amp;lt;%an&amp;gt;%Creset&#39; --all
+}
+
+function PrettyLS {
+  colorls --light -A
+}
+
+function GitStat {git status}
+
+function GoBack {Set-Location ..}
+
+function GetMyIp {curl -L tool.lu/ip}
+function UpdateScoop {scoop update; scoop update *}
+
+Import-Module posh-git
+Import-Module oh-my-posh
+# $DefaultUser = &#39;spenc&#39;
+
+# Setup other alias
+Set-Alias open Invoke-Item
+Set-Alias .. GoBack
+Set-Alias glola GitLogPretty
+Set-Alias gst GitStat
+Set-Alias myip GetMyIp
+Set-Alias pls PrettyLS
+
+Set-Theme Robbyrussell
+
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;windows-下-shift-win-s-截图路径为-c-users-用户-appdata-local-packages-microsoft-windows-shellexperiencehost-cw5n1h2txyewy-tempstate-screenclip&#34;&gt;windows 下 shift+win+s 截图路径为 &lt;code&gt;C:\Users\{用户}\AppData\Local\Packages\Microsoft.Windows.ShellExperienceHost_cw5n1h2txyewy\TempState\ScreenClip&lt;/code&gt;&lt;/h3&gt;
+</description>
     </item>
     
     <item>
-      <title>About</title>
-      <link>/about/</link>
-      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      <title>常用代理设置汇总</title>
+      <link>/2020/%E4%BB%A3%E7%90%86%E7%9B%B8%E5%85%B3/</link>
+      <pubDate>Sun, 22 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
+      <guid>/2020/%E4%BB%A3%E7%90%86%E7%9B%B8%E5%85%B3/</guid>
+      <description>
+
+&lt;h1 id=&#34;常用代理设置汇总&#34;&gt;常用代理设置汇总&lt;/h1&gt;
+
+&lt;p&gt;设置代理是为了这几种情况：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;翻墙&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;从 &lt;code&gt;内网&lt;/code&gt; 访问 &lt;code&gt;外网&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;从 &lt;code&gt;内网&lt;/code&gt; 访问 &lt;code&gt;内网镜像库&lt;/code&gt;（npm、composer 等）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;代理方式&#34;&gt;代理方式&lt;/h1&gt;
+
+&lt;p&gt;代理设置至少有以下几种方式：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;设置目标代理机器（常用）如：&lt;code&gt;http://yourProxyServer:port&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;设置 pac 自动匹配代理（常用于浏览器）如：&lt;code&gt;http://example/a.pac&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;代理地址&#34;&gt;代理地址&lt;/h1&gt;
+
+&lt;p&gt;假设你目前可用的代理是：&lt;code&gt;http://yourProxyServer:port&lt;/code&gt;，后面例子均以此代理作为示范。&lt;/p&gt;
+
+&lt;h1 id=&#34;windows-cmd-代理设置&#34;&gt;Windows CMD 代理设置&lt;/h1&gt;
+
+&lt;p&gt;当前 CMD 窗口有效：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;REM 设置代理
+set http_proxy=http://yourProxyServer:port
+set https_proxy=http://yourProxyServer:port
+
+REM 查看代理
+echo %http_proxy%
+echo %https_proxy%
+
+REM 取消代理(留空即可)
+set http_proxy=
+set https_proxy=
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若想一直有效，设置系统环境变量：http_proxy、https_proxy，并重启你的 Windows。&lt;/p&gt;
+
+&lt;p&gt;注意：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;http_proxy&lt;/code&gt; 和 &lt;code&gt;https_proxy&lt;/code&gt; 对应的都是 &lt;code&gt;http://yourProxyServer:port&lt;/code&gt;，后者可能没有 &lt;code&gt;https&lt;/code&gt; 的 &lt;code&gt;s&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;linux-代理设置&#34;&gt;Linux 代理设置&lt;/h1&gt;
+
+&lt;p&gt;同下面 Mac 代理设置 ↓&lt;/p&gt;
+
+&lt;h1 id=&#34;mac-代理设置&#34;&gt;Mac 代理设置&lt;/h1&gt;
+
+&lt;p&gt;这里只说命令行配置代理的方式&lt;/p&gt;
+
+&lt;p&gt;在 &lt;code&gt;~/.bash_profile&lt;/code&gt; 或 &lt;code&gt;~/.zshrc&lt;/code&gt; 中填入设置代理的快捷方式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# shadowsocks 翻墙用，不翻墙可不用
+alias proxy_ss=&#39;export all_proxy=socks5://127.0.0.1:1086; export http_proxy=http://127.0.0.1:1087; export https_proxy=https://127.0.0.1:1087&#39;
+
+# 其他代理
+alias proxy_dev=&#39;export http_proxy=http://yourProxyServer:port; export https_proxy=http://yourProxyServer:port&#39;
+
+# 取消所有代理设置
+alias unproxy=&#39;unset all_proxy; unset http_proxy; unset https_proxy&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设置完，记得 source 一下配置文件。&lt;/p&gt;
+
+&lt;p&gt;使用，shell 中执行（开发机为例）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 设置代理
+proxy_dev
+
+# 取消代理
+unproxy
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;单独命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 临时设置代理
+export http_proxy=http://yourProxyServer:port
+export https_proxy=http://yourProxyServer:port
+
+# 查看代理
+echo $http_proxy
+echo $https_proxy
+
+# 取消代理
+unset http_proxy
+unset https_proxy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;mac-homebrew-代理设置&#34;&gt;Mac Homebrew 代理设置&lt;/h1&gt;
+
+&lt;p&gt;同上面 Mac 命令行的代理设置。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://docs.brew.sh/Manpage#using-homebrew-behind-a-proxy&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Brew 官方参考&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;git-代理设置&#34;&gt;Git 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Git&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Git&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 全局：设置 Git 访问外网（如 github）的代理
+git config --global http.proxy http://yourProxyServer:port
+
+# 全局：查看 Git 代理
+git config --global --get http.proxy
+
+# 全局：删除 Git 代理
+git config --global --unset http.proxy
+
+
+
+# ----------- 下面是针对每个项目局部的，非全局 -----------------
+# 设置 Git 访问外网（如 github）的代理
+git config http.proxy http://yourProxyServer:port
+
+# 查看 Git 代理
+git config --get http.proxy
+
+# 删除 Git 代理
+git config --unset http.proxy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;给 git ssh设置代理 &lt;code&gt;./ssh/config&lt;/code&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# github
+Host github.com
+  HostName github.com
+  PreferredAuthentications publickey
+  IdentityFile C:\Users\MSI\.ssh\id_rsa_github
+  # 走 socks5 代理（如 Shadowsocks）
+  ProxyCommand connect -S 127.0.0.1:10808 -a none %h %p
+# coding
+Host e.coding.net
+  HostName e.coding.net
+  PreferredAuthentications publickey
+  IdentityFile C:\Users\MSI\.ssh\id_rsa_coding
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;npm-代理设置-镜像设置&#34;&gt;npm 代理设置 + 镜像设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.npmjs.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;npm&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;使用淘宝-npm-镜像-推荐&#34;&gt;使用淘宝 npm 镜像（推荐）&lt;/h2&gt;
+
+&lt;p&gt;此时需同时设置：淘宝镜像 +  你的代理（若有的话）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# ↓ 设置淘宝 npm 镜像
+npm config set registry https://registry.npm.taobao.org
+# ↓ 若本来即可访问外网，无需下面代理设置
+npm config set https-proxy http://yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;使用-npm-官方镜像&#34;&gt;使用 npm 官方镜像&lt;/h2&gt;
+
+&lt;p&gt;设置代理（若有的话）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;npm config set proxy http://yourProxyServer:port
+npm config set https-proxy http://yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;npm-代理-镜像查看方式&#34;&gt;npm 代理、镜像查看方式&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 查看 npm 所有设置
+npm config list
+
+# 查看代理
+npm config get proxy
+npm config get https-proxy
+
+# 查看镜像
+npm config get registry
+
+# 取消代理
+npm config rm proxy
+npm config rm https-proxy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;yarn-代理设置-镜像设置&#34;&gt;yarn 代理设置 + 镜像设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://yarnpkg.com/en/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;yarn&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 设置 registry 镜像
+yarn config set registry https://registry.npm.taobao.org
+
+# 设置代理（若有的话）
+yarn config set proxy http://yourProxyServer:port
+
+# 查看所有设置
+yarn config list
+
+# 查看镜像设置
+yarn config get registry
+
+# 查看某个设置
+yarn config get proxy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;yarn 全局配置： &lt;code&gt;用户目录/.yarnrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;注意：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;有时设置了代理也不生效，可能原因是 &lt;code&gt;yarn.lock&lt;/code&gt; 文件的问题，删掉重来试试
+
+&lt;ul&gt;
+&lt;li&gt;参考：&lt;a href=&#34;https://github.com/yarnpkg/yarn/issues/4890&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/yarnpkg/yarn/issues/4890&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;nvm-代理设置&#34;&gt;nvm 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/creationix/nvm&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;nvm&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 设置代理（永久）
+nvm proxy &amp;quot;http://yourProxyServer:port&amp;quot;
+
+# 设置代理（临时，非必须）
+set http_proxy=http://yourProxyServer:port
+set https_proxy=http://yourProxyServer:port
+
+# 查看代理
+nvm proxy
+
+# 删除代理
+nvm proxy &amp;quot;none&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;https://github.com/coreybutler/nvm-windows#usage&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/coreybutler/nvm-windows#usage&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;bower-代理设置&#34;&gt;Bower 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://bower.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Bower&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;新建 &lt;code&gt;.bowerrc&lt;/code&gt; 文件，
+填入 &lt;code&gt;proxy&lt;/code&gt; 和 &lt;code&gt;https-proxy&lt;/code&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;directory&amp;quot;: &amp;quot;bower_components&amp;quot;,
+  &amp;quot;proxy&amp;quot;: &amp;quot;http://yourProxyServer:port/&amp;quot;,
+  &amp;quot;https-proxy&amp;quot;: &amp;quot;http://yourProxyServer:port/&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;支持三种设置方式：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;当前项目：&lt;code&gt;当前目录（bower.json 的同级目录）&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;当前用户目录&lt;/li&gt;
+&lt;li&gt;系统根目录（Linux 的 &lt;code&gt;/&lt;/code&gt; 目录）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;https://bower.io/docs/config/#placement--order&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://bower.io/docs/config/#placement--order&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;php-composer-代理设置&#34;&gt;PHP Composer 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://getcomposer.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Composer&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;安装完 Composer 后，使用 Composer 时是直接使用系统（如 Win 的 CMD）的代理，并无代理配置文件。&lt;/p&gt;
+
+&lt;p&gt;也即：Windows 下需设置 CMD 的代理，类似&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-Batchfile&#34;&gt;set http_proxy=yourProxyServer:port
+set https_proxy=yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后，才能进行 &lt;code&gt;composer require packageName&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;系统配置了这两个环境变量的话，就相当于 Composer 的全局代理&lt;/p&gt;
+
+&lt;h1 id=&#34;phpstorm-intellij-idea-pycharm-webstorm-android-studio-或-jetbrains-系其他-代理设置&#34;&gt;PhpStorm、IntelliJ IDEA、PyCharm、WebStorm、Android Studio（或 Jetbrains 系其他）代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.jetbrains.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Jetbrains&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;File&lt;/code&gt; -&amp;gt; &lt;code&gt;Settings&lt;/code&gt; -&amp;gt; &lt;code&gt;Appearance &amp;amp; Behavior&lt;/code&gt; -&amp;gt; &lt;code&gt;System Settings&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;-&amp;gt; &lt;code&gt;HTTP Proxy&lt;/code&gt; -&amp;gt; &lt;code&gt;Manual proxy configuration&lt;/code&gt; -&amp;gt; &lt;code&gt;HTTP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;-&amp;gt; &lt;code&gt;Host name: yourProxyServer&lt;/code&gt; -&amp;gt; &lt;code&gt;Port number: yourProxyPort&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;-&amp;gt; &lt;code&gt;OK&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;maven-代理-镜像设置&#34;&gt;Maven 代理、镜像设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://maven.apache.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Maven&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Maven 的代理、镜像设置内容较多，详细见 &lt;a href=&#34;https://github.com/vikyd/note/blob/master/maven_proxy.md&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;gradle-代理设置&#34;&gt;Gradle 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://gradle.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Gradle&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;若设置当前项目：
+
+&lt;ul&gt;
+&lt;li&gt;新建或编辑当前项目内的 &lt;code&gt;gradle.properties&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;若设置全局项目：
+
+&lt;ul&gt;
+&lt;li&gt;新建或编辑 &lt;code&gt;用户目录/.gradle/gradle.properties&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在 &lt;code&gt;gradle.properties&lt;/code&gt; 文件中增加以下设置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;systemProp.http.proxyHost=yourProxyServer
+systemProp.http.proxyPort=yourPort
+systemProp.https.proxyHost=yourProxyServer
+systemProp.https.proxyPort=yourPort
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;https://docs.gradle.org/current/userguide/build_environment.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://docs.gradle.org/current/userguide/build_environment.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;python-的-pip-代理设置&#34;&gt;Python 的 pip 代理设置&lt;/h2&gt;
+
+&lt;p&gt;pip 可用于安装 Python 的包。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://pypi.org/project/pip/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;pip&lt;/a&gt; 的代理设置有 3 种方式（n 选 1）：
+ - 系统环境变量
+   - 就如 CMD 的代理设置，之后再 &lt;code&gt;pip install yourPackage&lt;/code&gt;，Win ↓&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;   set http_proxy=http://yourProxyServer:port
+   set https_proxy=http://yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--proxy&lt;/code&gt; 参数
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pip install yourPackage --proxy http://yourProxyServer:port&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;pip.ini&lt;/code&gt; 配置文件（推荐，永久）&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;以 Win 为例，在用户目录新建目录和文件 &lt;code&gt;%HOME%\pip\pip.ini&lt;/code&gt;，填入：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[install]
+proxy=http://yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;查看设置是否成功：&lt;code&gt;pip config list&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;pip 设置代理的官方文档：&lt;a href=&#34;https://pip.pypa.io/en/stable/user_guide/#using-a-proxy-server&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://pip.pypa.io/en/stable/user_guide/#using-a-proxy-server&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;vscode-代理设置&#34;&gt;VSCode 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://code.visualstudio.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;VSCode&lt;/a&gt; 默认从 &lt;code&gt;http_proxy&lt;/code&gt; 和 &lt;code&gt;https_proxy&lt;/code&gt; 环境变量获取代理。&lt;/p&gt;
+
+&lt;p&gt;但也可手动设置：
+&lt;code&gt;File&lt;/code&gt; -&amp;gt; &lt;code&gt;Preference&lt;/code&gt; -&amp;gt; &lt;code&gt;Settings&lt;/code&gt;，在右侧 &lt;code&gt;User Settings&lt;/code&gt; 里粘贴以下代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;http.proxy&amp;quot;: &amp;quot;http://yourProxyServer:port&amp;quot;,
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;notepad-代理设置&#34;&gt;Notepad++ 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://notepad-plus-plus.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Notepad++&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;菜单栏 -&amp;gt; 最右侧问号 &lt;code&gt;?&lt;/code&gt; -&amp;gt; &lt;code&gt;设置更新代理服务器&lt;/code&gt; -&amp;gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Proxy server&lt;/code&gt;：yourProxyServer&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Port&lt;/code&gt;：yourPort&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;sublime-代理设置&#34;&gt;Sublime 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.sublimetext.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Sublime&lt;/a&gt; 默认使用系统的 &lt;code&gt;PAC&lt;/code&gt; 设置。浏览器能上网，Sublime 基本就能联网。&lt;/p&gt;
+
+&lt;p&gt;也可在配置文件自定义代理：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;菜单栏&lt;/code&gt; -&amp;gt; &lt;code&gt;Preferences&lt;/code&gt; -&amp;gt; &lt;code&gt;Settings&lt;/code&gt; -&amp;gt; &lt;code&gt;在左右任意一侧填入&lt;/code&gt;：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;http_proxy&amp;quot;: &amp;quot;http://yourProxyServer:port&amp;quot;,
+&amp;quot;https_proxy&amp;quot;: &amp;quot;http://yourProxyServer:port&amp;quot;,
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;eclipse-代理设置&#34;&gt;Eclipse 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.eclipse.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Eclipse&lt;/a&gt; 代理设置方式：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Window&lt;/code&gt; -&amp;gt; &lt;code&gt;Preferences&lt;/code&gt; -&amp;gt; &lt;code&gt;General&lt;/code&gt; -&amp;gt; &lt;code&gt;Network Connections&lt;/code&gt; -&amp;gt; 右侧 &lt;code&gt;Active Provider&lt;/code&gt; 选择 &lt;code&gt;Manual&lt;/code&gt; -&amp;gt; &lt;code&gt;Proxy entries 表格&lt;/code&gt; 中双击第 1 行的 &lt;code&gt;HTTP&lt;/code&gt; -&amp;gt; &lt;code&gt;Host&lt;/code&gt; 填 &lt;code&gt;yourProxyServer&lt;/code&gt; -&amp;gt; &lt;code&gt;Port&lt;/code&gt; 填 &lt;code&gt;yourPort&lt;/code&gt; -&amp;gt; &lt;code&gt;OK&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HTTPS&lt;/code&gt;、&lt;code&gt;SOCKS&lt;/code&gt; 同理设置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;atom-编辑器-代理设置&#34;&gt;Atom 编辑器 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://atom.io/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Atom&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;见下面命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# 设置代理
+apm config set https-proxy https://yourProxyServer:port
+
+# 查看代理
+apm config get https-proxy
+
+# 查看所有配置（显示的结果的 `userconfig` 就是配置文件所在位置）
+apm config get
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：&lt;a href=&#34;https://github.com/atom/apm#using-a-proxy&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/atom/apm#using-a-proxy&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;wget-代理设置&#34;&gt;wget 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://eternallybored.org/misc/wget/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;wget Win&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.gnu.org/software/wget/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;wget Linux&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;方法 01（临时）：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;先设置 Windows CMD 的代理：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;set http_proxy=http://yourProxyServer:port
+set https_proxy=http://yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;或 Linux shell 的代理：
+&lt;code&gt;sh
+export http_proxy=http://yourProxyServer:port
+export https_proxy=http://yourProxyServer:port
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;然后可以直接使用 wget 命令&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;方法 02（永久，推荐！）：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;直接使用 wget 配置文件，在当前用户主目录下新建文件 &lt;code&gt;.wgetrc&lt;/code&gt;（或 Linux 的 &lt;code&gt;/etc/wgetrc&lt;/code&gt;）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;http-proxy = yourProxyServer:port
+https-proxy = yourProxyServer:port
+ftp-proxy = yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;然后可以直接使用 wget 命令&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;方法 03（临时）：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;直接在 wget 命令中添加参数，如&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wget https://www.baidu.com -e https-proxy=yourProxyServer:port&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;或 （都是 http ，而非 https）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wget http://www.baidu.com -e http-proxy=yourProxyServer:port&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;curl-代理设置&#34;&gt;curl 代理设置&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://curl.haxx.se/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;curl&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;方法 01（临时）：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;先设置 Windows CMD 的代理：
+&lt;code&gt;cmd
+set http_proxy=yourProxyServer:port
+set https_proxy=yourProxyServer:port
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;或 Linux shell 的代理：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;export http_proxy=yourProxyServer:port
+export https_proxy=yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;然后可以直接使用 curl 命令，如&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;curl http://www.baidu.com -o baidu.html&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;方法 02（永久，推荐！）：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;直接使用 curl 配置文件，在当前用户主目录下新建配置文件（Win：&lt;code&gt;_curlrc&lt;/code&gt;）（Linux：&lt;code&gt;.curlrc&lt;/code&gt;）：
+&lt;code&gt;ini
+proxy = yourProxyServer:port
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;然后可以直接使用 curl 命令，如&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;curl http://www.baidu.com -o baidu.html&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;方法 03（临时）：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;直接在 curl 命令中添加参数，如
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;curl https://www.baidu.com -o baidu.html -x yourProxyServer:port&lt;/code&gt;
+&amp;gt; &lt;code&gt;-x&lt;/code&gt; 小写 x 代表 &lt;code&gt;proxy&lt;/code&gt; 的意思&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;golang-的-go-get-代理&#34;&gt;Golang 的 go get 代理&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://golang.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Golang&lt;/a&gt; 的 &lt;code&gt;go get&lt;/code&gt; 使用系统的 &lt;code&gt;http_proxy&lt;/code&gt;，但拉取代码时会使用 Git 的代理，
+所以两步都要做：
+1. 设置系统代理（或说 CMD 代理）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;  set http_proxy=yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;设置 Git 代理，参考前面的 &lt;code&gt;Git 代理设置&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;git config --global http.proxy http://yourProxyServer:port
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考：
+- &lt;a href=&#34;https://stackoverflow.com/a/10385612/2752670&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://stackoverflow.com/a/10385612/2752670&lt;/a&gt;
+- 官方参考：&lt;a href=&#34;https://github.com/golang/go/wiki/GoGetProxyConfig&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/golang/go/wiki/GoGetProxyConfig&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;若使用 VSCode，要想 VSCode 自动下载 Go 的依赖工具，则也应设置 VSCode 的 settings.json 中的代理：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;http.proxy&amp;quot;: &amp;quot;http://yourProxyServer:port&amp;quot;,
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;navicat-连外网数据库&#34;&gt;Navicat 连外网数据库&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.navicat.com&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Navicat&lt;/a&gt; 貌似必须同时配置 &lt;code&gt;通道地址&lt;/code&gt; 和 &lt;code&gt;代理服务器&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;注意：此方法不太安全，慎重使用！&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;步骤 01：
+Navicat 安装目录找到文件： &lt;code&gt;C:\Program Files\PremiumSoft\Navicat Premium\ntunnel_mysql.php&lt;/code&gt; （或对应语言的 php），放置到你外网 Web 服务目录下（浏览器可打开 &lt;code&gt;http://IP:port/abc/ntunnel_mysql.php&lt;/code&gt; 看到一个页面）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;步骤 02：
+&lt;code&gt;右键某个数据库连接&lt;/code&gt; -&amp;gt; &lt;code&gt;HTTP&lt;/code&gt; -&amp;gt; 勾选 &lt;code&gt;使用 HTTP 通道&lt;/code&gt; -&amp;gt; &lt;code&gt;通道地址&lt;/code&gt; 填 &lt;code&gt;http://IP:port/abc/ntunnel_mysql.php&lt;/code&gt; -&amp;gt; 下面 &lt;code&gt;代理服务器&lt;/code&gt; -&amp;gt; 勾选 &lt;code&gt;使用代理服务器&lt;/code&gt; -&amp;gt; &lt;code&gt;主机&lt;/code&gt; 填 &lt;code&gt;yourPorxyServer&lt;/code&gt; -&amp;gt; &lt;code&gt;端口&lt;/code&gt; 填 &lt;code&gt;yourPort&lt;/code&gt; -&amp;gt; &lt;code&gt;测试连接&lt;/code&gt; -&amp;gt; &lt;code&gt;确定&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;virtual-box-vmware-代理设置&#34;&gt;Virtual Box、VMware 代理设置&lt;/h1&gt;
+
+&lt;p&gt;普通用户虚拟机都采用 NAT 模式吧。&lt;/p&gt;
+
+&lt;p&gt;代理设置：虚拟机内的系统与外部物理机一样的代理设置，才能上网。&lt;/p&gt;
+
+&lt;h1 id=&#34;xshell-代理设置&#34;&gt;Xshell 代理设置&lt;/h1&gt;
+
+&lt;p&gt;打开某个 session 的属性设置&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Connection&lt;/li&gt;
+&lt;li&gt;Proxy&lt;/li&gt;
+&lt;li&gt;Browse&lt;/li&gt;
+&lt;li&gt;Add
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;：anyName（或随意名字）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Type&lt;/strong&gt;：HTTP 1.1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Host&lt;/strong&gt;：yourProxyServer&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port&lt;/strong&gt;：yourPort&lt;/li&gt;
+&lt;li&gt;OK&lt;/li&gt;
+&lt;li&gt;Close&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Proxy Server 选择刚新建的代理&lt;/li&gt;
+&lt;li&gt;完毕&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;securecrt-代理设置&#34;&gt;SecureCRT 代理设置&lt;/h1&gt;
+
+&lt;p&gt;分 2 步走，先全局添加代理项，再在每个连接中选择对应的代理项。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;全局添加代理项&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Options&lt;/li&gt;
+&lt;li&gt;Global Options&lt;/li&gt;
+&lt;li&gt;Firewall
+
+&lt;ul&gt;
+&lt;li&gt;Add&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;：anyName（或随意名字）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Type&lt;/strong&gt;：HTTP (no authentication)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hostname or IP&lt;/strong&gt;：yourProxyServer&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port&lt;/strong&gt;：yourPort&lt;/li&gt;
+&lt;li&gt;OK&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在你的连接中选中刚刚新建的代理项&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+&lt;li&gt;你的连接 -&amp;gt; 属性&lt;/li&gt;
+&lt;li&gt;Connection&lt;/li&gt;
+&lt;li&gt;SSH2&lt;/li&gt;
+&lt;li&gt;Firewall&lt;/li&gt;
+&lt;li&gt;选择 &lt;code&gt;刚新建的代理项&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;proxifier-为其他软件设置代理&#34;&gt;Proxifier 为其他软件设置代理&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.proxifier.com/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Proxifier&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;与前面各个软件为各自设置代理不同，Proxifier 是另一种思路：统一为别的软件设置代理。&lt;/p&gt;
+
+&lt;p&gt;优点：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不用按照每个软件的不同方式设置各自的代理&lt;/li&gt;
+&lt;li&gt;部分没有代理设置界面的软件很适合使用 Proxifier&lt;/li&gt;
+&lt;li&gt;可查看被代理软件的实际流量情况&lt;/li&gt;
+&lt;li&gt;Windows、Mac 都可使用&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;缺点：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;代理设置有时不够个性化（如 Git 的全局代理与当前 Git 项目代理）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;步骤：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;菜单栏 Profile&lt;/code&gt; -&amp;gt; &lt;code&gt;Proxy Servers&lt;/code&gt; -&amp;gt; &lt;code&gt;Add&lt;/code&gt;
+-&amp;gt; &lt;code&gt;Address&lt;/code&gt; 填 &lt;code&gt;yourProxyServer&lt;/code&gt; -&amp;gt; &lt;code&gt;Port&lt;/code&gt; 填 &lt;code&gt;yourPort&lt;/code&gt; -&amp;gt; &lt;code&gt;Protocol&lt;/code&gt; 填 &lt;code&gt;HTTPS&lt;/code&gt; -&amp;gt; &lt;code&gt;OK&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;菜单栏 Profile&lt;/code&gt; -&amp;gt; &lt;code&gt;Proxification Rules&lt;/code&gt; -&amp;gt; &lt;code&gt;Add&lt;/code&gt; -&amp;gt; &lt;code&gt;Name&lt;/code&gt; 随意填- &amp;gt; &lt;code&gt;Applications&lt;/code&gt; 通过 &lt;code&gt;Browse&lt;/code&gt; 按钮选择你想代理的软件的 exe 文件 -&amp;gt; &lt;code&gt;Action&lt;/code&gt; 选择前面步骤设置的 &lt;code&gt;yourProxyServer&lt;/code&gt; -&amp;gt; &lt;code&gt;OK&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;注意-上述例子均为虚拟代理-请自行替换为你自己的代理&#34;&gt;注意：上述例子均为虚拟代理，请自行替换为你自己的代理&lt;/h1&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>单例模式-创建型</title>
+      <link>/2020/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F-%E5%88%9B%E5%BB%BA%E5%9E%8B/</guid>
+      <description>
+
+&lt;h2 id=&#34;单例模式&#34;&gt;单例模式&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;保证一个类仅有一个实例，并提供一个访问它的全局访问点，这样的模式就叫做单例模式。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;实现思路&#34;&gt;实现思路&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;class Single {
+    show() {
+        console.log(&#39;我是一个单例对象&#39;);
+    }
+}
+const s1 = new Single();
+const s2 = new Single();
+// s1 === s2 false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;先 new 了一个 s1，又 new 了一个 s2，很明显 s1 和 s2 之间没有任何瓜葛，两者是相互独立的对象，各占一块内存空间。而单例模式想要做到的是，&lt;strong&gt;不管我们尝试去创建多少次，它都只给你返回第一次所创建的那唯一的一个实例&lt;/strong&gt;。要做到这一点，就需要构造函数 &lt;strong&gt;具备判断自己是否已经创建过一个实例的能力&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;🌰1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/**
+ * 实现：静态方法版
+ */
+class Storage {
+  static getInstance() {
+    if (!Storage.instance) {
+      Storage.instance = new Storage();
+    }
+    return Storage.instance;
+  }
+  getItem(key) {
+    return localStorage.getItem(key);
+  }
+  setItem(key, val) {
+    return localStorage.setItem(key, val);
+  }
+}
+const storage1 = Storage.getInstance()
+const storage2 = Storage.getInstance()
+storage1.setItem(&#39;name&#39;, &#39;李雷&#39;)
+// 李雷
+storage1.getItem(&#39;name&#39;)
+// 也是李雷
+storage2.getItem(&#39;name&#39;)
+// 返回true
+storage1 === storage2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;🌰2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * 闭包版
+ */
+function StorageBase() {}
+StorageBase.prototype.getItem = function (key) {
+  return localStorage.getItem(key);
+}
+StorageBase.prototype.setItem = function (key, val) {
+  return localStorage.setItem(key, val);
+}
+const Storagev2 = (function () {
+  let instance = null;
+  return function () {
+    if (!instance) {
+      instance = new StorageBase();
+    }
+    return instance;
+  }
+})();
+// 这里其实不用 new Storage 的形式调用，直接 Storage() 也会有一样的效果 
+const storage3 = new Storagev2()
+const storage4 = new Storagev2()
+storage3.setItem(&#39;name&#39;, &#39;李雷&#39;)
+// 李雷
+storage4.getItem(&#39;name&#39;)
+// 也是李雷
+storage3.getItem(&#39;name&#39;)
+// 返回true
+storage3 === storage4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;🌰3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * 实现一个全局模态框
+ */
+class Model {
+  constructor() {
+    if (!Model.instance) {
+      this.div = document.createElement(&#39;div&#39;);
+      div.innerText = &#39;我是一个全局模态框&#39;;
+      div.style.display = &#39;none&#39;;
+      div.id = &#39;model&#39;;
+      document.body.appendChild(div);
+      Model.instance = this.div;
+    }
+    return Model.instance;
+  }
+  show() {
+    this.div.style.display = &#39;block&#39;;
+  }
+  hide() {
+    this.div.style.display = &#39;none&#39;;
+  }
+}
+document.getElementById(&#39;open&#39;).addEventListener(&#39;click&#39;, () =&amp;gt; {
+  const model = Model.getInstance();
+  model.show();
+});
+document.getElementById(&#39;close&#39;).addEventListener(&#39;click&#39;, () =&amp;gt; {
+  const model = Model.getInstance();
+  model.hide();
+});
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Gitlab</title>
+      <link>/2019/docker-gitlab/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/docker-gitlab/</guid>
+      <description>
+
+&lt;h1 id=&#34;安装-gitlab&#34;&gt;安装 Gitlab&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;目录类似 Jenkins，使用 docker-compose 安装&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;version: &#39;3&#39;
+services:
+    docker-gitlab:
+      image: &#39;twang2218/gitlab-ce-zh:9.4&#39;
+      restart: &#39;no&#39;
+      container_name: gitlab
+      hostname: &#39;gitlab.xxxxx.com&#39;
+      environment:
+        TZ: &#39;Asia/Shanghai&#39;
+        GITLAB_OMNIBUS_CONFIG: |
+          external_url &#39;http://gitlab.xxxxxx.com&#39;
+          unicorn[&#39;worker_timeout&#39;] = 60
+          unicorn[&#39;worker_processes&#39;] = 2
+          gitlab_rails[&#39;time_zone&#39;] = &#39;Asia/Shanghai&#39;
+          gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 26
+          nginx[&#39;client_max_body_size&#39;] = &#39;250m&#39;
+      ports:
+       - &#39;81:80&#39;
+       - &#39;443:443&#39;
+       - &#39;26:22&#39;
+      volumes:
+       - /home/gitlab/gitlab_home/config:/etc/gitlab
+       - /home/gitlab/gitlab_home/data:/var/opt/gitlab
+       - /home/gitlab/gitlab_home/logs:/var/log/gitlab
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在当前目录下运行 &lt;code&gt;docker-compose up -d&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;nginx-代理&#34;&gt;Nginx 代理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;upstream gitlab {
+ server 116.62.201.97:81;
+}
+
+server {
+ listen 80;
+ server_name gitlab.xxx.com;
+
+ location / {
+  client_max_body_size 900m;
+  proxy_redirect off;
+  # 以下确保 gitlab中项目的 url 是域名而不是 http://git，不可缺少
+  proxy_set_header Host $host;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  # 反向代理到 gitlab 内置的 nginx
+  proxy_pass http://gitlab;
+  index index.html index.htm;
+ }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Jenkins</title>
+      <link>/2019/docker-jenkins/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/docker-jenkins/</guid>
+      <description>
+
+&lt;h1 id=&#34;安装-jenkins&#34;&gt;安装 jenkins&lt;/h1&gt;
+
+&lt;p&gt;在安装jenkins我选择了使用docker-compose，docker-compose 是一个用来把 docker 自动化的东西&lt;br /&gt;
+有了 docker-compose 你可以把所有繁复的 docker 操作全都一条命令，自动化的完成。&lt;/p&gt;
+
+&lt;h3 id=&#34;首先我们需要在服务器上创建一个目录机构&#34;&gt;首先我们需要在服务器上创建一个目录机构&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;/home/jenkins
+  - docker-compose.yml
+  - jenkins-home
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;接下来我们来编写-docker-compose-yml-安装jenkins&#34;&gt;接下来我们来编写 docker-compose.yml 安装jenkins&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;version: &#39;3&#39;    # 指定 docker-compose.yml 文件的写法格式
+
+services:       # 多个容器集合
+  docker_jenkins:
+    user: root  # 为了避免一些权限问题 在这我使用了root
+    restart: always # 重启方式
+    image: jenkins/jenkins:lts  # 指定服务所使用的镜像 在这里我选择了 LTS (长期支持)
+    container_name: jenkins # 容器名称
+    ports:      # 对外暴露的端口定义
+      - &#39;8899:8080&#39;
+      - &#39;50000:50000&#39;
+    volumes:    # 卷挂载路径
+      - /home/jenkins/jenkins_home/:/var/jenkins_home  # 这是我们一开始创建的目录挂载到容器内的jenkins_home目录
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker     # 这是为了我们可以在容器内使用docker命令
+      - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose # 同样的这是为了使用docker-compose命令
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们需要进入到 jenkins 目录下执行：&lt;code&gt;docker-compose up -d&lt;/code&gt;，开启守护进程后台执行(停止 &lt;code&gt;docker-compose down&lt;/code&gt;)这个命令会帮我们自动拉取镜像并配置，不出意外你现在可以打开你的服务器地址 &lt;a href=&#34;http://xxxxxxx&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://xxxxxxx&lt;/a&gt;:端口号 就能看到这个界面：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/12/05/Q8sYxP.png&#34; alt=&#34;Q8sYxP.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;打开你所创建的jenkins目录进入到jenkins_home：&lt;code&gt;/home/jenkins/jenkins-home&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;进入 secrets 目录并打印下： &lt;code&gt;cat initialAdminPassword&lt;/code&gt;：（dadasdf324324dasdasd3243432）,然后把里面的文本复制出来填到管理员密码中：
+&lt;img src=&#34;https://s2.ax1x.com/2019/12/05/Q8yAeS.png&#34; alt=&#34;Q8yAeS.png&#34; /&gt;
+接下来需要安装几个插件：&lt;code&gt;NodeJS Plugin&lt;/code&gt;，&lt;code&gt;Publish Over SSH&lt;/code&gt;，&lt;code&gt;Git Parameter Plug-In&lt;/code&gt;（举例）
+&lt;img src=&#34;https://s2.ax1x.com/2019/12/05/Q867DK.png&#34; alt=&#34;Q867DK.png&#34; /&gt;
+然后到全局工具配置（举例）
+&lt;img src=&#34;https://s2.ax1x.com/2019/12/05/Q8cgMt.png&#34; alt=&#34;Q8cgMt.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;nginx-代理&#34;&gt;Nginx 代理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;upstream jenkins {
+ server xxxxxxxxxxxx:8899;
+}
+
+server {
+ listen 80;
+ server_name jenkins.ex.com;
+
+ location / {
+  proxy_pass http://jenkins;
+ }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sudo nginx -t&lt;/code&gt; 检测配置是否正确&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo service nginx restart&lt;/code&gt; 重启 nginx&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-删除链表中的节点</title>
+      <link>/2019/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</guid>
+      <description>
+
+&lt;h2 id=&#34;删除链表中的节点&#34;&gt;删除链表中的节点&lt;/h2&gt;
+
+&lt;h3 id=&#34;描述&#34;&gt;描述&lt;/h3&gt;
+
+&lt;p&gt;请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。&lt;/p&gt;
+
+&lt;p&gt;现有一个链表 &amp;ndash; head = [4,5,1,9]，它可以表示为: &lt;img src=&#34;https://s2.ax1x.com/2019/10/25/KwtOGq.png&#34; alt=&#34;示例&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;示例 1:
+  输入: head = [4,5,1,9], node = 5
+  输出: [4,1,9]
+  解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 1 -&amp;gt; 9.
+
+示例 2:
+  输入: head = [4,5,1,9], node = 1
+  输出: [4,5,9]
+  解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&amp;gt; 5 -&amp;gt; 9.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;分析&#34;&gt;分析&lt;/h3&gt;
+
+&lt;p&gt;从链表里删除一个节点 node 的最常见方法是修改之前节点的 next 指针，使其指向之后的节点。
+&lt;img src=&#34;https://s2.ax1x.com/2019/10/25/KwUinS.png&#34; alt=&#34;pic&#34; /&gt;
+因为，我们无法访问我们想要删除的节点 之前 的节点，我们始终不能修改该节点的 next 指针。相反，我们必须将想要删除的节点的值替换为它后面节点中的值，然后删除它之后的节点。
+&lt;img src=&#34;https://s2.ax1x.com/2019/10/25/KwUCX8.png&#34; alt=&#34;pic&#34; /&gt;
+因为我们知道要删除的节点不是列表的末尾，所以我们可以保证这种方法是可行的。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/**
+ * @param {ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
+ */
+var deleteNode = function(node) {
+  node.val = node.next.val;
+  node.next = node.next.next;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TS重新定义模块</title>
+      <link>/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/ts%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97/</guid>
+      <description>&lt;p&gt;重新定义模块：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ts&#34;&gt;declare var am: any; // 支付宝
+
+declare interface Window {
+  ap: any; // 支付宝注入
+}
+
+declare module &#39;dva/dynamic&#39; {
+  const dynamic: (config: any) =&amp;gt; React.ComponentType;
+  export default dynamic;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-反转链表</title>
+      <link>/2019/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;h2 id=&#34;反转链表&#34;&gt;反转链表&lt;/h2&gt;
+
+&lt;h3 id=&#34;描述&#34;&gt;描述&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;反转一个单链表。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;示例:
+  输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL
+  输出: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;分析&#34;&gt;分析&lt;/h3&gt;
+
+&lt;p&gt;一、迭代
+  - 第一个节点无前置节点 所以需要声明初始化一个前置节点prev
+  - 开始迭代，结束提交为 当前节点不为null
+  - 先把当前节点后置节点变为当前节点的前置节点
+  - 然后把前置pre变为当前节点 因为下一次所需
+  - 再把当前节点设为后置节点&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;在遍历列表时，将当前节点的 next 指针改为指向前一个元素。由于节点没有引用其上一个节点，因此必须事先存储其前一个元素。在更改引用之前，还需要另一个指针来存储下一个节点。不要忘记在最后返回新的头引用！&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  let cur = head;
+  let pre = null;
+  while(cur) {
+    let temp = cur.next; //  保存当前节点的后置节点 之后循环到下一个节点需要
+    cur.next = pre;
+    pre = cur;
+    cur = temp;
+  }
+  return pre;
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;二、递归&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;递归版本稍微复杂一些，其关键在于反向工作。假设列表的其余部分已经被反转，现在我该如何反转它前面的部分？&lt;/li&gt;
+&lt;li&gt;假设列表为：&lt;code&gt;n1 ​→ ... → nk−1 ​→ nk ​→ nk+1 ​→...→ nm ​→∅&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;若从节点 &lt;code&gt;nk+1&lt;/code&gt;到 &lt;code&gt;nm&lt;/code&gt;已经被反转，而我们正处于 &lt;code&gt;nk&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n 1 ​ →...→n k−1 ​ →n k ​ →n k+1 ​ ←...←n m&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;我们希望 &lt;code&gt;nk+1&lt;/code&gt; 的下一个节点指向 &lt;code&gt;nk&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;所以:&lt;code&gt;nk.next.next = nk&lt;/code&gt; &lt;em&gt;要小心的是 &lt;code&gt;n1&lt;/code&gt; 的下一个必须指向 Ø 。如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  if (!head || !head.next) return head;
+  let p = reverseList(head.next);
+  head.next.next = head;
+  head.next = null;
+  return p;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-设计链表</title>
+      <link>/2019/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;h3 id=&#34;设计链表&#34;&gt;设计链表&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针/引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。&lt;/p&gt;
+
+&lt;p&gt;在链表类中实现这些功能：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。&lt;/li&gt;
+&lt;li&gt;addAtHead(val)：在链表的第一个元素之前添加一个值为 val 的节点。插入后，新节点将成为链表的第一个节点。&lt;/li&gt;
+&lt;li&gt;addAtTail(val)：将值为 val 的节点追加到链表的最后一个元素。&lt;/li&gt;
+&lt;li&gt;addAtIndex(index,val)：在链表中的第 index 个节点之前添加值为 val  的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点。&lt;/li&gt;
+&lt;li&gt;deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 index 个节点。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// 假设链表为 5 -&amp;gt; 3 &amp;gt; 1
+{
+  val: 5,
+  next: {
+    val: 3,
+    next: {
+      val: 1,
+      next: null
+    }
+  }
+}
+// 双链表的结构就会多一个prev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;一-数组-不推荐&#34;&gt;一、数组（不推荐）&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class MyLinkedList {
+  constructor() {
+    this.list = [];
+  }
+  get(index) {
+    if (index &amp;lt; 0 || index &amp;gt;= this.list.length) return -1;
+    return this.list[index];
+  }
+  addAtHead(val) {
+    this.list.unshift(val);
+  }
+  addAtTail(val) {
+    this.arr.push(val)
+  }
+  addAtIndex(index, val) {
+    if (index &amp;lt; 0) { this.arr.push(val); return }
+    if (index &amp;gt; this.arr.length) { return }
+    this.arr.splice(index, 0, val)
+  }
+  deleteAtIndex(index) {
+    if (index &amp;gt;= 0 &amp;amp;&amp;amp; index &amp;lt; this.arr.length) this.arr.splice(index, 1)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;二-对象设计单链表&#34;&gt;二、对象设计单链表&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class MyLinkedList {
+  constructor() {
+    this.data = {};
+  }
+  get(index) {
+    if (index &amp;lt; 0) return -1;
+    let current = this.data;
+    for (let i = 0; i &amp;lt; index; i++) {
+      if (!current.next) return -1;
+      current = current.next;
+    }
+    return current.val === undefined || current.val === null ? -1 : current.val;
+  }
+  addAtHead(val) {
+    if (this.data.val === undefined || this.data.val === null) {
+      this.data = {
+        val: val,
+        next: this.data,
+      };
+    } else {
+      this.data = {
+        val: val,
+        next: null,
+      };
+    }
+  }
+  addAtTail(val) {
+    let curr = this.data;
+    while(curr.next) {
+      curr = curr/next;
+    }
+    curr.next = {
+      val: val,
+      next: null,
+    };
+  }
+  addAtIndex(index, val) {
+    if (index &amp;lt; 0) return this.addAtHead(val);
+    let curr = this.data;
+    for (let i = 0; i &amp;lt; index - 1; i++) {
+      if (!curr || !curr.next) return null;
+      curr = curr.next;
+    }
+    if (!curr.val &amp;amp;&amp;amp; curr.val !== 0) return null;
+    curr.next = {
+      val: val,
+      next: curr.next,
+    };
+  }
+  deleteAtIndex(index) {
+    if (index &amp;lt; 0) return null;
+    if (index === 0) return this.data = this.data.next;
+    let curr = this.data;
+    for (let i = 0; i &amp;lt; index - 1; i++) {
+      if (!curr.next || !curr.next.next) return null
+      curr = curr.next;
+    }
+    if (!curr.next) return null;
+    if (!curr.next.next) return curr.next = null;
+    curr.next = curr.next.next;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;二-对象设计双链表&#34;&gt;二、对象设计双链表&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;class MyLinkedList {
+  constructor () {
+    this.data = null;
+  }
+  get(index) {
+    if (index &amp;lt; 0) return -1;
+    let curr = this.data;
+    while (index &amp;gt; 0 &amp;amp;&amp;amp; curr) {
+      curr = curr.next;
+      index--;
+    }
+    return curr ? curr.val : -1;
+  }
+  addAtHead(val) {
+    this.data = {
+      val, next: this.data, prev: null
+    }
+    if (this.data.next) this.data.next.prev = this.data;
+  }
+  addAtTail(val) {
+    if (this.data) {
+      let curr = this.data;
+      while (curr.next) {
+        curr = curr.next;
+      }
+      curr.next = { val, next: null, prev: curr}
+    } else {
+      this.data = { val, next: null, prev: null }
+    }
+  }
+  addAtIndex(index, val) {
+    if (index &amp;lt;= 0) return this.addAtHead(val);
+    let curr = this.data;
+    for (let i = 0; i &amp;lt; index - 1; i++) {
+      if (!curr || !curr.next) return null;
+      curr = curr.next;
+    }
+    if (!curr) return null;
+    let temp = curr.next;
+    curr.next = {
+      val, prev: curr, next: curr.next
+    }
+    if (temp) temp.prev = curr.next
+  }
+  deleteAtIndex(index) {
+    if (index &amp;lt; 0) return null;
+    let curr = this.data;
+    while (index &amp;gt; 0) {
+      if (!curr) return null;
+      curr = curr.next;
+      index--;
+    }
+    if (!curr) return null;
+    if (!curr.prev &amp;amp;&amp;amp; !curr.next) {
+      this.data = null;
+    } else if (!curr.prev) {
+      curr.next.prev = curr.prev;
+      this.data = curr.next;
+    } else if (!curr.next) {
+      curr.prev.next = null;
+    } else {
+      curr.prev.next = curr.next;
+      curr.next.prev = curr.prev;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker 相关</title>
+      <link>/2019/docker/</link>
+      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/docker/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-相关&#34;&gt;Docker 相关&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;服务器环境: ubuntu16&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;使用apt安装&#34;&gt;使用APT安装&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;添加软件源的 GRP 密钥&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+# 官方源
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后，我们需要向 source.list 中添加 Docker 软件源&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo add-apt-repository &amp;quot;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable&amp;quot;
+
+# 官方源
+# $ sudo add-apt-repository &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上命令会添加稳定版本的 Docker CE APT 镜像源，如果需要测试或每日构建版本的 Docker CE 请将 stable 改为 test 或者 nightly。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装-docker-ce&#34;&gt;安装 Docker CE&lt;/h2&gt;
+
+&lt;p&gt;更新 apt 软件包缓存，并安装 docker-ce&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get update
+sudo apt-get install docker-ce
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;使用脚本自动安装&#34;&gt;使用脚本自动安装&lt;/h3&gt;
+
+&lt;p&gt;在测试或开发环境中 Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，Ubuntu 系统上可以使用这套脚本安装：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -fsSL get.docker.com -o get-docker.sh
+sudo sh get-docker.sh --mirror Aliyun
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;启动-docker-ce&#34;&gt;启动 Docker CE&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo systemctl enable docker
+sudo systemctl start docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;建立-docker-用户组&#34;&gt;建立 Docker 用户组&lt;/h3&gt;
+
+&lt;p&gt;默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。因此，更好地做法是将需要使用 docker 的用户加入 docker 用户组。&lt;/p&gt;
+
+&lt;p&gt;建立 docker 组：&lt;code&gt;sudo groupadd docker&lt;/code&gt;，将当前用户加入 docker 组：&lt;code&gt;sudo usermod -aG docker $USER&lt;/code&gt;，退出当前终端并重新登录，进行如下测试。&lt;/p&gt;
+
+&lt;h3 id=&#34;测试-docker-是否安装正确&#34;&gt;测试 Docker 是否安装正确&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker run hello-world
+# Unable to find image &#39;hello-world:latest&#39; locally
+#     latest: Pulling from library/hello-world
+#     d1725b59e92d: Pull complete
+#     Digest: sha256:0add3ace90ecb4adbf7777e9aacf18357296e799f81cabc9fde470971e499788
+#     Status: Downloaded newer image for hello-world:latest
+#     
+#     Hello from Docker!
+#     This message shows that your installation appears to be working correctly.
+#     
+#     To generate this message, Docker took the following steps:
+#      1. The Docker client contacted the Docker daemon.
+#      2. The Docker daemon pulled the &amp;quot;hello-world&amp;quot; image from the Docker Hub.
+#         (amd64)
+#      3. The Docker daemon created a new container from that image which runs the
+#         executable that produces the output you are currently reading.
+#      4. The Docker daemon streamed that output to the Docker client, which sent it
+#         to your terminal.
+#     
+#     To try something more ambitious, you can run an Ubuntu container with:
+#      $ docker run -it ubuntu bash
+#     
+#     Share images, automate workflows, and more with a free Docker ID:
+#      https://hub.docker.com/
+#     
+#     For more examples and ideas, visit:
+#      https://docs.docker.com/get-started/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若能正常输出以上信息，则说明安装成功。&lt;/p&gt;
+
+&lt;h3 id=&#34;镜像加速&#34;&gt;镜像加速&lt;/h3&gt;
+
+&lt;p&gt;如果在使用过程中发现拉取 Docker 镜像十分缓慢，可以配置 Docker 国内镜像加速。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://cr.console.aliyun.com/cn-shanghai/instances/mirrors&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;阿里云镜像加速&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;安装-docker-compose&#34;&gt;安装 docker-compose&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/compose/install/#install-compose&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;参考文档&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;运行此命令以下载docker-compose的当前稳定版本&#34;&gt;运行此命令以下载Docker Compose的当前稳定版本&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo curl -L &amp;quot;https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)&amp;quot; -o /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;对二进制文件应用可执行权限&#34;&gt;对二进制文件应用可执行权限&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo chmod +x /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;查看版本&#34;&gt;查看版本&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker-compose --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;搜索镜像&#34;&gt;搜索镜像&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker search gitlab-ce
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;查看镜像&#34;&gt;查看镜像&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker images
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-两数相加</title>
+      <link>/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</guid>
+      <description>
+
+&lt;h3 id=&#34;两数相加&#34;&gt;两数相加&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。&lt;/p&gt;
+
+&lt;p&gt;如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;输入：(2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4)
+输出：7 -&amp;gt; 0 -&amp;gt; 8
+原因：342 + 465 = 807
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;单链表的数据结构：&lt;code&gt;val&lt;/code&gt;属性存储当前的值，&lt;code&gt;next&lt;/code&gt;属性存储下一个节点的引用。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;从链表表头开始，然后进行每一位进行相加，每位的数字在 0~9 之间，相加有可能会出现 &lt;em&gt;溢出&lt;/em&gt; 。
+例如：5+7=12，这种情况下，将个位设置为当前值（也就是2），并将进位 carry=1 带入下一次迭代。进位必定是 0 | 1，因为两个数字相加（考虑到进位）最大和为 9+9+1=19。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 pre，该指针的下一个节点指向真正的头结点head。&lt;strong&gt;使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;先初始化一个哑结点&lt;/li&gt;
+&lt;li&gt;初始化 sum 为 0&lt;/li&gt;
+&lt;li&gt;进位 carry 初始化为 0&lt;/li&gt;
+&lt;li&gt;遍历列表 l1 和 l2 直至到达它们的尾端，并对 sum 进行累加，将 l1 和 l2 赋值为下一个节点&lt;/li&gt;
+&lt;li&gt;更新进位的值，carry = ~~(sum / 10carry=sum/10)&lt;/li&gt;
+&lt;li&gt;创建一个数值为 (sum % 10) 的新结点，并将其设置为当前结点的下一个结点，然后将当前结点前进到下一个结点&lt;/li&gt;
+&lt;li&gt;sum 赋值为 进位 carry，带入下一次循环&lt;/li&gt;
+&lt;li&gt;将 carry 从初始化&lt;/li&gt;
+&lt;li&gt;返回哑结点的下一个结点&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;代码&#34;&gt;代码&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+  let res = new ListNode(0)
+      dummy = res,
+      sum = 0, carry = 0;
+  while(l1 || l2 || sum &amp;gt; 0) {
+      if(l1) {
+          sum += l1.val;
+          l1 = l1.next;
+      }
+      if(l2) {
+          sum += l2.val;
+          l2 = l2.next;
+      }
+      carry = ~~(sum / 10);
+      dummy.next = new ListNode(sum % 10)
+      dummy = dummy.next;
+      sum = carry;
+      carry = 0;
+  }
+  return res.next;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-合并两个有序链表</title>
+      <link>/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;由于单链表是线性的，使用递归方式将导致栈的使用也是线性的，当链表长度达到一定程度时，递归会导致爆栈，因此，现实中并不推荐使用递归方式来操作链表。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;合并两个有序链表&#34;&gt;合并两个有序链表&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4
+输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;p&gt;一、 递归&lt;/p&gt;
+
+&lt;p&gt;可以使用 递归，两个链表头部较小的一个与剩下元素的 merge 操作结果合并。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;特殊的，如果 l1 或者 l2 一开始就是 null ，那么没有任何操作需要合并，所以我们只需要返回非空链表。否则，我们要判断 l1 和 l2 哪一个的头元素更小，然后递归地决定下一个添加到结果里的值。如果两个链表都是空的，那么过程终止，所以递归过程最终一定会终止。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;思路&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;这道题可以使用递归实现，新链表也不需要构造新节点，我们下面列举递归三个要素&lt;/li&gt;
+&lt;li&gt;终止条件：两条链表分别名为 l1 和 l2，当 l1 为空或 l2 为空时结束&lt;/li&gt;
+&lt;li&gt;返回值：每一层调用都返回排序好的链表头&lt;/li&gt;
+&lt;li&gt;本级递归内容：如果 l1 的 val 值更小，则将 l1.next 与排序好的链表头相接，l2 同理&lt;/li&gt;
+&lt;li&gt;O(m+n)O(m+n)，mm 为 l1的长度，nn 为 l2 的长度&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+  if(l1 === null){
+      return l2;
+  }
+  if(l2 === null){
+      return l1;
+  }
+  if(l1.val &amp;lt; l2.val){
+      l1.next = mergeTwoLists(l1.next, l2);
+      return l1;
+  }else{
+      l2.next = mergeTwoLists(l1, l2.next);
+      return l2;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;二、迭代&lt;/p&gt;
+
+&lt;p&gt;可以用迭代的方法来实现上述算法。我们假设 l1 元素严格比 l2元素少，我们可以将 l2 中的元素逐一插入 l1 中正确的位置。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;思路:
+
+&lt;ul&gt;
+&lt;li&gt;首先，我们设定一个哨兵节点 &lt;code&gt;preheat&lt;/code&gt; ，这可以在最后让我们比较容易地返回合并后的链表。我们维护一个 prev 指针，我们需要做的是调整它的 next 指针。然后，我们重复以下过程，直到 l1 或者 l2 指向了 null ：如果 l1 当前位置的值小于等于 l2 ，我们就把 l1 的值接在 prev 节点的后面同时将 l1 指针往后移一个。否则，我们对 l2 做同样的操作。不管我们将哪一个元素接在了后面，我们都把 prev 向后移一个元素。&lt;/li&gt;
+&lt;li&gt;在循环终止的时候， l1 和 l2 至多有一个是非空的。由于输入的两个链表都是有序的，所以不管哪个链表是非空的，它包含的所有元素都比前面已经合并链表中的所有元素都要大。这意味着我们只需要简单地将非空链表接在合并链表的后面，并返回合并链表。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+  // 在返回节点之前保持对节点的不变引用
+  const preheat = new ListNode(-1);
+  let prev = preheat;
+
+  while (l1 &amp;amp;&amp;amp; l2) {
+    if (l1.val &amp;lt; l2.val) {
+      prev.next = l1;
+      l1 = l1.next;
+    } else {
+      prev.next = l2;
+      l2 = l2.next;
+    }
+    prev = prev.next;
+  }
+  // 此时l1和l2中恰好有一个是非空的，将非空链表接在合并链表的后面
+  prev.next = l1 ? l1 : l2;
+  return preheat.next;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-回文链表</title>
+      <link>/2019/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;h2 id=&#34;回文链表&#34;&gt;回文链表&lt;/h2&gt;
+
+&lt;h3 id=&#34;描述&#34;&gt;描述&lt;/h3&gt;
+
+&lt;p&gt;判断一个链表是否为回文链表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;示例 1:
+  输入: 1-&amp;gt;2
+  输出: false
+
+示例 2:
+  输入: 1-&amp;gt;2-&amp;gt;2-&amp;gt;1
+  输出: true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;分析&#34;&gt;分析&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;用2个指针，一个low，一个fast，fast是low的2倍，所以可以达到2分链表的效果&lt;/li&gt;
+&lt;li&gt;在移动指针时同时对前半部分链表进行反转，最后直接比较被分开的2个链表&lt;/li&gt;
+&lt;li&gt;因为不能改变当前slow的next，不然就无法跳到下一个元素，所以这里用pre和prepre实现指针的反转&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function(head) {
+  if (!head || !head.next) return true;
+  let slow = head;
+  let fast = head.next;
+  let pre = null;
+  let prepre = null;
+  while (fast &amp;amp;&amp;amp; fast.next) {
+    // 反转前半段链表
+    pre = slow;
+    slow = slow.next;
+    fast = fast.next.next;
+    // 先移动指针再来反转
+    pre.next = prepre;
+    prepre = pre;
+  }
+  let p2 = slow.next;
+  slow.next = pre;
+  let p1 = !fast ? slow.next : slow;
+  while(p1) {
+    if (p1.val !== p2.val) return false;
+    p1 = p1.next;
+    p2 = p2.next;
+  }
+  return true;
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>你真的了解webview么？</title>
+      <link>/2019/webview/</link>
+      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/webview/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;文章转载自微信公众号 &lt;strong&gt;大转转FE&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;适用场景&#34;&gt;适用场景&lt;/h2&gt;
+
+&lt;p&gt;像一些 App 的内嵌页面，提供各种各样的交互操作，其实webview的应用场景远远不止这些，其实在一些PC的软件里，和我们交互的也是我们的html页面，只是穿着webview的衣服，衣服太美而我们没有发现他们的真谛。&lt;/p&gt;
+
+&lt;p&gt;另外，还有一些网络机顶盒里的交互，也是webview在和我们打交道，比如一些早期的IPTV里的EPG都是运行在webview里的，它们基于webkit内核，尽管我们使用的交互方式是遥控器。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;与app-native的交互&#34;&gt;与App native的交互&lt;/h2&gt;
+
+&lt;p&gt;目前使用频率最多的，还是客户端内嵌的webview，都是webview打开m页去承接的。目前javascript和客户端（后面统称native）交互的常见方式有两种，一种是通过JSBridge的方式，另一种是通过schema的方式。&lt;/p&gt;
+
+&lt;h3 id=&#34;jsbridge&#34;&gt;JSBridge&lt;/h3&gt;
+
+&lt;p&gt;体现的形式其实就是，当我们在native内打开m页，native会在全局的window下，为我们注入一个Bridge。这个Bridge里面，会包含我们与native交互的各种方法、比如判断第三方App是否安装、获取网络信息等等功能。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;/**
+ * 作用域下的JSBridge，
+ * 和实例化后的getNetInfomation，
+ * 均根据实际约定情况而定，
+ * 这里只是用来举例说明
+ */
+const bridge = window.JSBridge;
+console.log(bridge.getNetInfomation());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IOS端: 在IOS中，主要使用&lt;code&gt;WebViewJavascriptBridge&lt;/code&gt;来注册，可以参考&lt;em&gt;Github WebViewJavascriptBridge&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;self.bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
+
+[self.bridge registerHandler:@&amp;quot;ObjC Echo&amp;quot; handler:^(id data, WVJBResponseCallback responseCallback) {
+	// to do...
+}];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android: 在Android中，需要通过addJavascriptInterface来注册&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class JSBridge {
+    @JavascriptInterface //注意这里的注解。出于安全的考虑，4.2 之后强制要求，不然无法从 Javascript 中发起调用
+    public void getNetInfomation(){
+      // to do
+    };
+}
+webView.addJavascriptInterface(new JSBridge();, &amp;quot;JSBridge&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;schema-url&#34;&gt;Schema url&lt;/h3&gt;
+
+&lt;p&gt;如果说Bridge的方式是只能在native内部交互，那么&lt;code&gt;schame url&lt;/code&gt;的不紧可以在native内交互，也是可以跨app来交互的。&lt;code&gt;schema&lt;/code&gt;也是目前我们转转使用的主要方式，它类似一个伪协议的链接（也可以叫做统跳协议），比如：&lt;strong&gt;schema://path?param=abc&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在webview里，当m页发起schema请求时，native端会去进行捕获。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IOS端: 以UIWebView为例，在IOS中，UIWebView内发起网络请求时，可以通过delegate在native层来拦截，然后将捕获的schema进行触发对应的功能或业务逻辑（利用shouldStartLoadWithRequest）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
+  // 获取scheme url后自行进行处理
+  NSURL *url = [request URL];
+  NSString *requestString = [[request URL] absoluteString];
+  return YES;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android端: 在Android中，可以使用shouldoverrideurlloading来捕获schema url&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public boolean shouldOverrideUrlLoading(WebView view, String url){
+  //读取到url后自行进行分析处理
+
+  //这里注意：如果返回false，则WebView处理链接url，如果返回true，代表WebView根据程序来执行url  
+  return true;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;如何通过schema的方式可以进行跨端交互&#34;&gt;如何通过schema的方式可以进行跨端交互？&lt;/h2&gt;
+
+&lt;p&gt;其实对于JavaScript，在webview里基本是一样的，也是发起一个schema的请求，只不过在native侧会有些许变化。&lt;/p&gt;
+
+&lt;p&gt;首先，给大家普及一个小知识，就是在natvie中（包括IOS和Android），会通过schema找到相匹配的App。其中IOS不可以重复，就像appId一样；安卓可以重复，遇到重复情况时，会弹窗让用户选择其中之一。&lt;/p&gt;
+
+&lt;p&gt;那么，有了这个知识点做铺垫，就可以理解，当我们在其他app中，像这个schema发起请求时，系统底层（IOS &amp;amp; Android）会通过schema去找到所匹配的app，然后将此App拉起。拉起app后，对应处理如下：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IOS端: 在IOS端内，会将schema作为参数传入一个提前定义好的回调函数内，然后执行该回调函数。此回调函数，可以通过得到的schema去进行解析，然后定向到app内的固定的某个页面。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
+  // 参数 url 即为获取的 schema
+      
+  // to do
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Android端: 在Android端内，会稍微麻烦一些，在外部的m页，会发起一个schema的伪协议链接，系统会去根据这个schema去检索，需要被拉起的App需要有一个配置文件，大致如下：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;activity
+  android:name=&amp;quot;.activity.StartActivity&amp;quot;
+  android:exported=&amp;quot;true&amp;quot;
+&amp;gt;
+&amp;lt;intent-filter&amp;gt;
+    &amp;lt;action android:name=&amp;quot;android.intent.action.VIEW&amp;quot;/&amp;gt;
+    &amp;lt;category android:name=&amp;quot;android.intent.category.DEFAULT&amp;quot;/&amp;gt;   
+    &amp;lt;category android:name=&amp;quot;android.intent.category.BROWSABLE&amp;quot;/&amp;gt;        
+    &amp;lt;data android:scheme=&amp;quot;zhuanzhuan&amp;quot;/&amp;gt; 
+  &amp;lt;/intent-filter&amp;gt;
+&amp;lt;/activityandroid:name=&amp;quot;.activity.StartActivity&amp;quot;android:exported=&amp;quot;true&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上面的代码为例，在上面配置中scheme为zhuanzhuan，只要是 &amp;ldquo;zhuanzhuan://&amp;rdquo; 开头的schema的链接都会调起配置该schema的Activity(类似上面代码的 StartActivity)，此Activity会对这个 schema url 做处理，例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class StartActivity extends TempBaseActivity {
+
+  Intent intent;
+    
+  @Override
+  protected void onCreate(BundlesavedInstanceState) {       
+    super.onCreate(savedInstanceState);
+    intent = getIntent();      
+    Uri uri = intent.getData();
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例如上面的代码，可以在此Activity中，通过 intent 中的 getData 方法，获取到传入的schema的相关信息，如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2019/08/27374e51955cc775.jpg&#34; alt=&#34;pic&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以在第三方app内，可以调起app的原理。当然现在市场上一些app，为了怕有流量流失，会对schema进行限制，只有plist白名单里的schema才能对应拉起，否则会被直接过滤掉。比如我们的wx爸爸，开通白名单后，才可以使用更多的jsApiList，通过schema的拉起就是其中之一，在此不做赘述…… :）&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;webview的进化&#34;&gt;webview的进化&lt;/h2&gt;
+
+&lt;p&gt;对于webview，要说进化、或者蜕变，让我第一想到的就是IOS的WKWebView了，每一个事物存在都有它的必然，让我们一起看看这个super版的webview。&lt;/p&gt;
+
+&lt;h3 id=&#34;wkwebview的出现&#34;&gt;WKWebView的出现&lt;/h3&gt;
+
+&lt;p&gt;目前混合开发已然成为了主流，为了提高体验，WKWebView在IOS8发布时，也随之一起诞生。在这之前IOS端一直使用的是UIWebView。&lt;/p&gt;
+
+&lt;p&gt;从性能方面来说，WKWebView会比UIWebView高很多，可以算是一次飞跃。它采用了跨进程的方案，用 Nitro JS 解析器，高达 60fps 的刷新率。同时，提供了很好的H5页面支持，类比UIWebView还多提供了一个加载进度的属性。目前一些一线互联网app在IOS已经切换到了WKWebView，所以感觉我们无法拒绝。&lt;/p&gt;
+
+&lt;p&gt;整个WKWebView的初始化也很简单：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;WKWebView *webView = [[WKWebView alloc] init];
+NSURL *url = [NSURL URLWithString:@&amp;quot;https://m.zhuanzhuan.com&amp;quot;];
+[webView loadRequest:[NSURLRequest requestWithURL:url]];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;wkwebview-与-uiwebview的对比&#34;&gt;WKWebView 与 UIWebView的对比&lt;/h3&gt;
+
+&lt;p&gt;上面有提到性能的提升，为什么 app 接入 WKWebView 之后，相对比 UIWebView 内存占用小那么多，主要是因为网页的载入和渲染这些耗内存和性能的过程都是由 WKWebView 进程去实现的（WKWebView是独立于app的进程）。如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2019/08/b6c28e21432a222c.jpeg&#34; alt=&#34;WKWebView&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这样，互相进程独立相当于把整个App的进程对内存的占用量减少，App进程会更为稳定。况且，即使页面进程崩溃，体现出来的就是页面白屏或载入失败，不会影响到整个App进程的崩溃。&lt;/p&gt;
+
+&lt;p&gt;除了上面说的性能以外，WKWebView会比UIWebView多了一个询问过程。在服务器完成响应之后，会询问获取内容是否载入到容器内，在控制上会比UIWebView更细粒度一点，也可以在一些通信上更好的和m页进行交互。大概流程如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2019/08/f019036d9012a991.jpeg&#34; alt=&#34;stream&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;WKWebView 的代理协议为 WKNavigationDelegate，对比 UIWebDelegate 首先跳转询问，就是载入 URL之前的一次调用，询问开发者是否下载并载入当前 URL，UIWebView 只有一次询问，就是请求之前的询问，而 WKWebView 在 URL 下载完毕之后还会发一次询问，让开发者根据服务器返回的 Web 内容再次做一次确定。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;任重而道远&#34;&gt;任重而道远&lt;/h2&gt;
+
+&lt;p&gt;前面说到WKWebView这么赞，其实开发中也有一些痛点。不同于UIWebView，WKWebView很多交互都是异步的，所以在很大程度上，在和m页通信的时候，提高了开发成本。&lt;/p&gt;
+
+&lt;h3 id=&#34;cookie&#34;&gt;cookie&lt;/h3&gt;
+
+&lt;p&gt;首先就是cookie问题，这个目前我认为也是WKWebView在业界的一个坑。之前出现过一个问题，就是在IOS登陆完成后，马上进入m页，会有登录态的cookie获取不到的问题。这个问题在UIWebView中是不存在的。&lt;/p&gt;
+
+&lt;p&gt;经过调研发现，主要问题是UIWebView对cookie是通过NSHTTPCookieStorage来统一处理的，服务端响应时写入，然后在下次请求时，在请求头里会带上相应的cookie，来做到m页和native共享cookie的值。&lt;/p&gt;
+
+&lt;p&gt;但是在WKWebView中，则不然。它虽然也会对NSHTTPCookieStorage来写入cookie，但却不是实时存储的。而且从实际的测试中发现，不同的IOS版本，延迟的时间还不一样，无意对m页的开发者是一种挑战。同样，发起请求时，也不是实时读取，无法做到和native同步，导致页面逻辑出错。&lt;/p&gt;
+
+&lt;p&gt;针对这个问题，目前我们转转的解决方法是需要客户端手动干预一下cookie的存储。将服务响应的cookie，持久化到本地，在下次webview启动时，读取本地的cookie值，手动再去通过native往webview写入。大致流程如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://ftp.bmp.ovh/imgs/2019/08/f06684b50c93ab95.jpeg&#34; alt=&#34;stream&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当然这也不是很完美的解决方案，因为偶尔还有spa的页面路由切换的时候丢失cookie的问题。&lt;/p&gt;
+
+&lt;h3 id=&#34;缓存&#34;&gt;缓存&lt;/h3&gt;
+
+&lt;p&gt;除了cookie以外，WKWebView的缓存问题，最近我们也在关注。由于WKWebView内部默认使用一套缓存机制，开发者可以操作的权限会有限制，特别是IOS8版本，也许是当时刚诞生WKWebView的缘故，还很不完善，根本没法操作（当然相信IOS8很快会退出历史舞台）。对于一些m页的静态资源，偶尔会出现缓存不更新的情况，着实让人头疼。&lt;/p&gt;
+
+&lt;p&gt;但在IOS 9 之后，系统提供了缓存管理的接口 WKWebsiteDataStore。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;// RemoveCache
+NSSet *websiteTypes= [NSSet setWithArray:@[WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache]];
+NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+[[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteTypes modifiedSince:date completionHandler:^{}];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;至于IOS8，就只能通过删除文件来解决了，一般WKWebView的缓存数据会存储在这个目录里：&lt;code&gt;~/Library/Caches/BundleID/WebKit/&lt;/code&gt;，可通过删除该目录来实现清理缓存。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;还有webview的通病，就是我们每次首次打开m页时，都要有webview初始化的过程，那么如何减少初始化webview的时间，也是我们可以提高页面打开速度的一个重要环节&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>链表-leetCode-相交链表</title>
+      <link>/2019/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</guid>
+      <description>
+
+&lt;h3 id=&#34;相交链表&#34;&gt;相交链表&lt;/h3&gt;
+
+&lt;h4 id=&#34;描述&#34;&gt;描述&lt;/h4&gt;
+
+&lt;p&gt;编写一个程序，找到两个单链表相交的起始节点。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://s2.ax1x.com/2019/09/27/uMQiZ9.png&#34; alt=&#34;pic&#34; /&gt;
+&lt;img src=&#34;https://s2.ax1x.com/2019/09/27/uMQFaR.png&#34; alt=&#34;pic&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;注意：
+- 如果两个链表没有交点，返回 null.
+- 在返回结果后，两个链表仍须保持原有的结构。
+- 可假定整个链表结构中没有循环。
+- 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。&lt;/p&gt;
+
+&lt;h4 id=&#34;分析&#34;&gt;分析&lt;/h4&gt;
+
+&lt;p&gt;根据题目意思&lt;/p&gt;
+
+&lt;p&gt;如果两个链表相交，那么相交点之后的长度是相同的&lt;/p&gt;
+
+&lt;p&gt;我们需要做的事情是，让两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。
+为此，我们必须消除两个链表的长度差&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历&lt;/li&gt;
+&lt;li&gt;如果 pA 到了末尾，则 pA = headB 继续遍历&lt;/li&gt;
+&lt;li&gt;如果 pB 到了末尾，则 pB = headA 继续遍历&lt;/li&gt;
+&lt;li&gt;比较长的链表指针指向较短链表head时，长度差就消除了&lt;/li&gt;
+&lt;li&gt;如此，只需要将最短链表遍历两次即可找到位置&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/totalimgs/xtjd.png&#34; alt=&#34;pic&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var getIntersectionNode = function(headA, headB) {
+  if (headA === null || headB === null) return null;
+  let pA = headA;
+  let pB = headB;
+  while(pA !== pB) {
+    pA = (pA === null) ? headB : pA.next;
+    pB = (pB === null) ? headA : pB.next;
+  }
+  return pA;
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

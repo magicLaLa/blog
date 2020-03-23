@@ -164,47 +164,58 @@
         
         
 
-        <h3 id="删除排序链表中的重复元素">删除排序链表中的重复元素</h3>
+        
+
+<h3 id="删除排序链表中的重复元素">删除排序链表中的重复元素</h3>
+
 <h4 id="描述">描述</h4>
+
 <p>给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">示例 1:
+
+<pre><code class="language-bash">示例 1:
   输入: 1-&gt;1-&gt;2
   输出: 1-&gt;2
 示例 2:
   输入: 1-&gt;1-&gt;2-&gt;3-&gt;3
   输出: 1-&gt;2-&gt;3
-</code></pre></div><h4 id="分析">分析</h4>
+</code></pre>
+
+<h4 id="分析">分析</h4>
+
 <p>一、直接法</p>
+
 <ul>
-<li>仅测试你操作列表的结点指针的能力。由于输入的列表已排序，因此我们可以通过将结点的值与它之后的结点进行比较来确定它是否为重复结点。如果它是重复的，我们更改当前结点的 next 指针，以便它跳过下一个结点并直接指向下一个结点之后的结点。</li>
-</ul>
-<ul>
-<li>思路
+<li><p>仅测试你操作列表的结点指针的能力。由于输入的列表已排序，因此我们可以通过将结点的值与它之后的结点进行比较来确定它是否为重复结点。如果它是重复的，我们更改当前结点的 next 指针，以便它跳过下一个结点并直接指向下一个结点之后的结点。</p></li>
+
+<li><p>思路</p>
+
 <ul>
 <li>指定 cur 指针指向头部 head</li>
 <li>当 cur 和 cur.next 的存在为循环结束条件，当二者有一个不存在时说明链表没有去重复的必要了</li>
 <li>当 cur.val 和 cur.next.val 相等时说明需要去重，则将 cur 的下一个指针指向下一个的下一个，这样就能达到去重复的效果</li>
 <li>如果不相等则 cur 移动到下一个位置继续循环</li>
 <li>时间复杂度：O(n)O(n)</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">/**
-</span><span style="color:#75715e"> * @param {ListNode} head
-</span><span style="color:#75715e"> * @return {ListNode}
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">deleteDuplicates</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">head</span>) {
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">current</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">head</span>;
-  <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">current</span> <span style="color:#f92672">!==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">!==</span> <span style="color:#66d9ef">null</span>) {
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">val</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">val</span>) {
-      <span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">next</span>;
-    } <span style="color:#66d9ef">else</span> {
-      <span style="color:#a6e22e">current</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">current</span>.<span style="color:#a6e22e">next</span>
+
+<pre><code class="language-js">/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {
+  let current = head;
+  while (current !== null &amp;&amp; current.next !== null) {
+    if (current.val === current.next.val) {
+      current.next = current.next.next;
+    } else {
+      current = current.next
     }
   }
-  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">head</span>; <span style="color:#75715e">// current和head指向的是同一个地址，current用来操作列表，去除重复的。最后返回列表的最开始的地址，即头部head
-</span><span style="color:#75715e"></span>};
-</code></pre></div><p>循环不变式: <em>循环不变式是在循环的每次迭代之前和之后为真的条件</em></p>
+  return head; // current和head指向的是同一个地址，current用来操作列表，去除重复的。最后返回列表的最开始的地址，即头部head
+};
+</code></pre>
+
+<p>循环不变式: <em>循环不变式是在循环的每次迭代之前和之后为真的条件</em></p>
 
     </div>
 
